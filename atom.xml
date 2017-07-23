@@ -64,19 +64,19 @@
   </entry>
   
   <entry>
-    <title>CSS3新增伪类有那些</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
+    <title>Doctype作用？标准模式与兼容模式各有什么区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/webSocket%E5%A6%82%E4%BD%95%E5%85%BC%E5%AE%B9%E4%BD%8E%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    <id>www.wangchengzou.cn/2017/07/22/webSocket如何兼容低浏览器/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:55:42.524Z</updated>
+    <updated>2017-07-23T07:46:38.207Z</updated>
     
-    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
-<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
+    <content type="html"><![CDATA[<p>Adobe Flash Socket 、ActiveX HTMLFile (IE) 、基于 multipart 编码发送 XHR 、基于长轮询的 XHR方式显示,模拟老式浏览器的行为以防止站点无法工作。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
+      &lt;p&gt;Adobe Flash Socket 、ActiveX HTMLFile (IE) 、基于 multipart 编码发送 XHR 、基于长轮询的 XHR方式显示,模拟老式浏览器的行为以防止站点无法工作。&lt;/p&gt;
+
     
     </summary>
     
@@ -85,32 +85,7 @@
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS3有哪些新特性</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:01:09.332Z</updated>
-    
-    <content type="html"><![CDATA[<p>举例：<br>  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>  圆角           （border-radius:8px）<br>  多列布局        （multi-column layout）<br>  阴影和反射        （Shadow\Reflect）<br>  文字特效      （text-shadow、）<br>  文字渲染      （Text-decoration）<br>  线性渐变      （gradient）<br>  旋转          （transform）<br>  增加了旋转,缩放,定位,倾斜,动画，多背景<br>  transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;举例：&lt;br&gt;  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;  圆角           （border-radius:8px）&lt;br&gt;  多列布局        （multi-column layout）&lt;b
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -146,6 +121,837 @@
   </entry>
   
   <entry>
+    <title>CSS3高级笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:33:13.367Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、复杂选择器</p>
+<pre><code>1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选择器2
+        如：div+p   #top+.important
+                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
+        选择器1~选择器2
+        如#d1~div
+2、属性选择器
+    通过元素所附带的属性及其值来匹配页面中的元素
+    语法：
+        基础属性选择器  [attr]
+            匹配页面中的有附带attr属性的元素
+        elem[attr]
+            elem:表示任意元素名称
+            attr:表示任意属性名称
+            匹配页面中附带attr属性的elem元素
+            如：div[id]:匹配页面中所有附带id属性的div元素
+        [attr1][attr2][attr3]
+            匹配页面中同时附带attr1和attr2属性的所有元素
+            如 input[name][hype]
+        [attr=value]
+            匹配页面中所有attr属性的值为value的元素
+            如input[type=text]
+        [class~=value]
+            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
+        [attr^=value]
+            匹配以value值作为开始的attr属性的元素
+        [attr$=value]
+            匹配以value值作为结束的attr属性的元素
+        [attr*=value]
+            匹配attr属性值中包含value字符的所有元素
+3、伪类选择器
+    目标伪类
+        突出显示活动的HTML锚元素
+        语法： ：target
+    结构伪类
+        通过元素之间的结构关系来匹配元素
+        ：first-child     获取属于其父元素中的首个子元素
+        ：last-child     获取属于其父元素中的尾（最后）子元素
+        :nth-child(N)  获取属于其父元素中的第N个子元素
+        ：empty   空的，匹配没有子元素的元素，包含文本
+        ：only-child   匹配属于其父元素中的唯一子元素
+    否定伪类
+        把匹配某选择器元素排除出去
+        ：not(选择器 )
+4、伪元素选择器
+    伪类与伪元素
+        伪类：匹配元素不同的状态
+        伪元素：是匹配元素中的内容
+    语法：
+        ：first-letter
+        ::first-letter  匹配某元素的首字符
+        ：first-line    匹配某元素的首行字符
+        ：：selection 匹配用户选取的内容部分
+    ：和：：区别
+        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
+        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
+</code></pre><p>2、内容生成</p>
+<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
+伪元素选择器
+    ：before   定位到元素内容区域之前
+    ：after    定位到元素内容区域之后
+语法：
+    属性：content
+    取值：普通文本
+         图像，url(...)
+         计数器
+问题处理：
+    外边距溢出问题
+        为父元素添加边框
+        使用父元素的内边距取代子元素的外边距
+        在父元素的第一个或最后一个子元素位置处增加一个空的table
+    浮动元素父元素的高度问题
+</code></pre><p>3、弹性布局</p>
+<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
+基本概念‘
+    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
+    flex项目：简称项目，存放在flex容器中的内容
+
+语法：
+    容器：display
+        取值：flex 将块级元素变为flex容器
+              inline-flex  将行内元素变为flex容器
+        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
+    容器属性;
+        该组属性要添加在容器元素上，控制子元素的位置
+        flex-direction  决定主轴的方向（main-axsis）
+            取值：
+                row  主轴为水平方向的轴，起点在容器左端，默认值
+                row-reverse 主轴为水平方向的轴，起点在容器右端
+                column  主轴为交叉轴，起点在容器的顶端
+                column-reverse 主轴为交叉轴，起点在容器的底端
+        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
+            取值：
+                nowrap     默认值，不换行
+                wrap        换行
+                wrap-reverse  反方向换行
+        flex-flow   dirextion和wrap的缩写方式
+            取值：
+                row nowrap 默认值
+                direction wrap
+        justify-content   定义项目在主轴上的对齐方式
+            取值：
+                flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                space-between  两端对齐，项目之间的距离是相等的
+                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
+        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
+            取值：
+                flex-start  交叉轴起点对齐
+                flex-end   交叉轴终点对齐
+                center     交叉轴中间对齐
+                baseline   基线对齐，以所有项目中的第一行文本为准
+                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
+        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
+            取值：
+                flex-start   交叉轴顶端对齐
+                flex-end    交叉轴底端对齐
+                center      交叉轴中间对齐
+                space-between  与交叉轴两端对齐
+                space-around     项目与项目间对齐
+    项目属性：
+        该组属性主要设置于项目中
+        order  定义项目在排列顺序，值越小，越靠前，默认为0
+        flex-grow  指定项目的放大比例，默认为0，即不放大
+        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
+        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
+        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
+            取值，auto  相当于1  1   auto
+                 none  相当于0 0  auto
+                 flex-grow【,flex-shrink,flex-basis】
+        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
+            取值： auto 默认值，使用
+                  flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                base-line
+                stretch
+</code></pre><p>4、CSS Hack 兼容性</p>
+<pre><code>标准模式和混杂模式和准标准模式
+IE6之前，没有兼容性说法
+IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
+    混杂模式  无标准可言
+        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
+    标准模式  安全支持
+    准标准模式，即支持标准，也同时向前兼容非标准代码
+如何根据不同的浏览器编写不同的css
+    css类内部Hack
+        在属性名称前和值添加前后缀以便识别不同的浏览器
+    选择器Hack
+        在选择器前添加特殊标识以便识别不同的浏览器
+    头部引用hack
+        通过html的条件注释来判断浏览器版本，去执行不同的CSS
+        条件注释
+            条件：
+                gt:判断当前浏览器是否大于指定定版本
+                gte：判断当前浏览器是否大于等于指定定版本
+                it:   判断当前浏览器是否小于指定版本
+                ite： 判断当前浏览器是否小于等于指定版本
+                !：   判断当前浏览器是否为非指定版本
+                    &lt;!--[if !IE 8]&gt;
+                        该段内容在除IE8以外浏览器中显示
+                    &lt;![endif]--&gt;
+</code></pre><p>5、转换</p>
+<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
+    允许进行2D和3D方向的转换
+    2D转换：在平面中进行的操作
+    3D转换：在空间中进行的操作
+转换属性：
+    rtansform:为元素应用2D或3D转换效果
+        取值：none;  没有效果
+
+            transform-functions:一组转换函数
+                位移转换函数：translate()
+                改变形状函数：skew()
+                注意：如果指定多个转换函数的话中间用空格隔开
+    转换原点：
+        属性：transform-origin
+        默认：转换原点在元素中心处
+        取值：轴线给值
+            两个轴线值：X Y
+            三个轴线值：X Y Z
+2D转换
+    位移：改变元素在页面中的位置
+        语法：transform
+            fransform(x)  改变元素在X轴的位置
+            fransform(X ,Y)  改变元素在两轴的位置
+            fransformX(X) 只在X轴上位置移动
+            fransformY(Y)  只在Y轴上位置移动
+    缩放： 改变元素在页面中的大小】
+        语法：transform
+            scale(value)  表示两轴等比缩放
+                取值：默认  为1
+                    放大   为大于1的数值
+                    缩小   为0~1之间小数
+                    返转   负数
+            sacle(X,Y)
+            saclex(y)
+            sacley(y)
+    旋转：改变元素在页面上的角度，要根据原点实现转换效果
+        语法：transform
+            rotate(ndeg)
+                n 取值正，顺时针旋转
+                n 取值负，逆时针旋转
+                deg 为角度
+                0~360范围
+        注意：转换原点问题
+            元素坐标轴也跟着旋转
+    倾斜：改变元素在页面中形状
+        语法：transform
+            skew(xdeg)  横向倾斜指定度数
+                x 取值正，y轴逆时针倾斜一定角度
+                  取值负，Y轴顺时针倾斜一定角度
+            skew(xdeg,ydeg)
+            skewx(xdeg)
+            skewy(ydeg)
+3D转换
+    感觉空间
+    属性：perspetive 假定人眼到投射平面的距离
+    注意：该属性要放在3D转换元素的父元素上
+        兼容性chrome和safari需要加前缀
+            -wedkit-perspective:500px;
+    旋转：以X轴中心轴旋转
+            rotatex(xdeg)
+          以Y轴中心轴旋转
+            rotatey(ydeg)
+          以Z轴中心轴旋转
+            rotatez(zdeg)
+        取值：正  顺时针
+            负   逆时针
+        以多个轴同时进行旋转
+            rotate3d(x ,y, z ,ndeg)
+                x y z 取值为1，该轴参与旋转
+                x y z  取值为0 ，该轴不参与旋转
+    位移：改变元素在Z轴上的位置
+        语法：transform
+            translatez(z)
+
+            transform-style
+                取值：flat  默认值，子元素不保留3D位置
+                     preserve-3D  子元素保留3D位置
+</code></pre><p>6、过渡</p>
+<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
+要素与属性：
+    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
+        transition-property: 属性名称（width）
+                      all   全部属性
+                      none
+        允许设置过渡效果的属性：
+            颜色属性
+            渐变属性
+            取值为数字属性
+            转换属性 transition-property:transform;
+            visibility属性
+            阴影属性
+    指定过渡时长
+        transition-duration: 以S、MS为单位数值
+    指定过渡时速曲线函数  可选
+        transition-timing-function
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+    指定过渡的延迟时间   可选
+        transition-delay
+            取值：以S或MS做为单位
+    简写属性：transition:prop duration  timing-fun delay;
+        多个过渡效果
+            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
+触发过渡条件
+    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
+    将过渡编写在:hover,:active伪类中
+</code></pre><p>7、动画</p>
+<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
+动画使用步骤
+    声明动画
+        指定动画名称
+        指定动画中的关键帧（keyframes）
+            时间点（以百分比描述时间）
+            元素状态（CSS样式）
+    为元素调用动画
+        指定调用动画的名称以及执行时长
+语法：
+    声明动画     注意前缀，兼容性问题
+        &lt;style&gt;
+            @keyframes 名称{
+                0%{   动画开始时，元素的状态   }
+                。。。。
+                100%{  动画结束时，元素的状态  }
+            }
+        &lt;/style&gt;
+    调用动画(animation)
+        animation-name  指定调用动画名称
+        animation-duration   指定动画周期时长，以S或MS为单位
+        animation-timing-function  指定动画的速度时间出线函数
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+        animation-delay  指定动画延迟时间
+        animation-iteration-count  指定动画播放次数
+            取值：默认1次，具体数值
+                infinite:无限次播放
+        animation-direction  指定动画的播放方向
+            取值：normal  从0%~100%
+                reverse  从100%~0%
+                alternate  轮流来回播放 奇数 0%~100%
+                                 偶数 100%~0%
+        animation  简写方式
+            取值：name  duration  timing-fun delay  iteration-count direction;
+        animation-fill-mode  指定动画播放之前、之后的填充模式
+            取值：none  默认值
+                 forwards  动画播放完成后，保持在最后一帧的位置
+                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
+                 both 同时应用在开始和最后的位置帧上
+        animation-play-state  动画播放状态
+            取值：paused 暂停
+                 running 播放
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、复杂选择器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+    
+      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DOM_BOM笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/DOM_BOM%E7%AC%94%E8%AE%B0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/DOM_BOM笔记/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:57:34.367Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p>DOM: Document Object Model</p>
+<p> DOM是专门操作网页内容的API标准<br> 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题<br> 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商都遵照执行。<br> 结果，使用DOM API操作网页内容，几乎100%兼容所有浏览器<br> 何时: 只要操作网页内容，就用DOM API查找, 修改(内容,属性,样式), 添加, 删除.</p>
+</li>
+</ol>
+<p>DOM Tree:</p>
+<pre><code>什么是: 网页中一切内容在内存中都是以树形结构存储的
+       网页中每一项内容都是树上的一个节点对象
+       包括: 元素, 文字, 属性...
+       树只有一个根节点: document, 包含了所有网页内容
+Node: 每个节点都是一个node类型的对象
+      node是所有节点的父类型
+</code></pre><p>三大公共: nodeType  nodeName  nodeValue</p>
+<pre><code>nodeType: 节点的类型
+  值: document   9
+     element     1
+     attribute     2
+     text         3
+  何时: 只要判断节点类型，就用nodeType
+        因为不同类型的节点，能执行的操作是不一样的
+  问题: 不能进一步区分元素的名称
+  解决:
+nodeName: 节点的名称
+  值: document   #document
+     element    全大写的标签名
+     attribute    属性名
+     text        #text
+  何时: 只要细致鉴别元素的标签名时
+    强调: nodeName返回的是全大写的标签名
+nodeValue: 节点值:
+  值: document   null
+     element     null
+     attribute     属性值
+     text         文本内容
+</code></pre><p>2、查找: 4种:</p>
+<pre><code>  a. 不需要查找，可直接获得的元素
+        html   document.documentElement
+        head   document.head
+        body   document.body
+  b. 按节点间关系查找:
+节点树: 包含所有节点: 元素和文本
+  1. 父子: elem.parentNode  找elem的父节点
+        elem.childNodes  找elem的所有*直接*子节点
+            返回，所有直接子节点组成的集合(类数组)
+        elem.firstChild   找elem的第一个*直接*子节点
+        elem.lastChild   找elem的最后一个*直接*子节点
+  2. 兄弟: elem.previousSibling 找elem的前一个兄弟
+        elem.nextSibling   找elem的下一个兄弟
+ 何时: 前提: 已经获得了一个节点
+      要找周围临近的节点时
+ 问题: 连看不见的空字符，也算文本节点——干扰
+ 解决:
+元素树: 仅包含元素节点的树结构
+       不是一棵新树，仅是节点树的子集
+ 1. 父子: elem.parentElement  找elem的父元素
+        elem.children  找elem的所有*直接*子元素
+            返回，所有直接子元素组成的集合(类数组)
+        elem.firstElementChild   第一个*直接*子元素
+        elem.lastElementChild   最后一个*直接*子元素
+ 2. 兄弟:
+   elem.previousElementSibling 找elem的前一个兄弟元素
+   elem.nextElementSibling   找elem的下一个兄弟元素
+ 何时: 只要仅关心元素节点，不关心文本节点时
+ 问题: IE9+
+ 强调: childNodes和children返回的都是动态集合！
+   凡是遍历动态集合，都要先缓存元素个数，再遍历
+   for(var i=0,len= childNodes.length;i&lt;len;i++)
+     不会导致反复查找DOM树
+</code></pre><p>3、 按HTML查找:</p>
+<pre><code>    优: 范围可大可小,可设置条件
+a、按id查找: var elem=document.getElementById(&quot;id&quot;)
+  强调: 1. 只能在document对象上调用
+       2. 返回一个元素对象
+b、按标签名查找:
+    var elems=parent.getElementsByTagName(&quot;标签名&quot;);
+  强调: 1. 可在任意父元素上
+       2. 返回多个元素组成的集合
+       3. 不但查找直接子元素，还查找所有后代元素
+c、按name属性查找: 了解
+   专门找表单中有name属性的表单元素
+    var elems=document.getElementsByName(&quot;name&quot;)
+    强调: 1. 只能在document上调用
+         2. 返回多个元素组成的集合
+d、按class属性查找:
+    var elems=parent.getElementsByClassName(&quot;class&quot;)
+    强调: 1. 可在任意父元素上调用
+         2. 返回多个元素组成的集合
+         3. 不要求完整匹配，只要包含即可！
+缺: 每次只能按一个条件查找
+   如果条件复杂，就无法一句话获得想要的元素
+</code></pre><p>4、 按选择器查找:</p>
+<pre><code>a. 只找一个元素:
+  var elem=parent.querySelector(&quot;selector&quot;);
+b. 找多个元素
+  var elems=parent.querySelectorAll(&quot;selector&quot;);
+</code></pre><p>5、 总结:</p>
+<pre><code> A首次查找:
+    1. 如果条件简单: 按HTML查找: id, 标签, className
+    2. 如果条件复杂: 按选择器查找:
+ B已经获得一个元素，找周围相邻: 按节点间关系
+鄙视: 按HTML查找 vs 按选择器查找
+ 1.使用的难易程度: 当条件复杂时:
+    按选择器查找——简单, 按HTML查找——繁琐
+ 2.返回值:
+    getElementsByTagName() 返回多个元素的*动态*集合
+      什么是动态集合: 不实际存储对象的属性值，每次访问，都要重新查找DOM树
+    querySelectorAll()  返回多个元素的*非动态*集合
+      什么是非动态集合: 实际存储对象的所有属性值，即使反复访问集合，也不会导致反复查找DOM树
+ 3.单次效率:
+    按HTML查找——效率高!
+    按选择器查找——效率低
+</code></pre><p>3、 修改: (内容, 属性, 样式)</p>
+<pre><code>1. 修改:
+标准属性: 2种:
+  1. 核心DOM: 操作一切结构化文档的API(HTML，XML)
+    elem.attributes集合: 保存了当前元素的所有属性节点
+    获取属性值: elem.getAttribute(&quot;属性名&quot;)
+    修改属性值: elem.setAttribute(&quot;属性名&quot;,&quot;值&quot;)
+    判断是否包含属性: elem.hasAttribute(&quot;属性名&quot;)
+    移除属性: elem.removeAttribute(&quot;属性名&quot;)
+  2. HTML DOM: 对部分常用DOM API的简化版本
+     HTML DOM将标准属性都预定义在元素对象中
+    获取属性值: elem.属性名
+    修改属性值: elem.属性名=&quot;值&quot;;
+    判断是否包含属性: elem.属性名===&quot;&quot; 不包含
+    移除属性: elem.属性名=&quot;&quot;
+    特例: class属性和ES标准中的class重名
+          -&gt; DOM -&gt; className
+    自定义属性: 比如: data-toggle=&quot;dropdown&quot;
+      HTML DOM不能操作自定义属性
+      暂时只能用核心DOM操作:
+    三大状态: disabled  selected   checked
+      核心DOM无法操作三大状态属性
+      HTMLDOM: elem.disabled elem.selected  elem.checked
+            值都是bool类型true/false
+</code></pre><p>3.1、修改css样式:</p>
+<pre><code>1. 仅获取/修改内联样式:  elem.style.css属性名
+  问题1: css属性名有的带-
+  解决: 所有css属性名都要去横线变驼峰
+     比如: background-color: backgroundColor
+          list-style-type: listStyleType
+  问题2: 所有数值类型的属性值都是带单位的字符串
+  解决: 获取时: 都要去单位，转数值
+        修改时: 将单位拼回数值
+  问题3: 仅能获得内联样式, 无法获得样式表中的样式
+  解决: 计算后的样式: 最终应用到元素上的完整样式
+    何时: 只要希望获得元素完整的样式时
+    如何: 2步:
+      1. 获得完整样式对象style
+        var style=getComputedStyle(elem)
+      2. 获得style对象中的css属性
+        style.css属性名
+     强调: style对象中的样式都是只读
+结论: 1. 获取样式: getComputedStyle
+     2. 修改样式: elem.style.css属性名
+2. 运行时修改样式表中的样式:
+  Step1: 获得样式表对象:
+   var sheet=document.styleSheets[i]
+  Step2: 获得样式表对象中某个CSSRule(一个选择器{})
+   var rule=sheet.cssRules[i]
+  Step3: 修改rule.style.css属性名=值
+</code></pre><p>4、 添加和删除:</p>
+<pre><code>添加: 3步:
+ Step1: 创建空元素:
+  var a=document.createElement(&quot;a&quot;);
+  &lt;a&gt;&lt;/a&gt;
+ Step2: 设置关键属性:
+     a.href=&quot;http://tmooc.cn&quot;
+     a.innerHTML=&quot;go to tmooc&quot;;
+  &lt;a href=&quot;http://tmooc.cn&quot;&gt;go to tmooc&lt;/a&gt;
+ Step3: 将元素添加到DOM树: 3种:
+   1. 末尾追加: parent.appendChild(child)
+   2. 中间插入: parent.insertBefore(child, oldChild)
+   3. 替换: parent.replaceChild(child, oldChild)
+</code></pre><p>优化: 尽量少的修改DOM树</p>
+<pre><code>原因: 页面加载过程:
+  html -&gt; DOM Tree(松树)
+           ↓
+        render Tree(圣诞树)-&gt; layout(计算绝对布局)-&gt;paint
+           ↑                 最耗时
+  css  -&gt; cssRules(装饰品)
+  每次修改DOM树，都会导致重新layout，耗时。
+如何: 2种:
+ 1. 如果同时添加父元素和子元素时，应该先在内存将子元素都添加到父元素中，再将父元素一次性整体添加到DOM树
+    结果: 只触发一次layout
+</code></pre><p>1、 HTML DOM 常用对象: 对常用HTML元素操作的简化</p>
+<pre><code>Select: 代表页面上的一个select元素
+ 属性: select.value 当前选中项的value
+                 没有value，就返回选中项的内容
+      select.options 保存select下所有option元素对象
+        相当于: select.getElementsByTagName(&quot;option&quot;)
+        select.options.length 保存select下option的个数
+        清空select下所有option: select.options.length=0;
+      select.length 等效于select.options.length
+        清空select下所有option: select.length=0;
+                               select.innerHTML=&quot;&quot;;
+      select.selectedIndex 当前选中项的下标
+  事件: onchange 当选中项发生改变时
+  方法: select.add(option) 向select中添加一个option
+         相当于: select.appendChild(option)
+         不支持文档片段
+       select.remove(i) 移除select中i位置的一个option
+Option: 代表页面上的一个option元素
+  创建: var opt=new Option(text,value);
+     创建一个option对象，同时设置opt的内容为text，设置opt的值为value
+     相当于: var opt=document.createElement(&quot;option&quot;);
+            opt.innerHTML=text;
+            opt.value=value;
+  属性: .text 代替.innerHTML
+       .index  表示当前option在select下的下标位置
+</code></pre><p>Table: 代表网页中一个table元素</p>
+<pre><code> 管着行分组：
+   添加行分组: var 行分组=table.createTHead|TBody|TFoot();
+       强调: 即创建，同时又将行分组添加到table
+   删除行分组: table.deleteTHead|TFoot()
+   获取行分组: table.tHead|tFoot
+              table.tBodies[i]
+行分组: THead TBody TFoot
+  管着行:
+   添加行: var tr=行分组.insertRow(i)
+       在行分组中i位置插入一个新行
+       强调: 中间插入行，原i位置的行向后顺移
+       固定套路: 1. 末尾追加一个新行: 行分组.insertRow()
+                2. 开头插入: 行分组.insertRow(0)
+   删除行: 行分组.deleteRow(i)
+       删除行分组中第i行
+       强调: i是当前行在行分组内的相对下标位置
+   获取行: 行分组.rows
+
+行: tr
+  管着td:
+    添加td: var td=tr.insertCell(i);
+        省略i表示右侧末尾追加
+        insertCell不支持添加th，只能添加td
+    删除td: tr.deleteCell(i);
+    获取td: tr.cells
+
+删除行:
+ tr上都有一个属性: tr.rowIndex 行在整个表的绝对下标
+ 问题：行分组，无法使用tr.rowIndex删除行。
+ 解决: table.deleteRow(tr.rowIndex)
+ 总结: 今后，删除行都用table.deleteRow(tr.rowIndex)
+</code></pre><p>form: 代表页面上一个表单元素</p>
+<pre><code> 获取: var form=document.forms[i/id]
+ 属性: form.elements 保存了表单中所有表单元素的数组
+        包括: input   select   textarea  button
+      form.elements.length 获得表单中表单元素的个数
+      form.length =&gt; form.elements.length
+ 方法: form.submit();  用于手动提交表单
+ 事件: form.onsubmit  以任何方式提交表单之前自动触发
+          常用于在提交之前，验证所有表单元素的内容
+表单元素:
+ 获取: var elem=form.elements[i/id/name]
+        简写: 如果表单元素有name属性: form.name
+ 方法: elem.focus() 让elem获得焦点
+      elem.blur()  让elem失去焦点
+
+Image: 代表页面上一个img元素
+  创建: var img=new Image();
+</code></pre><p>DOM总结: 查找-&gt;绑定事件-&gt;查找-&gt;修改/添加/删除</p>
+<pre><code>查找: 4种:
+  1. 不需要查找可直接获得: html  head  body  form
+  2. 节点间关系: 节点树/元素树
+      鄙视: 递归遍历
+  3. 按HTML: 4种: ById, ByTagName, ByName, ByClassName
+  4. 按选择器: 2种:
+      只找一个: querySelector()
+      找多个: querySelectorAll()
+修改:
+  内容: .innerHTML  .textContent/.innerText  .value
+  属性:
+    1. 标准属性: 1. 核心DOM; 2. HTML DOM
+    2. 自定义属性: 核心DOM
+    3. 状态属性: HTML DOM
+  样式:
+    修改: elem.style.css属性=值
+    获取: var style=getComputedStyle(elem)
+         style.css属性 ——只读
+    可通过修改class属性批量应用修改多个css属性
+添加: 3步:
+   1. createElement,
+   2.设置关键属性,
+   3. appendChild/insertBefore/replaceChild
+  优化: 尽量少的操作DOM树
+  如何: 2种:
+   1. 同时添加父子元素: 先将子元素加入父元素，再将父元素整体添加到页面
+   2. 同时添加多个平级子元素: fragment
+删除: parent.removeChild(child)
+HTML DOM: Select/Option  Table/...  From/Element  Image
+过渡动画: 2步:
+  css中: 添加transition
+  js中: 修改css属性值
+   不支持transition: display  zIndex
+   支持: width  height  opacity   bottom/top/left/right ...
+</code></pre><p>2、BOM: Browser Object Model</p>
+<pre><code>什么是: 专门操作浏览器窗口的API
+比如: alert prompt confirm
+问题: 1. 没有标准——兼容性问题;
+     2. 不可定制
+window对象: 2个角色:
+  1. 代替ES中的Global充当全局作用域对象
+  2. 封装所有BOM和DOM的API
+
+打开超链接: 4种:
+  1. 在当前窗口打开，可后退
+    html: &lt;a href=&quot;url&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
+    js: /*window.*/open(&quot;url&quot;,&quot;_self&quot;)
+  2. 在当前窗口打开，不可后退
+    js: location.replace(&quot;url&quot;);
+       用新url代替history中当前url，结果: 无法后退
+  3. 在新窗口打开，可打开多个
+    html: &lt;a href=&quot;url&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;_blank&quot;)
+  4. 在新窗口打开，只能打开一个
+    html: &lt;a href=&quot;url&quot; target=&quot;自定义name属性值&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;自定义name属性值&quot;)
+    原理: 内存中每个窗口都有一个唯一的name属性来唯一标示一个窗口
+      浏览器规定，相同name属性的窗口只能打开一个
+    其实: html中的target属性就是在设置新窗口的name属性值。
+    如果target中使用自定义的窗口名，则只能打开一个
+    预定义:
+      _self: 默认使用当前窗口自己的name属性
+           结果，新窗口覆盖当前窗口
+      _blank: 意为不指定窗口名, 浏览器会随机生成不同的窗口名。
+           结果: 每次打开新窗口都随机生成不同的name
+                 结果: 可打开任意多个
+</code></pre><p>定时器: 2种:</p>
+<pre><code>1. 周期性定时器:
+  什么是: 让程序按照指定时间间隔，反复执行一项任务
+  何时: 只要让程序按照指定时间间隔，反复执行一项任务
+  如何: 3件事:
+    1. 任务函数: 让定时器反复调用的函数
+    2. 启动定时器:
+     var timer=setInterval(任务函数, 间隔的毫秒数)
+    3. 停止定时器: clearInterval(timer)
+        问题: timer中的序号会残留在timer变量中
+        解决: 停止定时器后，主动清空timer
+             timer=null
+  停止定时器: 2种:
+    1. 用户手动停止定时器: 用按钮调用clearInterval
+    2. 自动停止定时器: 在任务函数中:
+       1. 设定临界条件
+       2. 如果达到临界条件就自动调用clearInterval
+
+2. 一次性定时器:
+ 什么是: 让程序先等待一段时间，再自动执行一次任务
+         执行一次后，定时器自动停止
+ 何时: 只要先等待，再执行一次任务
+ 如何: 三件事
+   1. 任务函数
+   2. 启动: var timer=setTimeout(任务函数, 等待的毫秒数)
+   3. 停止: clearTimeout(timer)
+</code></pre><p>鄙视: 定时器中的函数，只能在主程序所有程序执行后才能执行</p>
+<pre><code>for(var i=0;i&lt;3;i++){
+  setTimeout(function(){
+    console.log(i);
+  },0);
+}//结果: 3 3 3
+//alert(&quot;Hello&quot;) 如果不点确定，则永远不输出333
+</code></pre><p>window:<br> history，location，document，navigator，screen，event</p>
+<pre><code>history: 保存当前窗口打开后，成功访问过的历史记录的栈
+  history封装的非常严密
+  只能前进，后退，刷新: history.go(n)
+   前进: go(1)  后退:go(-1)  刷新:go(0)
+
+location: 专门保存当前窗口正在打开的url的对象
+ 属性: location.href 保存了完整的url
+        在当前窗口打开: location.href=新url
+      location.protocol: 协议
+            .host: 主机名+端口号
+            .hostname: 主机名
+            .port: 端口号
+      location.pathname: 相对路径
+            .hash: 锚点地址#xxx
+            .search: 表单提交后地址栏中的查询字符串
+                   ?变量名=值&amp;变量名=值&amp;...
+ 方法:
+   1. 替换history中当前url,实现进制后退:
+     location.replace(&quot;新url&quot;)
+   2. 在当前页面打开，可后退:
+     location.assign(&quot;新url&quot;)
+       =&gt; location.href=&quot;新url&quot;
+        =&gt; location=&quot;新url&quot;
+   3. 刷新页面:  location.reload(false/true);
+     鄙视: false/true的差别
+       浏览器本地是有缓存的
+         浏览器的缓存中会保存css，图片等静态资源
+       每次请求时，首先查看缓存中是否有想要文件
+         没有想要文件，或文件过期，才去服务器下载新文件
+       reload(false) 优先使用本地缓存的文件
+       reload(true) 强制去服务器下载新文件
+     查 浏览器缓存的原理！
+</code></pre><p>1、event</p>
+<pre><code>绑定事件: 2种:
+ 1. 在HTML中绑定: &lt;ANY on事件名=&quot;js语句&quot;
+    问题: 不符合内容与行为分离的原则——不便于维护
+ 2. 在js中动态绑定: 2种:
+    1. 一个事件只绑定一个处理函数:
+       elem.on事件名=function(){
+         //this-&gt;elem
+       }
+       解除绑定: elem.on事件名=null;
+       问题: 每个事件只能绑定一个处理函数
+       解决:
+    2. 一个事件可同时绑定多个处理函数:
+       elem.addEventListener(&quot;事件名&quot;,function(){
+         //this-&gt;elem
+       })
+       解除绑定:
+        elem.removeEventListener(&quot;事件名&quot;,&quot;函数名&quot;);
+        强调: 如果一个事件处理函数可能被动态移除，则绑定时，不能使用匿名函数，必须使用有名称的函数
+
+    事件模型: DOM标准: 3个阶段
+      1. 捕获: 由外向内，记录各级父元素绑定的事件处理函数
+      2. 目标触发: 首先执行目标元素上的事件处理函数
+      3. 冒泡: 由内向外，反向执行捕获阶段记录的处理函数
+
+    事件对象: 事件发生时自动创建的
+             封装事件信息
+             提供操作事件的API 的对象
+      何时: 只要希望获得事件信息或修改事件的默认行为
+      如何: 事件对象，在事件发生时，通常作为事件处理函数的第一个参数，默认自动传入！
+          .on事件名=function(e){
+             //e会自动获得事件对象
+          }
+    阻止蔓延/冒泡: e.stopPropagation();
+    利用冒泡:
+      优化: 尽量少的添加事件监听
+      原理: 因为浏览器触发事件监听，是采用遍历查找的方式。添加的监听越多，遍历的速度越慢
+      如何: 如果多个子元素都要绑定相同的事件
+          只要在父元素绑定一次，所有子元素即可共用
+      难题:
+         1. 获得目标元素:
+            不能用this, 因为this指父元素
+            应该用e.target，保存实际点击的目标元素
+         2. 鉴别目标元素:
+            先判断目标元素的nodeName或className...
+            只有目标元素符合要求时，才执行事件操作
+    取消事件/阻止默认行为: e.preventDefault();
+    事件坐标: 3对儿:
+      1. 相对于整个屏幕左上角的坐标: e.screenX|screenY
+      2. 相对于文档显示区左上角的坐标: e.clientX|clientY
+      3. 相对于当前元素左上角的坐标: e.offsetX|offsetY
+
+    页面滚动:
+      事件: window.onscroll
+      获得页面滚动位置: document.body.scrollTop
+          页面超出文档显示区顶部的距离
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;DOM: Document Object Model&lt;/p&gt;
+&lt;p&gt; DOM是专门操作网页内容的API标准&lt;br&gt; 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题&lt;br&gt; 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+      <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
+    
+      <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CSS选择符有哪些？哪些属性可以继承</title>
     <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
     <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
@@ -175,40 +981,30 @@
   </entry>
   
   <entry>
-    <title>HTML5的form如何关闭自动完成功能</title>
-    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
-    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:45:05.164Z</updated>
-    
-    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
     <title>html知识点</title>
     <link href="www.wangchengzou.cn/2017/07/22/HTML%E7%AC%94%E8%AE%B0/"/>
     <id>www.wangchengzou.cn/2017/07/22/HTML笔记/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:01:36.497Z</updated>
+    <updated>2017-07-23T10:22:26.610Z</updated>
     
-    <content type="html"><![CDATA[<p>1、Web基础知识<br>    1、Internet<br>        1、简介<br>            Internet 实际上就是由计算机所组成的网络结构<br>            服务：<br>                1、Telnet<br>                    远程登录<br>                2、Email<br>                    电子邮件<br>                3、WWW<br>                    万维网服务，World Wide Web<br>                4、BBS<br>                    电子公告板 (论坛)<br>                    百度贴吧，天涯论坛，… …<br>                    CSDN … …<br>                5、FTP<br>                    文件传输协议</p>
-<pre><code>        基本实现技术：
+    <content type="html"><![CDATA[<p>1、Web基础知识</p>
+<pre><code>1、Internet
+    1、简介
+        Internet 实际上就是由计算机所组成的网络结构
+        服务：
+            1、Telnet
+                远程登录
+            2、Email
+                电子邮件
+            3、WWW
+                万维网服务，World Wide Web
+            4、BBS
+                电子公告板 (论坛)
+                百度贴吧，天涯论坛，... ...
+                CSDN ... ...
+            5、FTP
+                文件传输协议
+        基本实现技术：
             1、分组交换原理
                 将传递的数据 拆分成若干数据包
             2、TCP/IP协议
@@ -274,8 +1070,12 @@
         1、HTML
         2、CSS
         3、JavaScript(JS)
-</code></pre><p>2、HTML入门<br>    1、HTML概述<br>        Web : 一种应用<br>        HTML是开发Web网页程序的一种语言</p>
-<pre><code>    1、什么是HTML
+</code></pre><p>2、HTML入门</p>
+<pre><code>1、HTML概述
+    Web : 一种应用
+    HTML是开发Web网页程序的一种语言
+
+    1、什么是HTML
         HTML：Hyper Text Markup Language
                   超级  文本 标签   语言
             超级文本：具备超能力的文本
@@ -357,276 +1157,405 @@
                     指定元素所引用的类选择器(CSS中使用)
                 4、style
                     定义元素的内联样式(css中使用)
-    3、注释
-        要编写在源文档中，但不想被浏览器解释运行的内容
-        &lt;!--  注释  --&gt;
-        注意：
-            1、注释不能嵌套
-                &lt;!--
-                    这是一段注释
+        3、注释
+            要编写在源文档中，但不想被浏览器解释运行的内容
+            &lt;!--  注释  --&gt;
+            注意：
+                1、注释不能嵌套
                     &lt;!--
-                        这是另一段注释
+                        这是一段注释
+                        &lt;!--
+                            这是另一段注释
+                        --&gt;
                     --&gt;
-                --&gt;
-                以上结构是错的
-            2、注释不能出现在标记(&lt;&gt;)里
-                &lt;a &lt;!-- 这是一个a --&gt;&gt;&lt;/a&gt;
-                以上的写法是错误的
-3、文档结构
-    1、两部分组成
-        1、文档类型声明
-            指定当前html文档用的时哪个版本
-            语法：
-                文档中的第一句话位置处
-                &lt;!doctype html&gt;
-        2、html页面
-            网页要表示的信息的开始与结束
-            语法：
-                &lt;html&gt;&lt;/html&gt;
-                属性：
-                    1、lang
-                        取值：zh-cn
-            子级内容：
-                1、网页头部信息
-                    作用：用于定义网页的全局信息
+                    以上结构是错的
+                2、注释不能出现在标记(&lt;&gt;)里
+                    &lt;a &lt;!-- 这是一个a --&gt;&gt;&lt;/a&gt;
+                    以上的写法是错误的
+        4、文档结构
+            1、两部分组成
+                1、文档类型声明
+                    指定当前html文档用的时哪个版本
                     语法：
-                        &lt;head&gt;&lt;/head&gt;
-                    子级：
-                        1、网页标题
-                            &lt;title&gt;标题内容&lt;/title&gt;
-                        2、网页元数据
-                            指定网页编码格式
-                            &lt;meta charset=&quot;utf-8&quot;&gt;
-                            注意：
-                                必须保证网页文档的编码格式也是 utf-8 的
+                        文档中的第一句话位置处
+                        &lt;!doctype html&gt;
+                2、html页面
+                    网页要表示的信息的开始与结束
+                    语法：
+                        &lt;html&gt;&lt;/html&gt;
+                        属性：
+                            1、lang
+                                取值：zh-cn
+                    子级内容：
+                        1、网页头部信息
+                            作用：用于定义网页的全局信息
+                            语法：
+                                &lt;head&gt;&lt;/head&gt;
+                            子级：
+                                1、网页标题
+                                    &lt;title&gt;标题内容&lt;/title&gt;
+                                2、网页元数据
+                                    指定网页编码格式
+                                    &lt;meta charset=&quot;utf-8&quot;&gt;
+                                    注意：
+                                        必须保证网页文档的编码格式也是 utf-8 的
+                        2、网页主体信息
+                            包含要显示给用户去看的所有内容
+                            &lt;body&gt;&lt;/body&gt;
+                            属性：
+                                1、text
+                                    作用：控制当前文档的文本颜色
+                                    取值：颜色的英文表示方式
+                                2、bgcolor
+                                    作用：控制当前文档的背景颜色
+                                    取值：同上
+    3、文本
+        1、作用
+            以不同的形式展现文字
+        2、特殊字符
+            默认下，任意多个 回车 和 空格 最后都会被折叠成一个空格
+            通过转义字符表示特殊字符：
+            1、&amp;nbsp;
+                一个空格
+            2、&amp;gt;
+                &gt;
+            3、&amp;lt;
+                &lt;
+            4、&amp;copy;
+                ©
+            5、&amp;yen;
+                ￥
+        3、文本标记
+            1、文本样式
+                &lt;i&gt;内容&lt;/i&gt; 斜体显示文本
+                &lt;u&gt;内容&lt;/u&gt; 下划线的文本
+                &lt;s&gt;内容&lt;/s&gt; 删除线的文本
+                &lt;b&gt;内容&lt;/b&gt; 加粗显示文本
+                &lt;sub&gt;&lt;/sub&gt; 下标
+                &lt;sup&gt;&lt;/sup&gt; 上标
 
-                2、网页主体信息
-                    包含要显示给用户去看的所有内容
-                    &lt;body&gt;&lt;/body&gt;
-                    属性：
-                        1、text
-                            作用：控制当前文档的文本颜色
-                            取值：颜色的英文表示方式
-                        2、bgcolor
-                            作用：控制当前文档的背景颜色
-                            取值：同上
-</code></pre><p>3、文本<br>    1、作用<br>        以不同的形式展现文字<br>    2、特殊字符<br>        默认下，任意多个 回车 和 空格 最后都会被折叠成一个空格<br>        通过转义字符表示特殊字符：<br>        1、&nbsp;<br>            一个空格<br>        2、&gt;<br>            &gt;<br>        3、&lt;<br>            &lt;<br>        4、&copy;<br>            ©<br>        5、&yen;<br>            ￥<br>    3、文本标记<br>        1、文本样式<br>            <i>内容</i> 斜体显示文本<br>            <u>内容</u> 下划线的文本<br>            <s>内容</s> 删除线的文本<br>            <b>内容</b> 加粗显示文本<br>            <sub></sub> 下标<br>            <sup></sup> 上标</p>
-<pre><code>    特点：
-        所有的内容会在一行内显示
-2、标题元素
-    作用：以标题的方式显示文本(突出显示)
-    语法：
-        &lt;hn&gt;&lt;/hn&gt;
-            n : 1~6
-            &lt;h1&gt;&lt;/h1&gt;
-            ...
-            &lt;h6&gt;&lt;/h6&gt;
-    属性：
-        1、align ：文本的水平排列方式
-            取值：left / center / right
-    特点：
-        1、独自成行
-        2、加粗显示文本
-        3、上下会有垂直的空白
-3、段落元素
-    语法：
-        &lt;p&gt;&lt;/p&gt;
-    属性：
-        align
-    特点：
-        1、垂直空白
-        2、独占一行
-4、换行元素
-    语法：&lt;br&gt; 或 &lt;br/&gt;
-5、分割线元素
-    语法：&lt;hr&gt; 或 &lt;hr/&gt;
-    属性：
-        1、size
-            尺寸，以px或%为单位(省略单位的话是px)
-        2、width
-            宽度，以px或%为单位
-        3、align
-            水平对齐方式
-        4、color
-            颜色
-6、行分区元素
-    语法：&lt;span&gt;&lt;/span&gt;
-    作用：包裹文本并且设置不同的样式
-7、块分区元素
-    语法：&lt;div&gt;&lt;/div&gt;
-    作用：布局
-8、预格式化
-    作用：保留标记内的格式(回车 和 空格)
-    语法：&lt;pre&gt;&lt;/pre&gt;
-9、块级元素和行内元素
-    1、块级元素
-        每一个块级元素独占一行
-        块级元素的主要作用：布局
-    2、行内元素
-        多个元素会在一行内显示，显示不下自动换行
-        span,i,b,s,u,sub,sup
-        作用：设置文本样式
-</code></pre><p>DAY02<br>  图像和链接<br>    URL 表示地址<br>        目录    WEB站点中保存文件的文件夹<br>        目录结构<br>        URL:Uniform Resource Locator 即统一资源定位器，俗称路径<br>                                     是描述资源文件位置的信息<br>            a.html 中想使用 b.html<br>            a.html 当前文件<br>            b.html 资源文件<br>        URL：表达三种方式<br>                绝对路径：从资源文件所在的最高级目录下开始的完整路径表示<br>                            获取网络资源文件《只能是绝对路径》<br>                                由通信协议“http/https”、主机名(域名、IP地址)、目录路径、文件名组成<br>                            获取本机资源文件<br>                                从盘符开始到资源文件名结尾<br>                相对路径：从当前文件位置处开始开始，去查找资源文件所经过的路径<br>                根相对路径  从WEB站点所在的服务器根目录上开始查找的<br>                            以/作为开始<br>    图像  语法<br>          标记：<img>或<img><br>          属性：src(全称：source 源)<br>                <img src="ur1"><br>                <img src="a.jpg"><br>                <img src="images/a.jpg"><br>                注意：URL严格区分大小写<br>                width<br>                height<br>                注意：如果width 和height只设置其中一个属性的话，那么另外一个将等比缩放<br>    链接 （超链接）<br>            语法：由<a>内容</a><br>                  注意：默认情况下，A是不能被点击的<br>            属性：href 链接的URL 只有设置href属性后，才允许被点击<br>                  target  目标，打开新网页的方式<br>                          取值：_self 默认值，在自身标签页中，打开新网页<br>                                _blank 在新标签页中，打开新网页<br>            链接表现形式： 资源下载<br>                            链接地址为<strong>.zip/</strong>.rar<br>                           电子邮件链接 <a href="mailto:zhaoxu@tedu.cn" target="_blank" rel="external">发送邮件</a><br>                           返回页面顶部的空链接<a href="#">返回顶部</a><br>                           链接到Javascript <a href="javascript:js代码" target="_blank" rel="external"></a><br>            锚点：anchor   在html文档的某行位置做一个记号，允许通过超链接跳转到该记号位置<br>                    定义锚点（做记号）<br>                        通过A标记的name属性 <a name="名称"></a><br>                        通过任意标记的ID属性&lt;标记 ID=”标记名称”&gt;&lt;/标记&gt;<br>                    链接到锚点（跳转到锚点）<a href="#锚点名称"></a><br>                                            <a href="页面URL#锚点名称"></a></p>
-<pre><code>表格:表格的作用
-        表格，是由一些称为单元格的东西按照从左到右，从上到下的顺序排列而成的
-        语法：&lt;table&gt;&lt;/table&gt;  定义表格
-              &lt;tr&gt;&lt;/tr&gt;        定义表行
-              &lt;td&gt;&lt;/td&gt;           定义单元格
-             尽量保证默认情况下，每行中的单元格数量是相同的
-        表格属性：width   宽度
-              height  高度
-              align   对齐方式
-              border  边框
-              cellpadding  设置单元格内边距
-              cellspacing  设置单元格外边距
-              bgcolor  背景颜色
-        表行属性：align   水平对齐
-                  valign  取值top/middle/bottom    垂直对齐方法
-                  bgcolor 背景颜色
-              单元格属性：align
-                  valign
-                  width
-                  height
-                  bgcolor
-                  colspan    设置单元格跨列
-                  rowspan    设置单元格跨行
-        单元格特点
-                某一行单元格的高度，以最高的单元格高度为准
-                某一列单元格的宽度，以最宽的单元格宽度为主
-    table的子元素：表格标题&lt;caption&gt;标题文本&lt;/caption&gt;
-                    注意：一个表格最多只能有一个标题
-                         caption 必须位于&lt;table&gt;下的第一句话
-                   td允许被 th替换  加粗。居中
-    表格的复杂应用：行分组 表头行分组 &lt;thead&gt;&lt;/thead&gt; 允许包含一行或多行tr
-                           表主体行分组&lt;tbody&gt;&lt;/tbody&gt; 允许包含任意多的连续tr
-                           表尾行分组&lt;tfoot&gt;&lt;/tfoot&gt; 允许包含一行或多行tr
-                        注意：如果不对table中的数据进行显示分组的话，默认都在tbody中
-                    不规则表格  通td的 colspan和 rowspan属性来完成
-                                colspan 跨列，在一行中，从指定单元格位置处开始，横向向右合并几个单元格
-                                        被合并的单元格，要删除
-                                rowspan 跨行。在一列中，从指定单元格位置处开始，纵向向下合并几个单元格
-                                        被合并的单元格，要删除
-                    表格的嵌套  允许在单元格中在放入一个表格
-                                &lt;table&gt;
-                                    &lt;tr&gt;
-                                        &lt;td&gt;
-                                            &lt;table&gt;
-                                                &lt;tr&gt;
-                                                    &lt;td&gt;
-                                                    &lt;/td&gt;
-                                                &lt;/tr&gt;
-                                            &lt;/table&gt;
-                                        &lt;/td&gt;
-                                    &lt;/tr&gt;
-                                &lt;/table&gt;
-</code></pre><p>  列表<br>        列表语法<br>            组成  列表的类型：有序列表：<ol></ol><br>                              无序列表：<ul></ul><br>                     列 表项：显示在列表中的内容 <li></li><br>            属性  有序列表（ol）的属性 type 取值 1   a   A   i   I<br>                                       start  起始编号是多少 具体为数字<br>                  无序列表（ul）的属性 type 取值 disc 实心圆点<br>                                                 circle 空心圆<br>                                                 none 不显示标识<br>                                                 square  方块<br>        列表的嵌套： 允许在一个列表中出现另一个列表被嵌套的列表必须放在<li>中<br>        定义列表：作用，往往用于给出一类事物的定义情形，如名词解释<br>                  语法，<dl></dl>  表示定义列表<br>                            <dt></dt> 定义列表中标题<br>                            <dd></dd> 对标题解释说明的内容<br>                使用场合：图文混排时使用</li></p>
-<p>DAY03<br>      结构标记<br>            网页结构布局：为了取代做布局的Div，从而体现出布局标记的语义性<br>                块级元素做布局，Div<br>                常用结构标记  header 用来表示页面或某部分内容的顶部信息<br>                                <header></header><br>                              nav   用来表示页面的主导航信息<br>                                  <nav></nav><br>                              section  表示页面中的小节，也可以用来表示页面的主体内容<br>                                    <section></section><br>                              article  表示页面中的文章信息或是文字居多的部分，比如博客信息，微博的条目，论坛中的主贴和回帖<br>                                    <article></article><br>                              footer   表示页面中底部信息，一般用户关注度较低<br>                                      <footer></footer><br>                              aside  表示页面中的边档信息<br>                                    <aside></aside></p>
-<pre><code>&lt;h1&gt;表单&lt;/h1&gt;
-    表单概述：表单用于显示，收集用户信息，并提交给服务器
-        完整表单由两部分组成：实现表单以及可交互的界面元素（前端）
-                                    表单元素：用于定义表单的提交信息如：提交地址，提交方式<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">表单控件：能够与用户交互的界面无素如：文本框，密码框~</div></pre></td></tr></table></figure>
-
-                              表单提交后的处理（服务器端）
-        表单元素：语法 &lt;form&gt;&lt;/form&gt;
-                        注意：只有出现在form中的表单控件的数据才会被提交
-                              form在页面中没有显示效果，只有功能
-                  属性：action :指定提交给服务器处理程序的地址，该地址要与服务器端人员商量
-                                注意：如果省略不写，默认提交给本页
-                        method ：指定提交数据的方法（模式）
-                                取值：get 获取（默认方式）
-                                            以明文的方式提交数据到服务器（数据会显示在地址栏上），安全性低
-                                            最大提交2KB数据
-                                            向服务器要数据时用get方式
-                                      post  邮寄
-                                            以隐式的方式提交数据到服务器不会显示，安全性高
-                                            无提交数据大小限制
-                                            让服务器处理数据时使用post
-                                      put
-                                      delete
-                        enctype ：指定表单数据的编码方式（什么样的数据允许提交）
-                                  取值：application/x-www-form-urlencoded
-                                             默认值，可以将所有的数据提交给服务器（文件除外）
-                                        multipart/form-data
-                                             允许将文件（图像，音频，视频，文档）提交给服务器
-                                        text/plain
-                                             允许将普通字符提交给服务器，特殊字符无法提交（=，&amp;，？）
+                特点：
+                    所有的内容会在一行内显示
+            2、标题元素
+                作用：以标题的方式显示文本(突出显示)
+                语法：
+                    &lt;hn&gt;&lt;/hn&gt;
+                        n : 1~6
+                        &lt;h1&gt;&lt;/h1&gt;
+                        ...
+                        &lt;h6&gt;&lt;/h6&gt;
+                属性：
+                    1、align ：文本的水平排列方式
+                        取值：left / center / right
+                特点：
+                    1、独自成行
+                    2、加粗显示文本
+                    3、上下会有垂直的空白
+            3、段落元素
+                语法：
+                    &lt;p&gt;&lt;/p&gt;
+                属性：
+                    align
+                特点：
+                    1、垂直空白
+                    2、独占一行
+            4、换行元素
+                语法：&lt;br&gt; 或 &lt;br/&gt;
+            5、分割线元素
+                语法：&lt;hr&gt; 或 &lt;hr/&gt;
+                属性：
+                    1、size
+                        尺寸，以px或%为单位(省略单位的话是px)
+                    2、width
+                        宽度，以px或%为单位
+                    3、align
+                        水平对齐方式
+                    4、color
+                        颜色
+            6、行分区元素
+                语法：&lt;span&gt;&lt;/span&gt;
+                作用：包裹文本并且设置不同的样式
+            7、块分区元素
+                语法：&lt;div&gt;&lt;/div&gt;
+                作用：布局
+            8、预格式化
+                作用：保留标记内的格式(回车 和 空格)
+                语法：&lt;pre&gt;&lt;/pre&gt;
+            9、块级元素和行内元素
+                1、块级元素
+                    每一个块级元素独占一行
+                    块级元素的主要作用：布局
+                2、行内元素
+                    多个元素会在一行内显示，显示不下自动换行
+                    span,i,b,s,u,sub,sup
+                    作用：设置文本样式
+</code></pre><p>  图像和链接</p>
+<pre><code>URL 表示地址
+    目录    WEB站点中保存文件的文件夹
+    目录结构
+    URL:Uniform Resource Locator 即统一资源定位器，俗称路径
+                                 是描述资源文件位置的信息
+        a.html 中想使用 b.html
+        a.html 当前文件
+        b.html 资源文件
+    URL：表达三种方式
+            绝对路径：从资源文件所在的最高级目录下开始的完整路径表示
+                        获取网络资源文件《只能是绝对路径》
+                            由通信协议“http/https”、主机名(域名、IP地址)、目录路径、文件名组成
+                        获取本机资源文件
+                            从盘符开始到资源文件名结尾
+            相对路径：从当前文件位置处开始开始，去查找资源文件所经过的路径
+            根相对路径  从WEB站点所在的服务器根目录上开始查找的
+                        以/作为开始
+图像  语法
+      标记：&lt;img&gt;或&lt;img/&gt;
+      属性：src(全称：source 源)
+            &lt;img src=&quot;ur1&quot;&gt;
+            &lt;img src=&quot;a.jpg&quot;&gt;
+            &lt;img src=&quot;images/a.jpg&quot;&gt;
+            注意：URL严格区分大小写
+            width
+            height
+            注意：如果width 和height只设置其中一个属性的话，那么另外一个将等比缩放
+链接 （超链接）
+        语法：由&lt;a&gt;内容&lt;/a&gt;
+              注意：默认情况下，A是不能被点击的
+        属性：href 链接的URL 只有设置href属性后，才允许被点击
+              target  目标，打开新网页的方式
+                      取值：_self 默认值，在自身标签页中，打开新网页
+                            _blank 在新标签页中，打开新网页
+        链接表现形式： 资源下载
+                        链接地址为**.zip/**.rar
+                       电子邮件链接 &lt;a href=&quot;mailto:zhaoxu@tedu.cn&quot;&gt;发送邮件&lt;/a&gt;
+                       返回页面顶部的空链接&lt;a href=&quot;#&quot;&gt;返回顶部&lt;/a&gt;
+                       链接到Javascript &lt;a href=&quot;javascript:js代码&quot;&gt;&lt;/a&gt;
+        锚点：anchor   在html文档的某行位置做一个记号，允许通过超链接跳转到该记号位置
+                定义锚点（做记号）
+                    通过A标记的name属性 &lt;a name=&quot;名称&quot;&gt;&lt;/a&gt;
+                    通过任意标记的ID属性&lt;标记 ID=&quot;标记名称&quot;&gt;&lt;/标记&gt;
+                链接到锚点（跳转到锚点）&lt;a href=&quot;#锚点名称&quot;&gt;&lt;/a&gt;
+                                        &lt;a href=&quot;页面URL#锚点名称&quot;&gt;&lt;/a&gt;
+</code></pre><p>表格:表格的作用</p>
+<pre><code>表格，是由一些称为单元格的东西按照从左到右，从上到下的顺序排列而成的
+    语法：&lt;table&gt;&lt;/table&gt;  定义表格
+          &lt;tr&gt;&lt;/tr&gt;        定义表行
+          &lt;td&gt;&lt;/td&gt;           定义单元格
+         尽量保证默认情况下，每行中的单元格数量是相同的
+    表格属性：width   宽度
+          height  高度
+          align   对齐方式
+          border  边框
+          cellpadding  设置单元格内边距
+          cellspacing  设置单元格外边距
+          bgcolor  背景颜色
+    表行属性：align   水平对齐
+              valign  取值top/middle/bottom    垂直对齐方法
+              bgcolor 背景颜色
+          单元格属性：align
+              valign
+              width
+              height
+              bgcolor
+              colspan    设置单元格跨列
+              rowspan    设置单元格跨行
+    单元格特点
+            某一行单元格的高度，以最高的单元格高度为准
+            某一列单元格的宽度，以最宽的单元格宽度为主
+table的子元素：表格标题&lt;caption&gt;标题文本&lt;/caption&gt;
+                注意：一个表格最多只能有一个标题
+                     caption 必须位于&lt;table&gt;下的第一句话
+               td允许被 th替换  加粗。居中
+表格的复杂应用：行分组 表头行分组 &lt;thead&gt;&lt;/thead&gt; 允许包含一行或多行tr
+                       表主体行分组&lt;tbody&gt;&lt;/tbody&gt; 允许包含任意多的连续tr
+                       表尾行分组&lt;tfoot&gt;&lt;/tfoot&gt; 允许包含一行或多行tr
+                    注意：如果不对table中的数据进行显示分组的话，默认都在tbody中
+                不规则表格  通td的 colspan和 rowspan属性来完成
+                            colspan 跨列，在一行中，从指定单元格位置处开始，横向向右合并几个单元格
+                                    被合并的单元格，要删除
+                            rowspan 跨行。在一列中，从指定单元格位置处开始，纵向向下合并几个单元格
+                                    被合并的单元格，要删除
+                表格的嵌套  允许在单元格中在放入一个表格
+                            &lt;table&gt;
+                                &lt;tr&gt;
+                                    &lt;td&gt;
+                                        &lt;table&gt;
+                                            &lt;tr&gt;
+                                                &lt;td&gt;
+                                                &lt;/td&gt;
+                                            &lt;/tr&gt;
+                                        &lt;/table&gt;
+                                    &lt;/td&gt;
+                                &lt;/tr&gt;
+                            &lt;/table&gt;
+</code></pre><p>  列表</p>
+<pre><code>列表语法
+    组成  列表的类型：有序列表：&lt;ol&gt;&lt;/ol&gt;
+                      无序列表：&lt;ul&gt;&lt;/ul&gt;
+             列 表项：显示在列表中的内容 &lt;li&gt;&lt;/li&gt;
+    属性  有序列表（ol）的属性 type 取值 1   a   A   i   I
+                               start  起始编号是多少 具体为数字
+          无序列表（ul）的属性 type 取值 disc 实心圆点
+                                         circle 空心圆
+                                         none 不显示标识
+                                         square  方块
+列表的嵌套： 允许在一个列表中出现另一个列表被嵌套的列表必须放在&lt;li&gt;中
+定义列表：作用，往往用于给出一类事物的定义情形，如名词解释
+          语法，&lt;dl&gt;&lt;/dl&gt;  表示定义列表
+                    &lt;dt&gt;&lt;/dt&gt; 定义列表中标题
+                    &lt;dd&gt;&lt;/dd&gt; 对标题解释说明的内容
+        使用场合：图文混排时使用
+</code></pre><p>  结构标记</p>
+<pre><code>网页结构布局：为了取代做布局的Div，从而体现出布局标记的语义性
+    块级元素做布局，Div
+    常用结构标记
+        header 用来表示页面或某部分内容的顶部信息
+               &lt;header&gt;&lt;/header&gt;
+         nav   用来表示页面的主导航信息
+                &lt;nav&gt;&lt;/nav&gt;
+        section  表示页面中的小节，也可以用来表示页面的主体内容
+                 &lt;section&gt;&lt;/section&gt;
+        article  表示页面中的文章信息或是文字居多的部分，比如博客信息，微博的条目，论坛中的主贴和回帖
+                  &lt;article&gt;&lt;/article&gt;
+        footer   表示页面中底部信息，一般用户关注度较低
+                 &lt;footer&gt;&lt;/footer&gt;
+        aside  表示页面中的边档信息
+                &lt;aside&gt;&lt;/aside&gt;
+</code></pre><p>  表单</p>
+<pre><code>表单概述：表单用于显示，收集用户信息，并提交给服务器
+ 完整表单由两部分组成：实现表单以及可交互的界面元素（前端）
+      表单元素：用于定义表单的提交信息如：提交地址，提交方式
+      表单控件：能够与用户交互的界面无素如：文本框，密码框
+              表单提交后的处理（服务器端）
+          表单元素：语法 &lt;form&gt;&lt;/form&gt;
+              注意：只有出现在form中的表单控件的数据才会被提交
+                    form在页面中没有显示效果，只有功能
+          属性：action :指定提交给服务器处理程序的地址，该地址要与服务器端人员商量
+                  注意：如果省略不写，默认提交给本页
+               method ：指定提交数据的方法（模式）
+                   取值：get 获取（默认方式）
+                          以明文的方式提交数据到服务器（数据会显示在地址栏上），安全性低
+                          最大提交2KB数据
+                          向服务器要数据时用get方式
+                        post  邮寄
+                             以隐式的方式提交数据到服务器不会显示，安全性高
+                             无提交数据大小限制
+                             让服务器处理数据时使用post
+                        put
+                        delete
+               enctype ：指定表单数据的编码方式（什么样的数据允许提交）
+                   取值：application/x-www-form-urlencoded
+                         默认值，可以将所有的数据提交给服务器（文件除外）
+                        multipart/form-data
+                            允许将文件（图像，音频，视频，文档）提交给服务器
+                        text/plain
+                            允许将普通字符提交给服务器，特殊字符无法提交（=，&amp;，？）
                         name ：定义表单名称
-                        id： 定义表达独一的标识
-        表单控件：都是与用户进行交互的元素
-                语法:input     收集用户信息
-                        &lt;input&gt;  属性：type  根据不同的type值创建不同的输入控件
-                                       name  定义控件的名称提供给服务器端使用，采用匈牙利命名法，控件缩写+功能
-                                       value  定义控件的值，提供给服务器端使用
-                                       disabled 禁用控件（无法操作，无法提交），该属性无值
-                                说明：文本框和密码框
-                                      文本框：type=“text”
-                                      密码框：type=“password”
-                                        属性：maxlength 限制输入的字符数，超出不显示
-                                              readonly  只读（只能看，不能改，但允许被提交） 无值属性
-                                              name 缩写txt+功能 如 name=“txtpassword”
-                                      单选按钮和复选框
-                                        单选按钮 ：type=“‘radio’”   radio缩写rdo
-                                        复选框 ：type=“checkbox”    checkbox缩写chk
-                                          属性：：name 定义控件的名称
-                                                        为控件分组
-                                                  value 值
-                                                  checked 预选中
-                                        按钮：提交按钮
-                                                type=“submit” 必须放入表单中进行
-
-                                              重置按钮
-                                                type=“reset”
-                                              普通按钮
-                                                type=“button”
-                                            属性：name  缩写btn
-                                                  value  按钮上的文字
-                                      其它按钮：图片按钮
-                                                    &lt;input type=&quot;image&quot;&gt;
-                                                    属性：src
-                                                按钮《提交》可以放图
-                                                &lt;button&gt;内容&lt;/button&gt;
-                                      隐藏域和文件选择框
-                                                隐藏域：type=“hidden”  想提交给服务器，但不想被用户看见的数据放在隐藏域中
-                                                    属性：name
-                                                          value
-                                                文件选择框：type=“file”
-                                                        注意，要求form的methods属性必须为post
-                                                              form的enctype属性为multipart/form-data
-                     textarea  多行文本域 允许 录入多行数据
-                            语法：&lt;textarea&gt;&lt;/textarea&gt;
-                            属性：name缩写 txt
-                                  cols  指定文本区域列数
-                                  rows  指定文本区域行数
-                                  readonly  只读
-                     select  选择框下拉框
-                            语法：&lt;select&gt;&lt;/select&gt;
-                                    属性 name 缩写sel
-                                         size 默认显示的数量，如果大于1的话，则为滚动列表
-                                         multiple 设置多选，同时变以滚动列表配合ctrl或shift实现多选
-                                  选项
-                     option       &lt;option&gt;/&lt;option&gt;
-                                     属性  value 值
-                                          selected 默认预选中，无值
-                其它
-                    label  关联文本与控件
-                            &lt;label&gt;&lt;/label&gt;
-                            属性  for 表示与该元素关联的控件的ID值
-                    控件分组控件
-                           &lt;fieldset&gt;&lt;/fieldset&gt;  分组
-                           &lt;legend&gt;&lt;/legend&gt;    分组标题
-                    浮动框架
-                            可以在一个浏览器窗口中同时显示多个页面文档的内容，在一个页面中引入另一个页面
-                            语法  &lt;iframe&gt;文字&lt;/iframe&gt;
-                            属性 src 浮动框架中要引入的页面URL
-                                 width
-                                 height
-                                 frameborder 浮动框架边框 默认有边框，无需边框设置为0
-</code></pre><p>新表单元素（HTML5新标记）<br>        统一属性：name缩写txt<br>            required  非空限制，必须填入内容<br>        电子邮件类型：<input type="email"> 缩写txt<br>        搜索类型：<input type="search"><br>        URL类型：<input type="url">  数据必须符合URL规范<br>        电话号码类型：<input type="tel">    移动终端：弹出数字键盘<br>        数字类型：<input type="number"><br>            属性：min 控件接受的最小值<br>                max 控件接受的最大值<br>                step 控件递增的步长，默认为1<br>        范围类型：允许选择指定范围内的一个值（左右滑块类型）<br>            <input type="range"><br>            属性：min 指定范围最小值<br>                max 指定范围最大值<br>                step 指定值变化步长<br>                value 设置初始值<br>        颜色类型：颜色拾取控件<br>                <input type="color"><br>        日期类型：允许用户选择日期<br>                <input type="date"><br>        周类型：与date类似，但只能选择周<br>                <input type="week"><br>        月类型：与date类似，但只能选择月份<br>                <input type="month"></p>
-]]></content>
+                         id： 定义表达独一的标识
+          表单控件：都是与用户进行交互的元素
+              语法:input     收集用户信息
+                  属性：type  根据不同的type值创建不同的输入控件
+                       name  定义控件的名称提供给服务器端使用，采用匈牙利命名法，控件缩写+功能
+                       value  定义控件的值，提供给服务器端使用
+                       disabled 禁用控件（无法操作，无法提交），该属性无值
+                       说明：文本框和密码框
+                            文本框：type=“text”
+                            密码框：type=“password”
+                            属性：maxlength 限制输入的字符数，超出不显示
+                                 readonly  只读（只能看，不能改，但允许被提交） 无值属性
+                                 name 缩写txt+功能 如 name=“txtpassword”
+                            单选按钮和复选框
+                                单选按钮 ：type=“‘radio’”   radio缩写rdo
+                                复选框 ：type=“checkbox”    checkbox缩写chk
+                                 属性：：name 定义控件的名称
+                                              为控件分组
+                                         value 值
+                                         checked 预选中
+                             按钮：提交按钮
+                                  type=“submit” 必须放入表单中进行
+                                  重置按钮
+                                   type=“reset”
+                                  普通按钮
+                                     type=“button”
+                                      属性：name  缩写btn
+                                           value  按钮上的文字
+                                  其它按钮：图片按钮
+                                      &lt;input type=&quot;image&quot;&gt;
+                                        属性：src
+                                            按钮《提交》可以放图
+                                       &lt;button&gt;内容&lt;/button&gt;
+          隐藏域和文件选择框
+               隐藏域：type=“hidden”  想提交给服务器，但不想被用户看见的数据放在隐藏域中
+                 属性：name
+                      value
+               文件选择框：type=“file”
+                    注意，要求form的methods属性必须为post
+                         form的enctype属性为multipart/form-data
+          textarea  多行文本域 允许 录入多行数据
+               语法：&lt;textarea&gt;&lt;/textarea&gt;
+               属性：name缩写 txt
+                     cols  指定文本区域列数
+                     rows  指定文本区域行数
+                     readonly  只读
+          select  选择框下拉框
+               语法：&lt;select&gt;&lt;/select&gt;
+               属性 name 缩写sel
+                    size 默认显示的数量，如果大于1的话，则为滚动列表
+                    multiple 设置多选，同时变以滚动列表配合ctrl或shift实现多选
+                选项
+                     &lt;option&gt;/&lt;option&gt;
+                 属性  value 值
+                       selected 默认预选中，无值
+          其它
+               label  关联文本与控件
+                     &lt;label&gt;&lt;/label&gt;
+                属性  for 表示与该元素关联的控件的ID值
+                      控件分组控件
+                         &lt;fieldset&gt;&lt;/fieldset&gt;  分组
+                         &lt;legend&gt;&lt;/legend&gt;    分组标题
+               浮动框架
+                   可以在一个浏览器窗口中同时显示多个页面文档的内容，在一个页面中引入另一个页面
+                   语法  &lt;iframe&gt;文字&lt;/iframe&gt;
+                    属性 src 浮动框架中要引入的页面URL
+                          width
+                          height
+                          frameborder 浮动框架边框 默认有边框，无需边框设置为0
+</code></pre><p>新表单元素（HTML5新标记）</p>
+<pre><code>统一属性：name缩写txt
+    required  非空限制，必须填入内容
+电子邮件类型：&lt;input type=&quot;email&quot;&gt; 缩写txt
+搜索类型：&lt;input type=&quot;search&quot;&gt;
+URL类型：&lt;input type=&quot;url&quot;&gt;  数据必须符合URL规范
+电话号码类型：&lt;input type=&quot;tel&quot;&gt;    移动终端：弹出数字键盘
+数字类型：&lt;input type=&quot;number&quot;&gt;
+    属性：min 控件接受的最小值
+        max 控件接受的最大值
+        step 控件递增的步长，默认为1
+范围类型：允许选择指定范围内的一个值（左右滑块类型）
+    &lt;input type=&quot;range&quot;&gt;
+    属性：min 指定范围最小值
+        max 指定范围最大值
+        step 指定值变化步长
+        value 设置初始值
+颜色类型：颜色拾取控件
+        &lt;input type=&quot;color&quot;&gt;
+日期类型：允许用户选择日期
+        &lt;input type=&quot;date&quot;&gt;
+周类型：与date类似，但只能选择周
+        &lt;input type=&quot;week&quot;&gt;
+月类型：与date类似，但只能选择月份
+        &lt;input type=&quot;month&quot;&gt;
+</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;1、Web基础知识&lt;br&gt;    1、Internet&lt;br&gt;        1、简介&lt;br&gt;            Internet 实际上就是由计算机所组成的网络结构&lt;br&gt;            服务：&lt;br&gt;                1、Telnet&lt;br&gt; 
+      &lt;p&gt;1、Web基础知识&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、Internet
+    1、简介
+        Internet 实际上就是由计算机所组成的网络结构
+        服务：
+            1、Telnet
+                远程登录
+   
     
     </summary>
     
@@ -638,25 +1567,28 @@
   </entry>
   
   <entry>
-    <title>JavaScript原型，原型链，有什么特点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
+    <title>HTML5的form如何关闭自动完成功能</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:22:28.232Z</updated>
+    <updated>2017-07-23T07:45:05.164Z</updated>
     
-    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
+    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
+      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
+
     
     </summary>
     
       <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -698,6 +1630,29 @@
     
       &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
 
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript原型，原型链，有什么特点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:22:28.232Z</updated>
+    
+    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
     
     </summary>
     
@@ -899,44 +1854,6 @@
     
     
       <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>html5有哪些新特性、移除了那些元素</title>
-    <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
-    <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:58:08.890Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;       sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websocket, Geolocation;</li>
-</ul>
-<p>移除的元素：纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</p>
-<ul>
-<li>支持HTML5新标签：<br>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式。<br>当然也可以直接使用成熟的框架、比如html5shim;<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-<ul>
-<li>如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。&lt;br&gt;绘画 canvas;&lt;br&gt;用于媒介回放的 video 和 audio 元素;&lt;br&gt;本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
