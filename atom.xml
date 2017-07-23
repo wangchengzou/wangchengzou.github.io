@@ -89,32 +89,6 @@
   </entry>
   
   <entry>
-    <title>Label的作用是什么？是怎么用的</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T04:04:52.212Z</updated>
-    
-    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
-<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"> <label>Date:<input type="text" name="B"></label>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
-&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt; &lt;lab
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
     <title>html5有哪些新特性、移除了那些元素</title>
     <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
     <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
@@ -153,6 +127,31 @@
   </entry>
   
   <entry>
+    <title>常见的浏览器内核有哪些</title>
+    <link href="www.wangchengzou.cn/2017/07/22/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E6%9C%89%E5%93%AA%E4%BA%9B/"/>
+    <id>www.wangchengzou.cn/2017/07/22/常见的浏览器内核有哪些/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T03:54:34.968Z</updated>
+    
+    <content type="html"><![CDATA[<p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。<br>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等<br>Presto内核：Opera7及以上。<br>Webkit内核：Safari,Chrome等。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。&lt;br&gt;Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等&lt;br&gt;Presto内核：Opera7及以上。&lt;br&gt;Webkit内核：Saf
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>你对浏览器内核的理解</title>
     <link href="www.wangchengzou.cn/2017/07/22/%E4%BD%A0%E5%AF%B9%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E7%9A%84%E7%90%86%E8%A7%A3/"/>
     <id>www.wangchengzou.cn/2017/07/22/你对浏览器内核的理解/</id>
@@ -178,18 +177,19 @@
   </entry>
   
   <entry>
-    <title>常见的浏览器内核有哪些</title>
-    <link href="www.wangchengzou.cn/2017/07/22/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E6%9C%89%E5%93%AA%E4%BA%9B/"/>
-    <id>www.wangchengzou.cn/2017/07/22/常见的浏览器内核有哪些/</id>
+    <title>Label的作用是什么？是怎么用的</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:54:34.968Z</updated>
+    <updated>2017-07-23T04:04:52.212Z</updated>
     
-    <content type="html"><![CDATA[<p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。<br>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等<br>Presto内核：Opera7及以上。<br>Webkit内核：Safari,Chrome等。</p>
-]]></content>
+    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
+<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"> <label>Date:<input type="text" name="B"></label>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。&lt;br&gt;Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等&lt;br&gt;Presto内核：Opera7及以上。&lt;br&gt;Webkit内核：Saf
+      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
+&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt; &lt;lab
     
     </summary>
     
