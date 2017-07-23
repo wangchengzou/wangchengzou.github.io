@@ -1,0 +1,1080 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>node基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="node基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">21 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>node基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/node/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/node，html/" class="chip pink lighten-1">node，html</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>1、阿里面试题：用户在浏览器中输入www.taobao.com直到看到页面之间发生了什么？</p>
+<pre><code>(1)操作系统访问网络上的DNS服务器，把域名转换为IP地址
+(2)浏览器发起HTTP请求消息
+(3)Web服务器接收并解析请求消息，查找指定的资源，可能访问数据库，构建并返回HTTP响应消息
+(4)浏览器接收并解析响应消息
+(5)浏览器缓存接收到响应内容，并解析和渲染响应内容
+</code></pre><p>2、静态网页 和 动态网页？</p>
+<pre><code>静态：网页内容任何人在任何时间访问都是不变的
+        HTML/CSS/JS/Flash/视频音频....
+动态：网页内容不同人在不同时间访问可能是不同的
+        DB/JSP/PHP/ASP.NET/Node.js
+JSP=HTML+Java：功能强大可靠，适合大型企业级项目
+PHP=HTML+PHP：简单易用，适合互联网项目
+ASP.NET=HTML+C#：易用，适合Windows平台
+Node.js=HTML+&quot;JS&quot;：性能好，适合于服务器端IO密集型项目，不适合CPU密集型项目
+</code></pre><p>3、Node.js概述</p>
+<pre><code>Node.js不是JS，是一种服务器端技术，它的竞争对手是PHP/JSP/ASP.NET！ 历史上第一次有一种语言可以通吃前后台！
+官网：www.nodejs.org
+</code></pre><p>4、Node.js的两种运行模式</p>
+<pre><code>(1)交互模式——一般用于临时测试
+  REPL：Read Evaluate Print Loop，输入一行代码执行一行
+  注意：交互模式自带输出功能，不必写console.log
+  node  回车
+(2)脚本模式——正式项目中使用的方式
+  把要执行的所有语句编写的一个文本文件中(后缀名任意，没有都行)，一次性提交给node解释器执行
+  node  完整路径名/x.js  回车
+  提示：只要安装完Node.js，重启一下WebStorm，WS可以自动发现node.exe解释器程序。记得新建的项目一定要修改默认的文件编码方式为UTF-8
+</code></pre><p>5、面试题：如何自学一门新语言 —— Node.js</p>
+<pre><code>(1)了解背景
+  ——百度百科Node.js
+(2)搭建开发环境，编写HelloWorld
+  下载并安装node-v6.10.2-x64.msi
+  交互模式、脚本模式
+(3)数据类型——重点面试题
+  前端JS中的数据类型：
+    1.基本/原生/值类型
+       string、number、boolean、null、undefined
+    2.引用/对象类型
+       ES对象类型：String、Number、Boolean、Math、Date、RegExp、Object、Function、Error....
+       BOM对象类型：window、document、screen、history、location、navigator、event...
+       DOM对象类型：Node、Element、Attr....
+       用户自定义对象类型： { }
+  后端Node.js中的数据类型：
+    1.基本/原生/值类型
+       string、number、boolean、null、undefined
+    2.引用/对象类型
+       ES对象类型：String、Number、Boolean、Math、Date、RegExp、Object、Function、Error....
+       Node.js特供对象：目前有几百个....
+       用户自定义对象类型： { }
+(4)变量和常量
+  var age = 20;
+  const PI = 3.14;
+(5)运算符
+  算术运算符
+  比较运算符
+  逻辑运算符
+  位运算符
+  三目运算符
+  赋值运算符
+  特殊运算符  .  instanceof  typeof
+(6)逻辑结构
+  循环结构： while   do..while   for( ; ; )
+          for(.. in ..)  for(.. of ..)
+  选择结构：if..else..  switch..case..
+(7)通用小程序
+(8)函数和对象
+(9)常用的组件、第三方工具、框架
+(10)实际小项目
+
+  Modal：模态框
+  Model：模型
+  Module：模块
+</code></pre><p>6、Node.js中的特有概念——模块</p>
+<pre><code>一个Web项目功能可以分为很多不同的“模块”，如商品管理模块、用户管理模块、支付模块、促销模块、商家管理模块....
+Node.js按照功能的不同，可以把函数、对象分处到不同的文件、目录下，这些文件/目录在Node.js中就称为“Module”
+Node.js中每个模块都是一个独立构造函数，解释器会为每个.js文件添加如下代码：
+(function(exports, require, module, __filename, __dirname){
+    //exports：{ }  用于声明向外部导出的自己的成员
+    //require：fn  用于导入其它的模块，创建指定模块对象
+    //module：
+    //__filename：
+    //__dirname：
+    //自己编写的文件内容
+})
+Node.js的模块中exports和module.exports对象的区别是什么？
+二者都可以用于向外界导出自己内部的成员。但：
+module变量指代当前模块对象，真正导出的是modue.exports；
+Node.js底层有代码： exports = module.exports。
+所以：若只是给exports对象添加新的成员，则等价于给module.exports添加新成员；
+    但是若修改了exports的指向，则不会产生实质的作用。
+
+每个模块都可以使用自己的require()函数引入另一个模块——底层本质就是创建了指定模块的一个对象实例。
+    require(&apos;./模块文件名&apos;)
+每个模块可以使用exports对象向外导出/公开一些自己内部的成员供其它模块使用。
+    exports.成员名 = 成员值;
+</code></pre><p>7、Node.js中模块的分类</p>
+<pre><code>(1)Node.js官方提供的模块——安装在解释器内部
+  require(&apos;模块名&apos;)
+(2)第三方编写的模块
+(3)用户自定义的模块
+  exports.x=y + require(&apos;./模块文件名&apos;)
+</code></pre><p>8、Node.js预定义模块 —— Global</p>
+<pre><code>该模块提供的可以直接使用，而无需require(&apos;global&apos;)
+exports：用于向外部导出当前模块内部的成员
+module：用于指代当前模块
+require：用于引入其他模块
+__filename：返回当前模块的文件全名
+__dirname：返回当前模块文件所在的目录全名
+console：指代控制台对象，注意该对象与Chrome中console不同！
+      console.log/dir/time/timeEnd/assert....
+setInterval(time, fn)
+setTimeout(time, fn)
+setImmediate(fn)        等价于setTimeout(0, fn)
+</code></pre><p>9、Node.js中模块的类型：</p>
+<pre><code>(1)官方提供的原生模块
+    global、util、url、fs、http
+(2)第三方模块
+    mysql、oracle、express...
+(3)自定义模块
+    文件模块和目录模块
+</code></pre><p>10、自定义模块的两种形式</p>
+<pre><code>(1)文件模块
+  创建一个js文件，如m3.js，导出需要公开的数据。其它模块可以require(&apos;./m3&apos;)模块
+(2)目录模块
+  方式1：创建一个目录，假设名为m4，其中创建名为index.js的文件，
+          导出需要公开的数据。其它模块可以require(&apos;./m4&apos;)模块
+  方式2：创建一个目录，假设名为m5，其中创建package.json文件，
+          其中声明main属性指定默认执行的启动JS文件，如5.js，其中导出需要公开的数据。
+          其它模块可以require(&apos;./m5&apos;)模块
+  方式3：创建一个目录，必须名为node_modules，其中再创建目录模块，假设名为m6，
+          其中创建package.json文件，其中声明main属性指定默认执行的启动JS文件，
+          如6.js，其中导出需要公开的数据。其它模块可以require(&apos;m6&apos;)模块
+</code></pre><p>11、NPM包管理器</p>
+<pre><code>Node Package Manager：Node.js的第三方模块/包管理器，可用于下载、更新、删除、维护包依赖关系的工具。
+npm工具默认到www.npmjs.org网站下载所需的第三方模块包。
+使用NPM工具下载一个新的软件包：
+  npm  install  包名
+  npm  uninstall  包名
+更多的NPM命令参数可以使用 npm  -h 进行查看。
+</code></pre><p>12、Node.js官方提供的原生模块 —— querystring</p>
+<pre><code>querystring模块用于处理HTTP请求URL中的查询字符串
+var obj = qs.parse(str)        把查询字符串解析为JS对象
+var str = qs.stringify(obj)    把JS对象转换为查询字符串
+</code></pre><p>13.Node.js官方提供的原生模块 —— url</p>
+<pre><code>url模块用于解析一个HTTP请求地址，获取其中各个不同的部分
+var obj = url.parse( str )   把一个URL字符串解析为一个对象
+var obj = url.parse( str, true )   把一个URL字符串解析为一个对象，并把其中的查询字符串也解析为对象
+</code></pre><p>14、 Node.js官方提供的原生模块 —— Buffer</p>
+<pre><code>Buffer：缓冲区，本质是一块内存区域，用于暂存以后要用到的数据（可能是数字、字符串、二进制图片/音视频等），该区域就称为“缓存”。
+//分配一个指定大小的缓冲区
+  var buf1 = Buffer.alloc( 1024 );
+//使用一个数字数组创建一个缓冲区
+  var buf2 = Buffer.from( [1, 3, 5] );
+//使用一个字符串创建一个缓冲区
+  var buf3 = Buffer.from( &apos;abcdefg&apos; );
+//把一个缓冲区中的数据转换为字符串
+  var str = buf3.toString( );
+</code></pre><p>15、 Node.js官方提供的原生模块 —— fs —— 重点</p>
+<pre><code>fs模块提供了对文件系统中的文件/目录进行增删改查、读写的功能。
+//同步读取文件中的内容
+ var data = fs.readFileSync( file );
+//同步向文件中写出内容（删除已有内容）
+ fs.writeFileSync( file,  str/buf )
+//同步向文件中追加写出内容（不删除已有内容）
+ fs.appendFileSync( file,  str/buf )
+练习：使用上述方法，实现把 4.css 文件复制为 4.backup.css
+
+//异步读取文件中的内容
+ fs.readFile( file,  function(err, data){ } );
+//异步向文件中写出内容（删除已有内容）
+ fs.writeFile( file,  str/buf,  function(err){ } )
+提示：后续的项目中，文件读写可以使用同步或异步，但推荐使用异步方法——最大限度的发挥Node.js的优势。
+</code></pre><p>16、 Node.js官方提供的原生模块 —— http —— 重点</p>
+<pre><code>HTTP模块可用于编写基于HTTP协议的客户端程序（即浏览器）；
+  也可以编写基于HTTP协议的服务器端程序（即Web服务器）
+用http模块编写一个Web服务器：
+(1)接收客户端的HTTP请求消息
+(2)解析客户端请求消息
+(3)读取客户端请求的文件
+(4)向客户端发送HTTP响应消息，主体就是客户端请求的文件
+  var server = http.createServer( );
+  server.listen(80);
+  server.on(&apos;request&apos;, function(req, res){
+      //解析请求消息
+      //向客户端写出响应消息
+  })
+</code></pre><p>17、总结：</p>
+<pre><code>Node.js中的数据类型
+(1)基本值类型
+    number、boolean、string、null、undefined
+(2)引用/对象类型
+    1)ES原生类型
+    2)Node.js提供的类型
+    3)用户自定义的类型
+
+Node.js中模块(Module)系统
+(1)Node.js官方提供的模块
+(2)第三方扩展模块——npm
+(3)自定义模块：
+    文件模块
+        circle.js：exports.size = fn;
+        app.js： require(&apos;./circle&apos;);
+    目录模块
+        node_modules/mysql/package.json:  { &quot;main&quot;:&quot;./index.js&quot; }
+        node_modules/mysql/index.js: exports.conn = fn
+        app.js:  require(&apos;mysql&apos;)
+
+Node.js官方提供的模块：
+(1)global
+    global.console、global.parseInt、global.setInterval
+(2)util
+    const util = require(&apos;util&apos;)
+    var str = util.inspect(obj)
+(3)querystring
+    const qs = require(&apos;querystring&apos;)
+    var obj = qs.parse(&apos;uname=tom&amp;age=20&apos;)
+(4)url
+    const url = require(&apos;url&apos;);
+    var obj = url.parse(&apos;http://tmooc.cn:80/st/index.html?k=v#c1&apos;, true)
+(5)Buffer
+    缓冲区就是一块内存，用于暂存数据
+    var buf = Buffer.alloc(1024);
+    var buf = Buffer.from(&apos;abcde&apos;);
+(6)fs
+    const fs = require(&apos;fs&apos;)
+    //同步IO操作
+    var buf = fs.readFileSync(&apos;1.html&apos;)
+    fs.writeFileSync(&apos;2.log&apos;, buf)
+    fs.appendFileSync(&apos;3.log&apos;, buf)
+    //异步IO操作
+    fs.readFile(&apos;1.html&apos;, (err, buf)=&gt;{...})
+    fs.writeFile(&apos;2.log&apos;, buf, (err)=&gt;{})
+    fs.appendFile(&apos;3.log&apos;, buf, (err)=&gt;{})
+    console.log(&apos;JS执行完成&apos;)
+ (7)http
+    const http = require(&apos;http&apos;)
+    var server = http.createServer()
+    server.listen(80)
+    server.on(&apos;request&apos;, (req,  res)=&gt;{
+        //读取req中的请求信息
+        //输出响应消息
+    })
+</code></pre><p>18、MySQL中的SQL</p>
+<pre><code>SQL语句的分类：
+DDL:(Data Define Language) —— 定义数据列
+  CREATE、DROP、ALTER、TRUNCATE
+DML:(Data Manipulate Language) —— 操作数据行
+  INSERT、DELETE、UPDATE
+DQL:(Data Query Lanaguage) —— 数据查询
+  SELECT(最难)
+DCL:(Data Control Language) —— 控制用户权限
+  GRANT、REVOKE
+</code></pre><p>19、使用Node.js访问MySQL服务器</p>
+<pre><code>为了精简Node.js解释器，官方没有提供访问任何数据库相关模块，必须使用npm工具下载第三方模块。
+在www.npmjs.org上搜索关键字mysql，可以得到很多相关的模块，每个模块都有使用说明。
+ 使用npm工具下载mysql模块：
+   npm  i   mysql
+ mysql模块的使用步骤：
+ (1)创建到数据库服务器的连接
+   const mysql = require(&apos;mysql&apos;);
+   var conn = mysql.createConnection({...})
+ (2)发送SQL语句给数据库服务器来执行
+   conn.query(&apos;SQL...&apos;, function(err, result){....})
+ (3)关闭连接
+   conn.end()
+</code></pre><p>20、总结2：</p>
+<pre><code>Node.js模块的分类：
+(1)官方提供的模块
+    global、util、querystring、url、Buffer、fs、http
+(2)第三方模块——npm
+    mysql
+(3)自定义模块
+    文件模块  user.js    require(&apos;user&apos;)
+    目录模块  node_modules/db/package.json  require(&apos;db&apos;)
+
+http模块的使用：
+const http = require(&apos;http&apos;);
+var server = http.createServer()
+server.listen(8080)
+server.on(&apos;request&apos;, (req, res)=&gt;{  })
+
+mysql模块的使用：  pool 数据库连接池使用
+const mysql = require(&apos;mysql&apos;)
+var pool = mysql.createPool({
+    host: &apos;127.0.0.1&apos;,
+user: &apos;root&apos;,
+password: &apos;&apos;,
+    database: &apos;jd&apos;,
+connectionLimit: 10
+});
+pool.getConnection((err, conn)=&gt;{
+    conn.query(&apos;SQL..?,?&apos;, [x, x], (err, result)=&gt;{
+        conn.realease()
+    })
+})
+</code></pre><p>21、Express框架</p>
+<pre><code>  使用官方提供的http模块可以创建一个Web服务器应用，但是此模块非常底层，要处理各种情形，比较繁琐。
+推荐使用http模块的进一步封装简化模块 —— express —— 第三方模块，
+是一个基于Node.js的http模块而编写的高层模块，简化Web服务器端应用的开发。
+V4版本中官方的定义：Express是一个请求处理工具，用于接收客户端的请求消息，返回响应消息。
+  使用方法：
+  (1)下载express模块
+    npm   i   express
+  (2)在自己的模块中引入express模块
+    const express = require(&apos;express&apos;)
+  (3)使用http模块创建一个Web服务器对象，让express()担当请求处理函数
+    var app = express()
+    var server = require(&apos;http&apos;).createServer(app)
+    server.listen(8080)
+</code></pre><p>22、HTTP协议——请求消息</p>
+<pre><code>请求方法：用于标明此次请求的目的
+GET： 表客户端想“获得”指定的资源
+POST： 表客户端想“邮寄/上传/添加”指定的数据给服务器，相关数据在请求主体中
+PUT：表客户端想“放置/上传/更新”服务器上的指定资源，相关数据在请求主体中
+DELETE：表客户端想“删除”服务器上的指定资源
+
+POST和PUT的语义区别：
+所有的请求方法中只有这二者有请求主体，都可以用于向服务器传数据。
+POST：一般表示“添加”，每次POST请求都应该在服务器上产生一条新的记录。
+PUT一般表示“更新”，相同的PUT请求即使多次请求也只能产生一条影响——多次PUT请求是“幂等的”。
+
+GET /user HTTP/1.1   表客户端想获取所有用户
+GET /user?pno=2&amp;psize=10 HTTP/1.1表客户端想分页获取数据
+GET /user/pno/2/psize/10 HTTP/1.1表客户端想分页获取数据
+GET /user?uid=10 HTTP/1.1  表客户端想获取10号用户
+GET /user/10 HTTP/1.1   表客户端想获取10号用户
+POST /user HTTP/1.1    表客户端想向服务器添加一条新记录
+uname=tom&amp;upwd=123
+PUT /user HTTP/1.1  表客户端想更新服务器上的一条记录
+uname=tom&amp;upwd=123&amp;uid=8
+DELETE /user HTTP/1.1  表客户端想删除服务器上的所有用户
+DELETE /user?uid=9 HTTP/1.1  表客户端想删除9号用户
+DELETE /user/9 HTTP.1.1  表客户端想删除9号用户
+
+浏览器中如何发起GET请求：
+    地址栏中输入URL、超链接/JS跳转、SRC/HREF属性、表单GET提交、AJAX-GET请求
+浏览器中如何发起POST请求：
+    表单POST提交、AJAX-POST请求
+浏览器中如何发起PUT请求：
+    AJAX-PUT请求
+浏览器中如何发起DELETE请求：
+    AJAX-DELETE请求
+</code></pre><p>23、使用Express处理客户端的GET请求</p>
+<pre><code>Express路由：
+    //路由(Route) = Method + Path + Fn
+  app.get(url,  (req, res)=&gt;{
+    res.send(&apos;向客户端返回HTML字符串响应&apos;)
+    res.sendFile(__filename+&quot;/向客户端输出指定文件内容&quot;)
+    res.json( obj )    //将obj转化为JSON字符串，输出给客户端，并修改响应头
+  })
+  接收GET请求中的查询字符串：
+    //GET  /user?uid=10&amp;loc=bj
+    app.get(&apos;/user&apos;, (req, res)=&gt;{
+        //express为每个req对象添加一个query属性
+        console.log(req.query.uid);
+        console.log(req.query.loc);
+    })
+  接收GET请求中的请求参数：
+    //GET  /user/jsj/60
+    app.get(&apos;/book/:type/:id, (req, res)=&gt;{
+        //express为每个req对象添加一个params属性
+        console.log(req.params.type);        //jsj
+        console.log(req.params.id);        //60
+    })
+</code></pre><p>24、使用Express处理客户端的POST请求</p>
+<pre><code>app.post(url,  (req, res)=&gt; {})
+提示：客户端推荐使用AJAX异步请求，提交POST请求。
+示例：
+  app.post(&apos;/user&apos;, (req, res)=&gt;{
+      //接收请求主体中的数据
+      req.on(&apos;data&apos;, (buf)=&gt;{
+          var obj = qs.parse(buf.toString());
+      })
+  });
+</code></pre><p>25、使用Express处理客户端的PUT请求</p>
+<pre><code>app.put(url,  (req, res)=&gt; {})
+提示：客户端推荐使用AJAX异步请求，提交POST请求。
+示例：
+  app.put(&apos;/user&apos;, (req, res)=&gt;{
+      //接收请求主体中的数据
+      req.on(&apos;data&apos;, (buf)=&gt;{
+          var obj = qs.parse(buf.toString());
+      })
+  });
+</code></pre><p>26、使用Express处理客户端的DELETE请求</p>
+<pre><code>app.delete(url,  (req, res)=&gt; {})
+</code></pre><p>27、总结3：</p>
+<pre><code>Node.js知识点
+(1)与JS的区别：
+    JS属前端技术；Node.js属后端技术；
+    JS数据类型：值类型、对象类型(ES+BOM/DOM+自定义)
+    Node.js数据类型：值类型、对象类型(ES+Node.js官方核心对象+自定义)
+(2)Node.js模块系统
+  1)官方提供的核心模块
+  2)第三方模块——npm
+  3)用户自定义模块
+    文件模块：
+        user.js： module.exports = { }
+        app.js： var u = require(&apos;./user&apos;)
+    目录模块：
+        node_modules/oracle/package.json:
+                    {&quot;main&quot;:&quot;./index.js&quot;}
+        node_modules/oracle/index.js:
+                    module.exports = { }
+        app.js:    var o = require(&apos;oracle&apos;)
+(3)Node.js核心模块
+    global
+    util.inspect( )
+    querystring.parse( )
+    url.parse(str, true)
+    Buffer
+    fs.readFileSync()
+    fs.readFile()
+    fs.writeFileSync()
+    fs.writeFile()
+    fs.appendFileSync()
+    fs.appendFile()
+    http.createServer()
+    http.get()
+    http.post()
+(4)第三方模块
+    var conn = mysql.createConnection()
+    var pool = mysql.createPool()
+    pool.getConnection((err, conn)=&gt;{
+        conn.query(str, [ ], (err, result)=&gt;{
+            conn.release()
+        })
+    })
+     ------------------------------------
+    const http = require(&apos;http&apos;)
+    const express = require(&apos;express&apos;)
+    var app = express()
+    http.createServer(app).listen(80)
+    //定义路由（Route=method+url+fn）
+    app.get(&apos;/user&apos;, (req, res)=&gt;{})
+    app.post(&apos;/user&apos;, (req, res)=&gt;{})
+    app.put(&apos;/user&apos;, (req, res)=&gt;{})
+    app.delete(&apos;/user&apos;, (req, res)=&gt;{})
+</code></pre><p>28、Express中间件</p>
+<pre><code>  Express 是一个自身功能极简，完全是由路由和中间件构成一个的 web 开发框架：
+  从本质上来说，一个 Express 应用就是在调用各种中间件。
+
+  中间件（Middleware） 是一个函数，它可以访问请求对象（request object (req)）,
+   响应对象（response object (res)）,和 web 应用中处于请求-响应循环流程中的中间件
+   一般被命名为 next 的变量
+
+   中间件的功能包括：
+    执行任何代码。
+    修改请求和响应对象。
+    终结请求-响应循环。
+    调用堆栈中的下一个中间件。
+
+    如果当前中间件没有终结请求-响应循环，则必须调用 next() 方法将控制权交给下一个中间件
+    ，否则请求就会挂起。
+
+    Express 应用可使用如下几种中间件：
+        应用级中间件
+        路由级中间件
+        错误处理中间件
+        内置中间件
+        第三方中间件
+    使用可选则挂载路径，可在应用级别或路由级别装载中间件。
+    另外，你还可以同时装在一系列中间件函数，从而在一个挂载点上创建一个子中间件栈。
+
+    app.use(url,  (req, res, next)=&gt;{
+        //.....中间件要执行的代码
+        next( );   //调用下一个中间件或路由
+    })
+面试题：
+Express中路由本质上也是中间件，路由和普通中间件有何不同。
+
+除了可以自定义中间件函数外，Express 4.x官方还提供了一个中间件函数：
+app.use( express.static(&apos;public&apos;) );
+//若客户端请求了/public目录下的某个资源，它可以直接向客户端返回，不会再调用后续的路由。
+
+2.客户端JS与服务器端的Node.js整合在一个项目中
+  (1)客户端请求静态HTML页面
+  (2)服务器返回客户端请求的静态资源(express.static中间件)
+  (3)客户端加载完成，异步请求必需的动态数据
+  (4)服务器返回动态数据(一般都是JSON格式)
+  (5)客户端异步读取动态数据，解析出来，挂载到DOM树
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/phoneGap/" rel="next" title="phoneGap基础知识">
+    上一篇：phoneGap基础知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/position的值relative和absolute定位原点是/" rel="next" title="position的值relative和absolute定位原点是">
+    下一篇：position的值relative和absolute定位原点是
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

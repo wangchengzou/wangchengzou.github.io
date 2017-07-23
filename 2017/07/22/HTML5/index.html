@@ -1,0 +1,1213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Html5基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Html5基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">21 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Html5基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/HTML5/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/html/" class="chip pink lighten-1">html</a>
+        
+            <a href="/tags/h5/" class="chip pink lighten-1">h5</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>一、HTML5新特性 —— 十个新特性：凌乱</p>
+<pre><code>(1)新的语义标签
+(2)增强型表单(表单2.0)
+(3)音频和视频
+(4)Canvas绘图
+(5)SVG绘图
+(6)地理定位
+(7)拖放API
+(8)Web Worker
+(9)Web Storage
+(10)Web Socket
+</code></pre><p>二、HTML5中表单的新特性</p>
+<pre><code>(1)新的input type      &lt;input type=&quot;?&quot;&gt;
+  H4中的input type：text、password、radio、checkbox、file、hidden、submit、reset、image
+  H5中的input type：email、url、number、tel、search、range、color、date、month、week
+(2)新的表单元素
+  H4中的表单元素：input、textarea、select/option、label
+  H5中新增的表单元素：datalist、progress、meter、output
+(3)表单元素的新属性
+</code></pre><p>三、H5中新增的表单元素 —— datalist</p>
+<pre><code>&lt;datalist id=&quot;list3&quot;&gt;        datalist本身不可见
+  &lt;option&gt;XX&lt;/option&gt;
+  &lt;option&gt;YY&lt;/option&gt;
+&lt;/datalist&gt;
+&lt;input type=&quot;text&quot; list=&quot;list3&quot;&gt;
+  datalist为input提供输入建议列表，用户可以从中选取，也可以手工输入
+</code></pre><p>四、H5中新增的表单元素 —— progress</p>
+<pre><code>显示一个进度条，有两种形式：
+&lt;progress&gt;&lt;/progress&gt; 左右晃动的进度条
+&lt;progress value=&quot;0.7&quot;&gt;&lt;/progress&gt; 具有指定进度值的进度条
+</code></pre><p>五、H5中新增的表单元素 —— meter</p>
+<pre><code>Meter：度量衡、刻度尺，用于标示一个值所处的范围：不可接受(红色)、可以接受(黄色)、非常优秀(绿色)
+&lt;meter min=&quot;可取的最小值&quot; max=&quot;可取的最大值&quot; low=&quot;合理的下限值&quot;
+      high=&quot;合理的上限值&quot; optimum=&quot;最佳值&quot;  value=&quot;当前实际值&quot;&gt;
+&lt;/meter&gt;
+</code></pre><p>六、H5中新增的表单元素 —— output</p>
+<pre><code>output：输出，语义标签，没有任何外观样式，样式上等同于SPAN。
+  商品单价: ￥3.50
+购买数量：&lt;input type=&quot;number&quot; value=&quot;1&quot;&gt;
+小计：&lt;output&gt;￥3.50&lt;/output&gt;
+</code></pre><p>七、H5表单新特性 —— 表单元素的新属性</p>
+<pre><code>H4中表单元素的属性：  &lt;input ?&gt;
+  id、class、title、style、type、value、name、readonly、disabled、checked
+H5中表单元素的新属性：
+  (1)placeholder：占位字符
+    &lt;input value=&quot;tom&quot; placeholder=&quot;请输入用户名&quot;&gt;
+  (2)autofocus：自动获取输入焦点
+    &lt;input autofocus&gt;
+  (3)multiple：允许输入框中出现多个输入（用逗号分隔），如邮箱输入域
+    &lt;input type=&quot;email&quot; multiple&gt;
+  (4)form：用于把输入域放置到FORM外部
+    &lt;form id=&quot;f5&quot;&gt;&lt;/form&gt;
+    &lt;input form=&quot;f5&quot;&gt;
+  ====输入验证相关的新属性======
+  (5)required：必填项，内容不能为空
+    &lt;input required&gt;
+  (6)maxlength：指定字符串的最大长度
+    &lt;input maxlength=&quot;9&quot;&gt;
+  (7)minlength：指定字符串的最小长度
+    &lt;input minlength=&quot;6&quot;&gt;
+  (8)max：指定数字的最大值
+    &lt;input max=&quot;60&quot;&gt;
+  (9)min：指定数字的最小值
+    &lt;input min=&quot;18&quot;&gt;
+  (10)pattern：指定输入必需符合的正则表达式
+    &lt;input pattern=&quot;1[35789]\d{9}&quot;&gt;
+  上述验证属性会影响表单元素对应的JS对象的validity属性。
+</code></pre><p>九、H5新特性——视频播放</p>
+<pre><code>H5提供了一个新的标签用于播放视频：
+  &lt;video src=&quot;res/birds.mp4&quot;&gt;&lt;/video&gt;
+  &lt;video&gt;
+          &lt;source src=&quot;res/birds.mp4&quot;&gt;
+          &lt;source src=&quot;res/birds.ogg&quot;&gt;
+          &lt;source src=&quot;res/birds.webm&quot;&gt;
+          您的浏览器不支持VIDEO播放！
+  &lt;/video&gt;
+它本身是一个300*150的inline-block元素。
+VIDEO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  poster：&apos;&apos;，在播放第一帧之前显示的海报
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十、H5新特性——音频播放</p>
+<pre><code>H5提供了一个新的标签用于播放音频：
+  &lt;audio src=&quot;res/bg.mp3&quot;&gt;&lt;/audio&gt;
+  &lt;audio&gt;
+          &lt;source src=&quot;res/bg.mp3&quot;&gt;
+          &lt;source src=&quot;res/bg.ogg&quot;&gt;
+          &lt;source src=&quot;res/bg.wav&quot;&gt;
+          您的浏览器不支持AUDIO播放！
+  &lt;/audio&gt;
+它默认是一个300*30的inline-block元素；但若没有controls属性，则display:none。
+AUDIO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十一、网页中可用的绘图技术</p>
+<pre><code>  网页中的实时走势图、统计图、在线画图板、网页游戏、地图应用都要使用到绘图技术。有三种绘图技术：
+  (1)SVG绘图：2D矢量绘图技术，2000年出现，后纳入H5标准
+  (2)Canvas绘图：2D位图绘图技术，H5提出的绘图技术
+  (3)WebGL绘图：3D绘图技术，尚未纳入H5标准
+
+Canvas绘图难点所在：
+(1)坐标系
+(2)单词比较多
+</code></pre><p>十二、H5新特性——Canvas绘图技术</p>
+<pre><code>Canvas：画布，是H5提供的2D绘图技术。
+  &lt;canvas width=&quot;500&quot; height=&quot;400&quot;&gt;
+      您的浏览器不支持Canvas标签！
+  &lt;/canvas&gt;
+CANVAS标签在浏览器中默认是300*150的inline-block。
+画布的宽和高只能使用HTML/JS属性来赋值，不能使用CSS样式赋值！
+每个画布上有且只有一个“画笔”对象——称为“绘图上下文”对象——使用该对象进行绘图！
+  var ctx = canvas.getContext(&apos;2d&apos;)  //得到画布上的画笔对象
+  (1)使用Canvas绘制矩形
+      矩形的定位点在自己的左上角
+      ctx.lineWidth = 1            描边宽度
+      ctx.fillStyle = &apos;#000&apos;        填充样式/颜色
+      ctx.strokeStyle = &apos;#000&apos;        描边样式/颜色
+      ctx.fillRect( x, y, w, h )        填充一个矩形
+      ctx.strokeRect( x, y, w, h )    描边一个矩形
+      ctx.clearRect( x, y, w, h )        清除一个矩形范围内所有的绘图
+  (2)使用Canvas绘制文本
+    一段文字的定位点在其文本基线的起点
+      ctx.textBaseline = &apos;alphabetic&apos;    文本基线
+      ctx.font = &apos;12px sans-serif&apos;    文本大小和字体
+      ctx.fillText( str, x, y )            填充一段文本
+      ctx.strokeText( str, x, y )        描边一段文本
+      ctx.measureText( str )    基于当前文字大小字体设置测量文本，返回一个对象：{width: x}
+</code></pre><p>十三、Canvas绘图中使用渐变对象</p>
+<pre><code>线性渐变： linearGradient
+径向渐变： radialGradient
+可以参考PS中的渐变效果。
+var g = ctx.createLinearGradient( x1, y1,  x2,  y2 );
+g.addColorStop( offset,  color )
+....
+g.addColorStop( offset,  color )
+ctx.strokeStyle = g;
+ctx.fillStyle = g;
+</code></pre><p>十四、Canvas：是H5提供的2D位图绘图技术。</p>
+<pre><code>&lt;canvas id=&quot;c1&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+    您的浏览器不支持Canvas
+&lt;/canvas&gt;
+var ctx = c1.getContext(&apos;2d&apos;)
+//绘制矩形  ctx.fillRect()/strokeRect()/clearRect()
+//绘制文本  ctx.fillText()/strokeText()/measureText()
+//绘制路径
+//绘制图像
+
+1.Canvas的尺寸不能用CSS指定
+  使用CSS指定的Canvas尺寸，实际不是修改了画布尺寸，而是进行了拉伸，上面的绘图内容也会随着进行拉伸。
+  可以使用HTML标签的width和height属性，也可以使用JS对象的width和height属性。
+
+2.使用Canvas进行绘图 —— 路径
+  Path：类似于PS中的“钢笔工具”，由多个坐标点组成的任意形状，路径不可见，可用于“描边”、“填充”、“裁剪”。
+  ctx.beginPath()        开始一条新路径
+  ctx.closePath()        闭合当前路径
+  ctx.moveTo(x, y)        移动到指定点
+  ctx.lineTo(x, y)        从当前点到指定点画直线
+  ctx.arc(cx, cy, r, start, end)    绘制圆拱路径
+
+  ctx.stroke()            对当前路径描边
+  ctx.fill()                对当前路径填充
+  ctx.clip()            使用当前路径进行裁剪
+
+3.使用Canvas进行绘图 —— 图像
+  Canvas属于客户端技术，图片在服务器中，所以浏览器必须先下载要绘制的图片，且等待图片异步加载完成：
+  var p3 = new Image();
+  p3.src = &apos;img/p3.png&apos;;    //浏览器会自动异步请求图片
+  console.log(p3.width);    //0
+  p3.onload = function(){      //图片加载完成
+        console.log(p3.width);      //200
+        //开始绘制图片到画布上....
+    ctx.drawImage( p3, x, y );        //原始大小绘图
+    ctx.drawImage( p3, x, y, w, h );    //拉伸绘图
+  }
+
+Canvas绘图核心知识点：—— 重点
+绘制矩形：
+  ctx.fillRect()  ctx.strokeRect()   ctx.clearRect()
+绘制文本：
+  ctx.fillText()  ctx.strokeText()   ctx.measureText().width
+绘制路径：
+  ctx.beginPath()    ctx.closePath()
+  ctx.moveTo()   ctx.lineTo()
+  ctx.arc()
+  ctx.stroke()   ctx.fill()    ctx.clip()
+绘制图像：
+  ctx.drawImage()
+
+
+4.使用Canvas绘图时进行变形操作
+  CSS中有变形相关样式： transform: rotate/scale/translate/skew，这些变形只能作用于某个HTML元素。
+  Canvas绘图中也有变形技术，可以针对某一个图像/图形的绘制过程进行变形：rotate、scale、translate。
+  ctx.rotate( 弧度 )     旋转绘图上下文对象(即画笔),轴点是画布的原点
+  ctx.translate( x, y )  将整个画布的原点平移到指定的点
+  ctx.save()         保存画笔当前的所有变形状态值（游戏中从存盘）
+  ctx.restore()        恢复画笔变形状态到最近的一次保存（游戏中读取存盘）
+
+5.第三方绘制统计图工具
+  (1)Chart.js：免费的，提供了八种统计图表
+  (2)FusionCharts.js：收费的，提供了90+中统计图表
+  (3)ECharts：百度提供的免费的绘图工具，与地图整合的很好
+  (4)FreeCharts ....
+
+提示：第三方工具使用无需记忆！重点掌握自学的过程：
+(1)打开官网，查看说明
+    http://www.chartjs.org/
+(2)仿照DEMO编写示例
+    开源免费的、8种图表、基于H5 Canvas、支持响应式
+(3)在实际项目中加以应用，查看详细API说明
+    &lt;canvas id=&quot;c15&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+            您的浏览器不支持Canvas绘图！
+    &lt;/canvas&gt;
+    &lt;script src=&quot;js/Chart.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        new Chart(c15, {
+            type: &apos;bar&apos;,//line、pie、noughnut...
+            data: {},
+            options: {}
+            });
+    &lt;/script&gt;
+
+位图(Photoshop)：由一个又一个像素点组成，每个点各有自己的颜色，色彩细腻，但放大会失真
+矢量图(Illustrator)：由一个又一个线条组成，每个线条可以指定颜色、方向，可以无限缩放，但细节不够丰富
+</code></pre><p>十五、HTML5新特性——SVG绘图</p>
+<pre><code>Scalable Vector Graph：可缩放的矢量图
+Canvas绘图    SVG绘图
+类型    2D位图    2D矢量图
+如何绘图    使用JS代码绘图    使用标签绘图
+事件绑定    每个图形不是元素，无法直接绑定事件    每个图形都是元素，可以直接绑定事件监听
+应用场合    统计图、游戏    统计图、图标、地图
+  SVG技术诞生于2000年，早期作为XML的扩展应用出现；H5标准把常用的SVG标签采纳为标准，但有些被废弃掉。
+
+SVG技术在HTML5出现之前的使用方法：
+    (1)在一个XML文档中声明要绘制的图形
+    (2)再编写HTML文档，使用IMG/IFRAME应用XML文档即可
+SVG技术在HTML5出现之后的使用方法：
+    直接创建HTML5文档，在其中书写SVG标签即可
+    &lt;svg&gt;&lt;/svg&gt;本身是一个300*150的inline-block。
+
+使用SVG标签绘制矩形：
+    &lt;rect&gt;
+使用SVG标签绘制圆形：
+    &lt;circle&gt;
+使用SVG标签绘制椭圆：
+    &lt;ellipse&gt;
+使用SVG标签绘制直线：
+    &lt;line&gt;
+使用SVG标签绘制折线：
+    &lt;polyline&gt;
+使用SVG标签绘制多边形：
+    &lt;polygon&gt;
+</code></pre><p>十六、补充：Canvans上如何按照特定的顺序绘制图片</p>
+<pre><code>Canvas绘图中若需要多张图片，他们的加载都是异步的，无法预测哪一张先加载完成！
+但是绘图往往需要按照一定顺序，如先绘背景，再绘上面的内容。所以必须等待所有图片全部加载完成，才能开始绘图。
+var progress = 0; //所有图片的总加载进度
+var imgBg = new Image();
+imgBg.src = &apos;img/bg.jpg&apos;;
+imgBg.onload = function(){
+  progress += 40;    //为每张图片赋一个权重值
+  if(progress===100){
+    startDraw();
+  }
+}
+var imgDisc = new Image();
+imgDisc.src = &apos;img/disc.png&apos;;
+imgDisc.onload = function(){
+  progress += 60;
+  if(progress===100){
+    startDraw();
+  }
+}
+</code></pre><p>十七、补充：如何为Canvas上的图形/图像绑定事件监听</p>
+<pre><code>网页中只能为HTML元素绑定监听函数，Canvas上的图形/图像都是用JS绘制的，不是DOM元素，不能直接进行事件绑定！
+只能绑定给整个Canvas！然后再具体计算事件发生坐标是否处于某个图像/图形内部——仅适用于规则图像/图形。
+  SVG图形中为元素绑定事件监听
+  SVG图形中每个图形/图像都是一个标签，可以很方便进行事件绑定
+</code></pre><p>十八、SVG绘图的特点——着重注意！</p>
+<pre><code>(1)所有的图形默认只有填充色（黑色），没有描边色。
+(2)SVG图形的样式可以用元素属性声明，也可以用CSS形式来声明。但用CSS声明时，只能使用SVG专用的样式，不能使用CSS样式，如边框设置只能用stroke，而不用border！
+(3)图形可以使用JS来对属性赋值；但不能使用HTML DOM形式，只能用核心DOM操作，如：
+  r.x = 10;   r.width = 100;    //无效
+  r.setAttribute(&apos;x&apos;, 10); r.setAttribute(&apos;width&apos;, 100)//有效
+(4)动态添加SVG图形可以使用两种方式：
+   1)HTML字符串拼接
+       var html = `&lt;rect&gt;&lt;/rect&gt;`;
+       svg.innerHTML = html;
+   2)使用document.createElementNS(&apos;http://www.w3.org/2000/svg&apos;,&apos;标签名&apos;)创建
+
+4.使用SVG进行绘图——矩形
+  &lt;rect width=&quot;&quot; height=&quot;&quot; x=&quot;&quot; y=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/rect&gt;
+
+5.使用SVG进行绘图——圆形
+  &lt;circle r=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/circle&gt;
+
+6.使用SVG进行绘图——椭圆
+  &lt;ellipse rx=&quot;&quot; ry=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot;&gt;&lt;/ellipse&gt;
+
+7.使用SVG进行绘图——直线
+  &lt;line x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-linecap=&quot;butt/square/round&quot;&gt;&lt;/line&gt;
+ 练习：使用SVG中的直线绘制如下的图标
+
+提示：若多个SVG图形有完全一样的属性，可以抽出来，放在一个公共的父元素中（小组）
+&lt;g stroke=&quot;#000&quot;&gt;
+   &lt;line&gt;&lt;/line&gt;
+   &lt;line&gt;&lt;/line&gt;
+&lt;/g&gt;
+
+8.使用SVG进行绘图——折线
+  一条折线上可以有任意多个连续的点
+  &lt;polyline points=&quot;50,50  100,300 ...&quot; fill=&quot;transparent&quot; stroke=&quot;#000&quot;&gt;&lt;/polyline&gt;
+ 练习：使用折线绘制如下图标
+
+9.使用SVG进行绘图——多边形
+&lt;polygon points=&quot;50,50  100,300 ...&quot; fill=&quot;&quot;&gt;&lt;/ polygon&gt;
+  练习：使用多边形绘制如下两个图标
+
+10.附加：使用SVG进行绘图——文本
+  SVG画布上不允许使用普通的HTML元素绘制文本，如SPAN、P等！只能使用：
+  &lt;text font-size=&quot;&quot; alignment-baseline=&quot;before-edge&quot; fill=&quot;&quot; stroke=&quot;&quot; x=&quot;&quot; y=&quot;&quot;&gt;文本内容 &lt;/text&gt;
+
+11.附加：使用SVG进行绘图——图像
+  不能使用IMG置于SVG画布上！只能使用：
+  &lt;image xlink:href=&quot;disc.png&quot; width=&quot;200&quot; height=&quot;200&quot; x=&quot;&quot; y=&quot;&quot;&gt;&lt;/image&gt;
+SVG绘图的主要知识点：
+&lt;svg&gt;
+  &lt;rect&gt;&lt;/rect&gt;
+  &lt;circle&gt;&lt;/circle&gt;
+  &lt;ellipse&gt;&lt;/ellipse&gt;
+  &lt;line&gt;&lt;/line&gt;
+  &lt;polyline&gt;&lt;/polyline&gt;
+  &lt;polygon&gt;&lt;/polygon&gt;
+  &lt;text&gt;&lt;/text&gt;
+  &lt;image&gt;&lt;/image&gt;
+&lt;/svg&gt;
+
+12.补充小知识：如何在SVG中使用渐变
+  &lt;defs&gt;      定义特效对象：渐变对象属于一种特效对象
+    &lt;linearGradient id=&quot;g3&quot; x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot;&gt;
+        &lt;stop offset=&quot;0&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+        &lt;stop offset=&quot;1&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+  &lt;ANY fill=&quot;url(#g3)&quot;  stroke=&quot;url(#g3)&quot;&gt;&lt;/ANY&gt;
+ 练习：使用渐变对象，为不同的柱子分配不同的渐变色
+
+
+13.补充小知识：如何在SVG中使用滤镜
+  &lt;defs&gt;
+    &lt;filter id=&quot;f2&quot;&gt;
+        &lt;feGaussianBlur stdDeviation=&quot;3&quot;/&gt;
+    &lt;/filter&gt;
+  &lt;/defs&gt;
+  &lt;ANY filter=&quot;url(#f2)&quot;&gt;
+
+SVG中支持的所有滤镜：
+https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
+
+网页中可用的绘图技术：
+(1)Canvas绘图
+(2)SVG绘图
+(3)WebGL绘图
+
+14.第三方绘图工具库  —— Two.js
+
+ (1)打开官网，查看说明
+    https://two.js.org/
+    是一个2D绘图函数库，提供了一套API，可用于不同的技术下的绘图，如SVG/CANVAS/WEBGL。
+ (2)参考DEMO，编写示例
+    var two = new Two({ }).appendTo(box);
+    //绘制一个圆形
+    var c = two.makeCircle(200,200,100);
+    //绘制一个矩形——定位点在矩形中心，而不是左上角
+    var r = two.makeRectangle(600,200, 200,200);
+    //把绘图对象中的内容绘制到DOM树
+    two.update(); //更新DOM树
+ (3)查看API，在项目中加以应用
+</code></pre><p>十九、HTML5新特性之六 —— 地理定位</p>
+<pre><code>  Geolocation：地理定位，使用JS获取当前浏览器所在的地理坐标
+  （经度、维度、海拔、速度）数据，用于实现LBS应用(Location Based Service)，
+  如饿了么、高德导航...
+  手机浏览器如何获得定位信息：
+    (1)首选手机中的GPS芯片与卫星通信，定位精度在米
+    (2)次选手机通信基站进行定位获取，定位精度在公里
+  PC浏览器如何获得定位信息：
+    通过IP地址进行反向解析，定位精度取决于IP地址库的大小
+
+HTML5中提供了一个新的对象，用于获取当前浏览器的定位信息：
+  window.navigator.geolocation{
+    getCurrentPosition: fn,    获得当前定位信息
+    watchPosition: fn, 监视定位数据的改变
+    clearWatch: fn  取消监视
+  }
+获得客户端的定位信息：
+navigator.geolocation.getCurrentPosition(
+    (pos)=&gt;{ pos.coords.latitude   pos.coords.longitude },
+    (err)=&gt;{    err.code   err.message }
+)
+
+2.扩展小知识：在网页中如何嵌入百度地图
+  (1)注册百度开发者账号
+    http://lbsyun.baidu.com/
+  (2)创建一个网站；登录百度地图，为网站申请一个地图的AccessKey
+    http://lbsyun.baidu.com/apiconsole/key
+
+  (3)在自己的网页中嵌入百度地图提供的API，嵌入百度地图
+    官方手册：http://lbsyun.baidu.com/index.php?title=jspopular
+    var map = new BMap.Map(&quot;container&quot;);          // 创建地图实例
+    var point = new BMap.Point(116.300829,39.915836);  // 创建点坐标
+    map.centerAndZoom(point, 17);   // 以指定点为中心并缩放
+</code></pre><p>二十、HTML5新特性之七 —— 拖放API</p>
+<pre><code>Drag &amp; Drop：拖动和释放
+HTML5为拖放行为提供了7个事件，分为两组：
+拖动的源对象(会动)可以触发的事件：
+  dragstart：拖动开始
+  drag：拖动中
+  dragend：拖动结束
+  整个拖动过程： dragstart*1 + drag*n + dragend*1
+拖动的目标对象(不动)可以触发的事件：
+  dragenter：拖动着进入
+  dragover：拖动着悬停在上方
+  dragleave：拖动着离开
+  drop：在上方释放
+  整个拖动过程1： dragenter*1 + dragover*n + dragleave*1
+  整个拖动过程2： dragenter*1 + dragover*n + drop*1
+注意：必须阻止dragover的默认行为，drop才可能触发！
+</code></pre><p>二十一、HTML5新特性之八 —— Web Worker —— 代码就3行</p>
+<pre><code>  程序：Program，指可被CPU执行的代码，存储在外存中
+  进程：Process/Task，指程序被OS调入内存，分配执行空间，随时供CPU调度执行
+  线程：Thread，线程是进程内执行代码基本单位
+
+  进程和线程：
+    (1)进程是操作系统分配内存的基本单位；
+    (2)线程是CPU执行代码的基本单位；
+    (3)线程必须处于某个进程内部；
+    (4)一个进程内必须至少有一个线程；也可以有多个；
+    (5)一个操作系统中可能同时存在几千个线程，它们是“并发执行的”—— 宏观上看同时执行，微观上看是依次循环执行
+
+    Chrome浏览器中的线程模型：
+    一个Chrome进程内，至少有6个线程，可以“同时/并发”向Web服务器发起HTTP请求，以获得所需的资源——资源请求线程。
+    还有一个线程负责将所有内容绘制到浏览器页面中——UI主线程——不允许多线程同时绘图，防止内容布局错乱。
+
+    5.观察如下一段代码执行特点
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script src=&quot;14.js&quot;&gt;很耗时的JS任务&lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+      现象：JS执行过程中，按钮1可见，但点击无效；按钮2不可见。
+      原因：浏览器中执行代码的只有一个线程——UI主线程
+      解决办法：创建新的线程，由它来执行耗时的JS任务；UI主线程继续执行后续的HTML渲染：
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script&gt;
+        var w = new Worker(&apos;14.js&apos;)
+      &lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+1.补充小知识：在拖动源对象和目标对象间传递数据
+  如：拖动开始时(src.ondragstart)记录被拖动元素的ID，释放时(target.ondrop)根据ID查找拖动的源对象，进行相关操作。
+  方法1：使用一个全局变量 —— 造成全局对象的污染
+  方法2：使用H5拖放API专供的e.dataTransfer（数据传递）
+
+  //拖动的源对象
+  src.ondragstart = function(e){
+    //海南：往拖拉机中装数据
+    e.dataTransfer.setData(&apos;key&apos;, &apos;value&apos;)
+  }
+  //拖动的目标对象
+  target.ondrop = function(e){
+    //哈尔滨：从拖拉机中读取数据
+    var data = e.dataTransfer.getData(&apos;key&apos;);            //value
+  }
+</code></pre><p>二十二、HTML5新特性之八——WebWorker——代码就3行，重点在理论理解</p>
+<pre><code>进程：操作系统分配内存的单位 —— 工厂
+线程：处于进程内部，用于执行代码 —— 生产线
+线程并发：操作系统中所有的线程宏观上看“同时执行”；微观上看是“依次交替执行”
+Chrome中的线程模型： 请求资源——6个线程；运行代码/渲染页面内容——1个线程
+&lt;button&gt;按钮1&lt;/button&gt;
+&lt;script src=&quot;x.js&quot;&gt;&lt;/script&gt;
+&lt;button&gt;按钮2&lt;/button&gt;
+上述代码中若x.js很耗时，按钮1无法点击，按钮2在运行js过程中不可见——所有的代码(HTML/CSS/JS)都在单线程(UI主线程)中执行
+
+解决方案：创建一个并发执行的新线程，让它来执行耗时的JS任务
+
+3.Worker线程的致命缺陷
+浏览器不允许Worker线程操作任何的DOM&amp;BOM对象！！
+原因：浏览器只允许UI主线程操作DOM&amp;BOM！若多个线程同时都可以操作DOM结构，页面将混乱。
+所以，类似jQuery的脚步决不能使用Worker来加载执行。
+
+Worker线程可以给UI主线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.onmessage = function(e){ e.data }
+  Worker线程：
+      postMessage(stringMsg)
+UI主线程可以给Worker线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.postMessage(stringMsg)
+  Worker线程：
+      onmessage = function(e){ e.data }
+
+  项目中Worker的使用场景：
+  (1)只要js中有DOM&amp;BOM就不能用Worker！
+  (2)Worker适合于执行耗时的JS任务！如复杂计算、加密和解密、大数据统计、路径规划......
+</code></pre><p>二十三、HTML5新特性之九 —— WebStorage</p>
+<pre><code>  在浏览器中存储当前用户专有的数据：访问历史、内容定制、样式定制...
+  在客户端存储数据可以使用的技术：
+  (1)Cookie技术：浏览器兼容性好；不能超过4KB，操作复杂
+  (2)Flash存储：依赖于Flash播放器
+  (3)H5 WebStorage：不能超过8MB，操作简单
+  (4)IndexedDB：可存大量数据，还不是标准技术
+
+Session：会话，浏览器从打开某个网站的一个页面开始，中间可能打开很多页面，
+直到关闭浏览器，整个过程称为“浏览器与Web服务器的一次会话”。
+
+WebStorage技术中，浏览器为用户提供了两个对象：
+  (1)window.sessionStorage：类数组对象，会话级数据存储
+    在浏览器进程所分得的内存存储着一次Web会话可用的数据，可供此次会话中所有的页面共同使用
+    ；浏览器一旦关闭就消失了。
+作用：在同一个会话中的所有页面间共享数据，如登录用户名。
+    sessionStorage[key] = value            //保存一个数据
+    sessionStorage.setItem(key, value)        //保存一个数据
+    var v = sessionStorage[key]            //读取一个数据
+    var v = sessionStorage.getItem(key)    //读取一个数据
+    sessionStorage.removeItem(key)        //删除一个数据
+    sessionStorage.clear()                //清除所有数据
+    sessionStorage.length                //数据的数量
+    sessionStorage.key(i)                //获取第i个key
+
+  (2)window.localStorage：类数组对象，本地存储(跨会话级存储)
+    在浏览器所能管理的外存(硬盘)中存储着用户的浏览数据，可供此次会话以及后续的会话中的页面共同使用；
+即使浏览器关闭也不会消失——永久存在。作用：在当前客户端所对应的所有会话中共享数据，如登录用户名。
+    localStorage[key] = value            //保存一个数据
+    localStorage.setItem(key, value)        //保存一个数据
+    var v = localStorage [key]            //读取一个数据
+    var v = localStorage.getItem(key)        //读取一个数据
+    localStorage.removeItem(key)        //删除一个数据
+    localStorage.clear()                //清除所有数据
+    localStorage.length            //数据的数量
+    localStorage.key(i)                //获取第i个key
+
+localStorage中若数据发生了修改，会触发一次window.onstorage事件，可以监听此事件，实现监视localStorage数据改变的目的，
+用于在一个窗口中监视其它窗口中对localStorage数据的修改——不能监视sessionStorage数据的修改！
+
+5.HTML5新特性之十 —— WebSocket——代码不复杂重点在原理的理解
+  HTTP协议：属于“请求-响应”模型，只有客户端发起请求消息，服务器才会返回响应消息，没有请求就没有响应；
+一个请求，只能得到一个响应。有些场景中，此模型就力不从心了：实时走势应用、在线聊天室。
+解决方案：长轮询(Long-Polling)/心跳请求——定时器+AJAX——请求过于频繁，服务器压力过大；
+不够频繁，客户端数据延迟较大。
+  WebSocket协议：属于“广播-收听”模型，客户端连接到服务器就不再断开，永久的连接，双方就随时向对方发送消息，
+且是全双工不对等发送。WS协议在实时走势应用、在线聊天室应用中有着特别的优势。
+
+
+  WS协议的应用程序也分为客户端程序和服务器端程序：
+  WS服务器端应用：
+    监听指定端口，接收客户端请求，向对方发消息，并接收消息；可以使用php/java/node.js等语言编写
+  WS客户端应用：
+    主动发起连接请求，保持永久的连接，向对方消息，并接收消息，可以使用php/java/node.js/html5等语言编写
+
+6.了解：使用Node.js创建WS协议的服务器
+  node.js官方没有提供ws协议的模块，必须使用NPM下载第三方ws协议模块：  npm  i  ws
+  查看README,编写WS协议的服务器：
+  ......
+
+7.掌握：使用HTML5创建WS协议的客户端应用
+  //连接到WS服务器
+  var socket = new WebSocket(&apos;ws://127.0.0.1:9001&apos;)
+  //向服务器发消息
+  socket.send(stringMsg)
+  //接收服务器发来的消息
+  socket.onmessage = function(e){
+    e.data   //消息内容
+  }
+  //断开到WS服务器的连接
+  socket.close();
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/HTML5的form如何关闭自动完成功能/" rel="next" title="HTML5的form如何关闭自动完成功能">
+    上一篇：HTML5的form如何关闭自动完成功能
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/HTML笔记/" rel="next" title="html知识点">
+    下一篇：html知识点
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

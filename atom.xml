@@ -64,481 +64,40 @@
   </entry>
   
   <entry>
-    <title>javaScript高级基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/javaScript%E9%AB%98%E7%BA%A7%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>www.wangchengzou.cn/2017/07/22/javaScript高级基础知识/</id>
+    <title>html5有哪些新特性、移除了那些元素</title>
+    <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T12:45:43.316Z</updated>
+    <updated>2017-07-23T03:58:08.890Z</updated>
     
-    <content type="html"><![CDATA[<p>1、 错误处理:</p>
-<pre><code>错误bug: 程序执行过程中，导致程序无法正常执行的情况
-后果: 程序会强行中断退出
-错误处理: 即使程序出现错误，也保证程序不异常中断的机制。
-如何: try{//始终执行
-       //可能出错的代码
-     }catch(err){//只有发生错误时才执行
-       //err: 错误对象: 发生错误时，自动创建的，封装错误信息的对象
-       //出错时，执行的错误处理代码:
-         //比如: 通知用户，记录日志，保存进度
-     }[finally{//无论是否出错，都必须执行的代码
-       //一般用于释放资源
-     }]//可有可无，因为放在try catch之后的代码本来就总是执行的。
-问题: 放在try catch中的代码，执行效率会降低
-解决: 2种:
-  1. 尽量少的将代码放入try catch
-  2. 如果可提前预知错误原因，可用if...else代替try catch，提前预防错误。
-
-抛出自定义异常:
-throw new Error(&quot;错误信息&quot;)
-
-js中错误对象的类型: 6种
-  SyntaxError: 语法错误: 程序的语法写错了
-  ReferenceError: 引用错误: 要用的变量没找到
-  TypeError: 类型错误: 错误的使用对象的类型:
-     比如: 对非数组使用[]
-           对非函数使用()
-           对null/undefined用.xxx
-           要调用的函数，对象中没有:
-             比如: console.write();
-                  document.log();
-  RangeError: 范围错误: 参数值超规定范围:
-         比如: toFixed(d) d: 0~20之间 如果写-2
-
-  URIError, EvelError;
-</code></pre><p>2、 Functions:</p>
-<pre><code>创建: 3种:
-  1. 声明: function 函数名(参数列表){
-            函数体;
-            return 返回值;
-          }
-     问题: 被声明提前
-     解决:
-  2. 函数直接量: var函数名=function (参数列表){...}
-     优点: 不会被声明提前
-     揭示: 函数是一个引用类型的对象
-           函数名只是一个引用函数对象的普通变量
-  3. 用new: 了解
-    var函数名=new Function(&quot;参数&quot;,&quot;参数&quot;,&quot;函数体;...&quot;)
- 鄙视: 以下创建函数方式正确的是:
-    function fun(a,b){return a-b};
-    var fun=function(a,b){return a-b};
-    var fun=new Function(a,b,&quot;return a-b&quot;); X
-    var fun=new Function(&quot;a&quot;,&quot;b&quot;,&quot;return a-b&quot;);
-
-重载: overload
- 什么是: 相同函数名，不同参数列表的多个函数，在调用时可自动根据传入参数的不同，选择对应的函数执行。
- 为什么: 减少API的名字，减轻调用者的负担
- 何时: 只要一项任务，可能根据不同的参数执行不同的逻辑时。
- 问题: js语法默认不支持重载
-      为什么: js中不允许多个相同名称的函数同时存在
-             后定义的同名函数，会覆盖先定义的。
- 解决: 2步:
-  1. 将多个函数合并为一个函数，省略参数列表
-  2. 函数内，用arguments接住所有传入的变量值
-    arguments: 每个函数中自动创建的
-              自动接收所有参数值的类数组对象
-     类数组对象: 长的像数组的对象:
-       vs 数组: 相同: 1. 下标, 2. length, 3. for遍历
-               不同: 类型不同, 类数组对象不能使用数组的API
-       比如: childNodes  children
-
-  参数变量依然必要:
-    1. 参数变量可指导调用者正确的使用函数
-    2. 参数名都是有意义的，便于维护/提高程序可读性
-    3. 自定义的参数名通常简洁
-
-匿名函数:
-什么是: 定义函数时，不指定函数名的函数
-为什么: 节约内存!
-何时: 只要一个函数只使用一次时
-  2种:
-    1. 回调callback: 将一个函数作为参数传给另一个函数中调用
-       比如: arr.sort(function(a,b){return a-b;})
-            str.replace(reg,function(kw){return ......})
-            addEventListener(&quot;click&quot;,function(){...})
-            setInterval/Timeout(function(){...}, ms )
-    特例: 如果函数可能被反复调用或可能被多个元素共享时，应该用有名的函数。
-    2. 匿名函数自调:
-    定义一个函数后，立刻调用该函数，调用后立即释放
-    何时: 划分临时作用域，避免全局变量污染时
-    如何: 2种:
-      1. (function([参数列表]){...})([参数值])
-      2. +function(...){}(...)
-</code></pre><p>3、作用域和作用域链:</p>
-<pre><code>作用域(scope): 变量的可用范围
-  包含2种:
-    1. 全局作用域对象window
-       全局变量: 优: 可重复使用，随处可用
-                 缺: 极易造成全局污染
-                    ——今后尽量避免使用全局变量
-    2. 函数作用域对象AO
-       局部变量: 优: 仅函数内可用，不会造成全局污染
-                 缺: 不可重用！
-作用域链(scope chain):
- 什么是: 由各级作用域对象连续引用，形成的链式结构
- 函数的声明周期:
-   1. 程序开始执行前:
-      程序会创建全局作用域对象window
-   2. 定义函数时
-      在window中创建函数名变量引用函数对象
-      函数对象的隐藏属性scope指回函数来自的全局作用域对象window——就好像人的祖籍
-   3. 调用函数时
-      创建本次函数调用时使用的AO对象
-      在AO对象中添加函数的局部变量
-      设置AO的隐藏属性parent 指向函数的祖籍作用域对象。——执行时，如果AO中没有的变量可延parnet向祖籍作用域对象找。
-   4. 函数调用后
-      函数作用域对象AO释放
-        导致AO中局部变量释放
- 作用域链: 2项任务：
-   1. 保存了所有的变量
-   2. 控制了变量的使用顺序: 先用局部，局部没有才延作用域链向下查找。
-</code></pre><p>4、闭包(closure)</p>
-<pre><code>什么是: 即重用变量，又保护变量不被污染的一种结构
-为什么: 全局变量: 优: 可重用, 缺: 全局污染
-        局部变量: 优: 不会被污染, 缺: 不可重用
-何时: 只要希望重用一个变量，并保护变量不被污染。
-如何: 3步:
-  1. 使用外层函数包裹受保护的变量和操作变量的内层函数
-  2. 外层函数将内层函数返回到外部
-  3. 调用者用外部变量接住返回的内层函数
-问题: 闭包结构比普通函数占用更多的内存: 外层函数的函数作用域对象
-解决: 使用完闭包后，要主动释放闭包:
-  将引用内层函数的外部变量置为null
-
-鄙视: 画简图:
-  1. 找受保护的变量:
-      是外层函数的局部变量
-      同时, 在内层函数中被使用
-  2. 找外层函数都返回了哪些内层函数用于操作受保护的变量: 2种手段:
-    1. return function
-    2. 可直接给一个全局变量赋值一个function
-</code></pre><p>5、 什么是面向对象: 程序中都是用对象结构来描述现实中一个具体事务的属性和功能</p>
-<pre><code>为什么: 便于维护
-何时: 今后几乎所有大型项目都采用面向对象的思想
-如何: 三大特点: 封装，继承，多态
-</code></pre><p>6、封装: 用一个对象结构集中保存现实中一个事物的多个属性和功能。</p>
-<pre><code>什么是对象: 封装一个事物的属性，并提供操作事物的功能的数据结构。
-为什么: 现实中任何一个数据或一项功能都属于一个具体事物。——便于维护
-何时: 今后只要使用面向对象的方式，首先都要创建对象。
-如何: 3种:
- 1. 对象直接量: var obj={
-                 属性名:值,
-                    ... : ... ,
-                   方法:function(){
-                     ...this.属性名...
-                   }
-                    ... : ...
-               }
-     属性，其实就是保存在对象中的一个普通变量
-     方法，其实就是保存在对象中的一个普通函数
-     问题: 对象自己的方法，通常要使用对象自己的属性值
-       错误: 直接使用属性名当变量
-       正确: this: 引用正在调用函数的.前的对象的关键词
-         今后，只要对象自己的方法要使用对象自己的属性，必须用this.属性名
-
-访问对象的成员: 成员=属性+方法
-  访问属性: 对象.属性名  用法和普通变量完全一样
-      特殊: 要访问的属性不存在，不报错！
-           返回undefined
-  调用方法: 对象.方法名() 用法和普通函数完全一样！
- 2. 用new: 2步:
-    var obj=new Object(); //先创建一个空对象
-    obj.属性名=属性值;//再向空对象中添加属性和方法
-    obj.方法名=function(){
-      ...this.属性名...
-    }
-   其实js中的对象可在任何时候添加新属性和方法
-   特殊: 要赋值的属性不存在，不报错!
-         而是在对象中动态添加该属性
-js中对象的本质，就是关联数组。
-  其实访问成员: 对象[&quot;属性名&quot;]
-                对象[&quot;方法名&quot;]()
-  . vs [] : 如果要访问的属性名是固定的，就用.访问
-         如果要访问的属性名是动态生成的，就用[]
-
-问题: 只能创建一个单独的对象
-      反复创建多个相同结构的对象时，代码重复严重
-解决: 构造函数
-3. 用构造函数反复创建多个相同结构的对象
-什么是构造函数: 描述同一类型的所有对象共同成员结构的函数。
-为什么: 代码重用！
-何时: 只要反复创建同一类型的多个对象时
-如何: 2步:
- 1. 定义构造函数:
-    function 类型名(属性参数列表){
-       this.属性名=参数;
-             ... = ... ;
-       this.方法名=function(){
-         ...this.属性名...
-       }
-    }
- 2. 调用构造函数创建一个对象:
-    var obj=new 类型名(属性值列表)
-原理: new: 4件事:
-  1. 创建新的空对象，将构造函数中的this-&gt;新对象
-  2. 让新对象自动继承构造函数的原型对象
-  3. 执行构造函数中的语句，向新对象中添加新成员并赋值
-  4. 返回新对象地址保存到变量中
-</code></pre><p>7、 继承: 父对象的成员，子对象无需重复创建，就可直接使用。</p>
-<pre><code>为什么: 代码重用，节约内存
-如何:
-原型对象: 集中保存同一类型的子对象共有成员的父对象
-    创建: 在定义构造函数时，自动创建(买一赠一)
-    如何:
-      1. 使用构造函数创建子对象时，会自动设置子对象继承构造函数的原型对象
-      2. 放在原型对象中的成员，所有子对象共用
-    如何访问构造函数的原型对象:
-      构造函数.prototype.成员名=值/function(){...}
-总结: 今后，只要希望所有子对象共有的成员，都要添加到构造函数的原型对象中。而不应该放在构造函数内。
-
-共有属性和自有属性:
-  共有属性: 添加到原型对象中，所有子对象共有的属性
-  自有属性: 直接保存在对象本地的属性
-  访问: 读取: 两者用法完全相同: 对象.属性
-             先在对象本地找，没有，才去父对象中找
-        修改: 自有属性: 对象.属性=值
-              共有属性: 子对象不允许修改共有属性
-                  必须通过构造函数
-                  构造函数.prototype.属性=值
-  判断属性是否可用/包含:
-    &quot;成员&quot;  in 对象
-    返回bool
-       强调: in不仅判断自有属性，而且判断父对象中的共有属性。
-
-内置对象的原型对象:
-内置对象，也有构造函数和原型对象
-  构造函数负责创建指定类型的对象
-  原型对象负责保存该类型子对象共有的API
-  解决新旧浏览器API兼容性问题: 2步:
-    1. 判断当前浏览器是否支持API
-    2. 如果不支持，就自定义一个API放入该类型的原型对象中
-
-原型链: 由多级父对象逐级继承形成的链式结构
-  保存了所有对象的成员(属性和方法)
-  定义了成员的使用顺序:
-     先用自有成员, 自己没有，才延原型链向父对象查找
-  vs 作用域链:
-     保存了所有变量(全局/局部)
-     定义了变量的使用顺序: 先用局部，没有，才延作用域链先父级作用域查找
-总结: 只要不需要对象. 就可直接访问的变量都存在作用域链。
-      只要必须用对象.才能访问的对象成员都存在原型链中。
-</code></pre><p>8、 多态: 同一个方法，在不同情况下表现出不同的状态。</p>
-<pre><code>js中仅支持重写(override)
-什么是重写: 如果子对象觉得父对象的成员不好用，可自定义自有成员，覆盖父对象中的成员。
-为什么: 从父对象继承来的成员，不一定总是想要的
-何时: 只要子对象觉得父对象的成员不好用
-</code></pre><p>9、 自定义继承:</p>
-<pre><code>1. 仅修改两个对象间的继承关系
-   Object.setPrototypeOf(child, father)
-    让child继承father( 设置child的__proto__继承father)
-   问题: 一次只能修改一个对象的继承关系
-   解决:
-2. 修改构造函数的原型对象来修改所有子对象的父对象
-    构造函数.prototype=新father
-   强调: 必须在创建子对象之前更换
-
-3. 两种类型间的继承:
-  问题: 如果两种类型间有部分相同的属性结构和方法
-  优化: 3步:
-    1. 定义抽象父类型:
-         父类型构造函数中定义公共的属性结构
-         父类型原型对象中定义公共的方法
-    2. 在子类型构造函数中借用父类型构造函数
-      错误: 直接调用父类型构造函数()
-        因为如果一个函数没有用new或任何对象.调用，则this默认-&gt;window
-      正确: 用call/apply，将父类型构造中的this临时替换为子类型构造函数中的this
-        父类型构造.call(this,参数....)
-    3. 设置子类型的原型对象继承父类型的原型对象
-</code></pre><p>10、 ES5:</p>
-<pre><code>保护对象:
- 保护属性:
-   命名属性: 可用.直接访问的属性
-     数据属性: 实际存储属性值的属性
-       如何保护: 每个属性其实由四大特性组成:
-         {
-          value: 值, //实际存储属性值
-          writable: true, //控制是否可修改
-          enumerable:true,//控制是否可用for in遍历到
-                        //即使不能for in，用.也能访问
-          configurable:true,//控制是否可修改其他特性
-                         //控制能否删除该属性
-                         //改为false后不可逆
-         }
-       获取一个对象的属性的四大特性:
-       Object.getOwnPropertyDescriptor(obj,&quot;属性名&quot;)
-       修改一个对象的属性的四大特性:
-       Object.defineProperty(obj,&quot;属性名&quot;,{
-         特性名:特性值,
-            ... : ... ,
-       });
-       问题: 一次只能修改一个属性
-       解决: 同时修改多个属性
-       Object.defineProperties(obj,{
-         属性名:{
-           特性名:特性值,
-              ... : ...
-         },
-         属性名:{
-           特性名:特性值,
-              ... : ...
-         },
-       })
-       强调: 必须启用严格模式才能报错！
-       问题: 只能进行简单的保护，无法自定义保护规则
-       解决:
-     访问器属性: 不实际存储属性值，仅提供对另一个属性值的保护。
-      何时: 只要使用自定义规则保护属性时
-      如何定义: 2步:
-        1. 必须先定义一个隐藏的属性来实际存储属性值
-        2. 定义访问器属性，提过对受保护的属性的读写操作和验证。
-        Object.defineProperty(obj,&quot;属性名&quot;,{
-          get:function(){
-             return //受保护的属性值
-          },
-          set:function(val){
-             //如果val符合规则
-               受保护的属性=val
-             //否则
-               抛出自定义错误
-          },
-          enumerable:true, configurable:true,
-        })
-        强调:访问器属性中要使用对象自己的属性，也必须加this.
-        如何使用: 访问器属性的用法和普通属性的用法完全一样。
-          只不过: 获取访问器属性值时，自动调用get方法，实际获得的是受保护的隐藏属性的值
-                  修改访问器属性值时，自动调用set方法，自动将新值传给val，经过验证才，实际保存到受保护的隐藏属性中。
-   内部属性: 不可用.访问的属性: __proto__
- 防篡改: 防止在对象创建后，修改对象的结构/内容
-   3个级别:
-   1. 防扩展: 禁止给对象添加任何新属性
-     Object.preventExtensions(obj);
-   2. 密封: seal 在防扩展基础上，再禁止删除现有属性
-     Object.seal(obj)
-     相当于将所有属性的configurable特性都改为false
-   3. 冻结: 禁止对对象做任何修改(包括结构和值)
-     Object.freeze(obj);
-     三件事: 1. 禁止扩展
-            2. 修改所有属性的configurable为false
-            3. 修改所有属性的writable为false
-</code></pre><p>11、 数组API: 3组</p>
-<pre><code> 1. 判断: 判断数组中的元素是否符合要求:
-   every: 判断数组中的元素是否*都*符合要求:
-     如何: var bool=arr.every(function(val,i,arr){
-            //val, 当前元素值
-            //i, 当前位置
-            //arr, 当前数组
-            return 判断条件
-          })
-   some: 判断数组中是否*包含*符合要求的元素:
- 2. 遍历: 对每个元素执行相同操作
-   forEach: 对原数组中每个元素执行相同操作
-          直接修改原数组
-     arr.forEach(function(val,i,arr){
-       arr[i]=新值;
-     })
-   map: 取出原数组中每个元素，执行相同操作后，放入一个新数组中返回
-          不修改原数组，仅返回新数组
-     var 新数组=arr.map(function(val,i,arr){
-       return 新值;
-     });
- 3. 过滤和汇总:
-   过滤: 筛选出原数组中符合条件的元素组成新数组。
-         原数组不变。
-     var subArr=arr.filter(function(val,i,arr){
-       return 判断条件
-     })
-   汇总: 将数组中每个元素的值，汇总成一个最终结果
-     返回值: 一个汇总结果
-     var result=arr.reduce(function(prev,val,i,arr){
-       return prev+val;//累加
-     },base);
-  问题: 仅简化了代码，未提高程序的性能
-       所有遍历API中使用的都是for循环遍历每个元素
-
-Object.create方法: 直接用父对象创建子对象，并扩展子对象的自有属性:
-  何时: 如果只有父对象，也想创建子对象时
-  如何:  var child=Object.create(father,{
-           新属性:{四大特性},
-              ... : ...
-         });
-</code></pre><p>12、<em>**</em>call/apply/bind: 替换函数中不想要的this</p>
-<pre><code>call/apply : 临时替换函数中的this
- 差别: call，要求传入函数的参数必须单独传入
-      apply, 要求传入函数的参数必须放入数组中整体传入。apply会将数组打散为单个参数值分别传入
-强调: call/apply相当于调用函数，立刻执行。
-bind: 永久绑定函数中的this
- 3件事: 1. 创建一个和原函数功能完全一样的新函数
-        2. 将新函数中的this永久绑定为指定对象
-        3. 将新函数中的部分固定参数提前永久绑定
- 强调: bind绑定在新函数中的this，无法被call/apply再替换。
-
-总结: 如果临时调用一个函数，立刻执行时——call/apply
-      如果创建一个函数提前绑定this时，不一定立刻执行时——bind
-</code></pre><p> 13、 严格模式:</p>
-<pre><code>1. 禁止给未声明的变量赋值
-2. 将静默失败升级为错误
-</code></pre><p>14、 ES6:</p>
-<pre><code>模板字符串: 简化字符串拼接
-  何时: 只要一个字符串需要动态拼接而成时
-  如何: 反引号
-****let: 解决声明提前的问题
-  何时: 今后只要声明一个变量，首选let
-  特点: 2个:
-    1. let会将变量的作用域，限制在一个块内部
-        ——增加了块级作用域
-    2. let之前不允许再出现未声明的同名变量
-        ——避免了声明提前
-***箭头函数: 简化所有回调函数:
-  如何:
-    1. 去掉function，在()和{}之间加=&gt;
-    2. 更简化:
-      如果只有一个参数，可省略()
-        如果没有参数，必须保留()
-      如果函数体只有一句话，可省略{}
-        如果函数体只有一句话，且是return，可省了{}和return
-
-  强调: 箭头函数简写后，函数中的this和外部this一致了
-    所以: 当回调函数内外的this不相同时，不能使用箭头函数简化。
-    反之: 如果希望函数内外公用一个this时，就可用箭头函数简化回调函数。
-
-for...of: 简化普通for循环遍历:
-  for(var i=0;i&lt;arr.length;i++){
-    arr[i] //当前元素值
-  }
-  for(var val of arr){
-    val //当前元素值
-  }
-  问题1: 仅适用于读取元素值的情况，不能修改原数组元素。
-  问题2: 只能遍历数字下标的索引数组和类数组对象。不能遍历关联数组中的元素值。
-
-***class: 简化: 封装,继承,多态
-创建一个类型:
-  1. 用class结构包裹构造函数和原型对象方法, 将类型名定义在class后
-  2. 构造函数的function 函数名，改为constructor
-  3. 所有原型方法省略&quot;类型.prototype&quot;和&quot;=function&quot;
-两种类型间的继承:
-  1. 不再需要Object.setPrototype
-     而是class 子类型 extends 父类型
-  2. 借用构造函数不再用call/apply，而用super(...)
-     其中super中省略this
-</code></pre>]]></content>
+    <content type="html"><![CDATA[<ul>
+<li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;       sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websocket, Geolocation;</li>
+</ul>
+<p>移除的元素：纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</p>
+<ul>
+<li>支持HTML5新标签：<br>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式。<br>当然也可以直接使用成熟的框架、比如html5shim;<!--[if lt IE 9]>
+<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+<![endif]-->
+<ul>
+<li>如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素</li>
+</ul>
+</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;1、 错误处理:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;错误bug: 程序执行过程中，导致程序无法正常执行的情况
-后果: 程序会强行中断退出
-错误处理: 即使程序出现错误，也保证程序不异常中断的机制。
-如何: try{//始终执行
-       //可能出错的代码
-     }ca
+      &lt;ul&gt;
+&lt;li&gt;HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。&lt;br&gt;绘画 canvas;&lt;br&gt;用于媒介回放的 video 和 audio 元素;&lt;br&gt;本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
     
     </summary>
     
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -547,7 +106,7 @@ for...of: 简化普通for循环遍历:
     <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
     <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T14:29:30.091Z</updated>
+    <updated>2017-07-23T14:55:42.834Z</updated>
     
     <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
 <pre><code>拙劣的设计：
@@ -833,7 +392,6 @@ ngOptions语法：
 15、自定义服务
 
         服务的目的是为了封装业务逻辑，提高代码的复用率
-
         自定义指令 app.directive
         自定义过滤器 app.filter
         自定义服务的方法：
@@ -1051,6 +609,32 @@ keep it simple
   </entry>
   
   <entry>
+    <title>CSS3新增伪类有那些</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:55:42.524Z</updated>
+    
+    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
+<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CSS3有哪些新特性</title>
     <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
@@ -1072,31 +656,6 @@ keep it simple
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Doctype作用？标准模式与兼容模式各有什么区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/20170723/"/>
-    <id>www.wangchengzou.cn/2017/07/22/20170723/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T02:34:26.037Z</updated>
-    
-    <content type="html"><![CDATA[<p>（1）、&lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。<br>（2）、标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。</html></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;（1）、&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &lt;html&gt; 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。&lt;br&gt;（2）、标准模式的排版 和JS运作模式都是以该浏览器支持
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -2105,37 +1664,6 @@ keep it simple
   </entry>
   
   <entry>
-    <title>CSS优先级算法如何计算</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS优先级算法如何计算/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:53:48.776Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>优先级就近原则，同权重情况下样式定义最近者为准;</li>
-<li>载入样式以最后载入的定位为准;<br>优先级为:    !important &gt;  id &gt; class &gt; tag<br>important 比 内联优先级高</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
-&lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
-&lt;/
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CSS3高级笔记</title>
     <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
     <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
@@ -2491,19 +2019,24 @@ IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它
   </entry>
   
   <entry>
-    <title>HTML5的form如何关闭自动完成功能</title>
-    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
-    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <title>CSS优先级算法如何计算</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS优先级算法如何计算/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:45:05.164Z</updated>
+    <updated>2017-07-23T07:53:48.776Z</updated>
     
-    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+    <content type="html"><![CDATA[<ul>
+<li>优先级就近原则，同权重情况下样式定义最近者为准;</li>
+<li>载入样式以最后载入的定位为准;<br>优先级为:    !important &gt;  id &gt; class &gt; tag<br>important 比 内联优先级高</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
-
+      &lt;ul&gt;
+&lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
+&lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
+&lt;/
     
     </summary>
     
@@ -2512,7 +2045,7 @@ IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
     
   </entry>
   
@@ -2989,6 +2522,706 @@ location: 专门保存当前窗口正在打开的url的对象
       <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
     
       <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS选择符有哪些？哪些属性可以继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:53:18.490Z</updated>
+    
+    <content type="html"><![CDATA[<p> 1.id选择器（ # myid）<br> 2.类选择器（.myclassname）<br> 3.标签选择器（div, h1, p）<br> 4.相邻选择器（h1 + p）<br> 5.子选择器（ul &gt; li）<br> 6.后代选择器（li a）<br> 7.通配符选择器（ * ）<br> 8.属性选择器（a[rel = “external”]）<br> 9.伪类选择器（a:hover, li:nth-child）</p>
+<ul>
+<li>可继承的样式： font-size font-family color, UL LI DL DD DT;</li>
+<li>不可继承的样式：border padding margin width height ;</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 1.id选择器（ # myid）&lt;br&gt; 2.类选择器（.myclassname）&lt;br&gt; 3.标签选择器（div, h1, p）&lt;br&gt; 4.相邻选择器（h1 + p）&lt;br&gt; 5.子选择器（ul &amp;gt; li）&lt;br&gt; 6.后代选择器（li a）&lt;br&gt; 7.通配符
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5的form如何关闭自动完成功能</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:45:05.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Html5基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T16:50:23.596Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、HTML5新特性 —— 十个新特性：凌乱</p>
+<pre><code>(1)新的语义标签
+(2)增强型表单(表单2.0)
+(3)音频和视频
+(4)Canvas绘图
+(5)SVG绘图
+(6)地理定位
+(7)拖放API
+(8)Web Worker
+(9)Web Storage
+(10)Web Socket
+</code></pre><p>二、HTML5中表单的新特性</p>
+<pre><code>(1)新的input type      &lt;input type=&quot;?&quot;&gt;
+  H4中的input type：text、password、radio、checkbox、file、hidden、submit、reset、image
+  H5中的input type：email、url、number、tel、search、range、color、date、month、week
+(2)新的表单元素
+  H4中的表单元素：input、textarea、select/option、label
+  H5中新增的表单元素：datalist、progress、meter、output
+(3)表单元素的新属性
+</code></pre><p>三、H5中新增的表单元素 —— datalist</p>
+<pre><code>&lt;datalist id=&quot;list3&quot;&gt;        datalist本身不可见
+  &lt;option&gt;XX&lt;/option&gt;
+  &lt;option&gt;YY&lt;/option&gt;
+&lt;/datalist&gt;
+&lt;input type=&quot;text&quot; list=&quot;list3&quot;&gt;
+  datalist为input提供输入建议列表，用户可以从中选取，也可以手工输入
+</code></pre><p>四、H5中新增的表单元素 —— progress</p>
+<pre><code>显示一个进度条，有两种形式：
+&lt;progress&gt;&lt;/progress&gt; 左右晃动的进度条
+&lt;progress value=&quot;0.7&quot;&gt;&lt;/progress&gt; 具有指定进度值的进度条
+</code></pre><p>五、H5中新增的表单元素 —— meter</p>
+<pre><code>Meter：度量衡、刻度尺，用于标示一个值所处的范围：不可接受(红色)、可以接受(黄色)、非常优秀(绿色)
+&lt;meter min=&quot;可取的最小值&quot; max=&quot;可取的最大值&quot; low=&quot;合理的下限值&quot;
+      high=&quot;合理的上限值&quot; optimum=&quot;最佳值&quot;  value=&quot;当前实际值&quot;&gt;
+&lt;/meter&gt;
+</code></pre><p>六、H5中新增的表单元素 —— output</p>
+<pre><code>output：输出，语义标签，没有任何外观样式，样式上等同于SPAN。
+  商品单价: ￥3.50
+购买数量：&lt;input type=&quot;number&quot; value=&quot;1&quot;&gt;
+小计：&lt;output&gt;￥3.50&lt;/output&gt;
+</code></pre><p>七、H5表单新特性 —— 表单元素的新属性</p>
+<pre><code>H4中表单元素的属性：  &lt;input ?&gt;
+  id、class、title、style、type、value、name、readonly、disabled、checked
+H5中表单元素的新属性：
+  (1)placeholder：占位字符
+    &lt;input value=&quot;tom&quot; placeholder=&quot;请输入用户名&quot;&gt;
+  (2)autofocus：自动获取输入焦点
+    &lt;input autofocus&gt;
+  (3)multiple：允许输入框中出现多个输入（用逗号分隔），如邮箱输入域
+    &lt;input type=&quot;email&quot; multiple&gt;
+  (4)form：用于把输入域放置到FORM外部
+    &lt;form id=&quot;f5&quot;&gt;&lt;/form&gt;
+    &lt;input form=&quot;f5&quot;&gt;
+  ====输入验证相关的新属性======
+  (5)required：必填项，内容不能为空
+    &lt;input required&gt;
+  (6)maxlength：指定字符串的最大长度
+    &lt;input maxlength=&quot;9&quot;&gt;
+  (7)minlength：指定字符串的最小长度
+    &lt;input minlength=&quot;6&quot;&gt;
+  (8)max：指定数字的最大值
+    &lt;input max=&quot;60&quot;&gt;
+  (9)min：指定数字的最小值
+    &lt;input min=&quot;18&quot;&gt;
+  (10)pattern：指定输入必需符合的正则表达式
+    &lt;input pattern=&quot;1[35789]\d{9}&quot;&gt;
+  上述验证属性会影响表单元素对应的JS对象的validity属性。
+</code></pre><p>九、H5新特性——视频播放</p>
+<pre><code>H5提供了一个新的标签用于播放视频：
+  &lt;video src=&quot;res/birds.mp4&quot;&gt;&lt;/video&gt;
+  &lt;video&gt;
+          &lt;source src=&quot;res/birds.mp4&quot;&gt;
+          &lt;source src=&quot;res/birds.ogg&quot;&gt;
+          &lt;source src=&quot;res/birds.webm&quot;&gt;
+          您的浏览器不支持VIDEO播放！
+  &lt;/video&gt;
+它本身是一个300*150的inline-block元素。
+VIDEO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  poster：&apos;&apos;，在播放第一帧之前显示的海报
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十、H5新特性——音频播放</p>
+<pre><code>H5提供了一个新的标签用于播放音频：
+  &lt;audio src=&quot;res/bg.mp3&quot;&gt;&lt;/audio&gt;
+  &lt;audio&gt;
+          &lt;source src=&quot;res/bg.mp3&quot;&gt;
+          &lt;source src=&quot;res/bg.ogg&quot;&gt;
+          &lt;source src=&quot;res/bg.wav&quot;&gt;
+          您的浏览器不支持AUDIO播放！
+  &lt;/audio&gt;
+它默认是一个300*30的inline-block元素；但若没有controls属性，则display:none。
+AUDIO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十一、网页中可用的绘图技术</p>
+<pre><code>  网页中的实时走势图、统计图、在线画图板、网页游戏、地图应用都要使用到绘图技术。有三种绘图技术：
+  (1)SVG绘图：2D矢量绘图技术，2000年出现，后纳入H5标准
+  (2)Canvas绘图：2D位图绘图技术，H5提出的绘图技术
+  (3)WebGL绘图：3D绘图技术，尚未纳入H5标准
+
+Canvas绘图难点所在：
+(1)坐标系
+(2)单词比较多
+</code></pre><p>十二、H5新特性——Canvas绘图技术</p>
+<pre><code>Canvas：画布，是H5提供的2D绘图技术。
+  &lt;canvas width=&quot;500&quot; height=&quot;400&quot;&gt;
+      您的浏览器不支持Canvas标签！
+  &lt;/canvas&gt;
+CANVAS标签在浏览器中默认是300*150的inline-block。
+画布的宽和高只能使用HTML/JS属性来赋值，不能使用CSS样式赋值！
+每个画布上有且只有一个“画笔”对象——称为“绘图上下文”对象——使用该对象进行绘图！
+  var ctx = canvas.getContext(&apos;2d&apos;)  //得到画布上的画笔对象
+  (1)使用Canvas绘制矩形
+      矩形的定位点在自己的左上角
+      ctx.lineWidth = 1            描边宽度
+      ctx.fillStyle = &apos;#000&apos;        填充样式/颜色
+      ctx.strokeStyle = &apos;#000&apos;        描边样式/颜色
+      ctx.fillRect( x, y, w, h )        填充一个矩形
+      ctx.strokeRect( x, y, w, h )    描边一个矩形
+      ctx.clearRect( x, y, w, h )        清除一个矩形范围内所有的绘图
+  (2)使用Canvas绘制文本
+    一段文字的定位点在其文本基线的起点
+      ctx.textBaseline = &apos;alphabetic&apos;    文本基线
+      ctx.font = &apos;12px sans-serif&apos;    文本大小和字体
+      ctx.fillText( str, x, y )            填充一段文本
+      ctx.strokeText( str, x, y )        描边一段文本
+      ctx.measureText( str )    基于当前文字大小字体设置测量文本，返回一个对象：{width: x}
+</code></pre><p>十三、Canvas绘图中使用渐变对象</p>
+<pre><code>线性渐变： linearGradient
+径向渐变： radialGradient
+可以参考PS中的渐变效果。
+var g = ctx.createLinearGradient( x1, y1,  x2,  y2 );
+g.addColorStop( offset,  color )
+....
+g.addColorStop( offset,  color )
+ctx.strokeStyle = g;
+ctx.fillStyle = g;
+</code></pre><p>十四、Canvas：是H5提供的2D位图绘图技术。</p>
+<pre><code>&lt;canvas id=&quot;c1&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+    您的浏览器不支持Canvas
+&lt;/canvas&gt;
+var ctx = c1.getContext(&apos;2d&apos;)
+//绘制矩形  ctx.fillRect()/strokeRect()/clearRect()
+//绘制文本  ctx.fillText()/strokeText()/measureText()
+//绘制路径
+//绘制图像
+
+1.Canvas的尺寸不能用CSS指定
+  使用CSS指定的Canvas尺寸，实际不是修改了画布尺寸，而是进行了拉伸，上面的绘图内容也会随着进行拉伸。
+  可以使用HTML标签的width和height属性，也可以使用JS对象的width和height属性。
+
+2.使用Canvas进行绘图 —— 路径
+  Path：类似于PS中的“钢笔工具”，由多个坐标点组成的任意形状，路径不可见，可用于“描边”、“填充”、“裁剪”。
+  ctx.beginPath()        开始一条新路径
+  ctx.closePath()        闭合当前路径
+  ctx.moveTo(x, y)        移动到指定点
+  ctx.lineTo(x, y)        从当前点到指定点画直线
+  ctx.arc(cx, cy, r, start, end)    绘制圆拱路径
+
+  ctx.stroke()            对当前路径描边
+  ctx.fill()                对当前路径填充
+  ctx.clip()            使用当前路径进行裁剪
+
+3.使用Canvas进行绘图 —— 图像
+  Canvas属于客户端技术，图片在服务器中，所以浏览器必须先下载要绘制的图片，且等待图片异步加载完成：
+  var p3 = new Image();
+  p3.src = &apos;img/p3.png&apos;;    //浏览器会自动异步请求图片
+  console.log(p3.width);    //0
+  p3.onload = function(){      //图片加载完成
+        console.log(p3.width);      //200
+        //开始绘制图片到画布上....
+    ctx.drawImage( p3, x, y );        //原始大小绘图
+    ctx.drawImage( p3, x, y, w, h );    //拉伸绘图
+  }
+
+Canvas绘图核心知识点：—— 重点
+绘制矩形：
+  ctx.fillRect()  ctx.strokeRect()   ctx.clearRect()
+绘制文本：
+  ctx.fillText()  ctx.strokeText()   ctx.measureText().width
+绘制路径：
+  ctx.beginPath()    ctx.closePath()
+  ctx.moveTo()   ctx.lineTo()
+  ctx.arc()
+  ctx.stroke()   ctx.fill()    ctx.clip()
+绘制图像：
+  ctx.drawImage()
+
+
+4.使用Canvas绘图时进行变形操作
+  CSS中有变形相关样式： transform: rotate/scale/translate/skew，这些变形只能作用于某个HTML元素。
+  Canvas绘图中也有变形技术，可以针对某一个图像/图形的绘制过程进行变形：rotate、scale、translate。
+  ctx.rotate( 弧度 )     旋转绘图上下文对象(即画笔),轴点是画布的原点
+  ctx.translate( x, y )  将整个画布的原点平移到指定的点
+  ctx.save()         保存画笔当前的所有变形状态值（游戏中从存盘）
+  ctx.restore()        恢复画笔变形状态到最近的一次保存（游戏中读取存盘）
+
+5.第三方绘制统计图工具
+  (1)Chart.js：免费的，提供了八种统计图表
+  (2)FusionCharts.js：收费的，提供了90+中统计图表
+  (3)ECharts：百度提供的免费的绘图工具，与地图整合的很好
+  (4)FreeCharts ....
+
+提示：第三方工具使用无需记忆！重点掌握自学的过程：
+(1)打开官网，查看说明
+    http://www.chartjs.org/
+(2)仿照DEMO编写示例
+    开源免费的、8种图表、基于H5 Canvas、支持响应式
+(3)在实际项目中加以应用，查看详细API说明
+    &lt;canvas id=&quot;c15&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+            您的浏览器不支持Canvas绘图！
+    &lt;/canvas&gt;
+    &lt;script src=&quot;js/Chart.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        new Chart(c15, {
+            type: &apos;bar&apos;,//line、pie、noughnut...
+            data: {},
+            options: {}
+            });
+    &lt;/script&gt;
+
+位图(Photoshop)：由一个又一个像素点组成，每个点各有自己的颜色，色彩细腻，但放大会失真
+矢量图(Illustrator)：由一个又一个线条组成，每个线条可以指定颜色、方向，可以无限缩放，但细节不够丰富
+</code></pre><p>十五、HTML5新特性——SVG绘图</p>
+<pre><code>Scalable Vector Graph：可缩放的矢量图
+Canvas绘图    SVG绘图
+类型    2D位图    2D矢量图
+如何绘图    使用JS代码绘图    使用标签绘图
+事件绑定    每个图形不是元素，无法直接绑定事件    每个图形都是元素，可以直接绑定事件监听
+应用场合    统计图、游戏    统计图、图标、地图
+  SVG技术诞生于2000年，早期作为XML的扩展应用出现；H5标准把常用的SVG标签采纳为标准，但有些被废弃掉。
+
+SVG技术在HTML5出现之前的使用方法：
+    (1)在一个XML文档中声明要绘制的图形
+    (2)再编写HTML文档，使用IMG/IFRAME应用XML文档即可
+SVG技术在HTML5出现之后的使用方法：
+    直接创建HTML5文档，在其中书写SVG标签即可
+    &lt;svg&gt;&lt;/svg&gt;本身是一个300*150的inline-block。
+
+使用SVG标签绘制矩形：
+    &lt;rect&gt;
+使用SVG标签绘制圆形：
+    &lt;circle&gt;
+使用SVG标签绘制椭圆：
+    &lt;ellipse&gt;
+使用SVG标签绘制直线：
+    &lt;line&gt;
+使用SVG标签绘制折线：
+    &lt;polyline&gt;
+使用SVG标签绘制多边形：
+    &lt;polygon&gt;
+</code></pre><p>十六、补充：Canvans上如何按照特定的顺序绘制图片</p>
+<pre><code>Canvas绘图中若需要多张图片，他们的加载都是异步的，无法预测哪一张先加载完成！
+但是绘图往往需要按照一定顺序，如先绘背景，再绘上面的内容。所以必须等待所有图片全部加载完成，才能开始绘图。
+var progress = 0; //所有图片的总加载进度
+var imgBg = new Image();
+imgBg.src = &apos;img/bg.jpg&apos;;
+imgBg.onload = function(){
+  progress += 40;    //为每张图片赋一个权重值
+  if(progress===100){
+    startDraw();
+  }
+}
+var imgDisc = new Image();
+imgDisc.src = &apos;img/disc.png&apos;;
+imgDisc.onload = function(){
+  progress += 60;
+  if(progress===100){
+    startDraw();
+  }
+}
+</code></pre><p>十七、补充：如何为Canvas上的图形/图像绑定事件监听</p>
+<pre><code>网页中只能为HTML元素绑定监听函数，Canvas上的图形/图像都是用JS绘制的，不是DOM元素，不能直接进行事件绑定！
+只能绑定给整个Canvas！然后再具体计算事件发生坐标是否处于某个图像/图形内部——仅适用于规则图像/图形。
+  SVG图形中为元素绑定事件监听
+  SVG图形中每个图形/图像都是一个标签，可以很方便进行事件绑定
+</code></pre><p>十八、SVG绘图的特点——着重注意！</p>
+<pre><code>(1)所有的图形默认只有填充色（黑色），没有描边色。
+(2)SVG图形的样式可以用元素属性声明，也可以用CSS形式来声明。但用CSS声明时，只能使用SVG专用的样式，不能使用CSS样式，如边框设置只能用stroke，而不用border！
+(3)图形可以使用JS来对属性赋值；但不能使用HTML DOM形式，只能用核心DOM操作，如：
+  r.x = 10;   r.width = 100;    //无效
+  r.setAttribute(&apos;x&apos;, 10); r.setAttribute(&apos;width&apos;, 100)//有效
+(4)动态添加SVG图形可以使用两种方式：
+   1)HTML字符串拼接
+       var html = `&lt;rect&gt;&lt;/rect&gt;`;
+       svg.innerHTML = html;
+   2)使用document.createElementNS(&apos;http://www.w3.org/2000/svg&apos;,&apos;标签名&apos;)创建
+
+4.使用SVG进行绘图——矩形
+  &lt;rect width=&quot;&quot; height=&quot;&quot; x=&quot;&quot; y=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/rect&gt;
+
+5.使用SVG进行绘图——圆形
+  &lt;circle r=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/circle&gt;
+
+6.使用SVG进行绘图——椭圆
+  &lt;ellipse rx=&quot;&quot; ry=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot;&gt;&lt;/ellipse&gt;
+
+7.使用SVG进行绘图——直线
+  &lt;line x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-linecap=&quot;butt/square/round&quot;&gt;&lt;/line&gt;
+ 练习：使用SVG中的直线绘制如下的图标
+
+提示：若多个SVG图形有完全一样的属性，可以抽出来，放在一个公共的父元素中（小组）
+&lt;g stroke=&quot;#000&quot;&gt;
+   &lt;line&gt;&lt;/line&gt;
+   &lt;line&gt;&lt;/line&gt;
+&lt;/g&gt;
+
+8.使用SVG进行绘图——折线
+  一条折线上可以有任意多个连续的点
+  &lt;polyline points=&quot;50,50  100,300 ...&quot; fill=&quot;transparent&quot; stroke=&quot;#000&quot;&gt;&lt;/polyline&gt;
+ 练习：使用折线绘制如下图标
+
+9.使用SVG进行绘图——多边形
+&lt;polygon points=&quot;50,50  100,300 ...&quot; fill=&quot;&quot;&gt;&lt;/ polygon&gt;
+  练习：使用多边形绘制如下两个图标
+
+10.附加：使用SVG进行绘图——文本
+  SVG画布上不允许使用普通的HTML元素绘制文本，如SPAN、P等！只能使用：
+  &lt;text font-size=&quot;&quot; alignment-baseline=&quot;before-edge&quot; fill=&quot;&quot; stroke=&quot;&quot; x=&quot;&quot; y=&quot;&quot;&gt;文本内容 &lt;/text&gt;
+
+11.附加：使用SVG进行绘图——图像
+  不能使用IMG置于SVG画布上！只能使用：
+  &lt;image xlink:href=&quot;disc.png&quot; width=&quot;200&quot; height=&quot;200&quot; x=&quot;&quot; y=&quot;&quot;&gt;&lt;/image&gt;
+SVG绘图的主要知识点：
+&lt;svg&gt;
+  &lt;rect&gt;&lt;/rect&gt;
+  &lt;circle&gt;&lt;/circle&gt;
+  &lt;ellipse&gt;&lt;/ellipse&gt;
+  &lt;line&gt;&lt;/line&gt;
+  &lt;polyline&gt;&lt;/polyline&gt;
+  &lt;polygon&gt;&lt;/polygon&gt;
+  &lt;text&gt;&lt;/text&gt;
+  &lt;image&gt;&lt;/image&gt;
+&lt;/svg&gt;
+
+12.补充小知识：如何在SVG中使用渐变
+  &lt;defs&gt;      定义特效对象：渐变对象属于一种特效对象
+    &lt;linearGradient id=&quot;g3&quot; x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot;&gt;
+        &lt;stop offset=&quot;0&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+        &lt;stop offset=&quot;1&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+  &lt;ANY fill=&quot;url(#g3)&quot;  stroke=&quot;url(#g3)&quot;&gt;&lt;/ANY&gt;
+ 练习：使用渐变对象，为不同的柱子分配不同的渐变色
+
+
+13.补充小知识：如何在SVG中使用滤镜
+  &lt;defs&gt;
+    &lt;filter id=&quot;f2&quot;&gt;
+        &lt;feGaussianBlur stdDeviation=&quot;3&quot;/&gt;
+    &lt;/filter&gt;
+  &lt;/defs&gt;
+  &lt;ANY filter=&quot;url(#f2)&quot;&gt;
+
+SVG中支持的所有滤镜：
+https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
+
+网页中可用的绘图技术：
+(1)Canvas绘图
+(2)SVG绘图
+(3)WebGL绘图
+
+14.第三方绘图工具库  —— Two.js
+
+ (1)打开官网，查看说明
+    https://two.js.org/
+    是一个2D绘图函数库，提供了一套API，可用于不同的技术下的绘图，如SVG/CANVAS/WEBGL。
+ (2)参考DEMO，编写示例
+    var two = new Two({ }).appendTo(box);
+    //绘制一个圆形
+    var c = two.makeCircle(200,200,100);
+    //绘制一个矩形——定位点在矩形中心，而不是左上角
+    var r = two.makeRectangle(600,200, 200,200);
+    //把绘图对象中的内容绘制到DOM树
+    two.update(); //更新DOM树
+ (3)查看API，在项目中加以应用
+</code></pre><p>十九、HTML5新特性之六 —— 地理定位</p>
+<pre><code>  Geolocation：地理定位，使用JS获取当前浏览器所在的地理坐标
+  （经度、维度、海拔、速度）数据，用于实现LBS应用(Location Based Service)，
+  如饿了么、高德导航...
+  手机浏览器如何获得定位信息：
+    (1)首选手机中的GPS芯片与卫星通信，定位精度在米
+    (2)次选手机通信基站进行定位获取，定位精度在公里
+  PC浏览器如何获得定位信息：
+    通过IP地址进行反向解析，定位精度取决于IP地址库的大小
+
+HTML5中提供了一个新的对象，用于获取当前浏览器的定位信息：
+  window.navigator.geolocation{
+    getCurrentPosition: fn,    获得当前定位信息
+    watchPosition: fn, 监视定位数据的改变
+    clearWatch: fn  取消监视
+  }
+获得客户端的定位信息：
+navigator.geolocation.getCurrentPosition(
+    (pos)=&gt;{ pos.coords.latitude   pos.coords.longitude },
+    (err)=&gt;{    err.code   err.message }
+)
+
+2.扩展小知识：在网页中如何嵌入百度地图
+  (1)注册百度开发者账号
+    http://lbsyun.baidu.com/
+  (2)创建一个网站；登录百度地图，为网站申请一个地图的AccessKey
+    http://lbsyun.baidu.com/apiconsole/key
+
+  (3)在自己的网页中嵌入百度地图提供的API，嵌入百度地图
+    官方手册：http://lbsyun.baidu.com/index.php?title=jspopular
+    var map = new BMap.Map(&quot;container&quot;);          // 创建地图实例
+    var point = new BMap.Point(116.300829,39.915836);  // 创建点坐标
+    map.centerAndZoom(point, 17);   // 以指定点为中心并缩放
+</code></pre><p>二十、HTML5新特性之七 —— 拖放API</p>
+<pre><code>Drag &amp; Drop：拖动和释放
+HTML5为拖放行为提供了7个事件，分为两组：
+拖动的源对象(会动)可以触发的事件：
+  dragstart：拖动开始
+  drag：拖动中
+  dragend：拖动结束
+  整个拖动过程： dragstart*1 + drag*n + dragend*1
+拖动的目标对象(不动)可以触发的事件：
+  dragenter：拖动着进入
+  dragover：拖动着悬停在上方
+  dragleave：拖动着离开
+  drop：在上方释放
+  整个拖动过程1： dragenter*1 + dragover*n + dragleave*1
+  整个拖动过程2： dragenter*1 + dragover*n + drop*1
+注意：必须阻止dragover的默认行为，drop才可能触发！
+</code></pre><p>二十一、HTML5新特性之八 —— Web Worker —— 代码就3行</p>
+<pre><code>  程序：Program，指可被CPU执行的代码，存储在外存中
+  进程：Process/Task，指程序被OS调入内存，分配执行空间，随时供CPU调度执行
+  线程：Thread，线程是进程内执行代码基本单位
+
+  进程和线程：
+    (1)进程是操作系统分配内存的基本单位；
+    (2)线程是CPU执行代码的基本单位；
+    (3)线程必须处于某个进程内部；
+    (4)一个进程内必须至少有一个线程；也可以有多个；
+    (5)一个操作系统中可能同时存在几千个线程，它们是“并发执行的”—— 宏观上看同时执行，微观上看是依次循环执行
+
+    Chrome浏览器中的线程模型：
+    一个Chrome进程内，至少有6个线程，可以“同时/并发”向Web服务器发起HTTP请求，以获得所需的资源——资源请求线程。
+    还有一个线程负责将所有内容绘制到浏览器页面中——UI主线程——不允许多线程同时绘图，防止内容布局错乱。
+
+    5.观察如下一段代码执行特点
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script src=&quot;14.js&quot;&gt;很耗时的JS任务&lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+      现象：JS执行过程中，按钮1可见，但点击无效；按钮2不可见。
+      原因：浏览器中执行代码的只有一个线程——UI主线程
+      解决办法：创建新的线程，由它来执行耗时的JS任务；UI主线程继续执行后续的HTML渲染：
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script&gt;
+        var w = new Worker(&apos;14.js&apos;)
+      &lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+1.补充小知识：在拖动源对象和目标对象间传递数据
+  如：拖动开始时(src.ondragstart)记录被拖动元素的ID，释放时(target.ondrop)根据ID查找拖动的源对象，进行相关操作。
+  方法1：使用一个全局变量 —— 造成全局对象的污染
+  方法2：使用H5拖放API专供的e.dataTransfer（数据传递）
+
+  //拖动的源对象
+  src.ondragstart = function(e){
+    //海南：往拖拉机中装数据
+    e.dataTransfer.setData(&apos;key&apos;, &apos;value&apos;)
+  }
+  //拖动的目标对象
+  target.ondrop = function(e){
+    //哈尔滨：从拖拉机中读取数据
+    var data = e.dataTransfer.getData(&apos;key&apos;);            //value
+  }
+</code></pre><p>二十二、HTML5新特性之八——WebWorker——代码就3行，重点在理论理解</p>
+<pre><code>进程：操作系统分配内存的单位 —— 工厂
+线程：处于进程内部，用于执行代码 —— 生产线
+线程并发：操作系统中所有的线程宏观上看“同时执行”；微观上看是“依次交替执行”
+Chrome中的线程模型： 请求资源——6个线程；运行代码/渲染页面内容——1个线程
+&lt;button&gt;按钮1&lt;/button&gt;
+&lt;script src=&quot;x.js&quot;&gt;&lt;/script&gt;
+&lt;button&gt;按钮2&lt;/button&gt;
+上述代码中若x.js很耗时，按钮1无法点击，按钮2在运行js过程中不可见——所有的代码(HTML/CSS/JS)都在单线程(UI主线程)中执行
+
+解决方案：创建一个并发执行的新线程，让它来执行耗时的JS任务
+
+3.Worker线程的致命缺陷
+浏览器不允许Worker线程操作任何的DOM&amp;BOM对象！！
+原因：浏览器只允许UI主线程操作DOM&amp;BOM！若多个线程同时都可以操作DOM结构，页面将混乱。
+所以，类似jQuery的脚步决不能使用Worker来加载执行。
+
+Worker线程可以给UI主线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.onmessage = function(e){ e.data }
+  Worker线程：
+      postMessage(stringMsg)
+UI主线程可以给Worker线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.postMessage(stringMsg)
+  Worker线程：
+      onmessage = function(e){ e.data }
+
+  项目中Worker的使用场景：
+  (1)只要js中有DOM&amp;BOM就不能用Worker！
+  (2)Worker适合于执行耗时的JS任务！如复杂计算、加密和解密、大数据统计、路径规划......
+</code></pre><p>二十三、HTML5新特性之九 —— WebStorage</p>
+<pre><code>  在浏览器中存储当前用户专有的数据：访问历史、内容定制、样式定制...
+  在客户端存储数据可以使用的技术：
+  (1)Cookie技术：浏览器兼容性好；不能超过4KB，操作复杂
+  (2)Flash存储：依赖于Flash播放器
+  (3)H5 WebStorage：不能超过8MB，操作简单
+  (4)IndexedDB：可存大量数据，还不是标准技术
+
+Session：会话，浏览器从打开某个网站的一个页面开始，中间可能打开很多页面，
+直到关闭浏览器，整个过程称为“浏览器与Web服务器的一次会话”。
+
+WebStorage技术中，浏览器为用户提供了两个对象：
+  (1)window.sessionStorage：类数组对象，会话级数据存储
+    在浏览器进程所分得的内存存储着一次Web会话可用的数据，可供此次会话中所有的页面共同使用
+    ；浏览器一旦关闭就消失了。
+作用：在同一个会话中的所有页面间共享数据，如登录用户名。
+    sessionStorage[key] = value            //保存一个数据
+    sessionStorage.setItem(key, value)        //保存一个数据
+    var v = sessionStorage[key]            //读取一个数据
+    var v = sessionStorage.getItem(key)    //读取一个数据
+    sessionStorage.removeItem(key)        //删除一个数据
+    sessionStorage.clear()                //清除所有数据
+    sessionStorage.length                //数据的数量
+    sessionStorage.key(i)                //获取第i个key
+
+  (2)window.localStorage：类数组对象，本地存储(跨会话级存储)
+    在浏览器所能管理的外存(硬盘)中存储着用户的浏览数据，可供此次会话以及后续的会话中的页面共同使用；
+即使浏览器关闭也不会消失——永久存在。作用：在当前客户端所对应的所有会话中共享数据，如登录用户名。
+    localStorage[key] = value            //保存一个数据
+    localStorage.setItem(key, value)        //保存一个数据
+    var v = localStorage [key]            //读取一个数据
+    var v = localStorage.getItem(key)        //读取一个数据
+    localStorage.removeItem(key)        //删除一个数据
+    localStorage.clear()                //清除所有数据
+    localStorage.length            //数据的数量
+    localStorage.key(i)                //获取第i个key
+
+localStorage中若数据发生了修改，会触发一次window.onstorage事件，可以监听此事件，实现监视localStorage数据改变的目的，
+用于在一个窗口中监视其它窗口中对localStorage数据的修改——不能监视sessionStorage数据的修改！
+
+5.HTML5新特性之十 —— WebSocket——代码不复杂重点在原理的理解
+  HTTP协议：属于“请求-响应”模型，只有客户端发起请求消息，服务器才会返回响应消息，没有请求就没有响应；
+一个请求，只能得到一个响应。有些场景中，此模型就力不从心了：实时走势应用、在线聊天室。
+解决方案：长轮询(Long-Polling)/心跳请求——定时器+AJAX——请求过于频繁，服务器压力过大；
+不够频繁，客户端数据延迟较大。
+  WebSocket协议：属于“广播-收听”模型，客户端连接到服务器就不再断开，永久的连接，双方就随时向对方发送消息，
+且是全双工不对等发送。WS协议在实时走势应用、在线聊天室应用中有着特别的优势。
+
+
+  WS协议的应用程序也分为客户端程序和服务器端程序：
+  WS服务器端应用：
+    监听指定端口，接收客户端请求，向对方发消息，并接收消息；可以使用php/java/node.js等语言编写
+  WS客户端应用：
+    主动发起连接请求，保持永久的连接，向对方消息，并接收消息，可以使用php/java/node.js/html5等语言编写
+
+6.了解：使用Node.js创建WS协议的服务器
+  node.js官方没有提供ws协议的模块，必须使用NPM下载第三方ws协议模块：  npm  i  ws
+  查看README,编写WS协议的服务器：
+  ......
+
+7.掌握：使用HTML5创建WS协议的客户端应用
+  //连接到WS服务器
+  var socket = new WebSocket(&apos;ws://127.0.0.1:9001&apos;)
+  //向服务器发消息
+  socket.send(stringMsg)
+  //接收服务器发来的消息
+  socket.onmessage = function(e){
+    e.data   //消息内容
+  }
+  //断开到WS服务器的连接
+  socket.close();
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、HTML5新特性 —— 十个新特性：凌乱&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(1)新的语义标签
+(2)增强型表单(表单2.0)
+(3)音频和视频
+(4)Canvas绘图
+(5)SVG绘图
+(6)地理定位
+(7)拖放API
+(8)Web Worker
+(9)Web Stora
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="h5" scheme="www.wangchengzou.cn/tags/h5/"/>
     
   </entry>
   
@@ -3579,6 +3812,291 @@ URL类型：&lt;input type=&quot;url&quot;&gt;  数据必须符合URL规范
   </entry>
   
   <entry>
+    <title>Ionic基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:53:37.919Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
+<pre><code>三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
+HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
+
+学习WebApp以及HybridApp。
+
+将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
+
+前端+原生
+想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
+想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
+</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
+<pre><code>采用的开发语言：java
+
+使用Goolge公司所提供的SDK，java
+
+①安装jdk
+    java development kit java开发工具箱
+②安装eclipse
+③安装sdk
+    http://www.androiddevtools.cn/
+    ①、下载jdk 直接安装
+    ②、下载ADT bundle（集成了eclipse、sdk）
+</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
+<pre><code>操作注意事项：
+    工具条--》window--》show/hide toolbar 显示隐藏工具条
+    工具条--》window--》reset perspective 恢复默认视图
+    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
+
+    sdk manager：更新SDK
+    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
+    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
+    start-》launch
+
+创建Android项目
+file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
+
+运行Android项目
+选中项目，点击右键，run as-&gt;Android Application Project
+
+对于AndroidApp来说，添加权限，基本步骤：
+①找到工程中根目录下的AndroidManefiest.xml文件
+②打开，选中选项卡permissions
+③点击add，在弹窗中选中uses permission
+④在右侧的下拉菜单中选中需要用到的权限，保存即可
+
+Android工程所对应的目录功能：
+src(source) 源代码，java文件的修改
+gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
+Android* 是google所提供的sdk文件
+assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
+bin 运行工程（编译、链接）时所生成的可执行文件(apk)
+libs(libraries) 库文件：使用第三方的包
+res（resource） 资源文件：图片、布局文件、变量
+AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
+</code></pre><p>四、第一个hybridApp  – webView</p>
+<pre><code>1、基本步骤：
+①按照功能和要求 把前端代码编写完毕
+②将前端代码 放到 Android工程的assets目录
+③创建一个WebView（网页视图组件），配置webView加载指定的html页面
+④将webView作为一个app的内容视图展现出来
+⑤运行，最终是生成了安装包
+
+2、练习：（15:40 - 15：55）
+创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
+要求：创建一个新的Android。
+问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
+解决：借助于webview的setWebChromeClient
+
+3、混合编程的常见的两种方式
+①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
+②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
+
+
+练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
+http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
+localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
+http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
+注意事项：①加上网络权限 ②允许执行js
+
+技巧：
+①timeout 超时
+    只需要将eclipse和模拟器关掉再打开
+②ActivityManager: Warning: Activity not started, its current task has been brought to the front
+    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
+③android library projects can&apos;t be launched
+    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
+ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
+
+如何完成Android工程的创建、运行基本流程以及工作方式
+学习HybridApp的创建和运行
+
+扩展1：
+js调用原生组件：
+①创建一个接口类的文件
+②activity配置使用接口
+③在js中调用java中的一些接口
+
+扩展2：
+js调用原生组件：
+①创建一个接口类的文件
+    @JavascriptInterface
+
+②activity配置使用接口
+ wv.addJavascriptInterface(
+new webInterfac(getApplicationContext()),&quot;android&quot;);
+
+③在js中调用java中的一些接口
+function callShowToast(){
+    android.showToast();
+  }
+</code></pre><p>五、Ionic概述</p>
+<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
+Ionic是一个强大的h5的混合编程app开发框架
+Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
+注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
+特点：
+    ①完美融合了ng
+    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
+    ③设计风格好
+    ④性能优越，运行速度块
+    Ionic = ng + cordova + 移动ui库
+</code></pre><p>六、搭建Ionic的开发环境</p>
+<pre><code>1、方式1 （命令行）
+http://ionicframework.com/getting-started/
+①npm install -g cordova ionic
+    全局安装cordova以及ionic
+②ionic start myApp tabs/sidemenu
+    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
+③ionic serve
+2、方式2：借助于官方所提供的js、css文件
+</code></pre><p>七、学习Ionic样式类</p>
+<pre><code>1、color
+    9个常用的值 ，参考手册中最后一个color的介绍
+
+2、button按钮
+    button/button-small/button-large/button-outline/
+    button-clear/buttn-block/icon-left/icon-right/
+    ion-***/button-bar
+
+3、list 列表
+    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
+    item-divider(分隔符)/badge(badge-assertive)
+    item-avator/item-thumbnail-left/right
+
+4、card 卡片式
+
+5、form 表单
+    list/item/item-input/input-label/item-stacked-label/item-floating-label
+    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
+
+6、grid
+    row/col
+    col-10/20/50..(指定列的宽度)
+    .col-10    10%
+    .col-20    20%
+    .col-25    25%
+    .col-33    33.3333%
+    .col-50    50%
+    .col-67    66.6666%
+    .col-75    75%
+    .col-80    80%
+    .col-90    90%(设置列与列之间的offset)
+
+    .col-offset-10    10%
+    .col-offset-20    20%
+    .col-offset-25    25%
+    .col-offset-33    33.3333%
+    .col-offset-50    50%
+    .col-offset-67    66.6666%
+    .col-offset-75    75%
+    .col-offset-80    80%
+    .col-offset-90    90%
+    col-center/col-top/col-bottom
+</code></pre><p>八、IonRefresher 下拉刷新</p>
+<pre><code>①指定下拉刷新的处理函数
+on-refresh
+②处理完之后，结束刷新动作
+$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
+③ionContent第一个子元素
+</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
+<pre><code>①指定上拉的处理函数
+on-infinite
+②数据更新完成之后，结束刷新
+scroll.infiniteScrollComplete
+③ionContent最后一个子元素
+immediate-check=&apos;false&apos;
+</code></pre><p>十、$ionicScrollDelegate</p>
+<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
+scrollTo(left,top) 滚动到指定的位置
+getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
+</code></pre><p>十一、ionTabs 实现选项卡</p>
+<pre><code>ionTabs 常用属性：
+tabs-icon-top/left/right/bottom/only tabs-positive
+http://ionicons.com/
+ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
+                  badge/badge-style/on-select/ng-click
+</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
+<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
+操作侧边栏菜单打开或者关闭：
+1、js：
+    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
+2、滑动打开
+3、属性
+    menu-close 将现在打开的侧边栏菜单关掉
+    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
+</code></pre><p>十三、ActionSheet</p>
+<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
+    $ionicActionSheet.show({
+
+    })
+在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
+cancel/buttonClicked/destructiveButtonClicked
+(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
+</code></pre><p>十四、$ionicLoading</p>
+<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
+$ionicLoading.show({template/templateUrl/duration/delay})
+$ionicLoading.hide();
+</code></pre><p>十五、$ionicPopup</p>
+<pre><code>在ionic中内容弹窗（警告、确认。。）
+$ionicPopup.alert/confirm/prompt/show()
+</code></pre><p>十六、自定义弹窗</p>
+<pre><code>$ionicModal 模态窗
+①指定要去显示的模板内容
+②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
+③调用$scope.modal.show()
+</code></pre><p>十七、uiRouter</p>
+<pre><code>定位：UI-Router is a client-side router for single page web applications.
+注意：uiRouter用在ng、react中
+uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
+
+ngRoute：
+①路由的基本步骤
+   自定义模块，指定ngRoute模块（angular-route.js）
+   指定盛放代码片段的容器 ngView
+   创建代码片段
+   配置路由词典
+    $routerProvider.when().otherwise()
+②跳转
+  直接修改地址栏
+  $location.path(路由地址)
+  a href=&apos;#路由地址&apos;
+③参数的传递
+  发送方、接收方
+  配置接收方的路由
+  $routeParams
+  发送参数
+
+uiRouter的基本使用步骤：
+ 指定依赖的模块‘ui.router’
+ 盛放代码片段的容器 uiView
+ 创建模板文件
+ 设置状态
+    $stateProvider.state()
+注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
+        在ionic的项目没有必须要指定ui.router
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JQuery基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
     <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
@@ -4073,47 +4591,19 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
-    <title>CSS选择符有哪些？哪些属性可以继承</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
+    <title>JSON 的了解</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JSON%20%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JSON 的了解/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:53:18.490Z</updated>
+    <updated>2017-07-23T08:39:00.433Z</updated>
     
-    <content type="html"><![CDATA[<p> 1.id选择器（ # myid）<br> 2.类选择器（.myclassname）<br> 3.标签选择器（div, h1, p）<br> 4.相邻选择器（h1 + p）<br> 5.子选择器（ul &gt; li）<br> 6.后代选择器（li a）<br> 7.通配符选择器（ * ）<br> 8.属性选择器（a[rel = “external”]）<br> 9.伪类选择器（a:hover, li:nth-child）</p>
-<ul>
-<li>可继承的样式： font-size font-family color, UL LI DL DD DT;</li>
-<li>不可继承的样式：border padding margin width height ;</li>
-</ul>
+    <content type="html"><![CDATA[<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}<br>JSON字符串转换为JSON对象:<br>var obj =eval(‘(‘+ str +’)’);<br>var obj = str.parseJSON();<br>var obj = JSON.parse(str);</p>
+<p>JSON对象转换为JSON字符串：<br>var last=obj.toJSONString();<br>var last=JSON.stringify(obj);</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt; 1.id选择器（ # myid）&lt;br&gt; 2.类选择器（.myclassname）&lt;br&gt; 3.标签选择器（div, h1, p）&lt;br&gt; 4.相邻选择器（h1 + p）&lt;br&gt; 5.子选择器（ul &amp;gt; li）&lt;br&gt; 6.后代选择器（li a）&lt;br&gt; 7.通配符
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript如何实现继承</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Javascript如何实现继承/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:23:34.884Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、构造继承<br>2、原型继承<br>3、实例继承<br>4、拷贝继承<br>原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。<br>function Parent(){  this.name = ‘wang’;   }<br>function Child(){   this.age = 28;    }<br>Child.prototype = new Parent();//继承了Parent，通过原型<br>var demo = new Child();<br>alert(demo.age);<br>alert(demo.name);//得到被继承的属性   }</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、构造继承&lt;br&gt;2、原型继承&lt;br&gt;3、实例继承&lt;br&gt;4、拷贝继承&lt;br&gt;原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。&lt;br&gt;function Parent(){  this.name = ‘wang’;   }&lt;
+      &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
     
     </summary>
     
@@ -4172,30 +4662,6 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
-    <title>JSON 的了解</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JSON%20%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JSON 的了解/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:39:00.433Z</updated>
-    
-    <content type="html"><![CDATA[<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}<br>JSON字符串转换为JSON对象:<br>var obj =eval(‘(‘+ str +’)’);<br>var obj = str.parseJSON();<br>var obj = JSON.parse(str);</p>
-<p>JSON对象转换为JSON字符串：<br>var last=obj.toJSONString();<br>var last=JSON.stringify(obj);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Label的作用是什么？是怎么用的</title>
     <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
     <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
@@ -4218,30 +4684,6 @@ jQuery中的插件（即函数）分为两类：
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>谈谈This对象的理解</title>
-    <link href="www.wangchengzou.cn/2017/07/22/This%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3/"/>
-    <id>www.wangchengzou.cn/2017/07/22/This对象的理解/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:29:44.417Z</updated>
-    
-    <content type="html"><![CDATA[<p>this总是指向函数的直接调用者（而非间接调用者）；<br>如果有new关键字，this指向new出来的那个对象；<br>在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;this总是指向函数的直接调用者（而非间接调用者）；&lt;br&gt;如果有new关键字，this指向new出来的那个对象；&lt;br&gt;在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   

@@ -1,0 +1,865 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>MySql常用方法知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="MySql常用方法知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">21 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>MySql常用方法知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/MySql/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Ajax/" class="chip pink lighten-1">Ajax</a>
+        
+            <a href="/tags/MySql/" class="chip pink lighten-1">MySql</a>
+        
+            <a href="/tags/PhP/" class="chip pink lighten-1">PhP</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>添加用户方法 grant</p>
+<pre><code>&gt;grant select,insert,update,delete,create,drop
+&gt;on tutorials.*
+&gt;to &apos;zara&apos;@&apos;localhost&apos;
+&gt;identified by &apos;zara123&apos;;
+以上为为指定数据库tutorials添加用户zara 密码为zara123
+
+&gt;use数据库名；--选择操作的数据库
+&gt;show databases;   ---列出所有数据库
+&gt;show tables;      ---列出数据库所有表
+&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
+&gt;show index from 数据表； ---显示数据表索引信息
+&gt;show table status like 数据表\G; ---输出统计信息
+&gt;create database库名； ----创建库名
+&gt;drop database库名；   ----弹出框显示是否删除库名
+&gt;int bigint double varchar datetime now()  四大数据类型
+&gt;create table 表名；  ---创建数据表
+&gt;drop table 表名；    ---删除表
+&gt;insert into 表名（列，列）values(值，值)；---添加数据
+&gt;select 列名 from 表名 where 条件；  ----查询
+&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
+&gt;delete from 表名 where 条件； ---直接删除表内记录列
+&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
+&gt;create database 库名 charset=utf8；  ---指定库名编码
+&gt;set names utf8  -----设置语句编码
+&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
+&gt;$_request[&apos;title&apos;];--获取表单中的参数
+&gt;desc 表名；----将查看该表里面的所有类型
+&gt;require();  ---引用初始化PHP文件
+多表查询方法（
+    SELECT n.title,n.ctime,u.uname    多表联系
+    FROM t_user u,t_news n;           创建别名
+    WHERE u.id==n.uid          条件关系
+）
+
+{命令窗口使用SQL文件加载数据库，中文显示
+    &gt;set names utf8        --文件转换编码格式
+    &gt;source 文件位置    --加载文件位置
+    &gt;set names gbk        --临时使用gbk格式显示中文
+}
+</code></pre><p>php学习基本函数</p>
+<pre><code>phpinfo();显示软件版本信息
+var_dump();输出数组元素
+count();输出数组里面元素的个数
+foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
+</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
+<pre><code>1创建到MySQL服务器的连接
+  $conn=mysqli_connect(...);
+    服务器地址IP    本机127.0.0.1：8081
+    用户名      root
+    密码          p
+    选择库      库名
+2向MySQL服务器发送sql指令，等待服务器执行
+  $sql=&quot;...&quot;;//insert/delete/update
+3读取MySQL服务器返回结果
+  $result=mysqli_query($conn,$sql);
+4判断返回结果是否成功
+  if($result===false);
+5断开与MySQL服务器连接
+  mysqli_close($conn);
+</code></pre><p>php mysql查询操作</p>
+<pre><code>1:连接数据库
+  $conn=mysqli_connect(...);
+  服务器地址IP    本机127.0.0.1：8081
+  用户名            root
+  密码          p
+  选择库      库名
+2:发送查询sql   SELECT
+   $sql=&quot;...&quot;;    SELECT * FROM t_user;
+3:读取MySQL服务器返回结果 是不是true/false
+   $result=mysqli_query($conn,$sql);
+4:抓取结果中数据并且转换数组
+   a:抓取一行数据{关联数组}
+    mysqli_fetch_assoc(结果集对象);
+   b:抓取一行数据{索引数组
+    mysqli_fetch_row(结果集对象);
+5:断开与MySQL服务器连接
+   mysqli_close($conn);
+</code></pre><p>php常用函数说明</p>
+<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
+@    压制住当前行代码警告消息，在行首位置添加！
+#time() 返回当前系统时间，以毫秒为单位整数
+#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
+#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
+location.href   为跳转方式
+</code></pre><p>ajax  GET的使用方法</p>
+<pre><code>1.创建Ajax对象
+    var xhr= new XMLHttpRequest();
+2.绑定事件
+    xhr.onreadystatechange=function(){
+        alert(xhr.responseText);--输出事件运行文本状态
+    }
+3.打开连接
+    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
+4.发送请求
+    xhr.send(null)
+</code></pre><p>Ajax 常用对象和属性事件方法</p>
+<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
+    var xhr =new XMLHttpRequest();
+    兼容性问题，老IE8以下不支持
+    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
+    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
+
+readyState ;xhr对象当前状态，会自动改变
+    对应值：0 UNSENT 请求消息未发送
+        1 OPENED XHR已经找开连接
+        2 HEADERS_RECEVIED xhr已经接收信息
+        3 LOADING  XHR正在加载消息
+        4 DONE XHR接收完成消息
+
+status  表示服务器返回的状态码
+responseText  表示服务器响应文本
+responseXML   表示服务器响应XML文本
+
+属性使用方法
+    open(method,url.isAsyn)  表示打开服务器连接
+        method：请求方式，GET POST
+        Ulr  请求地址
+        isasyn：请求方式是异步TRUE还是同步FALSE
+
+    send（data）请求消息发送web服务器
+        data：请示消息主体内容:
+           GET为send(null)
+           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
+</code></pre><p>#AJAX POST  标准语法和用法</p>
+<pre><code>1.创建AJAX对象
+ xhr=new XMLHttpRequest()
+2.绑定事件
+    xhr.onreadystatechange=function(){
+    判断事件输出信息，返回数据
+    if(xhr.readyState===4&amp;&amp;xhr.status===200){
+        if(parseInt(xhr.responseText)&gt;0){
+            作输出 ，返回成功结果
+        }else{
+            输出 失败结果
+        }
+    }
+  }
+3.打开连接
+  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
+  修改头部信息
+   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4.发送请求
+  xhr.send(发送参数);
+</code></pre><p>修改头部信息–php首行加头部信息</p>
+<pre><code>纯文本text
+    header(&quot;Content-Type:text/plain&quot;);
+        html-&gt;ajax
+        xhr.responseText
+网页页面HTML
+    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+javascript
+    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+                html-&gt;ajax
+      eval(xhr.responseText);
+      示例:国际化
+       当前浏览器 zh-CN  你好
+                 en-US   hello
+</code></pre><p>json语法和要求</p>
+<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
+JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
+数组中可以包含多值 ，用， 分开
+对象中可以包含多个键值，使用逗号分开，
+
+怎么处理JSON数据
+服务器端PHP
+    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+    $str=json_encode($arr)
+    echo $str;
+
+javascript 接收
+    var obj=JSON.parse(xhr.responstText);
+</code></pre><p>XML语法要求</p>
+<pre><code>XML 文档声明
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
+所有属性必须用双引号
+
+XML方法
+    服务器PHP
+    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
+    echo &quot; xml....&quot;;
+    客户端JS
+    AJXX请求接收数据
+    var xmlDoc=xhr.responseXML;---
+    获取所有标签
+    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
+    获取其中属性
+    var name=xmldDoc.querySelector(&quot;name&quot;)
+</code></pre><p>jquery 常用AJAX函数</p>
+<pre><code>$.get(url,callback);    发送get请求
+$.post(url,data,callback);   发送post请求
+$.getJSON(url,callback);    发送JSON请求‘
+$.load(url);       加载
+$.getScript(url.callback);
+$.ajax({})   全能
+    全能使用方法
+    ajax({
+        type:&quot;GET&quot;        请求方式post,pub,delete
+        url:&quot;  url&quot;        请求地址
+        data:&quot;{---:--,--:--}&quot;
+            请求服务器数据
+        beforeSend:fn
+            请求消息发送前调用函数
+        success:fn
+            响应完成并且成功调用函数
+        error:fn
+            响应完成但是有问题的调用函数
+        complete:fn
+            响应完成但是无论成功与否都调用函数
+    })
+</code></pre><p>开发项目</p>
+<pre><code>开发流程
+    需求说明书---技术经理，美工
+    剪切图片集---UI
+    静态网页----前端
+    动态网页---后端
+    部署服务器----运维
+    测试---------功能
+    上线-----
+    调试---加新功能--升级
+</code></pre><p>针对cookie作了解</p>
+<pre><code>添加
+    document.cookie = &apos;uid=10&apos;;
+    document.cookie = &apos;uname=qiangdong&apos;;
+
+读取
+    function getCookieVal(key){
+            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
+        var rs = null;
+            //1:创建变量保存最终返回结果值
+        var line = document.cookie;
+        var arr = line.split(&quot;;&quot;);
+            //2:按照;拆分cookie中字符串
+        for(var i=0;i&lt;arr.length;i++){
+            //3:循环数组中每一个键值
+            var kv = arr[i];
+            var option = kv.split(&quot;=&quot;);
+            //4:按照=拆分
+            var k = option[0].trim();
+            //5:下标0 k  ---  trim()去除字符串前后空格
+            var v = option[1];
+            //6:下标0 v
+            if(key===k){
+                //7:判断如果参数中指定
+                key == k
+                return v;
+                //8:返回v
+            }
+        }
+        return rs;
+        //9:否则返回 null
+    }
+     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
+         console.log(rs);
+     var rs = getCookieVal(&quot;uname&quot;);
+         console.log(rs);
+     var age = getCookieVal(&quot;age&quot;);
+         console.log(age);
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/Javascript如何实现继承/" rel="next" title="Javascript如何实现继承">
+    上一篇：Javascript如何实现继承
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/This对象的理解/" rel="next" title="谈谈This对象的理解">
+    下一篇：谈谈This对象的理解
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
