@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>~~博客园~~</title>
+  <subtitle>千帆渡</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="www.wangchengzou.cn/"/>
+  <updated>2017-07-23T02:50:10.753Z</updated>
+  <id>www.wangchengzou.cn/</id>
+  
+  <author>
+    <name>汪成邹</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？</title>
+    <link href="www.wangchengzou.cn/2017/07/23/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E7%A9%BA-void-%E5%85%83%E7%B4%A0%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F/"/>
+    <id>www.wangchengzou.cn/2017/07/23/行内元素有哪些？块级元素有哪些？-空-void-元素有那些？/</id>
+    <published>2017-07-23T02:47:53.000Z</published>
+    <updated>2017-07-23T02:50:10.753Z</updated>
+    
+    <content type="html"><![CDATA[<p>行内元素有：a b span img input select strong（强调的语气）<br>块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p<br>常见的空元素：<br> <hr> <img> <input> <link> <meta></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;行内元素有：a b span img input select strong（强调的语气）&lt;br&gt;块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p&lt;br&gt;常见的空元素：&lt;br&gt; &lt;hr&gt; &lt;img&gt; &lt;input&gt; &lt;link&gt; &lt;meta
+    
+    </summary>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Doctype作用？标准模式与兼容模式各有什么区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/20170723/"/>
+    <id>www.wangchengzou.cn/2017/07/22/20170723/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T02:34:26.037Z</updated>
+    
+    <content type="html"><![CDATA[<p>（1）、&lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。<br>（2）、标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。</html></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;（1）、&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &lt;html&gt; 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。&lt;br&gt;（2）、标准模式的排版 和JS运作模式都是以该浏览器支持
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+</feed>
