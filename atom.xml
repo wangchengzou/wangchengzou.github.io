@@ -64,18 +64,19 @@
   </entry>
   
   <entry>
-    <title>title与h1的区别、b与strong的区别、i与em的区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/title%E4%B8%8Eh1%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81b%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81i%E4%B8%8Eem%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>www.wangchengzou.cn/2017/07/22/title与h1的区别、b与strong的区别、i与em的区别/</id>
+    <title>CSS3新增伪类有那些</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:49:57.033Z</updated>
+    <updated>2017-07-23T07:55:42.524Z</updated>
     
-    <content type="html"><![CDATA[<p>title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；<br>strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<b>是展示强调内容。<br>i内容展示为斜体，em表示强调的文本；<br>Physical Style Elements – 自然样式标签 b, i, u, s, preSemantic Style Elements – 语义样式标签<br>strong, em, ins, del, code应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。</b></strong></p>
+    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
+<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；&lt;br&gt;strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：&lt;strong&gt;会重读，而&lt;b&gt;是展示强调内容。&lt;br&gt;i内容展示为斜体，em表示强调的文本；&lt;
+      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
     
     </summary>
     
@@ -84,7 +85,32 @@
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3有哪些新特性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:01:09.332Z</updated>
+    
+    <content type="html"><![CDATA[<p>举例：<br>  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>  圆角           （border-radius:8px）<br>  多列布局        （multi-column layout）<br>  阴影和反射        （Shadow\Reflect）<br>  文字特效      （text-shadow、）<br>  文字渲染      （Text-decoration）<br>  线性渐变      （gradient）<br>  旋转          （transform）<br>  增加了旋转,缩放,定位,倾斜,动画，多背景<br>  transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;举例：&lt;br&gt;  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;  圆角           （border-radius:8px）&lt;br&gt;  多列布局        （multi-column layout）&lt;b
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
     
   </entry>
   
@@ -107,32 +133,6 @@
 &lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
 &lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
 &lt;/
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS3新增伪类有那些</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:55:42.524Z</updated>
-    
-    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
-<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
     
     </summary>
     
@@ -175,32 +175,40 @@
   </entry>
   
   <entry>
+    <title>HTML5的form如何关闭自动完成功能</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:45:05.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>html知识点</title>
     <link href="www.wangchengzou.cn/2017/07/22/HTML%E7%AC%94%E8%AE%B0/"/>
     <id>www.wangchengzou.cn/2017/07/22/HTML笔记/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T09:45:30.273Z</updated>
+    <updated>2017-07-23T10:01:36.497Z</updated>
     
-    <content type="html"><![CDATA[<p>DAY01<br>    赵旭  zhaoxu@tedu.cn</p>
-<p>1、WEB前端<br>    WEB前端 : Web Front-End<br>    WEB : 网页<br>    需求：<br>        1、HTML/CSS/Javascript<br>        2、各种框架<br>            jQuery<br>            AngularJS<br>            Bootstrap<br>            zepto<br>            Vue<br>            React<br>            … …<br>2、学习方法<br>    1、英文<br>        背<br>    2、练<br>        敲代码<br>    3、打字<br>3、课程体系<br>    1、阶段一 ：基础<br>        1、HTML5Basic<br>        2、CSS3Basic<br>        3、PROJECT1 - JD Index<br>        4、CSS3Core<br>        5、PROJECT2 - JD Details<br>        6、Bootstrap 框架<br>    2、阶段二 ：Javascript(JS)<br>    3、阶段三 ：高级<br>    4、阶段四 ：框架</p>
-<p>1、HTML5Basic (3天)</p>
-<hr>
-<p>1、Web基础知识<br>    1、Internet<br>        1、简介<br>            Internet 实际上就是由计算机所组成的网络结构</p>
-<pre><code>        服务：
-            1、Telnet
-                远程登录
-            2、Email
-                电子邮件
-            3、WWW
-                万维网服务，World Wide Web
-            4、BBS
-                电子公告板 (论坛)
-                百度贴吧，天涯论坛，... ...
-                CSDN ... ...
-            5、FTP
-                文件传输协议
-
-        基本实现技术：
+    <content type="html"><![CDATA[<p>1、Web基础知识<br>    1、Internet<br>        1、简介<br>            Internet 实际上就是由计算机所组成的网络结构<br>            服务：<br>                1、Telnet<br>                    远程登录<br>                2、Email<br>                    电子邮件<br>                3、WWW<br>                    万维网服务，World Wide Web<br>                4、BBS<br>                    电子公告板 (论坛)<br>                    百度贴吧，天涯论坛，… …<br>                    CSDN … …<br>                5、FTP<br>                    文件传输协议</p>
+<pre><code>        基本实现技术：
             1、分组交换原理
                 将传递的数据 拆分成若干数据包
             2、TCP/IP协议
@@ -613,13 +621,12 @@
                                  width
                                  height
                                  frameborder 浮动框架边框 默认有边框，无需边框设置为0
-</code></pre><p>新表单元素（HTML5新标记）<br>    统一属性：name缩写txt<br>        required  非空限制，必须填入内容<br>    电子邮件类型：<input type="email"> 缩写txt<br>    搜索类型：<input type="search"><br>    URL类型：<input type="url">  数据必须符合URL规范<br>    电话号码类型：<input type="tel">    移动终端：弹出数字键盘<br>    数字类型：<input type="number"><br>        属性：min 控件接受的最小值<br>            max 控件接受的最大值<br>            step 控件递增的步长，默认为1<br>    范围类型：允许选择指定范围内的一个值（左右滑块类型）<br>        <input type="range"><br>        属性：min 指定范围最小值<br>            max 指定范围最大值<br>            step 指定值变化步长<br>            value 设置初始值<br>    颜色类型：颜色拾取控件<br>            <input type="color"><br>    日期类型：允许用户选择日期<br>            <input type="date"><br>    周类型：与date类似，但只能选择周<br>            <input type="week"><br>    月类型：与date类似，但只能选择月份<br>            <input type="month"></p>
+</code></pre><p>新表单元素（HTML5新标记）<br>        统一属性：name缩写txt<br>            required  非空限制，必须填入内容<br>        电子邮件类型：<input type="email"> 缩写txt<br>        搜索类型：<input type="search"><br>        URL类型：<input type="url">  数据必须符合URL规范<br>        电话号码类型：<input type="tel">    移动终端：弹出数字键盘<br>        数字类型：<input type="number"><br>            属性：min 控件接受的最小值<br>                max 控件接受的最大值<br>                step 控件递增的步长，默认为1<br>        范围类型：允许选择指定范围内的一个值（左右滑块类型）<br>            <input type="range"><br>            属性：min 指定范围最小值<br>                max 指定范围最大值<br>                step 指定值变化步长<br>                value 设置初始值<br>        颜色类型：颜色拾取控件<br>                <input type="color"><br>        日期类型：允许用户选择日期<br>                <input type="date"><br>        周类型：与date类似，但只能选择周<br>                <input type="week"><br>        月类型：与date类似，但只能选择月份<br>                <input type="month"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;DAY01&lt;br&gt;    赵旭  zhaoxu@tedu.cn&lt;/p&gt;
-&lt;p&gt;1、WEB前端&lt;br&gt;    WEB前端 : Web Front-End&lt;br&gt;    WEB : 网页&lt;br&gt;    需求：&lt;br&gt;        1、HTML/CSS/Javascript&lt;b
+      &lt;p&gt;1、Web基础知识&lt;br&gt;    1、Internet&lt;br&gt;        1、简介&lt;br&gt;            Internet 实际上就是由计算机所组成的网络结构&lt;br&gt;            服务：&lt;br&gt;                1、Telnet&lt;br&gt; 
     
     </summary>
     
@@ -631,28 +638,25 @@
   </entry>
   
   <entry>
-    <title>HTML5的form如何关闭自动完成功能</title>
-    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
-    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <title>JavaScript原型，原型链，有什么特点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:45:05.164Z</updated>
+    <updated>2017-07-23T08:22:28.232Z</updated>
     
-    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
-
+      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
     
     </summary>
     
       <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   
@@ -670,29 +674,6 @@
     <summary type="html">
     
       &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript原型，原型链，有什么特点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:22:28.232Z</updated>
-    
-    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
     
     </summary>
     
@@ -801,6 +782,29 @@
   </entry>
   
   <entry>
+    <title>call()和.apply() 的区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/call()%20%E5%92%8C%20.apply()%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>www.wangchengzou.cn/2017/07/22/call() 和 .apply() 的区别/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:48:35.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);<br>注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。<br>function add(a,b)     {         alert(a+b);     }<br>function sub(a,b)     {         alert(a-b);     }<br>add.call(sub,3,1);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);&lt;br&gt;注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。&lt;br&gt;function add(a,b)     {    
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CSS3有哪些新特性</title>
     <link href="www.wangchengzou.cn/2017/07/22/css%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9D%83%E9%87%8D/"/>
     <id>www.wangchengzou.cn/2017/07/22/css定义的权重/</id>
@@ -822,29 +826,6 @@
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>call()和.apply() 的区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/call()%20%E5%92%8C%20.apply()%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>www.wangchengzou.cn/2017/07/22/call() 和 .apply() 的区别/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:48:35.899Z</updated>
-    
-    <content type="html"><![CDATA[<p>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);<br>注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。<br>function add(a,b)     {         alert(a+b);     }<br>function sub(a,b)     {         alert(a-b);     }<br>add.call(sub,3,1);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);&lt;br&gt;注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。&lt;br&gt;function add(a,b)     {    
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   
@@ -898,6 +879,30 @@
   </entry>
   
   <entry>
+    <title>eval是做什么的</title>
+    <link href="www.wangchengzou.cn/2017/07/22/eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/"/>
+    <id>www.wangchengzou.cn/2017/07/22/eval是做什么的/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:30:14.993Z</updated>
+    
+    <content type="html"><![CDATA[<p>它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。<br>由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。&lt;br&gt;由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>html5有哪些新特性、移除了那些元素</title>
     <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
     <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
@@ -932,30 +937,6 @@
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>eval是做什么的</title>
-    <link href="www.wangchengzou.cn/2017/07/22/eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/"/>
-    <id>www.wangchengzou.cn/2017/07/22/eval是做什么的/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:30:14.993Z</updated>
-    
-    <content type="html"><![CDATA[<p>它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。<br>由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。&lt;br&gt;由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   
