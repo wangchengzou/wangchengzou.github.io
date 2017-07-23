@@ -64,18 +64,136 @@
   </entry>
   
   <entry>
-    <title>Doctype作用？标准模式与兼容模式各有什么区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/20170723/"/>
-    <id>www.wangchengzou.cn/2017/07/22/20170723/</id>
+    <title>为什么要初始化CSS样式</title>
+    <link href="www.wangchengzou.cn/2017/07/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%9D%E5%A7%8B%E5%8C%96CSS%E6%A0%B7%E5%BC%8F/"/>
+    <id>www.wangchengzou.cn/2017/07/22/为什么要初始化CSS样式/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T02:34:26.037Z</updated>
+    <updated>2017-07-23T08:08:39.604Z</updated>
     
-    <content type="html"><![CDATA[<p>（1）、&lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。<br>（2）、标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。</html></p>
+    <content type="html"><![CDATA[<p>举例：</p>
+<ul>
+<li>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。</li>
+<li>当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化<br>最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）<br>淘宝的样式初始化代码：<br>body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }<br>body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }<br>h1, h2, h3, h4, h5, h6{ font-size:100%; }<br>address, cite, dfn, em, var { font-style:normal; }<br>code, kbd, pre, samp { font-family:couriernew, courier, monospace; } small{ font-size:12px; }<br>ul, ol { list-style:none; }<br>a { text-decoration:none; }<br>a:hover { text-decoration:underline; }<br>sup { vertical-align:text-top; }<br>sub{ vertical-align:text-bottom; }<br>legend { color:#000; }<br>fieldset, img { border:0; }<br>button, input, select, textarea { font-size:100%; }<br>table { border-collapse:collapse; border-spacing:0; }</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;（1）、&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &lt;html&gt; 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。&lt;br&gt;（2）、标准模式的排版 和JS运作模式都是以该浏览器支持
+      &lt;p&gt;举例：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。&lt;/li&gt;
+&lt;li&gt;当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化&lt;br&gt;最简单的
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3有哪些新特性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:01:09.332Z</updated>
+    
+    <content type="html"><![CDATA[<p>举例：<br>  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>  圆角           （border-radius:8px）<br>  多列布局        （multi-column layout）<br>  阴影和反射        （Shadow\Reflect）<br>  文字特效      （text-shadow、）<br>  文字渲染      （Text-decoration）<br>  线性渐变      （gradient）<br>  旋转          （transform）<br>  增加了旋转,缩放,定位,倾斜,动画，多背景<br>  transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;举例：&lt;br&gt;  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;  圆角           （border-radius:8px）&lt;br&gt;  多列布局        （multi-column layout）&lt;b
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS优先级算法如何计算</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS优先级算法如何计算/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:53:48.776Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>优先级就近原则，同权重情况下样式定义最近者为准;</li>
+<li>载入样式以最后载入的定位为准;<br>优先级为:    !important &gt;  id &gt; class &gt; tag<br>important 比 内联优先级高</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
+&lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
+&lt;/
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS选择符有哪些？哪些属性可以继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:53:18.490Z</updated>
+    
+    <content type="html"><![CDATA[<p> 1.id选择器（ # myid）<br> 2.类选择器（.myclassname）<br> 3.标签选择器（div, h1, p）<br> 4.相邻选择器（h1 + p）<br> 5.子选择器（ul &gt; li）<br> 6.后代选择器（li a）<br> 7.通配符选择器（ * ）<br> 8.属性选择器（a[rel = “external”]）<br> 9.伪类选择器（a:hover, li:nth-child）</p>
+<ul>
+<li>可继承的样式： font-size font-family color, UL LI DL DD DT;</li>
+<li>不可继承的样式：border padding margin width height ;</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 1.id选择器（ # myid）&lt;br&gt; 2.类选择器（.myclassname）&lt;br&gt; 3.标签选择器（div, h1, p）&lt;br&gt; 4.相邻选择器（h1 + p）&lt;br&gt; 5.子选择器（ul &amp;gt; li）&lt;br&gt; 6.后代选择器（li a）&lt;br&gt; 7.通配符
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5的form如何关闭自动完成功能</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:45:05.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
+
     
     </summary>
     
@@ -85,6 +203,247 @@
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JSON 的了解</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JSON%20%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JSON 的了解/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:39:00.433Z</updated>
+    
+    <content type="html"><![CDATA[<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}<br>JSON字符串转换为JSON对象:<br>var obj =eval(‘(‘+ str +’)’);<br>var obj = str.parseJSON();<br>var obj = JSON.parse(str);</p>
+<p>JSON对象转换为JSON字符串：<br>var last=obj.toJSONString();<br>var last=JSON.stringify(obj);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript原型，原型链，有什么特点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:22:28.232Z</updated>
+    
+    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript作用链域?</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E4%BD%9C%E7%94%A8%E9%93%BE%E5%9F%9F/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript作用链域/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:27:58.046Z</updated>
+    
+    <content type="html"><![CDATA[<p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript如何实现继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript如何实现继承/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:23:34.884Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、构造继承<br>2、原型继承<br>3、实例继承<br>4、拷贝继承<br>原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。<br>function Parent(){  this.name = ‘wang’;   }<br>function Child(){   this.age = 28;    }<br>Child.prototype = new Parent();//继承了Parent，通过原型<br>var demo = new Child();<br>alert(demo.age);<br>alert(demo.name);//得到被继承的属性   }</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、构造继承&lt;br&gt;2、原型继承&lt;br&gt;3、实例继承&lt;br&gt;4、拷贝继承&lt;br&gt;原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。&lt;br&gt;function Parent(){  this.name = ‘wang’;   }&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Label的作用是什么？是怎么用的</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:44:14.531Z</updated>
+    
+    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
+<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"><br><br><br><label>Date:<input type="text" name="B"></label>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
+&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt;&lt;br&gt;&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>call()和.apply() 的区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/call()%20%E5%92%8C%20.apply()%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>www.wangchengzou.cn/2017/07/22/call() 和 .apply() 的区别/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:48:35.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);<br>注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。<br>function add(a,b)     {         alert(a+b);     }<br>function sub(a,b)     {         alert(a-b);     }<br>add.call(sub,3,1);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);&lt;br&gt;注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。&lt;br&gt;function add(a,b)     {    
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈谈This对象的理解</title>
+    <link href="www.wangchengzou.cn/2017/07/22/This%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>www.wangchengzou.cn/2017/07/22/This对象的理解/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:29:44.417Z</updated>
+    
+    <content type="html"><![CDATA[<p>this总是指向函数的直接调用者（而非间接调用者）；<br>如果有new关键字，this指向new出来的那个对象；<br>在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;this总是指向函数的直接调用者（而非间接调用者）；&lt;br&gt;如果有new关键字，this指向new出来的那个对象；&lt;br&gt;在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3新增伪类有那些</title>
+    <link href="www.wangchengzou.cn/2017/07/22/display%E6%9C%89%E5%93%AA%E4%BA%9B%E5%80%BC%EF%BC%9F%E8%AF%B4%E6%98%8E%E4%BB%96%E4%BB%AC%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>www.wangchengzou.cn/2017/07/22/display有哪些值？说明他们的作用/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:58:36.808Z</updated>
+    
+    <content type="html"><![CDATA[<p>举例：<br>  block         象块类型元素一样显示。<br>  none          缺省值。象行内元素类型一样显示。<br>  inline-block  象行内元素一样显示，但其内容象块类型元素一样显示。<br>  list-item     象块类型元素一样显示，并添加样式列表标记。<br>  table         此元素会作为块级表格来显示<br>  inherit       规定应该从父元素继承 display 属性的值</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;举例：&lt;br&gt;  block         象块类型元素一样显示。&lt;br&gt;  none          缺省值。象行内元素类型一样显示。&lt;br&gt;  inline-block  象行内元素一样显示，但其内容象块类型元素一样显示。&lt;br&gt;  list-item     象块
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3有哪些新特性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9D%83%E9%87%8D/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css定义的权重/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:11:23.533Z</updated>
+    
+    <content type="html"><![CDATA[<p>以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，<br>以下例子是演示各种定义的权重值：<br>/<em>权重为1</em>/ div{}<br>/<em>权重为10</em>/.class1{}<br>/<em>权重为100</em>/#id1{}<br>/<em>权重为100+1=101</em>/#id1div{}<br>/<em>权重为10+1=11</em>/.class1 div{}<br>/<em>权重为10+10+1=21</em>/.class1 .class2 div{}<br>如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，&lt;br&gt;以下例子是演示各种定义的权重值：&lt;br&gt;/&lt;em&gt;权重为1&lt;/em&gt;/ div{}&lt;br&gt;/&lt;em&gt;权重为10&lt;/em&gt;/.class1{}&lt;br&gt;/&lt;em&gt;权重为100&lt;/em&gt;/#id
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>eval是做什么的</title>
+    <link href="www.wangchengzou.cn/2017/07/22/eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/"/>
+    <id>www.wangchengzou.cn/2017/07/22/eval是做什么的/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:30:14.993Z</updated>
+    
+    <content type="html"><![CDATA[<p>它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。<br>由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。&lt;br&gt;由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(‘(‘+ str +’)’);&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   
@@ -127,94 +486,45 @@
   </entry>
   
   <entry>
-    <title>常见的浏览器内核有哪些</title>
-    <link href="www.wangchengzou.cn/2017/07/22/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E6%9C%89%E5%93%AA%E4%BA%9B/"/>
-    <id>www.wangchengzou.cn/2017/07/22/常见的浏览器内核有哪些/</id>
+    <title>http状态码有那些？分别代表是什么意思</title>
+    <link href="www.wangchengzou.cn/2017/07/22/http%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+    <id>www.wangchengzou.cn/2017/07/22/http状态码有那些？分别代表是什么意思/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:54:34.968Z</updated>
+    <updated>2017-07-23T08:58:59.526Z</updated>
     
-    <content type="html"><![CDATA[<p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。<br>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等<br>Presto内核：Opera7及以上。<br>Webkit内核：Safari,Chrome等。</p>
+    <content type="html"><![CDATA[<p> 简单版<br> [<br> 100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息<br> 200  OK         正常返回信息<br> 201  Created    请求成功并且服务器创建了新的资源<br> 202  Accepted   服务器已接受请求，但尚未处理<br> 301  Moved Permanently  请求的网页已永久移动到新位置。<br> 302 Found       临时性重定向。<br> 303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。<br> 304  Not Modified 自从上次请求后，请求的网页未修改过。<br> 400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。<br> 401 Unauthorized 请求未授权。<br> 403 Forbidden   禁止访问。<br> 404 Not Found   找不到如何与 URI 相匹配的资源。<br> 500 Internal Server Error  最常见的服务器端错误。<br> 503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。<br> ]<br> 完整版<br> 1**(信息类)：表示接收到请求并且继续处理<br> 100——客户必须继续发出请求<br> 101——客户要求服务器根据请求转换HTTP协议版本</p>
+<p> 2**(响应成功)：表示动作被成功接收、理解和接受<br> 200——表明该请求被成功地完成，所请求的资源发送回客户端<br> 201——提示知道新文件的URL<br> 202——接受和处理、但处理未完成<br> 203——返回信息不确定或不完整<br> 204——请求收到，但返回信息为空<br> 205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件<br> 206——服务器已经完成了部分用户的GET请求</p>
+<p> 3**(重定向类)：为了完成指定的动作，必须接受进一步处理<br> 300——请求的资源可在多处得到<br> 301——本网页被永久性转移到另一个URL<br> 302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。<br> 303——建议客户访问其他URL或访问方式<br> 304——自从上次请求后，请求的网页未修改过，服务器返回此响应时，不会返回网页内容，代表上次的文档已经被缓存了，还可以继续使用<br> 305——请求的资源必须从服务器指定的地址得到<br> 306——前一版本HTTP中使用的代码，现行版本中不再使用<br> 307——申明请求的资源临时性删除</p>
+<p> 4**(客户端错误类)：请求包含错误语法或不能正确执行<br> 400——客户端请求有语法错误，不能被服务器所理解<br> 401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用<br> HTTP 401.1 - 未授权：登录失败     　　<br> HTTP 401.2 - 未授权：服务器配置问题导致登录失败     　　<br> HTTP 401.3 - ACL 禁止访问资源     　　<br> HTTP 401.4 - 未授权：授权被筛选器拒绝<br> HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败<br> 402——保留有效ChargeTo头响应<br> 403——禁止访问，服务器收到请求，但是拒绝提供服务<br> HTTP 403.1 禁止访问：禁止可执行访问     　　<br> HTTP 403.2 - 禁止访问：禁止读访问     　　<br> HTTP 403.3 - 禁止访问：禁止写访问     　　<br> HTTP 403.4 - 禁止访问：要求 SSL     　　<br> HTTP 403.5 - 禁止访问：要求 SSL 128     　　<br> HTTP 403.6 - 禁止访问：IP 地址被拒绝     　　<br> HTTP 403.7 - 禁止访问：要求客户证书     　　<br> HTTP 403.8 - 禁止访问：禁止站点访问     　　<br> HTTP 403.9 - 禁止访问：连接的用户过多     　　<br> HTTP 403.10 - 禁止访问：配置无效     　　<br> HTTP 403.11 - 禁止访问：密码更改     　　<br> HTTP 403.12 - 禁止访问：映射器拒绝访问     　　<br> HTTP 403.13 - 禁止访问：客户证书已被吊销     　　<br> HTTP 403.15 - 禁止访问：客户访问许可过多     　　<br> HTTP 403.16 - 禁止访问：客户证书不可信或者无效<br> HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效<br> 404——一个404错误表明可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。eg：输入了错误的URL<br> 405——用户在Request-Line字段定义的方法不允许<br> 406——根据用户发送的Accept拖，请求资源不可访问<br> 407——类似401，用户必须首先在代理服务器上得到授权<br> 408——客户端没有在用户指定的饿时间内完成请求<br> 409——对当前资源状态，请求不能完成<br> 410——服务器上不再有此资源且无进一步的参考地址     411——服务器拒绝用户定义的Content-Length属性请求<br> 412——一个或多个请求头字段在当前请求中错误<br> 413——请求的资源大于服务器允许的大小<br> 414——请求的资源URL长于服务器允许的长度<br> 415——请求资源不支持请求项目格式<br> 416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段<br> 417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。</p>
+<p> 5**(服务端错误类)：服务器不能正确执行一个正确的请求<br> HTTP 500 - 服务器遇到错误，无法完成请求     　　<br> HTTP 500.100 - 内部服务器错误 - ASP 错误     　　<br> HTTP 500-11 服务器关闭     　　<br> HTTP 500-12 应用程序重新启动     　　<br> HTTP 500-13 - 服务器太忙     　　<br> HTTP 500-14 - 应用程序无效     　　<br> HTTP 500-15 - 不允许请求 global.asa     　　<br> Error 501 - 未实现<br> HTTP 502 - 网关错误<br> HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。&lt;br&gt;Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等&lt;br&gt;Presto内核：Opera7及以上。&lt;br&gt;Webkit内核：Saf
+      &lt;p&gt; 简单版&lt;br&gt; [&lt;br&gt; 100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息&lt;br&gt; 200  OK         正常返回信息&lt;br&gt; 201  Created    
     
     </summary>
     
       <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
     
   </entry>
   
   <entry>
-    <title>你对浏览器内核的理解</title>
-    <link href="www.wangchengzou.cn/2017/07/22/%E4%BD%A0%E5%AF%B9%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%E7%9A%84%E7%90%86%E8%A7%A3/"/>
-    <id>www.wangchengzou.cn/2017/07/22/你对浏览器内核的理解/</id>
+    <title>title与h1的区别、b与strong的区别、i与em的区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/title%E4%B8%8Eh1%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81b%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81i%E4%B8%8Eem%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>www.wangchengzou.cn/2017/07/22/title与h1的区别、b与strong的区别、i与em的区别/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:52:35.640Z</updated>
+    <updated>2017-07-23T07:49:57.033Z</updated>
     
-    <content type="html"><![CDATA[<p>主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。<br>JS引擎则：解析和执行javascript来实现网页的动态效果。 最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。</p>
+    <content type="html"><![CDATA[<p>title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；<br>strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<b>是展示强调内容。<br>i内容展示为斜体，em表示强调的文本；<br>Physical Style Elements – 自然样式标签 b, i, u, s, preSemantic Style Elements – 语义样式标签<br>strong, em, ins, del, code应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。</b></strong></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Label的作用是什么？是怎么用的</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T04:04:52.212Z</updated>
-    
-    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
-<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"> <label>Date:<input type="text" name="B"></label>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
-&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt; &lt;lab
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浏览器是怎么对HTML5的离线储存资源进行管理和加载</title>
-    <link href="www.wangchengzou.cn/2017/07/22/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AF%B9HTML5%E7%9A%84%E7%A6%BB%E7%BA%BF%E5%82%A8%E5%AD%98%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E7%AE%A1%E7%90%86%E5%92%8C%E5%8A%A0%E8%BD%BD/"/>
-    <id>www.wangchengzou.cn/2017/07/22/浏览器是怎么对HTML5的离线储存资源进行管理和加载/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:59:47.161Z</updated>
-    
-    <content type="html"><![CDATA[<p>在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。离线的情况下，浏览器就直接使用离线存储的资源</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然
+      &lt;p&gt;title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；&lt;br&gt;strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：&lt;strong&gt;会重读，而&lt;b&gt;是展示强调内容。&lt;br&gt;i内容展示为斜体，em表示强调的文本；&lt;
     
     </summary>
     
