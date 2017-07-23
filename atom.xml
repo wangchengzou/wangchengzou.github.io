@@ -64,31 +64,922 @@
   </entry>
   
   <entry>
-    <title>html5有哪些新特性、移除了那些元素</title>
-    <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
-    <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
+    <title>http状态码有那些？分别代表是什么意思</title>
+    <link href="www.wangchengzou.cn/2017/07/22/http%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/"/>
+    <id>www.wangchengzou.cn/2017/07/22/http状态码有那些？分别代表是什么意思/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:58:08.890Z</updated>
+    <updated>2017-07-23T08:58:59.526Z</updated>
     
-    <content type="html"><![CDATA[<ul>
-<li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;       sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websocket, Geolocation;</li>
-</ul>
-<p>移除的元素：纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</p>
-<ul>
-<li>支持HTML5新标签：<br>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式。<br>当然也可以直接使用成熟的框架、比如html5shim;<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-<ul>
-<li>如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素</li>
-</ul>
-</li>
-</ul>
+    <content type="html"><![CDATA[<p> 简单版<br> [<br> 100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息<br> 200  OK         正常返回信息<br> 201  Created    请求成功并且服务器创建了新的资源<br> 202  Accepted   服务器已接受请求，但尚未处理<br> 301  Moved Permanently  请求的网页已永久移动到新位置。<br> 302 Found       临时性重定向。<br> 303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。<br> 304  Not Modified 自从上次请求后，请求的网页未修改过。<br> 400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。<br> 401 Unauthorized 请求未授权。<br> 403 Forbidden   禁止访问。<br> 404 Not Found   找不到如何与 URI 相匹配的资源。<br> 500 Internal Server Error  最常见的服务器端错误。<br> 503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。<br> ]<br> 完整版<br> 1**(信息类)：表示接收到请求并且继续处理<br> 100——客户必须继续发出请求<br> 101——客户要求服务器根据请求转换HTTP协议版本</p>
+<p> 2**(响应成功)：表示动作被成功接收、理解和接受<br> 200——表明该请求被成功地完成，所请求的资源发送回客户端<br> 201——提示知道新文件的URL<br> 202——接受和处理、但处理未完成<br> 203——返回信息不确定或不完整<br> 204——请求收到，但返回信息为空<br> 205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件<br> 206——服务器已经完成了部分用户的GET请求</p>
+<p> 3**(重定向类)：为了完成指定的动作，必须接受进一步处理<br> 300——请求的资源可在多处得到<br> 301——本网页被永久性转移到另一个URL<br> 302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。<br> 303——建议客户访问其他URL或访问方式<br> 304——自从上次请求后，请求的网页未修改过，服务器返回此响应时，不会返回网页内容，代表上次的文档已经被缓存了，还可以继续使用<br> 305——请求的资源必须从服务器指定的地址得到<br> 306——前一版本HTTP中使用的代码，现行版本中不再使用<br> 307——申明请求的资源临时性删除</p>
+<p> 4**(客户端错误类)：请求包含错误语法或不能正确执行<br> 400——客户端请求有语法错误，不能被服务器所理解<br> 401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用<br> HTTP 401.1 - 未授权：登录失败     　　<br> HTTP 401.2 - 未授权：服务器配置问题导致登录失败     　　<br> HTTP 401.3 - ACL 禁止访问资源     　　<br> HTTP 401.4 - 未授权：授权被筛选器拒绝<br> HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败<br> 402——保留有效ChargeTo头响应<br> 403——禁止访问，服务器收到请求，但是拒绝提供服务<br> HTTP 403.1 禁止访问：禁止可执行访问     　　<br> HTTP 403.2 - 禁止访问：禁止读访问     　　<br> HTTP 403.3 - 禁止访问：禁止写访问     　　<br> HTTP 403.4 - 禁止访问：要求 SSL     　　<br> HTTP 403.5 - 禁止访问：要求 SSL 128     　　<br> HTTP 403.6 - 禁止访问：IP 地址被拒绝     　　<br> HTTP 403.7 - 禁止访问：要求客户证书     　　<br> HTTP 403.8 - 禁止访问：禁止站点访问     　　<br> HTTP 403.9 - 禁止访问：连接的用户过多     　　<br> HTTP 403.10 - 禁止访问：配置无效     　　<br> HTTP 403.11 - 禁止访问：密码更改     　　<br> HTTP 403.12 - 禁止访问：映射器拒绝访问     　　<br> HTTP 403.13 - 禁止访问：客户证书已被吊销     　　<br> HTTP 403.15 - 禁止访问：客户访问许可过多     　　<br> HTTP 403.16 - 禁止访问：客户证书不可信或者无效<br> HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效<br> 404——一个404错误表明可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。eg：输入了错误的URL<br> 405——用户在Request-Line字段定义的方法不允许<br> 406——根据用户发送的Accept拖，请求资源不可访问<br> 407——类似401，用户必须首先在代理服务器上得到授权<br> 408——客户端没有在用户指定的饿时间内完成请求<br> 409——对当前资源状态，请求不能完成<br> 410——服务器上不再有此资源且无进一步的参考地址     411——服务器拒绝用户定义的Content-Length属性请求<br> 412——一个或多个请求头字段在当前请求中错误<br> 413——请求的资源大于服务器允许的大小<br> 414——请求的资源URL长于服务器允许的长度<br> 415——请求资源不支持请求项目格式<br> 416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段<br> 417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。</p>
+<p> 5**(服务端错误类)：服务器不能正确执行一个正确的请求<br> HTTP 500 - 服务器遇到错误，无法完成请求     　　<br> HTTP 500.100 - 内部服务器错误 - ASP 错误     　　<br> HTTP 500-11 服务器关闭     　　<br> HTTP 500-12 应用程序重新启动     　　<br> HTTP 500-13 - 服务器太忙     　　<br> HTTP 500-14 - 应用程序无效     　　<br> HTTP 500-15 - 不允许请求 global.asa     　　<br> Error 501 - 未实现<br> HTTP 502 - 网关错误<br> HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;ul&gt;
-&lt;li&gt;HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。&lt;br&gt;绘画 canvas;&lt;br&gt;用于媒介回放的 video 和 audio 元素;&lt;br&gt;本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
+      &lt;p&gt; 简单版&lt;br&gt; [&lt;br&gt; 100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息&lt;br&gt; 200  OK         正常返回信息&lt;br&gt; 201  Created    
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ajax_php基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Ajax_php/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Ajax_php/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T13:10:35.427Z</updated>
+    
+    <content type="html"><![CDATA[<p> 1、如何从数据库中将数据表中数据抓取出来并且显示.</p>
+<pre><code>解决方法:语言php 负责从数据库中抓取数据并且显示给用户.
+  a:什么是服务器
+    能够在网站中提供各种(浏览网页,收发邮件
+    视频,语言)等服务器的软件与硬件集合。
+    硬件服务器:高可用,高性能计算机
+    软件服务器(通常):(WEB/FTP/EMAIL/DB/DNS..)
+    web:apache
+    db:mysql
+b:数据库服务器(软件)
+    数据库软件特点：所有其它软件所没有
+    1:永久海量存储数据
+    2:高速查询
+c:数据库服务器分类
+    网状数据库:
+    树型数据库:
+    关系型数据库:
+    MySQL***/Oracle/SQLServer/DB2
+    NOSQL数据库:Redis
+d:什么是关系型数据库
+    以横行竖列的方式保存数据,mysql
+e:关系型数据库层次
+    数据库软件(mysql)--&gt;库--&gt;表--&gt;行--&gt;列
+f:mysql之父:马丁
+    MYSQL AB(瑞典)-&gt;SUN-&gt;Oracle
+g:mysql版本:
+  主版本: 企业版(收费)社区版(免费)
+    小版本:5.0 5.1 5.2 5.4 5.5 5.6 5.7 ..
+    建议:下载哪个版本
+    ?如果开发全新网站项目:新版本 5.6
+    ?如果二次开发选旧版本.
+g:下载
+https://www.oracle.com 官网
+https://www.mysql.com/downloads/
+搜狐镜像
+http://mirrors.sohu.com/
+mysql windows(64/32)(zip/exe)
+linux  unix
+    mysql-5.6.34-win32.msi (32)
+i:使用软件包(XAMPP)
+    (包含:mysql/php/apache/..)
+</code></pre><p>   2、如何使用xampp</p>
+<pre><code>1:双击xampp图标
+2:点击 apache  [start]启动(饭店)
+     点击 mysql   [start]启动
+3:点击 右侧[shell]
+4:输入命令
+    mysql -uroot -p
+    #mysql 指令专门进入数据库系统
+    #-u    指定用户名
+    #root  root是mysql软件最高级别用户
+    #-p    root用户密码
+5:退出软件
+    #exit
+    #点击右上角[X]
+</code></pre><p>3、 sql(结构化查询语言)专用于(增删改查)数据库中数据语言.</p>
+<pre><code>使用sql两种方式:
+    a:交互模式(上课)
+      一行一行执行指令
+       用户输入一个sql指令,mysql执行一个指令.
+    b:脚本模式(做项目)
+    把所有sql指令保存在一个.sql文件中一次执行在mysql中执行
+
+  ￥sql语句的分类
+    1:DDL:数据定义指令
+         CREATE/DROP/ALTER/TUNCATE
+    2:DML:数据操作指令
+         INSERT/UPDATE/DELETE
+    3:DQL:数据查询指令
+         SELECT
+    4:DCL:权限指令
+        GRANT/REVOKE
+    熟练掌握:
+        [CREATE/INSERT/UPDATE/DELETE/SELECT]
+</code></pre><p>  4、 #CREATE 指令功能创建(库)创建表</p>
+<pre><code>指令格式:
+      CREATE DATABASE 库名;(库)
+建议:(库名/表名/列名)
+     :英文不要数字或特殊字符开头
+     :中文空格不要
+    test01    ok
+    2017test  error
+    test 02   error
+    大旭之家  error
+</code></pre><p> 5、 #CREATE 指令功能创建表</p>
+<pre><code>a:列数据类型(常用列类型)
+     int      整型(年龄) 范围-21亿~21亿
+      varchar(10)   字符串(10个字符[数字，字母，汉字])
+      double(10,2)  浮点(小数)总长10位其中2位小数
+      datetime      日期和时间
+ 分析表:商品表
+     1:商品编号     int   1 2 3 5
+     2:商品名称     varchar(20)
+     3:商品上架时间 datetime
+     4:商品价格     double(10,2)
+
+b:创建表语法
+ CREATE TABLE 表名(
+     列名1 列类型,
+     列名2 列类型,
+     列名3 列类型
+     );
+ c:指令 use 库名称;
+ d:查看表是否创建成功
+     SHOW TABLES;
+     use test001;
+     CREATE TABLE t_product(id INT,name VARCHAR(20),ctime DATETIME,price DOUBLE(10,2));
+     SHOW TABLES;
+</code></pre><p>6、小结上午重点</p>
+<pre><code>1:创建库
+  CREATE DATABASE 库名; 创建库
+  SHOW DATABASES;       查询库是否创建成功
+2:创建表
+  USE 库名;
+  CREATE TABLE 表名(
+     列名 列类型(int/varchar/double/datetime)
+    );
+  SHOW TABLES;
+</code></pre><p>7、向数据库中添加记录(行)</p>
+<pre><code>a:标准语法
+a.1:向所有列添加数据
+INSERT INTO 表名 VALUES(列值1,列值2,列值3,.);
+INSERT INTO t_stu VALUES(1,&apos;wsl001&apos;,&apos;xuxu&apos;,19);
+INSERT INTO t_class VALUES(1,&apos;WEB&apos;,100);
+验证:
+SELECT * FROM t_stu;
+ #字符串类型列加单引号
+ #小心中文/(英文)单引号
+ #小心日期写法
+ #SQL指令结束使用分号
+a.2:向部分列添加数据
+INSERT INTO 表名(列名1，列名2)VALUES(列值1,列值2,..);
+INSERT INTO t_stu(id,no)VALUES(4,&apos;tao&apos;);
+
+a.3:日期类型 &apos;2017-04-12&apos; 字符串
+  now()        函数(当前日期时间)
+INSERT INTO t_product VALUES(10,&apos;book&apos;,&apos;2010-10-10&apos;,100.99);
+INSERT INTO t_product VALUES(20,&apos;js&apos;,&apos;2017-04-12&apos;,99);
+INSERT INTO t_product VALUES(30,&apos;css&apos;,now(),98);
+</code></pre><p> 8、删除记录(行)</p>
+<pre><code>#标准语法:
+条件: = &lt; &gt; &lt;= != &lt;&gt;
+DELETE FROM 表名 WHERE 条件;
+  示例:
+  DELETE FROM t_product id = 10;   //ok
+  DELETE FROM t_product price = 100.99;
+  DELETE FROM t_product name = &apos;book&apos;;
+</code></pre><p> 9、 更新记录(行)</p>
+<pre><code>#标准语法
+UPDATE 表名 SET  列名1=新值1
+,列名2=新值2 ..
+WHERE 条件;
+UPDATE t_stu SET age = 16,name=&apos;daxu&apos;WHERE id = 1;
+</code></pre><p>10、 查询记录(行)</p>
+<pre><code>  语法:SELECT 列名1,列名2,...
+    FROM 表名
+    WHERE 条件
+    ORDER BY 列名1 #排序
+
+SELECT * FROM 表名;  # *所有列
+SELECT id,name FROM t_emp;
+SELECT sal FROM t_emp;
+SELECT * FROM t_emp;
+SELECT id,name,sal,sal*1.2 FROM t_emp;
+</code></pre><p>  11、 小结SQL:</p>
+<pre><code>a:分类
+  DDL:数据定义语句
+    CREATE/DROP
+    DML:数据操作语句
+    DELETE/UPDATE/INSERT
+    DQL:数据查询语句
+    SELECT
+    DCL:
+b:常用SQL
+  CREATE DATABASE 库名;    创建库
+SHOW DATABASES;          查询库名
+CREATE TABLE 表名(
+      列名1 列类型,
+        ....
+    );
+列类型(INT/VARCHAR(10)/DOUBLE(10,2)/DATETIME)
+
+USE 库名;    进入指定库中
+SHOW TABLES; 查询表名
+INSERT INTO 表名VALUES(值1,值2,,...);
+INSERT INTO 表名(列1,列2)VALUES(值1);
+字符串值:&apos;&apos;
+日期值  :&apos;&apos; now()
+DELETE FROM 表名 WHERE 条件;
+UPDATE 表名 SET 列名=新值1,列名=新值2
+WHERE 条件;
+SELECT * FROM 表名;#*所有列
+SELECT id,name FROM 表名;
+ORDER BY 列名;
+ORDER BY 列名 DESC;
+count(列)/sum(列)/max(列)/min(列)/avg(列)
+子查询
+</code></pre><p>  12、 面试题:如何自学一门新的编程语言</p>
+<pre><code>1)了解背景，历史，现状，发展，特点，应用领域
+2)建设环境=写出HelloWorld
+3)数据类型
+4)变量常量
+5)运算符
+6)逻辑结构
+7)通用小程序
+8)函数,对象
+9)常用函数库，类库，中间件，框架
+10)实用项目
+
+   #php 背景特点
+     php是一种运行在服务器端(apache)的编程序言,用于
+     生成动态网页内容.
+
+   2000,Zend公司成立，维护php语言.发布php解释器环境
+     php特点:开源，简单，(易上手),
+      跨平台(windows/linux),占用资源少
+      尤其适合中小型web应用开发
+      (微博/微信/论坛)...
+
+   #搭建软件环境
+    1:服务器端环境创建:下载选择web服务器
+          apache/Microsoft IIS/Nginx
+            c:/xampp/apache/
+    2:服务器端:下载并且安装php解析软件
+          c:/xampp/php/php.exe
+    3:服务器端:编写并保存php程序保存哪里
+      c:/xampp/htdocs/1.php
+    4:服务器端:启动web服务器
+          [start]
+    5:客户端:打开浏览器/直接输入服务器程序地址按回车
+        http://127.0.0.1/1.php
+</code></pre><p>13、php语法              必须掌握</p>
+<pre><code>a:程序位置 c:/xampp/htdocs/??
+b:创建程序 后缀.php  1.php 2.php
+c:代码
+    &lt;?php
+    ?&gt;
+d:声明一个变量
+     $变量名 = 值;
+    $name = &quot;tom&quot;;
+e:访问程序{浏览器}
+      http://127.0.0.1/1.php  回车
+f:一个php程序由html/css/js/php 代码混合写
+</code></pre><p>  14、 php 数据类型</p>
+<pre><code>1:值类型/标量类型
+    string        字符串类 &quot;&quot;
+    boolean/bool  true/false
+    int/integer
+    float/double
+2:复合类型
+    object php面向对象2005年之后才出现
+    array  php索引/关联数组
+3:特殊类型
+    null/NULL
+    resource 资源:数据库连接，查询结果
+4.php 练习数据类型
+5.php 练习数组
+6.php 综合示例
+</code></pre><p>15、使用php操作数据库    重点&amp;难点</p>
+<pre><code>?数据库乱码问题处理
+原因:脚本文件格式不正确
+解决：保存脚本文件 utf-8
+
+php中操作mysql数据库函数
+1:php官方最初提供一套连接mysql函数:mysql_xxx();
+2:php官方提供增强版mysql函数:      mysqli_xxx();
+</code></pre><p>16、 使用php操作mysql服务器步骤</p>
+<pre><code>1:创建到mysql服务器连接
+  $conn = mysqli_connect(...);
+    1:数据库服务器地址ip 127.0.0.1
+    2:数据库用户名       root
+    3:数据库密码
+    4:选库               dangdang
+2:向mysql服务器发送sql指令,
+  等待服务器执行
+    $sql = &quot;....&quot;;//insert/delete/update
+    $result = mysqli_query($conn,$sql);
+3:读取mysql服务器返回结果
+  if($result===false)
+4:断开与mysql服务器连接--可以省略
+  mysqli_close($conn);
+</code></pre><p> 17、 小结:</p>
+<pre><code>1:php语法
+  $age = 10;
+  $stop = &quot;tom $age&quot;;
+  $run = &apos;tom&apos;.$age;
+2:php数组
+  $arr = [1,2,3,4];
+  $arr[] = 5;
+  $arr = [&quot;name&quot;=&gt;&quot;tom&quot;,&quot;age&quot;=&gt;10];
+  foreach($arr as $k=&gt;$v){...}
+3:php连接mysql
+  a:创建连接
+    $conn = mysqli_connect(数据库ip,数据库用户名,密码,库);
+    $sql = &quot;SET NAMES UTF8&quot;;
+    mysqli_query($conn,$sql);
+    b:发送sql
+    $sql = &quot;INSERT INTO dd_book VALUES(null,&apos;d&apos;)&quot;;
+    $result = mysqli_query($conn,$sql);
+    c:判断结果
+    if($result === false)
+
+  1:连接数据库
+    $conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;&quot;,&quot;dangdang&quot;);
+    $sql = &quot;SET NAMES utf8&quot;;
+    mysqli_query($conn,$sql);
+  2:发送sql语句
+    $sql = &quot;INSERT INTO 表名....&quot;;
+    $result = mysqli_query($conn,$sql);
+  3:获取判断返回结果
+    if($result===false)
+   4:关闭连接
+    mysqli_close($conn);
+   小结：
+      1：发送sql
+         解决:在mysql命令输入sql--&gt;copy
+              如果列是字符串类型一定 &apos;&apos;
+            如果列是整型不用加&apos;&apos;
+     2: 表单获取参数
+        html: &lt;input type=&quot;text&quot; name=&quot;uid&quot;
+        php :  $uid = $_REQUEST[&apos;uid&apos;]
+    3:问题{乱码/set names 作用}
+      乱码:?????
+        解决:
+        a:顺序:
+          1:news.sql 按照utf-8保存
+            2:set names utf8;
+              source 不加分号
+        b:指令:
+          1:SET NAMES UTF-8;
+          2:创建库编码指定错误
+              CREATE DATABASE bbs CHARSET=UTF8;
+        C:1.php
+          SET NAMES UTF8;
+</code></pre><p>18、学习总结上周重点</p>
+<pre><code>1.1:mysql
+      数据库软件:
+       海量存储永久数据
+       快速查询
+    SQL:结构化查询语言(操作数据库)
+      DDL:DROP/CREATE (DATABASE/TABLE)
+      DML:INSERT/UPDATE/DELETE
+      DQL:SELECT
+      DCL:
+      SET NAMES UTF8; 设置SQL编码
+      SHOW TABLES;    查询当前库表名
+      SHOW DATABASES; 查询当前MYSQL库名
+      ..
+1.2:php
+  后台语言:运行在(服务器 apache)
+      &lt;?php
+      ?&gt;
+      $age = 10;
+      $str = &apos;hello php&apos;;
+      $str = &quot;hello $age php&quot;;
+      php mysql
+      a:INSERT/UPDATE/DELETE
+        1:连接数据库
+          $conn = mysqli_connect(&quot;127.0.0.1&quot;,&apos;root&apos;,&apos;&apos;,&apos;dangdang&apos;);
+        2:发送sql
+              $sql = &quot;INSERT/UPDATE/DELETE&quot;;
+          $result = mysqli_query($conn,$sql);
+        3:if($result===true){
+          执行成功
+           }
+      b:SELECT
+        1:连接数据库
+          $conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;&quot;,&quot;dangdang&quot;);
+        2:发送sql
+          $sql = &quot;SELECT ...&quot;;
+          $result = mysqli_query($conn,$sql);
+        3:返回结果集对象
+        4:抓取
+          $row = mysqli_fetch_row($result); 索引
+          $row = mysqli_fetch_assoc($result);关联
+</code></pre><p>19、 php常用函数</p>
+<pre><code>1:#die($str); 终止当前php文件执行,
+      并且向客户输出一个终止原因说明.
+2:#@ 压制住当前行代码警告消息.
+3:#time() 返回当前系统时间,以秒为单位整数
+4:#$id = mysqli_insert_id($conn);
+  返回连接上刚刚执行insert语句产生id值
+  CREATE TABLE t_user(
+      id INT PRIMARY KEY AUTO_INCREMENT,
+   );
+  INSERT INTO t_user VALUES(null,);
+5:#$count = mysqli_affected_rows($conn)
+  返回刚刚连接上执行增删改语句影响行数
+6:$rows = mysql_fetch_all($result,MYSQLI_ASSOC);
+  从结果集对象中抓取所有记录,返回二维数组;
+</code></pre><p>20、 http协议(零碎.没有太多相关性)重点&amp;难点</p>
+<pre><code>1:学习http协议目标
+    1:调试AJAX应用&quot;看不见摸不着&quot;的错误
+    2:进行web访问优化---高阶面试题
+    2.3.1.1:URL
+        统一资源定位符:
+    互联网任何资源都有一个URL才能被访问
+    http://www.baidu.com  网站
+    https://www.baidu.com/img/bd_logo1.png 图片
+    http://127.0.0.1/01.php
+
+    a:scheme:方案 指定以哪种协议从服务器获取指定资源
+    常见方案:http/https/ftp/mailto/file/telnet....
+    http:获取网络资源{明文}
+    https:获取网络资源{加密}
+    http://www.ccb.com/cn        建行
+    https://ibsbjstar.ccb.com.cn 建行登录
+
+    b:host 主机名:资源在服务器ip地址或者域名
+        http://127.0.0.1      ip地址
+        http://www.baidu.com  域名(DNS 域名-&gt;ip)
+        http://tmooc.cn       域名
+
+    c:port 端口号*****(面试题)
+        每一项网络服务在服务器都对应一个端口号
+        ftp    21  文件上传下载
+        ssh    22  安全远程登录
+        telnet 23  远程登录
+        smtp   25  邮件传输发送
+        dns    53  域名解析
+        http   80  超文本传输***(apache)
+        pop3   110 邮件接收
+        https  443 加密传输
+
+    d:path
+        http://127.0.0.1/ajaxday03/01.php
+         e:?&lt;query&gt;
+        http://127.0.0.1/ajaxday03/01.php?id=10&amp;age=10
+        $id = $_REQUEST[&apos;id&apos;];
+        $age = $_REQUEST[&apos;age&apos;];
+
+      #分清一个概念:URL/URN/URI(了解)
+        URL:统一资源定位符
+        URN:统一资源命名符
+        URI:统一资源标示符
+        URI图.jpg
+        URI==URL+URN
+        URL:&lt;a href=&quot;login.html&quot;&gt;....&lt;/a&gt;
+            &lt;img src=&quot;http://tmoo.cn/logo.jpg&quot;&gt;....&lt;/a&gt;
+        URN:
+           &lt;a href=&quot;mailto:admin@tmooc.cn&quot;&gt;..&lt;/a&gt;
+           &lt;a href=&quot;javascript:void(0)&quot;&gt;..&lt;/a&gt;
+
+ 21、http协议概述
+
+        作用:传输网页
+        协议标准:生活标准(手机: 3g 4g 5g)
+                 USB(2.0 3.0)
+        国际互联网任务组(IETF)制定http协议标准
+        1991: http/0.9 有严重缺陷
+        1996: http/1.0 正式版本
+        1999: http/1.1 当前主流版本(***)
+
+    面试题:
+    http/1.1比http/1.0改进哪些地方?
+        http协议工作原理方式:请求和响应
+        1:客户端浏览器发送请求 (google-&gt;apache)
+        2:服务器响应请求并且返回数据
+                               (apache-&gt;google)
+     解答问题:
+        1:支持虚拟主机技术，在一个web服务器上
+          同时并存多个不同域名的网站
+            个人博客:500w(128 CPU 1T 2000块)
+            3网页 index.html photo.html review.html
+            20/年
+            d:/tmooc    www.tmooc.cn  50w
+            e:/tts      www.tts.cn    50w
+            ...10
+            http: Host:tmooc.cn 虚拟主机域名
+        2:支持持久连接技术
+          不支持持久边接技术情况
+            (每次客户端与服务器数据传输)
+            固定流程 101(300握 400挥)
+            三次握手 3--&gt;1--&gt;4
+            四次握手
+            http: keep-alive  (3)--101--(4)
+        3:支持代理连接
+            Proxy:xxx
+
+
+22、 http协议规定两种消息格式:
+
+     请求(Request) --客户端浏览器发送web服务器
+     响应(Response)--web服务器发送客户端浏览器
+     Message:消息/报文,是在http客户端和服务器传递数据块
+     http协议规定,消息必须符合特定格式才能版此理解..
+     消息内容 &quot;思维导图&quot;
+</code></pre><p>23、http协议-(响应)</p>
+<pre><code>http:作用传输网页
+http:工作方式 请求与响应
+请求消息:
+ 请求方式:{GET/POST/PUT/DELETE/HEAD/CONNECT/TRACE/OPTIONS}
+响应消息:
+ 响应状态码:
+ 100-199 提示消息
+ 200-299 响应成功   200
+ 300-399 重定向     304
+ 400-499 客户端请求错误 404
+ 500-599 服务器错误  500
+ 响应主体类型:
+ text/plain
+ text/html
+ text/css
+ application/javascript
+ application/json
+
+ 1：面试题:GET/POST区别?
+    a:语义
+        GET:客户端获取服务器上资源
+        POST:客户端将数据提交服务器
+    b:安全级别
+        GET:不安全
+        POST:不安全 {https}
+    c:数据长度
+        GET:通过浏览器地址栏 请求请起启 1KB   汉字20-30
+        POST:通过http响应主体 长度没限制
+    d:编码
+        GET:不会自动编码-&gt;可能出现中文乱码
+        POST:自动编码----&gt;不会中文乱码
+    e:如何发起
+        GET:
+        1:浏览器地址栏输入地址回车
+        2:标签href  &lt;a&gt;   点击发GET
+            src   &lt;img&gt; 自动发GET
+            css   like  自动发GET
+            script src  自动发GET
+        3:js自动跳转
+            location.href = &quot;1.html&quot;;
+        4:表单
+            &lt;form method=&quot;get&quot; action=&quot;&quot;&gt;
+            &lt;form action=&quot;1.ph&quot;&gt;
+        5:ajax GET
+            POST:
+            1:表单
+            &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;
+            2:ajax post
+
+  2：面试题:如何使用http协议相关知识进行web优化
+    提示:web访问可以很多方面考虑:
+        :优化数据库
+        :优化php
+        :优化web服务器(apache/nginx)
+        :网速
+        :传输数据
+        :浏览器解析速度(html/css/js)
+    下面仅从http请求和响应角度考虑
+         1:域名解析
+           尽可能减少域名解析次数--减少跨站外
+             资源引用.
+             DNS(www.tmmoc.cn-&gt;120.132.68.230)
+             tmooc.com
+             http://www.tmooc.cn/index.html
+             index.html
+             &lt;img src=&quot;www.tmooc.cn/1.jpg&quot;&gt;
+             &lt;script src=&quot;www.tmooc.cn/1.js&quot;&gt;&lt;/script&gt;
+         2:创建连接
+           努力减少连接创建次数-Connection:keep-alive
+             启用持久连接
+         3:减少发送请求次数
+           尽量减少请求次数--合理进行资源合并，
+             合理使用缓存.
+         4:等待响应时间
+           提交服务器运行速度-提高数据运算及查询速度
+         5:接收响应
+           尽可能减少响应数据长度--删除空白字符，启压缩
+        http://tool.oschina.net/jscompress/
+</code></pre><p>24、 ajax    重点&amp;难点 9</p>
+<pre><code>a:快速入门
+  ajax:异步javascript and xml
+    google 推出技术--&gt;酷
+    生活场景:ajax 微信餐厅
+    最大不同:(发送请求和接收数据都由js完成)
+
+b:原理细节知识
+  *功能:添加新用户 msg/t_user(uname,upwd)
+     *1:创建add_user.php
+    a:获取参数uname,upwd
+    b:创建sql insert 发送sql
+    c:输出结果添加成功或失败
+     *2:创建add_user_input.html
+    a:创建表单(uname,upwd)
+    b:在表单&lt;input type=&quot;button&quot; value=&quot;新建用户&quot;/&gt;
+    c:为button按钮绑定点击事件
+    c.1:获取用户名和密码
+    d:通过ajax发送请求并且接收服务器
+    输出一句话&quot;添加成功&quot;&quot;添加失败&quot;
+    以下ajax代码固定js
+    1:创建ajax对象
+      var xhr = new XMLHttpRequest();
+    2:绑定事件
+      xhr.onreadystatechange = function(){}
+    3:打开连接(连接php程序)
+      xhr.open(&apos;GET&apos;,&apos;add_user.php&apos;,true);
+    4:发送请求
+      xhr.send(null);
+</code></pre><p>25、 ajax请求并且接收响应4步</p>
+<pre><code>1:创建ajax对象
+  var xhr = new XMLHttpRequest();
+2:绑定事件:监听xhr对象状态
+  xhr.onreadystatechange = function(){
+    }
+3:连接web服务器php程序
+  xhr.open(请求方式,请求地址,是否异步);
+    xhr.open(&apos;GET&apos;,&apos;add_user.php?&apos;,true);
+4:发送请求消息
+  xhr.send(null);
+</code></pre><p>26、 ajax原理</p>
+<pre><code>a:2002年由Google搜索引擎，提示建议
+    AJAX=HTML/CSS/JS/DOM/XML/HTTP
+b:ajax作用:
+    实现在&apos;无刷新&apos;&apos;无提交&apos;&apos;无跳转&apos;的情况下完成页面局部更新.
+c:ajax应用场景
+    常见场合:聊天室，在线走势图,搜索建议..
+d:ajax 异步javascript and XML 异步:
+    1:ajax异步请求:XHR
+    2:    同步请求:
+    1.1:地址栏输入地址回车
+    1.2:表单 submit
+    1.3:&lt;a href=&quot;1.php&quot;&gt;
+    1.4:&lt;img src=&quot;1.jpg&quot;&gt;
+    1.5:location.href = &apos;1.php&apos;
+</code></pre><p>27、 ajax常用对象和属性事件方法</p>
+<pre><code>1:xhr对象:作用，向web服务器发送请求,并接收返回响应消息.
+  var xhr = new XMLHttpRequest();
+#注意:产品兼容性
+#老IE IE8- 不支持xhr
+  new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+#兼容性写法
+  var xhr = null;
+  if(window.XMLHttpRequest){
+  xhr = new XMLHttpRequest();
+  }else{
+      xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+  }
+  alert(xhr);
+2:xhr对象常用属性*****
+  2.1:readyState xhr对象当前状态
+    不能手工赋值，可以取值其值会随着(请求-响应)过程进行自动改变
+    0 UNSENT  请求消息沿未发送
+    1 OPENED  XHR己经打开web服务器连接
+    2 HEADERS_RECEVIED xhr己经接收服务器响应消息头部
+    3 LOADING XHR正在加载响应消息主体
+    4 DONE    XHR接收完成响应消息主体
+
+   2.2:xhr.readyState状态改变
+    0 UNSEND  xhr.open();
+    1 OPENED  xhr.send();
+    2 HREADERS_RECEIVED   自然(不能控制)
+    3 LOADING            自然(不能控制)
+    4 DONE
+
+  2.3:status
+  2.4:statusText
+  2.5:responseText
+</code></pre><p>28、 ajax 原理与ajax接收不同类型数据</p>
+<pre><code>a:核心 XMLHttpRequest    -创建对象
+   var xhr = null;
+   if(window.XMLHttpRequest){
+       xhr = new XMLHttpRequest();
+   }else{
+       xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+   }
+b:xhr属性、方法、事件
+  b.1:xhr.readyState 表示xhr状态
+   0 未发送      UNSENT
+   1 打开连接    OPENED
+   2 己经接收服务器返回头信息
+          HEADERS_RECEIVED
+   3 接收服务器数据
+          LOADING
+   4 接收完成
+          DONE
+  B.2:status    表示服务器返回状态码===200
+  B.3:responseText 表示服务器响应文本
+  B.4:responseXML  表示服务器响应XML文本
+    方法:
+  B.5:open(method,url.isAsyn)
+       表示:打开到服务器连接
+       method:请求方式 GET POST
+       url:   请求url地址(程序地址)
+       isAsyn:请求方式是异步true   同步false
+  B.6:send(data)
+      表示:把请求消息发送web服务器
+          data:请求消息主体内容
+      GET--&gt;内容为null
+      send(null);
+      POST--&gt;请求数据放在里面
+      send(&apos;id=10&amp;name=tom&amp;age=19&apos;);
+            事件:onreadystatechange
+      xhr.readyState每次改变时候触发
+        事件0 1 2 3 4
+</code></pre><p>29、 AJAX POST 标准语法</p>
+<pre><code>1:创建ajax对象 xhr
+2:绑定事件     xhr.onreadystatechange
+3:打开连接
+xhr.open(&apos;POST&apos;,&apos;book_add.php&apos;,true);
+3.1:修改请求头信息(将参数编码)
+xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4:xhr.send(`id=10&amp;name=tom&amp;age=19`);
+
+如果ajax输出
+    1:创建php     地址栏输入回车
+      http://127.0.0.1/ajaxday06/dangdang/book_add.php?name=1&amp;pic=2.jpg&amp;price=100&amp;pubDate=2010-10-10
+    2:创建html/js
+      console.log(&quot;1&quot;+变量);
+    3:F12/network
+
+  5.0 text/plain     纯文本
+        php第一行
+            header(&quot;Content-Type:text/plain&quot;);
+            html-&gt;ajax
+            xhr.responseText
+  5.1 text/html      (默认)
+        php第一行
+        header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+  5.2 javascript
+        php第一行
+        header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+        echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+      html-&gt;ajax
+        eval(xhr.responseText);
+        示例:国际化
+        当前浏览器 zh-CN  你好
+               en-US   hello
+      a:编写php i18n.php
+        读取客户端请求头部信息
+        Accept-Language 截最后二个字符
+            CN  你好
+        US  hello
+       b:i18n.html
+     ajax 发送请求--&gt;获取服务器返回信息
+    alert();
+  5.3 xml       ---- 很少(代码复杂)
+  5.4 json      ---- 重点&amp;难点
+</code></pre><p>30、 JSON 语法</p>
+<pre><code> 1:标准语法 json 要求
+   1:一个JSON字符串有且只有一个根，
+   可以是{}表示一个对象
+       []表示一个数组
+    员工信息 {&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:19}
+    一组整型 [10,20,90,100]
+    一组员工信息
+    [
+     {&quot;name&quot;:&quot;jerry&quot;,&quot;age&quot;:21},
+     {&quot;name&quot;:&quot;james&quot;,&quot;age&quot;:22},
+     {&quot;name&quot;:&quot;gogo&quot;,&quot;age&quot;:19}
+    ]
+    错误json
+    {&quot;name&quot;:&quot;tom1&quot;}
+    {&quot;name&quot;:&quot;tom2&quot;}
+    {&quot;name&quot;:&quot;tom3&quot;}
+2:JSON中可以表示，数字，bool,null,字符串
+   注意:字符串必须用双引号
+3:数组中可以包含多个值，使用逗号分隔
+4:对象中可以包含多个键值，使用逗号分隔
+  不同值，键和值之间用分号分隔,键必须是双引号.
+</code></pre><p>31、 如何处理JSON数据:</p>
+<pre><code>1:服务器端php
+  1.1:header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+  1.2:$str = json_encode($arr);
+  1.3:echo $str;
+2:javascript 接收
+  var obj = JSON.parse(xhr.responseText);
+    obj--&gt;js数组   obj--&gt;js对象
+
+ #JSON字符串格式概述
+   XML是字符串数据格式，用于描述数据，
+稍微有点麻烦--重量级数据格式.
+10字节-&gt;XML--&gt;50字节
+JSON是字符串数据格式，用于描述数据,
+更加简单--轻量级数据格式.
+10字节-&gt;JSON-&gt;22字节
+
+ JSON(JavaScript Object Natation)
+是一种轻量级数据交换格式,
+易于编写，同时易于程序解析生成
+.语法基于JS语言.但是目前被各种语句
+所支持.成为一种&quot;异构系统交互数据
+标准格式&quot;;
+JAVA---- {JSON}   html/js/css
+C#------ {JSON}   html/js/css
+php----- {JSON}   html/js/css
+</code></pre><p>32、ajax处理xml数据格式 – 了解</p>
+<pre><code>xml:
+html:超文本标记语言，所有标签都是预定义好的，
+     用于描述一个网页结构.
+xml:可扩展的标签语言，所有的标签都是自定义的
+    用于描述一段数据--尤其是批量复合数据.
+
+xml语法要求:
+1:xml文档声明
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+2:整篇xml字符串有且只能一个根元素
+  &lt;booklist&gt;
+    &lt;book&gt;&lt;/book&gt;
+    &lt;book&gt;&lt;/book&gt;
+    &lt;/booklist&gt;
+3:标签有开始必须有结束
+  &lt;book&gt;&lt;/book&gt;
+4:标签可能嵌套不能交叉
+  &lt;book&gt;&lt;name&gt;&lt;/name&gt;&lt;/book&gt;  ok
+    &lt;book&gt;&lt;name&gt;&lt;id&gt;&lt;/name&gt;&lt;/id&gt;&lt;/book&gt;
+5:标签所有属性&apos;值&apos;必须用双引号括起来
+  &lt;book id=&quot;1&quot; name=&quot;tom&quot;&gt;&lt;/book&gt;
+总结:xml和html用途不同，xml语法严格
+
+32、 jquery 常用ajax函数
+
+    a:$.get(url,callback);--简单
+    作用含义:
+         发起一个ajax的GET请求,如果服务器返回成功
+         响应消息，调用callback函数,
+         在方法中处理响应的数据
+        callback  function(data){}
+    b:$.post(url,data,callback);
+    作用:
+         发起一个ajax POST请求，并在请求主体中
+         提交请求数据，如果服务器返回成功响应
+         消息，调用callback，在cllback方法中
+         处理响应数据.
+      使用方法三种:
+        a:$.post(url,data,callback);
+        b:$.post(url,&apos;id=1&amp;name=tom&apos;,callback);
+        c:$.post(url,{id:1,name:tom},callback);
+        d:$.getJSON(url,callback);
+        e:$.load(url);
+        f:$.getScript(url,callback);
+        g:$.ajax({})--功能最全最强
+            万能AJAX封装函数，提供非常多的可选项,
+            可以处理各种情形，前面函数都是它的
+            简化版.
+      $.ajax({
+         type:&apos;GET&apos;      //请求方式post/pub/delete/head
+         url:&quot;x.php&quot;     //请求地址
+         data:&apos;k=v&amp;k1=v1&apos;//请求服务器数据
+         beforeSend:fn   //请求消息发送之前调用fn
+         success:fn      //响应完成并且成功调用fn
+         error:fn        //响应完成但有问题调用fn
+         complete:fn     //响应完成回调(无论成败)fn
+    });
+</code></pre><p>  33、 #ajax注意</p>
+<pre><code>对于异步请求成功后创建DOM元素,
+不能进行直接事件绑定! click()/bind().
+因为在执行此事件绑定时，这些元素在DOM
+还不存在。
+必须将相关事件委托给DOM树上己经存在父元素!
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 1、如何从数据库中将数据表中数据抓取出来并且显示.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;解决方法:语言php 负责从数据库中抓取数据并且显示给用户.
+  a:什么是服务器
+    能够在网站中提供各种(浏览网页,收发邮件
+    视频,语言)等服务器的软件与硬件集合。
+    
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
+    
+      <category term="php" scheme="www.wangchengzou.cn/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3有哪些新特性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:01:09.332Z</updated>
+    
+    <content type="html"><![CDATA[<p>举例：<br>  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>  圆角           （border-radius:8px）<br>  多列布局        （multi-column layout）<br>  阴影和反射        （Shadow\Reflect）<br>  文字特效      （text-shadow、）<br>  文字渲染      （Text-decoration）<br>  线性渐变      （gradient）<br>  旋转          （transform）<br>  增加了旋转,缩放,定位,倾斜,动画，多背景<br>  transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;举例：&lt;br&gt;  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;  圆角           （border-radius:8px）&lt;br&gt;  多列布局        （multi-column layout）&lt;b
     
     </summary>
     
@@ -97,7 +988,362 @@
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3高级笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:33:13.367Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、复杂选择器</p>
+<pre><code>1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选择器2
+        如：div+p   #top+.important
+                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
+        选择器1~选择器2
+        如#d1~div
+2、属性选择器
+    通过元素所附带的属性及其值来匹配页面中的元素
+    语法：
+        基础属性选择器  [attr]
+            匹配页面中的有附带attr属性的元素
+        elem[attr]
+            elem:表示任意元素名称
+            attr:表示任意属性名称
+            匹配页面中附带attr属性的elem元素
+            如：div[id]:匹配页面中所有附带id属性的div元素
+        [attr1][attr2][attr3]
+            匹配页面中同时附带attr1和attr2属性的所有元素
+            如 input[name][hype]
+        [attr=value]
+            匹配页面中所有attr属性的值为value的元素
+            如input[type=text]
+        [class~=value]
+            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
+        [attr^=value]
+            匹配以value值作为开始的attr属性的元素
+        [attr$=value]
+            匹配以value值作为结束的attr属性的元素
+        [attr*=value]
+            匹配attr属性值中包含value字符的所有元素
+3、伪类选择器
+    目标伪类
+        突出显示活动的HTML锚元素
+        语法： ：target
+    结构伪类
+        通过元素之间的结构关系来匹配元素
+        ：first-child     获取属于其父元素中的首个子元素
+        ：last-child     获取属于其父元素中的尾（最后）子元素
+        :nth-child(N)  获取属于其父元素中的第N个子元素
+        ：empty   空的，匹配没有子元素的元素，包含文本
+        ：only-child   匹配属于其父元素中的唯一子元素
+    否定伪类
+        把匹配某选择器元素排除出去
+        ：not(选择器 )
+4、伪元素选择器
+    伪类与伪元素
+        伪类：匹配元素不同的状态
+        伪元素：是匹配元素中的内容
+    语法：
+        ：first-letter
+        ::first-letter  匹配某元素的首字符
+        ：first-line    匹配某元素的首行字符
+        ：：selection 匹配用户选取的内容部分
+    ：和：：区别
+        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
+        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
+</code></pre><p>2、内容生成</p>
+<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
+伪元素选择器
+    ：before   定位到元素内容区域之前
+    ：after    定位到元素内容区域之后
+语法：
+    属性：content
+    取值：普通文本
+         图像，url(...)
+         计数器
+问题处理：
+    外边距溢出问题
+        为父元素添加边框
+        使用父元素的内边距取代子元素的外边距
+        在父元素的第一个或最后一个子元素位置处增加一个空的table
+    浮动元素父元素的高度问题
+</code></pre><p>3、弹性布局</p>
+<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
+基本概念‘
+    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
+    flex项目：简称项目，存放在flex容器中的内容
+
+语法：
+    容器：display
+        取值：flex 将块级元素变为flex容器
+              inline-flex  将行内元素变为flex容器
+        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
+    容器属性;
+        该组属性要添加在容器元素上，控制子元素的位置
+        flex-direction  决定主轴的方向（main-axsis）
+            取值：
+                row  主轴为水平方向的轴，起点在容器左端，默认值
+                row-reverse 主轴为水平方向的轴，起点在容器右端
+                column  主轴为交叉轴，起点在容器的顶端
+                column-reverse 主轴为交叉轴，起点在容器的底端
+        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
+            取值：
+                nowrap     默认值，不换行
+                wrap        换行
+                wrap-reverse  反方向换行
+        flex-flow   dirextion和wrap的缩写方式
+            取值：
+                row nowrap 默认值
+                direction wrap
+        justify-content   定义项目在主轴上的对齐方式
+            取值：
+                flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                space-between  两端对齐，项目之间的距离是相等的
+                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
+        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
+            取值：
+                flex-start  交叉轴起点对齐
+                flex-end   交叉轴终点对齐
+                center     交叉轴中间对齐
+                baseline   基线对齐，以所有项目中的第一行文本为准
+                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
+        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
+            取值：
+                flex-start   交叉轴顶端对齐
+                flex-end    交叉轴底端对齐
+                center      交叉轴中间对齐
+                space-between  与交叉轴两端对齐
+                space-around     项目与项目间对齐
+    项目属性：
+        该组属性主要设置于项目中
+        order  定义项目在排列顺序，值越小，越靠前，默认为0
+        flex-grow  指定项目的放大比例，默认为0，即不放大
+        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
+        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
+        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
+            取值，auto  相当于1  1   auto
+                 none  相当于0 0  auto
+                 flex-grow【,flex-shrink,flex-basis】
+        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
+            取值： auto 默认值，使用
+                  flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                base-line
+                stretch
+</code></pre><p>4、CSS Hack 兼容性</p>
+<pre><code>标准模式和混杂模式和准标准模式
+IE6之前，没有兼容性说法
+IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
+    混杂模式  无标准可言
+        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
+    标准模式  安全支持
+    准标准模式，即支持标准，也同时向前兼容非标准代码
+如何根据不同的浏览器编写不同的css
+    css类内部Hack
+        在属性名称前和值添加前后缀以便识别不同的浏览器
+    选择器Hack
+        在选择器前添加特殊标识以便识别不同的浏览器
+    头部引用hack
+        通过html的条件注释来判断浏览器版本，去执行不同的CSS
+        条件注释
+            条件：
+                gt:判断当前浏览器是否大于指定定版本
+                gte：判断当前浏览器是否大于等于指定定版本
+                it:   判断当前浏览器是否小于指定版本
+                ite： 判断当前浏览器是否小于等于指定版本
+                !：   判断当前浏览器是否为非指定版本
+                    &lt;!--[if !IE 8]&gt;
+                        该段内容在除IE8以外浏览器中显示
+                    &lt;![endif]--&gt;
+</code></pre><p>5、转换</p>
+<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
+    允许进行2D和3D方向的转换
+    2D转换：在平面中进行的操作
+    3D转换：在空间中进行的操作
+转换属性：
+    rtansform:为元素应用2D或3D转换效果
+        取值：none;  没有效果
+
+            transform-functions:一组转换函数
+                位移转换函数：translate()
+                改变形状函数：skew()
+                注意：如果指定多个转换函数的话中间用空格隔开
+    转换原点：
+        属性：transform-origin
+        默认：转换原点在元素中心处
+        取值：轴线给值
+            两个轴线值：X Y
+            三个轴线值：X Y Z
+2D转换
+    位移：改变元素在页面中的位置
+        语法：transform
+            fransform(x)  改变元素在X轴的位置
+            fransform(X ,Y)  改变元素在两轴的位置
+            fransformX(X) 只在X轴上位置移动
+            fransformY(Y)  只在Y轴上位置移动
+    缩放： 改变元素在页面中的大小】
+        语法：transform
+            scale(value)  表示两轴等比缩放
+                取值：默认  为1
+                    放大   为大于1的数值
+                    缩小   为0~1之间小数
+                    返转   负数
+            sacle(X,Y)
+            saclex(y)
+            sacley(y)
+    旋转：改变元素在页面上的角度，要根据原点实现转换效果
+        语法：transform
+            rotate(ndeg)
+                n 取值正，顺时针旋转
+                n 取值负，逆时针旋转
+                deg 为角度
+                0~360范围
+        注意：转换原点问题
+            元素坐标轴也跟着旋转
+    倾斜：改变元素在页面中形状
+        语法：transform
+            skew(xdeg)  横向倾斜指定度数
+                x 取值正，y轴逆时针倾斜一定角度
+                  取值负，Y轴顺时针倾斜一定角度
+            skew(xdeg,ydeg)
+            skewx(xdeg)
+            skewy(ydeg)
+3D转换
+    感觉空间
+    属性：perspetive 假定人眼到投射平面的距离
+    注意：该属性要放在3D转换元素的父元素上
+        兼容性chrome和safari需要加前缀
+            -wedkit-perspective:500px;
+    旋转：以X轴中心轴旋转
+            rotatex(xdeg)
+          以Y轴中心轴旋转
+            rotatey(ydeg)
+          以Z轴中心轴旋转
+            rotatez(zdeg)
+        取值：正  顺时针
+            负   逆时针
+        以多个轴同时进行旋转
+            rotate3d(x ,y, z ,ndeg)
+                x y z 取值为1，该轴参与旋转
+                x y z  取值为0 ，该轴不参与旋转
+    位移：改变元素在Z轴上的位置
+        语法：transform
+            translatez(z)
+
+            transform-style
+                取值：flat  默认值，子元素不保留3D位置
+                     preserve-3D  子元素保留3D位置
+</code></pre><p>6、过渡</p>
+<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
+要素与属性：
+    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
+        transition-property: 属性名称（width）
+                      all   全部属性
+                      none
+        允许设置过渡效果的属性：
+            颜色属性
+            渐变属性
+            取值为数字属性
+            转换属性 transition-property:transform;
+            visibility属性
+            阴影属性
+    指定过渡时长
+        transition-duration: 以S、MS为单位数值
+    指定过渡时速曲线函数  可选
+        transition-timing-function
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+    指定过渡的延迟时间   可选
+        transition-delay
+            取值：以S或MS做为单位
+    简写属性：transition:prop duration  timing-fun delay;
+        多个过渡效果
+            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
+触发过渡条件
+    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
+    将过渡编写在:hover,:active伪类中
+</code></pre><p>7、动画</p>
+<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
+动画使用步骤
+    声明动画
+        指定动画名称
+        指定动画中的关键帧（keyframes）
+            时间点（以百分比描述时间）
+            元素状态（CSS样式）
+    为元素调用动画
+        指定调用动画的名称以及执行时长
+语法：
+    声明动画     注意前缀，兼容性问题
+        &lt;style&gt;
+            @keyframes 名称{
+                0%{   动画开始时，元素的状态   }
+                。。。。
+                100%{  动画结束时，元素的状态  }
+            }
+        &lt;/style&gt;
+    调用动画(animation)
+        animation-name  指定调用动画名称
+        animation-duration   指定动画周期时长，以S或MS为单位
+        animation-timing-function  指定动画的速度时间出线函数
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+        animation-delay  指定动画延迟时间
+        animation-iteration-count  指定动画播放次数
+            取值：默认1次，具体数值
+                infinite:无限次播放
+        animation-direction  指定动画的播放方向
+            取值：normal  从0%~100%
+                reverse  从100%~0%
+                alternate  轮流来回播放 奇数 0%~100%
+                                 偶数 100%~0%
+        animation  简写方式
+            取值：name  duration  timing-fun delay  iteration-count direction;
+        animation-fill-mode  指定动画播放之前、之后的填充模式
+            取值：none  默认值
+                 forwards  动画播放完成后，保持在最后一帧的位置
+                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
+                 both 同时应用在开始和最后的位置帧上
+        animation-play-state  动画播放状态
+            取值：paused 暂停
+                 running 播放
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、复杂选择器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+    
+      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
     
   </entry>
   
@@ -609,19 +1855,24 @@ keep it simple
   </entry>
   
   <entry>
-    <title>CSS3新增伪类有那些</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
+    <title>CSS优先级算法如何计算</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS优先级算法如何计算/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:55:42.524Z</updated>
+    <updated>2017-07-23T07:53:48.776Z</updated>
     
-    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
-<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
+    <content type="html"><![CDATA[<ul>
+<li>优先级就近原则，同权重情况下样式定义最近者为准;</li>
+<li>载入样式以最后载入的定位为准;<br>优先级为:    !important &gt;  id &gt; class &gt; tag<br>important 比 内联优先级高</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
+      &lt;ul&gt;
+&lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
+&lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
+&lt;/
     
     </summary>
     
@@ -635,18 +1886,22 @@ keep it simple
   </entry>
   
   <entry>
-    <title>CSS3有哪些新特性</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
+    <title>CSS选择符有哪些？哪些属性可以继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:01:09.332Z</updated>
+    <updated>2017-07-23T07:53:18.490Z</updated>
     
-    <content type="html"><![CDATA[<p>举例：<br>  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>  圆角           （border-radius:8px）<br>  多列布局        （multi-column layout）<br>  阴影和反射        （Shadow\Reflect）<br>  文字特效      （text-shadow、）<br>  文字渲染      （Text-decoration）<br>  线性渐变      （gradient）<br>  旋转          （transform）<br>  增加了旋转,缩放,定位,倾斜,动画，多背景<br>  transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+    <content type="html"><![CDATA[<p> 1.id选择器（ # myid）<br> 2.类选择器（.myclassname）<br> 3.标签选择器（div, h1, p）<br> 4.相邻选择器（h1 + p）<br> 5.子选择器（ul &gt; li）<br> 6.后代选择器（li a）<br> 7.通配符选择器（ * ）<br> 8.属性选择器（a[rel = “external”]）<br> 9.伪类选择器（a:hover, li:nth-child）</p>
+<ul>
+<li>可继承的样式： font-size font-family color, UL LI DL DD DT;</li>
+<li>不可继承的样式：border padding margin width height ;</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;举例：&lt;br&gt;  新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;  圆角           （border-radius:8px）&lt;br&gt;  多列布局        （multi-column layout）&lt;b
+      &lt;p&gt; 1.id选择器（ # myid）&lt;br&gt; 2.类选择器（.myclassname）&lt;br&gt; 3.标签选择器（div, h1, p）&lt;br&gt; 4.相邻选择器（h1 + p）&lt;br&gt; 5.子选择器（ul &amp;gt; li）&lt;br&gt; 6.后代选择器（li a）&lt;br&gt; 7.通配符
     
     </summary>
     
@@ -1664,897 +2919,6 @@ keep it simple
   </entry>
   
   <entry>
-    <title>CSS3高级笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:33:13.367Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、复杂选择器</p>
-<pre><code>1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选择器2
-        如：div+p   #top+.important
-                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
-        选择器1~选择器2
-        如#d1~div
-2、属性选择器
-    通过元素所附带的属性及其值来匹配页面中的元素
-    语法：
-        基础属性选择器  [attr]
-            匹配页面中的有附带attr属性的元素
-        elem[attr]
-            elem:表示任意元素名称
-            attr:表示任意属性名称
-            匹配页面中附带attr属性的elem元素
-            如：div[id]:匹配页面中所有附带id属性的div元素
-        [attr1][attr2][attr3]
-            匹配页面中同时附带attr1和attr2属性的所有元素
-            如 input[name][hype]
-        [attr=value]
-            匹配页面中所有attr属性的值为value的元素
-            如input[type=text]
-        [class~=value]
-            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
-        [attr^=value]
-            匹配以value值作为开始的attr属性的元素
-        [attr$=value]
-            匹配以value值作为结束的attr属性的元素
-        [attr*=value]
-            匹配attr属性值中包含value字符的所有元素
-3、伪类选择器
-    目标伪类
-        突出显示活动的HTML锚元素
-        语法： ：target
-    结构伪类
-        通过元素之间的结构关系来匹配元素
-        ：first-child     获取属于其父元素中的首个子元素
-        ：last-child     获取属于其父元素中的尾（最后）子元素
-        :nth-child(N)  获取属于其父元素中的第N个子元素
-        ：empty   空的，匹配没有子元素的元素，包含文本
-        ：only-child   匹配属于其父元素中的唯一子元素
-    否定伪类
-        把匹配某选择器元素排除出去
-        ：not(选择器 )
-4、伪元素选择器
-    伪类与伪元素
-        伪类：匹配元素不同的状态
-        伪元素：是匹配元素中的内容
-    语法：
-        ：first-letter
-        ::first-letter  匹配某元素的首字符
-        ：first-line    匹配某元素的首行字符
-        ：：selection 匹配用户选取的内容部分
-    ：和：：区别
-        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
-        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
-</code></pre><p>2、内容生成</p>
-<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
-伪元素选择器
-    ：before   定位到元素内容区域之前
-    ：after    定位到元素内容区域之后
-语法：
-    属性：content
-    取值：普通文本
-         图像，url(...)
-         计数器
-问题处理：
-    外边距溢出问题
-        为父元素添加边框
-        使用父元素的内边距取代子元素的外边距
-        在父元素的第一个或最后一个子元素位置处增加一个空的table
-    浮动元素父元素的高度问题
-</code></pre><p>3、弹性布局</p>
-<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
-基本概念‘
-    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
-    flex项目：简称项目，存放在flex容器中的内容
-
-语法：
-    容器：display
-        取值：flex 将块级元素变为flex容器
-              inline-flex  将行内元素变为flex容器
-        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
-    容器属性;
-        该组属性要添加在容器元素上，控制子元素的位置
-        flex-direction  决定主轴的方向（main-axsis）
-            取值：
-                row  主轴为水平方向的轴，起点在容器左端，默认值
-                row-reverse 主轴为水平方向的轴，起点在容器右端
-                column  主轴为交叉轴，起点在容器的顶端
-                column-reverse 主轴为交叉轴，起点在容器的底端
-        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
-            取值：
-                nowrap     默认值，不换行
-                wrap        换行
-                wrap-reverse  反方向换行
-        flex-flow   dirextion和wrap的缩写方式
-            取值：
-                row nowrap 默认值
-                direction wrap
-        justify-content   定义项目在主轴上的对齐方式
-            取值：
-                flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                space-between  两端对齐，项目之间的距离是相等的
-                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
-        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
-            取值：
-                flex-start  交叉轴起点对齐
-                flex-end   交叉轴终点对齐
-                center     交叉轴中间对齐
-                baseline   基线对齐，以所有项目中的第一行文本为准
-                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
-        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
-            取值：
-                flex-start   交叉轴顶端对齐
-                flex-end    交叉轴底端对齐
-                center      交叉轴中间对齐
-                space-between  与交叉轴两端对齐
-                space-around     项目与项目间对齐
-    项目属性：
-        该组属性主要设置于项目中
-        order  定义项目在排列顺序，值越小，越靠前，默认为0
-        flex-grow  指定项目的放大比例，默认为0，即不放大
-        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
-        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
-        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
-            取值，auto  相当于1  1   auto
-                 none  相当于0 0  auto
-                 flex-grow【,flex-shrink,flex-basis】
-        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
-            取值： auto 默认值，使用
-                  flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                base-line
-                stretch
-</code></pre><p>4、CSS Hack 兼容性</p>
-<pre><code>标准模式和混杂模式和准标准模式
-IE6之前，没有兼容性说法
-IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
-    混杂模式  无标准可言
-        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
-    标准模式  安全支持
-    准标准模式，即支持标准，也同时向前兼容非标准代码
-如何根据不同的浏览器编写不同的css
-    css类内部Hack
-        在属性名称前和值添加前后缀以便识别不同的浏览器
-    选择器Hack
-        在选择器前添加特殊标识以便识别不同的浏览器
-    头部引用hack
-        通过html的条件注释来判断浏览器版本，去执行不同的CSS
-        条件注释
-            条件：
-                gt:判断当前浏览器是否大于指定定版本
-                gte：判断当前浏览器是否大于等于指定定版本
-                it:   判断当前浏览器是否小于指定版本
-                ite： 判断当前浏览器是否小于等于指定版本
-                !：   判断当前浏览器是否为非指定版本
-                    &lt;!--[if !IE 8]&gt;
-                        该段内容在除IE8以外浏览器中显示
-                    &lt;![endif]--&gt;
-</code></pre><p>5、转换</p>
-<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
-    允许进行2D和3D方向的转换
-    2D转换：在平面中进行的操作
-    3D转换：在空间中进行的操作
-转换属性：
-    rtansform:为元素应用2D或3D转换效果
-        取值：none;  没有效果
-
-            transform-functions:一组转换函数
-                位移转换函数：translate()
-                改变形状函数：skew()
-                注意：如果指定多个转换函数的话中间用空格隔开
-    转换原点：
-        属性：transform-origin
-        默认：转换原点在元素中心处
-        取值：轴线给值
-            两个轴线值：X Y
-            三个轴线值：X Y Z
-2D转换
-    位移：改变元素在页面中的位置
-        语法：transform
-            fransform(x)  改变元素在X轴的位置
-            fransform(X ,Y)  改变元素在两轴的位置
-            fransformX(X) 只在X轴上位置移动
-            fransformY(Y)  只在Y轴上位置移动
-    缩放： 改变元素在页面中的大小】
-        语法：transform
-            scale(value)  表示两轴等比缩放
-                取值：默认  为1
-                    放大   为大于1的数值
-                    缩小   为0~1之间小数
-                    返转   负数
-            sacle(X,Y)
-            saclex(y)
-            sacley(y)
-    旋转：改变元素在页面上的角度，要根据原点实现转换效果
-        语法：transform
-            rotate(ndeg)
-                n 取值正，顺时针旋转
-                n 取值负，逆时针旋转
-                deg 为角度
-                0~360范围
-        注意：转换原点问题
-            元素坐标轴也跟着旋转
-    倾斜：改变元素在页面中形状
-        语法：transform
-            skew(xdeg)  横向倾斜指定度数
-                x 取值正，y轴逆时针倾斜一定角度
-                  取值负，Y轴顺时针倾斜一定角度
-            skew(xdeg,ydeg)
-            skewx(xdeg)
-            skewy(ydeg)
-3D转换
-    感觉空间
-    属性：perspetive 假定人眼到投射平面的距离
-    注意：该属性要放在3D转换元素的父元素上
-        兼容性chrome和safari需要加前缀
-            -wedkit-perspective:500px;
-    旋转：以X轴中心轴旋转
-            rotatex(xdeg)
-          以Y轴中心轴旋转
-            rotatey(ydeg)
-          以Z轴中心轴旋转
-            rotatez(zdeg)
-        取值：正  顺时针
-            负   逆时针
-        以多个轴同时进行旋转
-            rotate3d(x ,y, z ,ndeg)
-                x y z 取值为1，该轴参与旋转
-                x y z  取值为0 ，该轴不参与旋转
-    位移：改变元素在Z轴上的位置
-        语法：transform
-            translatez(z)
-
-            transform-style
-                取值：flat  默认值，子元素不保留3D位置
-                     preserve-3D  子元素保留3D位置
-</code></pre><p>6、过渡</p>
-<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
-要素与属性：
-    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
-        transition-property: 属性名称（width）
-                      all   全部属性
-                      none
-        允许设置过渡效果的属性：
-            颜色属性
-            渐变属性
-            取值为数字属性
-            转换属性 transition-property:transform;
-            visibility属性
-            阴影属性
-    指定过渡时长
-        transition-duration: 以S、MS为单位数值
-    指定过渡时速曲线函数  可选
-        transition-timing-function
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-    指定过渡的延迟时间   可选
-        transition-delay
-            取值：以S或MS做为单位
-    简写属性：transition:prop duration  timing-fun delay;
-        多个过渡效果
-            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
-触发过渡条件
-    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
-    将过渡编写在:hover,:active伪类中
-</code></pre><p>7、动画</p>
-<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
-动画使用步骤
-    声明动画
-        指定动画名称
-        指定动画中的关键帧（keyframes）
-            时间点（以百分比描述时间）
-            元素状态（CSS样式）
-    为元素调用动画
-        指定调用动画的名称以及执行时长
-语法：
-    声明动画     注意前缀，兼容性问题
-        &lt;style&gt;
-            @keyframes 名称{
-                0%{   动画开始时，元素的状态   }
-                。。。。
-                100%{  动画结束时，元素的状态  }
-            }
-        &lt;/style&gt;
-    调用动画(animation)
-        animation-name  指定调用动画名称
-        animation-duration   指定动画周期时长，以S或MS为单位
-        animation-timing-function  指定动画的速度时间出线函数
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-        animation-delay  指定动画延迟时间
-        animation-iteration-count  指定动画播放次数
-            取值：默认1次，具体数值
-                infinite:无限次播放
-        animation-direction  指定动画的播放方向
-            取值：normal  从0%~100%
-                reverse  从100%~0%
-                alternate  轮流来回播放 奇数 0%~100%
-                                 偶数 100%~0%
-        animation  简写方式
-            取值：name  duration  timing-fun delay  iteration-count direction;
-        animation-fill-mode  指定动画播放之前、之后的填充模式
-            取值：none  默认值
-                 forwards  动画播放完成后，保持在最后一帧的位置
-                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
-                 both 同时应用在开始和最后的位置帧上
-        animation-play-state  动画播放状态
-            取值：paused 暂停
-                 running 播放
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、复杂选择器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
-    
-      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS优先级算法如何计算</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS优先级算法如何计算/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:53:48.776Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>优先级就近原则，同权重情况下样式定义最近者为准;</li>
-<li>载入样式以最后载入的定位为准;<br>优先级为:    !important &gt;  id &gt; class &gt; tag<br>important 比 内联优先级高</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
-&lt;li&gt;载入样式以最后载入的定位为准;&lt;br&gt;优先级为:    !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;important 比 内联优先级高&lt;/li&gt;
-&lt;/
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DOM_BOM笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/DOM_BOM%E7%AC%94%E8%AE%B0/"/>
-    <id>www.wangchengzou.cn/2017/07/22/DOM_BOM笔记/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:57:34.367Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><p>DOM: Document Object Model</p>
-<p> DOM是专门操作网页内容的API标准<br> 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题<br> 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商都遵照执行。<br> 结果，使用DOM API操作网页内容，几乎100%兼容所有浏览器<br> 何时: 只要操作网页内容，就用DOM API查找, 修改(内容,属性,样式), 添加, 删除.</p>
-</li>
-</ol>
-<p>DOM Tree:</p>
-<pre><code>什么是: 网页中一切内容在内存中都是以树形结构存储的
-       网页中每一项内容都是树上的一个节点对象
-       包括: 元素, 文字, 属性...
-       树只有一个根节点: document, 包含了所有网页内容
-Node: 每个节点都是一个node类型的对象
-      node是所有节点的父类型
-</code></pre><p>三大公共: nodeType  nodeName  nodeValue</p>
-<pre><code>nodeType: 节点的类型
-  值: document   9
-     element     1
-     attribute     2
-     text         3
-  何时: 只要判断节点类型，就用nodeType
-        因为不同类型的节点，能执行的操作是不一样的
-  问题: 不能进一步区分元素的名称
-  解决:
-nodeName: 节点的名称
-  值: document   #document
-     element    全大写的标签名
-     attribute    属性名
-     text        #text
-  何时: 只要细致鉴别元素的标签名时
-    强调: nodeName返回的是全大写的标签名
-nodeValue: 节点值:
-  值: document   null
-     element     null
-     attribute     属性值
-     text         文本内容
-</code></pre><p>2、查找: 4种:</p>
-<pre><code>  a. 不需要查找，可直接获得的元素
-        html   document.documentElement
-        head   document.head
-        body   document.body
-  b. 按节点间关系查找:
-节点树: 包含所有节点: 元素和文本
-  1. 父子: elem.parentNode  找elem的父节点
-        elem.childNodes  找elem的所有*直接*子节点
-            返回，所有直接子节点组成的集合(类数组)
-        elem.firstChild   找elem的第一个*直接*子节点
-        elem.lastChild   找elem的最后一个*直接*子节点
-  2. 兄弟: elem.previousSibling 找elem的前一个兄弟
-        elem.nextSibling   找elem的下一个兄弟
- 何时: 前提: 已经获得了一个节点
-      要找周围临近的节点时
- 问题: 连看不见的空字符，也算文本节点——干扰
- 解决:
-元素树: 仅包含元素节点的树结构
-       不是一棵新树，仅是节点树的子集
- 1. 父子: elem.parentElement  找elem的父元素
-        elem.children  找elem的所有*直接*子元素
-            返回，所有直接子元素组成的集合(类数组)
-        elem.firstElementChild   第一个*直接*子元素
-        elem.lastElementChild   最后一个*直接*子元素
- 2. 兄弟:
-   elem.previousElementSibling 找elem的前一个兄弟元素
-   elem.nextElementSibling   找elem的下一个兄弟元素
- 何时: 只要仅关心元素节点，不关心文本节点时
- 问题: IE9+
- 强调: childNodes和children返回的都是动态集合！
-   凡是遍历动态集合，都要先缓存元素个数，再遍历
-   for(var i=0,len= childNodes.length;i&lt;len;i++)
-     不会导致反复查找DOM树
-</code></pre><p>3、 按HTML查找:</p>
-<pre><code>    优: 范围可大可小,可设置条件
-a、按id查找: var elem=document.getElementById(&quot;id&quot;)
-  强调: 1. 只能在document对象上调用
-       2. 返回一个元素对象
-b、按标签名查找:
-    var elems=parent.getElementsByTagName(&quot;标签名&quot;);
-  强调: 1. 可在任意父元素上
-       2. 返回多个元素组成的集合
-       3. 不但查找直接子元素，还查找所有后代元素
-c、按name属性查找: 了解
-   专门找表单中有name属性的表单元素
-    var elems=document.getElementsByName(&quot;name&quot;)
-    强调: 1. 只能在document上调用
-         2. 返回多个元素组成的集合
-d、按class属性查找:
-    var elems=parent.getElementsByClassName(&quot;class&quot;)
-    强调: 1. 可在任意父元素上调用
-         2. 返回多个元素组成的集合
-         3. 不要求完整匹配，只要包含即可！
-缺: 每次只能按一个条件查找
-   如果条件复杂，就无法一句话获得想要的元素
-</code></pre><p>4、 按选择器查找:</p>
-<pre><code>a. 只找一个元素:
-  var elem=parent.querySelector(&quot;selector&quot;);
-b. 找多个元素
-  var elems=parent.querySelectorAll(&quot;selector&quot;);
-</code></pre><p>5、 总结:</p>
-<pre><code> A首次查找:
-    1. 如果条件简单: 按HTML查找: id, 标签, className
-    2. 如果条件复杂: 按选择器查找:
- B已经获得一个元素，找周围相邻: 按节点间关系
-鄙视: 按HTML查找 vs 按选择器查找
- 1.使用的难易程度: 当条件复杂时:
-    按选择器查找——简单, 按HTML查找——繁琐
- 2.返回值:
-    getElementsByTagName() 返回多个元素的*动态*集合
-      什么是动态集合: 不实际存储对象的属性值，每次访问，都要重新查找DOM树
-    querySelectorAll()  返回多个元素的*非动态*集合
-      什么是非动态集合: 实际存储对象的所有属性值，即使反复访问集合，也不会导致反复查找DOM树
- 3.单次效率:
-    按HTML查找——效率高!
-    按选择器查找——效率低
-</code></pre><p>3、 修改: (内容, 属性, 样式)</p>
-<pre><code>1. 修改:
-标准属性: 2种:
-  1. 核心DOM: 操作一切结构化文档的API(HTML，XML)
-    elem.attributes集合: 保存了当前元素的所有属性节点
-    获取属性值: elem.getAttribute(&quot;属性名&quot;)
-    修改属性值: elem.setAttribute(&quot;属性名&quot;,&quot;值&quot;)
-    判断是否包含属性: elem.hasAttribute(&quot;属性名&quot;)
-    移除属性: elem.removeAttribute(&quot;属性名&quot;)
-  2. HTML DOM: 对部分常用DOM API的简化版本
-     HTML DOM将标准属性都预定义在元素对象中
-    获取属性值: elem.属性名
-    修改属性值: elem.属性名=&quot;值&quot;;
-    判断是否包含属性: elem.属性名===&quot;&quot; 不包含
-    移除属性: elem.属性名=&quot;&quot;
-    特例: class属性和ES标准中的class重名
-          -&gt; DOM -&gt; className
-    自定义属性: 比如: data-toggle=&quot;dropdown&quot;
-      HTML DOM不能操作自定义属性
-      暂时只能用核心DOM操作:
-    三大状态: disabled  selected   checked
-      核心DOM无法操作三大状态属性
-      HTMLDOM: elem.disabled elem.selected  elem.checked
-            值都是bool类型true/false
-</code></pre><p>3.1、修改css样式:</p>
-<pre><code>1. 仅获取/修改内联样式:  elem.style.css属性名
-  问题1: css属性名有的带-
-  解决: 所有css属性名都要去横线变驼峰
-     比如: background-color: backgroundColor
-          list-style-type: listStyleType
-  问题2: 所有数值类型的属性值都是带单位的字符串
-  解决: 获取时: 都要去单位，转数值
-        修改时: 将单位拼回数值
-  问题3: 仅能获得内联样式, 无法获得样式表中的样式
-  解决: 计算后的样式: 最终应用到元素上的完整样式
-    何时: 只要希望获得元素完整的样式时
-    如何: 2步:
-      1. 获得完整样式对象style
-        var style=getComputedStyle(elem)
-      2. 获得style对象中的css属性
-        style.css属性名
-     强调: style对象中的样式都是只读
-结论: 1. 获取样式: getComputedStyle
-     2. 修改样式: elem.style.css属性名
-2. 运行时修改样式表中的样式:
-  Step1: 获得样式表对象:
-   var sheet=document.styleSheets[i]
-  Step2: 获得样式表对象中某个CSSRule(一个选择器{})
-   var rule=sheet.cssRules[i]
-  Step3: 修改rule.style.css属性名=值
-</code></pre><p>4、 添加和删除:</p>
-<pre><code>添加: 3步:
- Step1: 创建空元素:
-  var a=document.createElement(&quot;a&quot;);
-  &lt;a&gt;&lt;/a&gt;
- Step2: 设置关键属性:
-     a.href=&quot;http://tmooc.cn&quot;
-     a.innerHTML=&quot;go to tmooc&quot;;
-  &lt;a href=&quot;http://tmooc.cn&quot;&gt;go to tmooc&lt;/a&gt;
- Step3: 将元素添加到DOM树: 3种:
-   1. 末尾追加: parent.appendChild(child)
-   2. 中间插入: parent.insertBefore(child, oldChild)
-   3. 替换: parent.replaceChild(child, oldChild)
-</code></pre><p>优化: 尽量少的修改DOM树</p>
-<pre><code>原因: 页面加载过程:
-  html -&gt; DOM Tree(松树)
-           ↓
-        render Tree(圣诞树)-&gt; layout(计算绝对布局)-&gt;paint
-           ↑                 最耗时
-  css  -&gt; cssRules(装饰品)
-  每次修改DOM树，都会导致重新layout，耗时。
-如何: 2种:
- 1. 如果同时添加父元素和子元素时，应该先在内存将子元素都添加到父元素中，再将父元素一次性整体添加到DOM树
-    结果: 只触发一次layout
-</code></pre><p>1、 HTML DOM 常用对象: 对常用HTML元素操作的简化</p>
-<pre><code>Select: 代表页面上的一个select元素
- 属性: select.value 当前选中项的value
-                 没有value，就返回选中项的内容
-      select.options 保存select下所有option元素对象
-        相当于: select.getElementsByTagName(&quot;option&quot;)
-        select.options.length 保存select下option的个数
-        清空select下所有option: select.options.length=0;
-      select.length 等效于select.options.length
-        清空select下所有option: select.length=0;
-                               select.innerHTML=&quot;&quot;;
-      select.selectedIndex 当前选中项的下标
-  事件: onchange 当选中项发生改变时
-  方法: select.add(option) 向select中添加一个option
-         相当于: select.appendChild(option)
-         不支持文档片段
-       select.remove(i) 移除select中i位置的一个option
-Option: 代表页面上的一个option元素
-  创建: var opt=new Option(text,value);
-     创建一个option对象，同时设置opt的内容为text，设置opt的值为value
-     相当于: var opt=document.createElement(&quot;option&quot;);
-            opt.innerHTML=text;
-            opt.value=value;
-  属性: .text 代替.innerHTML
-       .index  表示当前option在select下的下标位置
-</code></pre><p>Table: 代表网页中一个table元素</p>
-<pre><code> 管着行分组：
-   添加行分组: var 行分组=table.createTHead|TBody|TFoot();
-       强调: 即创建，同时又将行分组添加到table
-   删除行分组: table.deleteTHead|TFoot()
-   获取行分组: table.tHead|tFoot
-              table.tBodies[i]
-行分组: THead TBody TFoot
-  管着行:
-   添加行: var tr=行分组.insertRow(i)
-       在行分组中i位置插入一个新行
-       强调: 中间插入行，原i位置的行向后顺移
-       固定套路: 1. 末尾追加一个新行: 行分组.insertRow()
-                2. 开头插入: 行分组.insertRow(0)
-   删除行: 行分组.deleteRow(i)
-       删除行分组中第i行
-       强调: i是当前行在行分组内的相对下标位置
-   获取行: 行分组.rows
-
-行: tr
-  管着td:
-    添加td: var td=tr.insertCell(i);
-        省略i表示右侧末尾追加
-        insertCell不支持添加th，只能添加td
-    删除td: tr.deleteCell(i);
-    获取td: tr.cells
-
-删除行:
- tr上都有一个属性: tr.rowIndex 行在整个表的绝对下标
- 问题：行分组，无法使用tr.rowIndex删除行。
- 解决: table.deleteRow(tr.rowIndex)
- 总结: 今后，删除行都用table.deleteRow(tr.rowIndex)
-</code></pre><p>form: 代表页面上一个表单元素</p>
-<pre><code> 获取: var form=document.forms[i/id]
- 属性: form.elements 保存了表单中所有表单元素的数组
-        包括: input   select   textarea  button
-      form.elements.length 获得表单中表单元素的个数
-      form.length =&gt; form.elements.length
- 方法: form.submit();  用于手动提交表单
- 事件: form.onsubmit  以任何方式提交表单之前自动触发
-          常用于在提交之前，验证所有表单元素的内容
-表单元素:
- 获取: var elem=form.elements[i/id/name]
-        简写: 如果表单元素有name属性: form.name
- 方法: elem.focus() 让elem获得焦点
-      elem.blur()  让elem失去焦点
-
-Image: 代表页面上一个img元素
-  创建: var img=new Image();
-</code></pre><p>DOM总结: 查找-&gt;绑定事件-&gt;查找-&gt;修改/添加/删除</p>
-<pre><code>查找: 4种:
-  1. 不需要查找可直接获得: html  head  body  form
-  2. 节点间关系: 节点树/元素树
-      鄙视: 递归遍历
-  3. 按HTML: 4种: ById, ByTagName, ByName, ByClassName
-  4. 按选择器: 2种:
-      只找一个: querySelector()
-      找多个: querySelectorAll()
-修改:
-  内容: .innerHTML  .textContent/.innerText  .value
-  属性:
-    1. 标准属性: 1. 核心DOM; 2. HTML DOM
-    2. 自定义属性: 核心DOM
-    3. 状态属性: HTML DOM
-  样式:
-    修改: elem.style.css属性=值
-    获取: var style=getComputedStyle(elem)
-         style.css属性 ——只读
-    可通过修改class属性批量应用修改多个css属性
-添加: 3步:
-   1. createElement,
-   2.设置关键属性,
-   3. appendChild/insertBefore/replaceChild
-  优化: 尽量少的操作DOM树
-  如何: 2种:
-   1. 同时添加父子元素: 先将子元素加入父元素，再将父元素整体添加到页面
-   2. 同时添加多个平级子元素: fragment
-删除: parent.removeChild(child)
-HTML DOM: Select/Option  Table/...  From/Element  Image
-过渡动画: 2步:
-  css中: 添加transition
-  js中: 修改css属性值
-   不支持transition: display  zIndex
-   支持: width  height  opacity   bottom/top/left/right ...
-</code></pre><p>2、BOM: Browser Object Model</p>
-<pre><code>什么是: 专门操作浏览器窗口的API
-比如: alert prompt confirm
-问题: 1. 没有标准——兼容性问题;
-     2. 不可定制
-window对象: 2个角色:
-  1. 代替ES中的Global充当全局作用域对象
-  2. 封装所有BOM和DOM的API
-
-打开超链接: 4种:
-  1. 在当前窗口打开，可后退
-    html: &lt;a href=&quot;url&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
-    js: /*window.*/open(&quot;url&quot;,&quot;_self&quot;)
-  2. 在当前窗口打开，不可后退
-    js: location.replace(&quot;url&quot;);
-       用新url代替history中当前url，结果: 无法后退
-  3. 在新窗口打开，可打开多个
-    html: &lt;a href=&quot;url&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
-    js: open(&quot;url&quot;,&quot;_blank&quot;)
-  4. 在新窗口打开，只能打开一个
-    html: &lt;a href=&quot;url&quot; target=&quot;自定义name属性值&quot;&gt;&lt;/a&gt;
-    js: open(&quot;url&quot;,&quot;自定义name属性值&quot;)
-    原理: 内存中每个窗口都有一个唯一的name属性来唯一标示一个窗口
-      浏览器规定，相同name属性的窗口只能打开一个
-    其实: html中的target属性就是在设置新窗口的name属性值。
-    如果target中使用自定义的窗口名，则只能打开一个
-    预定义:
-      _self: 默认使用当前窗口自己的name属性
-           结果，新窗口覆盖当前窗口
-      _blank: 意为不指定窗口名, 浏览器会随机生成不同的窗口名。
-           结果: 每次打开新窗口都随机生成不同的name
-                 结果: 可打开任意多个
-</code></pre><p>定时器: 2种:</p>
-<pre><code>1. 周期性定时器:
-  什么是: 让程序按照指定时间间隔，反复执行一项任务
-  何时: 只要让程序按照指定时间间隔，反复执行一项任务
-  如何: 3件事:
-    1. 任务函数: 让定时器反复调用的函数
-    2. 启动定时器:
-     var timer=setInterval(任务函数, 间隔的毫秒数)
-    3. 停止定时器: clearInterval(timer)
-        问题: timer中的序号会残留在timer变量中
-        解决: 停止定时器后，主动清空timer
-             timer=null
-  停止定时器: 2种:
-    1. 用户手动停止定时器: 用按钮调用clearInterval
-    2. 自动停止定时器: 在任务函数中:
-       1. 设定临界条件
-       2. 如果达到临界条件就自动调用clearInterval
-
-2. 一次性定时器:
- 什么是: 让程序先等待一段时间，再自动执行一次任务
-         执行一次后，定时器自动停止
- 何时: 只要先等待，再执行一次任务
- 如何: 三件事
-   1. 任务函数
-   2. 启动: var timer=setTimeout(任务函数, 等待的毫秒数)
-   3. 停止: clearTimeout(timer)
-</code></pre><p>鄙视: 定时器中的函数，只能在主程序所有程序执行后才能执行</p>
-<pre><code>for(var i=0;i&lt;3;i++){
-  setTimeout(function(){
-    console.log(i);
-  },0);
-}//结果: 3 3 3
-//alert(&quot;Hello&quot;) 如果不点确定，则永远不输出333
-</code></pre><p>window:<br> history，location，document，navigator，screen，event</p>
-<pre><code>history: 保存当前窗口打开后，成功访问过的历史记录的栈
-  history封装的非常严密
-  只能前进，后退，刷新: history.go(n)
-   前进: go(1)  后退:go(-1)  刷新:go(0)
-
-location: 专门保存当前窗口正在打开的url的对象
- 属性: location.href 保存了完整的url
-        在当前窗口打开: location.href=新url
-      location.protocol: 协议
-            .host: 主机名+端口号
-            .hostname: 主机名
-            .port: 端口号
-      location.pathname: 相对路径
-            .hash: 锚点地址#xxx
-            .search: 表单提交后地址栏中的查询字符串
-                   ?变量名=值&amp;变量名=值&amp;...
- 方法:
-   1. 替换history中当前url,实现进制后退:
-     location.replace(&quot;新url&quot;)
-   2. 在当前页面打开，可后退:
-     location.assign(&quot;新url&quot;)
-       =&gt; location.href=&quot;新url&quot;
-        =&gt; location=&quot;新url&quot;
-   3. 刷新页面:  location.reload(false/true);
-     鄙视: false/true的差别
-       浏览器本地是有缓存的
-         浏览器的缓存中会保存css，图片等静态资源
-       每次请求时，首先查看缓存中是否有想要文件
-         没有想要文件，或文件过期，才去服务器下载新文件
-       reload(false) 优先使用本地缓存的文件
-       reload(true) 强制去服务器下载新文件
-     查 浏览器缓存的原理！
-</code></pre><p>1、event</p>
-<pre><code>绑定事件: 2种:
- 1. 在HTML中绑定: &lt;ANY on事件名=&quot;js语句&quot;
-    问题: 不符合内容与行为分离的原则——不便于维护
- 2. 在js中动态绑定: 2种:
-    1. 一个事件只绑定一个处理函数:
-       elem.on事件名=function(){
-         //this-&gt;elem
-       }
-       解除绑定: elem.on事件名=null;
-       问题: 每个事件只能绑定一个处理函数
-       解决:
-    2. 一个事件可同时绑定多个处理函数:
-       elem.addEventListener(&quot;事件名&quot;,function(){
-         //this-&gt;elem
-       })
-       解除绑定:
-        elem.removeEventListener(&quot;事件名&quot;,&quot;函数名&quot;);
-        强调: 如果一个事件处理函数可能被动态移除，则绑定时，不能使用匿名函数，必须使用有名称的函数
-
-    事件模型: DOM标准: 3个阶段
-      1. 捕获: 由外向内，记录各级父元素绑定的事件处理函数
-      2. 目标触发: 首先执行目标元素上的事件处理函数
-      3. 冒泡: 由内向外，反向执行捕获阶段记录的处理函数
-
-    事件对象: 事件发生时自动创建的
-             封装事件信息
-             提供操作事件的API 的对象
-      何时: 只要希望获得事件信息或修改事件的默认行为
-      如何: 事件对象，在事件发生时，通常作为事件处理函数的第一个参数，默认自动传入！
-          .on事件名=function(e){
-             //e会自动获得事件对象
-          }
-    阻止蔓延/冒泡: e.stopPropagation();
-    利用冒泡:
-      优化: 尽量少的添加事件监听
-      原理: 因为浏览器触发事件监听，是采用遍历查找的方式。添加的监听越多，遍历的速度越慢
-      如何: 如果多个子元素都要绑定相同的事件
-          只要在父元素绑定一次，所有子元素即可共用
-      难题:
-         1. 获得目标元素:
-            不能用this, 因为this指父元素
-            应该用e.target，保存实际点击的目标元素
-         2. 鉴别目标元素:
-            先判断目标元素的nodeName或className...
-            只有目标元素符合要求时，才执行事件操作
-    取消事件/阻止默认行为: e.preventDefault();
-    事件坐标: 3对儿:
-      1. 相对于整个屏幕左上角的坐标: e.screenX|screenY
-      2. 相对于文档显示区左上角的坐标: e.clientX|clientY
-      3. 相对于当前元素左上角的坐标: e.offsetX|offsetY
-
-    页面滚动:
-      事件: window.onscroll
-      获得页面滚动位置: document.body.scrollTop
-          页面超出文档显示区顶部的距离
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;DOM: Document Object Model&lt;/p&gt;
-&lt;p&gt; DOM是专门操作网页内容的API标准&lt;br&gt; 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题&lt;br&gt; 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-      <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
-    
-      <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS选择符有哪些？哪些属性可以继承</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS选择符有哪些？哪些属性可以继承/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:53:18.490Z</updated>
-    
-    <content type="html"><![CDATA[<p> 1.id选择器（ # myid）<br> 2.类选择器（.myclassname）<br> 3.标签选择器（div, h1, p）<br> 4.相邻选择器（h1 + p）<br> 5.子选择器（ul &gt; li）<br> 6.后代选择器（li a）<br> 7.通配符选择器（ * ）<br> 8.属性选择器（a[rel = “external”]）<br> 9.伪类选择器（a:hover, li:nth-child）</p>
-<ul>
-<li>可继承的样式： font-size font-family color, UL LI DL DD DT;</li>
-<li>不可继承的样式：border padding margin width height ;</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; 1.id选择器（ # myid）&lt;br&gt; 2.类选择器（.myclassname）&lt;br&gt; 3.标签选择器（div, h1, p）&lt;br&gt; 4.相邻选择器（h1 + p）&lt;br&gt; 5.子选择器（ul &amp;gt; li）&lt;br&gt; 6.后代选择器（li a）&lt;br&gt; 7.通配符
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
     <title>HTML5的form如何关闭自动完成功能</title>
     <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
     <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
@@ -3226,6 +3590,888 @@ localStorage中若数据发生了修改，会触发一次window.onstorage事件�
   </entry>
   
   <entry>
+    <title>DOM_BOM笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/DOM_BOM%E7%AC%94%E8%AE%B0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/DOM_BOM笔记/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:57:34.367Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p>DOM: Document Object Model</p>
+<p> DOM是专门操作网页内容的API标准<br> 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题<br> 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商都遵照执行。<br> 结果，使用DOM API操作网页内容，几乎100%兼容所有浏览器<br> 何时: 只要操作网页内容，就用DOM API查找, 修改(内容,属性,样式), 添加, 删除.</p>
+</li>
+</ol>
+<p>DOM Tree:</p>
+<pre><code>什么是: 网页中一切内容在内存中都是以树形结构存储的
+       网页中每一项内容都是树上的一个节点对象
+       包括: 元素, 文字, 属性...
+       树只有一个根节点: document, 包含了所有网页内容
+Node: 每个节点都是一个node类型的对象
+      node是所有节点的父类型
+</code></pre><p>三大公共: nodeType  nodeName  nodeValue</p>
+<pre><code>nodeType: 节点的类型
+  值: document   9
+     element     1
+     attribute     2
+     text         3
+  何时: 只要判断节点类型，就用nodeType
+        因为不同类型的节点，能执行的操作是不一样的
+  问题: 不能进一步区分元素的名称
+  解决:
+nodeName: 节点的名称
+  值: document   #document
+     element    全大写的标签名
+     attribute    属性名
+     text        #text
+  何时: 只要细致鉴别元素的标签名时
+    强调: nodeName返回的是全大写的标签名
+nodeValue: 节点值:
+  值: document   null
+     element     null
+     attribute     属性值
+     text         文本内容
+</code></pre><p>2、查找: 4种:</p>
+<pre><code>  a. 不需要查找，可直接获得的元素
+        html   document.documentElement
+        head   document.head
+        body   document.body
+  b. 按节点间关系查找:
+节点树: 包含所有节点: 元素和文本
+  1. 父子: elem.parentNode  找elem的父节点
+        elem.childNodes  找elem的所有*直接*子节点
+            返回，所有直接子节点组成的集合(类数组)
+        elem.firstChild   找elem的第一个*直接*子节点
+        elem.lastChild   找elem的最后一个*直接*子节点
+  2. 兄弟: elem.previousSibling 找elem的前一个兄弟
+        elem.nextSibling   找elem的下一个兄弟
+ 何时: 前提: 已经获得了一个节点
+      要找周围临近的节点时
+ 问题: 连看不见的空字符，也算文本节点——干扰
+ 解决:
+元素树: 仅包含元素节点的树结构
+       不是一棵新树，仅是节点树的子集
+ 1. 父子: elem.parentElement  找elem的父元素
+        elem.children  找elem的所有*直接*子元素
+            返回，所有直接子元素组成的集合(类数组)
+        elem.firstElementChild   第一个*直接*子元素
+        elem.lastElementChild   最后一个*直接*子元素
+ 2. 兄弟:
+   elem.previousElementSibling 找elem的前一个兄弟元素
+   elem.nextElementSibling   找elem的下一个兄弟元素
+ 何时: 只要仅关心元素节点，不关心文本节点时
+ 问题: IE9+
+ 强调: childNodes和children返回的都是动态集合！
+   凡是遍历动态集合，都要先缓存元素个数，再遍历
+   for(var i=0,len= childNodes.length;i&lt;len;i++)
+     不会导致反复查找DOM树
+</code></pre><p>3、 按HTML查找:</p>
+<pre><code>    优: 范围可大可小,可设置条件
+a、按id查找: var elem=document.getElementById(&quot;id&quot;)
+  强调: 1. 只能在document对象上调用
+       2. 返回一个元素对象
+b、按标签名查找:
+    var elems=parent.getElementsByTagName(&quot;标签名&quot;);
+  强调: 1. 可在任意父元素上
+       2. 返回多个元素组成的集合
+       3. 不但查找直接子元素，还查找所有后代元素
+c、按name属性查找: 了解
+   专门找表单中有name属性的表单元素
+    var elems=document.getElementsByName(&quot;name&quot;)
+    强调: 1. 只能在document上调用
+         2. 返回多个元素组成的集合
+d、按class属性查找:
+    var elems=parent.getElementsByClassName(&quot;class&quot;)
+    强调: 1. 可在任意父元素上调用
+         2. 返回多个元素组成的集合
+         3. 不要求完整匹配，只要包含即可！
+缺: 每次只能按一个条件查找
+   如果条件复杂，就无法一句话获得想要的元素
+</code></pre><p>4、 按选择器查找:</p>
+<pre><code>a. 只找一个元素:
+  var elem=parent.querySelector(&quot;selector&quot;);
+b. 找多个元素
+  var elems=parent.querySelectorAll(&quot;selector&quot;);
+</code></pre><p>5、 总结:</p>
+<pre><code> A首次查找:
+    1. 如果条件简单: 按HTML查找: id, 标签, className
+    2. 如果条件复杂: 按选择器查找:
+ B已经获得一个元素，找周围相邻: 按节点间关系
+鄙视: 按HTML查找 vs 按选择器查找
+ 1.使用的难易程度: 当条件复杂时:
+    按选择器查找——简单, 按HTML查找——繁琐
+ 2.返回值:
+    getElementsByTagName() 返回多个元素的*动态*集合
+      什么是动态集合: 不实际存储对象的属性值，每次访问，都要重新查找DOM树
+    querySelectorAll()  返回多个元素的*非动态*集合
+      什么是非动态集合: 实际存储对象的所有属性值，即使反复访问集合，也不会导致反复查找DOM树
+ 3.单次效率:
+    按HTML查找——效率高!
+    按选择器查找——效率低
+</code></pre><p>3、 修改: (内容, 属性, 样式)</p>
+<pre><code>1. 修改:
+标准属性: 2种:
+  1. 核心DOM: 操作一切结构化文档的API(HTML，XML)
+    elem.attributes集合: 保存了当前元素的所有属性节点
+    获取属性值: elem.getAttribute(&quot;属性名&quot;)
+    修改属性值: elem.setAttribute(&quot;属性名&quot;,&quot;值&quot;)
+    判断是否包含属性: elem.hasAttribute(&quot;属性名&quot;)
+    移除属性: elem.removeAttribute(&quot;属性名&quot;)
+  2. HTML DOM: 对部分常用DOM API的简化版本
+     HTML DOM将标准属性都预定义在元素对象中
+    获取属性值: elem.属性名
+    修改属性值: elem.属性名=&quot;值&quot;;
+    判断是否包含属性: elem.属性名===&quot;&quot; 不包含
+    移除属性: elem.属性名=&quot;&quot;
+    特例: class属性和ES标准中的class重名
+          -&gt; DOM -&gt; className
+    自定义属性: 比如: data-toggle=&quot;dropdown&quot;
+      HTML DOM不能操作自定义属性
+      暂时只能用核心DOM操作:
+    三大状态: disabled  selected   checked
+      核心DOM无法操作三大状态属性
+      HTMLDOM: elem.disabled elem.selected  elem.checked
+            值都是bool类型true/false
+</code></pre><p>3.1、修改css样式:</p>
+<pre><code>1. 仅获取/修改内联样式:  elem.style.css属性名
+  问题1: css属性名有的带-
+  解决: 所有css属性名都要去横线变驼峰
+     比如: background-color: backgroundColor
+          list-style-type: listStyleType
+  问题2: 所有数值类型的属性值都是带单位的字符串
+  解决: 获取时: 都要去单位，转数值
+        修改时: 将单位拼回数值
+  问题3: 仅能获得内联样式, 无法获得样式表中的样式
+  解决: 计算后的样式: 最终应用到元素上的完整样式
+    何时: 只要希望获得元素完整的样式时
+    如何: 2步:
+      1. 获得完整样式对象style
+        var style=getComputedStyle(elem)
+      2. 获得style对象中的css属性
+        style.css属性名
+     强调: style对象中的样式都是只读
+结论: 1. 获取样式: getComputedStyle
+     2. 修改样式: elem.style.css属性名
+2. 运行时修改样式表中的样式:
+  Step1: 获得样式表对象:
+   var sheet=document.styleSheets[i]
+  Step2: 获得样式表对象中某个CSSRule(一个选择器{})
+   var rule=sheet.cssRules[i]
+  Step3: 修改rule.style.css属性名=值
+</code></pre><p>4、 添加和删除:</p>
+<pre><code>添加: 3步:
+ Step1: 创建空元素:
+  var a=document.createElement(&quot;a&quot;);
+  &lt;a&gt;&lt;/a&gt;
+ Step2: 设置关键属性:
+     a.href=&quot;http://tmooc.cn&quot;
+     a.innerHTML=&quot;go to tmooc&quot;;
+  &lt;a href=&quot;http://tmooc.cn&quot;&gt;go to tmooc&lt;/a&gt;
+ Step3: 将元素添加到DOM树: 3种:
+   1. 末尾追加: parent.appendChild(child)
+   2. 中间插入: parent.insertBefore(child, oldChild)
+   3. 替换: parent.replaceChild(child, oldChild)
+</code></pre><p>优化: 尽量少的修改DOM树</p>
+<pre><code>原因: 页面加载过程:
+  html -&gt; DOM Tree(松树)
+           ↓
+        render Tree(圣诞树)-&gt; layout(计算绝对布局)-&gt;paint
+           ↑                 最耗时
+  css  -&gt; cssRules(装饰品)
+  每次修改DOM树，都会导致重新layout，耗时。
+如何: 2种:
+ 1. 如果同时添加父元素和子元素时，应该先在内存将子元素都添加到父元素中，再将父元素一次性整体添加到DOM树
+    结果: 只触发一次layout
+</code></pre><p>1、 HTML DOM 常用对象: 对常用HTML元素操作的简化</p>
+<pre><code>Select: 代表页面上的一个select元素
+ 属性: select.value 当前选中项的value
+                 没有value，就返回选中项的内容
+      select.options 保存select下所有option元素对象
+        相当于: select.getElementsByTagName(&quot;option&quot;)
+        select.options.length 保存select下option的个数
+        清空select下所有option: select.options.length=0;
+      select.length 等效于select.options.length
+        清空select下所有option: select.length=0;
+                               select.innerHTML=&quot;&quot;;
+      select.selectedIndex 当前选中项的下标
+  事件: onchange 当选中项发生改变时
+  方法: select.add(option) 向select中添加一个option
+         相当于: select.appendChild(option)
+         不支持文档片段
+       select.remove(i) 移除select中i位置的一个option
+Option: 代表页面上的一个option元素
+  创建: var opt=new Option(text,value);
+     创建一个option对象，同时设置opt的内容为text，设置opt的值为value
+     相当于: var opt=document.createElement(&quot;option&quot;);
+            opt.innerHTML=text;
+            opt.value=value;
+  属性: .text 代替.innerHTML
+       .index  表示当前option在select下的下标位置
+</code></pre><p>Table: 代表网页中一个table元素</p>
+<pre><code> 管着行分组：
+   添加行分组: var 行分组=table.createTHead|TBody|TFoot();
+       强调: 即创建，同时又将行分组添加到table
+   删除行分组: table.deleteTHead|TFoot()
+   获取行分组: table.tHead|tFoot
+              table.tBodies[i]
+行分组: THead TBody TFoot
+  管着行:
+   添加行: var tr=行分组.insertRow(i)
+       在行分组中i位置插入一个新行
+       强调: 中间插入行，原i位置的行向后顺移
+       固定套路: 1. 末尾追加一个新行: 行分组.insertRow()
+                2. 开头插入: 行分组.insertRow(0)
+   删除行: 行分组.deleteRow(i)
+       删除行分组中第i行
+       强调: i是当前行在行分组内的相对下标位置
+   获取行: 行分组.rows
+
+行: tr
+  管着td:
+    添加td: var td=tr.insertCell(i);
+        省略i表示右侧末尾追加
+        insertCell不支持添加th，只能添加td
+    删除td: tr.deleteCell(i);
+    获取td: tr.cells
+
+删除行:
+ tr上都有一个属性: tr.rowIndex 行在整个表的绝对下标
+ 问题：行分组，无法使用tr.rowIndex删除行。
+ 解决: table.deleteRow(tr.rowIndex)
+ 总结: 今后，删除行都用table.deleteRow(tr.rowIndex)
+</code></pre><p>form: 代表页面上一个表单元素</p>
+<pre><code> 获取: var form=document.forms[i/id]
+ 属性: form.elements 保存了表单中所有表单元素的数组
+        包括: input   select   textarea  button
+      form.elements.length 获得表单中表单元素的个数
+      form.length =&gt; form.elements.length
+ 方法: form.submit();  用于手动提交表单
+ 事件: form.onsubmit  以任何方式提交表单之前自动触发
+          常用于在提交之前，验证所有表单元素的内容
+表单元素:
+ 获取: var elem=form.elements[i/id/name]
+        简写: 如果表单元素有name属性: form.name
+ 方法: elem.focus() 让elem获得焦点
+      elem.blur()  让elem失去焦点
+
+Image: 代表页面上一个img元素
+  创建: var img=new Image();
+</code></pre><p>DOM总结: 查找-&gt;绑定事件-&gt;查找-&gt;修改/添加/删除</p>
+<pre><code>查找: 4种:
+  1. 不需要查找可直接获得: html  head  body  form
+  2. 节点间关系: 节点树/元素树
+      鄙视: 递归遍历
+  3. 按HTML: 4种: ById, ByTagName, ByName, ByClassName
+  4. 按选择器: 2种:
+      只找一个: querySelector()
+      找多个: querySelectorAll()
+修改:
+  内容: .innerHTML  .textContent/.innerText  .value
+  属性:
+    1. 标准属性: 1. 核心DOM; 2. HTML DOM
+    2. 自定义属性: 核心DOM
+    3. 状态属性: HTML DOM
+  样式:
+    修改: elem.style.css属性=值
+    获取: var style=getComputedStyle(elem)
+         style.css属性 ——只读
+    可通过修改class属性批量应用修改多个css属性
+添加: 3步:
+   1. createElement,
+   2.设置关键属性,
+   3. appendChild/insertBefore/replaceChild
+  优化: 尽量少的操作DOM树
+  如何: 2种:
+   1. 同时添加父子元素: 先将子元素加入父元素，再将父元素整体添加到页面
+   2. 同时添加多个平级子元素: fragment
+删除: parent.removeChild(child)
+HTML DOM: Select/Option  Table/...  From/Element  Image
+过渡动画: 2步:
+  css中: 添加transition
+  js中: 修改css属性值
+   不支持transition: display  zIndex
+   支持: width  height  opacity   bottom/top/left/right ...
+</code></pre><p>2、BOM: Browser Object Model</p>
+<pre><code>什么是: 专门操作浏览器窗口的API
+比如: alert prompt confirm
+问题: 1. 没有标准——兼容性问题;
+     2. 不可定制
+window对象: 2个角色:
+  1. 代替ES中的Global充当全局作用域对象
+  2. 封装所有BOM和DOM的API
+
+打开超链接: 4种:
+  1. 在当前窗口打开，可后退
+    html: &lt;a href=&quot;url&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
+    js: /*window.*/open(&quot;url&quot;,&quot;_self&quot;)
+  2. 在当前窗口打开，不可后退
+    js: location.replace(&quot;url&quot;);
+       用新url代替history中当前url，结果: 无法后退
+  3. 在新窗口打开，可打开多个
+    html: &lt;a href=&quot;url&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;_blank&quot;)
+  4. 在新窗口打开，只能打开一个
+    html: &lt;a href=&quot;url&quot; target=&quot;自定义name属性值&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;自定义name属性值&quot;)
+    原理: 内存中每个窗口都有一个唯一的name属性来唯一标示一个窗口
+      浏览器规定，相同name属性的窗口只能打开一个
+    其实: html中的target属性就是在设置新窗口的name属性值。
+    如果target中使用自定义的窗口名，则只能打开一个
+    预定义:
+      _self: 默认使用当前窗口自己的name属性
+           结果，新窗口覆盖当前窗口
+      _blank: 意为不指定窗口名, 浏览器会随机生成不同的窗口名。
+           结果: 每次打开新窗口都随机生成不同的name
+                 结果: 可打开任意多个
+</code></pre><p>定时器: 2种:</p>
+<pre><code>1. 周期性定时器:
+  什么是: 让程序按照指定时间间隔，反复执行一项任务
+  何时: 只要让程序按照指定时间间隔，反复执行一项任务
+  如何: 3件事:
+    1. 任务函数: 让定时器反复调用的函数
+    2. 启动定时器:
+     var timer=setInterval(任务函数, 间隔的毫秒数)
+    3. 停止定时器: clearInterval(timer)
+        问题: timer中的序号会残留在timer变量中
+        解决: 停止定时器后，主动清空timer
+             timer=null
+  停止定时器: 2种:
+    1. 用户手动停止定时器: 用按钮调用clearInterval
+    2. 自动停止定时器: 在任务函数中:
+       1. 设定临界条件
+       2. 如果达到临界条件就自动调用clearInterval
+
+2. 一次性定时器:
+ 什么是: 让程序先等待一段时间，再自动执行一次任务
+         执行一次后，定时器自动停止
+ 何时: 只要先等待，再执行一次任务
+ 如何: 三件事
+   1. 任务函数
+   2. 启动: var timer=setTimeout(任务函数, 等待的毫秒数)
+   3. 停止: clearTimeout(timer)
+</code></pre><p>鄙视: 定时器中的函数，只能在主程序所有程序执行后才能执行</p>
+<pre><code>for(var i=0;i&lt;3;i++){
+  setTimeout(function(){
+    console.log(i);
+  },0);
+}//结果: 3 3 3
+//alert(&quot;Hello&quot;) 如果不点确定，则永远不输出333
+</code></pre><p>window:<br> history，location，document，navigator，screen，event</p>
+<pre><code>history: 保存当前窗口打开后，成功访问过的历史记录的栈
+  history封装的非常严密
+  只能前进，后退，刷新: history.go(n)
+   前进: go(1)  后退:go(-1)  刷新:go(0)
+
+location: 专门保存当前窗口正在打开的url的对象
+ 属性: location.href 保存了完整的url
+        在当前窗口打开: location.href=新url
+      location.protocol: 协议
+            .host: 主机名+端口号
+            .hostname: 主机名
+            .port: 端口号
+      location.pathname: 相对路径
+            .hash: 锚点地址#xxx
+            .search: 表单提交后地址栏中的查询字符串
+                   ?变量名=值&amp;变量名=值&amp;...
+ 方法:
+   1. 替换history中当前url,实现进制后退:
+     location.replace(&quot;新url&quot;)
+   2. 在当前页面打开，可后退:
+     location.assign(&quot;新url&quot;)
+       =&gt; location.href=&quot;新url&quot;
+        =&gt; location=&quot;新url&quot;
+   3. 刷新页面:  location.reload(false/true);
+     鄙视: false/true的差别
+       浏览器本地是有缓存的
+         浏览器的缓存中会保存css，图片等静态资源
+       每次请求时，首先查看缓存中是否有想要文件
+         没有想要文件，或文件过期，才去服务器下载新文件
+       reload(false) 优先使用本地缓存的文件
+       reload(true) 强制去服务器下载新文件
+     查 浏览器缓存的原理！
+</code></pre><p>1、event</p>
+<pre><code>绑定事件: 2种:
+ 1. 在HTML中绑定: &lt;ANY on事件名=&quot;js语句&quot;
+    问题: 不符合内容与行为分离的原则——不便于维护
+ 2. 在js中动态绑定: 2种:
+    1. 一个事件只绑定一个处理函数:
+       elem.on事件名=function(){
+         //this-&gt;elem
+       }
+       解除绑定: elem.on事件名=null;
+       问题: 每个事件只能绑定一个处理函数
+       解决:
+    2. 一个事件可同时绑定多个处理函数:
+       elem.addEventListener(&quot;事件名&quot;,function(){
+         //this-&gt;elem
+       })
+       解除绑定:
+        elem.removeEventListener(&quot;事件名&quot;,&quot;函数名&quot;);
+        强调: 如果一个事件处理函数可能被动态移除，则绑定时，不能使用匿名函数，必须使用有名称的函数
+
+    事件模型: DOM标准: 3个阶段
+      1. 捕获: 由外向内，记录各级父元素绑定的事件处理函数
+      2. 目标触发: 首先执行目标元素上的事件处理函数
+      3. 冒泡: 由内向外，反向执行捕获阶段记录的处理函数
+
+    事件对象: 事件发生时自动创建的
+             封装事件信息
+             提供操作事件的API 的对象
+      何时: 只要希望获得事件信息或修改事件的默认行为
+      如何: 事件对象，在事件发生时，通常作为事件处理函数的第一个参数，默认自动传入！
+          .on事件名=function(e){
+             //e会自动获得事件对象
+          }
+    阻止蔓延/冒泡: e.stopPropagation();
+    利用冒泡:
+      优化: 尽量少的添加事件监听
+      原理: 因为浏览器触发事件监听，是采用遍历查找的方式。添加的监听越多，遍历的速度越慢
+      如何: 如果多个子元素都要绑定相同的事件
+          只要在父元素绑定一次，所有子元素即可共用
+      难题:
+         1. 获得目标元素:
+            不能用this, 因为this指父元素
+            应该用e.target，保存实际点击的目标元素
+         2. 鉴别目标元素:
+            先判断目标元素的nodeName或className...
+            只有目标元素符合要求时，才执行事件操作
+    取消事件/阻止默认行为: e.preventDefault();
+    事件坐标: 3对儿:
+      1. 相对于整个屏幕左上角的坐标: e.screenX|screenY
+      2. 相对于文档显示区左上角的坐标: e.clientX|clientY
+      3. 相对于当前元素左上角的坐标: e.offsetX|offsetY
+
+    页面滚动:
+      事件: window.onscroll
+      获得页面滚动位置: document.body.scrollTop
+          页面超出文档显示区顶部的距离
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;DOM: Document Object Model&lt;/p&gt;
+&lt;p&gt; DOM是专门操作网页内容的API标准&lt;br&gt; 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题&lt;br&gt; 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+      <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
+    
+      <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ionic基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:53:37.919Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
+<pre><code>三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
+HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
+
+学习WebApp以及HybridApp。
+
+将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
+
+前端+原生
+想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
+想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
+</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
+<pre><code>采用的开发语言：java
+
+使用Goolge公司所提供的SDK，java
+
+①安装jdk
+    java development kit java开发工具箱
+②安装eclipse
+③安装sdk
+    http://www.androiddevtools.cn/
+    ①、下载jdk 直接安装
+    ②、下载ADT bundle（集成了eclipse、sdk）
+</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
+<pre><code>操作注意事项：
+    工具条--》window--》show/hide toolbar 显示隐藏工具条
+    工具条--》window--》reset perspective 恢复默认视图
+    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
+
+    sdk manager：更新SDK
+    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
+    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
+    start-》launch
+
+创建Android项目
+file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
+
+运行Android项目
+选中项目，点击右键，run as-&gt;Android Application Project
+
+对于AndroidApp来说，添加权限，基本步骤：
+①找到工程中根目录下的AndroidManefiest.xml文件
+②打开，选中选项卡permissions
+③点击add，在弹窗中选中uses permission
+④在右侧的下拉菜单中选中需要用到的权限，保存即可
+
+Android工程所对应的目录功能：
+src(source) 源代码，java文件的修改
+gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
+Android* 是google所提供的sdk文件
+assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
+bin 运行工程（编译、链接）时所生成的可执行文件(apk)
+libs(libraries) 库文件：使用第三方的包
+res（resource） 资源文件：图片、布局文件、变量
+AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
+</code></pre><p>四、第一个hybridApp  – webView</p>
+<pre><code>1、基本步骤：
+①按照功能和要求 把前端代码编写完毕
+②将前端代码 放到 Android工程的assets目录
+③创建一个WebView（网页视图组件），配置webView加载指定的html页面
+④将webView作为一个app的内容视图展现出来
+⑤运行，最终是生成了安装包
+
+2、练习：（15:40 - 15：55）
+创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
+要求：创建一个新的Android。
+问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
+解决：借助于webview的setWebChromeClient
+
+3、混合编程的常见的两种方式
+①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
+②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
+
+
+练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
+http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
+localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
+http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
+注意事项：①加上网络权限 ②允许执行js
+
+技巧：
+①timeout 超时
+    只需要将eclipse和模拟器关掉再打开
+②ActivityManager: Warning: Activity not started, its current task has been brought to the front
+    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
+③android library projects can&apos;t be launched
+    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
+ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
+
+如何完成Android工程的创建、运行基本流程以及工作方式
+学习HybridApp的创建和运行
+
+扩展1：
+js调用原生组件：
+①创建一个接口类的文件
+②activity配置使用接口
+③在js中调用java中的一些接口
+
+扩展2：
+js调用原生组件：
+①创建一个接口类的文件
+    @JavascriptInterface
+
+②activity配置使用接口
+ wv.addJavascriptInterface(
+new webInterfac(getApplicationContext()),&quot;android&quot;);
+
+③在js中调用java中的一些接口
+function callShowToast(){
+    android.showToast();
+  }
+</code></pre><p>五、Ionic概述</p>
+<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
+Ionic是一个强大的h5的混合编程app开发框架
+Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
+注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
+特点：
+    ①完美融合了ng
+    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
+    ③设计风格好
+    ④性能优越，运行速度块
+    Ionic = ng + cordova + 移动ui库
+</code></pre><p>六、搭建Ionic的开发环境</p>
+<pre><code>1、方式1 （命令行）
+http://ionicframework.com/getting-started/
+①npm install -g cordova ionic
+    全局安装cordova以及ionic
+②ionic start myApp tabs/sidemenu
+    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
+③ionic serve
+2、方式2：借助于官方所提供的js、css文件
+</code></pre><p>七、学习Ionic样式类</p>
+<pre><code>1、color
+    9个常用的值 ，参考手册中最后一个color的介绍
+
+2、button按钮
+    button/button-small/button-large/button-outline/
+    button-clear/buttn-block/icon-left/icon-right/
+    ion-***/button-bar
+
+3、list 列表
+    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
+    item-divider(分隔符)/badge(badge-assertive)
+    item-avator/item-thumbnail-left/right
+
+4、card 卡片式
+
+5、form 表单
+    list/item/item-input/input-label/item-stacked-label/item-floating-label
+    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
+
+6、grid
+    row/col
+    col-10/20/50..(指定列的宽度)
+    .col-10    10%
+    .col-20    20%
+    .col-25    25%
+    .col-33    33.3333%
+    .col-50    50%
+    .col-67    66.6666%
+    .col-75    75%
+    .col-80    80%
+    .col-90    90%(设置列与列之间的offset)
+
+    .col-offset-10    10%
+    .col-offset-20    20%
+    .col-offset-25    25%
+    .col-offset-33    33.3333%
+    .col-offset-50    50%
+    .col-offset-67    66.6666%
+    .col-offset-75    75%
+    .col-offset-80    80%
+    .col-offset-90    90%
+    col-center/col-top/col-bottom
+</code></pre><p>八、IonRefresher 下拉刷新</p>
+<pre><code>①指定下拉刷新的处理函数
+on-refresh
+②处理完之后，结束刷新动作
+$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
+③ionContent第一个子元素
+</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
+<pre><code>①指定上拉的处理函数
+on-infinite
+②数据更新完成之后，结束刷新
+scroll.infiniteScrollComplete
+③ionContent最后一个子元素
+immediate-check=&apos;false&apos;
+</code></pre><p>十、$ionicScrollDelegate</p>
+<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
+scrollTo(left,top) 滚动到指定的位置
+getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
+</code></pre><p>十一、ionTabs 实现选项卡</p>
+<pre><code>ionTabs 常用属性：
+tabs-icon-top/left/right/bottom/only tabs-positive
+http://ionicons.com/
+ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
+                  badge/badge-style/on-select/ng-click
+</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
+<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
+操作侧边栏菜单打开或者关闭：
+1、js：
+    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
+2、滑动打开
+3、属性
+    menu-close 将现在打开的侧边栏菜单关掉
+    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
+</code></pre><p>十三、ActionSheet</p>
+<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
+    $ionicActionSheet.show({
+
+    })
+在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
+cancel/buttonClicked/destructiveButtonClicked
+(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
+</code></pre><p>十四、$ionicLoading</p>
+<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
+$ionicLoading.show({template/templateUrl/duration/delay})
+$ionicLoading.hide();
+</code></pre><p>十五、$ionicPopup</p>
+<pre><code>在ionic中内容弹窗（警告、确认。。）
+$ionicPopup.alert/confirm/prompt/show()
+</code></pre><p>十六、自定义弹窗</p>
+<pre><code>$ionicModal 模态窗
+①指定要去显示的模板内容
+②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
+③调用$scope.modal.show()
+</code></pre><p>十七、uiRouter</p>
+<pre><code>定位：UI-Router is a client-side router for single page web applications.
+注意：uiRouter用在ng、react中
+uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
+
+ngRoute：
+①路由的基本步骤
+   自定义模块，指定ngRoute模块（angular-route.js）
+   指定盛放代码片段的容器 ngView
+   创建代码片段
+   配置路由词典
+    $routerProvider.when().otherwise()
+②跳转
+  直接修改地址栏
+  $location.path(路由地址)
+  a href=&apos;#路由地址&apos;
+③参数的传递
+  发送方、接收方
+  配置接收方的路由
+  $routeParams
+  发送参数
+
+uiRouter的基本使用步骤：
+ 指定依赖的模块‘ui.router’
+ 盛放代码片段的容器 uiView
+ 创建模板文件
+ 设置状态
+    $stateProvider.state()
+注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
+        在ionic的项目没有必须要指定ui.router
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript作用链域?</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E4%BD%9C%E7%94%A8%E9%93%BE%E5%9F%9F/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript作用链域/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:27:58.046Z</updated>
+    
+    <content type="html"><![CDATA[<p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript如何实现继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript如何实现继承/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:23:34.884Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、构造继承<br>2、原型继承<br>3、实例继承<br>4、拷贝继承<br>原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。<br>function Parent(){  this.name = ‘wang’;   }<br>function Child(){   this.age = 28;    }<br>Child.prototype = new Parent();//继承了Parent，通过原型<br>var demo = new Child();<br>alert(demo.age);<br>alert(demo.name);//得到被继承的属性   }</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、构造继承&lt;br&gt;2、原型继承&lt;br&gt;3、实例继承&lt;br&gt;4、拷贝继承&lt;br&gt;原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。&lt;br&gt;function Parent(){  this.name = ‘wang’;   }&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JSON 的了解</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JSON%20%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JSON 的了解/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:39:00.433Z</updated>
+    
+    <content type="html"><![CDATA[<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}<br>JSON字符串转换为JSON对象:<br>var obj =eval(‘(‘+ str +’)’);<br>var obj = str.parseJSON();<br>var obj = JSON.parse(str);</p>
+<p>JSON对象转换为JSON字符串：<br>var last=obj.toJSONString();<br>var last=JSON.stringify(obj);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Label的作用是什么？是怎么用的</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:44:14.531Z</updated>
+    
+    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
+<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"><br><br><br><label>Date:<input type="text" name="B"></label>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
+&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt;&lt;br&gt;&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈谈This对象的理解</title>
+    <link href="www.wangchengzou.cn/2017/07/22/This%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>www.wangchengzou.cn/2017/07/22/This对象的理解/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:29:44.417Z</updated>
+    
+    <content type="html"><![CDATA[<p>this总是指向函数的直接调用者（而非间接调用者）；<br>如果有new关键字，this指向new出来的那个对象；<br>在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;this总是指向函数的直接调用者（而非间接调用者）；&lt;br&gt;如果有new关键字，this指向new出来的那个对象；&lt;br&gt;在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>html知识点</title>
     <link href="www.wangchengzou.cn/2017/07/22/HTML%E7%AC%94%E8%AE%B0/"/>
     <id>www.wangchengzou.cn/2017/07/22/HTML笔记/</id>
@@ -3808,882 +5054,6 @@ URL类型：&lt;input type=&quot;url&quot;&gt;  数据必须符合URL规范
     
     
       <category term="笔记" scheme="www.wangchengzou.cn/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ionic基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:53:37.919Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
-<pre><code>三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
-HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
-
-学习WebApp以及HybridApp。
-
-将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
-
-前端+原生
-想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
-想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
-</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
-<pre><code>采用的开发语言：java
-
-使用Goolge公司所提供的SDK，java
-
-①安装jdk
-    java development kit java开发工具箱
-②安装eclipse
-③安装sdk
-    http://www.androiddevtools.cn/
-    ①、下载jdk 直接安装
-    ②、下载ADT bundle（集成了eclipse、sdk）
-</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
-<pre><code>操作注意事项：
-    工具条--》window--》show/hide toolbar 显示隐藏工具条
-    工具条--》window--》reset perspective 恢复默认视图
-    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
-
-    sdk manager：更新SDK
-    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
-    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
-    start-》launch
-
-创建Android项目
-file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
-
-运行Android项目
-选中项目，点击右键，run as-&gt;Android Application Project
-
-对于AndroidApp来说，添加权限，基本步骤：
-①找到工程中根目录下的AndroidManefiest.xml文件
-②打开，选中选项卡permissions
-③点击add，在弹窗中选中uses permission
-④在右侧的下拉菜单中选中需要用到的权限，保存即可
-
-Android工程所对应的目录功能：
-src(source) 源代码，java文件的修改
-gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
-Android* 是google所提供的sdk文件
-assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
-bin 运行工程（编译、链接）时所生成的可执行文件(apk)
-libs(libraries) 库文件：使用第三方的包
-res（resource） 资源文件：图片、布局文件、变量
-AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
-</code></pre><p>四、第一个hybridApp  – webView</p>
-<pre><code>1、基本步骤：
-①按照功能和要求 把前端代码编写完毕
-②将前端代码 放到 Android工程的assets目录
-③创建一个WebView（网页视图组件），配置webView加载指定的html页面
-④将webView作为一个app的内容视图展现出来
-⑤运行，最终是生成了安装包
-
-2、练习：（15:40 - 15：55）
-创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
-要求：创建一个新的Android。
-问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
-解决：借助于webview的setWebChromeClient
-
-3、混合编程的常见的两种方式
-①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
-②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
-
-
-练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
-http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
-localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
-http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
-注意事项：①加上网络权限 ②允许执行js
-
-技巧：
-①timeout 超时
-    只需要将eclipse和模拟器关掉再打开
-②ActivityManager: Warning: Activity not started, its current task has been brought to the front
-    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
-③android library projects can&apos;t be launched
-    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
-ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
-
-如何完成Android工程的创建、运行基本流程以及工作方式
-学习HybridApp的创建和运行
-
-扩展1：
-js调用原生组件：
-①创建一个接口类的文件
-②activity配置使用接口
-③在js中调用java中的一些接口
-
-扩展2：
-js调用原生组件：
-①创建一个接口类的文件
-    @JavascriptInterface
-
-②activity配置使用接口
- wv.addJavascriptInterface(
-new webInterfac(getApplicationContext()),&quot;android&quot;);
-
-③在js中调用java中的一些接口
-function callShowToast(){
-    android.showToast();
-  }
-</code></pre><p>五、Ionic概述</p>
-<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
-Ionic是一个强大的h5的混合编程app开发框架
-Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
-注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
-特点：
-    ①完美融合了ng
-    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
-    ③设计风格好
-    ④性能优越，运行速度块
-    Ionic = ng + cordova + 移动ui库
-</code></pre><p>六、搭建Ionic的开发环境</p>
-<pre><code>1、方式1 （命令行）
-http://ionicframework.com/getting-started/
-①npm install -g cordova ionic
-    全局安装cordova以及ionic
-②ionic start myApp tabs/sidemenu
-    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
-③ionic serve
-2、方式2：借助于官方所提供的js、css文件
-</code></pre><p>七、学习Ionic样式类</p>
-<pre><code>1、color
-    9个常用的值 ，参考手册中最后一个color的介绍
-
-2、button按钮
-    button/button-small/button-large/button-outline/
-    button-clear/buttn-block/icon-left/icon-right/
-    ion-***/button-bar
-
-3、list 列表
-    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
-    item-divider(分隔符)/badge(badge-assertive)
-    item-avator/item-thumbnail-left/right
-
-4、card 卡片式
-
-5、form 表单
-    list/item/item-input/input-label/item-stacked-label/item-floating-label
-    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
-
-6、grid
-    row/col
-    col-10/20/50..(指定列的宽度)
-    .col-10    10%
-    .col-20    20%
-    .col-25    25%
-    .col-33    33.3333%
-    .col-50    50%
-    .col-67    66.6666%
-    .col-75    75%
-    .col-80    80%
-    .col-90    90%(设置列与列之间的offset)
-
-    .col-offset-10    10%
-    .col-offset-20    20%
-    .col-offset-25    25%
-    .col-offset-33    33.3333%
-    .col-offset-50    50%
-    .col-offset-67    66.6666%
-    .col-offset-75    75%
-    .col-offset-80    80%
-    .col-offset-90    90%
-    col-center/col-top/col-bottom
-</code></pre><p>八、IonRefresher 下拉刷新</p>
-<pre><code>①指定下拉刷新的处理函数
-on-refresh
-②处理完之后，结束刷新动作
-$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
-③ionContent第一个子元素
-</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
-<pre><code>①指定上拉的处理函数
-on-infinite
-②数据更新完成之后，结束刷新
-scroll.infiniteScrollComplete
-③ionContent最后一个子元素
-immediate-check=&apos;false&apos;
-</code></pre><p>十、$ionicScrollDelegate</p>
-<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
-scrollTo(left,top) 滚动到指定的位置
-getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
-</code></pre><p>十一、ionTabs 实现选项卡</p>
-<pre><code>ionTabs 常用属性：
-tabs-icon-top/left/right/bottom/only tabs-positive
-http://ionicons.com/
-ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
-                  badge/badge-style/on-select/ng-click
-</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
-<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
-操作侧边栏菜单打开或者关闭：
-1、js：
-    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
-2、滑动打开
-3、属性
-    menu-close 将现在打开的侧边栏菜单关掉
-    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
-</code></pre><p>十三、ActionSheet</p>
-<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
-    $ionicActionSheet.show({
-
-    })
-在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
-cancel/buttonClicked/destructiveButtonClicked
-(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
-</code></pre><p>十四、$ionicLoading</p>
-<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
-$ionicLoading.show({template/templateUrl/duration/delay})
-$ionicLoading.hide();
-</code></pre><p>十五、$ionicPopup</p>
-<pre><code>在ionic中内容弹窗（警告、确认。。）
-$ionicPopup.alert/confirm/prompt/show()
-</code></pre><p>十六、自定义弹窗</p>
-<pre><code>$ionicModal 模态窗
-①指定要去显示的模板内容
-②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
-③调用$scope.modal.show()
-</code></pre><p>十七、uiRouter</p>
-<pre><code>定位：UI-Router is a client-side router for single page web applications.
-注意：uiRouter用在ng、react中
-uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
-
-ngRoute：
-①路由的基本步骤
-   自定义模块，指定ngRoute模块（angular-route.js）
-   指定盛放代码片段的容器 ngView
-   创建代码片段
-   配置路由词典
-    $routerProvider.when().otherwise()
-②跳转
-  直接修改地址栏
-  $location.path(路由地址)
-  a href=&apos;#路由地址&apos;
-③参数的传递
-  发送方、接收方
-  配置接收方的路由
-  $routeParams
-  发送参数
-
-uiRouter的基本使用步骤：
- 指定依赖的模块‘ui.router’
- 盛放代码片段的容器 uiView
- 创建模板文件
- 设置状态
-    $stateProvider.state()
-注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
-        在ionic的项目没有必须要指定ui.router
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JQuery基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T13:47:56.493Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、 DOM分为三部分：</p>
-<pre><code>(1)核心DOM：操作任意标签树
-(2)HTML DOM：操作HTML标签树
-(3)XML DOM：操作XML标签树
-</code></pre><p>2、常用的核心DOM操作</p>
-<pre><code>(1)查找元素的方法
-    document.getElementById(&apos;p1&apos;)
-    document.getElementsByName(&apos;uname&apos;)
-    document.getElementsByTagName(&apos;div&apos;)
-    document.getElementsByClassName(&apos;btn&apos;)
-    document.querySelector(&apos;选择器&apos;)
-    document.querySelectorAll(&apos;选择器&apos;)
-    遍历DOM节点：
-    node.parentNode
-    parent.childNodes、parent.children
-    node.nextSibling、node.previousSibling
-(2)修改元素的属性
-    node.setAttribute(&apos;title&apos;,&apos;值&apos;)
-    node.getAttribute(&apos;title&apos;)
-(3)修改元素的内容
-    element.innerHTML
-    element.textContent/innerText
-(4)修改元素的样式
-    element.style.color = &apos;red&apos;;
-    element.className = &apos;btn btn-danger&apos;
-(5)修改元素的值
-    inputElement.value
-(6)添加新元素
-    var newElement = document.createElement(&apos;div&apos;);
-    parent.appendChild(newElement)
-(7)删除已有元素
-    parent.removeChild(node)
-(8)替换旧元素
-    parent.replaceChild(oldChild, newChild)
-(9)元素克隆
-    element.cloneNode()
-
-总结：核心DOM操作的问题
-  · 方法名普遍比较长
-  · 操作比较僵硬
-  · 方法存在浏览器兼容性
-</code></pre><p>3、jQuery 概述</p>
-<pre><code>jQuery是一个DOM操作的函数库，简化了常用的DOM操作。
-理念：Write Less，Do More
-jQuery提供了四类函数：
-  (1)DOM操作 —— 重点
-  (2)事件处理
-  (3)动画函数
-  (4)AJAX
-</code></pre><p>4、 jQuery的版本问题：</p>
-<pre><code>(1)jQuery 1.x：比较大、功能偏弱、兼容老IE
-(2)jQuery 2.x：比较小、功能强大、不兼容老IE
-(3)jQuery 3.x：比较小、功能更强大、不兼容老IE
-面试题：jQuery3的新特性有哪些？
-HTML中使用jQuery，只需要使用SCRIPT标签引入jquery-*.js即可，会为window添加两个新的成员：
-    window.$
-    window.jQuery
-</code></pre><p>5、jQuery函数的特点</p>
-<pre><code>(1) $或者jQuery是一个函数，返回值是一个jQuery类数组对象
-(2)即使没有查找到需要的元素，jQuery类数组对象也不会是null/undefined，调用jQuery函数不会报错！
-(3)jQuery类数组对象提供的函数都自带for循环遍历每个查找到的元素
-(4)jQuery函数底层都是DOM操作，所以可和原生的DOM操作组合使用
-(5)原生DOM对象不能调用jQuery提供的函数；jQuery函数返回的类数组对象也不能调用核心DOM成员
-(6)原生DOM对象和jQuery对象间如何转换：
-  原生DOM对象封装到一个jQuery类数组对象
-      $(domObject)
-  jQuery类数组中取出封装的DOM对象：
-      $(&apos;button&apos;)[index]
-(7)jQuery对象方法的返回值一般还是当前选定的类数组对象，可以实现“链式调用”
-</code></pre><p>6、jQuery函数第一部分：DOM操作函数 —— 查找元素</p>
-<pre><code>$( &apos;选择器&apos; )
-jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；同时还扩展了一些新的选择器语法。
-面试题：jQuery中的哪些选择器是CSS中没有的？ —— 执行效率较低
-</code></pre><p>7、 第一组：基本选择器   —— 重点</p>
-<pre><code>(1)#id
-  练习：点击一个button#bt1，让下方的一个p#p1隐藏起来
-  提示：jQuery类数组对象提供的.hide()函数可以隐藏一个元素
-(2).className
-  练习：点击一个button#bt2，让下方所有的span.badge字体变大为2em
-  提示：jQuery类数组对象提供的.css(&apos;color&apos;, &apos;red&apos;)函数可以修改当前选定元素的指定样式
-(3)标签名
-  练习：li元素上发生鼠标进入事件时，当前li显示出下边框
-  提示：使用.on(&apos;mouseover&apos;, fn)监听鼠标进入事件
-(4)*
-  练习：单击button#bt3后，让所有的元素的box-sizing变为border-box，所有元素的margin变为0
-(5)div, p, #c3
-  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，添加事件监听，点击后打印出当前系统时间
-</code></pre><p>8、第二组：层级选择器       —— 重点</p>
-<pre><code>(6) ancestor descendant   后代选择器
-  练习：为所有#alert1中的.btn添加事件监听，单击后，隐藏#alert1
-(7) parent &gt; child     直接子代选择器
-  练习：为所有#alert2中的直接子元素.btn添加事件监听，单击后，隐藏#alert2
-(8) prev + next      下一个相邻兄弟选择器
-  练习：为UL中的LI添加上边框，实现如下效果：
-  $(&apos;li + li&apos;).....
-  $(&apos;li:not(:first-child)&apos;)....
-(9) prev ~ siblings    后续的所有兄弟选择器
-</code></pre><p>9、第三组：基本过滤选择器       —— 重点</p>
-<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，不论是否在同一个父元素中与否。下标从0开始！
-(10) :first
-  练习：把所有列表中的第一个LI字体加粗显示
-(11) :last:
-  练习：把所有列表中的最后一个LI字体斜体显示
-(12) :eq(index)
-  练习：把所有列表中的第index个LI添加有边框
-(13) :gt(index)
-  练习：把所有列表中的下标大于index的LI添加删除线
-(14) :lt(index)
-  练习：把所有列表中的下标小于index的LI添加下划线
-(15) :odd
-  练习：把所有列表中的下标为奇数的LI背景颜色变为淡黄色
-(16) :even
-  练习：把所有列表中的下标为偶数的LI背景颜色变为淡蓝色
-(17) :not(selector)
-</code></pre><p>10、第四组：子元素过滤选择器       —— 重点</p>
-<pre><code>注意：在每个父元素中进行分组，查找指定的子元素。下标从1开始。
-(18) :first-child
-  $(&apos;li:first-child&apos;);
-  练习：把每个列表中的第一个子LI字体变浅蓝
-(19) :last-child
-  练习：把每个列表中的第最后一个子LI字体变红色
-(20) :nth-child(index)
-  练习：把每个列表中的第2个子LI字体添加绿色背景
-  $(&apos;li:nth-child(2)&apos;)...
-  $(&apos;li:nth-child(odd)&apos;)       $(&apos;li:nth-child(2n+2)&apos;)
-  $(&apos;li:nth-child(even)&apos;)    $(&apos;li:nth-child(2n)&apos;)
-(21) :only-child
-  $(&apos;li:only-child&apos;)
-</code></pre><p>11、第五组：属性选择器</p>
-<pre><code>(22) [attribute]
-  选中所有具备title属性的a元素： $(&apos;a[title]&apos;)...
-(23) [attribute=value]
-  选中所有具备data-toggle属性且值为dropddown的元素：
-  $(&apos;[data-toggle=&quot;dropdown&quot;]&apos;)....
-(24) [attribute!=value]
-(25) [attribute^=value]
-(26) [attribute$=value]
-(27) [attribute*=value]    具备指定的属性，且值中包含指定字符
-</code></pre><p>12、第六组：可见性选择器</p>
-<pre><code>(28) :visible         $(&apos;:visible&apos;)选中所有可见元素
-(29) :hidden        $(&apos;:hidden&apos;)选中所有隐藏元素
-测试：哪些是:hidden可以选中的？
-      · display: none            可以
-      · visibility: hidden        不可以
-      · opacity: 0            不可以
-      · input[type=&quot;hidden&quot;]    可以
-</code></pre><p>13、第七组：内容过滤选择器</p>
-<pre><code>  (30) :contains(txt)
-    练习：选中文本中包含“提交”字的button元素，让它们变为绿色按钮
-  (31) :has(selector)
-    练习：选中包含.close按钮的.alert元素，让它们变为红色的警告框；
-选中不包含.close按钮的.alert元素，让它们变为红色的警告框
-  (32) :empty
-    练习：选中内容为空的警告框    $(&apos;.alert:empty&apos;).....
-  (33) :parent
-    练习：选中内容不为空的警告框，即包含子元素或文本内容
-    $(&apos;.alert:parent&apos;).....
-</code></pre><p>14、第八组：表单元素选择器</p>
-<pre><code>: input         :text         :password     :radio
-:checkbox     :submit         :image         :reset
-:button     :file             :hidden
-
-:enabled     :disabled     :checked         :selected
-  &lt;input type=&quot;image&quot; src=&quot;img/1.jpg&quot;&gt;
-</code></pre><p>15、 W3C DOM把HTML文档看做树型结构，并提供操作节点方法；–总结</p>
-<pre><code>jQuery是一个函数库，用于简化DOM操作，屏蔽了浏览器兼容性问题。函数分为四类：
-  (1)DOM操作
-  (2)事件处理
-  (3)动画
-  (4)AJAX
-jQueryDOM操作——查找节点
-  jQuery(&apos;选择器&apos;)    =》  类数组对象
-基本选择器：
-    #id、.class、div、*、button,.btn
-层级选择器：
-    parent  child
-    parent &gt; child
-    prev + next
-    prev ~ siblings
-基本过滤选择器：
-    :first        :last        :eq(i)    :gt(i)        :lt(i)
-    :odd        :even    :not(selector)
-子代过滤选择器：
-    :first-child    :last-child        :nth-child(i)
-    :nth-child(odd)   :nth-child(even)
-属性选择器：
-    [attr=&quot;value&quot;]
-可见性选择器：
-    :visible        :hidden
-内容选择器：
-    :contains(txt)        :has(selector)
-    :empty            :parent
-表单元素选择器：
-    :text        :radio    :submit
-    :disabled    :enabled     :checked    :selected
-</code></pre><p>16、操作元素的属性</p>
-<pre><code>&lt;a  href=&quot;&quot; title=&quot;&quot;  data-toggle=&quot;dropdown&quot;&gt;
-核心DOM：
-  element.getAttribute(&apos;title&apos;)
-  element.setAttribute(&apos;title&apos;, &apos;abc&apos;)
-jQuery：
-  var value  = $(..).attr(&apos;title&apos;)        //读取属性的值
-  $(..).attr(&apos;title&apos;, &apos;abc&apos;)            //设置属性的值
-提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
-  var v = $(...).data(&apos;my-target&apos;)        //读取
-  $(...).data(&apos;my-target&apos;, &apos;2.jpg&apos;)        //设置
-
-练习：点击某个小图，下方就显示出对应的大图
-  &lt;img src=&quot;img/4.jpg&quot; data-target=&quot;img/Koala.jpg&quot;&gt;
-</code></pre><p>17、操作元素的内容</p>
-<pre><code>核心DOM：
-  var h = element.innerHTML;
-  element.innerHTML = h;
-  var t = element.innerText/textContent;
-  element.innerText/textContext = t;
-jQuery：
-  $(..).html( )        //读取innerHTML
-  $(..).html( &apos;html&apos; )    //设置innerHTML
-  $(..).text( )        //读取innerText
-  $(..).text( &apos;txt&apos; )        //设置innerText
-练习：点击一个Button，上方显示出已点击的次数
-练习：&lt;a href=&quot;#&quot;&gt;再次点击即显示下一张图片&lt;/a&gt;
-  1再次点击即显示下一张图片
-  2&lt;img src=&quot;1.jpg&quot;&gt;
-  3再次点击即显示下一张图片
-  4&lt;img src=&quot;2.jpg&quot;&gt;
-  5再次点击即显示下一张图片
-  6 ....
-</code></pre><p>18、操作元素的样式</p>
-<pre><code>核心DOM：
-  var c = element.style.color        //读取行内样式
-  element.style.color = &apos;red&apos;        //设置行内样式
-  var n = element.className        //读取ClassName
-  element.className = n            //设置ClassName
-jQuery：
-  $(..).css(&apos;color&apos;)        //读取指定样式的值
-  $(..).css(&apos;color&apos;, &apos;red&apos;)    //设置行内样式
-  $(..).addClass(&apos;alert&apos;)    //添加一个class
-  $(..).removeClass(&apos;alert&apos;)    //删除一个class
-  $(..).hasClass(&apos;alert&apos;)    //判断选定元素是否具有指定class
-练习：实现一个“双态按钮”，点击一次变为深色，再点击变为浅色
-  .up {  }            .down {  }
-</code></pre><p>19、操作表单元素的值</p>
-<pre><code>核心DOM：
-    var v = input.value        //读取值
-    input.value = &apos;v&apos;        //设置值
-jQuery：
-    $(...).val( )            //读取值
-    $(...).val(&apos;value&apos;)    //设置值
-练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，读取用户的两个输入，打印出来，在输入框中清除用户的输入
-
-面试题：在操作元素的相关属性时，使用attr()、val()、prop()、data()有何区别？
-attr()一般只用于操作元素的HTML字面属性，如src、href、name...
-val()操作的是HTML元素对应的JS对象的value属性
-prop()操作的是HTML元素对应的JS对象的disabled、readyonly、selected、checked等Boolean类型属性
-data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据），而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
-</code></pre><p>20、遍历DOM树上的节点</p>
-<pre><code>核心DOM：
-  element.parentNode            //寻找父节点
-  element.childNodes/children        //获取子节点
-  elemnet.nextSibling            //获取下一个兄弟
-  element.previousSibling            //获取上一个兄弟
-jQuery：
-  $(..).parent()            //返回选定元素的父节点
-  $(..).children()            //返回所有子节点
-  $(..).next()            //返回下一个兄弟
-  $(..).prev()            //返回上一个兄弟
-  $(..).siblings()            //返回所有的同辈兄弟
-练习：实现一个自己的页签组件
-
-  &lt;ul class=&quot;tabs&quot;&gt;
-      &lt;li&gt;&lt;a&gt;十元套餐&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;active&quot;&gt;&lt;a&gt;二十元套餐&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a&gt;三十元套餐&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-</code></pre><p>21、添加新的元素</p>
-<pre><code>核心DOM：
-  var li = document.createElement(&apos;li&apos;)    //创建子节点
-  //修改li的属性....                    //设置其属性
-  ul.appendChild( li );                    //添加到父节点
-jQuery：
-  var li = $(&apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos;)    //创建子节点
-  //li.click(fn)
-  $(&apos;ul&apos;).append( li );                //在父节点最后追加子节点
-  $(li).appendTo( &apos;ul&apos; )            //子节点追加到父节点最后
-   -------可以简写为------------------------------
-  $(&apos;ul&apos;).append( &apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos; )
-练习：添加和删除小盒子
-
-  function rc(){            //Random Color:  返回一个随机的颜色
-      var r = Math.floor(Math.random()*256)
-      var g = Math.floor(Math.random()*256)
-      var b = Math.floor(Math.random()*256)
-      return `rgb(  ,  ,  )`;
-  }
-</code></pre><p>22、删除已有的元素</p>
-<pre><code>核心DOM：
-  ul.removeChild( li )            //由父元素删除孩子
-jQuery：
-  $(&apos;li&apos;).remove()                //删除当前选定元素
-</code></pre><p>23、替换已有元素</p>
-<pre><code>核心DOM：
-  parent.replaceChild(oldChild,  newChild);
-jQuery：
-  $(&apos;oldChild&apos;).replaceWith( newChild )    //已有节点用新节点替换，返回被删除的旧节点
-  $(&apos;newChild&apos;).replaceAll( oldChild )    //新节点替换所有的旧节点，返回新节点
-练习：实现英雄选择效果    div#chosen        div#list
-</code></pre><p>24克隆节点</p>
-<pre><code>核心DOM：
-  var copy = element.cloneNode( )
-jQuery：
-  var copy = $(..).clone()        //返回选定元素的副本
-  var copy = $(..).clone(copyListener)   //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
-练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，上方选中区域出现当前飞机的一个副本
-</code></pre><p>25、jQuery函数第二部分：事件处理函数</p>
-<pre><code>jQuery的历史上先后出现了若干事件处理函数：
-(1)bind() / unbind()            已废弃
-(2)one(事件名称, fn)    仅对指定事件监听一次
-(3)live() / die()                已废弃
-(4)delegate() / undelegate()    已废弃
-(5)on() / off()
-(6)click() / mouseover() / mouseout() / keyup() ...
-  $(..).click(fn)  &lt;=&gt;  $(..).on(&apos;click&apos;, fn)
-
-  on()函数的第一种使用方法——直接绑定在事件源上：
-      $(&apos;事件源&apos;).on(&apos;事件名称&apos;, fn)    //绑定监听函数
-      $(&apos;事件源&apos;).off(&apos;事件名称&apos;)        //取消所有监听函数
-  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；要求此后此按钮再被点击无任何处理函数了。
-  on()的第一种用法有两个限制：
-      (1)若选中元素很多，每个都会有一个监听函数
-      (2)无法为后添加的元素执行绑定
-  on()函数的第二种使用方法——委托给父元素进行事件代理：
-      $(&apos;parent&apos;).on(&apos;事件名称&apos;, &apos;子元素选择器&apos;, fn)
-</code></pre><p>26、 DOM中为元素绑定监听函数：</p>
-<pre><code>btn.onclick = function(){  }
-btn.addEventListener(&apos;click&apos;, function(){  })
-jQuery中的on()函数底层是addEventListener
-</code></pre><p>27、DOM操作——增删改查</p>
-<pre><code>(1)查找元素：  $(&apos;选择器&apos;)   jQuery(&apos;选择器&apos;)
-(2)操作元素的属性： $(..).attr()
-(3)操作元素的内容： $(..).html()  $(..).text()
-(4)操作元素的样式： $(..).css()
-    $(..).addClass()   $(..)removeClass()
-    $(..).hasClass()  $(..).toggleClass(&apos;.btn&apos;)
- (5)操作元素的值：  $(..).val()
- (6)遍历元素：
-    $(..).parent()
-    $(..).children()-直接子代
-    $(..).find()-所有子元素
-    $(..).next()        $(..).nextAll()
-    $(..).prev()        $(..).prevAll()
-    $(..).siblings()
-(7)插入节点：  $(..).append()   $(..).prepend()
-(8)删除节点：  $(..).remove()   $(..).empty()
-(9)替换节点：  $(..).replaceWith()  $(..).replaceAll()
-(10)克隆节点： $(..).clone()
-</code></pre><p>28、事件处理函数：</p>
-<pre><code>(1)$(&apos;.btn&apos;).one(&apos;click&apos;, fn)
-(2)$(&apos;.btn&apos;).click(fn) ....
-(3)$(&apos;.btn&apos;).on(&apos;click&apos;, fn)        off(..)
-  $(&apos;.container&apos;).on(&apos;click&apos;, &apos;.btn&apos;, fn)  off(..)
-
-  让jQuery放弃使用 $ ：
-  jQuery.noConflict()
-</code></pre><p>29、面试题：window.onload和$(document).ready()的异同？</p>
-<pre><code>window.onload是核心DOM的写法：
-  window.onload = function(){ ... }
-  只能为绑定一次；
-  只有全部的网页内容(html/css/js/图片....)加载完成才能触发。
-
-$(document).ready()是jQuery的写法：
-  $(document).ready(function(){ ... })
-  底层是addEventListener(&apos;DOMContentLoaded&apos;, fn)，可以先后绑定多次；
-  只要“DOM内容(只包括html/js)加载完成”即可触发。
-</code></pre><p>30、补充：jQuery中的hover()函数</p>
-<pre><code>jQuery监听“鼠标进入+鼠标离开”有如下三种方法：
-(1) $(..).mouseover(fn)   +  $(..).mouseout(fn)
-(2) $(..).mouseenter(fn)   +   $(..).mouseleave(fn)
-(3) $(..).hover( fn, fn )
-注意：方法3等同于方法2
-</code></pre><p>31、补充：jQuery中的trigger()函数</p>
-<pre><code>使用JS代码代替用户触发指定的事件，调用之前绑定的监听函数。
-$(&apos;.btn&apos;).trigger( &apos;click&apos; )
-可以简写为：
-$(&apos;.btn&apos;).click( )
-</code></pre><p>32、jQuery中的函数第三部分：动画函数 —— 隐藏和显示动画</p>
-<pre><code>隐藏和显示函数通过使用定时器修改目标元素的width / height / opcaity三个样式的值来实现动画：
-$(..).show()      $(..).show(&apos;slow/normal/fast&apos;)  $(..).show(3000)
-$(..).hide()    $(..).hide(&apos;slow/normal/fast&apos;)  $(..).hide(3000)
-$(..).toggle()     ...  在隐藏和显示之间切换
-</code></pre><p>33、jQuery中的函数第三部分：动画函数 —— 折叠展开/收起动画</p>
-<pre><code>折叠展开/收起动画函数通过使用定时器修改目标元素的height一个样式的值来实现动画：
-$(..).slideUp( )    $(..).slideUp( &apos;slow/normal/fast&apos; )   $(..).slideUp( 300 )
-$(..).slideDown( )  ....
-$(..).slideToggle( )   ....
-
-练习：仿写Bootstrap中的响应式导航条在手机中的效果
-&lt;div class=&quot;navbar&quot;&gt;
-  &lt;div class=&quot;navbar-header&quot;&gt;
-      &lt;a class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
-      &lt;a class=&quot;navbar-toggle&quot;&gt;三&lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;navbar-collapse&quot;&gt;
-      ul&gt;li&gt;a
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>34、jQuery中的函数第三部分：动画函数 —— 淡入/淡出动画</p>
-<pre><code>淡入/淡出动画函数通过使用定时器修改目标元素的opacity一个样式的值来实现动画：
-$(..).fadeIn( )  $(..).fadeIn(&apos;slow/normal/fast&apos;)  $(..).fadeIn(300)
-$(..).fadeOut( )
-$(..).fadeToggle( )
-提示：上述六个动画函数都可以在最后接收一个参数——函数
-  $(..).fadeOut( 300,  function(){ //在动画结束时的回调函数 })
-练习：点击小星星后，闪动3次，最后消失
-</code></pre><p>35、jQuery中的函数第三部分：动画函数 —— animate()</p>
-<pre><code>$(..).animate({
-  属性1: 值1;
-  ...
-}, 300, fn)
-动画排队：执行完一个动画后，再执行另一个
-动画并发：同时执行多个属性的动画效果
-
-animate({})可以对哪些CSS属性执行动画？
-(1)width、height、opacity、fontSize....等等有可渐变属性值（数值型）的样式可以执行动画
-(2)display、fontFamily、transform、颜色类属性等没有渐变属性值的样式不能执行动画
-</code></pre><p>36、Web应用中可用的动画技术：</p>
-<pre><code>(1)CSS3 Transition
-(2)CSS3 Keyframes
-(3)定时器 + 属性修改            jQuery1/2动画函数
-(4)requestAnimationFrame       jQuery3
-</code></pre><p>37、jQuery类数组对象的操作</p>
-<pre><code>  window.$  &lt;=&gt; window.jQuery
-$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
-  $(..).length        获取类数组中封装的DOM对象的数量
-  $(..)[index]        获取类数组中封装的第index个DOM对象
-  $(..).get(index)        获取类数组中封装的第index个DOM对象
-  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，针对每个DOM元素执行一次指定的回调函数
-  $(..).index(domObj)    返回指定的DOM元素在当前类数组中的下标
-</code></pre><p>38、补充：页面DOM内容加载完成后执行指定的函数</p>
-<pre><code>$(document).ready(fn)
-$().ready(fn)
-$(fn)
-</code></pre><p>39、jQuery中的插件函数</p>
-<pre><code> Plugin：插件，在现有的功能基础上添加更多的功能，扩展整体的应用。
-jQuery中的插件（即函数）分为两类：
- 1.jQuery全局插件函数
-   原本要声明的工具函数（如max()/min()）如果声明为全局函数，会造成“全局对象(window)的污染；
-   为了避免污染全局对象，可以把这些函数纳入到 jQuery对象的名下——与jQuery没有必然的关系：
-   声明方式：    jQuery.max = function(arr){  }
-               jQuery.extend({ max: fn,  min: fn})
-   调用方式：    jQuery.max([10,38,50])
- 2.jQuery对象插件函数
-   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，用于操作当前选定的DOM元素。
-   声明方式：    jQuery.fn.max = function( ){  }
-               jQuery.fn.extend({ max: fn,   min: fn})
-   调用方式：    $(&apos;li&apos;).max( )
-
-   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，所有的jQuery对象的原型： jQuery.fn;
-   若想给所有的jQuery对象都添加一个扩展函数，只需要加给jQuery.fn即可
-
-  3.复杂插件的编写：轮播广告
-       $(&apos;..&apos;).carousel( );
-
-  4.复杂插件的编写：滚动监听
-       $(&apos;..&apos;).scrollspy( );
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、 DOM分为三部分：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)核心DOM：操作任意标签树
-(2)HTML DOM：操作HTML标签树
-(3)XML DOM：操作XML标签树
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、常用的核心DOM操作&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)查找元
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-      <category term="JQuery" scheme="www.wangchengzou.cn/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JSON 的了解</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JSON%20%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JSON 的了解/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:39:00.433Z</updated>
-    
-    <content type="html"><![CDATA[<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}<br>JSON字符串转换为JSON对象:<br>var obj =eval(‘(‘+ str +’)’);<br>var obj = str.parseJSON();<br>var obj = JSON.parse(str);</p>
-<p>JSON对象转换为JSON字符串：<br>var last=obj.toJSONString();<br>var last=JSON.stringify(obj);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小如：{“age”:”12”, “name”:”back”}&lt;br&gt;JSON字符串转换为JSON对象:&lt;
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript原型，原型链，有什么特点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:22:28.232Z</updated>
-    
-    <content type="html"><![CDATA[<p>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。<br>关系：instance.constructor.prototype = instance.<strong>proto</strong><br>特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。<br>当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。<br> function Func(){}<br> Func.prototype.name = “Sean”;<br> Func.prototype.getInfo = function() {return this.name;}<br> var person = new Func();//现在可以参考var person = Object.create(oldObject);<br> console.log(person.getInfo());//它拥有了Func的属性和方法<br> //“Sean”<br> console.log(Func.prototype);<br> // Func { name=”Sean”, getInfo=function()}</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript作用链域?</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E4%BD%9C%E7%94%A8%E9%93%BE%E5%9F%9F/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Javascript作用链域/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:27:58.046Z</updated>
-    
-    <content type="html"><![CDATA[<p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Label的作用是什么？是怎么用的</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Label%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E7%94%A8%E7%9A%84/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Label的作用是什么？是怎么用的/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:44:14.531Z</updated>
-    
-    <content type="html"><![CDATA[<p>label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。</p>
-<label for="Name">Number:</label><input type="“text“name="Name"" id="Name"><br><br><br><label>Date:<input type="text" name="B"></label>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
-&lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;&lt;input type=&quot;“text“name=&quot;Name&quot;&quot; id=&quot;Name&quot;&gt;&lt;br&gt;&lt;
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   

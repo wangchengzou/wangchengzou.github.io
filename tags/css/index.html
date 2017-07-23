@@ -7,7 +7,7 @@
 
     
 
-    <title>CSS | 千帆渡</title>
+    <title>css | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -217,7 +217,7 @@
         
 
         
-            <a class="breadcrumb" href="/tags/CSS/">CSS</a>
+            <a class="breadcrumb" href="/tags/css/">css</a>
         
     </div>
 </nav>
@@ -226,16 +226,82 @@
 
     <div class="collection mt-0">
         
-            <a href="/2017/07/22/CSS3笔记/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+            <a href="/2017/07/23/link和-import有什么区别/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-23T03:50:15.000Z">2017-07-23</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                CSS3笔记
+                link和@import有什么区别
             </a>
         
-            <a href="/2017/07/22/CSS3高级/" class="collection-item grey-text text-darken-1">
+            <a href="/2017/07/22/position的值relative和absolute定位原点是/" class="collection-item grey-text text-darken-1">
                 <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                CSS3高级笔记
+                position的值relative和absolute定位原点是
+            </a>
+        
+            <a href="/2017/07/22/CSS优先级算法如何计算/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS优先级算法如何计算
+            </a>
+        
+            <a href="/2017/07/22/CSS选择符有哪些？哪些属性可以继承/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS选择符有哪些？哪些属性可以继承
+            </a>
+        
+            <a href="/2017/07/22/display有哪些值？说明他们的作用/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS3新增伪类有那些
+            </a>
+        
+            <a href="/2017/07/22/CSS3新增伪类有那些/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS3新增伪类有那些
+            </a>
+        
+            <a href="/2017/07/22/CSS3有哪些新特性/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS3有哪些新特性
+            </a>
+        
+            <a href="/2017/07/22/为什么要初始化CSS样式/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                为什么要初始化CSS样式
+            </a>
+        
+            <a href="/2017/07/22/什么是CSS 预处理器，后处理器/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                什么是CSS 预处理器/后处理器
+            </a>
+        
+            <a href="/2017/07/22/如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中
+            </a>
+        
+            <a href="/2017/07/22/标准的CSS的盒子模型？低版本IE的盒子模型有什么不同/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                标准的CSS的盒子模型？低版本IE的盒子模型有什么不同
+            </a>
+        
+            <a href="/2017/07/22/浏览器的兼容性有哪些，解决方法，常用hack的技巧/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                浏览器的兼容性有哪些，解决方法是什么，常用hack的技巧
+            </a>
+        
+            <a href="/2017/07/22/css定义的权重/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                CSS3有哪些新特性
             </a>
         
     </div>
@@ -463,95 +529,6 @@
                             var data_url = data.url;
                             var index_title = -1;
                             var index_content = -1;
-                            var first_occur = -1;
-                            // only match artiles with not empty titles and contents
-                            if (data_title != '' && data_content != '') {
-                                keywords.forEach(function(keyword, i) {
-                                    index_title = data_title.indexOf(keyword);
-                                    index_content = data_content.indexOf(keyword);
-                                    if (index_title < 0 && index_content < 0) {
-                                        isMatch = false;
-                                    } else {
-                                        if (index_content < 0) {
-                                            index_content = 0;
-                                        }
-                                        if (i == 0) {
-                                            first_occur = index_content;
-                                        }
-                                    }
-                                });
-                            }
-                            // show search results
-                            if (isMatch) {
-                                keywords.forEach(function(keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
-                                });
-
-                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                                var content = data.content.trim().replace(/<[^>]+>/g, "");
-                                if (first_occur >= 0) {
-                                    // cut out 100 characters
-                                    var start = first_occur - 20;
-                                    var end = first_occur + 80;
-                                    if (start < 0) {
-                                        start = 0;
-                                    }
-                                    if (start == 0) {
-                                        end = 100;
-                                    }
-                                    if (end > content.length) {
-                                        end = content.length;
-                                    }
-                                    var match_content = content.substring(start, end);
-                                    // highlight all keywords
-                                    keywords.forEach(function(keyword) {
-                                        var regS = new RegExp(keyword, "gi");
-                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
-                                    });
-
-                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
-                                }
-                                str += "</li>";
-                            }
-                        });
-                        str += "</ul>";
-                        $resultContent.innerHTML = str;
-                    });
-                }
-            });
-        }
-    })(jQuery);
-</script>
-
-
-<script src="/js/prettify.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("pre").addClass("prettyprint");
-        prettyPrint();
-    });
-</script>
-
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-});
-</script>
-<script type="text/javascript" async
-  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-
-
-</body>
-</html>
-      var index_content = -1;
                             var first_occur = -1;
                             // only match artiles with not empty titles and contents
                             if (data_title != '' && data_content != '') {
