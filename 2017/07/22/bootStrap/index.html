@@ -1,0 +1,1298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>bootStrap基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="bootStrap基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>bootStrap基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/bootStrap/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/bootStrap/" class="chip pink lighten-1">bootStrap</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>webstorm<br>    lorem 随机测试文本</p>
+<p>1、响应式网页</p>
+<pre><code>responsive web page  一个页面可以在电脑浏览器中浏览也可以在手机平板中浏览，并且配合不同设备有不同的响应结果
+响应式网页特点：
+    页面上的图片和文字要随着屏幕尺寸发生改变
+    页面的布局随着屏幕尺寸而发生改变
+如何测试响应式网页
+    使用真实的物理设备
+        优势：测试结果真实
+        不足：设备太多，成本太大，测试任务量大
+        方法：搭建本地服务器，部署项目 ，移动终端与服务接入相同网络
+    使用三方模拟设备
+        优势：无须添加更多设备
+        不足：效率偏低，加载慢
+    使用浏览器自带模拟器（emulator）
+        优势：功能丰富
+        不足：****
+视口-viewport
+    IOS中的safari最早引入的概念
+    移动设备中，浏览器里显示网页的一块区域（Pc端会忽略）
+    对于响应式网页，设置视口的信息：
+        视口的宽度：要与设备宽度一致
+        视口的缩放倍率：设置为1，即为不缩放
+        视口的手动缩放：不允许缩放网页
+    在html中指定视口信息：
+        &lt;meta name=&quot;viewport&quot; content=&quot; &quot;&gt;
+            视口的宽度：width
+                取值：device-width
+                     具体数值
+            视口的初始缩放倍率：initial-scale
+                取值：1  原始大小
+            视口是否允许手动缩放：user-scalable
+                取值：1、0、yes、no
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,user-scalable=no&quot;&gt;
+        快键--meta:vp
+        以上代码，移动端必备！！！！
+</code></pre><p>2、如何编写响应式网页</p>
+<pre><code>必须声明视口
+文字必须使用相对尺寸（em/rem），尽量不用绝对尺寸(px)
+    css中的1px并不代表真实物理设备的1px
+    EM    :父元素字体大小倍数
+    REM  ：根元素字体大小倍数
+容器元素使用相对尺寸（%，auto），尽量不用绝对尺寸(px)
+图片使用相对尺寸（%,auto）,尽量不用绝对尺寸（px）
+页面元素使用流式布局
+    流式布局特点：
+        元素默认靠向容器的左上方
+        横向排列，排列不下则换行
+    方法：float 浮动
+         display:inline-block; 行内块
+响应式网页都要使用CSS3 Media Query技术，最重要
+</code></pre><p>3、CSS3 Media Query</p>
+<pre><code>作用：可以根据不同的媒体类型以及特性执行不同的css
+    Media:媒体，指浏览网页设备的类型，
+        如：screen(pc/pad/phone),tv,tty
+    语法：通过@media 规则进行声明
+        @media MEDIA-TYPE and|not|only (MEDIA-FEATURE)
+        MEDIA-TYPE:媒体类型
+            取值：all 默认值，所有设备
+                 screen ：电脑屏幕，智能手机 平板电脑
+                 tv     :电视设备
+        MEDIA-FEATURE:媒体特性
+            取值：width:指定浏览器窗口大小
+                 min-width:指定浏览器窗口宽度的最小值
+                 max-width:指定浏览器窗口宽度的最大值
+@media用法：
+    有选择性的执行某个外部CSS文件
+    &lt;link rel=&quot;&quot; href=&apos;&quot; media=&quot;screen&quot;&gt;
+    &lt;link rel=&quot;&quot; href=&quot;&quot; media=&quot;screen&quot;and(max-width:px)&gt;
+        不足：即使不满足当前设备条件的css文件也会被请求，但不会生效
+    有选择性执行CSS片段中的内容
+        在样式表中 @media screen and(max-width:px){
+                        选择器{属性：值}
+                    }
+常见屏幕尺寸：
+    超小屏幕（Extra Small:xs）
+        width&lt;=767px
+    小型屏幕（Small: sm）
+        768&lt;=width&lt;=991px
+    中型屏幕（Medium:md）
+        992&lt;=width&lt;=1199px
+    大型屏幕(Large:lg)
+        width&gt;=1200px
+
+大公司成型的大型框架（BOOT STRAP）开发公司Twitter
+    官网：http://getbootstrap.com
+    中文官网:http://www.bootcss.com
+    重点： bootstrap.css   提供了上千个class  依赖于JS库-jquery
+</code></pre><p>4、 bootstrap 第一步 起步</p>
+<pre><code>基本模板：
+    &lt;html lang=&quot;zh-cn&quot;&gt; 指定当前文件的基础语言
+        作用：为浏览器的自动翻译功能指定语言基础
+             为读屏软件指定基础发音
+    &lt;meta name=&quot;viewport&quot;&gt;  必须
+    &lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;ie=edge&quot;&gt;
+        x-ua-compatible
+            cross useragent compatible 跨（IE）浏览器兼容性
+                指定用哪个IE的内核进行页面渲染
+            IE=6  指定用IE6内核渲染页面
+            IE=7  ...
+            ..
+            IE=edge  采用IE最新内核渲染页面
+    两个Js 必须引用
+          html5shiv.min.js  第三方的JS 自调函数，用于让老IE支持html5新标记（IE8以下）
+          respond.min.js    第三方的JS 自调函数，用于让老IE支持CSS3媒体查询技术，响应式必备
+          通过头部引用HACK判断是否为IE8以下的浏览器
+              &lt;!--[if lt IE 9]&gt;
+                 &lt;script src=&quot;***.js&quot;&gt;&lt;/script&gt;
+             &lt;![endif]--&gt;
+    两个JS 引用页面
+        jquery.js  引入到页面中（先）
+        bootstrap.js 引入到页面中（后）
+        建议:尽量将以上两个文件放在页面最底端引入
+</code></pre><p>5、 bootstrap 第二步， 全局CSS样式</p>
+<pre><code>BOOTSTRAP 默认将屏幕分成四大类
+    大型PC屏幕LG  width:1200px
+    中型PC屏幕md  1199--992px
+    小型PAD屏幕SM  768---991px
+    超小型phone屏幕xs width:767px
+bootstrap 提供两种容器
+    定宽容器
+    在大小不同的设备上，提供不同的width固定值
+    类：container
+        lg:width:1170px
+        md:width:970px
+        sm:width:750px
+        xs:width:100%
+变宽容器
+    在任何设备中，宽度都是100%
+    类：container-fluid
+        width:100%
+</code></pre><p>6、 bootstrap 按钮</p>
+<pre><code>.btn
+.btn-default 白底深色字
+.btn-danger/success/warning/info/primary   五种不同颜色按钮
+.btn-lg/sm/xs   几种大小按钮
+.btn-block     块级按钮
+</code></pre><p>7、 bootstrap 列表</p>
+<pre><code>.list-unstyled 不带标识的列表
+.list-inline   行内列表
+.dl-horizontal 定义列表
+</code></pre><p>8、 bootstrap 图像图片</p>
+<pre><code>.img-rounded        圆角边框图像
+.img-circle            圆形边框图像
+.img-thumbnail        带几像素内边距边框图像缩进图片
+.img-responsive     响应式布局图片
+</code></pre><p>9、 bootstrap 表格</p>
+<pre><code>.table
+.table-bordered        带边框表格
+.table-striped        隔行变色
+.table-hover        悬停突出效果
+.table-responsive    响应式表格   需要加在表格父元素
+</code></pre><p>10、 bootstrap 文本和排版</p>
+<pre><code>文本颜色
+.text-danger
+.text-success
+.text-warning
+.text-info
+.text-primary
+文本背景颜色
+.bg-danger
+.bg-success
+.bg-warning
+.bg-info
+.bg-primary
+文本大小写
+.text-uppercase     全大写
+.text-lowercase        全小写
+.text-capitalize    首字母大写
+文本对齐方式
+.text-left
+.text-center
+.text-right
+浮动
+.pull-left        左浮动
+.pull-right        右浮动
+.clearfix        清浮动
+</code></pre><p>11、 bootstrap 栅格布局</p>
+<pre><code>table 布局
+    好处:简单，容易控制
+    不足:效率低
+div+css 布局
+    好处：效率高，
+    不足：太灵活，不易控制
+栅格布局
+    好处：效率高 易控制轻松实现响应式
+    不足：。。。。
+    实际上就是由div组成的table样式的响应式结构
+使用方法：
+    系统最外层，必须是bootstrap提供的容器
+        .container  .container-fluid
+    允许在容器中放置若干行  div.row
+        每行中最多等分为12列
+    行中放置 div.col 即列，每列都需要指定宽度 1/12 n/12
+        语法：&lt;div class=&quot;container&quot;&gt;
+                &lt;div class=&quot;row&quot;&gt;
+                    &lt;div class=&quot;col-*-*&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+    列 根据适用屏幕分成四个类型        N最大12列宽
+        .col-xs-n   在超小屏幕中占N列宽
+        .col-sm-n   在小型屏幕中占N列宽
+        .col-md-n      在中型屏幕中占N列宽
+        .col-lg-n   在大型屏幕中占N列宽
+    列偏移数量
+        每个列都可以指定向右偏移几列数量
+        .col-xs-offset-n       在超小屏幕中当前列向右偏移N列距离
+        .col-sm-offset-n
+        .col-md-offset-n
+        .col-lg-offset-n
+
+
+    栅格布局系统可以嵌套
+        .container&gt;.row.col-*_*&gt;.row&gt;.col-*-*
+
+    适用于不同屏幕的列的class(xs/sm/md/lg)可以兼容更大的屏幕
+        大屏幕class不能适应小屏幕  会垂直显示
+        小屏幕class可适应大屏幕
+
+    可以在一个div中指定在不同屏幕下的宽度占比
+        &lt;div class=&quot;col-xs-9 col-sm-6 col-md-3&quot;&gt;&lt;/div&gt;
+
+    指定列在特定屏幕下不显示
+        .hidden-lg  在lg下隐藏
+        .hidden-md
+        .hidden-sm
+        .hidden-xs
+</code></pre><p>12、 全局样式  表单</p>
+<pre><code>默认表单
+    .form-group            定义表单控件组
+    .form-control        定义表单控件
+    .control-label        定义控件对应的label
+    .help-block            定义提示文本
+
+行内表单
+    为&lt;form&gt;添加class=&quot;form-inline&quot;其它同上
+
+水平表单
+    水平表单=表单+栅格布局系统
+    栅格：最外层：.container/.container-fluid
+         行：.div.row
+         列：.div.col-*-*
+
+    水平表单栅格系统
+        最外层：form.form-horizontal/.container
+        行：div.form-group/div.row
+        列：div.col-*-*
+</code></pre><p> bootstrap</p>
+<p> 13、    下拉菜单</p>
+<pre><code>&lt;select&gt; &lt;option&gt;&lt;/option&gt;&lt;/select&gt;
+
+外层必须是.dropdown/.dropup  或position:relative;
+内层：为&lt;button&gt;或&lt;a&gt;
+    class=“dropdown-toggle”
+    data-toggle=&quot;dropdown&quot;        切换内容和隐藏
+内层内容：ul 或 div 来组成
+    class=&quot;dropdown-menu&quot;
+
+    li.divider:      分割线效果
+    li.disabled:    禁用菜单项
+    li.dropdown-header    标题
+</code></pre><p> 14、导航菜单</p>
+<pre><code>标签页式导航
+    &lt;ul class=&quot;nav nav-tabs&quot;&gt;
+        &lt;li class=&quot;active&quot;&gt;
+            &lt;a href=&quot;#&quot; data-toggle=&quot;tab&quot;&gt;...&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+li.active        默认被激活
+li.data-toggle=&quot;data&quot;    允许切换并且指定切换方式
+</code></pre><p>15、图标字体</p>
+<pre><code>在页面中，显示为图标，本质上是文字，可以设置字体，颜色，大小
+在web程序中常用的图标字体：
+    giyphicons 字体，收费中，
+    fontawesome  免费
+
+由于客户端不具备bootstrap中的图标字体，所以使用自定义的图标字体，必须声明
+在服务器端做以下操作：
+    ***.css
+    声明字体
+    @font-face{font-family:名称： src:url(地址)}
+    对使用字体图标的选择器进行声明
+    .glyphicon{ font-family:&quot;名称&quot;}
+
+使用方法：    必须为空元素
+    &lt;span class=&quot;glyphicon glyphicon-**&quot;&gt;&lt;/span&gt;
+</code></pre><p>16、按钮组</p>
+<pre><code>将多个按钮放在一个组中（btn-group）
+    &lt;div&gt; class=&quot;btn-group&quot;
+        &lt;button class=&quot;btn btn-deftult&quot;&gt;***&lt;/button&gt;
+        &lt;button class=&quot;btn btn-deftult&quot;&gt;***&lt;/button&gt;
+        &lt;button class=&quot;btn btn-deftult&quot;&gt;***&lt;/button&gt;
+        &lt;button class=&quot;btn btn-deftult&quot;&gt;***&lt;/button&gt;
+    &lt;/div&gt;
+将一组btn-group 组合进一个.btn-boolbar(按钮工具栏)
+按钮组尺寸
+    .btn-group 增加.btn-group-** lg/md/sm/xs
+两端对齐按钮组
+    .btn-group .btn-group-justified
+垂直放置的按钮组
+    .btn-group-vertical
+</code></pre><p>17、警告框</p>
+<pre><code>允许将任意字符与可选的关闭按钮组合在一起的结构
+所有警告框依赖于.alert
+.alert
+.alert-warning
+...
+...
+
+允许关闭的警告框
+    .alert-dismissible
+    &lt;div class=&quot;alert alert-danger alert-dismissible&quot;&gt;
+        lorem
+        &lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+警告框中的链接
+    &lt;a class=&quot;alert-link&quot;&gt;&lt;/a&gt;
+</code></pre><p>18、面包屑导航/路径导航</p>
+<pre><code>.breadcrumb
+&lt;ul class=&quot;breadcrumb&quot;&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;首页&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;产品大全&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p>19、分页条</p>
+<pre><code>.pagination
+.active : 被激活的页码
+&lt;ul class=&quot;pagination&quot;&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;上一页&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;active&quot;&gt;
+        &lt;a href=&quot;#&quot;&gt;2&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;...&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href=&quot;#&quot;&gt;下一页&lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p>20、分页器</p>
+<pre><code>.pager
+&lt;ul class=&quot;pager&quot;&gt;
+&lt;/ul&gt;
+</code></pre><p>21、标签</p>
+<pre><code>所有的标签都依赖于 .label
+.label
+.label-default
+.label-danger
+.label-success
+...
+&lt;span class=&quot;label label-danger&quot;&gt;标签内容&lt;/span&gt;
+</code></pre><p>22、徽章</p>
+<pre><code>.badge
+&lt;span class=&quot;badge&quot;&gt;35&lt;/span&gt;
+</code></pre><p>23、巨幕</p>
+<pre><code>.jumbotron
+</code></pre><p>24、页头</p>
+<pre><code>允许为 标题元素 增加适当的空间,与其他元素有一定的间隔
+.page-header
+</code></pre><p>25、Well (水井)</p>
+<pre><code>.well
+</code></pre><p>26、进度条</p>
+<pre><code>外层：.progress
+内层：
+    .progress-bar
+    .progress-bar-danger
+    .progress-bar-success
+    ...
+    .progress-bar-striped
+    .active : 被激活的
+    通过 给内层元素 增加 style=&quot;width:50%&quot; 增加宽度
+</code></pre><p>27、缩略图</p>
+<pre><code>.thumbnail
+.caption
+&lt;div class=&quot;thumbnail&quot;&gt;
+    &lt;img&gt;
+    &lt;div class=&quot;caption&quot;&gt;
+        &lt;p&gt;文本1&lt;/p&gt;
+        &lt;p&gt;文本2&lt;/p&gt;
+        &lt;p&gt;按钮&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>28、媒体对象</p>
+<pre><code>&lt;div class=&quot;media&quot;&gt;
+    &lt;div class=&quot;media-left&quot;&gt;
+        &lt;img&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;media-body&quot;&gt;
+        &lt;h2 class=&quot;media-heading&quot;&gt;标题&lt;/h2&gt;
+        形容的文本
+    &lt;/div&gt;
+    &lt;div class=&quot;media-right&quot;&gt;
+        &lt;img&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>29、列表组</p>
+<pre><code>ul : class=&quot;list-group&quot;
+li : class=&quot;list-group-item&quot;
+</code></pre><p>30、面版</p>
+<pre><code>呈现头部 主体 尾部 结构的组件
+&lt;div class=&quot;panel panel-default panel-primary&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h2 class=&quot;panel-title&quot;&gt;标题文本&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        主体内容
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-footer&quot;&gt;
+        脚注内容
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>31、导航条</p>
+<pre><code>基本导航条
+    .navbar .navbar-default
+    有需要的话允许增加div.container
+    .navbar-header,内部允许包含class带有.navbar-brand&lt;a&gt;元素
+    允许向导航条中添加链接列表，只需要增加
+导航条中的表单
+    导航中的表单不适用bootstrap中默认class使用时.navbar-form,配合.navbar-left/.navbar-right
+导航条中的按钮
+    class.navbar-btn 允许向不在form中的button(a)增加样式
+导航条中的文本
+    普通文本的话，需要增加class.navbar-text属性来设置样式
+组件的对齐方式
+    允许通过.navbar-left 实现左浮动
+    允许通过.navbar-right 实现右浮动
+导航栏的固定
+    不会随着滚动条发生滚动，一直在可视化区域中
+    固定在页面顶端：.navbar-fixed-top
+    固定在页面底端：.navbar-fixed-bottom
+    注意：最好为body设置内边距至少50px
+</code></pre><p>32、 JS插件plugin</p>
+<pre><code>Bootstrap 基于 jQuery ，在jQuery 基础上提供了十几个插件函数，
+        每个都是一个独立的JS文件,可以一次性引入全部的JS操作 - bootstrap.js
+每个插件函数都有两种调用方式：
+1、data-* 方式调用
+    &lt;a data-toggle=&quot;dropdown&quot;&gt;&lt;/a&gt;
+2、JS编程方式
+    手动编写JS代码完成行为的调用
+    &lt;script&gt;
+        $(&quot;选择器&quot;) : 在 Javascript(jQuery) 中获取页面指定选择器的元素
+            $(&quot;#id&quot;)
+            $(&quot;.class&quot;)
+            $(&quot;div p&quot;)
+        下拉列表：
+         $(&quot;选择器&quot;).dropdown();
+    &lt;/script&gt;
+3、警告框
+    父元素 class =&quot;alert alert-danger alert-dismissible&quot;
+    关闭：&lt;button class=&quot;close&quot; data-dismiss=&quot;alert&quot;&gt;&lt;/button&gt;
+    JS :
+        $(&quot;关闭选择器&quot;).click(function(){
+            $(this).alert(&quot;close&quot;);
+        });
+4、按钮
+    1、设置按钮的操作文本
+        为 按钮元素 添加 data-loading-text=&quot;显示的文本&quot;
+        &lt;button class=&quot;btn btn-default&quot; data-loading-text=&quot;请稍后....&quot;&gt;文本&lt;/button&gt;
+
+        //点击按钮时，改变按钮的文字为 data-loading-text
+        $(&quot;按钮选择器&quot;).click(function(){
+            $(this).button(&quot;loading&quot;);
+        });
+
+
+    2、设置 单选按钮 / 复选框
+        1、将 若干 单选按钮 / 复选框 放到 btn-group中  ， 为btn-group增加属性 data-toggle=&quot;buttons&quot;
+5、工具提示
+    为元素增加
+        data-toggle=&quot;tooltip&quot;
+        data-palcement=&quot;top/right/bottom/left&quot;
+        title=&quot;提示的文本&quot;
+    配合 JS 代码
+        $(&quot;选择器&quot;).tooltip();
+6、弹出框
+    为元素增加
+        data-toggle=&quot;popover&quot; //指定为弹出框方式
+        data-placement=&quot;top/right/bottom/left&quot;//方向
+        data-content=&quot;弹出框内容区域的文本&quot;
+        title=&quot;弹出框的标题&quot;;
+    配合 JS 代码如下:
+        $(&quot;选择器&quot;).popover();
+7、标签页
+    1、为导航组件里面 a 增加：
+        1、data-toggle = &quot;tab&quot;
+        2、href=&quot;#对应元素内容的ID&quot;
+    2、创建内容组
+        1、class 为 tab-content
+        2、在 内容组中 增加对应显示的内容模块
+            1、增加id属性
+            2、增加 class=&quot;tab-pane active&quot;
+    ex:
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;ul class=&quot;nav nav-tabs&quot;&gt;
+                &lt;li class=&quot;active&quot;&gt;
+                    &lt;a href=&quot;#tab1&quot; data-toggle=&quot;tab&quot;&gt;&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;div class=&quot;tab-content&quot;&gt;
+                &lt;!-- 内容1 --&gt;
+                &lt;div class=&quot;tab-pane&quot; id=&quot;tab1&quot;&gt;
+                    ....
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+8、模态对话框
+    模态对话框：父窗口中弹出一个子窗口，只要子窗口不关闭，父窗口就无法获得输入的焦点
+    模态对话框由两部分组成：
+    1、触发元素，通常 a / button 组成
+        &lt;a href=&quot;#模态框ID&quot; data-toggle=&quot;modal&quot;&gt;&lt;/a&gt;
+
+        &lt;button data-toggle=&quot;model&quot; data-target=&quot;#模态框ID&quot;&gt;&lt;/button&gt;
+    2、模态框元素
+        // 提供了半透明的遮罩层
+        &lt;div class=&quot;modal&quot; id=&quot;&quot; data-backdrop=&quot;static&quot;&gt;
+            // 提供了 宽度，高度，定位
+            &lt;div class=&quot;modal-dialog&quot;&gt;
+                //背景色，边框，倒角，阴影
+                &lt;div class=&quot;model-content&quot;&gt;
+                    &lt;div class=&quot;modal-header&quot;&gt;
+                        &lt;h4&gt;&lt;/h4&gt;
+                        &lt;button&gt; ... &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;modal-body&quot;&gt;
+                        显示主题内容
+                    &lt;/div&gt;
+                    &lt;div class=&quot;modal-footer&quot;&gt;
+                        脚注信息
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+9、折叠效果
+    1、触发元素
+        &lt;a data-toggle=&quot;collapse&quot; href=&quot;#id&quot;&gt;&lt;/a&gt;
+
+        &lt;button data-toggle=&quot;collapse&quot; data-target=&quot;#id&quot;&gt;&lt;/button&gt;
+    2、被折叠元素
+        &lt;div class=&quot;collapse&quot; id=&quot;id&quot;&gt;
+            ... ...
+        &lt;/div&gt;
+    特殊效果：
+        1、手风琴(Accordion)
+            Accordion = 面板组(panel-group) + 折叠插件
+</code></pre><p>33、折叠</p>
+<pre><code>响应式导航条
+    当屏幕尺寸大于768时候，可以正常显示出所有的内容，
+    当屏幕尺寸小于768时候一部分内容就会隐藏，通过点击弹出
+
+响应式导航条由两部分组成
+    .navbar-head
+        用于显示navbar-brand和折叠点击按钮
+        .navbar-brand:定义brand内容
+        折叠按钮：屏幕大于768不显示
+                屏幕小于768显示
+                .navbar-toggle完成以上操作
+
+    .navbar-collapse
+        被折叠的内容，当屏幕大于768正常显示
+                    当屏幕小于768就隐藏
+        通过点击按钮完成展开显示
+</code></pre><p>34、广告轮播 carousel</p>
+<pre><code>基本class
+    .carousel    data-ride=&quot;carousel&quot;
+        .carousel-inner
+            .item
+            img
+指定轮播时间
+    父元素增加.data-interval=&quot;200s&quot;
+
+图片说明文本
+    img图片下放div.carousel-caption
+        显示在图片正中间
+
+带方向按钮的轮播
+    &lt;a herf=&quot;#carousel的ID&quot;
+        class=&quot;carousel-control left
+        data-slide=&quot;prev&quot; &gt;
+        &lt;span class=&quot;glyphicon glyphicon-chevron-left&quot;&gt;&lt;/span&gt;
+    &lt;/a&gt;        这是左边
+    &lt;a herf=&quot;#carousel的ID&quot;
+        class=&quot;carousel-control right
+        data-slide=&quot;next&quot; &gt;
+        &lt;span class=&quot;glyphicon glyphicon-chevron-right&quot;&gt;&lt;/span&gt;
+    &lt;/a&gt;        这是右边
+
+带数字圆点导航的轮播
+    &lt;ul class=&quot;carousel-indicators&quot;&gt;
+        &lt;li class=&quot;active
+            data-target=&quot;#carousel的ID&quot;
+            data-slide-to=&quot;数字值&quot;&gt;
+        &lt;/li&gt;
+</code></pre><p>35、Less 和 Bootstrap 定制</p>
+<pre><code>样式语言的分类
+    静态样式语言：css
+        可以被浏览器直接解析处理，但CSS并不是合格语言，
+        缺少了基本的要素，如：变量 运算符 函数
+        可维护维护性差
+    动态样式语言：less sass、scSS 、stylus
+        不可以被浏览器直接解析处理；必须经过编译（compile）得到CSS文件后才能使用
+
+less语言        http://lesscss.org   中文 http://less.bootcss.com
+    less是一本预处理语言，扩充了CSS，在纯静态的CSS基础上增加一部分内容 如：变量 混合，
+
+在web项目中使用less的两种方式：
+    在客户端浏览器中编译less，不推荐使用
+        编写.less文件
+        编写.html 引入.less再引入less.js
+        浏览器访问.html会自行下载文件，并且在客户端进行编译转换成.css
+    在服务器端编译less   推荐使用
+        编写.less
+        在服务器端搭建less编译器，把.less转换为CSS
+        编写HTML直接引入CSS文件
+
+搭建less服务器端编译环境   ！！！
+    less编译器实际上是由JavaScript编写
+    安装独立的js解释器 node.exe
+        命令行中：执行 node -v显示：版本号
+    在webstrorm中配置filewatchers（文件监视器）
+        由ws自动检测less文件的编写与更改，自动进行编译，得到CSS文件
+        配置filewatchers
+        ws--&gt;file--&gt;settings--&gt;toos--&gt;filewiathcers
+        --&gt;添加选择less--&gt;指定lessc.cmd文件地址
+less语法
+    less完全支持CSS语法
+    less支持多行注释和单选注释，只有多行注释能被编译到CSS中
+        多行：/***/
+        单选：//注释  只一行
+    less支持变量（variable）
+        变量：在less中可以变化的数据
+        语法：@变量名：值；
+        使用变量：变量作为值，出现在CSS属性名称后
+            @变量名;
+    less变量可以使用运算符 +  - * % /
+
+less支持在一组样式中混入另一种样式 名称为混合（mixin） 嵌套
+    带参数的混合：声明选择器的时候，允许使用参数来表示暂时不确定的数据，在调用时将具体数值传递进来
+        语法：选择器（@参数名1，@参数名2）{
+                        width：@参数名1
+                        height：@参数名2
+                    }
+    使用带参混合写法：
+        选择器2{
+            选择器（值1，值2）
+        }
+    使用默认值的混合写法：
+        选择器2 (参数名1：默认值，参数名2：默认值){
+              选择器（值1，值2）
+       }
+       当没有设定值时，为默认值输出，有设定值时，为设定值输出
+
+嵌套规则
+    在less中，允许在一个选择器内再声明另一个选择器，以便完成父子或后代结构
+    语法：选择器1{
+            --；
+            --；
+            选择器2{
+                ---；
+                ---；
+            }
+        }
+    编译结果为
+         选择器1{
+             ---；
+         }
+         选择器1 选择器2{
+             ---；
+         }
+
+    声明子代嵌套：选择器1{
+                       --；
+                       --；
+                       &gt;选择器2{
+                           ---；
+                           ---；
+                       }
+                   }
+
+less中提供的功能函数
+    lighten（@color，20%）    返回一个变亮的颜色值(颜色减淡)
+    darken(@color，30%)         返回一个变暗的颜色值（颜色加深）
+    image-width(&quot;**.jpg&quot;)    返回指定图片的宽度
+    image-height(&quot;**.jpg&quot;)    返回指定图片的高度
+    ceil（@num）                对数字向上取整 返回四舍五入
+    floor（@num）            对数字向下取整
+    percentage（@num）        返回小数转换为%数字
+
+@import功能
+    在less中的@import，在服务器端将多个less文件内容整合一个less文件中
+    语法：  @import&quot;***.less&quot;;
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/css定义的权重/" rel="next" title="CSS3有哪些新特性">
+    上一篇：CSS3有哪些新特性
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/documen.write和 innerHTML的区别/" rel="next" title="documen.write和 innerHTML的区别?">
+    下一篇：documen.write和 innerHTML的区别?
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

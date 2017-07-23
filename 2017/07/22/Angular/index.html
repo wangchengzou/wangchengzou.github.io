@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Angular基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Angular基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Angular基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/Angular/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Angular/" class="chip pink lighten-1">Angular</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>1、设计原则和设计模式</p>
+<pre><code>拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple and stupid
+语义化的标记、命名规则、减少嵌套
+
+3、DRY（善于使用封装和重用）
+Don&apos;t Repeat Yourself
+
+4、高内聚 低耦合（High cohesion,low coupling）
+内聚：一个组件（模块）内部的不同部分的关系
+耦合：不同组件（模块）之间的关系
+
+5、SRP 单一责任原则
+Single Responsibility Principle
+实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
+
+6、OCP原则(对于扩展开放、对于修改关闭)
+open close principle
+
+7、LCP（迪米特法则）
+Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
+
+常用的设计模式分为3大类：①创建 ②结构 ③行为
+
+常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
+先去实现功能，在迭代的过程中优化代码。
+</code></pre><p>2、AngularJS</p>
+<pre><code>认识新东西最好的方式：
+①官网
+②维基百科 wikipedia.org
+what?--ng(AngularJS)是一个开源的js框架
+where？--用来实现SPA应用程序（单一页面应用程序single page application）
+Gmail邮箱是由Google退出的前端历史中第一个SPA应用
+why？
+四大特征：
+①采用了MVC的设计模式
+Model 模型数据
+View  视图
+Controller 控制器
+</code></pre><p>3、MVC的工作原理：</p>
+<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
+1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
+2.双向数据绑定
+    数据-》视图
+    视图用户的输入 -》 数据
+3.依赖注入
+4.模块化设计
+</code></pre><p>4、使用ng</p>
+<pre><code>1、基本语法
+    &lt;any&gt;{{表达式}} &lt;/any&gt;
+    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
+
+2、常用指令
+    ngApp
+        ①启动ng
+        ②指定作用范围，将指令写在根标签
+    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
+    ngInit 指令 来完成数据的初始化
+    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
+        ①不需要在通过ngInit指令定义数据时候，加上var关键字
+        ②ngInit所初始化的变量是可以在整个html去使用变量
+</code></pre><p>5、常用指令</p>
+<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
+
+作为扩展属性来使用：
+    &lt;div ng-**&gt;&lt;/div&gt;
+    ngInit  --&gt; ng-init
+    ngApp --&gt; ng-app
+作为扩展标签来使用：
+    &lt;ngView/&gt;
+①ngApp
+    启动ng
+    指定作用范围，将指令写在根标签
+    注意事项：调用一次ngApp
+②ngInit
+    通过ngInit调用一次，初始化多个变量？？
+    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
+③ngRepeat
+    重复实例化模板
+    两种语法：
+    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
+    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
+
+    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
+        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
+
+④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
+    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
+    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
+    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
+    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
+    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，但是控制台是会报错的，通过ngSrc去指定就搞定了
+    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
+    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
+</code></pre><p>6、MVC</p>
+<pre><code>在ng中：
+    Model 模型数据：在ng中定义的一些变量
+    View  视图：通过ng指令和表达式增强版的html
+    Controller 控制器：负责数据的增删改查的
+MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
+在ng中应该怎么做才能实现一个SPA？
+准备工作：
+①创建一个模块
+    因为在ng中是以模块为基本单位的
+    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
+②使用模块
+    采用ngApp指令
+    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
+③创建一个控制器
+    app.controller(&apos;控制器的名称&apos;,function(){})
+    第二个参数时控制器被调用时，要执行的方法
+④调用控制器
+    采用ngController指令来调用控制器
+    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
+    实现数据的创建和显示等：
+⑤操作数据、显示出来
+
+$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
+    建立起控制器中的数据和控制器的所指定的视图的桥梁
+
+绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
+&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
+
+注意事项：
+由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
+</code></pre><p>7、ng是由很多指令的：</p>
+<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
+ngBind ngClass ngStyle
+
+在webStorm中创建一个文件模板的基本步骤：
+①拷贝要使用的代码
+②点击左上角的file，选择new
+③选择Edit File Templates
+④点击弹窗中右上角的+号
+⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
+</code></pre><p>8、自定义指令</p>
+<pre><code>1、如何自定义？？
+    angular.module()
+    app.controller()
+    //创建指令
+    app.directive(&apos;指令的名称&apos;，function(){
+        return {}
+    })
+    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写； 后缀：用来描述指令的功能
+    属性：
+    template：指定要显示的模板内容
+    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
+    replace: true,替换并显示出来
+    scope
+
+2、如何使用自定义的指令？？
+    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
+    &apos;tsHello&apos; --&gt; ts-hello
+    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
+
+3、自定义指令传递参数
+    怎么传？
+        在调用指令的时候可以传 将参数作为属性对应的值
+    怎么接受？
+        scope
+</code></pre><p>9、双向数据绑定</p>
+<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
+绑定方式：
+①常用指令： ngRepeat/ngIf/ngShow...
+②双花括号：{{}}
+
+方向2：从‘视图中用户的输入’绑定到‘数据’
+绑定方式：指令：ngModel
+
+如果要监听数据的变化：
+$scope.$watch(&apos;txt&apos;,function(){
+
+})
+
+在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
+ngOptions语法：
+ &lt;select
+    ng-model=&quot;city&quot;
+    ng-options=&quot;city.cityName for city in cities&quot;&gt;
+ &lt;/select&gt;
+</code></pre><p>10、过滤器</p>
+<pre><code>a.内置的过滤器
+    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
+    过滤器的语法：支持多重过滤和传参
+    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
+            | => 管道
+            常用的过滤器：
+                currency 货币样式的过滤器
+                date 日期
+                uppercase/lowercase 大小写的处理
+                orderBy 对指定的数组进行升序或者降序排列
+                number 格式化数字为文本（对有小数点的数据的处理）
+                limitTo 限定数组或者字符串要显示的个数
+        b.自定义过滤器
+            自定义过滤器方式：
+            app.filter('过滤器名称',function(){
+                return function(input，arg){
+                        //input是传递给过滤器的数据
+                        //arg 是过滤器本身的参数
+                    return '过滤后的结果'
+                }
+            })
+            使用自定义的过滤器:
+            和内置的过滤器用法是一样的
+
+11、ng模块内置的方法
+
+        序列化、反序列化
+        toJson:将对象或者数组 序列化 为json格式的字符串
+        fromJson：相反的过程
+
+12、服务
+
+    服务的本质是一个单例对象，提供数据和对象。
+    两大类：
+    ①内置服务
+        $location、$http、$window、$scope...
+        使用内置服务中提供的方法：
+            第一步 将需要用到的服务注入进来 function($scope,$location)
+            第二步 调用服务中提供的方法 数据。。
+    ②自定义的服务
+        面试题：$scope与$rootScope之间的关系
+        1、不同的控制器之间的数据是彼此隔离的
+        2、不同的控制器之间如何共享数据？？
+        $scope的id是从2开始依次往上递增，
+        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
+            方式1：借助于$rootScope
+                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
+            方式2：借助于控制器之间的嵌套
+                在调用控制器的元素 之间的嵌套关系
+                @@div ng-controller='myCtrl02'>
+                    @@<div ng-controller="myCtrl03"></div>
+                @@
+            方式3：触发事件传递参数
+                绑定事件：
+                $scope.$on('事件名称',function(event,data){
+
+                })
+        触发事件：
+        //从子作用对象 向 父作用域对象 传递事件
+        $scope.$emit()
+        //从父作用对象 向 子作用域对象 传递事件
+        $scope.$broadcaset()
+
+13、服务
+
+        双向数据绑定的工作原理：
+        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
+        怎么知道数据发生了变化？
+        在ng中有一个循环$digest,会不断的对比数据，
+        需要手工的触发循环做对比，可以通过：
+        $scope.$digest();
+        $scope.$apply();//触发$rootScope.$digest();
+
+14、ng内置的服务：
+
+        $location $scope $rootScope $window $interval $timeout
+        1、在ng中定时器相关的处理--》$interval $timeout
+        2、$http
+        $http({method:'',url:''}).success().error()
+        $http.get()
+        $http.post()
+        注意：如果需要发起post请求，需要设置:
+         app.run(function ($http) {
+                $http.defaults.headers.post =
+        {'Content-Type':'application/x-www-form-urlencoded'};})
+
+        在发起post请求时，如果需要对参数进行序列化:
+        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
+
+15、自定义服务
+
+        服务的目的是为了封装业务逻辑，提高代码的复用率
+
+        自定义指令 app.directive
+        自定义过滤器 app.filter
+        自定义服务的方法：
+        app.factory ('服务名称',function(){//普通方法 return {}})
+app.service(&apos;服务名称&apos;,function(){//构造函数})
+app.constant(&apos;服务名称&apos;，{})//创建常量服务
+app.value(&apos;服务名称&apos;，{})//创建变量服务
+
+注意事项：
+自定义的服务 需要用到其它服务中方法
+图：两个按钮：开始 结束。
+</code></pre><p>16、依赖注入</p>
+<pre><code>将代码部署到线上，都会对代码做压缩。
+使用YUI-Compressor.jar （有java的运行环境）
+①借助于CLI（command line）
+    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
+
+②IDE（webStorm）
+    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，在弹窗中的program选中对应的jar，保存即可
+压缩效果：
+会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），但是数字、字符串、关键字是不会改变的。
+
+解决压缩后的问题方式：
+依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，让我们可以去直接使用
+
+注入的方式：
+①推断式（猜测）
+    这种方式在进行压缩会有问题
+    app.controller(&apos;myCtrl&apos;,function($scope){});
+
+②标记式
+    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，存在一个字符串（服务名称）数组。
+    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
+    实现方式：1、将处理函数单独的存在一个变量中 2、给变量设置$inject，值是一个由字符串构成的数组 3、使用服务即可
+③行内式（内联式）
+    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
+    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
+    依赖注入3种方式，官方推荐采用行内式依赖注入。
+    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，整个ng应用的注入对象都是由$injector定位和创建。
+    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
+    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
+</code></pre><p>17、模块化设计</p>
+<pre><code>ng有4大特征：
+①MVC
+②双向数据绑定
+③依赖注入
+④模块化设计
+
+高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
+
+如何自定义模块？
+angular.module();
+
+使用模块？
+ng-app=&quot;&quot;
+在创建模块时，在第二个参数所对应的数组中写上服务的名称
+
+一个ng的模块都可以包含哪些？
+控制器：对应部分业务逻辑的封装
+服务：经常用到的重复代码封装
+指令：扩展html标签、属性
+过滤器：针对数据做一些筛选 过滤 格式化的处理
+</code></pre><p>18、ngRoute（路由模块）</p>
+<pre><code>ng是主要实现SPA（单一页面应用程序）
+SPA的工作原理：
+    1、页面url
+    http://127.0.0.1/index.html#/路由地址
+    例如：http://127.0.0.1/index.html#/start
+    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
+    3、在路由词典中寻找路由地址(start)所对应的路由信息
+    4、在路由信息所对应的对象中找到真实的模板页面地址
+    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
+
+ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，自动发起ajax请求加载页面显示。
+    0、在创建自定义模块，在依赖列表中指定ngRoute
+    1、指定盛放代码片段的容器
+    2、配置路由词典
+
+使用ngRoute的基本步骤：
+①创建一个完整的html页面
+    记得引入angular.js angular-route.js
+
+②创建模块，并指定依赖于ngRoute模块
+    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
+
+③使用指令创建一个盛放代码片段的容器
+    调用ngView指令：创建一个容器，代码片段会加载到这里
+
+④创建模板页面
+
+⑤配置路由词典
+    $routeProvider
+    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
+    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
+    otherwise是用来指定异常的处理
+    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
+
+SPA在ng实现过程，代码片段的跳转：
+①直接修改地址栏中的路由地址
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
+②通过js的方式
+    $location.path(&apos;路由地址&apos;)
+③超链接的方式
+    a href=&quot;#/myRegister&quot;
+    login-&gt;start 10
+
+SPA应用程序通过ngRoute来传递参数：
+①搞明白 发送 接收
+②配置接收方的路由
+    $routeProvider.when(&apos;/myStart/:num&apos;,{
+    templateUrl:&apos;tpl/start.html&apos;
+    })
+③拿到传递过来的参数
+    $routeParams.num
+④发送
+    a href=&apos;#/myStart/10&apos;
+    $location.path(&apos;/myStart/10&apos;)
+
+注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
+    myStart/:id $routeParams.id
+
+练习：实现一个SPA
+完整的html manager.html
+代码片段： checkProduct.html pay.html send.html
+
+要求：能够实现不同页面的跳转以及参数的传递
+checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
+pay 点击button跳转到send
+send button以及a跳转到check.html
+
+优化思路：如果多个控制器需要用到同一个方法或者数据，
+    ①将方法和数据封装成一个服务
+    ②$rootScope
+    ③控制器之间的嵌套
+    ④借助于事件
+
+由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
+控制器中的方法和数据，代码片段就可以用了。
+①发送 接收
+    checkProduct --&gt; pay
+
+②配置接收方路由
+    .when(&apos;/myPay/:price&apos;,{})
+
+③$routeParams
+    $routeParams.price
+
+④发送参数
+    href=&apos;#/myPay/20&apos;
+    $location.path(&apos;/myPay/20&apos;)
+
+ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
+
+要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
+
+注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
+</code></pre><p>19、ngAnimate（动画模块）</p>
+<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
+基本步骤：
+①引入对应的js文件
+    angular-animate.js
+②指定自定义模块依赖于ngAnimate
+    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
+③css给ng应用程序添加动画效果：
+    ngEnter 准备进入
+    ngEnterActive 进入完成
+    ngLeave 准备离开
+    ngLeaveActive 离开完成
+④引入对应的css文件
+
+如果用到其它的模块整体思路：
+    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
+    ②在创建模块，指定依赖列表
+    ③根据模块中所提供的指令、服务。。结合业务需要进行
+</code></pre><p>20、表单验证</p>
+<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
+布尔类型：
+$valid
+$invalid
+$dirty
+$pristine
+对象：
+$error
+
+注意事项：
+①给表单以及表单组件 加上name属性
+②给需要用到的表单组件 ，加上ngModel
+③属性的用法
+myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/javaScript高级基础知识/" rel="next" title="javaScript高级基础知识">
+    上一篇：javaScript高级基础知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/CSS3有哪些新特性/" rel="next" title="CSS3有哪些新特性">
+    下一篇：CSS3有哪些新特性
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

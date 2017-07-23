@@ -1,0 +1,1066 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>JQuery基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="JQuery基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>JQuery基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/JQuery/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/javaScript/" class="chip pink lighten-1">javaScript</a>
+        
+            <a href="/tags/JQuery/" class="chip pink lighten-1">JQuery</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>1、 DOM分为三部分：</p>
+<pre><code>(1)核心DOM：操作任意标签树
+(2)HTML DOM：操作HTML标签树
+(3)XML DOM：操作XML标签树
+</code></pre><p>2、常用的核心DOM操作</p>
+<pre><code>(1)查找元素的方法
+    document.getElementById(&apos;p1&apos;)
+    document.getElementsByName(&apos;uname&apos;)
+    document.getElementsByTagName(&apos;div&apos;)
+    document.getElementsByClassName(&apos;btn&apos;)
+    document.querySelector(&apos;选择器&apos;)
+    document.querySelectorAll(&apos;选择器&apos;)
+    遍历DOM节点：
+    node.parentNode
+    parent.childNodes、parent.children
+    node.nextSibling、node.previousSibling
+(2)修改元素的属性
+    node.setAttribute(&apos;title&apos;,&apos;值&apos;)
+    node.getAttribute(&apos;title&apos;)
+(3)修改元素的内容
+    element.innerHTML
+    element.textContent/innerText
+(4)修改元素的样式
+    element.style.color = &apos;red&apos;;
+    element.className = &apos;btn btn-danger&apos;
+(5)修改元素的值
+    inputElement.value
+(6)添加新元素
+    var newElement = document.createElement(&apos;div&apos;);
+    parent.appendChild(newElement)
+(7)删除已有元素
+    parent.removeChild(node)
+(8)替换旧元素
+    parent.replaceChild(oldChild, newChild)
+(9)元素克隆
+    element.cloneNode()
+
+总结：核心DOM操作的问题
+  · 方法名普遍比较长
+  · 操作比较僵硬
+  · 方法存在浏览器兼容性
+</code></pre><p>3、jQuery 概述</p>
+<pre><code>jQuery是一个DOM操作的函数库，简化了常用的DOM操作。
+理念：Write Less，Do More
+jQuery提供了四类函数：
+  (1)DOM操作 —— 重点
+  (2)事件处理
+  (3)动画函数
+  (4)AJAX
+</code></pre><p>4、 jQuery的版本问题：</p>
+<pre><code>(1)jQuery 1.x：比较大、功能偏弱、兼容老IE
+(2)jQuery 2.x：比较小、功能强大、不兼容老IE
+(3)jQuery 3.x：比较小、功能更强大、不兼容老IE
+面试题：jQuery3的新特性有哪些？
+HTML中使用jQuery，只需要使用SCRIPT标签引入jquery-*.js即可，会为window添加两个新的成员：
+    window.$
+    window.jQuery
+</code></pre><p>5、jQuery函数的特点</p>
+<pre><code>(1) $或者jQuery是一个函数，返回值是一个jQuery类数组对象
+(2)即使没有查找到需要的元素，jQuery类数组对象也不会是null/undefined，调用jQuery函数不会报错！
+(3)jQuery类数组对象提供的函数都自带for循环遍历每个查找到的元素
+(4)jQuery函数底层都是DOM操作，所以可和原生的DOM操作组合使用
+(5)原生DOM对象不能调用jQuery提供的函数；jQuery函数返回的类数组对象也不能调用核心DOM成员
+(6)原生DOM对象和jQuery对象间如何转换：
+  原生DOM对象封装到一个jQuery类数组对象
+      $(domObject)
+  jQuery类数组中取出封装的DOM对象：
+      $(&apos;button&apos;)[index]
+(7)jQuery对象方法的返回值一般还是当前选定的类数组对象，可以实现“链式调用”
+</code></pre><p>6、jQuery函数第一部分：DOM操作函数 —— 查找元素</p>
+<pre><code>$( &apos;选择器&apos; )
+jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；同时还扩展了一些新的选择器语法。
+面试题：jQuery中的哪些选择器是CSS中没有的？ —— 执行效率较低
+</code></pre><p>7、 第一组：基本选择器   —— 重点</p>
+<pre><code>(1)#id
+  练习：点击一个button#bt1，让下方的一个p#p1隐藏起来
+  提示：jQuery类数组对象提供的.hide()函数可以隐藏一个元素
+(2).className
+  练习：点击一个button#bt2，让下方所有的span.badge字体变大为2em
+  提示：jQuery类数组对象提供的.css(&apos;color&apos;, &apos;red&apos;)函数可以修改当前选定元素的指定样式
+(3)标签名
+  练习：li元素上发生鼠标进入事件时，当前li显示出下边框
+  提示：使用.on(&apos;mouseover&apos;, fn)监听鼠标进入事件
+(4)*
+  练习：单击button#bt3后，让所有的元素的box-sizing变为border-box，所有元素的margin变为0
+(5)div, p, #c3
+  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，添加事件监听，点击后打印出当前系统时间
+</code></pre><p>8、第二组：层级选择器       —— 重点</p>
+<pre><code>(6) ancestor descendant   后代选择器
+  练习：为所有#alert1中的.btn添加事件监听，单击后，隐藏#alert1
+(7) parent &gt; child     直接子代选择器
+  练习：为所有#alert2中的直接子元素.btn添加事件监听，单击后，隐藏#alert2
+(8) prev + next      下一个相邻兄弟选择器
+  练习：为UL中的LI添加上边框，实现如下效果：
+  $(&apos;li + li&apos;).....
+  $(&apos;li:not(:first-child)&apos;)....
+(9) prev ~ siblings    后续的所有兄弟选择器
+</code></pre><p>9、第三组：基本过滤选择器       —— 重点</p>
+<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，不论是否在同一个父元素中与否。下标从0开始！
+(10) :first
+  练习：把所有列表中的第一个LI字体加粗显示
+(11) :last:
+  练习：把所有列表中的最后一个LI字体斜体显示
+(12) :eq(index)
+  练习：把所有列表中的第index个LI添加有边框
+(13) :gt(index)
+  练习：把所有列表中的下标大于index的LI添加删除线
+(14) :lt(index)
+  练习：把所有列表中的下标小于index的LI添加下划线
+(15) :odd
+  练习：把所有列表中的下标为奇数的LI背景颜色变为淡黄色
+(16) :even
+  练习：把所有列表中的下标为偶数的LI背景颜色变为淡蓝色
+(17) :not(selector)
+</code></pre><p>10、第四组：子元素过滤选择器       —— 重点</p>
+<pre><code>注意：在每个父元素中进行分组，查找指定的子元素。下标从1开始。
+(18) :first-child
+  $(&apos;li:first-child&apos;);
+  练习：把每个列表中的第一个子LI字体变浅蓝
+(19) :last-child
+  练习：把每个列表中的第最后一个子LI字体变红色
+(20) :nth-child(index)
+  练习：把每个列表中的第2个子LI字体添加绿色背景
+  $(&apos;li:nth-child(2)&apos;)...
+  $(&apos;li:nth-child(odd)&apos;)       $(&apos;li:nth-child(2n+2)&apos;)
+  $(&apos;li:nth-child(even)&apos;)    $(&apos;li:nth-child(2n)&apos;)
+(21) :only-child
+  $(&apos;li:only-child&apos;)
+</code></pre><p>11、第五组：属性选择器</p>
+<pre><code>(22) [attribute]
+  选中所有具备title属性的a元素： $(&apos;a[title]&apos;)...
+(23) [attribute=value]
+  选中所有具备data-toggle属性且值为dropddown的元素：
+  $(&apos;[data-toggle=&quot;dropdown&quot;]&apos;)....
+(24) [attribute!=value]
+(25) [attribute^=value]
+(26) [attribute$=value]
+(27) [attribute*=value]    具备指定的属性，且值中包含指定字符
+</code></pre><p>12、第六组：可见性选择器</p>
+<pre><code>(28) :visible         $(&apos;:visible&apos;)选中所有可见元素
+(29) :hidden        $(&apos;:hidden&apos;)选中所有隐藏元素
+测试：哪些是:hidden可以选中的？
+      · display: none            可以
+      · visibility: hidden        不可以
+      · opacity: 0            不可以
+      · input[type=&quot;hidden&quot;]    可以
+</code></pre><p>13、第七组：内容过滤选择器</p>
+<pre><code>  (30) :contains(txt)
+    练习：选中文本中包含“提交”字的button元素，让它们变为绿色按钮
+  (31) :has(selector)
+    练习：选中包含.close按钮的.alert元素，让它们变为红色的警告框；
+选中不包含.close按钮的.alert元素，让它们变为红色的警告框
+  (32) :empty
+    练习：选中内容为空的警告框    $(&apos;.alert:empty&apos;).....
+  (33) :parent
+    练习：选中内容不为空的警告框，即包含子元素或文本内容
+    $(&apos;.alert:parent&apos;).....
+</code></pre><p>14、第八组：表单元素选择器</p>
+<pre><code>: input         :text         :password     :radio
+:checkbox     :submit         :image         :reset
+:button     :file             :hidden
+
+:enabled     :disabled     :checked         :selected
+  &lt;input type=&quot;image&quot; src=&quot;img/1.jpg&quot;&gt;
+</code></pre><p>15、 W3C DOM把HTML文档看做树型结构，并提供操作节点方法；–总结</p>
+<pre><code>jQuery是一个函数库，用于简化DOM操作，屏蔽了浏览器兼容性问题。函数分为四类：
+  (1)DOM操作
+  (2)事件处理
+  (3)动画
+  (4)AJAX
+jQueryDOM操作——查找节点
+  jQuery(&apos;选择器&apos;)    =》  类数组对象
+基本选择器：
+    #id、.class、div、*、button,.btn
+层级选择器：
+    parent  child
+    parent &gt; child
+    prev + next
+    prev ~ siblings
+基本过滤选择器：
+    :first        :last        :eq(i)    :gt(i)        :lt(i)
+    :odd        :even    :not(selector)
+子代过滤选择器：
+    :first-child    :last-child        :nth-child(i)
+    :nth-child(odd)   :nth-child(even)
+属性选择器：
+    [attr=&quot;value&quot;]
+可见性选择器：
+    :visible        :hidden
+内容选择器：
+    :contains(txt)        :has(selector)
+    :empty            :parent
+表单元素选择器：
+    :text        :radio    :submit
+    :disabled    :enabled     :checked    :selected
+</code></pre><p>16、操作元素的属性</p>
+<pre><code>&lt;a  href=&quot;&quot; title=&quot;&quot;  data-toggle=&quot;dropdown&quot;&gt;
+核心DOM：
+  element.getAttribute(&apos;title&apos;)
+  element.setAttribute(&apos;title&apos;, &apos;abc&apos;)
+jQuery：
+  var value  = $(..).attr(&apos;title&apos;)        //读取属性的值
+  $(..).attr(&apos;title&apos;, &apos;abc&apos;)            //设置属性的值
+提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
+  var v = $(...).data(&apos;my-target&apos;)        //读取
+  $(...).data(&apos;my-target&apos;, &apos;2.jpg&apos;)        //设置
+
+练习：点击某个小图，下方就显示出对应的大图
+  &lt;img src=&quot;img/4.jpg&quot; data-target=&quot;img/Koala.jpg&quot;&gt;
+</code></pre><p>17、操作元素的内容</p>
+<pre><code>核心DOM：
+  var h = element.innerHTML;
+  element.innerHTML = h;
+  var t = element.innerText/textContent;
+  element.innerText/textContext = t;
+jQuery：
+  $(..).html( )        //读取innerHTML
+  $(..).html( &apos;html&apos; )    //设置innerHTML
+  $(..).text( )        //读取innerText
+  $(..).text( &apos;txt&apos; )        //设置innerText
+练习：点击一个Button，上方显示出已点击的次数
+练习：&lt;a href=&quot;#&quot;&gt;再次点击即显示下一张图片&lt;/a&gt;
+  1再次点击即显示下一张图片
+  2&lt;img src=&quot;1.jpg&quot;&gt;
+  3再次点击即显示下一张图片
+  4&lt;img src=&quot;2.jpg&quot;&gt;
+  5再次点击即显示下一张图片
+  6 ....
+</code></pre><p>18、操作元素的样式</p>
+<pre><code>核心DOM：
+  var c = element.style.color        //读取行内样式
+  element.style.color = &apos;red&apos;        //设置行内样式
+  var n = element.className        //读取ClassName
+  element.className = n            //设置ClassName
+jQuery：
+  $(..).css(&apos;color&apos;)        //读取指定样式的值
+  $(..).css(&apos;color&apos;, &apos;red&apos;)    //设置行内样式
+  $(..).addClass(&apos;alert&apos;)    //添加一个class
+  $(..).removeClass(&apos;alert&apos;)    //删除一个class
+  $(..).hasClass(&apos;alert&apos;)    //判断选定元素是否具有指定class
+练习：实现一个“双态按钮”，点击一次变为深色，再点击变为浅色
+  .up {  }            .down {  }
+</code></pre><p>19、操作表单元素的值</p>
+<pre><code>核心DOM：
+    var v = input.value        //读取值
+    input.value = &apos;v&apos;        //设置值
+jQuery：
+    $(...).val( )            //读取值
+    $(...).val(&apos;value&apos;)    //设置值
+练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，读取用户的两个输入，打印出来，在输入框中清除用户的输入
+
+面试题：在操作元素的相关属性时，使用attr()、val()、prop()、data()有何区别？
+attr()一般只用于操作元素的HTML字面属性，如src、href、name...
+val()操作的是HTML元素对应的JS对象的value属性
+prop()操作的是HTML元素对应的JS对象的disabled、readyonly、selected、checked等Boolean类型属性
+data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据），而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
+</code></pre><p>20、遍历DOM树上的节点</p>
+<pre><code>核心DOM：
+  element.parentNode            //寻找父节点
+  element.childNodes/children        //获取子节点
+  elemnet.nextSibling            //获取下一个兄弟
+  element.previousSibling            //获取上一个兄弟
+jQuery：
+  $(..).parent()            //返回选定元素的父节点
+  $(..).children()            //返回所有子节点
+  $(..).next()            //返回下一个兄弟
+  $(..).prev()            //返回上一个兄弟
+  $(..).siblings()            //返回所有的同辈兄弟
+练习：实现一个自己的页签组件
+
+  &lt;ul class=&quot;tabs&quot;&gt;
+      &lt;li&gt;&lt;a&gt;十元套餐&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;active&quot;&gt;&lt;a&gt;二十元套餐&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a&gt;三十元套餐&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+</code></pre><p>21、添加新的元素</p>
+<pre><code>核心DOM：
+  var li = document.createElement(&apos;li&apos;)    //创建子节点
+  //修改li的属性....                    //设置其属性
+  ul.appendChild( li );                    //添加到父节点
+jQuery：
+  var li = $(&apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos;)    //创建子节点
+  //li.click(fn)
+  $(&apos;ul&apos;).append( li );                //在父节点最后追加子节点
+  $(li).appendTo( &apos;ul&apos; )            //子节点追加到父节点最后
+   -------可以简写为------------------------------
+  $(&apos;ul&apos;).append( &apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos; )
+练习：添加和删除小盒子
+
+  function rc(){            //Random Color:  返回一个随机的颜色
+      var r = Math.floor(Math.random()*256)
+      var g = Math.floor(Math.random()*256)
+      var b = Math.floor(Math.random()*256)
+      return `rgb(  ,  ,  )`;
+  }
+</code></pre><p>22、删除已有的元素</p>
+<pre><code>核心DOM：
+  ul.removeChild( li )            //由父元素删除孩子
+jQuery：
+  $(&apos;li&apos;).remove()                //删除当前选定元素
+</code></pre><p>23、替换已有元素</p>
+<pre><code>核心DOM：
+  parent.replaceChild(oldChild,  newChild);
+jQuery：
+  $(&apos;oldChild&apos;).replaceWith( newChild )    //已有节点用新节点替换，返回被删除的旧节点
+  $(&apos;newChild&apos;).replaceAll( oldChild )    //新节点替换所有的旧节点，返回新节点
+练习：实现英雄选择效果    div#chosen        div#list
+</code></pre><p>24克隆节点</p>
+<pre><code>核心DOM：
+  var copy = element.cloneNode( )
+jQuery：
+  var copy = $(..).clone()        //返回选定元素的副本
+  var copy = $(..).clone(copyListener)   //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
+练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，上方选中区域出现当前飞机的一个副本
+</code></pre><p>25、jQuery函数第二部分：事件处理函数</p>
+<pre><code>jQuery的历史上先后出现了若干事件处理函数：
+(1)bind() / unbind()            已废弃
+(2)one(事件名称, fn)    仅对指定事件监听一次
+(3)live() / die()                已废弃
+(4)delegate() / undelegate()    已废弃
+(5)on() / off()
+(6)click() / mouseover() / mouseout() / keyup() ...
+  $(..).click(fn)  &lt;=&gt;  $(..).on(&apos;click&apos;, fn)
+
+  on()函数的第一种使用方法——直接绑定在事件源上：
+      $(&apos;事件源&apos;).on(&apos;事件名称&apos;, fn)    //绑定监听函数
+      $(&apos;事件源&apos;).off(&apos;事件名称&apos;)        //取消所有监听函数
+  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；要求此后此按钮再被点击无任何处理函数了。
+  on()的第一种用法有两个限制：
+      (1)若选中元素很多，每个都会有一个监听函数
+      (2)无法为后添加的元素执行绑定
+  on()函数的第二种使用方法——委托给父元素进行事件代理：
+      $(&apos;parent&apos;).on(&apos;事件名称&apos;, &apos;子元素选择器&apos;, fn)
+</code></pre><p>26、 DOM中为元素绑定监听函数：</p>
+<pre><code>btn.onclick = function(){  }
+btn.addEventListener(&apos;click&apos;, function(){  })
+jQuery中的on()函数底层是addEventListener
+</code></pre><p>27、DOM操作——增删改查</p>
+<pre><code>(1)查找元素：  $(&apos;选择器&apos;)   jQuery(&apos;选择器&apos;)
+(2)操作元素的属性： $(..).attr()
+(3)操作元素的内容： $(..).html()  $(..).text()
+(4)操作元素的样式： $(..).css()
+    $(..).addClass()   $(..)removeClass()
+    $(..).hasClass()  $(..).toggleClass(&apos;.btn&apos;)
+ (5)操作元素的值：  $(..).val()
+ (6)遍历元素：
+    $(..).parent()
+    $(..).children()-直接子代
+    $(..).find()-所有子元素
+    $(..).next()        $(..).nextAll()
+    $(..).prev()        $(..).prevAll()
+    $(..).siblings()
+(7)插入节点：  $(..).append()   $(..).prepend()
+(8)删除节点：  $(..).remove()   $(..).empty()
+(9)替换节点：  $(..).replaceWith()  $(..).replaceAll()
+(10)克隆节点： $(..).clone()
+</code></pre><p>28、事件处理函数：</p>
+<pre><code>(1)$(&apos;.btn&apos;).one(&apos;click&apos;, fn)
+(2)$(&apos;.btn&apos;).click(fn) ....
+(3)$(&apos;.btn&apos;).on(&apos;click&apos;, fn)        off(..)
+  $(&apos;.container&apos;).on(&apos;click&apos;, &apos;.btn&apos;, fn)  off(..)
+
+  让jQuery放弃使用 $ ：
+  jQuery.noConflict()
+</code></pre><p>29、面试题：window.onload和$(document).ready()的异同？</p>
+<pre><code>window.onload是核心DOM的写法：
+  window.onload = function(){ ... }
+  只能为绑定一次；
+  只有全部的网页内容(html/css/js/图片....)加载完成才能触发。
+
+$(document).ready()是jQuery的写法：
+  $(document).ready(function(){ ... })
+  底层是addEventListener(&apos;DOMContentLoaded&apos;, fn)，可以先后绑定多次；
+  只要“DOM内容(只包括html/js)加载完成”即可触发。
+</code></pre><p>30、补充：jQuery中的hover()函数</p>
+<pre><code>jQuery监听“鼠标进入+鼠标离开”有如下三种方法：
+(1) $(..).mouseover(fn)   +  $(..).mouseout(fn)
+(2) $(..).mouseenter(fn)   +   $(..).mouseleave(fn)
+(3) $(..).hover( fn, fn )
+注意：方法3等同于方法2
+</code></pre><p>31、补充：jQuery中的trigger()函数</p>
+<pre><code>使用JS代码代替用户触发指定的事件，调用之前绑定的监听函数。
+$(&apos;.btn&apos;).trigger( &apos;click&apos; )
+可以简写为：
+$(&apos;.btn&apos;).click( )
+</code></pre><p>32、jQuery中的函数第三部分：动画函数 —— 隐藏和显示动画</p>
+<pre><code>隐藏和显示函数通过使用定时器修改目标元素的width / height / opcaity三个样式的值来实现动画：
+$(..).show()      $(..).show(&apos;slow/normal/fast&apos;)  $(..).show(3000)
+$(..).hide()    $(..).hide(&apos;slow/normal/fast&apos;)  $(..).hide(3000)
+$(..).toggle()     ...  在隐藏和显示之间切换
+</code></pre><p>33、jQuery中的函数第三部分：动画函数 —— 折叠展开/收起动画</p>
+<pre><code>折叠展开/收起动画函数通过使用定时器修改目标元素的height一个样式的值来实现动画：
+$(..).slideUp( )    $(..).slideUp( &apos;slow/normal/fast&apos; )   $(..).slideUp( 300 )
+$(..).slideDown( )  ....
+$(..).slideToggle( )   ....
+
+练习：仿写Bootstrap中的响应式导航条在手机中的效果
+&lt;div class=&quot;navbar&quot;&gt;
+  &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;a class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
+      &lt;a class=&quot;navbar-toggle&quot;&gt;三&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;navbar-collapse&quot;&gt;
+      ul&gt;li&gt;a
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>34、jQuery中的函数第三部分：动画函数 —— 淡入/淡出动画</p>
+<pre><code>淡入/淡出动画函数通过使用定时器修改目标元素的opacity一个样式的值来实现动画：
+$(..).fadeIn( )  $(..).fadeIn(&apos;slow/normal/fast&apos;)  $(..).fadeIn(300)
+$(..).fadeOut( )
+$(..).fadeToggle( )
+提示：上述六个动画函数都可以在最后接收一个参数——函数
+  $(..).fadeOut( 300,  function(){ //在动画结束时的回调函数 })
+练习：点击小星星后，闪动3次，最后消失
+</code></pre><p>35、jQuery中的函数第三部分：动画函数 —— animate()</p>
+<pre><code>$(..).animate({
+  属性1: 值1;
+  ...
+}, 300, fn)
+动画排队：执行完一个动画后，再执行另一个
+动画并发：同时执行多个属性的动画效果
+
+animate({})可以对哪些CSS属性执行动画？
+(1)width、height、opacity、fontSize....等等有可渐变属性值（数值型）的样式可以执行动画
+(2)display、fontFamily、transform、颜色类属性等没有渐变属性值的样式不能执行动画
+</code></pre><p>36、Web应用中可用的动画技术：</p>
+<pre><code>(1)CSS3 Transition
+(2)CSS3 Keyframes
+(3)定时器 + 属性修改            jQuery1/2动画函数
+(4)requestAnimationFrame       jQuery3
+</code></pre><p>37、jQuery类数组对象的操作</p>
+<pre><code>  window.$  &lt;=&gt; window.jQuery
+$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
+  $(..).length        获取类数组中封装的DOM对象的数量
+  $(..)[index]        获取类数组中封装的第index个DOM对象
+  $(..).get(index)        获取类数组中封装的第index个DOM对象
+  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，针对每个DOM元素执行一次指定的回调函数
+  $(..).index(domObj)    返回指定的DOM元素在当前类数组中的下标
+</code></pre><p>38、补充：页面DOM内容加载完成后执行指定的函数</p>
+<pre><code>$(document).ready(fn)
+$().ready(fn)
+$(fn)
+</code></pre><p>39、jQuery中的插件函数</p>
+<pre><code> Plugin：插件，在现有的功能基础上添加更多的功能，扩展整体的应用。
+jQuery中的插件（即函数）分为两类：
+ 1.jQuery全局插件函数
+   原本要声明的工具函数（如max()/min()）如果声明为全局函数，会造成“全局对象(window)的污染；
+   为了避免污染全局对象，可以把这些函数纳入到 jQuery对象的名下——与jQuery没有必然的关系：
+   声明方式：    jQuery.max = function(arr){  }
+               jQuery.extend({ max: fn,  min: fn})
+   调用方式：    jQuery.max([10,38,50])
+ 2.jQuery对象插件函数
+   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，用于操作当前选定的DOM元素。
+   声明方式：    jQuery.fn.max = function( ){  }
+               jQuery.fn.extend({ max: fn,   min: fn})
+   调用方式：    $(&apos;li&apos;).max( )
+
+   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，所有的jQuery对象的原型： jQuery.fn;
+   若想给所有的jQuery对象都添加一个扩展函数，只需要加给jQuery.fn即可
+
+  3.复杂插件的编写：轮播广告
+       $(&apos;..&apos;).carousel( );
+
+  4.复杂插件的编写：滚动监听
+       $(&apos;..&apos;).scrollspy( );
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/HTML笔记/" rel="next" title="html知识点">
+    上一篇：html知识点
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/CSS选择符有哪些？哪些属性可以继承/" rel="next" title="CSS选择符有哪些？哪些属性可以继承">
+    下一篇：CSS选择符有哪些？哪些属性可以继承
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

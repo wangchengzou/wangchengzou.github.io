@@ -1,0 +1,1449 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Ajax_php基础知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Ajax_php基础知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">48 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Ajax_php基础知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/Ajax_php/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/ajax/" class="chip pink lighten-1">ajax</a>
+        
+            <a href="/tags/php/" class="chip pink lighten-1">php</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p> 1、如何从数据库中将数据表中数据抓取出来并且显示.</p>
+<pre><code>解决方法:语言php 负责从数据库中抓取数据并且显示给用户.
+  a:什么是服务器
+    能够在网站中提供各种(浏览网页,收发邮件
+    视频,语言)等服务器的软件与硬件集合。
+    硬件服务器:高可用,高性能计算机
+    软件服务器(通常):(WEB/FTP/EMAIL/DB/DNS..)
+    web:apache
+    db:mysql
+b:数据库服务器(软件)
+    数据库软件特点：所有其它软件所没有
+    1:永久海量存储数据
+    2:高速查询
+c:数据库服务器分类
+    网状数据库:
+    树型数据库:
+    关系型数据库:
+    MySQL***/Oracle/SQLServer/DB2
+    NOSQL数据库:Redis
+d:什么是关系型数据库
+    以横行竖列的方式保存数据,mysql
+e:关系型数据库层次
+    数据库软件(mysql)--&gt;库--&gt;表--&gt;行--&gt;列
+f:mysql之父:马丁
+    MYSQL AB(瑞典)-&gt;SUN-&gt;Oracle
+g:mysql版本:
+  主版本: 企业版(收费)社区版(免费)
+    小版本:5.0 5.1 5.2 5.4 5.5 5.6 5.7 ..
+    建议:下载哪个版本
+    ?如果开发全新网站项目:新版本 5.6
+    ?如果二次开发选旧版本.
+g:下载
+https://www.oracle.com 官网
+https://www.mysql.com/downloads/
+搜狐镜像
+http://mirrors.sohu.com/
+mysql windows(64/32)(zip/exe)
+linux  unix
+    mysql-5.6.34-win32.msi (32)
+i:使用软件包(XAMPP)
+    (包含:mysql/php/apache/..)
+</code></pre><p>   2、如何使用xampp</p>
+<pre><code>1:双击xampp图标
+2:点击 apache  [start]启动(饭店)
+     点击 mysql   [start]启动
+3:点击 右侧[shell]
+4:输入命令
+    mysql -uroot -p
+    #mysql 指令专门进入数据库系统
+    #-u    指定用户名
+    #root  root是mysql软件最高级别用户
+    #-p    root用户密码
+5:退出软件
+    #exit
+    #点击右上角[X]
+</code></pre><p>3、 sql(结构化查询语言)专用于(增删改查)数据库中数据语言.</p>
+<pre><code>使用sql两种方式:
+    a:交互模式(上课)
+      一行一行执行指令
+       用户输入一个sql指令,mysql执行一个指令.
+    b:脚本模式(做项目)
+    把所有sql指令保存在一个.sql文件中一次执行在mysql中执行
+
+  ￥sql语句的分类
+    1:DDL:数据定义指令
+         CREATE/DROP/ALTER/TUNCATE
+    2:DML:数据操作指令
+         INSERT/UPDATE/DELETE
+    3:DQL:数据查询指令
+         SELECT
+    4:DCL:权限指令
+        GRANT/REVOKE
+    熟练掌握:
+        [CREATE/INSERT/UPDATE/DELETE/SELECT]
+</code></pre><p>  4、 #CREATE 指令功能创建(库)创建表</p>
+<pre><code>指令格式:
+      CREATE DATABASE 库名;(库)
+建议:(库名/表名/列名)
+     :英文不要数字或特殊字符开头
+     :中文空格不要
+    test01    ok
+    2017test  error
+    test 02   error
+    大旭之家  error
+</code></pre><p> 5、 #CREATE 指令功能创建表</p>
+<pre><code>a:列数据类型(常用列类型)
+     int      整型(年龄) 范围-21亿~21亿
+      varchar(10)   字符串(10个字符[数字，字母，汉字])
+      double(10,2)  浮点(小数)总长10位其中2位小数
+      datetime      日期和时间
+ 分析表:商品表
+     1:商品编号     int   1 2 3 5
+     2:商品名称     varchar(20)
+     3:商品上架时间 datetime
+     4:商品价格     double(10,2)
+
+b:创建表语法
+ CREATE TABLE 表名(
+     列名1 列类型,
+     列名2 列类型,
+     列名3 列类型
+     );
+ c:指令 use 库名称;
+ d:查看表是否创建成功
+     SHOW TABLES;
+     use test001;
+     CREATE TABLE t_product(id INT,name VARCHAR(20),ctime DATETIME,price DOUBLE(10,2));
+     SHOW TABLES;
+</code></pre><p>6、小结上午重点</p>
+<pre><code>1:创建库
+  CREATE DATABASE 库名; 创建库
+  SHOW DATABASES;       查询库是否创建成功
+2:创建表
+  USE 库名;
+  CREATE TABLE 表名(
+     列名 列类型(int/varchar/double/datetime)
+    );
+  SHOW TABLES;
+</code></pre><p>7、向数据库中添加记录(行)</p>
+<pre><code>a:标准语法
+a.1:向所有列添加数据
+INSERT INTO 表名 VALUES(列值1,列值2,列值3,.);
+INSERT INTO t_stu VALUES(1,&apos;wsl001&apos;,&apos;xuxu&apos;,19);
+INSERT INTO t_class VALUES(1,&apos;WEB&apos;,100);
+验证:
+SELECT * FROM t_stu;
+ #字符串类型列加单引号
+ #小心中文/(英文)单引号
+ #小心日期写法
+ #SQL指令结束使用分号
+a.2:向部分列添加数据
+INSERT INTO 表名(列名1，列名2)VALUES(列值1,列值2,..);
+INSERT INTO t_stu(id,no)VALUES(4,&apos;tao&apos;);
+
+a.3:日期类型 &apos;2017-04-12&apos; 字符串
+  now()        函数(当前日期时间)
+INSERT INTO t_product VALUES(10,&apos;book&apos;,&apos;2010-10-10&apos;,100.99);
+INSERT INTO t_product VALUES(20,&apos;js&apos;,&apos;2017-04-12&apos;,99);
+INSERT INTO t_product VALUES(30,&apos;css&apos;,now(),98);
+</code></pre><p> 8、删除记录(行)</p>
+<pre><code>#标准语法:
+条件: = &lt; &gt; &lt;= != &lt;&gt;
+DELETE FROM 表名 WHERE 条件;
+  示例:
+  DELETE FROM t_product id = 10;   //ok
+  DELETE FROM t_product price = 100.99;
+  DELETE FROM t_product name = &apos;book&apos;;
+</code></pre><p> 9、 更新记录(行)</p>
+<pre><code>#标准语法
+UPDATE 表名 SET  列名1=新值1
+,列名2=新值2 ..
+WHERE 条件;
+UPDATE t_stu SET age = 16,name=&apos;daxu&apos;WHERE id = 1;
+</code></pre><p>10、 查询记录(行)</p>
+<pre><code>  语法:SELECT 列名1,列名2,...
+    FROM 表名
+    WHERE 条件
+    ORDER BY 列名1 #排序
+
+SELECT * FROM 表名;  # *所有列
+SELECT id,name FROM t_emp;
+SELECT sal FROM t_emp;
+SELECT * FROM t_emp;
+SELECT id,name,sal,sal*1.2 FROM t_emp;
+</code></pre><p>  11、 小结SQL:</p>
+<pre><code>a:分类
+  DDL:数据定义语句
+    CREATE/DROP
+    DML:数据操作语句
+    DELETE/UPDATE/INSERT
+    DQL:数据查询语句
+    SELECT
+    DCL:
+b:常用SQL
+  CREATE DATABASE 库名;    创建库
+SHOW DATABASES;          查询库名
+CREATE TABLE 表名(
+      列名1 列类型,
+        ....
+    );
+列类型(INT/VARCHAR(10)/DOUBLE(10,2)/DATETIME)
+
+USE 库名;    进入指定库中
+SHOW TABLES; 查询表名
+INSERT INTO 表名VALUES(值1,值2,,...);
+INSERT INTO 表名(列1,列2)VALUES(值1);
+字符串值:&apos;&apos;
+日期值  :&apos;&apos; now()
+DELETE FROM 表名 WHERE 条件;
+UPDATE 表名 SET 列名=新值1,列名=新值2
+WHERE 条件;
+SELECT * FROM 表名;#*所有列
+SELECT id,name FROM 表名;
+ORDER BY 列名;
+ORDER BY 列名 DESC;
+count(列)/sum(列)/max(列)/min(列)/avg(列)
+子查询
+</code></pre><p>  12、 面试题:如何自学一门新的编程语言</p>
+<pre><code>1)了解背景，历史，现状，发展，特点，应用领域
+2)建设环境=写出HelloWorld
+3)数据类型
+4)变量常量
+5)运算符
+6)逻辑结构
+7)通用小程序
+8)函数,对象
+9)常用函数库，类库，中间件，框架
+10)实用项目
+
+   #php 背景特点
+     php是一种运行在服务器端(apache)的编程序言,用于
+     生成动态网页内容.
+
+   2000,Zend公司成立，维护php语言.发布php解释器环境
+     php特点:开源，简单，(易上手),
+      跨平台(windows/linux),占用资源少
+      尤其适合中小型web应用开发
+      (微博/微信/论坛)...
+
+   #搭建软件环境
+    1:服务器端环境创建:下载选择web服务器
+          apache/Microsoft IIS/Nginx
+            c:/xampp/apache/
+    2:服务器端:下载并且安装php解析软件
+          c:/xampp/php/php.exe
+    3:服务器端:编写并保存php程序保存哪里
+      c:/xampp/htdocs/1.php
+    4:服务器端:启动web服务器
+          [start]
+    5:客户端:打开浏览器/直接输入服务器程序地址按回车
+        http://127.0.0.1/1.php
+</code></pre><p>13、php语法              必须掌握</p>
+<pre><code>a:程序位置 c:/xampp/htdocs/??
+b:创建程序 后缀.php  1.php 2.php
+c:代码
+    &lt;?php
+    ?&gt;
+d:声明一个变量
+     $变量名 = 值;
+    $name = &quot;tom&quot;;
+e:访问程序{浏览器}
+      http://127.0.0.1/1.php  回车
+f:一个php程序由html/css/js/php 代码混合写
+</code></pre><p>  14、 php 数据类型</p>
+<pre><code>1:值类型/标量类型
+    string        字符串类 &quot;&quot;
+    boolean/bool  true/false
+    int/integer
+    float/double
+2:复合类型
+    object php面向对象2005年之后才出现
+    array  php索引/关联数组
+3:特殊类型
+    null/NULL
+    resource 资源:数据库连接，查询结果
+4.php 练习数据类型
+5.php 练习数组
+6.php 综合示例
+</code></pre><p>15、使用php操作数据库    重点&amp;难点</p>
+<pre><code>?数据库乱码问题处理
+原因:脚本文件格式不正确
+解决：保存脚本文件 utf-8
+
+php中操作mysql数据库函数
+1:php官方最初提供一套连接mysql函数:mysql_xxx();
+2:php官方提供增强版mysql函数:      mysqli_xxx();
+</code></pre><p>16、 使用php操作mysql服务器步骤</p>
+<pre><code>1:创建到mysql服务器连接
+  $conn = mysqli_connect(...);
+    1:数据库服务器地址ip 127.0.0.1
+    2:数据库用户名       root
+    3:数据库密码
+    4:选库               dangdang
+2:向mysql服务器发送sql指令,
+  等待服务器执行
+    $sql = &quot;....&quot;;//insert/delete/update
+    $result = mysqli_query($conn,$sql);
+3:读取mysql服务器返回结果
+  if($result===false)
+4:断开与mysql服务器连接--可以省略
+  mysqli_close($conn);
+</code></pre><p> 17、 小结:</p>
+<pre><code>1:php语法
+  $age = 10;
+  $stop = &quot;tom $age&quot;;
+  $run = &apos;tom&apos;.$age;
+2:php数组
+  $arr = [1,2,3,4];
+  $arr[] = 5;
+  $arr = [&quot;name&quot;=&gt;&quot;tom&quot;,&quot;age&quot;=&gt;10];
+  foreach($arr as $k=&gt;$v){...}
+3:php连接mysql
+  a:创建连接
+    $conn = mysqli_connect(数据库ip,数据库用户名,密码,库);
+    $sql = &quot;SET NAMES UTF8&quot;;
+    mysqli_query($conn,$sql);
+    b:发送sql
+    $sql = &quot;INSERT INTO dd_book VALUES(null,&apos;d&apos;)&quot;;
+    $result = mysqli_query($conn,$sql);
+    c:判断结果
+    if($result === false)
+
+  1:连接数据库
+    $conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;&quot;,&quot;dangdang&quot;);
+    $sql = &quot;SET NAMES utf8&quot;;
+    mysqli_query($conn,$sql);
+  2:发送sql语句
+    $sql = &quot;INSERT INTO 表名....&quot;;
+    $result = mysqli_query($conn,$sql);
+  3:获取判断返回结果
+    if($result===false)
+   4:关闭连接
+    mysqli_close($conn);
+   小结：
+      1：发送sql
+         解决:在mysql命令输入sql--&gt;copy
+              如果列是字符串类型一定 &apos;&apos;
+            如果列是整型不用加&apos;&apos;
+     2: 表单获取参数
+        html: &lt;input type=&quot;text&quot; name=&quot;uid&quot;
+        php :  $uid = $_REQUEST[&apos;uid&apos;]
+    3:问题{乱码/set names 作用}
+      乱码:?????
+        解决:
+        a:顺序:
+          1:news.sql 按照utf-8保存
+            2:set names utf8;
+              source 不加分号
+        b:指令:
+          1:SET NAMES UTF-8;
+          2:创建库编码指定错误
+              CREATE DATABASE bbs CHARSET=UTF8;
+        C:1.php
+          SET NAMES UTF8;
+</code></pre><p>18、学习总结上周重点</p>
+<pre><code>1.1:mysql
+      数据库软件:
+       海量存储永久数据
+       快速查询
+    SQL:结构化查询语言(操作数据库)
+      DDL:DROP/CREATE (DATABASE/TABLE)
+      DML:INSERT/UPDATE/DELETE
+      DQL:SELECT
+      DCL:
+      SET NAMES UTF8; 设置SQL编码
+      SHOW TABLES;    查询当前库表名
+      SHOW DATABASES; 查询当前MYSQL库名
+      ..
+1.2:php
+  后台语言:运行在(服务器 apache)
+      &lt;?php
+      ?&gt;
+      $age = 10;
+      $str = &apos;hello php&apos;;
+      $str = &quot;hello $age php&quot;;
+      php mysql
+      a:INSERT/UPDATE/DELETE
+        1:连接数据库
+          $conn = mysqli_connect(&quot;127.0.0.1&quot;,&apos;root&apos;,&apos;&apos;,&apos;dangdang&apos;);
+        2:发送sql
+              $sql = &quot;INSERT/UPDATE/DELETE&quot;;
+          $result = mysqli_query($conn,$sql);
+        3:if($result===true){
+          执行成功
+           }
+      b:SELECT
+        1:连接数据库
+          $conn = mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;&quot;,&quot;dangdang&quot;);
+        2:发送sql
+          $sql = &quot;SELECT ...&quot;;
+          $result = mysqli_query($conn,$sql);
+        3:返回结果集对象
+        4:抓取
+          $row = mysqli_fetch_row($result); 索引
+          $row = mysqli_fetch_assoc($result);关联
+</code></pre><p>19、 php常用函数</p>
+<pre><code>1:#die($str); 终止当前php文件执行,
+      并且向客户输出一个终止原因说明.
+2:#@ 压制住当前行代码警告消息.
+3:#time() 返回当前系统时间,以秒为单位整数
+4:#$id = mysqli_insert_id($conn);
+  返回连接上刚刚执行insert语句产生id值
+  CREATE TABLE t_user(
+      id INT PRIMARY KEY AUTO_INCREMENT,
+   );
+  INSERT INTO t_user VALUES(null,);
+5:#$count = mysqli_affected_rows($conn)
+  返回刚刚连接上执行增删改语句影响行数
+6:$rows = mysql_fetch_all($result,MYSQLI_ASSOC);
+  从结果集对象中抓取所有记录,返回二维数组;
+</code></pre><p>20、 http协议(零碎.没有太多相关性)重点&amp;难点</p>
+<pre><code>1:学习http协议目标
+    1:调试AJAX应用&quot;看不见摸不着&quot;的错误
+    2:进行web访问优化---高阶面试题
+    2.3.1.1:URL
+        统一资源定位符:
+    互联网任何资源都有一个URL才能被访问
+    http://www.baidu.com  网站
+    https://www.baidu.com/img/bd_logo1.png 图片
+    http://127.0.0.1/01.php
+
+    a:scheme:方案 指定以哪种协议从服务器获取指定资源
+    常见方案:http/https/ftp/mailto/file/telnet....
+    http:获取网络资源{明文}
+    https:获取网络资源{加密}
+    http://www.ccb.com/cn        建行
+    https://ibsbjstar.ccb.com.cn 建行登录
+
+    b:host 主机名:资源在服务器ip地址或者域名
+        http://127.0.0.1      ip地址
+        http://www.baidu.com  域名(DNS 域名-&gt;ip)
+        http://tmooc.cn       域名
+
+    c:port 端口号*****(面试题)
+        每一项网络服务在服务器都对应一个端口号
+        ftp    21  文件上传下载
+        ssh    22  安全远程登录
+        telnet 23  远程登录
+        smtp   25  邮件传输发送
+        dns    53  域名解析
+        http   80  超文本传输***(apache)
+        pop3   110 邮件接收
+        https  443 加密传输
+
+    d:path
+        http://127.0.0.1/ajaxday03/01.php
+         e:?&lt;query&gt;
+        http://127.0.0.1/ajaxday03/01.php?id=10&amp;age=10
+        $id = $_REQUEST[&apos;id&apos;];
+        $age = $_REQUEST[&apos;age&apos;];
+
+      #分清一个概念:URL/URN/URI(了解)
+        URL:统一资源定位符
+        URN:统一资源命名符
+        URI:统一资源标示符
+        URI图.jpg
+        URI==URL+URN
+        URL:&lt;a href=&quot;login.html&quot;&gt;....&lt;/a&gt;
+            &lt;img src=&quot;http://tmoo.cn/logo.jpg&quot;&gt;....&lt;/a&gt;
+        URN:
+           &lt;a href=&quot;mailto:admin@tmooc.cn&quot;&gt;..&lt;/a&gt;
+           &lt;a href=&quot;javascript:void(0)&quot;&gt;..&lt;/a&gt;
+
+ 21、http协议概述
+
+        作用:传输网页
+        协议标准:生活标准(手机: 3g 4g 5g)
+                 USB(2.0 3.0)
+        国际互联网任务组(IETF)制定http协议标准
+        1991: http/0.9 有严重缺陷
+        1996: http/1.0 正式版本
+        1999: http/1.1 当前主流版本(***)
+
+    面试题:
+    http/1.1比http/1.0改进哪些地方?
+        http协议工作原理方式:请求和响应
+        1:客户端浏览器发送请求 (google-&gt;apache)
+        2:服务器响应请求并且返回数据
+                               (apache-&gt;google)
+     解答问题:
+        1:支持虚拟主机技术，在一个web服务器上
+          同时并存多个不同域名的网站
+            个人博客:500w(128 CPU 1T 2000块)
+            3网页 index.html photo.html review.html
+            20/年
+            d:/tmooc    www.tmooc.cn  50w
+            e:/tts      www.tts.cn    50w
+            ...10
+            http: Host:tmooc.cn 虚拟主机域名
+        2:支持持久连接技术
+          不支持持久边接技术情况
+            (每次客户端与服务器数据传输)
+            固定流程 101(300握 400挥)
+            三次握手 3--&gt;1--&gt;4
+            四次握手
+            http: keep-alive  (3)--101--(4)
+        3:支持代理连接
+            Proxy:xxx
+
+
+22、 http协议规定两种消息格式:
+
+     请求(Request) --客户端浏览器发送web服务器
+     响应(Response)--web服务器发送客户端浏览器
+     Message:消息/报文,是在http客户端和服务器传递数据块
+     http协议规定,消息必须符合特定格式才能版此理解..
+     消息内容 &quot;思维导图&quot;
+</code></pre><p>23、http协议-(响应)</p>
+<pre><code>http:作用传输网页
+http:工作方式 请求与响应
+请求消息:
+ 请求方式:{GET/POST/PUT/DELETE/HEAD/CONNECT/TRACE/OPTIONS}
+响应消息:
+ 响应状态码:
+ 100-199 提示消息
+ 200-299 响应成功   200
+ 300-399 重定向     304
+ 400-499 客户端请求错误 404
+ 500-599 服务器错误  500
+ 响应主体类型:
+ text/plain
+ text/html
+ text/css
+ application/javascript
+ application/json
+
+ 1：面试题:GET/POST区别?
+    a:语义
+        GET:客户端获取服务器上资源
+        POST:客户端将数据提交服务器
+    b:安全级别
+        GET:不安全
+        POST:不安全 {https}
+    c:数据长度
+        GET:通过浏览器地址栏 请求请起启 1KB   汉字20-30
+        POST:通过http响应主体 长度没限制
+    d:编码
+        GET:不会自动编码-&gt;可能出现中文乱码
+        POST:自动编码----&gt;不会中文乱码
+    e:如何发起
+        GET:
+        1:浏览器地址栏输入地址回车
+        2:标签href  &lt;a&gt;   点击发GET
+            src   &lt;img&gt; 自动发GET
+            css   like  自动发GET
+            script src  自动发GET
+        3:js自动跳转
+            location.href = &quot;1.html&quot;;
+        4:表单
+            &lt;form method=&quot;get&quot; action=&quot;&quot;&gt;
+            &lt;form action=&quot;1.ph&quot;&gt;
+        5:ajax GET
+            POST:
+            1:表单
+            &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;
+            2:ajax post
+
+  2：面试题:如何使用http协议相关知识进行web优化
+    提示:web访问可以很多方面考虑:
+        :优化数据库
+        :优化php
+        :优化web服务器(apache/nginx)
+        :网速
+        :传输数据
+        :浏览器解析速度(html/css/js)
+    下面仅从http请求和响应角度考虑
+         1:域名解析
+           尽可能减少域名解析次数--减少跨站外
+             资源引用.
+             DNS(www.tmmoc.cn-&gt;120.132.68.230)
+             tmooc.com
+             http://www.tmooc.cn/index.html
+             index.html
+             &lt;img src=&quot;www.tmooc.cn/1.jpg&quot;&gt;
+             &lt;script src=&quot;www.tmooc.cn/1.js&quot;&gt;&lt;/script&gt;
+         2:创建连接
+           努力减少连接创建次数-Connection:keep-alive
+             启用持久连接
+         3:减少发送请求次数
+           尽量减少请求次数--合理进行资源合并，
+             合理使用缓存.
+         4:等待响应时间
+           提交服务器运行速度-提高数据运算及查询速度
+         5:接收响应
+           尽可能减少响应数据长度--删除空白字符，启压缩
+        http://tool.oschina.net/jscompress/
+</code></pre><p>24、 ajax    重点&amp;难点 9</p>
+<pre><code>a:快速入门
+  ajax:异步javascript and xml
+    google 推出技术--&gt;酷
+    生活场景:ajax 微信餐厅
+    最大不同:(发送请求和接收数据都由js完成)
+
+b:原理细节知识
+  *功能:添加新用户 msg/t_user(uname,upwd)
+     *1:创建add_user.php
+    a:获取参数uname,upwd
+    b:创建sql insert 发送sql
+    c:输出结果添加成功或失败
+     *2:创建add_user_input.html
+    a:创建表单(uname,upwd)
+    b:在表单&lt;input type=&quot;button&quot; value=&quot;新建用户&quot;/&gt;
+    c:为button按钮绑定点击事件
+    c.1:获取用户名和密码
+    d:通过ajax发送请求并且接收服务器
+    输出一句话&quot;添加成功&quot;&quot;添加失败&quot;
+    以下ajax代码固定js
+    1:创建ajax对象
+      var xhr = new XMLHttpRequest();
+    2:绑定事件
+      xhr.onreadystatechange = function(){}
+    3:打开连接(连接php程序)
+      xhr.open(&apos;GET&apos;,&apos;add_user.php&apos;,true);
+    4:发送请求
+      xhr.send(null);
+</code></pre><p>25、 ajax请求并且接收响应4步</p>
+<pre><code>1:创建ajax对象
+  var xhr = new XMLHttpRequest();
+2:绑定事件:监听xhr对象状态
+  xhr.onreadystatechange = function(){
+    }
+3:连接web服务器php程序
+  xhr.open(请求方式,请求地址,是否异步);
+    xhr.open(&apos;GET&apos;,&apos;add_user.php?&apos;,true);
+4:发送请求消息
+  xhr.send(null);
+</code></pre><p>26、 ajax原理</p>
+<pre><code>a:2002年由Google搜索引擎，提示建议
+    AJAX=HTML/CSS/JS/DOM/XML/HTTP
+b:ajax作用:
+    实现在&apos;无刷新&apos;&apos;无提交&apos;&apos;无跳转&apos;的情况下完成页面局部更新.
+c:ajax应用场景
+    常见场合:聊天室，在线走势图,搜索建议..
+d:ajax 异步javascript and XML 异步:
+    1:ajax异步请求:XHR
+    2:    同步请求:
+    1.1:地址栏输入地址回车
+    1.2:表单 submit
+    1.3:&lt;a href=&quot;1.php&quot;&gt;
+    1.4:&lt;img src=&quot;1.jpg&quot;&gt;
+    1.5:location.href = &apos;1.php&apos;
+</code></pre><p>27、 ajax常用对象和属性事件方法</p>
+<pre><code>1:xhr对象:作用，向web服务器发送请求,并接收返回响应消息.
+  var xhr = new XMLHttpRequest();
+#注意:产品兼容性
+#老IE IE8- 不支持xhr
+  new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+#兼容性写法
+  var xhr = null;
+  if(window.XMLHttpRequest){
+  xhr = new XMLHttpRequest();
+  }else{
+      xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+  }
+  alert(xhr);
+2:xhr对象常用属性*****
+  2.1:readyState xhr对象当前状态
+    不能手工赋值，可以取值其值会随着(请求-响应)过程进行自动改变
+    0 UNSENT  请求消息沿未发送
+    1 OPENED  XHR己经打开web服务器连接
+    2 HEADERS_RECEVIED xhr己经接收服务器响应消息头部
+    3 LOADING XHR正在加载响应消息主体
+    4 DONE    XHR接收完成响应消息主体
+
+   2.2:xhr.readyState状态改变
+    0 UNSEND  xhr.open();
+    1 OPENED  xhr.send();
+    2 HREADERS_RECEIVED   自然(不能控制)
+    3 LOADING            自然(不能控制)
+    4 DONE
+
+  2.3:status
+  2.4:statusText
+  2.5:responseText
+</code></pre><p>28、 ajax 原理与ajax接收不同类型数据</p>
+<pre><code>a:核心 XMLHttpRequest    -创建对象
+   var xhr = null;
+   if(window.XMLHttpRequest){
+       xhr = new XMLHttpRequest();
+   }else{
+       xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+   }
+b:xhr属性、方法、事件
+  b.1:xhr.readyState 表示xhr状态
+   0 未发送      UNSENT
+   1 打开连接    OPENED
+   2 己经接收服务器返回头信息
+          HEADERS_RECEIVED
+   3 接收服务器数据
+          LOADING
+   4 接收完成
+          DONE
+  B.2:status    表示服务器返回状态码===200
+  B.3:responseText 表示服务器响应文本
+  B.4:responseXML  表示服务器响应XML文本
+    方法:
+  B.5:open(method,url.isAsyn)
+       表示:打开到服务器连接
+       method:请求方式 GET POST
+       url:   请求url地址(程序地址)
+       isAsyn:请求方式是异步true   同步false
+  B.6:send(data)
+      表示:把请求消息发送web服务器
+          data:请求消息主体内容
+      GET--&gt;内容为null
+      send(null);
+      POST--&gt;请求数据放在里面
+      send(&apos;id=10&amp;name=tom&amp;age=19&apos;);
+            事件:onreadystatechange
+      xhr.readyState每次改变时候触发
+        事件0 1 2 3 4
+</code></pre><p>29、 AJAX POST 标准语法</p>
+<pre><code>1:创建ajax对象 xhr
+2:绑定事件     xhr.onreadystatechange
+3:打开连接
+xhr.open(&apos;POST&apos;,&apos;book_add.php&apos;,true);
+3.1:修改请求头信息(将参数编码)
+xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4:xhr.send(`id=10&amp;name=tom&amp;age=19`);
+
+如果ajax输出
+    1:创建php     地址栏输入回车
+      http://127.0.0.1/ajaxday06/dangdang/book_add.php?name=1&amp;pic=2.jpg&amp;price=100&amp;pubDate=2010-10-10
+    2:创建html/js
+      console.log(&quot;1&quot;+变量);
+    3:F12/network
+
+  5.0 text/plain     纯文本
+        php第一行
+            header(&quot;Content-Type:text/plain&quot;);
+            html-&gt;ajax
+            xhr.responseText
+  5.1 text/html      (默认)
+        php第一行
+        header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+  5.2 javascript
+        php第一行
+        header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+        echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+      html-&gt;ajax
+        eval(xhr.responseText);
+        示例:国际化
+        当前浏览器 zh-CN  你好
+               en-US   hello
+      a:编写php i18n.php
+        读取客户端请求头部信息
+        Accept-Language 截最后二个字符
+            CN  你好
+        US  hello
+       b:i18n.html
+     ajax 发送请求--&gt;获取服务器返回信息
+    alert();
+  5.3 xml       ---- 很少(代码复杂)
+  5.4 json      ---- 重点&amp;难点
+</code></pre><p>30、 JSON 语法</p>
+<pre><code> 1:标准语法 json 要求
+   1:一个JSON字符串有且只有一个根，
+   可以是{}表示一个对象
+       []表示一个数组
+    员工信息 {&quot;name&quot;:&quot;tom&quot;,&quot;age&quot;:19}
+    一组整型 [10,20,90,100]
+    一组员工信息
+    [
+     {&quot;name&quot;:&quot;jerry&quot;,&quot;age&quot;:21},
+     {&quot;name&quot;:&quot;james&quot;,&quot;age&quot;:22},
+     {&quot;name&quot;:&quot;gogo&quot;,&quot;age&quot;:19}
+    ]
+    错误json
+    {&quot;name&quot;:&quot;tom1&quot;}
+    {&quot;name&quot;:&quot;tom2&quot;}
+    {&quot;name&quot;:&quot;tom3&quot;}
+2:JSON中可以表示，数字，bool,null,字符串
+   注意:字符串必须用双引号
+3:数组中可以包含多个值，使用逗号分隔
+4:对象中可以包含多个键值，使用逗号分隔
+  不同值，键和值之间用分号分隔,键必须是双引号.
+</code></pre><p>31、 如何处理JSON数据:</p>
+<pre><code>1:服务器端php
+  1.1:header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+  1.2:$str = json_encode($arr);
+  1.3:echo $str;
+2:javascript 接收
+  var obj = JSON.parse(xhr.responseText);
+    obj--&gt;js数组   obj--&gt;js对象
+
+ #JSON字符串格式概述
+   XML是字符串数据格式，用于描述数据，
+稍微有点麻烦--重量级数据格式.
+10字节-&gt;XML--&gt;50字节
+JSON是字符串数据格式，用于描述数据,
+更加简单--轻量级数据格式.
+10字节-&gt;JSON-&gt;22字节
+
+ JSON(JavaScript Object Natation)
+是一种轻量级数据交换格式,
+易于编写，同时易于程序解析生成
+.语法基于JS语言.但是目前被各种语句
+所支持.成为一种&quot;异构系统交互数据
+标准格式&quot;;
+JAVA---- {JSON}   html/js/css
+C#------ {JSON}   html/js/css
+php----- {JSON}   html/js/css
+</code></pre><p>32、ajax处理xml数据格式 – 了解</p>
+<pre><code>xml:
+html:超文本标记语言，所有标签都是预定义好的，
+     用于描述一个网页结构.
+xml:可扩展的标签语言，所有的标签都是自定义的
+    用于描述一段数据--尤其是批量复合数据.
+
+xml语法要求:
+1:xml文档声明
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+2:整篇xml字符串有且只能一个根元素
+  &lt;booklist&gt;
+    &lt;book&gt;&lt;/book&gt;
+    &lt;book&gt;&lt;/book&gt;
+    &lt;/booklist&gt;
+3:标签有开始必须有结束
+  &lt;book&gt;&lt;/book&gt;
+4:标签可能嵌套不能交叉
+  &lt;book&gt;&lt;name&gt;&lt;/name&gt;&lt;/book&gt;  ok
+    &lt;book&gt;&lt;name&gt;&lt;id&gt;&lt;/name&gt;&lt;/id&gt;&lt;/book&gt;
+5:标签所有属性&apos;值&apos;必须用双引号括起来
+  &lt;book id=&quot;1&quot; name=&quot;tom&quot;&gt;&lt;/book&gt;
+总结:xml和html用途不同，xml语法严格
+
+32、 jquery 常用ajax函数
+
+    a:$.get(url,callback);--简单
+    作用含义:
+         发起一个ajax的GET请求,如果服务器返回成功
+         响应消息，调用callback函数,
+         在方法中处理响应的数据
+        callback  function(data){}
+    b:$.post(url,data,callback);
+    作用:
+         发起一个ajax POST请求，并在请求主体中
+         提交请求数据，如果服务器返回成功响应
+         消息，调用callback，在cllback方法中
+         处理响应数据.
+      使用方法三种:
+        a:$.post(url,data,callback);
+        b:$.post(url,&apos;id=1&amp;name=tom&apos;,callback);
+        c:$.post(url,{id:1,name:tom},callback);
+        d:$.getJSON(url,callback);
+        e:$.load(url);
+        f:$.getScript(url,callback);
+        g:$.ajax({})--功能最全最强
+            万能AJAX封装函数，提供非常多的可选项,
+            可以处理各种情形，前面函数都是它的
+            简化版.
+      $.ajax({
+         type:&apos;GET&apos;      //请求方式post/pub/delete/head
+         url:&quot;x.php&quot;     //请求地址
+         data:&apos;k=v&amp;k1=v1&apos;//请求服务器数据
+         beforeSend:fn   //请求消息发送之前调用fn
+         success:fn      //响应完成并且成功调用fn
+         error:fn        //响应完成但有问题调用fn
+         complete:fn     //响应完成回调(无论成败)fn
+    });
+</code></pre><p>  33、 #ajax注意</p>
+<pre><code>对于异步请求成功后创建DOM元素,
+不能进行直接事件绑定! click()/bind().
+因为在执行此事件绑定时，这些元素在DOM
+还不存在。
+必须将相关事件委托给DOM树上己经存在父元素!
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/javaScript/" rel="next" title="javaScript基础知识">
+    上一篇：javaScript基础知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/javascript创建对象的几种方式/" rel="next" title="Javascript如何实现继承">
+    下一篇：Javascript如何实现继承
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
