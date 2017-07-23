@@ -64,38 +64,6 @@
   </entry>
   
   <entry>
-    <title>为什么要初始化CSS样式</title>
-    <link href="www.wangchengzou.cn/2017/07/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%9D%E5%A7%8B%E5%8C%96CSS%E6%A0%B7%E5%BC%8F/"/>
-    <id>www.wangchengzou.cn/2017/07/22/为什么要初始化CSS样式/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:08:39.604Z</updated>
-    
-    <content type="html"><![CDATA[<p>举例：</p>
-<ul>
-<li>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。</li>
-<li>当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化<br>最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）<br>淘宝的样式初始化代码：<br>body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }<br>body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }<br>h1, h2, h3, h4, h5, h6{ font-size:100%; }<br>address, cite, dfn, em, var { font-style:normal; }<br>code, kbd, pre, samp { font-family:couriernew, courier, monospace; } small{ font-size:12px; }<br>ul, ol { list-style:none; }<br>a { text-decoration:none; }<br>a:hover { text-decoration:underline; }<br>sup { vertical-align:text-top; }<br>sub{ vertical-align:text-bottom; }<br>legend { color:#000; }<br>fieldset, img { border:0; }<br>button, input, select, textarea { font-size:100%; }<br>table { border-collapse:collapse; border-spacing:0; }</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;举例：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。&lt;/li&gt;
-&lt;li&gt;当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化&lt;br&gt;最简单的
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CSS3有哪些新特性</title>
     <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     <id>www.wangchengzou.cn/2017/07/22/CSS3有哪些新特性/</id>
@@ -181,19 +149,19 @@
   </entry>
   
   <entry>
-    <title>HTML5的form如何关闭自动完成功能</title>
-    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
-    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <title>CSS3新增伪类有那些</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3新增伪类有那些/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:45:05.164Z</updated>
+    <updated>2017-07-23T07:55:42.524Z</updated>
     
-    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+    <content type="html"><![CDATA[<p>举例：<br>p:first-of-type 选择属于其父元素的首个 </p><p> 元素的每个 </p><p> 元素。<br>p:last-of-type  选择属于其父元素的最后 </p><p> 元素的每个 </p><p> 元素。<br>p:only-of-type  选择属于其父元素唯一的 </p><p> 元素的每个 </p><p> 元素。<br>p:only-child        选择属于其父元素的唯一子元素的每个 </p><p> 元素。<br>p:nth-child(2)  选择属于其父元素的第二个子元素的每个 </p><p> 元素。</p>
+<p>:after          在元素之前添加内容,也可以用来做清除浮动。<br>:before         在元素之后添加内容<br>:enabled<br>:disabled       控制表单控件的禁用状态。<br>:checked        单选框或复选框被选中。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
-
+      &lt;p&gt;举例：&lt;br&gt;p:first-of-type 选择属于其父元素的首个 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:last-of-type  选择属于其父元素的最后 &lt;/p&gt;&lt;p&gt; 元素的每个 &lt;/p&gt;&lt;p&gt; 元素。&lt;br&gt;p:only-of-type  
     
     </summary>
     
@@ -202,7 +170,7 @@
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="css" scheme="www.wangchengzou.cn/tags/css/"/>
     
   </entry>
   
@@ -231,6 +199,32 @@
   </entry>
   
   <entry>
+    <title>HTML5的form如何关闭自动完成功能</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5%E7%9A%84form%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5的form如何关闭自动完成功能/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T07:45:05.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>给不想要提示的 form 或某个 input 设置为 autocomplete=off</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript原型，原型链，有什么特点</title>
     <link href="www.wangchengzou.cn/2017/07/22/JavaScript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9/"/>
     <id>www.wangchengzou.cn/2017/07/22/JavaScript原型，原型链，有什么特点/</id>
@@ -243,53 +237,6 @@
     <summary type="html">
     
       &lt;p&gt;每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript作用链域?</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E4%BD%9C%E7%94%A8%E9%93%BE%E5%9F%9F/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Javascript作用链域/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:27:58.046Z</updated>
-    
-    <content type="html"><![CDATA[<p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
-
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript如何实现继承</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Javascript如何实现继承/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:23:34.884Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、构造继承<br>2、原型继承<br>3、实例继承<br>4、拷贝继承<br>原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。<br>function Parent(){  this.name = ‘wang’;   }<br>function Child(){   this.age = 28;    }<br>Child.prototype = new Parent();//继承了Parent，通过原型<br>var demo = new Child();<br>alert(demo.age);<br>alert(demo.name);//得到被继承的属性   }</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、构造继承&lt;br&gt;2、原型继承&lt;br&gt;3、实例继承&lt;br&gt;4、拷贝继承&lt;br&gt;原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。&lt;br&gt;function Parent(){  this.name = ‘wang’;   }&lt;
     
     </summary>
     
@@ -327,18 +274,42 @@
   </entry>
   
   <entry>
-    <title>call()和.apply() 的区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/call()%20%E5%92%8C%20.apply()%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>www.wangchengzou.cn/2017/07/22/call() 和 .apply() 的区别/</id>
+    <title>Javascript如何实现继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript如何实现继承/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T08:48:35.899Z</updated>
+    <updated>2017-07-23T08:23:34.884Z</updated>
     
-    <content type="html"><![CDATA[<p>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);<br>注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。<br>function add(a,b)     {         alert(a+b);     }<br>function sub(a,b)     {         alert(a-b);     }<br>add.call(sub,3,1);</p>
+    <content type="html"><![CDATA[<p>1、构造继承<br>2、原型继承<br>3、实例继承<br>4、拷贝继承<br>原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。<br>function Parent(){  this.name = ‘wang’;   }<br>function Child(){   this.age = 28;    }<br>Child.prototype = new Parent();//继承了Parent，通过原型<br>var demo = new Child();<br>alert(demo.age);<br>alert(demo.name);//得到被继承的属性   }</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);&lt;br&gt;注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。&lt;br&gt;function add(a,b)     {    
+      &lt;p&gt;1、构造继承&lt;br&gt;2、原型继承&lt;br&gt;3、实例继承&lt;br&gt;4、拷贝继承&lt;br&gt;原型prototype机制或apply和call方法去实现较简单，建议使用构造函数与原型混合方式。&lt;br&gt;function Parent(){  this.name = ‘wang’;   }&lt;
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript作用链域?</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Javascript%E4%BD%9C%E7%94%A8%E9%93%BE%E5%9F%9F/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Javascript作用链域/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:27:58.046Z</updated>
+    
+    <content type="html"><![CDATA[<p>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。<br>当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，直至全局细节。&lt;br&gt;当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。&lt;/p&gt;
+
     
     </summary>
     
@@ -363,6 +334,29 @@
     
       &lt;p&gt;this总是指向函数的直接调用者（而非间接调用者）；&lt;br&gt;如果有new关键字，this指向new出来的那个对象；&lt;br&gt;在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；&lt;/p&gt;
 
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>call()和.apply() 的区别</title>
+    <link href="www.wangchengzou.cn/2017/07/22/call()%20%E5%92%8C%20.apply()%20%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>www.wangchengzou.cn/2017/07/22/call() 和 .apply() 的区别/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:48:35.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);<br>注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。<br>function add(a,b)     {         alert(a+b);     }<br>function sub(a,b)     {         alert(a-b);     }<br>add.call(sub,3,1);</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);&lt;br&gt;注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。&lt;br&gt;function add(a,b)     {    
     
     </summary>
     
@@ -424,6 +418,30 @@
   </entry>
   
   <entry>
+    <title>documen.write和 innerHTML的区别?</title>
+    <link href="www.wangchengzou.cn/2017/07/22/documen.write%E5%92%8C%20innerHTML%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>www.wangchengzou.cn/2017/07/22/documen.write和 innerHTML的区别/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T08:45:31.879Z</updated>
+    
+    <content type="html"><![CDATA[<p>document.write只能重绘整个页面  innerHTML可以重绘页面的一部分</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;document.write只能重绘整个页面  innerHTML可以重绘页面的一部分&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="DOM BOM" scheme="www.wangchengzou.cn/tags/DOM-BOM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>eval是做什么的</title>
     <link href="www.wangchengzou.cn/2017/07/22/eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/"/>
     <id>www.wangchengzou.cn/2017/07/22/eval是做什么的/</id>
@@ -444,44 +462,6 @@
     
     
       <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>html5有哪些新特性、移除了那些元素</title>
-    <link href="www.wangchengzou.cn/2017/07/22/html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0/"/>
-    <id>www.wangchengzou.cn/2017/07/22/html5有哪些新特性、移除了那些元素/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T03:58:08.890Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。<br>绘画 canvas;<br>用于媒介回放的 video 和 audio 元素;<br>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;       sessionStorage 的数据在浏览器关闭后自动删除;<br>语意化更好的内容元素，比如 article、footer、header、nav、section;<br>表单控件，calendar、date、time、email、url、search;<br>新的技术webworker, websocket, Geolocation;</li>
-</ul>
-<p>移除的元素：纯表现的元素：basefont，big，center，font, s，strike，tt，u;<br>对可用性产生负面影响的元素：frame，frameset，noframes；</p>
-<ul>
-<li>支持HTML5新标签：<br>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式。<br>当然也可以直接使用成熟的框架、比如html5shim;<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-<ul>
-<li>如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。&lt;br&gt;绘画 canvas;&lt;br&gt;用于媒介回放的 video 和 audio 元素;&lt;br&gt;本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -513,27 +493,30 @@
   </entry>
   
   <entry>
-    <title>title与h1的区别、b与strong的区别、i与em的区别</title>
-    <link href="www.wangchengzou.cn/2017/07/22/title%E4%B8%8Eh1%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81b%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%81i%E4%B8%8Eem%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>www.wangchengzou.cn/2017/07/22/title与h1的区别、b与strong的区别、i与em的区别/</id>
+    <title>Javascript如何实现继承</title>
+    <link href="www.wangchengzou.cn/2017/07/22/javascript%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>www.wangchengzou.cn/2017/07/22/javascript创建对象的几种方式/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T07:49:57.033Z</updated>
+    <updated>2017-07-23T08:27:03.747Z</updated>
     
-    <content type="html"><![CDATA[<p>title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；<br>strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<b>是展示强调内容。<br>i内容展示为斜体，em表示强调的文本；<br>Physical Style Elements – 自然样式标签 b, i, u, s, preSemantic Style Elements – 语义样式标签<br>strong, em, ins, del, code应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。</b></strong></p>
+    <content type="html"><![CDATA[<p>javascript创建对象简单的说,无非就是使用内置对象或各种自定义对象，当然还可以用JSON；但写法有很多种，也能混合使用。<br>1、对象字面量的方式<br>person={firstname:”Mark”,lastname:”Yun”,age:25,eyecolor:”black”};</p>
+<p>2、用function来模拟无参的构造函数<br>function Person(){}<br>var person=new Person();//定义一个function，如果使用new”实例化”,该function可以看作是一个Class<br>person.name=”Mark”;<br>person.age=”25”;<br>person.work=function(){ alert(person.name+” hello…”);  }<br>person.work();</p>
+<p>3、用function来模拟参构造函数来实现（用this关键字定义构造的上下文属性）<br>function Pet(name,age,hobby){<br>this.name=name;//this作用域：当前对象<br>this.age=age;<br>this.hobby=hobby;<br>this.eat=function(){<br>alert(“我叫”+this.name+”,我喜欢”+this.hobby+”,是个程序员”);<br> }<br> }<br> var maidou =new Pet(“麦兜”,25,”coding”);//实例化、创建对象<br> maidou.eat();//调用eat方法</p>
+<p>4、用工厂方式来创建（内置对象）<br>var wcDog =new Object();<br>wcDog.name=”旺财”;<br>wcDog.age=3;<br>wcDog.work=function(){ alert(“我是”+wcDog.name+”,汪汪汪……”);  }<br>wcDog.work();</p>
+<p>5、用原型方式来创建<br>function Dog(){       }<br>Dog.prototype.name=”旺财”;<br>Dog.prototype.eat=function(){      alert(this.name+”是个吃货”);      }<br>var wangcai =new Dog();<br>wangcai.eat();</p>
+<p>6、用混合方式来创建<br>function Car(name,price){<br>this.name=name;<br>this.price=price;      }<br>Car.prototype.sell=function(){alert(“我是”+this.name+”，我现在卖”+this.price+”万元”);  }<br>var camry =new Car(“凯美瑞”,27);<br>camry.sell();</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；&lt;br&gt;strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：&lt;strong&gt;会重读，而&lt;b&gt;是展示强调内容。&lt;br&gt;i内容展示为斜体，em表示强调的文本；&lt;
+      &lt;p&gt;javascript创建对象简单的说,无非就是使用内置对象或各种自定义对象，当然还可以用JSON；但写法有很多种，也能混合使用。&lt;br&gt;1、对象字面量的方式&lt;br&gt;person={firstname:”Mark”,lastname:”Yun”,age:25,eyecolor
     
     </summary>
     
       <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
   </entry>
   
