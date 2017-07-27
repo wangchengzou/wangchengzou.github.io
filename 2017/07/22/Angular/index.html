@@ -171,16 +171,16 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/面试题目/">
-                    面试题目 <span class="right">48 篇</span></a>
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">18 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/学习笔记/">
-                    学习笔记 <span class="right">21 篇</span></a>
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">4 篇</span></a>
                 </a>
             </li>
 
@@ -369,7 +369,8 @@ Controller 控制器
     &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
     &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
     注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
-    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，但是控制台是会报错的，通过ngSrc去指定就搞定了
+    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
+    但是控制台是会报错的，通过ngSrc去指定就搞定了
     &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
     &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
 </code></pre><p>6、MVC</p>
@@ -421,7 +422,8 @@ ngBind ngClass ngStyle
     app.directive(&apos;指令的名称&apos;，function(){
         return {}
     })
-    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写； 后缀：用来描述指令的功能
+    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
+    后缀：用来描述指令的功能
     属性：
     template：指定要显示的模板内容
     restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
@@ -569,12 +571,15 @@ app.value(&apos;服务名称&apos;，{})//创建变量服务
     java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
 
 ②IDE（webStorm）
-    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，在弹窗中的program选中对应的jar，保存即可
+    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
+    在弹窗中的program选中对应的jar，保存即可
 压缩效果：
-会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），但是数字、字符串、关键字是不会改变的。
+会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
+但是数字、字符串、关键字是不会改变的。
 
 解决压缩后的问题方式：
-依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，让我们可以去直接使用
+依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
+让我们可以去直接使用
 
 注入的方式：
 ①推断式（猜测）
@@ -582,14 +587,20 @@ app.value(&apos;服务名称&apos;，{})//创建变量服务
     app.controller(&apos;myCtrl&apos;,function($scope){});
 
 ②标记式
-    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，存在一个字符串（服务名称）数组。
+    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
+    存在一个字符串（服务名称）数组。
     注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
-    实现方式：1、将处理函数单独的存在一个变量中 2、给变量设置$inject，值是一个由字符串构成的数组 3、使用服务即可
+    实现方式：
+    1、将处理函数单独的存在一个变量中
+    2、给变量设置$inject，值是一个由字符串构成的数组
+    3、使用服务即可
 ③行内式（内联式）
-    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
+    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
+    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
     app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
     依赖注入3种方式，官方推荐采用行内式依赖注入。
-    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，整个ng应用的注入对象都是由$injector定位和创建。
+    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
+    整个ng应用的注入对象都是由$injector定位和创建。
     $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
     $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
 </code></pre><p>17、模块化设计</p>
@@ -624,7 +635,8 @@ SPA的工作原理：
     4、在路由信息所对应的对象中找到真实的模板页面地址
     5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
 
-ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，自动发起ajax请求加载页面显示。
+ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
+自动发起ajax请求加载页面显示。
     0、在创建自定义模块，在依赖列表中指定ngRoute
     1、指定盛放代码片段的容器
     2、配置路由词典
@@ -744,16 +756,16 @@ myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/javaScript/" rel="next" title="javaScript基础知识">
-    上一篇：javaScript基础知识
+    <a href="/2017/07/22/ajax面试题/" rel="next" title="ajax面试题点">
+    上一篇：ajax面试题点
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/CSS3有哪些新特性/" rel="next" title="CSS3有哪些新特性">
-    下一篇：CSS3有哪些新特性
+    <a href="/2017/07/22/bootStrap/" rel="next" title="bootStrap基础知识">
+    下一篇：bootStrap基础知识
   </a>
 </p>
 

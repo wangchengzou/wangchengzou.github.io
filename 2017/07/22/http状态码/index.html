@@ -7,7 +7,7 @@
 
     
 
-    <title>MySql常用方法知识 | 千帆渡</title>
+    <title>http状态码总表 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="MySql常用方法知识"/>
+    <meta property="og:title" content="http状态码总表"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -224,7 +224,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+    <a class="breadcrumb" href="/categories/面试题目/">面试题目</a>
 
 
         
@@ -241,12 +241,12 @@
             <div class="article-title">
                 
     
-        <h1>MySql常用方法知识</h1>
+        <h1>http状态码总表</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/MySql/">2017-07-22</a></time>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/http状态码/">2017-07-22</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -256,11 +256,9 @@
             
     <div class="tags-row">
         
-            <a href="/tags/MySql/" class="chip pink lighten-1">MySql</a>
+            <a href="/tags/html/" class="chip pink lighten-1">html</a>
         
-            <a href="/tags/PhP/" class="chip pink lighten-1">PhP</a>
-        
-            <a href="/tags/Ajax/" class="chip pink lighten-1">Ajax</a>
+            <a href="/tags/http/" class="chip pink lighten-1">http</a>
         
     </div>
 
@@ -271,281 +269,107 @@
 
 
             <div class="entry pink-link-context">
-                <p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
-
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
-}
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
+                <p>简单版</p>
+<pre><code>100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK         正常返回信息
+201  Created    请求成功并且服务器创建了新的资源
+202  Accepted   服务器已接受请求，但尚未处理
+301  Moved Permanently  请求的网页已永久移动到新位置。
+302 Found       临时性重定向。
+303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。
+304  Not Modified 自从上次请求后，请求的网页未修改过。
+400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+401 Unauthorized 请求未授权。
+403 Forbidden   禁止访问。
+404 Not Found   找不到如何与 URI 相匹配的资源。
+500 Internal Server Error  最常见的服务器端错误。
+503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。     ]
+</code></pre><p>完整版</p>
+<pre><code>1**(信息类)：表示接收到请求并且继续处理
+   100——客户必须继续发出请求
+   101——客户要求服务器根据请求转换HTTP协议版本
+2**(响应成功)：表示动作被成功接收、理解和接受
+   200——表明该请求被成功地完成，所请求的资源发送回客户端
+   201——提示知道新文件的URL
+   202——接受和处理、但处理未完成
+   203——返回信息不确定或不完整
+   204——请求收到，但返回信息为空
+   205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件
+   206——服务器已经完成了部分用户的GET请求
+3**(重定向类)：为了完成指定的动作，必须接受进一步处理
+   300——请求的资源可在多处得到
+   301——本网页被永久性转移到另一个URL
+   302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，
+       重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。
+   303——建议客户访问其他URL或访问方式
+   304——自从上次请求后，请求的网页未修改过，服务器返回此响应时，不会返回网页内容，
+       代表上次的文档已经被缓存了，还可以继续使用     305——请求的资源必须从服务器指定的地址得到
+   306——前一版本HTTP中使用的代码，现行版本中不再使用
+   307——申明请求的资源临时性删除
+4**(客户端错误类)：请求包含错误语法或不能正确执行
+   400——客户端请求有语法错误，不能被服务器所理解
+   401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
+   HTTP 401.1 - 未授权：登录失败     　　
+   HTTP 401.2 - 未授权：服务器配置问题导致登录失败     　　
+   HTTP 401.3 - ACL 禁止访问资源     　　
+   HTTP 401.4 - 未授权：授权被筛选器拒绝
+   HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败
+   402——保留有效ChargeTo头响应
+   403——禁止访问，服务器收到请求，但是拒绝提供服务
+   HTTP 403.1 禁止访问：禁止可执行访问     　　
+   HTTP 403.2 - 禁止访问：禁止读访问     　　
+   HTTP 403.3 - 禁止访问：禁止写访问     　　
+   HTTP 403.4 - 禁止访问：要求 SSL     　　
+   HTTP 403.5 - 禁止访问：要求 SSL 128     　　
+   HTTP 403.6 - 禁止访问：IP 地址被拒绝     　　
+   HTTP 403.7 - 禁止访问：要求客户证书     　　
+   HTTP 403.8 - 禁止访问：禁止站点访问     　　
+   HTTP 403.9 - 禁止访问：连接的用户过多     　　
+   HTTP 403.10 - 禁止访问：配置无效     　　
+   HTTP 403.11 - 禁止访问：密码更改     　　
+   HTTP 403.12 - 禁止访问：映射器拒绝访问     　　
+   HTTP 403.13 - 禁止访问：客户证书已被吊销     　　
+   HTTP 403.15 - 禁止访问：客户访问许可过多     　　
+   HTTP 403.16 - 禁止访问：客户证书不可信或者无效
+   HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效
+   404——一个404错误表明可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。
+   405——用户在Request-Line字段定义的方法不允许
+   406——根据用户发送的Accept拖，请求资源不可访问
+   407——类似401，用户必须首先在代理服务器上得到授权
+   408——客户端没有在用户指定的饿时间内完成请求
+   409——对当前资源状态，请求不能完成
+   410——服务器上不再有此资源且无进一步的参考地址
+   411——服务器拒绝用户定义的Content-Length属性请求
+   412——一个或多个请求头字段在当前请求中错误
+   413——请求的资源大于服务器允许的大小
+   414——请求的资源URL长于服务器允许的长度
+   415——请求资源不支持请求项目格式
+   416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段
+   417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。
+5**(服务端错误类)：服务器不能正确执行一个正确的请求
+    HTTP 500 - 服务器遇到错误，无法完成请求     　　
+    HTTP 500.100 - 内部服务器错误 - ASP 错误     　　
+    HTTP 500-11 服务器关闭     　　
+    HTTP 500-12 应用程序重新启动     　　
+    HTTP 500-13 - 服务器太忙     　　
+    HTTP 500-14 - 应用程序无效     　　
+    HTTP 500-15 - 不允许请求 global.asa     　　
+    Error 501 - 未实现
+    HTTP 502 - 网关错误
+    HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/JQuery/" rel="next" title="JQuery基础知识">
-    上一篇：JQuery基础知识
+    <a href="/2017/07/22/hexo/" rel="next" title="hexo使用基础知识">
+    上一篇：hexo使用基础知识
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/Vue快速上手知识/" rel="next" title="Vue快速上手知识">
-    下一篇：Vue快速上手知识
+    <a href="/2017/07/22/node/" rel="next" title="node基础知识">
+    下一篇：node基础知识
   </a>
 </p>
 

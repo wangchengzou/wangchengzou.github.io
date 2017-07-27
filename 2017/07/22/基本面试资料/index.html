@@ -7,7 +7,7 @@
 
     
 
-    <title>MySql常用方法知识 | 千帆渡</title>
+    <title>html css3基本知识 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="MySql常用方法知识"/>
+    <meta property="og:title" content="html css3基本知识"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -224,7 +224,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+    <a class="breadcrumb" href="/categories/面试题目/">面试题目</a>
 
 
         
@@ -241,12 +241,12 @@
             <div class="article-title">
                 
     
-        <h1>MySql常用方法知识</h1>
+        <h1>html css3基本知识</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/MySql/">2017-07-22</a></time>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/基本面试资料/">2017-07-22</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -256,11 +256,9 @@
             
     <div class="tags-row">
         
-            <a href="/tags/MySql/" class="chip pink lighten-1">MySql</a>
+            <a href="/tags/html/" class="chip pink lighten-1">html</a>
         
-            <a href="/tags/PhP/" class="chip pink lighten-1">PhP</a>
-        
-            <a href="/tags/Ajax/" class="chip pink lighten-1">Ajax</a>
+            <a href="/tags/H5/" class="chip pink lighten-1">H5</a>
         
     </div>
 
@@ -271,281 +269,266 @@
 
 
             <div class="entry pink-link-context">
-                <p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
+                <p>前端开发知识点：</p>
+<pre><code>HTML&amp;CSS：
+对Web标准的理解、浏览器内核差异、兼容性、hack、CSS基本功：布局、盒子模型、选择器优先级、
+HTML5、CSS3、Flexbox JavaScript：
+数据类型、运算、对象、Function、继承、闭包、作用域、原型链、事件、RegExp、JSON、Ajax、
+DOM、BOM、内存泄漏、跨域、异步装载、模板引擎、前端MVC、路由、模块化、Canvas、ECMAScript 6、Nodejs
+其他：
+移动端、响应式、自动化构建、HTTP、离线存储、WEB安全、优化、重构、团队协作、
+可维护、易用性、SEO、UED、架构、职业生涯、快速学习能力
 
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
+1、DOM结构 —— 两个节点之间可能存在哪些关系以及如何在节点之间任意移动。
+2、DOM操作 —— 如何添加、移除、移动、复制、创建和查找节点等。
+3、事件 —— 如何使用事件，以及IE和标准DOM事件模型之间存在的差别。
+4、XMLHttpRequest —— 这是什么、怎样完整地执行一次GET请求、怎样检测错误。
+5、严格模式与混杂模式 —— 如何触发这两种模式，区分它们有何意义。
+6、盒模型 —— 外边距、内边距和边框之间的关系，及IE8以下版本的浏览器中的盒模型
+7、块级元素与行内元素 —— 怎么用CSS控制它们、以及如何合理的使用它们
+8、浮动元素 —— 怎么使用它们、它们有什么问题以及怎么解决这些问题。
+9、HTML与XHTML —— 二者有什么区别，你觉得应该使用哪一个并说出理由。
+10、JSON —— 作用、用途、设计结构。
+</code></pre><p>Doctype作用？标准模式与兼容模式各有什么区别?</p>
+<pre><code>（1）、&lt;!DOCTYPE&gt;声明位于位于HTML文档中的第一行，处于 &lt;html&gt; 标签之前。
+告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会
+导致文档以兼容模式呈现。
+（2）、标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。
+在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
+</code></pre><p>页面导入样式时，使用link和@import有什么区别？</p>
+<pre><code>（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS,
+定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
+（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
+</code></pre><p>常见的浏览器内核有哪些？</p>
+<pre><code>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]
+Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
+Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]
+Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
+</code></pre><p>浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？</p>
+<pre><code>在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，
+如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源
+并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会
+使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件
+，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件
+中的资源并进行离线存储。离线的情况下，浏览器就直接使用离线存储的资源。
+</code></pre><p>title与h1的区别、b与strong的区别、i与em的区别？</p>
+<pre><code>title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；
+strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：
+&lt;strong&gt;会重读，而&lt;B&gt;是展示强调内容。  i内容展示为斜体，em表示强调的文本；
+Physical Style Elements
+-- 自然样式标签 b, i, u, s,
+preSemantic Style Elements
+-- 语义样式标签 strong, em, ins, del, code应该准确使用语义样式标签,
+ 但不能滥用, 如果不能确定时首选使用自然样式标签。
+</code></pre><p>CSS选择符有哪些？哪些属性可以继承？</p>
+<pre><code>1.id选择器（ # myid）
+2.类选择器（.myclassname）
+3.标签选择器（div, h1, p）
+4.相邻选择器（h1 + p）
+5.子选择器（ul &gt; li）
+6.后代选择器（li a）
+7.通配符选择器（ * ）
+8.属性选择器（a[rel = &quot;external&quot;]）
+9.伪类选择器（a:hover, li:nth-child）
+*   可继承的样式： font-size font-family color, UL LI DL DD DT;
+*   不可继承的样式：border padding margin width height ;
+</code></pre><p>CSS3新增伪类有那些？</p>
+<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child        选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+:after          在元素之前添加内容,也可以用来做清除浮动。
+:before         在元素之后添加内容
+:enabled
+:disabled       控制表单控件的禁用状态。
+:checked        单选框或复选框被选中。
+</code></pre><p>position的值relative和absolute定位原点是？</p>
+<pre><code>absolute     生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
+fixed （老IE不支持）     生成绝对定位的元素，相对于浏览器窗口进行定位。
+relative     生成相对定位的元素，相对于其正常位置进行定位。
+static     默认值。没有定位，元素出现在正常的流中。
+inherit     规定从父元素继承 position 属性的值。
+</code></pre><p>CSS3有哪些新特性？</p>
+<pre><code>新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）
+圆角           （border-radius:8px）
+多列布局        （multi-column layout）
+阴影和反射        （Shadow\Reflect）
+文字特效      （text-shadow、）
+文字渲染      （Text-decoration）
+线性渐变      （gradient）
+旋转          （transform）   增加了旋转,缩放,定位,倾斜,动画，多背景
+transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
+</code></pre><p>什么是Cookie 隔离？（或者说：请求资源的时候不要让它带cookie怎么做）</p>
+<pre><code>如果静态文件都放在主域名下，那静态文件请求的时候都带有的cookie的数据提交给server的，
+非常浪费流量，所以不如隔离开。 因为cookie有域的限制，因此不能跨域提交请求，
+故使用非主要域名的时候，请求头中就不会带有cookie数据，这样可以降低请求头的大小
+，降低请求时间，从而达到降低整体请求延时的目的。
+同时这种方式不会将cookie传入Web Server，也减少了Web Server对cookie的处理分析环节
+，提高了webserver的http请求的解析速度。
+</code></pre><p>什么是CSS 预处理器 / 后处理器？</p>
+<p>   预处理器例如：LESS、Sass、Stylus，用来预编译Sass或less，增强了css代码的复用性，<br>    还有层级、mixin、变量、循环、函数等，具有很方便的UI组件模块化开发能力，极大的提高工作效率。 -<br>  后处理器例如：PostCSS，通常被视为在完成的样式表中根据CSS规范处理CSS，让其更有效；目前最常做的<br>     是给CSS属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。</p>
+<p>介绍js的基本数据类型。</p>
+<pre><code>Undefined、Null、Boolean、Number、String
+</code></pre><p>介绍js有哪些内置对象？</p>
+<pre><code>Object 是 JavaScript 中所有对象的父对象
+数据封装类对象：Object、Array、Boolean、Number 和 String
+其他对象：Function、Arguments、Math、Date、RegExp、Error
+</code></pre><p>JavaScript原型，原型链 ? 有什么特点？</p>
+<pre><code>每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时，
+如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又
+会有自己的prototype，于是就这样一直找下去，也就是我们平时所说的原型链的概念。
+关系：instance.constructor.prototype = instance.__proto__
+特点：JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份
+属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。
+当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性，
+如果没有的话，  就会查找他的Prototype对象是否有这个属性，如此递推下去，
+一直检索到 Object 内建对象。
+function Func(){}
+Func.prototype.name = &quot;Sean&quot;;
+Func.prototype.getInfo = function() {       return this.name;     }
+var person = new Func();//现在可以参考
+var person = Object.create(oldObject);
+console.log(person.getInfo());//它拥有了Func的属性和方法     //&quot;Sean&quot;
+console.log(Func.prototype);     // Func { name=&quot;Sean&quot;, getInfo=function()}
+</code></pre><p>Javascript作用链域?</p>
+<pre><code>全局函数无法查看局部函数的内部细节，但局部函数可以查看其上层的函数细节，
+直至全局细节。当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，
+就会上溯到上层作用域查找，直至全局函数，这种组织形式就是作用域链。
+</code></pre><p>谈谈This对象的理解。</p>
+<pre><code>this总是指向函数的直接调用者（而非间接调用者）；
+如果有new关键字，this指向new出来的那个对象；
+在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；
+</code></pre><p>eval是做什么的？</p>
+<pre><code>它的功能是把对应的字符串解析成JS代码并运行；
+应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）
+由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval(&apos;(&apos;+ str +&apos;)&apos;);
+</code></pre><p>Ajax 是什么? 如何创建一个Ajax？</p>
+<pre><code>ajax的全称：Asynchronous Javascript And XML。
+异步传输+js+xml。所谓异步，在这里简单地解释就是：
+向服务器发送请求的时候，我们不必等待结果，而是可以同时做其他的事情，
+等到有了结果它自己会根据设定进行后续操作，与此同时，页面是不会发生整页刷新的，提高了用户体验。
+ (1)创建XMLHttpRequest对象,也就是创建一个异步调用对象
+ (2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
+ (3)设置响应HTTP请求状态变化的函数
+ (4)发送HTTP请求
+ (5)获取异步调用返回的数据
+ (6)使用JavaScript和DOM实现局部刷新
+</code></pre><p>DOM操作——怎样添加、移除、移动、复制、创建和查找节点?</p>
+<pre><code>（1）创建新节点
+    createDocumentFragment()    //创建一个DOM片段
+    createElement()   //创建一个具体的元素
+    createTextNode()   //创建一个文本节点
+（2）添加、移除、替换、插入
+    appendChild()   removeChild()
+    replaceChild()   insertBefore() //在已有的子节点前插入一个新的子节点
+（3）查找
+    getElementsByTagName()    //通过标签名称
+    getElementsByName()    //通过元素的Name属性的值
+    getElementById()    //通过元素Id，唯一性
+</code></pre><p>用js实现千位分隔符?</p>
+<pre><code>function commafy(num) {
+num = num + &apos;&apos;;
+var reg = /(-?d+)(d{3})/;
+if(reg.test(num)){
+num = num.replace(reg, &apos;$1,$2&apos;);
 }
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
+return num;
+}
+</code></pre><p>Object.is() 与原来的比较操作符” ===”、” ==”的区别？</p>
+<pre><code>两等号判等，会在比较时进行类型转换；三等号判等(判断严格)，比较时不进行隐式类型转换,
+（类型不同则会返回false）；
+  Object.is 在三等号判等的基础上特别处理了 NaN 、-0 和 +0 ，保证 -0 和 +0 不再相同，
+  但 Object.is(NaN, NaN) 会返回 true. Object.is 应被认为有其特殊的用途，
+  而不能用它认为它比其它的相等对比更宽松或严格。
+</code></pre><p>列举IE与其他浏览器不一样的特性？</p>
+<pre><code>触发事件的元素被认为是目标（target）。而在 IE 中，目标包含在 event 对象的 srcElement 属性；
+获取字符代码、如果按键代表一个字符（shift、ctrl、alt除外），
+IE 的 keyCode 会返回字符代码（Unicode），DOM 中按键的代码和字符是分离的，
+获取字符代码，需要使用 charCode 属性；
+阻止某个事件的默认行为
+IE 中阻止某个事件的默认行为，必须将 returnValue 属性设置为 false，Mozilla 中
+，需要调用 preventDefault() 方法；
+停止事件冒泡，IE 中阻止事件进一步冒泡，需要设置 cancelBubble 为 true，Mozzilla 中
+，需要调用 stopPropagation()；
+</code></pre><p>对Node的优点和缺点提出了自己的看法？</p>
+<pre><code>*（优点）因为Node是基于事件驱动和无阻塞的，所以非常适合处理并发请求，
+因此构建在Node上的代理服务器相比其他技术实现（如Ruby）的服务器表现要好得多。
+此外，与Node代理服务器交互的客户端代码是由javascript语言编写的，
+因此客户端和服务器端都用同一种语言编写，这是非常美妙的事情。
+*（缺点）Node是一个相对新的开源项目，所以不太稳定，它总是一直在变，
+而且缺少足够多的第三方库支持。看起来，就像是Ruby/Rails当年的样子。
+</code></pre><p>你有用过哪些前端性能优化的方法？</p>
+<pre><code>（1） 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；
+网页Gzip，CDN托管，data缓存 ，图片服务器。
+（2） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果
+，每次操作本地变量，不用请求，减少请求次数
+（3） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+（4） 当需要设置的样式很多时设置className而不是直接操作style。
+（5） 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+（8） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来
+，显示比div+css布局慢。
+对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。
+向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，
+能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，
+本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询
+。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让
+你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件
+次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。
+</code></pre><p>一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）</p>
+<pre><code>注：这题胜在区分度高，知识点覆盖广，再不懂的人，也能答出几句，
+而高手可以根据自己擅长的领域自由发挥，从URL规范、HTTP协议、DNS、CDN、数据库查询
+、   到浏览器流式解析、CSS规则构建、layout、paint、onload/domready、JS执行、
+JS API绑定等等；
+详细版：
+1、浏览器会开启一个线程来处理这个请求，对 URL 分析判断如果是 http 协议就按照 Web 方式来处理;
+2、调用浏览器内核中的对应方法，比如 WebView 中的 loadUrl 方法;
+3、通过DNS解析获取网址的IP地址，设置 UA 等信息发出第二个GET请求;
+4、进行HTTP协议会话，客户端发送报头(请求报头);
+5、进入到web服务器上的 Web Server，如 Apache、Tomcat、Node.JS 等服务器;
+6、进入部署好的后端应用，如 PHP、Java、JavaScript、Python 等，找到对应的请求处理;
+7、处理结束回馈报头，此处如果浏览器访问过，缓存上有对应资源，会与服务器最后修改时间对比，一致则返回304;
+8、浏览器开始下载html文档(响应报头，状态码200)，同时使用缓存;
+9、文档树建立，根据标记请求所需指定MIME类型的文件（比如css、js）,同时设置了cookie;
+10、页面开始渲染DOM，JS根据DOM API操作DOM,执行事件绑定等，页面显示完成。
+简洁版：
+浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求；
+服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）；
+浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）；
+载入解析到的资源文件，渲染页面，完成。
+</code></pre><p>端工程师这个职位是怎么样理解的？它的前景会怎么样？</p>
+<pre><code>前端是最贴近用户的程序员，比后端、数据库、产品经理、运营、安全都近。
+1、实现界面交互
+2、提升用户体验
+3、有了Node.js，前端可以实现服务端的一些事情  前端是最贴近用户的程序员
+，前端的能力就是能让产品从 90分进化到 100 分，甚至更好， 参与项目，
+快速高质量完成实现效果图，精确到1px； 与团队成员，UI设计，产品经理的沟通
+； 做好的页面结构，页面重构和用户体验； 处理hack，兼容、写出优美的代码格式
+； 针对服务器的优化、拥抱最新前端技术。
+</code></pre><p>平时如何管理你的项目？</p>
+<pre><code>先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；
+编写习惯必须一致（例如都是采用继承式的写法，单样式都写成一行）；
+ 标注样式编写人，各模块都及时标注（标注关键样式调用的地方）；
+ 页面进行标注（例如 页面 模块 开始和结束）；
+ CSS跟HTML 分文件夹并行存放，命名都得统一（例如style.css）；
+ JS 分文件夹存放 命名以该JS功能为准的英文翻译。
+ 图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/JQuery/" rel="next" title="JQuery基础知识">
-    上一篇：JQuery基础知识
+    <a href="/2017/07/22/判断质数算法/" rel="next" title="判断质数算法">
+    上一篇：判断质数算法
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/Vue快速上手知识/" rel="next" title="Vue快速上手知识">
-    下一篇：Vue快速上手知识
+    <a href="/2017/07/22/排序基本算法/" rel="next" title="排序基本算法Sort">
+    下一篇：排序基本算法Sort
   </a>
 </p>
 
