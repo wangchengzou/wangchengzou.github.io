@@ -1,0 +1,1290 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>js高级 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="js高级"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">18 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/算法和函数/">
+                    算法和函数 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/面试题目/">面试题目</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>js高级</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/javaScript高级面试题/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/javaScript/" class="chip pink lighten-1">javaScript</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>1、    JQuery一个对象可以同时绑定多个事件，这是如何实现的？</p>
+<pre><code>jQuery可以给一个对象同时绑定多个事件，低层实现方式是使用addEventListner
+或attachEvent兼容不同的浏览器实现事件的绑定，这样可以给同一个对象注册多个事件。
+</code></pre><p>2、    知道什么是webkit么? 知道怎么用浏览器的各种工具来调试和debug代码么?</p>
+<pre><code>Webkit是浏览器引擎，包括html渲染和js解析功能，手机浏览器的主流内核，
+与之相对应的引擎有Gecko（Mozilla Firefox 等使用）和Trident（也称MSHTML，IE 使用）。
+对于浏览器的调试工具要熟练使用，主要是页面结构分析，后台请求信息查看，
+js调试工具使用，熟练使用这些工具可以快速提高解决问题的效率
+</code></pre><p>10、实现一个函数clone，可以对JavaScript中的5种主要的数据类型（<br>    包括Number、String、Object、Array、Boolean）进行值复制<br>    考察点1：对于基本数据类型和引用数据类型在内存中存放的是值还是指针这一区别是否清楚<br>    考察点2：是否知道如何判断一个变量是什么类型的<br>    考察点3：递归算法的设计<br>    // 方法一：<br>        Object.prototype.clone = function(){<br>           var o = this.constructor === Array ? [] : {};<br>           for(var e in this){<br>            o[e] = typeof this[e] === “object” ? this[e].clone() : this[e];<br>           }<br>           return o;<br>        }<br>    //方法二：<br>      /**</p>
+<pre><code> * 克隆一个对象
+ * @param Obj
+ * @returns
+ */
+function clone(Obj) {
+    var buf;
+    if (Obj instanceof Array) {
+        buf = [];//创建一个空的数组
+        var i = Obj.length;
+        while (i--) {
+            buf[i] = clone(Obj[i]);
+        }
+        return buf;
+    }else if (Obj instanceof Object){
+        buf = {};//创建一个空对象
+        for (var k in Obj) { //为这个对象添加新的属性
+            buf[k] = clone(Obj[k]);
+        }
+        return buf;
+    }else{ //普通变量直接赋值
+        return Obj;
+    }
+}
+</code></pre><p>11、如何消除一个数组里面重复的元素？</p>
+<pre><code>var arr=[1,2,3,3,4,4,5,5,6,1,9,3,25,4];
+    function deRepeat(){
+        var newArr=[];
+        var obj={};
+        var index=0;
+        var l=arr.length;
+        for(var i=0;i&lt;l;i++){
+            if(obj[arr[i]]==undefined)
+              {
+                obj[arr[i]]=1;
+                newArr[index++]=arr[i];
+              }
+            else if(obj[arr[i]]==1)
+              continue;
+        }
+        return newArr;
+    }
+    var newArr2=deRepeat(arr);
+    alert(newArr2); //输出1,2,3,4,5,6,9,25
+</code></pre><p>12、小贤是一条可爱的小狗(Dog)，它的叫声很好听(wow)，<br>    每次看到主人的时候就会乖乖叫一声(yelp)。从这段描述可以得到以下对象：</p>
+<pre><code>    function Dog() {
+      this.wow = function() {
+               alert(’Wow’);
+      }
+      this.yelp = function() {
+              this.wow();
+      }
+    }
+小芒和小贤一样，原来也是一条可爱的小狗，可是突然有一天疯了(MadDog)，
+一看到人就会每隔半秒叫一声(wow)地不停叫唤(yelp)。
+请根据描述，按示例的形式用代码来实。（继承，原型，setInterval）
+function MadDog() {
+this.yelp = function() {
+      var self = this;
+      setInterval(function() {
+            self.wow();
+      }, 500);
+  }
+}
+MadDog.prototype = new Dog();
+//for test
+var dog = new Dog();
+dog.yelp();
+var madDog = new MadDog();
+madDog.yelp();
+</code></pre><p>13、下面这个ul，如何点击每一列的时候alert其index?（闭包）</p>
+<pre><code>    &lt;ul id=”test”&gt;
+        &lt;li&gt;这是第一条&lt;/li&gt;
+        &lt;li&gt;这是第二条&lt;/li&gt;
+        &lt;li&gt;这是第三条&lt;/li&gt;
+    &lt;/ul&gt;
+ // 方法一：
+    var lis=document.getElementById(&apos;2223&apos;).getElementsByTagName(&apos;li&apos;);
+    for(var i=0;i&lt;3;i++)
+    {
+        lis[i].index=i;
+        lis[i].onclick=function(){
+            alert(this.index);
+        };
+    }
+//方法二：
+    var lis=document.getElementById(&apos;2223&apos;).getElementsByTagName(&apos;li&apos;);
+    for(var i=0;i&lt;3;i++){
+        lis[i].index=i;
+        lis[i].onclick=(function(a){
+            return function() {
+                alert(a);
+            }
+        })(i);
+    }
+</code></pre><p>14、编写一个JavaScript函数，输入指定类型的选择器(仅需支持id，class，tagName<br>    三种简单CSS选择器，无需兼容组合选择器)可以返回匹配的DOM节点，需考虑浏览器兼容性和性能。</p>
+<pre><code>/*** @param selector {String} 传入的CSS选择器。* @return {Array}*/
+    var query = function(selector) {
+var reg = /^(#)?(\.)?(\w+)$/img;
+var regResult = reg.exec(selector);
+var result = [];
+//如果是id选择器
+if(regResult[1]) {
+if(regResult[3]) {
+if(typeof document.querySelector === &quot;function&quot;) {
+result.push(document.querySelector(regResult[3]));
+    }else {
+      result.push(document.getElementById(regResult[3]));
+    }
+  }
+  }
+  //如果是class选择器
+  else if(regResult[2]) {
+   if(regResult[3]) {
+      if(typeof document.getElementsByClassName === &apos;function&apos;) {
+        var doms = document.getElementsByClassName(regResult[3]);
+        if(doms) {
+          result = converToArray(doms);
+        }
+      }
+     //如果不支持getElementsByClassName函数
+     else {
+      var allDoms = document.getElementsByTagName(&quot;*&quot;) ;
+       for(var i = 0, len = allDoms.length; i &lt; len; i++) {
+         if(allDoms[i].className.search(new RegExp(regResult[2])) &gt; -1) {
+           result.push(allDoms[i]);
+        }
+       }
+    }
+ }
+}
+ //如果是标签选择器
+ else if(regResult[3]) {
+   var doms = document.getElementsByTagName(regResult[3].toLowerCase());
+   if(doms) {
+     result = converToArray(doms);
+   }
+ }
+ return result;
+ }
+ function converToArray(nodes){
+    var array = null;
+    try{
+     array = Array.prototype.slice.call(nodes,0);//针对非IE浏览器
+   }catch(ex){
+    array = new Array();
+   for( var i = 0 ,len = nodes.length; i &lt; len ; i++ ) {
+     array.push(nodes[i])
+   }
+  }
+  return array;
+}
+</code></pre><p>16、给String对象添加一个方法，传入一个string类型的参数，然后将string的每个字符间价格空格返回，</p>
+<pre><code>例如：addSpace(“hello world”) // -&gt; ‘h e l l o  w o r l d’
+String.prototype.spacify = function(){
+  return this.split(&apos;&apos;).join(&apos; &apos;);
+};
+</code></pre><p>17、定义一个log方法，让它可以代理console.log的方法。</p>
+<pre><code>可行的方法一：
+function log(msg)　{
+    console.log(msg);
+}
+log(&quot;hello world!&quot;) // hello world!
+如果要传入多个参数呢？显然上面的方法不能满足要求，所以更好的方法是：
+function log(){
+    console.log.apply(console, arguments);
+};
+到此，追问apply和call方法的异同。
+对于apply和call两者在作用上是相同的，即是调用一个对象的一个方法，
+以另一个对象替换当前对象。将一个函数的对象上下文从初始的上下文改变为
+由 thisObj 指定的新对象。
+但两者在参数上有区别的。对于第一个参数意义都一样，但对第二个参数：
+ apply传入的是一个参数数组，也就是将多个参数组合成为一个数组传入，
+ 而call则作为call的参数传入（从第二个参数开始）。
+ 如 func.call(func1,var1,var2,var3)
+ 对应的apply写法为：func.apply(func1,[var1,var2,var3]) 。
+</code></pre><p>18、在Javascript中什么是伪数组？如何将伪数组转化为标准数组？</p>
+<pre><code>伪数组（类数组）：无法直接调用数组方法或期望length属性有什么特殊的行为，
+但仍可以对真正数组遍历方法来遍历它们。典型的是函数的argument参数，
+还有像调用getElementsByTagName,document.childNodes之类的,
+它们都返回NodeList对象都属于伪数组。可以使用Array.prototype.slice.call(fakeArray)
+将数组转化为真正的Array对象。
+</code></pre><p>19、对作用域上下文和this的理解，看下列代码：</p>
+<pre><code>var User = {
+  count: 1,
+  getCount: function() {
+    return this.count;
+  }
+};
+console.log(User.getCount());  // what?
+var func = User.getCount;
+console.log(func());  // what?
+问两处console输出什么？为什么？
+答案是1和undefined。
+func是在winodw的上下文中被执行的，所以会访问不到count属性。
+继续追问，那么如何确保Uesr总是能访问到func的上下文，即正确返回1。
+正确的方法是使用Function.prototype.bind。兼容各个浏览器完整代码如下：
+Function.prototype.bind = Function.prototype.bind || function(context){
+   var self = this;
+   return function(){
+      return self.apply(context, arguments);
+   };
+}
+var func = User.getCount.bind(User);
+console.log(func());
+</code></pre><p>20、原生JS的window.onload与Jquery的$(document).ready(function(){})有什么不同？<br>    如何用原生JS实现Jq的ready方法？</p>
+<pre><code>window.onload()方法是必须等到页面内包括图片的所有元素加载完毕后才能执行。
+$(document).ready()是DOM结构绘制完毕后就执行，不必等到加载完毕。
+/*
+ * 传递函数给whenReady()
+ * 当文档解析完毕且为操作准备就绪时，函数作为document的方法调用
+ */
+var whenReady = (function() {               //这个函数返回whenReady()函数
+    var funcs = [];             //当获得事件时，要运行的函数
+    var ready = false;          //当触发事件处理程序时,切换为true
+    //当文档就绪时,调用事件处理程序
+    function handler(e) {
+        if(ready) return;       //确保事件处理程序只完整运行一次
+        //如果发生onreadystatechange事件，但其状态不是complete的话,那么文档尚未准备好
+        if(e.type === &apos;onreadystatechange&apos; &amp;&amp; document.readyState !== &apos;complete&apos;) {
+            return;
+        }
+        //运行所有注册函数
+        //注意每次都要计算funcs.length
+        //以防这些函数的调用可能会导致注册更多的函数
+        for(var i=0; i&lt;funcs.length; i++) {
+            funcs[i].call(document);
+        }
+        //事件处理函数完整执行,切换ready状态, 并移除所有函数
+        ready = true;
+        funcs = null;
+    }
+    //为接收到的任何事件注册处理程序
+    if(document.addEventListener) {
+        document.addEventListener(&apos;DOMContentLoaded&apos;, handler, false);
+        document.addEventListener(&apos;readystatechange&apos;, handler, false);
+        //IE9+
+        window.addEventListener(&apos;load&apos;, handler, false);
+    }else if(document.attachEvent) {
+        document.attachEvent(&apos;onreadystatechange&apos;, handler);
+        window.attachEvent(&apos;onload&apos;, handler);
+    }
+    //返回whenReady()函数
+    return function whenReady(fn) {
+        if(ready) { fn.call(document); }
+        else { funcs.push(fn); }
+    }
+})();
+如果上述代码十分难懂，下面这个简化版：
+function ready(fn){
+    if(document.addEventListener) {//标准浏览器
+        document.addEventListener(&apos;DOMContentLoaded&apos;, function() {
+            //注销事件, 避免反复触发
+            document.removeEventListener(&apos;DOMContentLoaded&apos;,arguments.callee, false);
+            fn();//执行函数
+        }, false);
+    }else if(document.attachEvent) {//IE
+        document.attachEvent(&apos;onreadystatechange&apos;, function() {
+            if(document.readyState == &apos;complete&apos;) {
+                document.detachEvent(&apos;onreadystatechange&apos;, arguments.callee);
+                fn();//函数执行
+            }
+        });
+    }
+};
+</code></pre><p>21、（设计题）想实现一个对页面某个节点的拖曳？如何做？（使用原生JS）</p>
+<pre><code>1.    给需要拖拽的节点绑定mousedown, mousemove, mouseup事件
+2.    mousedown事件触发后，开始拖拽
+3.    mousemove时，需要通过event.clientX和clientY获取拖拽位置，并实时更新位置
+4.    mouseup时，拖拽结束
+5.    需要注意浏览器边界的情况
+</code></pre><p>24、    Javascript作用链域?</p>
+<pre><code>理解变量和函数的访问范围和生命周期，全局作用域与局部作用域的区别，
+JavaScript中没有块作用域，函数的嵌套形成不同层次的作用域，
+嵌套的层次形成链式形式，通过作用域链查找属性的规则需要深入理解。
+</code></pre><p>25、    谈谈This对象的理解。</p>
+<pre><code>理解不同形式的函数调用方式下的this指向，理解事件函数、
+定时函数中的this指向，函数的调用形式决定了this的指向。
+</code></pre><p>26、    eval是做什么的？</p>
+<pre><code>它的功能是把对应的字符串解析成JS代码并运行；应该避免使用eval，
+不安全，非常耗性能（2个步骤，一次解析成js语句，一次执行）
+</code></pre><p>27、    关于事件，IE与火狐的事件机制有什么区别？ 如何阻止冒泡？</p>
+<pre><code>[1].在IE中,事件对象是作为一个全局变量来保存和维护的.所有的浏览器事件,
+不管是用户触发的，还是其他事件,都会更新window.event对象.所以在代码中，
+只要调用window.event就可以获取事件对象， 再event.srcElement就可以取得
+触发事件的元素进行进一步处理.
+[2].在FireFox中，事件对象却不是全局对象，一般情况下，是现场发生，现场使用，
+FireFox把事件对象自动传给事件处理程序.
+关于事件的兼容性处理要熟练掌握，事件对象具体哪些属性存在兼容性问题，IE与标准
+事件模型事件冒泡与事件捕获的支持要理解
+</code></pre><p>28、    什么是闭包（closure），为什么要用它？</p>
+<pre><code>简单的理解是函数的嵌套形成闭包，闭包包括函数本身已经它的外部作用域
+使用闭包可以形成独立的空间，延长变量的生命周期，报存中间状态值
+</code></pre><p>29、javascript 代码中的”use strict”;是什么意思 ? 使用它区别是什么？</p>
+<pre><code>意思是使用严格模式，使用严格模式，一些不规范的语法将不再支持
+</code></pre><p>30、如何判断一个对象是否属于某个类？</p>
+<pre><code>Instanceof   constructor
+</code></pre><p>31、new操作符具体干了什么呢?</p>
+<pre><code>1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+2、属性和方法被加入到 this 引用的对象中。
+3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+</code></pre><p>33、Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？</p>
+<pre><code>HasOwnProperty
+</code></pre><p>34、对JSON的了解？</p>
+<p>轻量级数据交互格式，可以形成复杂的嵌套格式，解析非常方便</p>
+<p>36、模块化开发怎么做？</p>
+<pre><code>理解模块化开发模式：
+浏览器端requirejs，seajs；
+服务器端nodejs；
+ES6模块化；
+fis、webpack等前端整体模块化解决方案；
+grunt、gulp等前端工作流的使用
+</code></pre><p>37、AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？</p>
+<pre><code>理解这两种规范的差异，主要通过requirejs与seajs的对比，
+理解模块的定义与引用方式的差异以及这两种规范的设计原则
+</code></pre><p>38、requireJS的核心原理是什么？（如何动态加载的？如何避免多次加载的？如何 缓存的？）</p>
+<pre><code>核心是js的加载模块，通过正则匹配模块以及模块的依赖关系，
+保证文件加载的先后顺序，根据文件的路径对加载过的文件做了缓存
+</code></pre><p>39、让你自己设计实现一个requireJS，你会怎么做？</p>
+<pre><code>核心是实现js的加载模块，维护js的依赖关系，控制好文件加载的先后顺序
+</code></pre><p>40、谈一谈你对ECMAScript6的了解？</p>
+<pre><code>ES6新的语法糖，类，模块化等新特性
+</code></pre><p>41、ECMAScript6 怎么写class么，为什么会出现class这种东西?</p>
+<pre><code>class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  toString() {
+     return &apos;(&apos;+this.x+&apos;, &apos;+this.y+&apos;)&apos;;
+  }
+}
+</code></pre><p>42、异步加载的方式有哪些？</p>
+<pre><code>方案一：&lt;script&gt;标签的async=&quot;async&quot;属性（详细参见：script标签的async属性）
+方案二：&lt;script&gt;标签的defer=&quot;defer&quot;属性
+方案三：动态创建&lt;script&gt;标签
+方案四：AJAX eval（使用AJAX得到脚本内容，然后通过eval_r(xmlhttp.responseText)来运行脚本）
+方案五：iframe方式
+</code></pre><p>43、documen.write和 innerHTML的区别?</p>
+<pre><code>document.write是重写整个document, 写入内容是字符串的html
+innerHTML是HTMLElement的属性，是一个元素的内部html内容
+</code></pre><p>44、DOM操作——怎样添加、移除、移动、复制、创建和查找节点?</p>
+<pre><code>（1）创建新节点
+      createDocumentFragment()    //创建一个DOM片段
+      createElement_x()   //创建一个具体的元素
+      createTextNode()   //创建一个文本节点
+（2）添加、移除、替换、插入
+      appendChild()
+      removeChild()
+      replaceChild()
+      insertBefore()
+（3）查找
+      getElementsByTagName()    //通过标签名称
+      getElementsByName()    //通过元素的Name属性的值
+      getElementById()    //通过元素Id，唯一性
+</code></pre><p>45、call() 和 .apply() 的含义和区别？</p>
+<pre><code>apply的参数是数组形式，call的参数是单个的值，除此之外在使用上没有差别，
+重点理解这两个函数调用的this改变
+</code></pre><p>46、数组和对象有哪些原生方法，列举一下？</p>
+<pre><code>Array.concat( ) 连接数组
+Array.join( ) 将数组元素连接起来以构建一个字符串
+Array.length 数组的大小
+Array.pop( ) 删除并返回数组的最后一个元素
+Array.push( ) 给数组添加元素
+Array.reverse( ) 颠倒数组中元素的顺序
+Array.shift( ) 将元素移出数组
+Array.slice( ) 返回数组的一部分
+Array.sort( ) 对数组元素进行排序
+Array.splice( ) 插入、删除或替换数组的元素
+Array.toLocaleString( ) 把数组转换成局部字符串
+Array.toString( ) 将数组转换成一个字符串
+Array.unshift( ) 在数组头部插入一个元素
+
+Object.hasOwnProperty( ) 检查属性是否被继承
+Object.isPrototypeOf( ) 一个对象是否是另一个对象的原型
+Object.propertyIsEnumerable( ) 是否可以通过for/in循环看到属性
+Object.toLocaleString( ) 返回对象的本地字符串表示
+Object.toString( ) 定义一个对象的字符串表示
+Object.valueOf( ) 指定对象的原始值
+</code></pre><p>47、JS 怎么实现一个类。怎么实例化这个类</p>
+<pre><code>严格来讲js中并没有类的概念，不过js中的函数可以作为构造函数来使用，
+通过new来实例化，其实函数本身也是一个对象。
+</code></pre><p>48、JavaScript中的作用域与变量声明提升？</p>
+<pre><code>理解JavaScript的预解析机制，js的运行主要分两个阶段：js的预解析和运行，
+预解析阶段所有的变量声明和函数定义都会提前，但是变量的赋值不会提前
+</code></pre><p>49、如何编写高性能的Javascript？</p>
+<pre><code>使用 DocumentFragment 优化多次 append
+通过模板元素 clone ，替代 createElement
+使用一次 innerHTML 赋值代替构建 dom 元素
+使用 firstChild 和 nextSibling 代替 childNodes 遍历 dom 元素
+使用 Array 做为 StringBuffer ，代替字符串拼接的操作
+将循环控制量保存到局部变量
+顺序无关的遍历时，用 while 替代 for
+将条件分支，按可能性顺序从高到低排列
+在同一条件子的多（ &gt;2 ）条件分支时，使用 switch 优于 if
+使用三目运算符替代条件分支
+需要不断执行的时候，优先考虑使用 setInterval
+</code></pre><p>50、那些操作会造成内存泄漏？</p>
+<pre><code>闭包，循环
+</code></pre><p>51、javascript对象的几种创建方式？</p>
+<pre><code>1. 工厂模式
+2. 构造函数模式
+3. 原型模式
+4. 混合构造函数和原型模式
+5. 动态原型模式
+6. 寄生构造函数模式
+7. 稳妥构造函数模式
+</code></pre><p>52、javascript继承的 6 种方法？</p>
+<pre><code>1. 原型链继承
+2. 借用构造函数继承
+3. 组合继承(原型+借用构造)
+4. 原型式继承
+5. 寄生式继承
+6. 寄生组合式继承
+</code></pre><p>53、eval是做什么的？</p>
+<pre><code>1. 它的功能是把对应的字符串解析成JS代码并运行
+2. 应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）
+</code></pre><p>54、JavaScript 原型，原型链 ? 有什么特点？</p>
+<pre><code>1. 原型对象也是普通的对象，是对象一个自带隐式的 __proto__ 属性，
+原型也有可能有自己的原型，如果一个原型对象的原型不为 null 的话，我们就称之为原型链
+2. 原型链是由一些用来继承和共享属性的对象组成的（有限的）对象链
+</code></pre><p>55、事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？</p>
+<pre><code>1. 我们在网页中的某个操作（有的操作对应多个事件）。
+例如：当我们点击一个按钮就会产生一个事件。是可以被 JavaScript 侦测到的行为
+2. 事件处理机制：IE是事件冒泡、firefox同时支持两种事件模型，
+也就是：捕获型事件和冒泡型事件
+3. ev.stopPropagation();
+注意旧ie的方法：ev.cancelBubble = true;
+</code></pre><p>56、简述一下Sass、Less，且说明区别？</p>
+<pre><code>他们是动态的样式语言，是CSS预处理器,CSS上的一种抽象层。
+他们是一种特殊的语法/语言而编译成CSS。
+变量符不一样，less是@，而Sass是$;
+Sass支持条件语句，可以使用if{}else{},for{}循环等等。而Less不支持;
+Sass是基于Ruby的，是在服务端处理的，而Less是需要引入less.js来处理Less代码输出Css到浏览器
+</code></pre><p>57、关于javascript中apply()和call()方法的区别？</p>
+<pre><code>相同点:两个方法产生的作用是完全一样的
+不同点:方法传递的参数不同
+Object.call(this,obj1,obj2,obj3)
+Object.apply(this,arguments)
+apply()接收两个参数，一个是函数运行的作用域(this)，另一个是参数数组。
+call()方法第一个参数与apply()方法相同，但传递给函数的参数必须列举出来。
+</code></pre><p>58、简述一下JS中的闭包？</p>
+<pre><code>闭包用的多的两个作用：读取函数内部的变量值；让这些变量值始终保存着(在内存中)。
+同时需要注意的是：闭包慎用，不滥用，不乱用，由于函数内部的变量都被保存在内存中，
+会导致内存消耗大。
+</code></pre><p>59、说说你对this的理解？</p>
+<pre><code>在JavaScript中，this通常指向的是我们正在执行的函数本身，或者是，指向该函数所属的对象。
+全局的this → 指向的是Window
+函数中的this → 指向的是函数所在的对象
+对象中的this → 指向其本身
+</code></pre><p>60、分别阐述split(),slice(),splice(),join()？</p>
+<pre><code>join()用于把数组中的所有元素拼接起来放入一个字符串。
+所带的参数为分割字符串的分隔符，默认是以逗号分开。归属于Array
+split()即把字符串分离开，以数组方式存储。归属于Stringstring
+slice() 方法可从已有的数组中返回选定的元素。该方法并不会修改数组，
+而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()
+splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+返回的是含有被删除的元素的数组。
+</code></pre><p>61、事件委托是什么？</p>
+<pre><code>让利用事件冒泡的原理，让自己的所触发的事件，让他的父元素代替执行！
+</code></pre><p>62、如何阻止事件冒泡和默认事件？</p>
+<pre><code>阻止浏览器的默认行为
+window.event?window.event.returnValue=false:e.preventDefault();
+停止事件冒泡
+window.event?window.event.cancelBubble=true:e.stopPropagation();
+原生JavaScript中，return false;只阻止默认行为，不阻止冒泡，
+jQuery中的return false;既阻止默认行为，又阻止冒泡
+</code></pre><p>63、添加 删除 替换 插入到某个接点的方法？</p>
+<pre><code>obj.appendChidl()
+obj.removeChild()
+obj.replaceChild()
+obj.innersetBefore()
+</code></pre><p>64、你用过require.js吗？它有什么特性？</p>
+<pre><code>（1）实现js文件的异步加载，避免网页失去响应；
+（2）管理模块之间的依赖性，便于代码的编写和维护。
+</code></pre><p>65、谈一下JS中的递归函数，并且用递归简单实现阶乘？</p>
+<pre><code>递归即是程序在执行过程中不断调用自身的编程技巧，
+当然也必须要有一个明确的结束条件，不然就会陷入死循环。
+</code></pre><p>66、请用正则表达式写一个简单的邮箱验证。</p>
+<pre><code>/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+</code></pre><p>67、简述一下你对web性能优化的方案？</p>
+<pre><code>1、尽量减少 HTTP 请求
+2、使用浏览器缓存
+3、使用压缩组件
+4、图片、JS的预载入
+5、将脚本放在底部
+6、将样式文件放在页面顶部
+7、使用外部的JS和CSS
+8、精简代码
+</code></pre><p>68、在JS中有哪些会被隐式转换为false</p>
+<pre><code>Undefined、null、关键字false、NaN、零、空字符串
+</code></pre><p>69、定时器setInterval有一个有名函数fn1，setInterval（fn1,500）<br>    与setInterval（fn1(),500）有什么区别？</p>
+<pre><code>第一个是重复执行每500毫秒执行一次，后面一个只执行一次。
+</code></pre><p>71、谈谈浏览器的内核，并且说一下什么是内核？</p>
+<pre><code>Trident ([&apos;traɪd(ə)nt])--
+IE，Gecko ([&apos;gekəʊ])--
+Firefox, Presto ([&apos;prestəʊ])--
+opera,webkit—谷歌和Safari
+浏览器内核又可以分成两部分：渲染引擎和 JS 引擎。
+它负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入 CSS 等），
+以及计算网页的显示方式，然后会输出至显示器或打印机。
+JS 引擎则是解析 Javascript 语言，执行 javascript 语言来实现网页的动态效果。
+</code></pre><p>72、JavaScript原型，原型链 ? 有什么特点？</p>
+<pre><code>*  原型对象也是普通的对象，是对象一个自带隐式的 __proto__ 属性，
+原型也有可能有自己的原型，如果一个原型对象的原型不为null的话，我们就称之为原型链。
+*  原型链是由一些用来继承和共享属性的对象组成的（有限的）对象链。
+* JavaScript的数据对象有那些属性值？
+　　writable：这个属性的值是否可以改。
+　　configurable：这个属性的配置是否可以删除，修改。
+　　enumerable：这个属性是否能在for…in循环中遍历出来或在Object.keys中列举出来。
+　　value：属性值。
+* 当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性，
+ 如果没有的话，就会查找他的Prototype对象是否有这个属性。
+ function clone(proto) {
+　　function Dummy() { }
+　　Dummy.prototype = proto;
+　　Dummy.prototype.constructor = Dummy;
+　　return new Dummy(); //等价于Object.create(Person);
+ }
+        function object(old) {
+         function F() {};
+         F.prototype = old;
+         return new F();
+        }
+    var newObj = object(oldObject);
+</code></pre><p>73、写一个通用的事件侦听器函数</p>
+<pre><code>// event(事件)工具集，来源：https://github.com/markyun
+markyun.Event = {
+    // 页面加载完成后
+    readyEvent : function(fn) {
+        if (fn==null) {
+            fn=document;
+        }
+        var oldonload = window.onload;
+        if (typeof window.onload != &apos;function&apos;) {
+            window.onload = fn;
+        } else {
+            window.onload = function() {
+                oldonload();
+                fn();
+            };
+        }
+    },
+    // 视能力分别使用dom0||dom2||IE方式 来绑定事件
+    // 参数： 操作的元素,事件名称 ,事件处理程序
+    addEvent : function(element, type, handler) {
+        if (element.addEventListener) {
+            //事件类型、需要执行的函数、是否捕捉
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent(&apos;on&apos; + type, function() {
+                handler.call(element);
+            });
+        } else {
+            element[&apos;on&apos; + type] = handler;
+        }
+    },
+    // 移除事件
+    removeEvent : function(element, type, handler) {
+        if (element.removeEnentListener) {
+            element.removeEnentListener(type, handler, false);
+        } else if (element.datachEvent) {
+            element.detachEvent(&apos;on&apos; + type, handler);
+        } else {
+            element[&apos;on&apos; + type] = null;
+        }
+    },
+    // 阻止事件 (主要是事件冒泡，因为IE不支持事件捕获)
+    stopPropagation : function(ev) {
+        if (ev.stopPropagation) {
+            ev.stopPropagation();
+        } else {
+            ev.cancelBubble = true;
+        }
+    },
+    // 取消事件的默认行为
+    preventDefault : function(event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+    // 获取事件目标
+    getTarget : function(event) {
+        return event.target || event.srcElement;
+    },
+    // 获取event对象的引用，取到事件的所有信息，确保随时能使用event；
+    getEvent : function(e) {
+        var ev = e || window.event;
+        if (!ev) {
+            var c = this.getEvent.caller;
+            while (c) {
+                ev = c.arguments[0];
+                if (ev &amp;&amp; Event == ev.constructor) {
+                    break;
+                }
+                c = c.caller;
+            }
+        }
+        return ev;
+    }
+};
+</code></pre><p>77、new操作符具体干了什么呢?</p>
+<pre><code>1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+2、属性和方法被加入到 this 引用的对象中。
+3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+  var obj  = {};
+  obj.__proto__ = Base.prototype;
+  Base.call(obj);
+</code></pre><p>78、JSON 的了解</p>
+<pre><code>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。
+它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小
+{&apos;age&apos;:&apos;12&apos;, &apos;name&apos;:&apos;back&apos;}
+</code></pre><p>79、js延迟加载的方式有哪些</p>
+<pre><code>defer和async、动态创建DOM方式（用得最多）、按需异步载入js
+</code></pre><p>81、异步加载的方式</p>
+<pre><code>(1) defer，只支持IE
+(2) async：
+(3) 创建script，插入到DOM中，加载完毕后callBack
+    documen.write和 innerHTML的区别
+    document.write只能重绘整个页面
+    innerHTML可以重绘页面的一部分
+</code></pre><p>82、告诉我答案是多少？</p>
+<pre><code>(function(x){
+    delete x;
+    alert(x);
+})(1+5);
+函数参数无法delete删除，delete只能删除通过for in访问的属性。
+当然，删除失败也不会报错，所以代码运行会弹出“1”。
+</code></pre><p>83、JS中的call()和apply()方法的区别？</p>
+<pre><code>例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);
+注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。
+function add(a,b){
+    alert(a+b);
+}
+function sub(a,b){
+    alert(a-b);
+}
+add.call(sub,3,1);
+</code></pre><p>84、Jquery与jQuery UI 有啥区别？</p>
+<pre><code>*jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。
+*jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
+提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
+</code></pre><p>85、jquery 中如何将数组转化为json字符串，然后再转化回来？</p>
+<pre><code>jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
+$.fn.stringifyArray = function(array) {
+        return JSON.stringify(array)
+    }
+    $.fn.parseArray = function(array) {
+        return JSON.parse(array)
+    }
+    然后调用：
+    $(&quot;&quot;).stringifyArray(array)
+</code></pre><p>86、JavaScript中的作用域与变量声明提升？</p>
+<pre><code>（HTTP、正则、优化、重构、响应式、移动端、团队协作、SEO、UED、职业生涯）
+*基于Class的选择性的性能相对于Id选择器开销很大，因为需遍历所有DOM元素。
+*频繁操作的DOM，先缓存起来再操作。用Jquery的链式调用更好。
+ 比如：var str=$(&quot;a&quot;).attr(&quot;href&quot;);
+*for (var i = size; i &lt; arr.length; i++) {}
+ for 循环每一次循环都查找了数组 (arr) 的.length 属性，
+ 在开始循环的时候设置一个变量来存储这个数字，可以让循环跑得更快：
+ for (var i = size, length = arr.length; i &lt; length; i++) {}
+</code></pre><p>87、前端开发的优化问题（看雅虎14条性能优化原则）。</p>
+<pre><code>（1） 减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；
+网页Gzip，CDN托管，data缓存 ，图片服务器。
+（2） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，
+前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+（3） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+（4） 当需要设置的样式很多时设置className而不是直接操作style。
+（5） 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+（8） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来
+，显示比div+css布局慢。
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/Vue快速上手知识/" rel="next" title="Vue快速上手知识">
+    上一篇：Vue快速上手知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/js面试题/" rel="next" title="javaScript面试题">
+    下一篇：javaScript面试题
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

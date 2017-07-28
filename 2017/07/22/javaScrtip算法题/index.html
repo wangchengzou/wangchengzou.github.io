@@ -1,0 +1,1182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>javaScript算法题 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="javaScript算法题"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">18 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/算法和函数/">
+                    算法和函数 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/面试题目/">面试题目</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>javaScript算法题</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/javaScrtip算法题/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/javaScript/" class="chip pink lighten-1">javaScript</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>看下列代码输出为何？解释原因。</p>
+<pre><code>var a;
+alert(typeof a); // undefined
+alert(b); // 报错
+解释：Undefined是一个只有一个值的数据类型，这个值就是“undefined”，
+在使用var声明变量但并未对其赋值进行初始化时，这个变量的值就是undefined。
+而b由于未声明将报错。注意未申明的变量（a is not defined）和声明了未赋值的是不一样的。
+</code></pre><p>看下列代码,输出什么？解释原因。</p>
+<pre><code>var a = null;
+alert(typeof a); //object
+解释：null是一个只有一个值的数据类型，这个值就是null。
+表示一个空指针对象，所以用typeof检测会返回”object”。
+</code></pre><p>看下列代码,输出什么？解释原因。</p>
+<pre><code>var undefined;
+undefined == null; // true
+1 == true;   // true
+2 == true;   // false
+0 == false;  // true
+0 == &apos;&apos;;     // true
+NaN == NaN;  // false
+[] == false; // true
+[] == ![];   // true
+•    undefined与null相等，但不恒等（===）
+一个是number一个是string时，会尝试将string转换为number
+尝试将boolean转换为number，0或1
+尝试将Object转换成number或string，取决于另外一个对比量的类型
+所以，对于0、空字符串的判断，建议使用 “===” 。“===”会先判断两边的值类型，类型不匹配时为false。
+那么问题来了，看下面的代码，输出什么，foo的值为什么？
+var foo = &quot;11&quot;+2-&quot;1&quot;;
+console.log(foo);
+console.log(typeof foo);
+执行完后foo的值为111，foo的类型为String。
+</code></pre><p>看代码给答案。</p>
+<pre><code>var a = new Object();
+a.value = 1;
+b = a;
+b.value = 2;
+alert(a.value);
+答案：2（考察引用数据类型细节）引用数据类型，数据放在堆中，指针指向这个数据
+</code></pre><p>已知数组var stringArray = [“This”, “is”, “Baidu”, “Campus”]，<br>    Alert出”This is Baidu Campus”</p>
+<pre><code>alert(stringArray.join(“”))转化为字符串空格隔开即可
+</code></pre><p>已知有字符串foo=”get-element-by-id”,写一个function将其转化成驼峰表示法”getElementById”。</p>
+<pre><code>function combo(msg){
+var arr=msg.split(&quot;-&quot;);
+for(var i=1;i&lt;arr.length;i++){
+    arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+}
+msg=arr.join(&quot;&quot;);
+return msg;
+}
+
+var numberArray = [3,6,2,4,1,5];
+1) 实现对该数组的倒排，输出[5,1,4,2,6,3]
+是索引值的倒序numberArray.reverse( )
+3) 实现对该数组的降序排列，输出[6,5,4,3,2,1]
+ 是数值大小的倒序numberArray.sort(function(a,b){return b-a})
+</code></pre><p>输出今天的日期，以YYYY-MM-DD的方式，比如今天是2014年9月26日，则输出2014-09-26</p>
+<pre><code>var d = new Date();
+// 获取年，getFullYear()返回4位的数字
+var year = d.getFullYear();
+// 获取月，月份比较特殊，0是1月，11是12月
+var month = d.getMonth() + 1;
+// 变成两位
+month = month &lt; 10 ? &apos;0&apos; + month : month;
+// 获取日
+var day = d.getDate();
+day = day &lt; 10 ? &apos;0&apos; + day : day;
+alert(year + &apos;-&apos; + month + &apos;-&apos; + day);
+</code></pre><p>将字符串”<tr><td>{$id}</td><td>{$name}</td></tr>”中的{$id}替换成10，{$name}替换成Tony （使用正则表达式）</p>
+<pre><code>&quot;&lt;tr&gt;&lt;td&gt;{$id}&lt;/td&gt;&lt;td&gt;{$id}_{$name}&lt;/td&gt;&lt;/tr&gt;&quot;
+.replace(/{\$id}/g, &apos;10&apos;)
+.replace( /  {\$name}  /g, &apos;Tony&apos;);
+在正则表带式中的直接量的形式：/要匹配的字符串/，/^ 严格模式 $/，
+/  /g默认在全局下找到所有匹配该字符串的  replace替换匹配到的字符串特殊符号用 \ 转义
+</code></pre><p>为了保证页面输出安全，我们经常需要对一些特殊的字符进行转义，请写一个函数escapeHtml，将&lt;, &gt;, &amp;, “进行转义</p>
+<pre><code>function escapeHtml(str) {
+return str.replace(/[&lt;&gt;”&amp;]/g, function(match) {
+    switch (match) {
+                   case “&lt;”:
+                      return “&amp;lt;”;
+                   case “&gt;”:
+                      return “&amp;gt;”;
+                   case “&amp;”:
+                      return “&amp;amp;”;
+                   case “\””:
+                      return “&amp;quot;”;
+      }
+  });
+}
+</code></pre><p>看下列代码，将会输出什么?(变量声明提升)</p>
+<pre><code>var foo = 1;
+(function(){
+    console.log(foo);
+    var foo = 2;
+    console.log(foo);
+})()
+答案：输出undefined 和 2。上面代码相当于：
+var foo = 1;
+(function(){
+    var foo;
+    console.log(foo); //undefined
+    foo = 2;
+    console.log(foo); // 2;
+})()
+函数声明与变量声明会被JavaScript引擎隐式地提升到当前作用域的顶部，
+但是只提升名称不会提升赋值部分。
+</code></pre><p>用js实现随机选取10–100之间的10个数字，存入一个数组，并排序。</p>
+<pre><code>function randomNub(aArray, len, min, max) {
+           if (len &gt;= (max - min)) {
+               return &apos;超过&apos; + min + &apos;-&apos; + max + &apos;之间的个数范围&apos;
+                + (max - min - 1) + &apos;个的总数&apos;;
+           }
+           if (aArray.length &gt;= len) {
+               aArray.sort(function(a, b) {
+                   return a - b
+               });
+               return aArray;
+           }
+           var nowNub = parseInt(Math.random() * (max - min - 1)) + (min + 1);
+           for (var j = 0; j &lt; aArray.length; j++) {
+               if (nowNub == aArray[j]) {
+                   randomNub(aArray, len, min, max);
+                   return;
+               }
+           }
+           aArray.push(nowNub);
+           randomNub(aArray, len, min, max);
+           return aArray;
+       }
+var arr=[];
+randomNub(arr,10,10,100);
+</code></pre><p>把两个数组合并，并删除第二个元素。</p>
+<pre><code>var array1 = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;];
+var bArray = [&apos;d&apos;,&apos;e&apos;,&apos;f&apos;];
+var cArray = array1.concat(bArray);
+cArray.splice(1,1);
+在数组的第（参数1）个索引值开始，删除（参数2）个数组元素，返回剩余的含有数组值的数组
+slice()
+</code></pre><p>看下面代码，给出输出结果。</p>
+<pre><code>for(var i=1;i&lt;=3;i++){
+  setTimeout(function(){
+      console.log(i);
+  },0);
+};
+答案：4 4 4。
+原因：Javascript事件处理器在线程空闲之前不会运行。追问，如何让上述代码输出1 2 3？
+    for(var i=1;i&lt;=3;i++){
+   setTimeout((function(a){  //改成立即执行函数
+       console.log(a);
+   })(i),0);
+};
+1           //输出
+2
+3
+</code></pre><p>写一个function，清除字符串前后的空格</p>
+<pre><code>if (!String.prototype.trim) {
+ String.prototype.trim = function() {
+ return this.replace(/^\s+/, &quot;&quot;).replace(/\s+$/,&quot;&quot;);
+ }
+}
+
+// test the function
+var str = &quot; \t\n test string &quot;.trim();
+alert(str == &quot;test string&quot;); // alerts &quot;true&quot;
+</code></pre><p>写出函数DateDemo的返回结果，系统时间假定为今天</p>
+<pre><code>function DateDemo(){
+ var d, s=&quot;今天日期是：&quot;;
+ d = new Date();
+s += d.getMonth() +1+&quot;/&quot;;
+s += d.getDate() + &quot;/&quot;;
+s += d.getFullYear();
+return s;}
+结果：今天日期是：7/17/2010
+</code></pre><p>写出程序运行的结果？</p>
+<pre><code>for(i=0, j=0; i&lt;10, j&lt;6; i++, j++){
+k = i + j;}
+结果：10
+</code></pre><p>阅读以下代码，请分析出结果：</p>
+<pre><code>var arr = new Array(1 ,3 ,5);
+arr[4]=&apos;z&apos;;
+arr2 = arr.reverse();
+arr3 = arr.concat(arr2);
+alert(arr3);
+弹出提示对话框：z,,5,3,1,z,,5,3,1
+</code></pre><p>补充按钮事件的函数，确认用户是否退出当前页面，确认之后关闭窗?</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;script type=”text/javascript” &gt;
+function closeWin(){
+//在此处添加代码
+if(confirm(“确定要退出吗？”)){
+window.close();
+}
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=”button”value=”关闭窗口”onclick=”closeWin()”/&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>写出简单描述html标签（不带属性的开始标签和结束标签）的正则表达式，并将以下字符串中的html标签去除掉</p>
+<pre><code>var str = “&lt;div&gt;这里是div&lt;p&gt;里面的段落&lt;/p&gt;&lt;/div&gt;”;
+//
+&lt;scripttype=”text/javascript”&gt;
+varreg = /&lt;\/?\w+\/?&gt;/gi;
+varstr = “&lt;div&gt;这里是div&lt;p&gt;里面的段落&lt;/p&gt;&lt;/div&gt;”;
+alert(str.replace(reg,”&quot;));
+&lt;/script&gt;
+</code></pre><p>完成foo()函数的内容，要求能够弹出对话框提示当前选中的是第几个单选框。</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;metahttp-equiv=”Content-Type” content=”text/html;charset=utf-8″ /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=”text/javascript” &gt;
+function foo() {
+//在此处添加代码
+var rdo =document.form1.radioGroup;
+for(var i =0 ;i&lt;rdo.length;i++){
+if(rdo.checked){
+alert(“您选择的是第”+(i+1)+”个单选框”);
+}
+}
+}
+&lt;/script&gt;
+&lt;body&gt;
+&lt;form name=”form1″ &gt;
+&lt;input type=”radio” name=”radioGroup”/&gt;
+&lt;input type=”radio” name=”radioGroup”/&gt;
+&lt;input type=”radio” name=”radioGroup”/&gt;
+&lt;input type=”radio” name=”radioGroup”/&gt;
+&lt;input type=”submit”/&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>完成函数showImg()，要求能够动态根据下拉列表的选项变化，更新图片的显示</p>
+<pre><code>&lt;body&gt;
+&lt;script type=”text/javascript” &gt;
+function showImg (oSel) {
+//在此处添加代码
+var str = oSel.value;
+document.getElementById(“pic”).src= str+”.jpg”;
+}
+&lt;/script&gt;
+&lt;img id=”pic”src=”img1.jpg”width=”200″ height=”200″ /&gt;
+&lt;br /&gt;
+&lt;select id=”sel”&gt;
+&lt;option value=”img1“&gt;城市生活&lt;/option&gt;
+&lt;option value=”img2“&gt;都市早报&lt;/option&gt;
+&lt;option value=”img3“&gt;青山绿水&lt;/option&gt;
+&lt;/select&gt;&lt;/body&gt;
+</code></pre><p>截取字符串abcdefg的efg</p>
+<pre><code>alert(&apos;abcdefg&apos;.substring(4));
+</code></pre><p>判断一个字符串中出现次数最多的字符，统计这个次数</p>
+<pre><code>var str = &apos;asdfssaaasasasasaa&apos;;
+var json = {};
+for (var i = 0; i &lt; str.length; i++) {
+        if(!json[str.charAt(i)]){
+                json[str.charAt(i)] = 1;
+        }else{
+                json[str.charAt(i)]++;
+        }
+};
+var iMax = 0;
+var iIndex = &apos;&apos;;
+for(var i in json){
+        if(json[i]&gt;iMax){
+                iMax = json[i];
+                iIndex = i;
+        }
+}
+alert(&apos;出现次数最多的是:&apos;+iIndex+&apos;出现&apos;+iMax+&apos;次&apos;);
+</code></pre><p>写一个获取非行间样式的函数</p>
+<pre><code>function getStyle(obj,attr,value)
+{
+    if(!value)
+    {
+        if(obj.currentStyle)
+        {
+            return obj.currentStyle(attr);
+        }
+        else{
+            obj.getComputedStyle(attr,false);
+        }
+    }
+    else
+    {
+        obj.style[attr] = value;
+    }
+}
+</code></pre><p>生成5个不同的随机数；</p>
+<pre><code>//思路：5个不同的数，每生成一次就和前面的所有数字相比较，如果有相同的，则放弃当前生成的数字！
+var num1 = [];
+for(var i = 0; i &lt; 5; i++){
+    num1[i] = Math.floor(Math.random()*10) + 1; //范围是 [1, 10]
+    for(var j = 0; j &lt; i; j++){
+        if(num1[i] == num1[j]){
+            i--;
+重新覆盖第i（重复）个值，可以将其删除或是重新的生成这个i值就会替换掉这个重复的值
+        }
+    }
+}
+</code></pre><p>去掉数组中重复的数字</p>
+<pre><code>方法一；
+//思路：每遍历一次就和之前的所有做比较，不相等则放入新的数组中！
+//这里用的原型 个人做法；
+Array.prototype.unique = function(){
+    var len = this.length,
+        newArr = [],
+        flag = 1;
+    for(var i = 0; i &lt; len; i++, flag = 1){
+        for(var j = 0; j &lt; i; j++){
+            if(this[i] == this[j]){
+                flag = 0;        //找到相同的数字后，不执行添加数据
+            }
+        }
+For 循环会遍历完所有的条件值才会跳出for循环，除非有一个让他跳出循环的语句，
+他才会提前终止循环、
+
+        flag ? newArr.push(this[i]) : &apos;&apos;;
+    }
+    return newArr;
+}
+方法二：
+var arr=[1,2,3,3,4,4,5,5,6,1,9,3,25,4];
+Array.prototype.unique2 = function()
+{
+    var n = []; //一个新的临时数组
+    for(var i = 0; i &lt; this.length; i++) //遍历当前数组
+    {
+        //如果当前数组的第i已经保存进了临时数组，那么跳过，
+        //否则把当前项push到临时数组里面
+        if (n.indexOf(this[i]) == -1) n.push(this[i]);
+    }
+    return n;
+}
+Arr.indexOf (3)获得指定数组下的指定的元素值的下标索引号
+var newArr2=arr.unique2(arr);
+alert(newArr2); //输出1,2,3,4,5,6,9,25
+</code></pre><p>阶乘函数；</p>
+<pre><code>//原型方法
+Number.prototype.N = function(){
+    var re = 1;
+    for(var i = 1; i &lt;= this; i++){
+        re *= i;
+    }
+    return re;
+}
+var num = 5;
+alert(num.N());
+</code></pre><p>FF与IE中如何阻止事件冒泡，如何获取事件对象，以及如何获取触发事件的元素</p>
+<pre><code>function stopPropagation(e) {
+e = e || window.event;
+if(e.stopPropagation) { //W3C阻止冒泡方法
+    e.stopPropagation();
+} else {
+    e.cancelBubble = true; //IE阻止冒泡方法
+}
+}
+document.getElementById(&apos;need_hide&apos;).onclick = function(e) {
+    stopPropagation(e);
+}
+</code></pre><p>写一个函数可以计算 sum(5,0,-5);输出0; sum(1,2,3,4);输出10;</p>
+<pre><code>function sum() {
+    var result = 0;
+    var arr = arguments;
+    for (var i = 0; i &lt; arr.length; i++) {
+        var num = arguments[i];
+        if (typeof num==&apos;number&apos;) {
+            result += num;
+        };
+    };
+    return result;
+}
+</code></pre><p>用JavaScript实现冒泡排序。数据为23、45、18、37、92、13、24<br>    //升序算法<br>    function sort(arr){<br>    for (var i = 0; i <arr.length; i++)="" {="" for="" (var="" j="0;" <arr.length-i;="" j++)="" if(arr[j]="">arr[j+1]){<br>    var c=arr[j];//交换两个变量的位置<br>    arr[j]=arr[j+1];<br>    arr[j+1]=c;<br>    }<br>            };<br>    };<br>    return arr.toString();<br>    }<br>    console.log(sort([23,45,18,37,92,13,24]));</arr.length;></p>
+<p>下列JavaScript代码执行后，依次alert的结果是</p>
+<pre><code>var obj = {proto: {a:1,b:2}};
+function F(){};
+F.prototype = obj.proto;  构造函数的原型继承
+var f = new F();
+obj.proto.c = 3;
+obj.proto = {a:-1, b:-2};
+alert(f.a);   1
+alert(f.c);
+delete F.prototype[&apos;a&apos;];
+alert(f.a);
+alert(obj.proto.a);
+答案：
+1
+3
+undefined
+-1
+</code></pre><p>下列JavaScript代码执行后的效果是</p>
+<pre><code>&lt;ul id=&apos;list&apos;&gt;
+&lt;li&gt;item&lt;/li&gt;
+&lt;li&gt;item&lt;/li&gt;
+&lt;li&gt;item&lt;/li&gt;
+&lt;li&gt;item&lt;/li&gt;
+&lt;li&gt;item&lt;/li&gt;
+&lt;/ul&gt;
+var items = document.querySelectorAll(&apos;#list&gt;li&apos;);
+for(var i = 0;i &lt; items.length; i++){
+     setTimeout(function(){
+           items[i].style.backgroundColor = &apos;#fee&apos;;
+    }, 5);
+}
+答案：报错，因为i一直等于5，items[i]获取不到元素
+</code></pre><p>下列JavaScript代码执行后的li元素的数量是</p>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Item&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;Item&lt;/li&gt;
+&lt;li&gt;Item&lt;/li&gt;
+&lt;/ul&gt;
+
+var items = document.getElementsByTagName(&apos;li&apos;);
+for(var i = 0; i&lt; items.length; i++){
+    if(items[i].innerHTML == &apos;&apos;){
+        items[i].parentNode.removeChild(items[i]);
+    }
+}
+</code></pre><p>程序中捕获异常的方法？</p>
+<pre><code>window.error
+try{}catch(){}finally{}
+</code></pre><p>给String对象添加一个方法，传入一个string类型的参数，然后将string的每个字符间价格空格返回，</p>
+<pre><code>例如：addSpace(“hello world”) // -&gt; ‘h e l l o ?w o r l d’
+String.prototype.spacify = function(){
+return this.split(&apos;&apos;).join(&apos; &apos;);
+};
+</code></pre><p>数组和字符串</p>
+<pre><code>&lt;script lang=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;
+function outPut(s) {
+    document.writeln(s);
+}
+var a = &quot;lashou&quot;;
+var b = a;
+outPut(b);
+a = &quot;拉手&quot;;
+outPut(a);
+outPut(b);
+var a_array = [1, 2, 3];
+var b_array = a_array;
+outPut(b_array);
+a_array[3] = 4;
+outPut(a_array);
+outPut(b_array);
+&lt;/script&gt;
+输出结果：
+答案：lashou 拉手 lashou 1,2,3 1,2,3,4 1,2,3,4
+</code></pre><p>下列控制台都输出什么</p>
+<pre><code>第1题：
+    function setName(){
+        name=&quot;张三&quot;;
+    }
+    setName();
+    console.log(name);
+    答案：&quot;张三&quot;
+第2题：
+    //考点：1、变量声明提升 2、变量搜索机制
+    var a=1;
+    function test(){
+        console.log(a);
+        var a=1;
+    }
+    test();
+    答案：undefined
+第3题：
+    var b=2;
+    function test2(){
+        window.b=3;
+        console.log(b);
+    }
+    test2();
+    答案：3
+第4题：
+    c=5;//声明一个全局变量c
+    function test3(){
+        window.c=3;
+        console.log(c);
+        //答案：undefined，原因：由于此时的c是一个局部变量c，并且没有被赋值
+        var c;
+        console.log(window.c);//答案：3，原因：这里的c就是一个全局变量c
+    }
+    test3();
+第5题：
+    var arr = [];
+    arr[0]  = &apos;a&apos;;
+    arr[1]  = &apos;b&apos;;
+    arr[10] = &apos;c&apos;;
+    alert(arr.length);    //答案：11
+    console.log(arr[5]);    //答案：undefined
+第6题：
+    var a=1;
+    console.log(a++);        //答案：1
+    console.log(++a);        //答案：3
+第7题：
+    console.log(null==undefined);    //答案：true
+    console.log(&quot;1&quot;==1);        //答案：true，因为会将数字1先转换为字符串1
+    console.log(&quot;1&quot;===1);        //答案：false，因为数据类型不一致
+第8题：
+    typeof 1;        &quot;number&quot;
+    typeof &quot;hello&quot;;        &quot;string&quot;
+    typeof /[0-9]/;        &quot;object&quot;
+    typeof {};        &quot;object&quot;
+    typeof null;        &quot;object&quot;
+    typeof undefined;    &quot;undefined&quot;
+    typeof [1,2,3];        &quot;object&quot;
+    typeof function(){};    //&quot;function&quot;
+第9题：
+    parseInt(3.14);            //3
+    parseFloat(&quot;3asdf&quot;);        //3
+    parseInt(&quot;1.23abc456&quot;);
+    parseInt(true);//&quot;true&quot; NaN
+第10题：
+    //考点：函数声明提前
+    function bar() {
+        return foo;
+        foo = 10;
+        function foo() {}
+        //var foo = 11;
+    }
+    alert(typeof bar());//&quot;function&quot;
+第11题：考点：函数声明提前
+    var foo = 1;
+    function bar() {
+        foo = 10;
+        return;
+        function foo() {}
+    }
+    bar();
+    alert(foo);//答案：1
+第12题：
+    console.log(a);//是一个函数
+    var a = 3;
+    function a(){}
+    console.log(a);////3
+第13题：
+    //考点：对arguments的操作
+    function foo(a) {
+        arguments[0] = 2;
+        alert(a);
+        //答案：2，
+        因为：a、arguments是对实参的访问，b、通过arguments[i]可以修改指定实参的值
+    }
+    foo(1);
+第14题：
+    function foo(a) {
+        alert(arguments.length);
+        //答案：3，因为arguments是对实参的访问
+    }
+    foo(1, 2, 3);
+第15题
+    bar();//报错
+    var foo = function bar(name) {
+        console.log(&quot;hello&quot;+name);
+        console.log(bar);
+    };
+    //alert(typeof bar);
+    foo(&quot;world&quot;);//&quot;hello&quot;
+    console.log(bar);//undefined
+    console.log(foo.toString());
+    bar();//报错
+
+第16题：以下执行会有什么输出
+    function test(){
+        console.log(&quot;test函数&quot;);
+    }
+    setTimeout(function(){
+        console.log(&quot;定时器回调函数&quot;);
+    }, 0)
+    test();
+    结果：
+    test函数
+    定时器回调函数
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/ajax面试题/" rel="next" title="ajax面试题点">
+    上一篇：ajax面试题点
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/http状态码/" rel="next" title="http状态码总表">
+    下一篇：http状态码总表
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
