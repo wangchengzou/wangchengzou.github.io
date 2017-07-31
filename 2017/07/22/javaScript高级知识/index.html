@@ -1,0 +1,1053 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>javaScript高级知识 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="javaScript高级知识"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">20 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/算法和函数/">
+                    算法和函数 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>javaScript高级知识</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/javaScript高级知识/">2017-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/javaScript/" class="chip pink lighten-1">javaScript</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>错误处理:</p>
+<pre><code>错误bug: 程序执行过程中，导致程序无法正常执行的情况
+后果: 程序会强行中断退出
+错误处理: 即使程序出现错误，也保证程序不异常中断的机制。
+如何: try{//始终执行
+       //可能出错的代码
+     }catch(err){//只有发生错误时才执行
+       //err: 错误对象: 发生错误时，自动创建的，封装错误信息的对象
+       //出错时，执行的错误处理代码:
+         //比如: 通知用户，记录日志，保存进度
+     }[finally{//无论是否出错，都必须执行的代码
+       //一般用于释放资源
+     }]//可有可无，因为放在try catch之后的代码本来就总是执行的。
+问题: 放在try catch中的代码，执行效率会降低
+解决: 2种:
+  1. 尽量少的将代码放入try catch
+  2. 如果可提前预知错误原因，可用if...else代替try catch，提前预防错误。
+
+抛出自定义异常:
+throw new Error(&quot;错误信息&quot;)
+
+js中错误对象的类型: 6种
+  SyntaxError: 语法错误: 程序的语法写错了
+  ReferenceError: 引用错误: 要用的变量没找到
+  TypeError: 类型错误: 错误的使用对象的类型:
+     比如: 对非数组使用[]
+           对非函数使用()
+           对null/undefined用.xxx
+           要调用的函数，对象中没有:
+             比如: console.write();
+                  document.log();
+  RangeError: 范围错误: 参数值超规定范围:
+         比如: toFixed(d) d: 0~20之间 如果写-2
+
+  URIError, EvelError;
+</code></pre><p>Functions:</p>
+<pre><code>创建: 3种:
+  1. 声明: function 函数名(参数列表){
+            函数体;
+            return 返回值;
+          }
+     问题: 被声明提前
+     解决:
+  2. 函数直接量: var函数名=function (参数列表){...}
+     优点: 不会被声明提前
+     揭示: 函数是一个引用类型的对象
+           函数名只是一个引用函数对象的普通变量
+  3. 用new: 了解
+    var函数名=new Function(&quot;参数&quot;,&quot;参数&quot;,&quot;函数体;...&quot;)
+ 鄙视: 以下创建函数方式正确的是:
+    function fun(a,b){return a-b};
+    var fun=function(a,b){return a-b};
+    var fun=new Function(a,b,&quot;return a-b&quot;); X
+    var fun=new Function(&quot;a&quot;,&quot;b&quot;,&quot;return a-b&quot;);
+</code></pre><p>重载: overload</p>
+<pre><code>什么是: 相同函数名，不同参数列表的多个函数，在调用时可自动根据传入参数的不同，选择对应的函数执行。
+为什么: 减少API的名字，减轻调用者的负担
+何时: 只要一项任务，可能根据不同的参数执行不同的逻辑时。
+问题: js语法默认不支持重载
+     为什么: js中不允许多个相同名称的函数同时存在
+            后定义的同名函数，会覆盖先定义的。
+解决: 2步:
+ 1. 将多个函数合并为一个函数，省略参数列表
+ 2. 函数内，用arguments接住所有传入的变量值
+   arguments: 每个函数中自动创建的
+             自动接收所有参数值的类数组对象
+    类数组对象: 长的像数组的对象:
+      vs 数组: 相同: 1. 下标, 2. length, 3. for遍历
+              不同: 类型不同, 类数组对象不能使用数组的API
+      比如: childNodes  children
+
+ 参数变量依然必要:
+   1. 参数变量可指导调用者正确的使用函数
+   2. 参数名都是有意义的，便于维护/提高程序可读性
+   3. 自定义的参数名通常简洁
+</code></pre><p>匿名函数:</p>
+<pre><code>什么是: 定义函数时，不指定函数名的函数
+为什么: 节约内存!
+何时: 只要一个函数只使用一次时
+  2种:
+    1. 回调callback: 将一个函数作为参数传给另一个函数中调用
+       比如: arr.sort(function(a,b){return a-b;})
+            str.replace(reg,function(kw){return ......})
+            addEventListener(&quot;click&quot;,function(){...})
+            setInterval/Timeout(function(){...}, ms )
+    特例: 如果函数可能被反复调用或可能被多个元素共享时，应该用有名的函数。
+    2. 匿名函数自调:
+    定义一个函数后，立刻调用该函数，调用后立即释放
+    何时: 划分临时作用域，避免全局变量污染时
+    如何: 2种:
+      1. (function([参数列表]){...})([参数值])
+      2. +function(...){}(...)
+</code></pre><p>作用域和作用域链:</p>
+<pre><code>作用域(scope): 变量的可用范围
+  包含2种:
+    1. 全局作用域对象window
+       全局变量: 优: 可重复使用，随处可用
+                 缺: 极易造成全局污染
+                    ——今后尽量避免使用全局变量
+    2. 函数作用域对象AO
+       局部变量: 优: 仅函数内可用，不会造成全局污染
+                 缺: 不可重用！
+作用域链(scope chain):
+ 什么是: 由各级作用域对象连续引用，形成的链式结构
+ 函数的声明周期:
+   1. 程序开始执行前:
+      程序会创建全局作用域对象window
+   2. 定义函数时
+      在window中创建函数名变量引用函数对象
+      函数对象的隐藏属性scope指回函数来自的全局作用域对象window——就好像人的祖籍
+   3. 调用函数时
+      创建本次函数调用时使用的AO对象
+      在AO对象中添加函数的局部变量
+      设置AO的隐藏属性parent 指向函数的祖籍作用域对象。——执行时，如果AO中没有的变量可延parnet向祖籍作用域对象找。
+   4. 函数调用后
+      函数作用域对象AO释放
+        导致AO中局部变量释放
+ 作用域链: 2项任务：
+   1. 保存了所有的变量
+   2. 控制了变量的使用顺序: 先用局部，局部没有才延作用域链向下查找。
+</code></pre><p>闭包(closure)</p>
+<pre><code>什么是: 即重用变量，又保护变量不被污染的一种结构
+为什么: 全局变量: 优: 可重用, 缺: 全局污染
+        局部变量: 优: 不会被污染, 缺: 不可重用
+何时: 只要希望重用一个变量，并保护变量不被污染。
+如何: 3步:
+  1. 使用外层函数包裹受保护的变量和操作变量的内层函数
+  2. 外层函数将内层函数返回到外部
+  3. 调用者用外部变量接住返回的内层函数
+问题: 闭包结构比普通函数占用更多的内存: 外层函数的函数作用域对象
+解决: 使用完闭包后，要主动释放闭包:
+  将引用内层函数的外部变量置为null
+
+鄙视: 画简图:
+  1. 找受保护的变量:
+      是外层函数的局部变量
+      同时, 在内层函数中被使用
+  2. 找外层函数都返回了哪些内层函数用于操作受保护的变量: 2种手段:
+    1. return function
+    2. 可直接给一个全局变量赋值一个function
+</code></pre><p>什么是面向对象: 程序中都是用对象结构来描述现实中一个具体事务的属性和功能</p>
+<pre><code>为什么: 便于维护
+何时: 今后几乎所有大型项目都采用面向对象的思想
+如何: 三大特点: 封装，继承，多态
+</code></pre><p>封装: 用一个对象结构集中保存现实中一个事物的多个属性和功能。</p>
+<pre><code>什么是对象: 封装一个事物的属性，并提供操作事物的功能的数据结构。
+为什么: 现实中任何一个数据或一项功能都属于一个具体事物。——便于维护
+何时: 今后只要使用面向对象的方式，首先都要创建对象。
+如何: 3种:
+ 1. 对象直接量: var obj={
+                 属性名:值,
+                    ... : ... ,
+                   方法:function(){
+                     ...this.属性名...
+                   }
+                    ... : ...
+               }
+     属性，其实就是保存在对象中的一个普通变量
+     方法，其实就是保存在对象中的一个普通函数
+     问题: 对象自己的方法，通常要使用对象自己的属性值
+       错误: 直接使用属性名当变量
+       正确: this: 引用正在调用函数的.前的对象的关键词
+         今后，只要对象自己的方法要使用对象自己的属性，必须用this.属性名
+
+    访问对象的成员: 成员=属性+方法
+    访问属性: 对象.属性名  用法和普通变量完全一样
+      特殊: 要访问的属性不存在，不报错！
+           返回undefined
+    调用方法: 对象.方法名() 用法和普通函数完全一样！
+ 2. 用new: 2步:
+    var obj=new Object(); //先创建一个空对象
+    obj.属性名=属性值;//再向空对象中添加属性和方法
+    obj.方法名=function(){
+      ...this.属性名...
+    }
+   其实js中的对象可在任何时候添加新属性和方法
+   特殊: 要赋值的属性不存在，不报错!
+         而是在对象中动态添加该属性
+js中对象的本质，就是关联数组。
+  其实访问成员: 对象[&quot;属性名&quot;]
+                对象[&quot;方法名&quot;]()
+    . vs [] : 如果要访问的属性名是固定的，就用.访问
+         如果要访问的属性名是动态生成的，就用[]
+    问题: 只能创建一个单独的对象
+          反复创建多个相同结构的对象时，代码重复严重
+    解决: 构造函数
+3. 用构造函数反复创建多个相同结构的对象
+什么是构造函数: 描述同一类型的所有对象共同成员结构的函数。
+为什么: 代码重用！
+何时: 只要反复创建同一类型的多个对象时
+如何: 2步:
+ 1. 定义构造函数:
+    function 类型名(属性参数列表){
+       this.属性名=参数;
+             ... = ... ;
+       this.方法名=function(){
+         ...this.属性名...
+       }
+    }
+ 2. 调用构造函数创建一个对象:
+    var obj=new 类型名(属性值列表)
+原理: new: 4件事:
+  1. 创建新的空对象，将构造函数中的this-&gt;新对象
+  2. 让新对象自动继承构造函数的原型对象
+  3. 执行构造函数中的语句，向新对象中添加新成员并赋值
+  4. 返回新对象地址保存到变量中
+</code></pre><p>继承: 父对象的成员，子对象无需重复创建，就可直接使用。</p>
+<pre><code>为什么: 代码重用，节约内存
+如何:
+原型对象: 集中保存同一类型的子对象共有成员的父对象
+    创建: 在定义构造函数时，自动创建(买一赠一)
+    如何:
+      1. 使用构造函数创建子对象时，会自动设置子对象继承构造函数的原型对象
+      2. 放在原型对象中的成员，所有子对象共用
+    如何访问构造函数的原型对象:
+      构造函数.prototype.成员名=值/function(){...}
+总结: 今后，只要希望所有子对象共有的成员，都要添加到构造函数的原型对象中。而不应该放在构造函数内。
+
+共有属性和自有属性:
+  共有属性: 添加到原型对象中，所有子对象共有的属性
+  自有属性: 直接保存在对象本地的属性
+  访问: 读取: 两者用法完全相同: 对象.属性
+             先在对象本地找，没有，才去父对象中找
+        修改: 自有属性: 对象.属性=值
+              共有属性: 子对象不允许修改共有属性
+                  必须通过构造函数
+                  构造函数.prototype.属性=值
+  判断属性是否可用/包含:
+    &quot;成员&quot;  in 对象
+    返回bool
+       强调: in不仅判断自有属性，而且判断父对象中的共有属性。
+
+内置对象的原型对象:
+内置对象，也有构造函数和原型对象
+  构造函数负责创建指定类型的对象
+  原型对象负责保存该类型子对象共有的API
+  解决新旧浏览器API兼容性问题: 2步:
+    1. 判断当前浏览器是否支持API
+    2. 如果不支持，就自定义一个API放入该类型的原型对象中
+
+原型链: 由多级父对象逐级继承形成的链式结构
+  保存了所有对象的成员(属性和方法)
+  定义了成员的使用顺序:
+     先用自有成员, 自己没有，才延原型链向父对象查找
+  vs 作用域链:
+     保存了所有变量(全局/局部)
+     定义了变量的使用顺序: 先用局部，没有，才延作用域链先父级作用域查找
+总结: 只要不需要对象. 就可直接访问的变量都存在作用域链。
+      只要必须用对象.才能访问的对象成员都存在原型链中。
+</code></pre><p>多态: 同一个方法，在不同情况下表现出不同的状态。</p>
+<pre><code>js中仅支持重写(override)
+什么是重写: 如果子对象觉得父对象的成员不好用，可自定义自有成员，覆盖父对象中的成员。
+为什么: 从父对象继承来的成员，不一定总是想要的
+何时: 只要子对象觉得父对象的成员不好用
+</code></pre><p>自定义继承:</p>
+<pre><code>1. 仅修改两个对象间的继承关系
+   Object.setPrototypeOf(child, father)
+    让child继承father( 设置child的__proto__继承father)
+   问题: 一次只能修改一个对象的继承关系
+   解决:
+2. 修改构造函数的原型对象来修改所有子对象的父对象
+    构造函数.prototype=新father
+   强调: 必须在创建子对象之前更换
+
+3. 两种类型间的继承:
+  问题: 如果两种类型间有部分相同的属性结构和方法
+  优化: 3步:
+    1. 定义抽象父类型:
+         父类型构造函数中定义公共的属性结构
+         父类型原型对象中定义公共的方法
+    2. 在子类型构造函数中借用父类型构造函数
+      错误: 直接调用父类型构造函数()
+        因为如果一个函数没有用new或任何对象.调用，则this默认-&gt;window
+      正确: 用call/apply，将父类型构造中的this临时替换为子类型构造函数中的this
+        父类型构造.call(this,参数....)
+    3. 设置子类型的原型对象继承父类型的原型对象
+</code></pre><p>ES5: 保护对象:</p>
+<pre><code>保护属性:
+  命名属性: 可用.直接访问的属性
+    数据属性: 实际存储属性值的属性
+      如何保护: 每个属性其实由四大特性组成:
+        {
+         value: 值, //实际存储属性值
+         writable: true, //控制是否可修改
+         enumerable:true,//控制是否可用for in遍历到
+                       //即使不能for in，用.也能访问
+         configurable:true,//控制是否可修改其他特性
+                        //控制能否删除该属性
+                        //改为false后不可逆
+        }
+      获取一个对象的属性的四大特性:
+      Object.getOwnPropertyDescriptor(obj,&quot;属性名&quot;)
+      修改一个对象的属性的四大特性:
+      Object.defineProperty(obj,&quot;属性名&quot;,{
+        特性名:特性值,
+           ... : ... ,
+      });
+      问题: 一次只能修改一个属性
+      解决: 同时修改多个属性
+      Object.defineProperties(obj,{
+        属性名:{
+          特性名:特性值,
+             ... : ...
+        },
+        属性名:{
+          特性名:特性值,
+             ... : ...
+        },
+      })
+      强调: 必须启用严格模式才能报错！
+      问题: 只能进行简单的保护，无法自定义保护规则
+      解决:
+    访问器属性: 不实际存储属性值，仅提供对另一个属性值的保护。
+     何时: 只要使用自定义规则保护属性时
+     如何定义: 2步:
+       1. 必须先定义一个隐藏的属性来实际存储属性值
+       2. 定义访问器属性，提过对受保护的属性的读写操作和验证。
+       Object.defineProperty(obj,&quot;属性名&quot;,{
+         get:function(){
+            return //受保护的属性值
+         },
+         set:function(val){
+            //如果val符合规则
+              受保护的属性=val
+            //否则
+              抛出自定义错误
+         },
+         enumerable:true, configurable:true,
+       })
+       强调:访问器属性中要使用对象自己的属性，也必须加this.
+       如何使用: 访问器属性的用法和普通属性的用法完全一样。
+         只不过: 获取访问器属性值时，自动调用get方法，实际获得的是受保护的隐藏属性的值
+                修改访问器属性值时，自动调用set方法，自动将新值传给val，
+                经过验证才，实际保存到受保护的隐藏属性中。
+   内部属性: 不可用.访问的属性: __proto__
+   防篡改: 防止在对象创建后，修改对象的结构/内容
+  3个级别:
+  1. 防扩展: 禁止给对象添加任何新属性
+    Object.preventExtensions(obj);
+  2. 密封: seal 在防扩展基础上，再禁止删除现有属性
+    Object.seal(obj)
+    相当于将所有属性的configurable特性都改为false
+  3. 冻结: 禁止对对象做任何修改(包括结构和值)
+    Object.freeze(obj);
+    三件事: 1. 禁止扩展
+           2. 修改所有属性的configurable为false
+           3. 修改所有属性的writable为false
+</code></pre><p>数组API: 3组</p>
+<pre><code> 1. 判断: 判断数组中的元素是否符合要求:
+   every: 判断数组中的元素是否*都*符合要求:
+     如何: var bool=arr.every(function(val,i,arr){
+            //val, 当前元素值
+            //i, 当前位置
+            //arr, 当前数组
+            return 判断条件
+          })
+   some: 判断数组中是否*包含*符合要求的元素:
+ 2. 遍历: 对每个元素执行相同操作
+   forEach: 对原数组中每个元素执行相同操作
+          直接修改原数组
+     arr.forEach(function(val,i,arr){
+       arr[i]=新值;
+     })
+   map: 取出原数组中每个元素，执行相同操作后，放入一个新数组中返回
+          不修改原数组，仅返回新数组
+     var 新数组=arr.map(function(val,i,arr){
+       return 新值;
+     });
+ 3. 过滤和汇总:
+   过滤: 筛选出原数组中符合条件的元素组成新数组。
+         原数组不变。
+     var subArr=arr.filter(function(val,i,arr){
+       return 判断条件
+     })
+   汇总: 将数组中每个元素的值，汇总成一个最终结果
+     返回值: 一个汇总结果
+     var result=arr.reduce(function(prev,val,i,arr){
+       return prev+val;//累加
+     },base);
+  问题: 仅简化了代码，未提高程序的性能
+       所有遍历API中使用的都是for循环遍历每个元素
+
+Object.create方法: 直接用父对象创建子对象，并扩展子对象的自有属性:
+  何时: 如果只有父对象，也想创建子对象时
+  如何:  var child=Object.create(father,{
+           新属性:{四大特性},
+              ... : ...
+         });
+</code></pre><p>call/apply/bind: 替换函数中不想要的this</p>
+<pre><code>  call/apply : 临时替换函数中的this
+   差别: call，要求传入函数的参数必须单独传入
+        apply, 要求传入函数的参数必须放入数组中整体传入。apply会将数组打散为单个参数值分别传入
+  强调: call/apply相当于调用函数，立刻执行。
+  bind: 永久绑定函数中的this
+   3件事: 1. 创建一个和原函数功能完全一样的新函数
+          2. 将新函数中的this永久绑定为指定对象
+          3. 将新函数中的部分固定参数提前永久绑定
+   强调: bind绑定在新函数中的this，无法被call/apply再替换。
+
+  总结: 如果临时调用一个函数，立刻执行时——call/apply
+        如果创建一个函数提前绑定this时，不一定立刻执行时——bind
+
+严格模式:
+  1. 禁止给未声明的变量赋值
+  2. 将静默失败升级为错误
+</code></pre><p>ES6: 模板字符串: 简化字符串拼接</p>
+<pre><code>何时: 只要一个字符串需要动态拼接而成时
+如何: 反引号
+let: 解决声明提前的问题
+何时: 今后只要声明一个变量，首选let
+特点: 2个:
+  1. let会将变量的作用域，限制在一个块内部
+      ——增加了块级作用域
+  2. let之前不允许再出现未声明的同名变量
+      ——避免了声明提前
+</code></pre><p>箭头函数: 简化所有回调函数:</p>
+<pre><code>如何:
+  1. 去掉function，在()和{}之间加=&gt;
+  2. 更简化:
+    如果只有一个参数，可省略()
+      如果没有参数，必须保留()
+    如果函数体只有一句话，可省略{}
+      如果函数体只有一句话，且是return，可省了{}和return
+
+强调: 箭头函数简写后，函数中的this和外部this一致了
+  所以: 当回调函数内外的this不相同时，不能使用箭头函数简化。
+  反之: 如果希望函数内外公用一个this时，就可用箭头函数简化回调函数。
+</code></pre><p>for…of: 简化普通for循环遍历:</p>
+<pre><code>for(var i=0;i&lt;arr.length;i++){
+  arr[i] //当前元素值
+}
+for(var val of arr){
+  val //当前元素值
+}
+问题1: 仅适用于读取元素值的情况，不能修改原数组元素。
+问题2: 只能遍历数字下标的索引数组和类数组对象。不能遍历关联数组中的元素值。
+</code></pre><p>class: 简化: 封装,继承,多态</p>
+<pre><code>创建一个类型:
+  1. 用class结构包裹构造函数和原型对象方法, 将类型名定义在class后
+  2. 构造函数的function 函数名，改为constructor
+  3. 所有原型方法省略&quot;类型.prototype&quot;和&quot;=function&quot;
+两种类型间的继承:
+  1. 不再需要Object.setPrototype
+     而是class 子类型 extends 父类型
+  2. 借用构造函数不再用call/apply，而用super(...)
+     其中super中省略this
+</code></pre>
+                
+<p class="pink-link-context">
+    <a href="/2017/07/22/Zeptojs/" rel="next" title="Zetpojs基础知识">
+    上一篇：Zetpojs基础知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/bootStrap/" rel="next" title="bootStrap基础知识">
+    下一篇：bootStrap基础知识
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

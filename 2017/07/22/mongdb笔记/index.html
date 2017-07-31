@@ -172,7 +172,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/学习笔记/">
-                    学习笔记 <span class="right">19 篇</span></a>
+                    学习笔记 <span class="right">20 篇</span></a>
                 </a>
             </li>
 
@@ -299,10 +299,12 @@
 <pre><code>db.persons.update({name:&quot;uspcat&quot;},{$set:{name:&quot;uspcat1&quot;}})
 var p=db.persons.findOne();
 db.persons.update(p,{name:&quot;uspcat&quot;})
-</code></pre><p> 8、删除文档中的数据<br>    db.[name].remove({})<br>    db.persons.remove({name:”uspcat”})</p>
-<p> 9、增加一条数据<br>    db.persons.insert({})</p>
-<p> 10、删除数据集合<br>    db.[].drop()</p>
-<p> 11、删除数据库<br>    db.dropDatabase</p>
+</code></pre><p> 8、删除文档中的数据</p>
+<pre><code>db.[name].remove({})
+db.persons.remove({name:&quot;uspcat&quot;})
+</code></pre><p> 9、增加一条数据<br>        db.persons.insert({})</p>
+<p> 10、删除数据集合<br>        db.[].drop()</p>
+<p> 11、删除数据库<br>        db.dropDatabase</p>
 <p>12、查看帮助</p>
 <pre><code>db.help
 db.persons.help
@@ -836,16 +838,16 @@ db.persons.find({},{name:1,age:1,country:1,_id:0})
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/js面试题/" rel="next" title="javaScript面试题">
-    上一篇：javaScript面试题
+    <a href="/2017/07/22/javaScript/" rel="next" title="javaScript基础知识">
+    上一篇：javaScript基础知识
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/react/" rel="next" title="react基础知识">
-    下一篇：react基础知识
+    <a href="/2017/07/22/javaScrtip算法题/" rel="next" title="javaScript算法题">
+    下一篇：javaScript算法题
   </a>
 </p>
 
