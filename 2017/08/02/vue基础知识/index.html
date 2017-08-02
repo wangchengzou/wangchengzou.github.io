@@ -7,7 +7,7 @@
 
     
 
-    <title>Angular | 千帆渡</title>
+    <title>vue基础知识 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="vue基础知识"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -217,30 +217,304 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
 
         
-            <a class="breadcrumb" href="/tags/Angular/">Angular</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>vue基础知识</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2017-08-02T07:21:52.000Z"><a href="/2017/08/02/vue基础知识/">2017-08-02</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/07/22/Angular/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                Angular基础知识
-            </a>
+            <a href="/tags/vue/" class="chip pink lighten-1">vue</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>一、Vue介绍</p>
+<pre><code>vuejs.com
+github.com/vuejs/awesome-vue
+//列举了和vue先关的官方和第三方用的比较多的资源
+what？VueJS是国内的开发者尤雨溪开发的js的框架
+when？ 实现UI层的渐进式的框架
+从最简单的数据处理，到数据交互，到DOM操作，到路由处理等，VueJS都有完整的解决方案
+why？
+学习曲线比较缓和
+Vue借鉴了Angular的指令、React中组件和props等优点进行设计
+Vue提供了全套的解决方案
+
+how？
+两种开发模式：
+1、CLI
+# 全局安装 vue-cli
+$ npm install --global vue-cli
+# 创建一个基于 webpack 模板的新项目
+$ vue init webpack my-project
+# 安装依赖，走你
+$ cd my-project
+$ npm install
+$ npm run dev
+
+2、引入js文件
+直接下载，引入js文件即可
+</code></pre><p>Vue所支持的指令</p>
+<pre><code>选择：
+v-if v-else v-else-if
+
+循环：
+v-for
+
+显示：
+v-show
+
+绑定属性：
+v-bind
+在vue中 绑定html属性，必须使用v-bind
+缩写的形式： v-bind:src --&gt; :src
+
+双向数据绑定：
+v-model 修饰符：.lazy .number .trim
+&lt;input    type=&apos;number&apos; v-model.number=&apos;num1&apos;/&gt;
+
+绑定事件：
+v-on:click=&quot;handleClick&quot;
+缩写形式： @click=&quot;&quot;
+</code></pre><p>自定义指令</p>
+<pre><code>3个钩子函数：
+bind：绑定
+update：更新
+unbind：解绑
+</code></pre><p>过滤器</p>
+<pre><code>作用：数据的处理
+自从Vue2.0之后，就已经自带的过滤取消，不再支持，用户要想使用，有两种方法：
+①https://github.com/wy-ei/vue-filter
+②自定义过滤器
+
+像ng，通过| 管道符号，支持多重过滤，而且支持给过滤器传参
+过滤器的本质就是一个函数！
+①自定义过滤器创建
+在Vue实例的filters属性中指定：
+currency:function(value,arg1,arg2){
+    return &apos;处理后的数据&apos;
+}
+②自定义过滤器使用
+依然是管道符号，只有传参方式变了：
+{{ price | currency('￥','@')}}
+</code></pre><p>计算属性</p>
+<pre><code>计算属性其实是一个方法，定义在computed属性中的方法。
+计算属性的优势：
+①计算属性的方法和methods中的方法实现的功能是一样的，但是由于计算属性是有计算缓存的，
+    可以让更新更高效
+②让代码更方便进行维护
+
+什么时候需要使用计算属性？
+方法所依赖的数据，性能开销比较大，适合用计算属性，正常情况，在methods定义方法也是可以的。
+</code></pre><p>监听属性</p>
+<pre><code>watch：{
+kw:function(newValue,oldValue){}
+kw2:function(newValue,oldValue){}
+}
+</code></pre><p>vue中生命周期</p>
+<pre><code>create、mount、update、destroy
+每个阶段都对应着有处理函数：
+
+beforeCreate
+created
+beforeMount
+mounted
+beforeUpdate
+updated
+beforeDestroy
+destroyed
+</code></pre><p>组件</p>
+<pre><code>①React
+在React中组件的创建和使用：
+var MyComponent = React.createClass({
+    componentWillMount:func,
+    getInitialState:func,
+    handleCLick:
+    render:function(){}
+})
+
+&lt;MyComponent&gt;&lt;/MyComponent&gt;
+
+②Vue
+Vue.component(&apos;my-component&apos;,{
+    template:
+})    data:...
+&lt;my-component&gt;&lt;/my-component&gt;
+
+组件命名：建议通过烤串式的命名方式（中间有-连接起来）
+</code></pre><p>复合组件</p>
+<pre><code>全局组件可以在父模板中的任何一个元素（组件）去使用，
+局部组件只能够用在父模板中。
+
+比如：局部组件 item，全局组件 my-list,my-item
+
+可以在my-list中调用my-item，但是不可以调用item（局部组件）
+
+当将局部组件或者全局组件放在一起构成的组件称之为复合组件。
+MVVM：Model+View+ViewModel
+MVC：Model+View+Controller
+</code></pre><p>父组件给子组件传值</p>
+<pre><code>props down
+步骤：
+①在创建子组件 指定属性，把要传递的值给属性
+&lt;son name=&apos;zhangsan&apos;&gt;&lt;/son&gt;
+②在子组件内部声明props属性
+props:[&apos;name&apos;]
+//props数组中的元素就是属性的名称，在组件创建完成之后，只要是通过该属性传值了，
+    就可以直接在props的元素中拿到传递过来的数据
+
+注意事项：
+1、在组件中，data属性必须是一个带有返回值而且返回值是对象的方法
+2、如果在通过属性传值时，值是会变化，通过v-bind指令将变量绑定到属性
+&lt;son v-bind:name=&apos;kw&apos;&gt;&lt;/son&gt;
+&lt;son :name=&apos;kw&apos;&gt;&lt;/son&gt;
+</code></pre><p>子组件和父组件通信</p>
+<pre><code>events up
+步骤：
+要想通过事件传值，要约定事件的名称：toFather
+①在调用子组件时 绑定自定义的事件
+&lt;son @toFather=&quot;&quot;&gt;&lt;/son&gt;
+②在子组件中触发自定义的事件，并传值
+this.$emit(&apos;事件的名称&apos;,&apos;传递的数据&apos;)
+this.$emit(&apos;toFather&apos;,123);
+</code></pre><p>ref</p>
+<pre><code>父组件操作子组件：
+&lt;子组件 ref=&apos;名称&apos;&gt;&lt;/子组件&gt;
+在父组件中可以通过:this.$refs.名称
+(react: this.refs.名称)
+
+子组件操作父组件：
+this.$parent.属性或者方法
+</code></pre><p>兄弟组件之间通信</p>
+<pre><code>借助于事件
+var bus = new Vue()
+this.$emit()
+this.$on()
+</code></pre><p>angularJs 多个控制器通信：</p>
+<pre><code>①$rootScope
+②借助于控制器之间的嵌套
+③事件 $scope.$on $scope.$broadcast $scope.$emit
+④借助于service
+
+React 组件之间的通信：
+①借助于props 传值 this.props
+②借助于props传递方法
+</code></pre><p>vue-router 路由</p>
+<pre><code>ngRoute
+①引入对应的angular-router.js 指定ngRoute
+②ngView创建一个盛放代码片段的容器
+③路由词典
+app.config(function($routeProvider){
+$routeProvider.when()
+.otherwise
+})
+跳转： $location.path a href=&apos;#/myDetail&apos;
+传参： ①发送接收 ②配置接收方路由 /myDetail --&gt;/myDetail/:id ③$routeParams
+</code></pre><p>ui-router:支持代码片段的嵌套</p>
+<pre><code>①引入对应的js文件，ionic [&apos;ui.router&apos;]
+②uiView
+③配置状态
+$stateProvder.state()
+$urlRouterProvider.otherwise
+跳转：$state.go ui-sref a
+传参：①发送接收 ②配置接收方状态对应的url ③$stateParams
+</code></pre><p>vue-router</p>
+<pre><code>①引入对应的vue-router.js
+②指定容器
+&lt;router-view&gt;&lt;/router-view&gt;
+③配置路由词典
+3.1 定义一个对象数组
+每一个对象包含两个属性：path component
+var myRoutes=[{path:&apos;&apos;,component:}]
+3.2 创建VueRouter对象（路由词典）
+var myRouter= new VueRouter({
+    routes:myRoutes=
+})
+3.3 在Vue的实例中，指定router属性为myRouter
+
+跳转：
+&lt;router-link to=&apos;/myMain&apos;&gt;&lt;/router-link&gt;
+this.$router.push(&apos;/myLogin&apos;)
+a href=&apos;#/myLogin&apos;
+
+传参：
+①发送 、接受
+②配置接收方的路由
+③接受参数
+
+从注册页面 跳转到 主页面 并发送数据123：
+①发送：register 接受：main
+②配置main的路由
+{path:&apos;/myMain&apos;,com..}--&gt;
+{path:&apos;/myMain/:id&apos;,com..}
+③在组件生命周期钩子函数中读取传递过来的参数
+mounted:function(){
+    var result= this.$route.params.id
+}
+④ href=&apos;#/myMain/123&apos;
+router-link to=&apos;/myMain/123&apos;
+this.$router.push(&apos;/myMain/123&apos;)
+</code></pre><p>vue-http 网络请求</p>
+<pre><code>this.$http.get/post/ajax().then(function(response){})
+</code></pre>
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/22/hexo/" rel="next" title="hexo使用基础知识">
+    下一篇：hexo使用基础知识
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
