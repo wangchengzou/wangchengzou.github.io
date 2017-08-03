@@ -7,7 +7,7 @@
 
     
 
-    <title>Tags | 千帆渡</title>
+    <title>element-ui响应式布局 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="Tags"/>
+    <meta property="og:title" content="element-ui响应式布局"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -222,6 +222,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
 
         
 
@@ -237,12 +241,12 @@
             <div class="article-title">
                 
     
-        <h1>Tags</h1>
+        <h1>element-ui响应式布局</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-22T13:15:45.412Z"><a href="/tags/index.html">2017-07-22</a></time>
+            <time class="pink-link-context" datetime="2017-08-03T14:38:34.000Z"><a href="/2017/08/03/element-ui响应式面壁/">2017-08-03</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -250,6 +254,14 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/vue/" class="chip pink lighten-1">vue</a>
+        
+            <a href="/tags/element-ui/" class="chip pink lighten-1">element-ui</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
     
@@ -257,9 +269,295 @@
 
 
             <div class="entry pink-link-context">
-                
+                <p>Layout布局</p>
+<p>1、创建布局</p>
+<pre><code>通过Col组件的:span属性调整Layout布局，分为24栏。
+    el-row&gt;
+      &lt;el-col :span=&quot;24&quot;&gt;
+        &lt;div class=&quot;grid-content bg-purple-dark&quot;&gt;&lt;/div&gt;
+      &lt;/el-col&gt;
+    &lt;/el-row&gt;
+</code></pre><p>2、分栏间隔</p>
+<pre><code>通过Row组件的:gutter属性来调整布局之间的宽度。
+&lt;el-row :gutter=&quot;20&quot;&gt;
+  &lt;el-col :span=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :span=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+&lt;/el-row&gt;
+</code></pre><p>3、分栏漂移</p>
+<pre><code>通过Col组件的:offset属性调整栅格的偏移位置（每次1格/24格）。
+&lt;el-row :gutter=&quot;20&quot;&gt;
+  &lt;el-col :span=&quot;6&quot; :offset=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :span=&quot;6&quot; :offset=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+&lt;/el-row&gt;
+</code></pre><p>4、对齐方式</p>
+<pre><code>通过Row组件的type=&quot;flex&quot;启动flex布局，再通过Row组件的justify属性调整排版方式，属性值分别有
+start 居前（默认）
+center 居中
+end 居后
+space-between 分布自适应（两边–中间，两边没有空隙）
+around （中间–两边，两边会有空隙）
+&lt;el-row type=&quot;flex&quot; class=&quot;row-bg&quot; justify=&quot;center&quot;&gt;
+  &lt;el-col :span=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :span=&quot;6&quot;&gt;&lt;div class=&quot;grid-content bg-purple-light&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+&lt;/el-row&gt;
+</code></pre><p>5、响应式布局</p>
+<pre><code>参考bootstrap的响应式，预设四个尺寸
+xs &lt;768px
+sm ≥768px
+md ≥992
+lg ≥1200
+&lt;el-row :gutter=&quot;10&quot;&gt;
+  &lt;el-col :xs=&quot;8&quot; :sm=&quot;6&quot; :md=&quot;4&quot; :lg=&quot;3&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :xs=&quot;4&quot; :sm=&quot;6&quot; :md=&quot;8&quot; :lg=&quot;9&quot;&gt;&lt;div class=&quot;grid-content bg-purple-light&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :xs=&quot;4&quot; :sm=&quot;6&quot; :md=&quot;8&quot; :lg=&quot;9&quot;&gt;&lt;div class=&quot;grid-content bg-purple&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+  &lt;el-col :xs=&quot;8&quot; :sm=&quot;6&quot; :md=&quot;4&quot; :lg=&quot;3&quot;&gt;&lt;div class=&quot;grid-content bg-purple-light&quot;&gt;&lt;/div&gt;&lt;/el-col&gt;
+&lt;/el-row&gt;
+</code></pre><p>ICON图标</p>
+<pre><code>今后可以使用&lt;i&gt;来做图标，给其class添加el-icon-iconName即可。
+可以在&lt;button&gt;上添加icon属性。
+
+&lt;i class=&quot;el-icon-edit&quot;&gt;&lt;/i&gt;
+&lt;i class=&quot;el-icon-share&quot;&gt;&lt;/i&gt;
+&lt;i class=&quot;el-icon-delete&quot;&gt;&lt;/i&gt;
+&lt;el-button type=&quot;primary&quot; icon=&quot;search&quot;&gt;搜索&lt;/el-button&gt;
+</code></pre><p>Button图标</p>
+<p>1、主题风格</p>
+<pre><code>default
+primary 蓝色
+text 文字蓝色无边框
+&lt;el-button&gt;默认按钮&lt;/el-button&gt;
+&lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;
+&lt;el-button type=&quot;text&quot;&gt;文字按钮&lt;/el-button&gt;
+</code></pre><p>2、禁用状态</p>
+<pre><code>通过修改:disabled的boolean值true,false来控制按钮是否禁用。
+&lt;el-button :plain=&quot;true&quot; :disabled=&quot;true&quot;&gt;主要按钮&lt;/el-button&gt;
+&lt;el-button type=&quot;primary&quot; :disabled=&quot;true&quot;&gt;主要按钮&lt;/el-button&gt;
+&lt;el-button type=&quot;text&quot; :disabled=&quot;true&quot;&gt;文字按钮&lt;/el-button&gt;
+</code></pre><p>3、颜色暗示</p>
+<pre><code>默认按钮，通过type的值来控制
+朴素按钮，hover显示颜色 ，通过plain的boolean值来控制
+</code></pre><p>4、图标按钮</p>
+<pre><code>按钮不添加字，设置icon属性即可
+&lt;el-button type=&quot;primary&quot; icon=&quot;edit&quot;&gt;&lt;/el-button&gt;
+
+按钮添加字，图标居按钮文字左侧
+&lt;el-button type=&quot;primary&quot; icon=&quot;search&quot;&gt;搜索&lt;/el-button&gt;
+
+可以在&lt;button&gt;文字右侧添加&lt;i&gt;标签，图标居按钮文字右侧
+&lt;el-button type=&quot;primary&quot;&gt;上传
+&lt;i class=&quot;el-icon-upload el-icon--right&quot;&gt;&lt;/i&gt;
+&lt;/el-button&gt;
+</code></pre><p>5、加载中</p>
+<pre><code>设置loading属性为true即可
+&lt;el-button type=&quot;primary&quot; :loading=&quot;true&quot;&gt;加载中&lt;/el-button&gt;
+</code></pre><p>6、按钮尺寸</p>
+<pre><code>设置size属性来配置
+large 大
+正常
+small 小
+mini 超小
+其他
+autofocus：是否默认对焦，boolean
+native-type：原生type，string（button,submit,reset）
+</code></pre><p>Radio单选框(label前面到底加不加：冒号)</p>
+<p>1、基本用法</p>
+<pre><code>v-model属性用来绑定变量
+label用来赋值（想要选中该单选框，label的值必须等于v-model绑定的变量值，Number/String）
+&lt;template&gt;
+  &lt;el-radio class=&quot;radio&quot; v-model=&quot;radio&quot; label=&quot;1&quot;&gt;备选项&lt;/el-radio&gt;
+  &lt;el-radio class=&quot;radio&quot; v-model=&quot;radio&quot; label=&quot;2&quot;&gt;备选项&lt;/el-radio&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        radio: &apos;1&apos;
+      };
+    }
+  }
+&lt;/script&gt;
+</code></pre><p>2、禁用状态</p>
+<pre><code>设置disableed的boolean值为true
+&lt;template&gt;
+  &lt;el-radio disabled v-model=&quot;radio1&quot; label=&quot;禁用&quot;&gt;备选项&lt;/el-radio&gt;
+  &lt;el-radio disabled v-model=&quot;radio1&quot; label=&quot;选中且禁用&quot;&gt;备选项&lt;/el-radio&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        radio1: &apos;选中且禁用&apos;//此处变量值等于label变量值
+      };
+    }
+  }
+&lt;/script&gt;
+</code></pre><p>3、单选框组</p>
+<pre><code>被&lt;el-radio-group&gt; &lt;/el-radio-group&gt; 包含即可。
+只需要在&lt;el-radio-group&gt;中绑定v-model，
+在&lt;el-radio&gt;中设置:label即可。
+（提供可一个change方法响应变化，会传入一个value值）
+
+&lt;template&gt;
+  &lt;el-radio-group v-model=&quot;radio2&quot;&gt;
+    &lt;el-radio :label=&quot;3&quot;&gt;备选项&lt;/el-radio&gt;
+    &lt;el-radio :label=&quot;6&quot;&gt;备选项&lt;/el-radio&gt;
+    &lt;el-radio :label=&quot;9&quot;&gt;备选项&lt;/el-radio&gt;
+  &lt;/el-radio-group&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        radio2: 3
+      };
+    }
+  }
+&lt;/script&gt;
+</code></pre><p>4、按钮组（单选）</p>
+<pre><code>个人炒鸡喜欢
+lable就是显示的值
+在按钮组当中添加&lt;el-radio-button&gt;就可以实现，
+并且支持对size属性设置large和small两个属性，不设置为默认。
+
+&lt;el-radio-group v-model=&quot;radio5&quot; :disabled=&quot;true&quot;&gt;
+    &lt;el-radio-button label=&quot;上海&quot; :disabled=&quot;true&quot;&gt;
+    &lt;/el-radio-button&gt;
+    &lt;el-radio-button label=&quot;北京&quot;&gt;&lt;/el-radio-button&gt;
+    &lt;el-radio-button label=&quot;广州&quot;&gt;&lt;/el-radio-button&gt;
+    &lt;el-radio-button label=&quot;深圳&quot;&gt;&lt;/el-radio-button&gt;
+  &lt;/el-radio-group&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        radio5: &apos;上海&apos;
+      };
+    }
+  }
+&lt;/script&gt;
+</code></pre><p>CheckBox单选框<br>1、基础用法</p>
+<pre><code>设置v-model属性绑定变量。
+&lt;template&gt;
+  &lt;!-- `checked` 为 true 或 false --&gt;
+  &lt;el-checkbox v-model=&quot;checked&quot;&gt;备选项&lt;/el-checkbox&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        checked: true
+      };
+    }
+  };
+&lt;/script&gt;
+</code></pre><p>2、禁用状态</p>
+<pre><code>设置disabled属性即可。
+&lt;el-checkbox v-model=&quot;checked2&quot; disabled&gt;备选项&lt;/el-checkbox&gt;
+</code></pre><p>CheckBox复选框<br>  1、基本用法</p>
+<pre><code>按钮是单一时，绑定v-model变量，类型为boolean值。
+&lt;template&gt;
+  &lt;!-- `checked` 为 true 或 false --&gt;
+  &lt;el-checkbox v-model=&quot;checked&quot;&gt;备选项&lt;/el-checkbox&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        checked: true
+      };
+    }
+  };
+&lt;/script&gt;
+</code></pre><p>  2、禁用状态</p>
+<pre><code>设置其disabled属性即可。
+&lt;template&gt;
+  &lt;el-checkbox v-model=&quot;checked1&quot; disabled&gt;备选项1&lt;/el-checkbox&gt;
+  &lt;el-checkbox v-model=&quot;checked2&quot; disabled&gt;备选项&lt;/el-checkbox&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        checked1: false,
+        checked2: true
+      };
+    }
+  };
+&lt;/script&gt;
+</code></pre><p>  3、多选框组</p>
+<pre><code>1.使用&lt;checkbox-group&gt; &lt;/checkbox-group&gt;包裹即可，v-model的值绑定为Array类型变量。
+在&lt;el-checkbox&gt;中的label属性为checkbox对应的值。
+（标签无内容，该属性充当checkbox按钮后的介绍）
+
+label与数组中的元素值相对应。存在则为选中，不存在则不选中。
+&lt;template&gt;
+  &lt;el-checkbox-group v-model=&quot;checkList&quot;&gt;
+    &lt;el-checkbox label=&quot;复选框 A&quot;&gt;&lt;/el-checkbox&gt;
+    &lt;el-checkbox label=&quot;复选框 B&quot;&gt;&lt;/el-checkbox&gt;
+    &lt;el-checkbox label=&quot;复选框 C&quot;&gt;&lt;/el-checkbox&gt;
+    &lt;el-checkbox label=&quot;禁用&quot; disabled&gt;&lt;/el-checkbox&gt;
+    &lt;el-checkbox label=&quot;选中且禁用&quot; disabled&gt;&lt;/el-checkbox&gt;
+  &lt;/el-checkbox-group&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        checkList: [&apos;选中且禁用&apos;,&apos;复选框 A&apos;]
+      };
+    }
+  };
+&lt;/script&gt;
+</code></pre><p>  4、indeterminate状态</p>
+<pre><code>indeterminate属性只控制样式变化。
+@change当绑定值变化时，触发的事件。
+&lt;template&gt;
+  &lt;el-checkbox :indeterminate=&quot;isIndeterminate&quot;
+      v-model=&quot;checkAll&quot; @change=&quot;handleCheckAllChange&quot;&gt;全选&lt;/el-checkbox&gt;
+  &lt;div style=&quot;margin: 15px 0;&quot;&gt;&lt;/div&gt;
+  &lt;el-checkbox-group v-model=&quot;checkedCities&quot; @change=&quot;handleCheckedCitiesChange&quot;&gt;
+    &lt;el-checkbox v-for=&quot;city in cities&quot; :label=&quot;city&quot;&gt;{{city}}&lt;/el-checkbox&gt;
+  &lt;/el-checkbox-group&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  const cityOptions = [&apos;上海&apos;, &apos;北京&apos;, &apos;广州&apos;, &apos;深圳&apos;];
+  export default {
+    data() {
+      return {
+        checkAll: true,
+        checkedCities: [&apos;上海&apos;, &apos;北京&apos;],
+        cities: cityOptions,
+        isIndeterminate: true
+      };
+    },
+    methods: {
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount &gt; 0 &amp;&amp; checkedCount &lt; this.cities.length;
+      }
+    }
+  };
+&lt;/script&gt;
+</code></pre>
                 
 
+
+<p class="pink-link-context">
+    <a href="/2017/08/02/vue基础知识/" rel="next" title="vue基础知识">
+    下一篇：vue基础知识
+  </a>
+</p>
 
 
             </div>
