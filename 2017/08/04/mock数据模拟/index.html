@@ -7,7 +7,7 @@
 
     
 
-    <title>Tags | 千帆渡</title>
+    <title>mock数据模拟 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="Tags"/>
+    <meta property="og:title" content="mock数据模拟"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -222,6 +222,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
 
         
 
@@ -237,12 +241,12 @@
             <div class="article-title">
                 
     
-        <h1>Tags</h1>
+        <h1>mock数据模拟</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-22T13:15:45.412Z"><a href="/tags/index.html">2017-07-22</a></time>
+            <time class="pink-link-context" datetime="2017-08-04T02:53:05.000Z"><a href="/2017/08/04/mock数据模拟/">2017-08-04</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -250,6 +254,14 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/vue/" class="chip pink lighten-1">vue</a>
+        
+            <a href="/tags/mock/" class="chip pink lighten-1">mock</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
     
@@ -257,9 +269,409 @@
 
 
             <div class="entry pink-link-context">
-                
+                <p>实例</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;script src=&quot;http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://mockjs.com/dist/mock.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div&gt;
+    &lt;h1 id=&quot;mockjs&quot;&gt;mockjs&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+    //调用mock方法模拟数据
+    Mock.mock(
+        &apos;http://mockjs&apos;, {
+            &quot;userName&quot; : &apos;@name&apos;,     //模拟名称
+            &quot;age|1-100&quot;:100,          //模拟年龄(1-100)
+            &quot;color&quot;    : &quot;@color&quot;,    //模拟色值
+            &quot;date&quot;     : &quot;@date(&apos;yyyy-MM-dd&apos;)&quot;,  //模拟时间
+            &quot;url&quot;      : &quot;@url()&quot;,     //模拟url
+            &quot;content&quot;  : &quot;@cparagraph()&quot; //模拟文本
+        }
+    );
+
+    //ajax请求
+    $(&quot;#mockjs&quot;).click(function(){
+        $.ajax({
+            url        : &quot;http://mockjs&quot;,    //请求的url地址
+            dataType   : &quot;json&quot;,   //返回格式为json
+            async      : true, //请求是否异步，默认为异步，这也是ajax重要特性
+            data       : {},    //参数值
+            type       : &quot;GET&quot;,   //请求方式
+            beforeSend : function() {
+                //请求前的处理
+            },
+            success: function(req) {
+                //请求成功时处理
+                console.log(req);
+            },
+            complete: function() {
+                //请求完成的处理
+            },
+            error: function() {
+                //请求出错处理
+            }
+        });
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>CommonJs规范</p>
+<pre><code>// 加载Mock.js插件，让前端开发与后端独立
+window.Mock = require(&apos;mockjs&apos;)
+// 加载Mock.mock方法
+window.M = window.Mock.mock;
+// 加载mock.Random方法
+window.R = window.Mock.Random;
+
+console.log(R.email())
+console.log(M({email:&apos;@email&apos;}))
+    // 这种@的方式叫&quot;占位符&quot;。它可以用来直接生成各种数据
+</code></pre><p>Mock.Random 提供的完整方法（占位符）如下：</p>
+<pre><code>Type    Method
+Basic    boolean, natural, integer, float, character, string,
+        range, date, time, datetime, now
+Image    image, dataImage
+Color    color
+Text    paragraph, sentence, word, title, cparagraph, csentence, cword, ctitle
+Name    first, last, name, cfirst, clast, cname
+Web    url, domain, email, ip, tld
+Address    area, region
+Helper    capitalize, upper, lower, pick, shuffle
+Miscellaneous    guid, id
+
+    // 所有@占位符，都是R对象的演变,比如@email就是如下：
+    console.log(R.email())
+
+    // basic：https://github.com/nuysoft/Mock/wiki/Basic
+    console.log(M({boolean:&apos;@boolean&apos;}))
+    console.log(M({natural:&apos;@natural&apos;}))
+    console.log(M({integer:&apos;@integer&apos;}))
+    console.log(M({float:&apos;@float&apos;}))
+    console.log(M({character:&apos;@character&apos;}))
+    console.log(M({range:&apos;@range&apos;}))
+
+    // date:https://github.com/nuysoft/Mock/wiki/Date
+    console.log(M({date:&apos;@date&apos;}))
+    console.log(M({time:&apos;@time&apos;}))
+    console.log(M({datetime:&apos;@datetime&apos;}))
+    console.log(M({now:&apos;@now&apos;}))
+
+    // Image：https://github.com/nuysoft/Mock/wiki/Image
+    console.log(M({image:&quot;@image()&quot;}))
+    console.log(M({image:&quot;@image(60x60)&quot;}))
+    console.log(M({image:&quot;@image(60x60,#000000)&quot;}))
+    console.log(M({image:&quot;@image(&apos;200x100&apos;, &apos;#00405d&apos;, &apos;#FFF&apos;, &apos;Mock.js&apos;)&quot;}))
+    console.log(M({dataImage:&apos;@dataImage&apos;}))
+    console.log(M({dataImage:&quot;@dataImage(&apos;200x100&apos;)&quot;}))
+    console.log(M({dataImage:&quot;@dataImage(&apos;200x100&apos;, &apos;Hello Mock.js!&apos;)&quot;}))
+
+    // color : https://github.com/nuysoft/Mock/wiki/Color
+    console.log(M({color:&apos;@color&apos;}))
+    console.log(M({hex:&apos;@hex&apos;}))
+    console.log(M({rgb:&apos;@rgb&apos;}))
+    console.log(M({rgba:&apos;@rgba&apos;}))
+    console.log(M({hsl:&apos;@hsl&apos;}))
+
+    // text : https://github.com/nuysoft/Mock/wiki/Text
+    console.log(M({paragraph:&apos;@paragraph&apos;}))
+    console.log(M({sentence:&apos;@sentence&apos;}))
+    console.log(M({title:&apos;@title&apos;}))
+    console.log(M({cparagraph:&apos;@cparagraph&apos;}))
+    console.log(M({csentence:&apos;@csentence&apos;}))
+    console.log(M({cword:&apos;@cword&apos;}))
+    console.log(M({ctitle:&apos;@ctitle&apos;}))
+
+    // name : https://github.com/nuysoft/Mock/wiki/Name
+    console.log(M({first:&apos;@first&apos;}))
+    console.log(M({last:&apos;@last&apos;}))
+    console.log(M({name:&apos;@name&apos;}))
+    console.log(M({cfirst:&apos;@cfirst&apos;}))
+    console.log(M({clast:&apos;@clast&apos;}))
+    console.log(M({cname:&apos;@cname&apos;}))
+
+    // Web　：　https://github.com/nuysoft/Mock/wiki/Name
+    console.log(M({url:&apos;@url&apos;}))
+    console.log(M({domain:&apos;@domain&apos;}))
+    console.log(M({email:&apos;@email&apos;}))
+    console.log(M({ip:&apos;@ip&apos;}))
+    console.log(M({tld:&apos;@tld&apos;}))
+
+    // address: https://github.com/nuysoft/Mock/wiki/Name
+    console.log(M({region:&apos;@region&apos;}))
+    console.log(M({province:&apos;@province&apos;}))
+    console.log(M({city:&apos;@city&apos;}))
+    console.log(M({county:&apos;@county&apos;}))
+    console.log(M({zip:&apos;@zip&apos;}))
+
+    // helper Methods : https://github.com/nuysoft/Mock/wiki/Helper
+    console.log(M({capitalize:&apos;@capitalize(`hello`)&apos;}))
+    console.log(M({upper:&apos;@upper(`hello`)&apos;}))
+    console.log(M({lower:&apos;@lower(`HELLO`)&apos;}))
+    console.log(M({pick:&quot;@pick([&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;])&quot;}))
+    console.log(M({shuffle:&quot;@shuffle([&apos;a&apos;, &apos;e&apos;, &apos;i&apos;, &apos;o&apos;, &apos;u&apos;])&quot;}))
+
+    // Miscellaneous: https://github.com/nuysoft/Mock/wiki/Miscellaneous
+    console.log(M({guid:&apos;@guid&apos;}))
+    console.log(M({id:&apos;@id&apos;}))
+    console.log(M({increment:&apos;@increment&apos;}))
+</code></pre><p>概述</p>
+<pre><code>Mock.js实现的功能
+基于 数据模板 生成数据
+基于 HTML模板 生成数据
+拦截并模拟 Ajax请求
+</code></pre><p>用法</p>
+<pre><code>浏览器：
+&lt;!-- （必选）加载 Mock --&gt;
+&lt;script src=&quot;http://mockjs.com/dist/mock.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+// 使用 Mock
+var data = Mock.mock({
+    &apos;list|1-10&apos;: [{
+        &apos;id|+1&apos;: 1
+    }]
+});
+$(&apos;&lt;pre&gt;&apos;).text(JSON.stringify(data, null, 4))
+.appendTo(&apos;body&apos;)
+&lt;/script&gt;
+返回值:
+
+{
+&quot;list&quot;: [
+    {
+        &quot;id&quot;: 1
+    },
+    {
+        &quot;id&quot;: 2
+    },
+    {
+        &quot;id&quot;: 3
+    }
+    ]
+}
+</code></pre><p>JQuery：</p>
+<pre><code>配置模拟数据：
+
+Mock.mock(&apos;http://g.cn&apos;, {
+    &apos;name&apos;     : &apos;@name&apos;,
+    &apos;age|1-100&apos;: 100,
+    &apos;color&apos;    : &apos;@color&apos;
+});
+发送Ajax请求：
+
+$.ajax({
+    url: &apos;http://g.cn&apos;,
+    dataType:&apos;json&apos;
+    }).done(function(data, status, xhr){
+    console.log(
+    JSON.stringify(data, null, 4)
+    )
+})；
+返回数据：
+
+// 结果1
+{
+&quot;name&quot;: &quot;Elizabeth Hall&quot;,
+&quot;age&quot;: 91,
+&quot;color&quot;: &quot;#0e64ea&quot;
+}
+
+// 结果2
+{
+&quot;name&quot;: &quot;Michael Taylor&quot;,
+&quot;age&quot;: 61,
+&quot;color&quot;: &quot;#081086&quot;
+}
+</code></pre><p>Node.js：</p>
+<pre><code>// 安装
+npm install mockjs
+
+// 使用
+var Mock = require(&apos;mockjs&apos;);
+var data = Mock.mock({
+    &apos;list|1-10&apos;: [{
+        &apos;id|+1&apos;: 1
+    }]
+});
+
+console.log(JSON.stringify(data, null, 4))
+</code></pre><p>Angular.js:</p>
+<pre><code>&lt;!-- 引用 --&gt;
+&lt;script src=&quot;http://mockjs.com/dist/mock-min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://cdn.staticfile.org/angular.js/1.3.0-beta.13/angular.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- 兼容angular (mock.js默认不兼容angular，需额外引用兼容包)--&gt;
+&lt;script src=&quot;./src/mock.angular.js&quot;&gt;&lt;/script&gt;
+&lt;!-- 模拟数据 --&gt;
+&lt;script src=&quot;./mockData.js&quot;&gt;&lt;/script&gt;
+&lt;!-- 使用 --&gt;
+&lt;script&gt;
+(function() {
+    (function() {
+        var app;
+        app = angular.module(&apos;app&apos;, []);
+        //使用mockjax方法覆盖Ajax请求
+        Mock.mockjax(app);
+        return app.controller(&apos;appCtrl&apos;, function($scope, $http) {
+            var box;
+            box = $scope.box = [];
+            $scope.get = function() {
+                $http({
+                    url: &apos;http://www.baidu.com&apos;,
+                    method: &apos;POST&apos;,
+                    params: {a: 1},
+                    data  : {b:1}
+                }).success(function(data) {
+                return box.push(data);
+            });
+
+            $http({
+                url: &apos;http://baidu.com&apos;
+                }).success(function(data) {
+                console.log(data);
+                });
+            };
+        return $scope.get();
+        });
+    })();
+
+}).call(this);
+&lt;/script&gt;
+</code></pre><p>mock数据mockData.js:</p>
+<pre><code>Mock.mock(&apos;http://www.baidu.com&apos;, {
+    &apos;name&apos;: &apos;@name()&apos;,
+    &apos;age|1-100&apos;: 100,
+    &apos;color&apos;: &apos;@color&apos;
+});
+</code></pre><p>语法</p>
+<pre><code>Mock.js 的语法规范包括两部分：
+数据模板定义（Data Temaplte Definition，DTD）
+数据占位符定义（Data Placeholder Definition，DPD）
+数据模板定义 DTD
+数据模板中的每个属性由 3 部分构成：属性名、生成规则、属性值：
+
+// 属性名   name
+// 生成规则 rule
+// 属性值   value
+&apos;name|rule&apos;: value
+注意：
+属性名 和 生成规则 之间用 | 分隔。
+生成规则 是可选的。
+生成规则 有 7 种格式：
+&apos;name|min-max&apos;: value
+&apos;name|count&apos;: value
+&apos;name|min-max.dmin-dmax&apos;: value
+&apos;name|min-max.dcount&apos;: value
+&apos;name|count.dmin-dmax&apos;: value
+&apos;name|count.dcount&apos;: value
+&apos;name|+step&apos;: value
+生成规则 的 含义 需要依赖 属性值 才能确定。
+属性值 中可以含有 @占位符。
+属性值 还指定了最终值的初始值和类型。
+</code></pre><p>生成规则和示例：</p>
+<pre><code>1. 属性值是字符串 String
+&apos;name|min-max&apos;: &apos;value&apos; 通过重复 &apos;value&apos; 生成一个字符串，重复次数大于等于 min，小于等于 max。
+&apos;name|count&apos;: &apos;value&apos; 通过重复 &apos;value&apos; 生成一个字符串，重复次数等于 count。
+
+2. 属性值是数字 Number
+&apos;name|+1&apos;: 100 属性值自动加 1，初始值为 100
+&apos;name|1-100&apos;: 100 生成一个大于等于 1、小于等于 100 的整数，属性值 100 只用来确定类型。
+&apos;name|1-100.1-10&apos;: 100 生成一个浮点数，整数部分大于等于 1、小于等于 100，小数部分保留 1 到 10 位。
+    {
+    &apos;number1|1-100.1-10&apos;: 1,
+    &apos;number2|123.1-10&apos;: 1,
+    &apos;number3|123.3&apos;: 1,
+    &apos;number4|123.10&apos;: 1.123
+    }
+    // =&gt;
+    {
+    &quot;number1&quot;: 12.92,
+    &quot;number2&quot;: 123.51,
+    &quot;number3&quot;: 123.777,
+    &quot;number4&quot;: 123.1231091814
+    }
+
+3. 属性值是布尔型 Boolean
+&apos;name|1&apos;: value 随机生成一个布尔值，值为 true 的概率是 1/2，值为 false 的概率是 1/2。
+&apos;name|min-max&apos;: value 随机生成一个布尔值，值为 value 的概率是 min / (min + max)，
+    值为 !value 的概率是 max / (min + max)。
+
+4. 属性值是对象 Object
+&apos;name|min-max&apos;: {} 从属性值 {} 中随机选取 min 到 max 个属性。
+&apos;name|count&apos;: {} 从属性值 {} 中随机选取 count 个属性。
+
+5. 属性值是数组 Array
+&apos;name|1&apos;: [{}, {} ...] 从属性值 [{}, {} ...] 中随机选取 1 个元素，作为最终值。
+&apos;name|min-max&apos;: [{}, {} ...] 通过重复属性值 [{}, {} ...] 生成一个新数组，
+    重复次数大于等于 min，小于等于 max。
+&apos;name|count&apos;: [{}, {} ...] 通过重复属性值 [{}, {} ...] 生成一个新数组，重复次数为 count。
+
+6. 属性值是数组 Function
+&apos;name&apos;: function(){} 执行函数 function(){}，取其返回值作为最终的属性值，上下文为 &apos;name&apos; 所在的对象。
+</code></pre><p>数据占位符定义 DPD</p>
+<pre><code>占位符 只是在属性值字符串中占个位置，并不出现在最终的属性值中。占位符 的格式为：
+@占位符
+@占位符(参数 [, 参数])
+
+注意：
+用 @ 来标识其后的字符串是 占位符。
+占位符 引用的是 Mock.Random 中的方法。
+通过 Mock.Random.extend() 来扩展自定义占位符。
+占位符 也可以引用 数据模板 中的属性。
+占位符 会优先引用 数据模板 中的属性
+{
+ name: {
+ first: &apos;@FIRST&apos;,
+ middle: &apos;@FIRST&apos;,
+ last: &apos;@LAST&apos;,
+ full: &apos;@first @middle @last&apos;
+    }
+}
+// =&gt;
+{
+ &quot;name&quot;: {
+ &quot;first&quot;: &quot;Charles&quot;,
+ &quot;middle&quot;: &quot;Brenda&quot;,
+ &quot;last&quot;: &quot;Lopez&quot;,
+ &quot;full&quot;: &quot;Charles Brenda Lopez&quot;
+    }
+}
+</code></pre><p>常用方法</p>
+<pre><code>Mock.mock( rurl?, rtype?, template|function(options) )
+根据数据模板生成模拟数据。
+
+参数的含义和默认值如下所示：
+参数 rurl：可选。表示需要拦截的 URL，可以是 URL 字符串或 URL 正则。例如 /\/domain\/list.json/、&apos;/domian/list.json&apos;。
+参数 rtype：可选。表示需要拦截的 Ajax 请求类型。例如 GET、POST、PUT、DELETE 等。
+参数 template：可选。表示数据模板，可以是对象或字符串。例如 { &apos;data|1-10&apos;:[{}] }、&apos;@EMAIL&apos;。
+参数 function(options)：可选。表示用于生成响应数据的函数。
+参数 options：指向本次请求的 Ajax 选项集。
+Mock.mockjax(library)
+覆盖（拦截） Ajax 请求，目前内置支持 jQuery、Zepto、KISSY。
+</code></pre><p>Mock.Random</p>
+<pre><code>Mock.Random 是一个工具类，用于生成各种随机数据。
+Mock.Random 的方法在数据模板中称为“占位符”，
+引用格式为 @占位符(参数 [, 参数]) 。
+
+Mock.tpl(input, options, helpers, partials)
+基于 Handlebars、Mustache 的 HTML 模板生成模拟数据。
+</code></pre>
                 
 
+
+<p class="pink-link-context">
+    <a href="/2017/08/03/element-ui响应式面壁/" rel="next" title="element-ui响应式布局">
+    下一篇：element-ui响应式布局
+  </a>
+</p>
 
 
             </div>
