@@ -322,7 +322,8 @@ js中错误对象的类型: 6种
     var fun=new Function(a,b,&quot;return a-b&quot;); X
     var fun=new Function(&quot;a&quot;,&quot;b&quot;,&quot;return a-b&quot;);
 </code></pre><p>重载: overload</p>
-<pre><code>什么是: 相同函数名，不同参数列表的多个函数，在调用时可自动根据传入参数的不同，选择对应的函数执行。
+<pre><code>什么是: 相同函数名，不同参数列表的多个函数，
+       在调用时可自动根据传入参数的不同，选择对应的函数执行。
 为什么: 减少API的名字，减轻调用者的负担
 何时: 只要一项任务，可能根据不同的参数执行不同的逻辑时。
 问题: js语法默认不支持重载
@@ -380,7 +381,8 @@ js中错误对象的类型: 6种
    3. 调用函数时
       创建本次函数调用时使用的AO对象
       在AO对象中添加函数的局部变量
-      设置AO的隐藏属性parent 指向函数的祖籍作用域对象。——执行时，如果AO中没有的变量可延parnet向祖籍作用域对象找。
+      设置AO的隐藏属性parent 指向函数的祖籍作用域对象。
+      ——执行时，如果AO中没有的变量可延parnet向祖籍作用域对象找。
    4. 函数调用后
       函数作用域对象AO释放
         导致AO中局部变量释放
@@ -483,7 +485,8 @@ js中对象的本质，就是关联数组。
       2. 放在原型对象中的成员，所有子对象共用
     如何访问构造函数的原型对象:
       构造函数.prototype.成员名=值/function(){...}
-总结: 今后，只要希望所有子对象共有的成员，都要添加到构造函数的原型对象中。而不应该放在构造函数内。
+总结: 今后，只要希望所有子对象共有的成员，都要添加到构造函数的原型对象中。
+      而不应该放在构造函数内。
 
 共有属性和自有属性:
   共有属性: 添加到原型对象中，所有子对象共有的属性
@@ -716,16 +719,16 @@ for(var val of arr){
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/git/" rel="next" title="git使用基础知识">
-    上一篇：git使用基础知识
+    <a href="/2017/07/22/http状态码/" rel="next" title="http状态码总表">
+    上一篇：http状态码总表
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/javaScript高级面试题/" rel="next" title="js高级">
-    下一篇：js高级
+    <a href="/2017/07/22/javaScript/" rel="next" title="javaScript基础知识">
+    下一篇：javaScript基础知识
   </a>
 </p>
 

@@ -340,7 +340,8 @@ HTML中使用jQuery，只需要使用SCRIPT标签引入jquery-*.js即可，会�
 (7)jQuery对象方法的返回值一般还是当前选定的类数组对象，可以实现“链式调用”
 </code></pre><p>6、jQuery函数第一部分：DOM操作函数 —— 查找元素</p>
 <pre><code>$( &apos;选择器&apos; )
-jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；同时还扩展了一些新的选择器语法。
+jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；
+同时还扩展了一些新的选择器语法。
 面试题：jQuery中的哪些选择器是CSS中没有的？ —— 执行效率较低
 </code></pre><p>7、 第一组：基本选择器   —— 重点</p>
 <pre><code>(1)#id
@@ -355,7 +356,8 @@ jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览�
 (4)*
   练习：单击button#bt3后，让所有的元素的box-sizing变为border-box，所有元素的margin变为0
 (5)div, p, #c3
-  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，添加事件监听，点击后打印出当前系统时间
+  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，
+  添加事件监听，点击后打印出当前系统时间
 </code></pre><p>8、第二组：层级选择器       —— 重点</p>
 <pre><code>(6) ancestor descendant   后代选择器
   练习：为所有#alert1中的.btn添加事件监听，单击后，隐藏#alert1
@@ -367,7 +369,8 @@ jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览�
   $(&apos;li:not(:first-child)&apos;)....
 (9) prev ~ siblings    后续的所有兄弟选择器
 </code></pre><p>9、第三组：基本过滤选择器       —— 重点</p>
-<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，不论是否在同一个父元素中与否。下标从0开始！
+<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，
+      不论是否在同一个父元素中与否。下标从0开始！
 (10) :first
   练习：把所有列表中的第一个LI字体加粗显示
 (11) :last:
@@ -472,7 +475,8 @@ jQueryDOM操作——查找节点
 jQuery：
   var value  = $(..).attr(&apos;title&apos;)        //读取属性的值
   $(..).attr(&apos;title&apos;, &apos;abc&apos;)            //设置属性的值
-提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
+提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，
+  也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
   var v = $(...).data(&apos;my-target&apos;)        //读取
   $(...).data(&apos;my-target&apos;, &apos;2.jpg&apos;)        //设置
 
@@ -518,13 +522,16 @@ jQuery：
 jQuery：
     $(...).val( )            //读取值
     $(...).val(&apos;value&apos;)    //设置值
-练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，读取用户的两个输入，打印出来，在输入框中清除用户的输入
+练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，
+读取用户的两个输入，打印出来，在输入框中清除用户的输入
 
 面试题：在操作元素的相关属性时，使用attr()、val()、prop()、data()有何区别？
 attr()一般只用于操作元素的HTML字面属性，如src、href、name...
 val()操作的是HTML元素对应的JS对象的value属性
-prop()操作的是HTML元素对应的JS对象的disabled、readyonly、selected、checked等Boolean类型属性
-data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据），而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
+prop()操作的是HTML元素对应的JS对象的disabled、
+readyonly、selected、checked等Boolean类型属性
+data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据）
+    而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
 </code></pre><p>20、遍历DOM树上的节点</p>
 <pre><code>核心DOM：
   element.parentNode            //寻找父节点
@@ -573,16 +580,21 @@ jQuery：
 <pre><code>核心DOM：
   parent.replaceChild(oldChild,  newChild);
 jQuery：
-  $(&apos;oldChild&apos;).replaceWith( newChild )    //已有节点用新节点替换，返回被删除的旧节点
-  $(&apos;newChild&apos;).replaceAll( oldChild )    //新节点替换所有的旧节点，返回新节点
+  $(&apos;oldChild&apos;).replaceWith( newChild )
+  //已有节点用新节点替换，返回被删除的旧节点
+  $(&apos;newChild&apos;).replaceAll( oldChild )
+  //新节点替换所有的旧节点，返回新节点
 练习：实现英雄选择效果    div#chosen        div#list
 </code></pre><p>24克隆节点</p>
 <pre><code>核心DOM：
   var copy = element.cloneNode( )
 jQuery：
-  var copy = $(..).clone()        //返回选定元素的副本
-  var copy = $(..).clone(copyListener)   //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
-练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，上方选中区域出现当前飞机的一个副本
+  var copy = $(..).clone()
+  //返回选定元素的副本
+  var copy = $(..).clone(copyListener)
+  //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
+练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，
+上方选中区域出现当前飞机的一个副本
 </code></pre><p>25、jQuery函数第二部分：事件处理函数</p>
 <pre><code>jQuery的历史上先后出现了若干事件处理函数：
 (1)bind() / unbind()            已废弃
@@ -596,7 +608,8 @@ jQuery：
   on()函数的第一种使用方法——直接绑定在事件源上：
       $(&apos;事件源&apos;).on(&apos;事件名称&apos;, fn)    //绑定监听函数
       $(&apos;事件源&apos;).off(&apos;事件名称&apos;)        //取消所有监听函数
-  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；要求此后此按钮再被点击无任何处理函数了。
+  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；
+  要求此后此按钮再被点击无任何处理函数了。
   on()的第一种用法有两个限制：
       (1)若选中元素很多，每个都会有一个监听函数
       (2)无法为后添加的元素执行绑定
@@ -701,11 +714,13 @@ animate({})可以对哪些CSS属性执行动画？
 (4)requestAnimationFrame       jQuery3
 </code></pre><p>37、jQuery类数组对象的操作</p>
 <pre><code>  window.$  &lt;=&gt; window.jQuery
-$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
+$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，
+其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
   $(..).length        获取类数组中封装的DOM对象的数量
   $(..)[index]        获取类数组中封装的第index个DOM对象
   $(..).get(index)        获取类数组中封装的第index个DOM对象
-  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，针对每个DOM元素执行一次指定的回调函数
+  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，
+                      针对每个DOM元素执行一次指定的回调函数
   $(..).index(domObj)    返回指定的DOM元素在当前类数组中的下标
 </code></pre><p>38、补充：页面DOM内容加载完成后执行指定的函数</p>
 <pre><code>$(document).ready(fn)
@@ -721,12 +736,14 @@ jQuery中的插件（即函数）分为两类：
                jQuery.extend({ max: fn,  min: fn})
    调用方式：    jQuery.max([10,38,50])
  2.jQuery对象插件函数
-   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，用于操作当前选定的DOM元素。
+   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，
+   用于操作当前选定的DOM元素。
    声明方式：    jQuery.fn.max = function( ){  }
                jQuery.fn.extend({ max: fn,   min: fn})
    调用方式：    $(&apos;li&apos;).max( )
 
-   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，所有的jQuery对象的原型： jQuery.fn;
+   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，
+   所有的jQuery对象的原型： jQuery.fn;
    若想给所有的jQuery对象都添加一个扩展函数，只需要加给jQuery.fn即可
 
   3.复杂插件的编写：轮播广告
@@ -737,16 +754,16 @@ jQuery中的插件（即函数）分为两类：
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/hexo编写方法/" rel="next" title="hexo编写方法">
-    上一篇：hexo编写方法
+    <a href="/2017/07/22/Ionic/" rel="next" title="Ionic基础知识">
+    上一篇：Ionic基础知识
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/Ionic/" rel="next" title="Ionic基础知识">
-    下一篇：Ionic基础知识
+    <a href="/2017/07/22/MySql/" rel="next" title="MySql常用方法知识">
+    下一篇：MySql常用方法知识
   </a>
 </p>
 
