@@ -1675,942 +1675,6 @@ NativeApp:通过（Google或者Apple）SDK（software development kit 软件开�
   </entry>
   
   <entry>
-    <title>Html5基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/HTML5/"/>
-    <id>www.wangchengzou.cn/2017/07/22/HTML5/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T16:50:23.596Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、HTML5新特性 —— 十个新特性：凌乱</p>
-<pre><code>(1)新的语义标签
-(2)增强型表单(表单2.0)
-(3)音频和视频
-(4)Canvas绘图
-(5)SVG绘图
-(6)地理定位
-(7)拖放API
-(8)Web Worker
-(9)Web Storage
-(10)Web Socket
-</code></pre><p>二、HTML5中表单的新特性</p>
-<pre><code>(1)新的input type      &lt;input type=&quot;?&quot;&gt;
-  H4中的input type：text、password、radio、checkbox、file、hidden、submit、reset、image
-  H5中的input type：email、url、number、tel、search、range、color、date、month、week
-(2)新的表单元素
-  H4中的表单元素：input、textarea、select/option、label
-  H5中新增的表单元素：datalist、progress、meter、output
-(3)表单元素的新属性
-</code></pre><p>三、H5中新增的表单元素 —— datalist</p>
-<pre><code>&lt;datalist id=&quot;list3&quot;&gt;        datalist本身不可见
-  &lt;option&gt;XX&lt;/option&gt;
-  &lt;option&gt;YY&lt;/option&gt;
-&lt;/datalist&gt;
-&lt;input type=&quot;text&quot; list=&quot;list3&quot;&gt;
-  datalist为input提供输入建议列表，用户可以从中选取，也可以手工输入
-</code></pre><p>四、H5中新增的表单元素 —— progress</p>
-<pre><code>显示一个进度条，有两种形式：
-&lt;progress&gt;&lt;/progress&gt; 左右晃动的进度条
-&lt;progress value=&quot;0.7&quot;&gt;&lt;/progress&gt; 具有指定进度值的进度条
-</code></pre><p>五、H5中新增的表单元素 —— meter</p>
-<pre><code>Meter：度量衡、刻度尺，用于标示一个值所处的范围：不可接受(红色)、可以接受(黄色)、非常优秀(绿色)
-&lt;meter min=&quot;可取的最小值&quot; max=&quot;可取的最大值&quot; low=&quot;合理的下限值&quot;
-      high=&quot;合理的上限值&quot; optimum=&quot;最佳值&quot;  value=&quot;当前实际值&quot;&gt;
-&lt;/meter&gt;
-</code></pre><p>六、H5中新增的表单元素 —— output</p>
-<pre><code>output：输出，语义标签，没有任何外观样式，样式上等同于SPAN。
-  商品单价: ￥3.50
-购买数量：&lt;input type=&quot;number&quot; value=&quot;1&quot;&gt;
-小计：&lt;output&gt;￥3.50&lt;/output&gt;
-</code></pre><p>七、H5表单新特性 —— 表单元素的新属性</p>
-<pre><code>H4中表单元素的属性：  &lt;input ?&gt;
-  id、class、title、style、type、value、name、readonly、disabled、checked
-H5中表单元素的新属性：
-  (1)placeholder：占位字符
-    &lt;input value=&quot;tom&quot; placeholder=&quot;请输入用户名&quot;&gt;
-  (2)autofocus：自动获取输入焦点
-    &lt;input autofocus&gt;
-  (3)multiple：允许输入框中出现多个输入（用逗号分隔），如邮箱输入域
-    &lt;input type=&quot;email&quot; multiple&gt;
-  (4)form：用于把输入域放置到FORM外部
-    &lt;form id=&quot;f5&quot;&gt;&lt;/form&gt;
-    &lt;input form=&quot;f5&quot;&gt;
-  ====输入验证相关的新属性======
-  (5)required：必填项，内容不能为空
-    &lt;input required&gt;
-  (6)maxlength：指定字符串的最大长度
-    &lt;input maxlength=&quot;9&quot;&gt;
-  (7)minlength：指定字符串的最小长度
-    &lt;input minlength=&quot;6&quot;&gt;
-  (8)max：指定数字的最大值
-    &lt;input max=&quot;60&quot;&gt;
-  (9)min：指定数字的最小值
-    &lt;input min=&quot;18&quot;&gt;
-  (10)pattern：指定输入必需符合的正则表达式
-    &lt;input pattern=&quot;1[35789]\d{9}&quot;&gt;
-  上述验证属性会影响表单元素对应的JS对象的validity属性。
-</code></pre><p>九、H5新特性——视频播放</p>
-<pre><code>H5提供了一个新的标签用于播放视频：
-  &lt;video src=&quot;res/birds.mp4&quot;&gt;&lt;/video&gt;
-  &lt;video&gt;
-          &lt;source src=&quot;res/birds.mp4&quot;&gt;
-          &lt;source src=&quot;res/birds.ogg&quot;&gt;
-          &lt;source src=&quot;res/birds.webm&quot;&gt;
-          您的浏览器不支持VIDEO播放！
-  &lt;/video&gt;
-它本身是一个300*150的inline-block元素。
-VIDEO标签/对象常用的成员：
-成员属性：
-  autoplay：false，是否自动播放
-  controls：false，是否显示播放控件
-  loop：false，是否循环播放
-  muted：false，是否静音播放
-  poster：&apos;&apos;，在播放第一帧之前显示的海报
-  preload：视频的预加载策略，可取值：
-      auto：预加载视频的元数据以及缓冲一定时长
-      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
-      none：不预加载任何数据
-   -------------JS对象属性---------------------
-  currentTime：当前播放的时长
-  duration：总时长
-  paused：true，当前视频是否处于暂停状态
-  volume：1，当前音量
-  playbackRate：1，回放速率，大于1表快放，小于1表慢放
-成员方法：
-  play( )： 播放视频
-  pause( )： 暂停播放
-成员事件：
-  onplay：    当视频开始播放时触发的事件
-  onpause：当视频开始暂停时触发的事件
-</code></pre><p>十、H5新特性——音频播放</p>
-<pre><code>H5提供了一个新的标签用于播放音频：
-  &lt;audio src=&quot;res/bg.mp3&quot;&gt;&lt;/audio&gt;
-  &lt;audio&gt;
-          &lt;source src=&quot;res/bg.mp3&quot;&gt;
-          &lt;source src=&quot;res/bg.ogg&quot;&gt;
-          &lt;source src=&quot;res/bg.wav&quot;&gt;
-          您的浏览器不支持AUDIO播放！
-  &lt;/audio&gt;
-它默认是一个300*30的inline-block元素；但若没有controls属性，则display:none。
-AUDIO标签/对象常用的成员：
-成员属性：
-  autoplay：false，是否自动播放
-  controls：false，是否显示播放控件
-  loop：false，是否循环播放
-  muted：false，是否静音播放
-  preload：视频的预加载策略，可取值：
-      auto：预加载视频的元数据以及缓冲一定时长
-      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
-      none：不预加载任何数据
-   -------------JS对象属性---------------------
-  currentTime：当前播放的时长
-  duration：总时长
-  paused：true，当前视频是否处于暂停状态
-  volume：1，当前音量
-  playbackRate：1，回放速率，大于1表快放，小于1表慢放
-成员方法：
-  play( )： 播放视频
-  pause( )： 暂停播放
-成员事件：
-  onplay：    当视频开始播放时触发的事件
-  onpause：当视频开始暂停时触发的事件
-</code></pre><p>十一、网页中可用的绘图技术</p>
-<pre><code>  网页中的实时走势图、统计图、在线画图板、网页游戏、地图应用都要使用到绘图技术。有三种绘图技术：
-  (1)SVG绘图：2D矢量绘图技术，2000年出现，后纳入H5标准
-  (2)Canvas绘图：2D位图绘图技术，H5提出的绘图技术
-  (3)WebGL绘图：3D绘图技术，尚未纳入H5标准
-
-Canvas绘图难点所在：
-(1)坐标系
-(2)单词比较多
-</code></pre><p>十二、H5新特性——Canvas绘图技术</p>
-<pre><code>Canvas：画布，是H5提供的2D绘图技术。
-  &lt;canvas width=&quot;500&quot; height=&quot;400&quot;&gt;
-      您的浏览器不支持Canvas标签！
-  &lt;/canvas&gt;
-CANVAS标签在浏览器中默认是300*150的inline-block。
-画布的宽和高只能使用HTML/JS属性来赋值，不能使用CSS样式赋值！
-每个画布上有且只有一个“画笔”对象——称为“绘图上下文”对象——使用该对象进行绘图！
-  var ctx = canvas.getContext(&apos;2d&apos;)  //得到画布上的画笔对象
-  (1)使用Canvas绘制矩形
-      矩形的定位点在自己的左上角
-      ctx.lineWidth = 1            描边宽度
-      ctx.fillStyle = &apos;#000&apos;        填充样式/颜色
-      ctx.strokeStyle = &apos;#000&apos;        描边样式/颜色
-      ctx.fillRect( x, y, w, h )        填充一个矩形
-      ctx.strokeRect( x, y, w, h )    描边一个矩形
-      ctx.clearRect( x, y, w, h )        清除一个矩形范围内所有的绘图
-  (2)使用Canvas绘制文本
-    一段文字的定位点在其文本基线的起点
-      ctx.textBaseline = &apos;alphabetic&apos;    文本基线
-      ctx.font = &apos;12px sans-serif&apos;    文本大小和字体
-      ctx.fillText( str, x, y )            填充一段文本
-      ctx.strokeText( str, x, y )        描边一段文本
-      ctx.measureText( str )    基于当前文字大小字体设置测量文本，返回一个对象：{width: x}
-</code></pre><p>十三、Canvas绘图中使用渐变对象</p>
-<pre><code>线性渐变： linearGradient
-径向渐变： radialGradient
-可以参考PS中的渐变效果。
-var g = ctx.createLinearGradient( x1, y1,  x2,  y2 );
-g.addColorStop( offset,  color )
-....
-g.addColorStop( offset,  color )
-ctx.strokeStyle = g;
-ctx.fillStyle = g;
-</code></pre><p>十四、Canvas：是H5提供的2D位图绘图技术。</p>
-<pre><code>&lt;canvas id=&quot;c1&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
-    您的浏览器不支持Canvas
-&lt;/canvas&gt;
-var ctx = c1.getContext(&apos;2d&apos;)
-//绘制矩形  ctx.fillRect()/strokeRect()/clearRect()
-//绘制文本  ctx.fillText()/strokeText()/measureText()
-//绘制路径
-//绘制图像
-
-1.Canvas的尺寸不能用CSS指定
-  使用CSS指定的Canvas尺寸，实际不是修改了画布尺寸，而是进行了拉伸，上面的绘图内容也会随着进行拉伸。
-  可以使用HTML标签的width和height属性，也可以使用JS对象的width和height属性。
-
-2.使用Canvas进行绘图 —— 路径
-  Path：类似于PS中的“钢笔工具”，由多个坐标点组成的任意形状，路径不可见，可用于“描边”、“填充”、“裁剪”。
-  ctx.beginPath()        开始一条新路径
-  ctx.closePath()        闭合当前路径
-  ctx.moveTo(x, y)        移动到指定点
-  ctx.lineTo(x, y)        从当前点到指定点画直线
-  ctx.arc(cx, cy, r, start, end)    绘制圆拱路径
-
-  ctx.stroke()            对当前路径描边
-  ctx.fill()                对当前路径填充
-  ctx.clip()            使用当前路径进行裁剪
-
-3.使用Canvas进行绘图 —— 图像
-  Canvas属于客户端技术，图片在服务器中，所以浏览器必须先下载要绘制的图片，且等待图片异步加载完成：
-  var p3 = new Image();
-  p3.src = &apos;img/p3.png&apos;;    //浏览器会自动异步请求图片
-  console.log(p3.width);    //0
-  p3.onload = function(){      //图片加载完成
-        console.log(p3.width);      //200
-        //开始绘制图片到画布上....
-    ctx.drawImage( p3, x, y );        //原始大小绘图
-    ctx.drawImage( p3, x, y, w, h );    //拉伸绘图
-  }
-
-Canvas绘图核心知识点：—— 重点
-绘制矩形：
-  ctx.fillRect()  ctx.strokeRect()   ctx.clearRect()
-绘制文本：
-  ctx.fillText()  ctx.strokeText()   ctx.measureText().width
-绘制路径：
-  ctx.beginPath()    ctx.closePath()
-  ctx.moveTo()   ctx.lineTo()
-  ctx.arc()
-  ctx.stroke()   ctx.fill()    ctx.clip()
-绘制图像：
-  ctx.drawImage()
-
-
-4.使用Canvas绘图时进行变形操作
-  CSS中有变形相关样式： transform: rotate/scale/translate/skew，这些变形只能作用于某个HTML元素。
-  Canvas绘图中也有变形技术，可以针对某一个图像/图形的绘制过程进行变形：rotate、scale、translate。
-  ctx.rotate( 弧度 )     旋转绘图上下文对象(即画笔),轴点是画布的原点
-  ctx.translate( x, y )  将整个画布的原点平移到指定的点
-  ctx.save()         保存画笔当前的所有变形状态值（游戏中从存盘）
-  ctx.restore()        恢复画笔变形状态到最近的一次保存（游戏中读取存盘）
-
-5.第三方绘制统计图工具
-  (1)Chart.js：免费的，提供了八种统计图表
-  (2)FusionCharts.js：收费的，提供了90+中统计图表
-  (3)ECharts：百度提供的免费的绘图工具，与地图整合的很好
-  (4)FreeCharts ....
-
-提示：第三方工具使用无需记忆！重点掌握自学的过程：
-(1)打开官网，查看说明
-    http://www.chartjs.org/
-(2)仿照DEMO编写示例
-    开源免费的、8种图表、基于H5 Canvas、支持响应式
-(3)在实际项目中加以应用，查看详细API说明
-    &lt;canvas id=&quot;c15&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
-            您的浏览器不支持Canvas绘图！
-    &lt;/canvas&gt;
-    &lt;script src=&quot;js/Chart.js&quot;&gt;&lt;/script&gt;
-    &lt;script&gt;
-        new Chart(c15, {
-            type: &apos;bar&apos;,//line、pie、noughnut...
-            data: {},
-            options: {}
-            });
-    &lt;/script&gt;
-
-位图(Photoshop)：由一个又一个像素点组成，每个点各有自己的颜色，色彩细腻，但放大会失真
-矢量图(Illustrator)：由一个又一个线条组成，每个线条可以指定颜色、方向，可以无限缩放，但细节不够丰富
-</code></pre><p>十五、HTML5新特性——SVG绘图</p>
-<pre><code>Scalable Vector Graph：可缩放的矢量图
-Canvas绘图    SVG绘图
-类型    2D位图    2D矢量图
-如何绘图    使用JS代码绘图    使用标签绘图
-事件绑定    每个图形不是元素，无法直接绑定事件    每个图形都是元素，可以直接绑定事件监听
-应用场合    统计图、游戏    统计图、图标、地图
-  SVG技术诞生于2000年，早期作为XML的扩展应用出现；H5标准把常用的SVG标签采纳为标准，但有些被废弃掉。
-
-SVG技术在HTML5出现之前的使用方法：
-    (1)在一个XML文档中声明要绘制的图形
-    (2)再编写HTML文档，使用IMG/IFRAME应用XML文档即可
-SVG技术在HTML5出现之后的使用方法：
-    直接创建HTML5文档，在其中书写SVG标签即可
-    &lt;svg&gt;&lt;/svg&gt;本身是一个300*150的inline-block。
-
-使用SVG标签绘制矩形：
-    &lt;rect&gt;
-使用SVG标签绘制圆形：
-    &lt;circle&gt;
-使用SVG标签绘制椭圆：
-    &lt;ellipse&gt;
-使用SVG标签绘制直线：
-    &lt;line&gt;
-使用SVG标签绘制折线：
-    &lt;polyline&gt;
-使用SVG标签绘制多边形：
-    &lt;polygon&gt;
-</code></pre><p>十六、补充：Canvans上如何按照特定的顺序绘制图片</p>
-<pre><code>Canvas绘图中若需要多张图片，他们的加载都是异步的，无法预测哪一张先加载完成！
-但是绘图往往需要按照一定顺序，如先绘背景，再绘上面的内容。所以必须等待所有图片全部加载完成，才能开始绘图。
-var progress = 0; //所有图片的总加载进度
-var imgBg = new Image();
-imgBg.src = &apos;img/bg.jpg&apos;;
-imgBg.onload = function(){
-  progress += 40;    //为每张图片赋一个权重值
-  if(progress===100){
-    startDraw();
-  }
-}
-var imgDisc = new Image();
-imgDisc.src = &apos;img/disc.png&apos;;
-imgDisc.onload = function(){
-  progress += 60;
-  if(progress===100){
-    startDraw();
-  }
-}
-</code></pre><p>十七、补充：如何为Canvas上的图形/图像绑定事件监听</p>
-<pre><code>网页中只能为HTML元素绑定监听函数，Canvas上的图形/图像都是用JS绘制的，不是DOM元素，不能直接进行事件绑定！
-只能绑定给整个Canvas！然后再具体计算事件发生坐标是否处于某个图像/图形内部——仅适用于规则图像/图形。
-  SVG图形中为元素绑定事件监听
-  SVG图形中每个图形/图像都是一个标签，可以很方便进行事件绑定
-</code></pre><p>十八、SVG绘图的特点——着重注意！</p>
-<pre><code>(1)所有的图形默认只有填充色（黑色），没有描边色。
-(2)SVG图形的样式可以用元素属性声明，也可以用CSS形式来声明。但用CSS声明时，只能使用SVG专用的样式，不能使用CSS样式，如边框设置只能用stroke，而不用border！
-(3)图形可以使用JS来对属性赋值；但不能使用HTML DOM形式，只能用核心DOM操作，如：
-  r.x = 10;   r.width = 100;    //无效
-  r.setAttribute(&apos;x&apos;, 10); r.setAttribute(&apos;width&apos;, 100)//有效
-(4)动态添加SVG图形可以使用两种方式：
-   1)HTML字符串拼接
-       var html = `&lt;rect&gt;&lt;/rect&gt;`;
-       svg.innerHTML = html;
-   2)使用document.createElementNS(&apos;http://www.w3.org/2000/svg&apos;,&apos;标签名&apos;)创建
-
-4.使用SVG进行绘图——矩形
-  &lt;rect width=&quot;&quot; height=&quot;&quot; x=&quot;&quot; y=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/rect&gt;
-
-5.使用SVG进行绘图——圆形
-  &lt;circle r=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/circle&gt;
-
-6.使用SVG进行绘图——椭圆
-  &lt;ellipse rx=&quot;&quot; ry=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot;&gt;&lt;/ellipse&gt;
-
-7.使用SVG进行绘图——直线
-  &lt;line x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-linecap=&quot;butt/square/round&quot;&gt;&lt;/line&gt;
- 练习：使用SVG中的直线绘制如下的图标
-
-提示：若多个SVG图形有完全一样的属性，可以抽出来，放在一个公共的父元素中（小组）
-&lt;g stroke=&quot;#000&quot;&gt;
-   &lt;line&gt;&lt;/line&gt;
-   &lt;line&gt;&lt;/line&gt;
-&lt;/g&gt;
-
-8.使用SVG进行绘图——折线
-  一条折线上可以有任意多个连续的点
-  &lt;polyline points=&quot;50,50  100,300 ...&quot; fill=&quot;transparent&quot; stroke=&quot;#000&quot;&gt;&lt;/polyline&gt;
- 练习：使用折线绘制如下图标
-
-9.使用SVG进行绘图——多边形
-&lt;polygon points=&quot;50,50  100,300 ...&quot; fill=&quot;&quot;&gt;&lt;/ polygon&gt;
-  练习：使用多边形绘制如下两个图标
-
-10.附加：使用SVG进行绘图——文本
-  SVG画布上不允许使用普通的HTML元素绘制文本，如SPAN、P等！只能使用：
-  &lt;text font-size=&quot;&quot; alignment-baseline=&quot;before-edge&quot; fill=&quot;&quot; stroke=&quot;&quot; x=&quot;&quot; y=&quot;&quot;&gt;文本内容 &lt;/text&gt;
-
-11.附加：使用SVG进行绘图——图像
-  不能使用IMG置于SVG画布上！只能使用：
-  &lt;image xlink:href=&quot;disc.png&quot; width=&quot;200&quot; height=&quot;200&quot; x=&quot;&quot; y=&quot;&quot;&gt;&lt;/image&gt;
-SVG绘图的主要知识点：
-&lt;svg&gt;
-  &lt;rect&gt;&lt;/rect&gt;
-  &lt;circle&gt;&lt;/circle&gt;
-  &lt;ellipse&gt;&lt;/ellipse&gt;
-  &lt;line&gt;&lt;/line&gt;
-  &lt;polyline&gt;&lt;/polyline&gt;
-  &lt;polygon&gt;&lt;/polygon&gt;
-  &lt;text&gt;&lt;/text&gt;
-  &lt;image&gt;&lt;/image&gt;
-&lt;/svg&gt;
-
-12.补充小知识：如何在SVG中使用渐变
-  &lt;defs&gt;      定义特效对象：渐变对象属于一种特效对象
-    &lt;linearGradient id=&quot;g3&quot; x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot;&gt;
-        &lt;stop offset=&quot;0&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
-        &lt;stop offset=&quot;1&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
-    &lt;/linearGradient&gt;
-  &lt;/defs&gt;
-  &lt;ANY fill=&quot;url(#g3)&quot;  stroke=&quot;url(#g3)&quot;&gt;&lt;/ANY&gt;
- 练习：使用渐变对象，为不同的柱子分配不同的渐变色
-
-
-13.补充小知识：如何在SVG中使用滤镜
-  &lt;defs&gt;
-    &lt;filter id=&quot;f2&quot;&gt;
-        &lt;feGaussianBlur stdDeviation=&quot;3&quot;/&gt;
-    &lt;/filter&gt;
-  &lt;/defs&gt;
-  &lt;ANY filter=&quot;url(#f2)&quot;&gt;
-
-SVG中支持的所有滤镜：
-https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
-
-网页中可用的绘图技术：
-(1)Canvas绘图
-(2)SVG绘图
-(3)WebGL绘图
-
-14.第三方绘图工具库  —— Two.js
-
- (1)打开官网，查看说明
-    https://two.js.org/
-    是一个2D绘图函数库，提供了一套API，可用于不同的技术下的绘图，如SVG/CANVAS/WEBGL。
- (2)参考DEMO，编写示例
-    var two = new Two({ }).appendTo(box);
-    //绘制一个圆形
-    var c = two.makeCircle(200,200,100);
-    //绘制一个矩形——定位点在矩形中心，而不是左上角
-    var r = two.makeRectangle(600,200, 200,200);
-    //把绘图对象中的内容绘制到DOM树
-    two.update(); //更新DOM树
- (3)查看API，在项目中加以应用
-</code></pre><p>十九、HTML5新特性之六 —— 地理定位</p>
-<pre><code>  Geolocation：地理定位，使用JS获取当前浏览器所在的地理坐标
-  （经度、维度、海拔、速度）数据，用于实现LBS应用(Location Based Service)，
-  如饿了么、高德导航...
-  手机浏览器如何获得定位信息：
-    (1)首选手机中的GPS芯片与卫星通信，定位精度在米
-    (2)次选手机通信基站进行定位获取，定位精度在公里
-  PC浏览器如何获得定位信息：
-    通过IP地址进行反向解析，定位精度取决于IP地址库的大小
-
-HTML5中提供了一个新的对象，用于获取当前浏览器的定位信息：
-  window.navigator.geolocation{
-    getCurrentPosition: fn,    获得当前定位信息
-    watchPosition: fn, 监视定位数据的改变
-    clearWatch: fn  取消监视
-  }
-获得客户端的定位信息：
-navigator.geolocation.getCurrentPosition(
-    (pos)=&gt;{ pos.coords.latitude   pos.coords.longitude },
-    (err)=&gt;{    err.code   err.message }
-)
-
-2.扩展小知识：在网页中如何嵌入百度地图
-  (1)注册百度开发者账号
-    http://lbsyun.baidu.com/
-  (2)创建一个网站；登录百度地图，为网站申请一个地图的AccessKey
-    http://lbsyun.baidu.com/apiconsole/key
-
-  (3)在自己的网页中嵌入百度地图提供的API，嵌入百度地图
-    官方手册：http://lbsyun.baidu.com/index.php?title=jspopular
-    var map = new BMap.Map(&quot;container&quot;);          // 创建地图实例
-    var point = new BMap.Point(116.300829,39.915836);  // 创建点坐标
-    map.centerAndZoom(point, 17);   // 以指定点为中心并缩放
-</code></pre><p>二十、HTML5新特性之七 —— 拖放API</p>
-<pre><code>Drag &amp; Drop：拖动和释放
-HTML5为拖放行为提供了7个事件，分为两组：
-拖动的源对象(会动)可以触发的事件：
-  dragstart：拖动开始
-  drag：拖动中
-  dragend：拖动结束
-  整个拖动过程： dragstart*1 + drag*n + dragend*1
-拖动的目标对象(不动)可以触发的事件：
-  dragenter：拖动着进入
-  dragover：拖动着悬停在上方
-  dragleave：拖动着离开
-  drop：在上方释放
-  整个拖动过程1： dragenter*1 + dragover*n + dragleave*1
-  整个拖动过程2： dragenter*1 + dragover*n + drop*1
-注意：必须阻止dragover的默认行为，drop才可能触发！
-</code></pre><p>二十一、HTML5新特性之八 —— Web Worker —— 代码就3行</p>
-<pre><code>  程序：Program，指可被CPU执行的代码，存储在外存中
-  进程：Process/Task，指程序被OS调入内存，分配执行空间，随时供CPU调度执行
-  线程：Thread，线程是进程内执行代码基本单位
-
-  进程和线程：
-    (1)进程是操作系统分配内存的基本单位；
-    (2)线程是CPU执行代码的基本单位；
-    (3)线程必须处于某个进程内部；
-    (4)一个进程内必须至少有一个线程；也可以有多个；
-    (5)一个操作系统中可能同时存在几千个线程，它们是“并发执行的”—— 宏观上看同时执行，微观上看是依次循环执行
-
-    Chrome浏览器中的线程模型：
-    一个Chrome进程内，至少有6个线程，可以“同时/并发”向Web服务器发起HTTP请求，以获得所需的资源——资源请求线程。
-    还有一个线程负责将所有内容绘制到浏览器页面中——UI主线程——不允许多线程同时绘图，防止内容布局错乱。
-
-    5.观察如下一段代码执行特点
-      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
-      &lt;script src=&quot;14.js&quot;&gt;很耗时的JS任务&lt;/script&gt;
-      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
-
-      现象：JS执行过程中，按钮1可见，但点击无效；按钮2不可见。
-      原因：浏览器中执行代码的只有一个线程——UI主线程
-      解决办法：创建新的线程，由它来执行耗时的JS任务；UI主线程继续执行后续的HTML渲染：
-      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
-      &lt;script&gt;
-        var w = new Worker(&apos;14.js&apos;)
-      &lt;/script&gt;
-      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
-
-1.补充小知识：在拖动源对象和目标对象间传递数据
-  如：拖动开始时(src.ondragstart)记录被拖动元素的ID，释放时(target.ondrop)根据ID查找拖动的源对象，进行相关操作。
-  方法1：使用一个全局变量 —— 造成全局对象的污染
-  方法2：使用H5拖放API专供的e.dataTransfer（数据传递）
-
-  //拖动的源对象
-  src.ondragstart = function(e){
-    //海南：往拖拉机中装数据
-    e.dataTransfer.setData(&apos;key&apos;, &apos;value&apos;)
-  }
-  //拖动的目标对象
-  target.ondrop = function(e){
-    //哈尔滨：从拖拉机中读取数据
-    var data = e.dataTransfer.getData(&apos;key&apos;);            //value
-  }
-</code></pre><p>二十二、HTML5新特性之八——WebWorker——代码就3行，重点在理论理解</p>
-<pre><code>进程：操作系统分配内存的单位 —— 工厂
-线程：处于进程内部，用于执行代码 —— 生产线
-线程并发：操作系统中所有的线程宏观上看“同时执行”；微观上看是“依次交替执行”
-Chrome中的线程模型： 请求资源——6个线程；运行代码/渲染页面内容——1个线程
-&lt;button&gt;按钮1&lt;/button&gt;
-&lt;script src=&quot;x.js&quot;&gt;&lt;/script&gt;
-&lt;button&gt;按钮2&lt;/button&gt;
-上述代码中若x.js很耗时，按钮1无法点击，按钮2在运行js过程中不可见——所有的代码(HTML/CSS/JS)都在单线程(UI主线程)中执行
-
-解决方案：创建一个并发执行的新线程，让它来执行耗时的JS任务
-
-3.Worker线程的致命缺陷
-浏览器不允许Worker线程操作任何的DOM&amp;BOM对象！！
-原因：浏览器只允许UI主线程操作DOM&amp;BOM！若多个线程同时都可以操作DOM结构，页面将混乱。
-所以，类似jQuery的脚步决不能使用Worker来加载执行。
-
-Worker线程可以给UI主线程发数据消息：
-  UI主线程：
-      var w6 =new Worker(&apos;6.js&apos;);
-      w6.onmessage = function(e){ e.data }
-  Worker线程：
-      postMessage(stringMsg)
-UI主线程可以给Worker线程发数据消息：
-  UI主线程：
-      var w6 =new Worker(&apos;6.js&apos;);
-      w6.postMessage(stringMsg)
-  Worker线程：
-      onmessage = function(e){ e.data }
-
-  项目中Worker的使用场景：
-  (1)只要js中有DOM&amp;BOM就不能用Worker！
-  (2)Worker适合于执行耗时的JS任务！如复杂计算、加密和解密、大数据统计、路径规划......
-</code></pre><p>二十三、HTML5新特性之九 —— WebStorage</p>
-<pre><code>  在浏览器中存储当前用户专有的数据：访问历史、内容定制、样式定制...
-  在客户端存储数据可以使用的技术：
-  (1)Cookie技术：浏览器兼容性好；不能超过4KB，操作复杂
-  (2)Flash存储：依赖于Flash播放器
-  (3)H5 WebStorage：不能超过8MB，操作简单
-  (4)IndexedDB：可存大量数据，还不是标准技术
-
-Session：会话，浏览器从打开某个网站的一个页面开始，中间可能打开很多页面，
-直到关闭浏览器，整个过程称为“浏览器与Web服务器的一次会话”。
-
-WebStorage技术中，浏览器为用户提供了两个对象：
-  (1)window.sessionStorage：类数组对象，会话级数据存储
-    在浏览器进程所分得的内存存储着一次Web会话可用的数据，可供此次会话中所有的页面共同使用
-    ；浏览器一旦关闭就消失了。
-作用：在同一个会话中的所有页面间共享数据，如登录用户名。
-    sessionStorage[key] = value            //保存一个数据
-    sessionStorage.setItem(key, value)        //保存一个数据
-    var v = sessionStorage[key]            //读取一个数据
-    var v = sessionStorage.getItem(key)    //读取一个数据
-    sessionStorage.removeItem(key)        //删除一个数据
-    sessionStorage.clear()                //清除所有数据
-    sessionStorage.length                //数据的数量
-    sessionStorage.key(i)                //获取第i个key
-
-  (2)window.localStorage：类数组对象，本地存储(跨会话级存储)
-    在浏览器所能管理的外存(硬盘)中存储着用户的浏览数据，可供此次会话以及后续的会话中的页面共同使用；
-即使浏览器关闭也不会消失——永久存在。作用：在当前客户端所对应的所有会话中共享数据，如登录用户名。
-    localStorage[key] = value            //保存一个数据
-    localStorage.setItem(key, value)        //保存一个数据
-    var v = localStorage [key]            //读取一个数据
-    var v = localStorage.getItem(key)        //读取一个数据
-    localStorage.removeItem(key)        //删除一个数据
-    localStorage.clear()                //清除所有数据
-    localStorage.length            //数据的数量
-    localStorage.key(i)                //获取第i个key
-
-localStorage中若数据发生了修改，会触发一次window.onstorage事件，可以监听此事件，实现监视localStorage数据改变的目的，
-用于在一个窗口中监视其它窗口中对localStorage数据的修改——不能监视sessionStorage数据的修改！
-
-5.HTML5新特性之十 —— WebSocket——代码不复杂重点在原理的理解
-  HTTP协议：属于“请求-响应”模型，只有客户端发起请求消息，服务器才会返回响应消息，没有请求就没有响应；
-一个请求，只能得到一个响应。有些场景中，此模型就力不从心了：实时走势应用、在线聊天室。
-解决方案：长轮询(Long-Polling)/心跳请求——定时器+AJAX——请求过于频繁，服务器压力过大；
-不够频繁，客户端数据延迟较大。
-  WebSocket协议：属于“广播-收听”模型，客户端连接到服务器就不再断开，永久的连接，双方就随时向对方发送消息，
-且是全双工不对等发送。WS协议在实时走势应用、在线聊天室应用中有着特别的优势。
-
-
-  WS协议的应用程序也分为客户端程序和服务器端程序：
-  WS服务器端应用：
-    监听指定端口，接收客户端请求，向对方发消息，并接收消息；可以使用php/java/node.js等语言编写
-  WS客户端应用：
-    主动发起连接请求，保持永久的连接，向对方消息，并接收消息，可以使用php/java/node.js/html5等语言编写
-
-6.了解：使用Node.js创建WS协议的服务器
-  node.js官方没有提供ws协议的模块，必须使用NPM下载第三方ws协议模块：  npm  i  ws
-  查看README,编写WS协议的服务器：
-  ......
-
-7.掌握：使用HTML5创建WS协议的客户端应用
-  //连接到WS服务器
-  var socket = new WebSocket(&apos;ws://127.0.0.1:9001&apos;)
-  //向服务器发消息
-  socket.send(stringMsg)
-  //接收服务器发来的消息
-  socket.onmessage = function(e){
-    e.data   //消息内容
-  }
-  //断开到WS服务器的连接
-  socket.close();
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、HTML5新特性 —— 十个新特性：凌乱&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)新的语义标签
-(2)增强型表单(表单2.0)
-(3)音频和视频
-(4)Canvas绘图
-(5)SVG绘图
-(6)地理定位
-(7)拖放API
-(8)Web Worker
-(9)Web Stora
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="h5" scheme="www.wangchengzou.cn/tags/h5/"/>
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySql常用方法知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
-    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T16:08:55.461Z</updated>
-    
-    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
-
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
-}
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
-&amp;gt;on tutorials.*
-&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
-    
-      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
-    
-      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JQuery基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
     <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
@@ -3495,79 +2559,6 @@ Props验证：
   </entry>
   
   <entry>
-    <title>Zetpojs基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:56:58.353Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
-<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要引入js文件，调用方法即可
-特点：
-    学习成本低
-    轻量
-注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
-        如果要用到其他模块，去zeptoBuilder
-        官网：http://github.e-sites.nl/zeptobuilder/
-        选择需要用到的模块，勾选，下载即可
-</code></pre><p>二、使用Zepto</p>
-<pre><code>1、核心模块
-    集合、数据、类型判断的操作
-    选择器
-    DOM增删改查
-
-2、detect
-    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
-    $.os $.browser
-
-3、event模块
-    on off one trigger
-
-4、Ajax模块
-    $.get
-    $.post
-    $.ajax
-    $.load
-
-5、form模块
-    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
-    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
-    submit 表单指定submit触发时 执行的处理函数
-
-6、Touch模块
-    点按事件：tap singleTap doubleTap longTap
-    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
-
-7、Effects（Animate）模块
-    show/hide/fadeIn/fadeOut/fadeToggle
-    animate
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ajax面试题点</title>
     <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
@@ -4177,6 +3168,2088 @@ node端发起http请求
       <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
     
       <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zetpojs基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:56:58.353Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
+<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要引入js文件，调用方法即可
+特点：
+    学习成本低
+    轻量
+注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
+        如果要用到其他模块，去zeptoBuilder
+        官网：http://github.e-sites.nl/zeptobuilder/
+        选择需要用到的模块，勾选，下载即可
+</code></pre><p>二、使用Zepto</p>
+<pre><code>1、核心模块
+    集合、数据、类型判断的操作
+    选择器
+    DOM增删改查
+
+2、detect
+    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
+    $.os $.browser
+
+3、event模块
+    on off one trigger
+
+4、Ajax模块
+    $.get
+    $.post
+    $.ajax
+    $.load
+
+5、form模块
+    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
+    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
+    submit 表单指定submit触发时 执行的处理函数
+
+6、Touch模块
+    点按事件：tap singleTap doubleTap longTap
+    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
+
+7、Effects（Animate）模块
+    show/hide/fadeIn/fadeOut/fadeToggle
+    animate
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySql常用方法知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
+    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T16:08:55.461Z</updated>
+    
+    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
+<pre><code>&gt;grant select,insert,update,delete,create,drop
+&gt;on tutorials.*
+&gt;to &apos;zara&apos;@&apos;localhost&apos;
+&gt;identified by &apos;zara123&apos;;
+以上为为指定数据库tutorials添加用户zara 密码为zara123
+
+&gt;use数据库名；--选择操作的数据库
+&gt;show databases;   ---列出所有数据库
+&gt;show tables;      ---列出数据库所有表
+&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
+&gt;show index from 数据表； ---显示数据表索引信息
+&gt;show table status like 数据表\G; ---输出统计信息
+&gt;create database库名； ----创建库名
+&gt;drop database库名；   ----弹出框显示是否删除库名
+&gt;int bigint double varchar datetime now()  四大数据类型
+&gt;create table 表名；  ---创建数据表
+&gt;drop table 表名；    ---删除表
+&gt;insert into 表名（列，列）values(值，值)；---添加数据
+&gt;select 列名 from 表名 where 条件；  ----查询
+&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
+&gt;delete from 表名 where 条件； ---直接删除表内记录列
+&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
+&gt;create database 库名 charset=utf8；  ---指定库名编码
+&gt;set names utf8  -----设置语句编码
+&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
+&gt;$_request[&apos;title&apos;];--获取表单中的参数
+&gt;desc 表名；----将查看该表里面的所有类型
+&gt;require();  ---引用初始化PHP文件
+多表查询方法（
+    SELECT n.title,n.ctime,u.uname    多表联系
+    FROM t_user u,t_news n;           创建别名
+    WHERE u.id==n.uid          条件关系
+）
+
+{命令窗口使用SQL文件加载数据库，中文显示
+    &gt;set names utf8        --文件转换编码格式
+    &gt;source 文件位置    --加载文件位置
+    &gt;set names gbk        --临时使用gbk格式显示中文
+}
+</code></pre><p>php学习基本函数</p>
+<pre><code>phpinfo();显示软件版本信息
+var_dump();输出数组元素
+count();输出数组里面元素的个数
+foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
+</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
+<pre><code>1创建到MySQL服务器的连接
+  $conn=mysqli_connect(...);
+    服务器地址IP    本机127.0.0.1：8081
+    用户名      root
+    密码          p
+    选择库      库名
+2向MySQL服务器发送sql指令，等待服务器执行
+  $sql=&quot;...&quot;;//insert/delete/update
+3读取MySQL服务器返回结果
+  $result=mysqli_query($conn,$sql);
+4判断返回结果是否成功
+  if($result===false);
+5断开与MySQL服务器连接
+  mysqli_close($conn);
+</code></pre><p>php mysql查询操作</p>
+<pre><code>1:连接数据库
+  $conn=mysqli_connect(...);
+  服务器地址IP    本机127.0.0.1：8081
+  用户名            root
+  密码          p
+  选择库      库名
+2:发送查询sql   SELECT
+   $sql=&quot;...&quot;;    SELECT * FROM t_user;
+3:读取MySQL服务器返回结果 是不是true/false
+   $result=mysqli_query($conn,$sql);
+4:抓取结果中数据并且转换数组
+   a:抓取一行数据{关联数组}
+    mysqli_fetch_assoc(结果集对象);
+   b:抓取一行数据{索引数组
+    mysqli_fetch_row(结果集对象);
+5:断开与MySQL服务器连接
+   mysqli_close($conn);
+</code></pre><p>php常用函数说明</p>
+<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
+@    压制住当前行代码警告消息，在行首位置添加！
+#time() 返回当前系统时间，以毫秒为单位整数
+#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
+#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
+location.href   为跳转方式
+</code></pre><p>ajax  GET的使用方法</p>
+<pre><code>1.创建Ajax对象
+    var xhr= new XMLHttpRequest();
+2.绑定事件
+    xhr.onreadystatechange=function(){
+        alert(xhr.responseText);--输出事件运行文本状态
+    }
+3.打开连接
+    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
+4.发送请求
+    xhr.send(null)
+</code></pre><p>Ajax 常用对象和属性事件方法</p>
+<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
+    var xhr =new XMLHttpRequest();
+    兼容性问题，老IE8以下不支持
+    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
+    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
+
+readyState ;xhr对象当前状态，会自动改变
+    对应值：0 UNSENT 请求消息未发送
+        1 OPENED XHR已经找开连接
+        2 HEADERS_RECEVIED xhr已经接收信息
+        3 LOADING  XHR正在加载消息
+        4 DONE XHR接收完成消息
+
+status  表示服务器返回的状态码
+responseText  表示服务器响应文本
+responseXML   表示服务器响应XML文本
+
+属性使用方法
+    open(method,url.isAsyn)  表示打开服务器连接
+        method：请求方式，GET POST
+        Ulr  请求地址
+        isasyn：请求方式是异步TRUE还是同步FALSE
+
+    send（data）请求消息发送web服务器
+        data：请示消息主体内容:
+           GET为send(null)
+           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
+</code></pre><p>#AJAX POST  标准语法和用法</p>
+<pre><code>1.创建AJAX对象
+ xhr=new XMLHttpRequest()
+2.绑定事件
+    xhr.onreadystatechange=function(){
+    判断事件输出信息，返回数据
+    if(xhr.readyState===4&amp;&amp;xhr.status===200){
+        if(parseInt(xhr.responseText)&gt;0){
+            作输出 ，返回成功结果
+        }else{
+            输出 失败结果
+        }
+    }
+  }
+3.打开连接
+  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
+  修改头部信息
+   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4.发送请求
+  xhr.send(发送参数);
+</code></pre><p>修改头部信息–php首行加头部信息</p>
+<pre><code>纯文本text
+    header(&quot;Content-Type:text/plain&quot;);
+        html-&gt;ajax
+        xhr.responseText
+网页页面HTML
+    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+javascript
+    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+                html-&gt;ajax
+      eval(xhr.responseText);
+      示例:国际化
+       当前浏览器 zh-CN  你好
+                 en-US   hello
+</code></pre><p>json语法和要求</p>
+<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
+JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
+数组中可以包含多值 ，用， 分开
+对象中可以包含多个键值，使用逗号分开，
+
+怎么处理JSON数据
+服务器端PHP
+    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+    $str=json_encode($arr)
+    echo $str;
+
+javascript 接收
+    var obj=JSON.parse(xhr.responstText);
+</code></pre><p>XML语法要求</p>
+<pre><code>XML 文档声明
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
+所有属性必须用双引号
+
+XML方法
+    服务器PHP
+    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
+    echo &quot; xml....&quot;;
+    客户端JS
+    AJXX请求接收数据
+    var xmlDoc=xhr.responseXML;---
+    获取所有标签
+    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
+    获取其中属性
+    var name=xmldDoc.querySelector(&quot;name&quot;)
+</code></pre><p>jquery 常用AJAX函数</p>
+<pre><code>$.get(url,callback);    发送get请求
+$.post(url,data,callback);   发送post请求
+$.getJSON(url,callback);    发送JSON请求‘
+$.load(url);       加载
+$.getScript(url.callback);
+$.ajax({})   全能
+    全能使用方法
+    ajax({
+        type:&quot;GET&quot;        请求方式post,pub,delete
+        url:&quot;  url&quot;        请求地址
+        data:&quot;{---:--,--:--}&quot;
+            请求服务器数据
+        beforeSend:fn
+            请求消息发送前调用函数
+        success:fn
+            响应完成并且成功调用函数
+        error:fn
+            响应完成但是有问题的调用函数
+        complete:fn
+            响应完成但是无论成功与否都调用函数
+    })
+</code></pre><p>开发项目</p>
+<pre><code>开发流程
+    需求说明书---技术经理，美工
+    剪切图片集---UI
+    静态网页----前端
+    动态网页---后端
+    部署服务器----运维
+    测试---------功能
+    上线-----
+    调试---加新功能--升级
+</code></pre><p>针对cookie作了解</p>
+<pre><code>添加
+    document.cookie = &apos;uid=10&apos;;
+    document.cookie = &apos;uname=qiangdong&apos;;
+
+读取
+    function getCookieVal(key){
+            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
+        var rs = null;
+            //1:创建变量保存最终返回结果值
+        var line = document.cookie;
+        var arr = line.split(&quot;;&quot;);
+            //2:按照;拆分cookie中字符串
+        for(var i=0;i&lt;arr.length;i++){
+            //3:循环数组中每一个键值
+            var kv = arr[i];
+            var option = kv.split(&quot;=&quot;);
+            //4:按照=拆分
+            var k = option[0].trim();
+            //5:下标0 k  ---  trim()去除字符串前后空格
+            var v = option[1];
+            //6:下标0 v
+            if(key===k){
+                //7:判断如果参数中指定
+                key == k
+                return v;
+                //8:返回v
+            }
+        }
+        return rs;
+        //9:否则返回 null
+    }
+     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
+         console.log(rs);
+     var rs = getCookieVal(&quot;uname&quot;);
+         console.log(rs);
+     var age = getCookieVal(&quot;age&quot;);
+         console.log(age);
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
+&amp;gt;on tutorials.*
+&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
+    
+      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
+    
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Html5基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/HTML5/"/>
+    <id>www.wangchengzou.cn/2017/07/22/HTML5/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T16:50:23.596Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、HTML5新特性 —— 十个新特性：凌乱</p>
+<pre><code>(1)新的语义标签
+(2)增强型表单(表单2.0)
+(3)音频和视频
+(4)Canvas绘图
+(5)SVG绘图
+(6)地理定位
+(7)拖放API
+(8)Web Worker
+(9)Web Storage
+(10)Web Socket
+</code></pre><p>二、HTML5中表单的新特性</p>
+<pre><code>(1)新的input type      &lt;input type=&quot;?&quot;&gt;
+  H4中的input type：text、password、radio、checkbox、file、hidden、submit、reset、image
+  H5中的input type：email、url、number、tel、search、range、color、date、month、week
+(2)新的表单元素
+  H4中的表单元素：input、textarea、select/option、label
+  H5中新增的表单元素：datalist、progress、meter、output
+(3)表单元素的新属性
+</code></pre><p>三、H5中新增的表单元素 —— datalist</p>
+<pre><code>&lt;datalist id=&quot;list3&quot;&gt;        datalist本身不可见
+  &lt;option&gt;XX&lt;/option&gt;
+  &lt;option&gt;YY&lt;/option&gt;
+&lt;/datalist&gt;
+&lt;input type=&quot;text&quot; list=&quot;list3&quot;&gt;
+  datalist为input提供输入建议列表，用户可以从中选取，也可以手工输入
+</code></pre><p>四、H5中新增的表单元素 —— progress</p>
+<pre><code>显示一个进度条，有两种形式：
+&lt;progress&gt;&lt;/progress&gt; 左右晃动的进度条
+&lt;progress value=&quot;0.7&quot;&gt;&lt;/progress&gt; 具有指定进度值的进度条
+</code></pre><p>五、H5中新增的表单元素 —— meter</p>
+<pre><code>Meter：度量衡、刻度尺，用于标示一个值所处的范围：不可接受(红色)、可以接受(黄色)、非常优秀(绿色)
+&lt;meter min=&quot;可取的最小值&quot; max=&quot;可取的最大值&quot; low=&quot;合理的下限值&quot;
+      high=&quot;合理的上限值&quot; optimum=&quot;最佳值&quot;  value=&quot;当前实际值&quot;&gt;
+&lt;/meter&gt;
+</code></pre><p>六、H5中新增的表单元素 —— output</p>
+<pre><code>output：输出，语义标签，没有任何外观样式，样式上等同于SPAN。
+  商品单价: ￥3.50
+购买数量：&lt;input type=&quot;number&quot; value=&quot;1&quot;&gt;
+小计：&lt;output&gt;￥3.50&lt;/output&gt;
+</code></pre><p>七、H5表单新特性 —— 表单元素的新属性</p>
+<pre><code>H4中表单元素的属性：  &lt;input ?&gt;
+  id、class、title、style、type、value、name、readonly、disabled、checked
+H5中表单元素的新属性：
+  (1)placeholder：占位字符
+    &lt;input value=&quot;tom&quot; placeholder=&quot;请输入用户名&quot;&gt;
+  (2)autofocus：自动获取输入焦点
+    &lt;input autofocus&gt;
+  (3)multiple：允许输入框中出现多个输入（用逗号分隔），如邮箱输入域
+    &lt;input type=&quot;email&quot; multiple&gt;
+  (4)form：用于把输入域放置到FORM外部
+    &lt;form id=&quot;f5&quot;&gt;&lt;/form&gt;
+    &lt;input form=&quot;f5&quot;&gt;
+  ====输入验证相关的新属性======
+  (5)required：必填项，内容不能为空
+    &lt;input required&gt;
+  (6)maxlength：指定字符串的最大长度
+    &lt;input maxlength=&quot;9&quot;&gt;
+  (7)minlength：指定字符串的最小长度
+    &lt;input minlength=&quot;6&quot;&gt;
+  (8)max：指定数字的最大值
+    &lt;input max=&quot;60&quot;&gt;
+  (9)min：指定数字的最小值
+    &lt;input min=&quot;18&quot;&gt;
+  (10)pattern：指定输入必需符合的正则表达式
+    &lt;input pattern=&quot;1[35789]\d{9}&quot;&gt;
+  上述验证属性会影响表单元素对应的JS对象的validity属性。
+</code></pre><p>九、H5新特性——视频播放</p>
+<pre><code>H5提供了一个新的标签用于播放视频：
+  &lt;video src=&quot;res/birds.mp4&quot;&gt;&lt;/video&gt;
+  &lt;video&gt;
+          &lt;source src=&quot;res/birds.mp4&quot;&gt;
+          &lt;source src=&quot;res/birds.ogg&quot;&gt;
+          &lt;source src=&quot;res/birds.webm&quot;&gt;
+          您的浏览器不支持VIDEO播放！
+  &lt;/video&gt;
+它本身是一个300*150的inline-block元素。
+VIDEO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  poster：&apos;&apos;，在播放第一帧之前显示的海报
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十、H5新特性——音频播放</p>
+<pre><code>H5提供了一个新的标签用于播放音频：
+  &lt;audio src=&quot;res/bg.mp3&quot;&gt;&lt;/audio&gt;
+  &lt;audio&gt;
+          &lt;source src=&quot;res/bg.mp3&quot;&gt;
+          &lt;source src=&quot;res/bg.ogg&quot;&gt;
+          &lt;source src=&quot;res/bg.wav&quot;&gt;
+          您的浏览器不支持AUDIO播放！
+  &lt;/audio&gt;
+它默认是一个300*30的inline-block元素；但若没有controls属性，则display:none。
+AUDIO标签/对象常用的成员：
+成员属性：
+  autoplay：false，是否自动播放
+  controls：false，是否显示播放控件
+  loop：false，是否循环播放
+  muted：false，是否静音播放
+  preload：视频的预加载策略，可取值：
+      auto：预加载视频的元数据以及缓冲一定时长
+      metadata：仅预加载视频的元数据(尺寸、时长、第一帧内容)，没有视频缓冲
+      none：不预加载任何数据
+   -------------JS对象属性---------------------
+  currentTime：当前播放的时长
+  duration：总时长
+  paused：true，当前视频是否处于暂停状态
+  volume：1，当前音量
+  playbackRate：1，回放速率，大于1表快放，小于1表慢放
+成员方法：
+  play( )： 播放视频
+  pause( )： 暂停播放
+成员事件：
+  onplay：    当视频开始播放时触发的事件
+  onpause：当视频开始暂停时触发的事件
+</code></pre><p>十一、网页中可用的绘图技术</p>
+<pre><code>  网页中的实时走势图、统计图、在线画图板、网页游戏、地图应用都要使用到绘图技术。有三种绘图技术：
+  (1)SVG绘图：2D矢量绘图技术，2000年出现，后纳入H5标准
+  (2)Canvas绘图：2D位图绘图技术，H5提出的绘图技术
+  (3)WebGL绘图：3D绘图技术，尚未纳入H5标准
+
+Canvas绘图难点所在：
+(1)坐标系
+(2)单词比较多
+</code></pre><p>十二、H5新特性——Canvas绘图技术</p>
+<pre><code>Canvas：画布，是H5提供的2D绘图技术。
+  &lt;canvas width=&quot;500&quot; height=&quot;400&quot;&gt;
+      您的浏览器不支持Canvas标签！
+  &lt;/canvas&gt;
+CANVAS标签在浏览器中默认是300*150的inline-block。
+画布的宽和高只能使用HTML/JS属性来赋值，不能使用CSS样式赋值！
+每个画布上有且只有一个“画笔”对象——称为“绘图上下文”对象——使用该对象进行绘图！
+  var ctx = canvas.getContext(&apos;2d&apos;)  //得到画布上的画笔对象
+  (1)使用Canvas绘制矩形
+      矩形的定位点在自己的左上角
+      ctx.lineWidth = 1            描边宽度
+      ctx.fillStyle = &apos;#000&apos;        填充样式/颜色
+      ctx.strokeStyle = &apos;#000&apos;        描边样式/颜色
+      ctx.fillRect( x, y, w, h )        填充一个矩形
+      ctx.strokeRect( x, y, w, h )    描边一个矩形
+      ctx.clearRect( x, y, w, h )        清除一个矩形范围内所有的绘图
+  (2)使用Canvas绘制文本
+    一段文字的定位点在其文本基线的起点
+      ctx.textBaseline = &apos;alphabetic&apos;    文本基线
+      ctx.font = &apos;12px sans-serif&apos;    文本大小和字体
+      ctx.fillText( str, x, y )            填充一段文本
+      ctx.strokeText( str, x, y )        描边一段文本
+      ctx.measureText( str )    基于当前文字大小字体设置测量文本，返回一个对象：{width: x}
+</code></pre><p>十三、Canvas绘图中使用渐变对象</p>
+<pre><code>线性渐变： linearGradient
+径向渐变： radialGradient
+可以参考PS中的渐变效果。
+var g = ctx.createLinearGradient( x1, y1,  x2,  y2 );
+g.addColorStop( offset,  color )
+....
+g.addColorStop( offset,  color )
+ctx.strokeStyle = g;
+ctx.fillStyle = g;
+</code></pre><p>十四、Canvas：是H5提供的2D位图绘图技术。</p>
+<pre><code>&lt;canvas id=&quot;c1&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+    您的浏览器不支持Canvas
+&lt;/canvas&gt;
+var ctx = c1.getContext(&apos;2d&apos;)
+//绘制矩形  ctx.fillRect()/strokeRect()/clearRect()
+//绘制文本  ctx.fillText()/strokeText()/measureText()
+//绘制路径
+//绘制图像
+
+1.Canvas的尺寸不能用CSS指定
+  使用CSS指定的Canvas尺寸，实际不是修改了画布尺寸，而是进行了拉伸，上面的绘图内容也会随着进行拉伸。
+  可以使用HTML标签的width和height属性，也可以使用JS对象的width和height属性。
+
+2.使用Canvas进行绘图 —— 路径
+  Path：类似于PS中的“钢笔工具”，由多个坐标点组成的任意形状，路径不可见，可用于“描边”、“填充”、“裁剪”。
+  ctx.beginPath()        开始一条新路径
+  ctx.closePath()        闭合当前路径
+  ctx.moveTo(x, y)        移动到指定点
+  ctx.lineTo(x, y)        从当前点到指定点画直线
+  ctx.arc(cx, cy, r, start, end)    绘制圆拱路径
+
+  ctx.stroke()            对当前路径描边
+  ctx.fill()                对当前路径填充
+  ctx.clip()            使用当前路径进行裁剪
+
+3.使用Canvas进行绘图 —— 图像
+  Canvas属于客户端技术，图片在服务器中，所以浏览器必须先下载要绘制的图片，且等待图片异步加载完成：
+  var p3 = new Image();
+  p3.src = &apos;img/p3.png&apos;;    //浏览器会自动异步请求图片
+  console.log(p3.width);    //0
+  p3.onload = function(){      //图片加载完成
+        console.log(p3.width);      //200
+        //开始绘制图片到画布上....
+    ctx.drawImage( p3, x, y );        //原始大小绘图
+    ctx.drawImage( p3, x, y, w, h );    //拉伸绘图
+  }
+
+Canvas绘图核心知识点：—— 重点
+绘制矩形：
+  ctx.fillRect()  ctx.strokeRect()   ctx.clearRect()
+绘制文本：
+  ctx.fillText()  ctx.strokeText()   ctx.measureText().width
+绘制路径：
+  ctx.beginPath()    ctx.closePath()
+  ctx.moveTo()   ctx.lineTo()
+  ctx.arc()
+  ctx.stroke()   ctx.fill()    ctx.clip()
+绘制图像：
+  ctx.drawImage()
+
+
+4.使用Canvas绘图时进行变形操作
+  CSS中有变形相关样式： transform: rotate/scale/translate/skew，这些变形只能作用于某个HTML元素。
+  Canvas绘图中也有变形技术，可以针对某一个图像/图形的绘制过程进行变形：rotate、scale、translate。
+  ctx.rotate( 弧度 )     旋转绘图上下文对象(即画笔),轴点是画布的原点
+  ctx.translate( x, y )  将整个画布的原点平移到指定的点
+  ctx.save()         保存画笔当前的所有变形状态值（游戏中从存盘）
+  ctx.restore()        恢复画笔变形状态到最近的一次保存（游戏中读取存盘）
+
+5.第三方绘制统计图工具
+  (1)Chart.js：免费的，提供了八种统计图表
+  (2)FusionCharts.js：收费的，提供了90+中统计图表
+  (3)ECharts：百度提供的免费的绘图工具，与地图整合的很好
+  (4)FreeCharts ....
+
+提示：第三方工具使用无需记忆！重点掌握自学的过程：
+(1)打开官网，查看说明
+    http://www.chartjs.org/
+(2)仿照DEMO编写示例
+    开源免费的、8种图表、基于H5 Canvas、支持响应式
+(3)在实际项目中加以应用，查看详细API说明
+    &lt;canvas id=&quot;c15&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;
+            您的浏览器不支持Canvas绘图！
+    &lt;/canvas&gt;
+    &lt;script src=&quot;js/Chart.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        new Chart(c15, {
+            type: &apos;bar&apos;,//line、pie、noughnut...
+            data: {},
+            options: {}
+            });
+    &lt;/script&gt;
+
+位图(Photoshop)：由一个又一个像素点组成，每个点各有自己的颜色，色彩细腻，但放大会失真
+矢量图(Illustrator)：由一个又一个线条组成，每个线条可以指定颜色、方向，可以无限缩放，但细节不够丰富
+</code></pre><p>十五、HTML5新特性——SVG绘图</p>
+<pre><code>Scalable Vector Graph：可缩放的矢量图
+Canvas绘图    SVG绘图
+类型    2D位图    2D矢量图
+如何绘图    使用JS代码绘图    使用标签绘图
+事件绑定    每个图形不是元素，无法直接绑定事件    每个图形都是元素，可以直接绑定事件监听
+应用场合    统计图、游戏    统计图、图标、地图
+  SVG技术诞生于2000年，早期作为XML的扩展应用出现；H5标准把常用的SVG标签采纳为标准，但有些被废弃掉。
+
+SVG技术在HTML5出现之前的使用方法：
+    (1)在一个XML文档中声明要绘制的图形
+    (2)再编写HTML文档，使用IMG/IFRAME应用XML文档即可
+SVG技术在HTML5出现之后的使用方法：
+    直接创建HTML5文档，在其中书写SVG标签即可
+    &lt;svg&gt;&lt;/svg&gt;本身是一个300*150的inline-block。
+
+使用SVG标签绘制矩形：
+    &lt;rect&gt;
+使用SVG标签绘制圆形：
+    &lt;circle&gt;
+使用SVG标签绘制椭圆：
+    &lt;ellipse&gt;
+使用SVG标签绘制直线：
+    &lt;line&gt;
+使用SVG标签绘制折线：
+    &lt;polyline&gt;
+使用SVG标签绘制多边形：
+    &lt;polygon&gt;
+</code></pre><p>十六、补充：Canvans上如何按照特定的顺序绘制图片</p>
+<pre><code>Canvas绘图中若需要多张图片，他们的加载都是异步的，无法预测哪一张先加载完成！
+但是绘图往往需要按照一定顺序，如先绘背景，再绘上面的内容。所以必须等待所有图片全部加载完成，才能开始绘图。
+var progress = 0; //所有图片的总加载进度
+var imgBg = new Image();
+imgBg.src = &apos;img/bg.jpg&apos;;
+imgBg.onload = function(){
+  progress += 40;    //为每张图片赋一个权重值
+  if(progress===100){
+    startDraw();
+  }
+}
+var imgDisc = new Image();
+imgDisc.src = &apos;img/disc.png&apos;;
+imgDisc.onload = function(){
+  progress += 60;
+  if(progress===100){
+    startDraw();
+  }
+}
+</code></pre><p>十七、补充：如何为Canvas上的图形/图像绑定事件监听</p>
+<pre><code>网页中只能为HTML元素绑定监听函数，Canvas上的图形/图像都是用JS绘制的，不是DOM元素，不能直接进行事件绑定！
+只能绑定给整个Canvas！然后再具体计算事件发生坐标是否处于某个图像/图形内部——仅适用于规则图像/图形。
+  SVG图形中为元素绑定事件监听
+  SVG图形中每个图形/图像都是一个标签，可以很方便进行事件绑定
+</code></pre><p>十八、SVG绘图的特点——着重注意！</p>
+<pre><code>(1)所有的图形默认只有填充色（黑色），没有描边色。
+(2)SVG图形的样式可以用元素属性声明，也可以用CSS形式来声明。但用CSS声明时，只能使用SVG专用的样式，不能使用CSS样式，如边框设置只能用stroke，而不用border！
+(3)图形可以使用JS来对属性赋值；但不能使用HTML DOM形式，只能用核心DOM操作，如：
+  r.x = 10;   r.width = 100;    //无效
+  r.setAttribute(&apos;x&apos;, 10); r.setAttribute(&apos;width&apos;, 100)//有效
+(4)动态添加SVG图形可以使用两种方式：
+   1)HTML字符串拼接
+       var html = `&lt;rect&gt;&lt;/rect&gt;`;
+       svg.innerHTML = html;
+   2)使用document.createElementNS(&apos;http://www.w3.org/2000/svg&apos;,&apos;标签名&apos;)创建
+
+4.使用SVG进行绘图——矩形
+  &lt;rect width=&quot;&quot; height=&quot;&quot; x=&quot;&quot; y=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/rect&gt;
+
+5.使用SVG进行绘图——圆形
+  &lt;circle r=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot; fill=&quot;&quot; fill-opacity=&quot;&quot; stroke=&quot;&quot; stroke-opacity=&quot;&quot;&gt;&lt;/circle&gt;
+
+6.使用SVG进行绘图——椭圆
+  &lt;ellipse rx=&quot;&quot; ry=&quot;&quot; cx=&quot;&quot; cy=&quot;&quot;&gt;&lt;/ellipse&gt;
+
+7.使用SVG进行绘图——直线
+  &lt;line x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot; stroke=&quot;&quot; stroke-width=&quot;&quot; stroke-linecap=&quot;butt/square/round&quot;&gt;&lt;/line&gt;
+ 练习：使用SVG中的直线绘制如下的图标
+
+提示：若多个SVG图形有完全一样的属性，可以抽出来，放在一个公共的父元素中（小组）
+&lt;g stroke=&quot;#000&quot;&gt;
+   &lt;line&gt;&lt;/line&gt;
+   &lt;line&gt;&lt;/line&gt;
+&lt;/g&gt;
+
+8.使用SVG进行绘图——折线
+  一条折线上可以有任意多个连续的点
+  &lt;polyline points=&quot;50,50  100,300 ...&quot; fill=&quot;transparent&quot; stroke=&quot;#000&quot;&gt;&lt;/polyline&gt;
+ 练习：使用折线绘制如下图标
+
+9.使用SVG进行绘图——多边形
+&lt;polygon points=&quot;50,50  100,300 ...&quot; fill=&quot;&quot;&gt;&lt;/ polygon&gt;
+  练习：使用多边形绘制如下两个图标
+
+10.附加：使用SVG进行绘图——文本
+  SVG画布上不允许使用普通的HTML元素绘制文本，如SPAN、P等！只能使用：
+  &lt;text font-size=&quot;&quot; alignment-baseline=&quot;before-edge&quot; fill=&quot;&quot; stroke=&quot;&quot; x=&quot;&quot; y=&quot;&quot;&gt;文本内容 &lt;/text&gt;
+
+11.附加：使用SVG进行绘图——图像
+  不能使用IMG置于SVG画布上！只能使用：
+  &lt;image xlink:href=&quot;disc.png&quot; width=&quot;200&quot; height=&quot;200&quot; x=&quot;&quot; y=&quot;&quot;&gt;&lt;/image&gt;
+SVG绘图的主要知识点：
+&lt;svg&gt;
+  &lt;rect&gt;&lt;/rect&gt;
+  &lt;circle&gt;&lt;/circle&gt;
+  &lt;ellipse&gt;&lt;/ellipse&gt;
+  &lt;line&gt;&lt;/line&gt;
+  &lt;polyline&gt;&lt;/polyline&gt;
+  &lt;polygon&gt;&lt;/polygon&gt;
+  &lt;text&gt;&lt;/text&gt;
+  &lt;image&gt;&lt;/image&gt;
+&lt;/svg&gt;
+
+12.补充小知识：如何在SVG中使用渐变
+  &lt;defs&gt;      定义特效对象：渐变对象属于一种特效对象
+    &lt;linearGradient id=&quot;g3&quot; x1=&quot;&quot; y1=&quot;&quot; x2=&quot;&quot; y2=&quot;&quot;&gt;
+        &lt;stop offset=&quot;0&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+        &lt;stop offset=&quot;1&quot; stop-color=&quot;&quot; stop-opacity=&quot;&quot;/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+  &lt;ANY fill=&quot;url(#g3)&quot;  stroke=&quot;url(#g3)&quot;&gt;&lt;/ANY&gt;
+ 练习：使用渐变对象，为不同的柱子分配不同的渐变色
+
+
+13.补充小知识：如何在SVG中使用滤镜
+  &lt;defs&gt;
+    &lt;filter id=&quot;f2&quot;&gt;
+        &lt;feGaussianBlur stdDeviation=&quot;3&quot;/&gt;
+    &lt;/filter&gt;
+  &lt;/defs&gt;
+  &lt;ANY filter=&quot;url(#f2)&quot;&gt;
+
+SVG中支持的所有滤镜：
+https://developer.mozilla.org/en-US/docs/Web/SVG/Element/filter
+
+网页中可用的绘图技术：
+(1)Canvas绘图
+(2)SVG绘图
+(3)WebGL绘图
+
+14.第三方绘图工具库  —— Two.js
+
+ (1)打开官网，查看说明
+    https://two.js.org/
+    是一个2D绘图函数库，提供了一套API，可用于不同的技术下的绘图，如SVG/CANVAS/WEBGL。
+ (2)参考DEMO，编写示例
+    var two = new Two({ }).appendTo(box);
+    //绘制一个圆形
+    var c = two.makeCircle(200,200,100);
+    //绘制一个矩形——定位点在矩形中心，而不是左上角
+    var r = two.makeRectangle(600,200, 200,200);
+    //把绘图对象中的内容绘制到DOM树
+    two.update(); //更新DOM树
+ (3)查看API，在项目中加以应用
+</code></pre><p>十九、HTML5新特性之六 —— 地理定位</p>
+<pre><code>  Geolocation：地理定位，使用JS获取当前浏览器所在的地理坐标
+  （经度、维度、海拔、速度）数据，用于实现LBS应用(Location Based Service)，
+  如饿了么、高德导航...
+  手机浏览器如何获得定位信息：
+    (1)首选手机中的GPS芯片与卫星通信，定位精度在米
+    (2)次选手机通信基站进行定位获取，定位精度在公里
+  PC浏览器如何获得定位信息：
+    通过IP地址进行反向解析，定位精度取决于IP地址库的大小
+
+HTML5中提供了一个新的对象，用于获取当前浏览器的定位信息：
+  window.navigator.geolocation{
+    getCurrentPosition: fn,    获得当前定位信息
+    watchPosition: fn, 监视定位数据的改变
+    clearWatch: fn  取消监视
+  }
+获得客户端的定位信息：
+navigator.geolocation.getCurrentPosition(
+    (pos)=&gt;{ pos.coords.latitude   pos.coords.longitude },
+    (err)=&gt;{    err.code   err.message }
+)
+
+2.扩展小知识：在网页中如何嵌入百度地图
+  (1)注册百度开发者账号
+    http://lbsyun.baidu.com/
+  (2)创建一个网站；登录百度地图，为网站申请一个地图的AccessKey
+    http://lbsyun.baidu.com/apiconsole/key
+
+  (3)在自己的网页中嵌入百度地图提供的API，嵌入百度地图
+    官方手册：http://lbsyun.baidu.com/index.php?title=jspopular
+    var map = new BMap.Map(&quot;container&quot;);          // 创建地图实例
+    var point = new BMap.Point(116.300829,39.915836);  // 创建点坐标
+    map.centerAndZoom(point, 17);   // 以指定点为中心并缩放
+</code></pre><p>二十、HTML5新特性之七 —— 拖放API</p>
+<pre><code>Drag &amp; Drop：拖动和释放
+HTML5为拖放行为提供了7个事件，分为两组：
+拖动的源对象(会动)可以触发的事件：
+  dragstart：拖动开始
+  drag：拖动中
+  dragend：拖动结束
+  整个拖动过程： dragstart*1 + drag*n + dragend*1
+拖动的目标对象(不动)可以触发的事件：
+  dragenter：拖动着进入
+  dragover：拖动着悬停在上方
+  dragleave：拖动着离开
+  drop：在上方释放
+  整个拖动过程1： dragenter*1 + dragover*n + dragleave*1
+  整个拖动过程2： dragenter*1 + dragover*n + drop*1
+注意：必须阻止dragover的默认行为，drop才可能触发！
+</code></pre><p>二十一、HTML5新特性之八 —— Web Worker —— 代码就3行</p>
+<pre><code>  程序：Program，指可被CPU执行的代码，存储在外存中
+  进程：Process/Task，指程序被OS调入内存，分配执行空间，随时供CPU调度执行
+  线程：Thread，线程是进程内执行代码基本单位
+
+  进程和线程：
+    (1)进程是操作系统分配内存的基本单位；
+    (2)线程是CPU执行代码的基本单位；
+    (3)线程必须处于某个进程内部；
+    (4)一个进程内必须至少有一个线程；也可以有多个；
+    (5)一个操作系统中可能同时存在几千个线程，它们是“并发执行的”—— 宏观上看同时执行，微观上看是依次循环执行
+
+    Chrome浏览器中的线程模型：
+    一个Chrome进程内，至少有6个线程，可以“同时/并发”向Web服务器发起HTTP请求，以获得所需的资源——资源请求线程。
+    还有一个线程负责将所有内容绘制到浏览器页面中——UI主线程——不允许多线程同时绘图，防止内容布局错乱。
+
+    5.观察如下一段代码执行特点
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script src=&quot;14.js&quot;&gt;很耗时的JS任务&lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+      现象：JS执行过程中，按钮1可见，但点击无效；按钮2不可见。
+      原因：浏览器中执行代码的只有一个线程——UI主线程
+      解决办法：创建新的线程，由它来执行耗时的JS任务；UI主线程继续执行后续的HTML渲染：
+      &lt;button onclick=&quot;console.log(111)&quot;&gt;按钮1&lt;/button&gt;
+      &lt;script&gt;
+        var w = new Worker(&apos;14.js&apos;)
+      &lt;/script&gt;
+      &lt;button onclick=&quot;console.log(222)&quot;&gt;按钮
+
+1.补充小知识：在拖动源对象和目标对象间传递数据
+  如：拖动开始时(src.ondragstart)记录被拖动元素的ID，释放时(target.ondrop)根据ID查找拖动的源对象，进行相关操作。
+  方法1：使用一个全局变量 —— 造成全局对象的污染
+  方法2：使用H5拖放API专供的e.dataTransfer（数据传递）
+
+  //拖动的源对象
+  src.ondragstart = function(e){
+    //海南：往拖拉机中装数据
+    e.dataTransfer.setData(&apos;key&apos;, &apos;value&apos;)
+  }
+  //拖动的目标对象
+  target.ondrop = function(e){
+    //哈尔滨：从拖拉机中读取数据
+    var data = e.dataTransfer.getData(&apos;key&apos;);            //value
+  }
+</code></pre><p>二十二、HTML5新特性之八——WebWorker——代码就3行，重点在理论理解</p>
+<pre><code>进程：操作系统分配内存的单位 —— 工厂
+线程：处于进程内部，用于执行代码 —— 生产线
+线程并发：操作系统中所有的线程宏观上看“同时执行”；微观上看是“依次交替执行”
+Chrome中的线程模型： 请求资源——6个线程；运行代码/渲染页面内容——1个线程
+&lt;button&gt;按钮1&lt;/button&gt;
+&lt;script src=&quot;x.js&quot;&gt;&lt;/script&gt;
+&lt;button&gt;按钮2&lt;/button&gt;
+上述代码中若x.js很耗时，按钮1无法点击，按钮2在运行js过程中不可见——所有的代码(HTML/CSS/JS)都在单线程(UI主线程)中执行
+
+解决方案：创建一个并发执行的新线程，让它来执行耗时的JS任务
+
+3.Worker线程的致命缺陷
+浏览器不允许Worker线程操作任何的DOM&amp;BOM对象！！
+原因：浏览器只允许UI主线程操作DOM&amp;BOM！若多个线程同时都可以操作DOM结构，页面将混乱。
+所以，类似jQuery的脚步决不能使用Worker来加载执行。
+
+Worker线程可以给UI主线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.onmessage = function(e){ e.data }
+  Worker线程：
+      postMessage(stringMsg)
+UI主线程可以给Worker线程发数据消息：
+  UI主线程：
+      var w6 =new Worker(&apos;6.js&apos;);
+      w6.postMessage(stringMsg)
+  Worker线程：
+      onmessage = function(e){ e.data }
+
+  项目中Worker的使用场景：
+  (1)只要js中有DOM&amp;BOM就不能用Worker！
+  (2)Worker适合于执行耗时的JS任务！如复杂计算、加密和解密、大数据统计、路径规划......
+</code></pre><p>二十三、HTML5新特性之九 —— WebStorage</p>
+<pre><code>  在浏览器中存储当前用户专有的数据：访问历史、内容定制、样式定制...
+  在客户端存储数据可以使用的技术：
+  (1)Cookie技术：浏览器兼容性好；不能超过4KB，操作复杂
+  (2)Flash存储：依赖于Flash播放器
+  (3)H5 WebStorage：不能超过8MB，操作简单
+  (4)IndexedDB：可存大量数据，还不是标准技术
+
+Session：会话，浏览器从打开某个网站的一个页面开始，中间可能打开很多页面，
+直到关闭浏览器，整个过程称为“浏览器与Web服务器的一次会话”。
+
+WebStorage技术中，浏览器为用户提供了两个对象：
+  (1)window.sessionStorage：类数组对象，会话级数据存储
+    在浏览器进程所分得的内存存储着一次Web会话可用的数据，可供此次会话中所有的页面共同使用
+    ；浏览器一旦关闭就消失了。
+作用：在同一个会话中的所有页面间共享数据，如登录用户名。
+    sessionStorage[key] = value            //保存一个数据
+    sessionStorage.setItem(key, value)        //保存一个数据
+    var v = sessionStorage[key]            //读取一个数据
+    var v = sessionStorage.getItem(key)    //读取一个数据
+    sessionStorage.removeItem(key)        //删除一个数据
+    sessionStorage.clear()                //清除所有数据
+    sessionStorage.length                //数据的数量
+    sessionStorage.key(i)                //获取第i个key
+
+  (2)window.localStorage：类数组对象，本地存储(跨会话级存储)
+    在浏览器所能管理的外存(硬盘)中存储着用户的浏览数据，可供此次会话以及后续的会话中的页面共同使用；
+即使浏览器关闭也不会消失——永久存在。作用：在当前客户端所对应的所有会话中共享数据，如登录用户名。
+    localStorage[key] = value            //保存一个数据
+    localStorage.setItem(key, value)        //保存一个数据
+    var v = localStorage [key]            //读取一个数据
+    var v = localStorage.getItem(key)        //读取一个数据
+    localStorage.removeItem(key)        //删除一个数据
+    localStorage.clear()                //清除所有数据
+    localStorage.length            //数据的数量
+    localStorage.key(i)                //获取第i个key
+
+localStorage中若数据发生了修改，会触发一次window.onstorage事件，可以监听此事件，实现监视localStorage数据改变的目的，
+用于在一个窗口中监视其它窗口中对localStorage数据的修改——不能监视sessionStorage数据的修改！
+
+5.HTML5新特性之十 —— WebSocket——代码不复杂重点在原理的理解
+  HTTP协议：属于“请求-响应”模型，只有客户端发起请求消息，服务器才会返回响应消息，没有请求就没有响应；
+一个请求，只能得到一个响应。有些场景中，此模型就力不从心了：实时走势应用、在线聊天室。
+解决方案：长轮询(Long-Polling)/心跳请求——定时器+AJAX——请求过于频繁，服务器压力过大；
+不够频繁，客户端数据延迟较大。
+  WebSocket协议：属于“广播-收听”模型，客户端连接到服务器就不再断开，永久的连接，双方就随时向对方发送消息，
+且是全双工不对等发送。WS协议在实时走势应用、在线聊天室应用中有着特别的优势。
+
+
+  WS协议的应用程序也分为客户端程序和服务器端程序：
+  WS服务器端应用：
+    监听指定端口，接收客户端请求，向对方发消息，并接收消息；可以使用php/java/node.js等语言编写
+  WS客户端应用：
+    主动发起连接请求，保持永久的连接，向对方消息，并接收消息，可以使用php/java/node.js/html5等语言编写
+
+6.了解：使用Node.js创建WS协议的服务器
+  node.js官方没有提供ws协议的模块，必须使用NPM下载第三方ws协议模块：  npm  i  ws
+  查看README,编写WS协议的服务器：
+  ......
+
+7.掌握：使用HTML5创建WS协议的客户端应用
+  //连接到WS服务器
+  var socket = new WebSocket(&apos;ws://127.0.0.1:9001&apos;)
+  //向服务器发消息
+  socket.send(stringMsg)
+  //接收服务器发来的消息
+  socket.onmessage = function(e){
+    e.data   //消息内容
+  }
+  //断开到WS服务器的连接
+  socket.close();
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、HTML5新特性 —— 十个新特性：凌乱&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(1)新的语义标签
+(2)增强型表单(表单2.0)
+(3)音频和视频
+(4)Canvas绘图
+(5)SVG绘图
+(6)地理定位
+(7)拖放API
+(8)Web Worker
+(9)Web Stora
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="h5" scheme="www.wangchengzou.cn/tags/h5/"/>
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E7%AC%94%E8%AE%B0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3笔记/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:29:58.932Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、CSS概述</p>
+<pre><code>1、问题
+    1、控制页面中所有的文本颜色为 红色
+    2、控制页面中所有div的文本颜色 为蓝色
+    3、将 所有div 的颜色 变为 黄色
+
+    HTML元素的不足：
+        1、要完成相同的效果，使用的是不同的属性
+            &lt;body text=&quot;red&quot;&gt;
+            &lt;font color=&quot;blue&quot;&gt;
+        2、没有提升 html属性的 可重用性和可维护性
+            可重用性：重复的操作 不用重复的写
+
+        可以通过 CSS 解决以上两个问题
+2、什么是CSS
+    CSS (Cascading Style Sheets),层叠样式表，级联样式表，简称：样式表。专门用于定义页面元素的样式的。
+    以统一的方式定义页面元素的样式
+
+    CSS实现了内容与表现相分离
+    提升了代码的可重用性 和 可维护性
+3、CSS 与 HTML之间的关系
+    HTML : 专门用于构建网页结构
+    CSS : 专门构建HTML网页的样式
+
+    HTML属性效果 与 CSS样式效果相冲突的话：
+    优先使用 CSS 定义页面元素的效果
+</code></pre><p>2、CSS语法</p>
+<pre><code>1、使用CSS样式表
+    1、内联方式
+        又称为 ：行内样式
+        将样式定义在某个html元素中
+        语法：
+        &lt;ANY style=&quot;样式声明;样式声明;&quot;&gt;&lt;/ANY&gt;
+        样式声明：
+            由 属性名称 和 属性值 来组成，属性名称和属性值之间用 : 来关联
+        ex:
+            属性名称          属性值
+            color             red,blue,yellow...
+            background-color  合法颜色值即可..(同上)
+            font-size         以px，pt，为单位的数值
+
+            控制以下 文本颜色为 红色，背景颜色为 黄色，文字大小为 24px
+            &lt;p&gt;静夜思&lt;/p&gt;
+    2、内部样式表
+        将样式定义在网页的一块独立位置处
+        在 &lt;head&gt;&lt;/head&gt; 中 增加一对 &lt;style&gt;&lt;/style&gt;元素，在 &lt;style&gt; 元素中 定义元素的样式,具体语法如下：
+        &lt;head&gt;
+            &lt;title&gt;&lt;/title&gt;
+            &lt;style&gt;
+                样式规则1
+                样式规则2
+                ...
+                样式规则n
+            &lt;/style&gt;
+        &lt;/head&gt;
+        样式规则，由两部分组成
+            1、选择器
+                选择(规范)页面中哪些元素能够使用声明好的样式
+                比如：元素选择器，由元素名称来充当选择器，控制某标记对应所有页面元素的样式
+            2、若干样式声明
+
+            样式规则 语法结构：
+            选择器{
+                样式声明1;
+                样式声明2;
+                ...
+                样式声明n;
+            }
+            ex:
+            p{
+                color:red;
+                background-color:yellow;
+                font-size:24px;
+            }
+
+    3、外部样式表
+        将样式定义在外部的&quot;样式表文件(*.css)&quot;中
+        1、创建 .css 文件，编写样式规则
+        2、在要使用 样式表的 html文件中进行引入
+            &lt;head&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;样式表文件url&quot;&gt;
+            &lt;/head&gt;
+2、CSS样式表特征
+    1、继承性
+        大部分样式属性是可以被继承
+    2、层叠性
+        可以为一个元素定义多个样式规则
+        如果 属性 不冲突时，多个样式规则可以层叠为一个(即都可以应用到当前元素上)
+    3、优先级
+        在层叠性基础上，如果 样式定义 冲突的话，那么就会按照不同使用方式的优先级，来选择性应用样式
+        低 ：浏览器默认设置
+        中 ：外部样式表 和 内部样式表
+            就近原则
+            后定义优先
+        高 ：内联方式
+    4、!important 规则
+        显示调整样式属性的优先级
+        语法：
+            属性名:值 !important;
+        谨慎使用!
+3、选择器(重点)
+    1、作用
+        选择(规范)页面中哪些元素能够使用声明好的样式
+        为了匹配页面的元素
+    2、详解
+        1、通用选择器
+            作用：匹配页面中所有的元素
+            语法：*{}
+            缺点：效率较低，尽可能少用,可以通过 使用 body 的继承性 来替代 *
+        2、元素选择器
+            作用：匹配某一标记所对应的页面中所有的元素
+            语法：元素/标签 {}
+            ex:
+            div{/*匹配页面中所有div*/}
+            span{/*匹配页面中所有span*/}
+            li{/*匹配页面中所有li*/}
+        3、类选择器
+            作用：事先定义好样式，可以由任意元素通过class属性进行引用
+            语法：
+                定义：.类名{}
+                引用：&lt;ANY class=&quot;类名&quot;&gt;&lt;/ANY&gt;
+
+            多类选择器的引用方式：
+            让一个元素引用多个类选择器，中间用 空格 隔开即可
+
+            分类选择器的声明方式：
+                将元素选择器和类选择器结合到一起进行声明，实现对某种元素中的不同样式细分控制
+
+                ex:想要控制 class为important的div元素，文字大小为 48px
+                语法：元素选择器.类选择器{}
+        4、id选择器
+            作用：匹配 指定id值的元素的 样式
+            ex:
+                &lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
+
+            语法：#ID值{}
+        5、群组选择器
+            群组选择器的声明以一个以 , 隔开的选择器列表
+            语法：
+                选择器1,选择器2,...{}
+            ex:
+                #title,p.redColor,.important,span{
+                    color:red;
+                }
+        6、后代选择器
+            后代：
+                多于 一级 层级关系的元素，只能叫后代
+                只具备 一级 层级关系的 也可以叫后代
+            语法：
+                选择器1 选择器2{}
+                语义：匹配 在选择器1 中的  所有后代元素 选择器2
+                ex:
+                    #content span{}
+        7、子代选择器
+            子代：
+                只具备 一级 层级关系的 称之为 子代
+            语法：
+                选择器1&gt;选择器2{}
+                语义：匹配 在选择器1 中的 子级元素 选择器2
+        8、伪类选择器
+            伪类：专门匹配元素不同状态的选择器
+            分类：
+                1、链接伪类
+                2、动态伪类
+
+                3、目标伪类
+                4、元素状态伪类
+                5、结构伪类
+                6、否定伪类
+            语法：
+                以 :作为开始的选择器
+
+                1、链接伪类
+                    1、:link
+                        适用于未被访问的超链接
+                    2、:visited
+                        适用于访问过的超链接
+                2、动态伪类
+                    1、:hover
+                        适用于鼠标悬停在html元素时
+                    2、:active
+                        适用于html元素被激活时
+                    3、:focus
+                        适用于html元素获取焦点时
+</code></pre><p>3、尺寸与边框</p>
+<pre><code>1、CSS单位
+    1、尺寸单位
+        1、px ：像素
+        2、pt ：磅 (1pt=1/72in)
+        3、in ：英寸，1in=2.54cm
+        4、%  ：百分比，占据 当前元素 或 父元素 对应属性的 占比
+        5、em ：倍数，多数用于 文字大小的描述
+        6、mm ：毫米
+        7、cm ：厘米
+        注意：css中尺寸单位是不能省略的。
+    2、颜色单位(取值)
+        1、rgb(r,g,b)
+                r : red , 范围 0-255
+                g : green,范围 0-255
+                b : blue, 范围 0-255
+
+             ex：
+                background-color:rgb(0,0,0);黑色
+                background-color:rgb(255,0,0);红色
+                background-color:rgb(255,255,255);白色
+        2、rgb(r%,g%,b%)
+        3、rgba(r,g,b,alpha)
+            alpha : 透明度 0-1之间的数字
+                0 : 完全透明
+                1 : 完全不透明
+                0.5 : 半透明
+        4、#rrggbb
+            通过6位16进制数字表示一个颜色
+            每位数字范围：0-9 A-F
+            #00ff00 : 绿色
+            #ff0000 : 红色
+            #1a2b3c : ?
+        5、#rgb
+            #rrggbb 每两位数字相同时，可以使用#rgb简化
+            #00ff00 -&gt; #0f0
+            #aabbcc -&gt; #abc
+            #accdda -&gt; ×
+        6、颜色的英文表示
+            red,green,blur,orange,yellow...
+2、尺寸属性
+    1、作用
+        用于设置元素的宽度和高度
+        单位一般为 px 或 %(父元素对应属性的占比)
+    2、语法
+        1、宽度
+            width
+            min-width : 最小宽度
+            max-width : 最大宽度
+        2、高度
+            height
+            min-height : 最小高度
+            max-height : 最大高度
+        注意：
+            页面中所有元素的高度，在不指定的情况全部是自适应(以内容为主)。
+
+            页面中所有块级元素的宽度，默认占据父元素的100%
+            页面中所有行内元素的宽度，默认自适应(以内容为主)
+    3、页面中允许修改 尺寸 属性的元素
+        1、所有块级元素都允许修改
+        2、大部分的行内块元素
+            所有的表单元素都是行内块元素
+            除radio、checkbox之外，其他元素允许修改尺寸
+        3、本身html元素就具备width 和 height的
+            img，table 可以修改尺寸
+        4、行内元素(除具备width和height之外)是不能修改尺寸
+            span,b,a,i,s,b ... 不能修改尺寸
+    4、溢出
+        1、什么是溢出
+            使用尺寸属性限制元素大小时，如果内容所需要的空间大于元素本身空间，则会导致内容溢出
+        2、溢出处理属性
+            属性：
+                overflow
+                overflow-x : 横向溢出处理
+                overflow-y : 纵向溢出处理
+            取值：
+                1、visible
+                    默认值，溢出可见
+                2、hidden
+                    隐藏
+                3、scroll
+                    滚动，让元素出现滚动条，溢出时，滚动条可用
+                4、auto
+                    自动，溢出时显示滚动条并可用，非溢出时，不显示滚动条
+3、边框属性
+    1、边框
+        1、简写方式
+            border:width style color;
+            作用：设置元素上下左右四个边框的宽度，样式以及颜色
+                width:边框的宽度(尺寸)
+                style:边框的样式
+                    取值：
+                        1、solid ：直线
+                        2、dotted ：虚线(点状)
+                        3、dashed ：虚线(线状)
+                color:边框的颜色,可以取值为 transparent(透明)
+
+            ex:
+                div{
+                    border:1px solid red;
+                }
+        2、单边定义
+            border-方向:width style color;
+            方向可以被以下关键字所取代
+            top : 上
+            right : 右
+            bottom : 下
+            left:左
+            ex:
+                border-bottom:2px dashed #00ff00;
+        3、单属性定义
+            border-属性:值;
+            属性可以被以下关键字取代：
+            width:宽度
+            style:样式
+            color:颜色
+            ex:
+                border-width:5px;
+                border-style:solid;
+                border-color:#f00f00;
+        4、单边单属性定义
+            border-方向-属性:值;
+            方向：top/right/bottom/left
+            属性：width/style/color
+            ex:
+                border-top-color:yellow;
+                border-right-style:dotted;
+</code></pre><hr>
+<p>1、边框</p>
+<pre><code>1、边框
+    边框实际上是由四个三角形组成的
+2、边框倒角
+    属性：border-radius
+    取值：
+        具体数值(px) 或 %
+        最少一个值，最多4个值
+    单角定义
+        border-top-left-radius:左上角倒角半径
+        border-bottom-right-radius:右下角
+        ... ...
+3、边框阴影
+    属性：box-shadow
+    取值：h-shadow v-shadow blur spread color inset;
+        h-shadow:(必须)
+            阴影的水平偏移距离
+            取值为正，右偏移
+            取值为负，左偏移
+        v-shadow:(必须)
+            阴影的垂直偏移距离
+            取值为正，下偏移
+            取值为负，上偏移
+        blur : 模糊距离,取值为数值
+        spread : 阴影的大小
+        color : 颜色
+        inset : 值，将默认的外阴影改为内阴影
+4、轮廓
+    1、什么是轮廓
+        位于元素外围的一条线,位于边框之外的
+    2、属性
+        outline:width style color;
+        outline-width:宽度;
+        outline-style:样式;
+        outline-color:颜色;
+
+        常用：
+            outline:none;
+            或
+            outline:0;
+    练习：作业基础上
+        1、为每幅图像增加四个角的倒角(5px)
+        2、鼠标移入的时候，为每幅图像增加阴影
+            右下偏移，大小不限，颜色不限
+</code></pre><p>2、框模型(重难点)</p>
+<pre><code>1、框 &amp; 框模型
+    框：页面元素皆为框
+    框模型：Box Model ,定义了元素框处理元素内容尺寸，内边距，边框和外边距的一种方式
+
+    元素一旦增加框模型对应属性的属性，那么实际的占地区域会发生改变
+
+    元素的实际宽度=左右外边距 + 左右边框 + 左右内边距 + width;
+
+    元素的实际高度=上下外边距 + 上下边框 + 上下内边距 + height;
+2、外边距
+    1 、外边距
+        围绕在元素边缘周围的空白区域
+        默认不能被其他元素所占据
+        作用：拉伸两个元素间的距离
+    2、语法
+        属性：
+            margin:值;
+            单边设置：
+            margin-方向:值;
+                方向：top/right/bottom/left
+        取值：
+            1、具体数值 px
+            2、%
+            3、负值
+                左外边距取负值 ：左移动
+                左外边距取正值 ：右移动
+                上外边距取负值 ：上移动
+                上外边距取正值 ：下移动
+            4、auto
+                自动，由浏览器计算外边距的值应该是多少
+                注意：默认情况下，auto只对左右有效，上下无效。
+
+                为块级元素设置宽度后，再设置其左右外边距为 auto，该元素能水平居中显示
+        margin的简洁写法：
+            margin:value; 四个方向外边距的值
+                margin:5px;
+            margin:v1 v2; v1 上下外边距 v2 左右外边距
+                margin:5px 10px;
+            margin:v1 v2 v3;v1 上外边距 v2 左右外边距 v3 下外边距
+                margin:5px 15px 3px;
+            margin:v1 v2 v3 v4;上 右 下 左
+    3、页面中具备默认外边距的元素
+    4、特殊注意
+        1、外边距合并
+            当两个垂直外边距相遇时，将合并成一个
+        2、外边距的溢出
+            特殊场合下，为子元素设置外边距(上下)会作用到父元素上
+            特殊场合：
+                1、父元素没有边框(上下)
+                2、为第一个(最后一个)子元素设置外边距
+            解决方案：
+                1、为父元素增加边框(透明的)
+                    弊端：父元素会变高
+                2、可以为父元素设置上内边距来取代子元素上外边距
+                    弊端：父元素高度会变高
+                3、为父元素增加一个空子元素
+                    &lt;table&gt;&lt;/table&gt;
+                    弊端：多一个子元素
+                4、后续讲解...(CSS3高级)
+        3、为行内元素和行内块元素设置垂直外边距
+            1、大部分行内元素垂直外边距无效
+                img允许设置
+            2、行内块元素设置垂直外边距，该行的所有元素都跟着变
+3、内边距
+    1、什么是内边距
+        内容区域 和 边框(边缘)之间的距离
+        注意：内边距会扩大边框所占用的区域
+    2、语法
+        属性：
+            padding:值;
+            padding-方向:值;
+                方向：top/right/bottom/left
+            取值：
+                1、px
+                2、%
+                3、auto
+        简写方式：
+            padding:value; 上下左右
+            padding:v1 v2; 上下  左右
+            padding:v1 v2 v3;上  左右  下
+            padding:v1 v2 v3 v4;上 右 下 左
+    3、特殊注意
+        1、为行内元素增加上下内边距时
+            只影响自己，并不影响其他元素
+4、box-sizing
+    1、作用
+        重新指定元素尺寸计算模式
+        占地宽度 = margin+border+padding+width
+        可见宽度 = border+padding+width
+    2、语法
+        属性：box-sizing
+        取值：
+            1、content-box
+                默认值，width只表示内容区域的宽度，border和padding额外进行计算
+                可见宽度=border+padding+width
+            2、border-box
+                width包含边框内所有的距离(padding,border)
+                可见宽度=width(border+padding+宽度);
+</code></pre><p>3、背景</p>
+<pre><code>1、背景颜色
+    属性：background-color
+    取值：颜色值 或 transparent
+    注意：背景颜色从边框位置处开始绘制
+2、背景图像
+    属性：background-image
+    取值：url(背景图url)
+3、背景重复
+    属性：background-repeat
+    取值：
+        1、repeat
+            默认值，即横向又纵向平铺
+        2、repeat-x
+            只在横向平铺
+        3、repeat-y
+            只在纵向平铺
+        4、no-repeat
+            不平铺
+4、背景图片尺寸
+    属性：background-size
+    取值：
+        1、value1 value2
+            指定背景图像宽度 和 高度
+        2、value1% value2%
+            采用当前元素宽和高的占比，来作为背景图大小
+        3、cover
+            覆盖，会将背景图像等比放大，直到背景图完全覆盖到元素为止
+        4、contain
+            包含，会将背景图像等比放大，直到右边或下边碰到元素边缘为止
+5、背景图片固定
+    属性：background-attachment
+    取值：
+        1、scroll
+            滚动，默认值
+        2、fixed
+            固定，让背景图一直在可视化区域中
+6、背景图片定位
+    改变背景图在元素中的位置
+    属性：background-position
+    取值：
+        1、x y
+            指定背景图水平 和 垂直偏移距离
+            x : 水平偏移距离
+                取值为正，背景图右偏移
+                取值为负，背景图左偏移
+            y : 垂直偏移距离
+                取值为正，背景图下偏移
+                取值为负，背景图上偏移
+        2、x% y%
+            0% 0% : 背景图在左上
+            0% 100% : 背景图在左下
+            100% 100% : 背景图在右下
+        3、关键字
+            x : left / center / right
+            y : top / center/ bottom
+7、背景属性
+    在一个 background 属性中声明所有的北京属性值
+
+    属性：background
+    取值：color url repeat attachment position;
+
+    ex:
+        background:red;
+        background:url(a.jpg) no-repeat;
+8、特殊使用
+    CSS Sprites(精灵图/雪碧图)
+</code></pre><p>1、渐变</p>
+<pre><code>1、什么是渐变
+    多种颜色之间平缓过度的显示效果
+2、渐变分类
+    1、线性渐变(linear-gradient)
+        按照直线的方式填充渐变颜色和方向
+    2、径向渐变(radial-gradient)
+        以圆的方式填充渐变效果(圆心位置，半径)
+    3、重复渐变
+        1、重复线性渐变
+            repeating-linear-gradient
+        2、重复径向渐变
+            repeating-radial-gradient
+3、渐变中的重要信息
+    1、色标
+        由 颜色 及其 出现的位置 来组成的
+4、渐变的语法
+    1、属性
+        background-image
+    2、取值
+        1、linear-gradient()
+            linear-gradient(angle,color-point1,color-point2);
+            1、angle
+                填充的方向或角度
+                1、关键字
+                    1、to top ：从下向上填充
+                    2、to right ：从左向右填充
+                    3、to bottom ：从上向下填充
+                    4、to left ：从右向左填充
+                2、角度
+                    0deg ~ 360deg
+
+                    0deg : to top
+                    90deg : to right
+                    180deg : to bottom
+                    270deg : to left
+            2、color-point
+                渐变中的色标,由 颜色 及其 出现的位置组成
+                ex:
+                    1、red 0px
+                        该色标颜色为 red ，位置为填充方向的 0px 处
+                    2、green 50px
+                        该色标颜色为 green,位置为填充方向的 50px 处
+                    3、blue 50%
+                        该色标颜色为 blue，位置为填充方向的 50% 处
+                    4、
+                        linear-gradient(to top,red,blue,green);
+                        自动分配位置
+        2、radial-gradient()
+            radial-gradient([size at position,]color-point,color-point)
+
+            1、[size at position,] : 允许被省略
+                size:圆的半径
+                at : 关键字
+                position:圆心的位置
+                    1、x y
+                        以px为单位的具体数值
+                    2、x% y%
+                    3、关键字
+                        x : left , center , right
+                        y : top , center, bottom
+        3、repeating-linear-gradient()
+        4、repeating-radial-gradient()
+5、浏览器兼容性问题
+    主流浏览器都支持渐变
+    对于不支持的浏览器，需要添加浏览器前缀的方式实现兼容性
+        浏览器前缀：
+            1、Firefox ：-moz-
+            2、Chrome 和 Safari ：-webkit-
+            3、Opear ：-o-
+            4、Microsoft IE ：-ms-
+        如果浏览器不支持属性的话，则将前缀添加到属性名称前
+            ex:
+                animation:值;
+                -moz-aniamtion:值;
+                -webkit-aniamtion:值;
+                -o-aniamtion:值;
+                -ms-animation:值;
+        如果浏览器支持属性，但不支持属性值的话，则将前缀添加到属性值前
+            ex:
+                background-image:linear-gradient();
+                background-image:-moz-linear-gradient();
+                background-image:-webkit-linear-gradient();
+                background-image:-o-linear-gradient();
+                background-image:-ms-linear-gradient();
+</code></pre><p>2、文本格式化</p>
+<pre><code>1、字体属性
+    1、指定字体
+        属性：font-family
+        取值：字体1,字体2,字体3;
+        注意：字体中包含中文或特殊字符的话，尽量使用 &quot;&quot; 引起来
+        ex:
+            font-family:&quot;微软雅黑&quot;,Arial;
+    2、字体大小
+        属性：font-size
+        取值：px 或 pt 为单位的数值
+    3、字体加粗
+        属性：font-weight
+        取值：
+            1、normal
+                非加粗显示，正常体
+            2、bold
+                加粗显示 &lt;b&gt;&lt;/b&gt;
+            3、400 ~ 900
+                400 ：normal
+                900 ：bold
+    4、字体样式
+        属性：font-style
+        取值：
+            1、normal
+                正常体
+            2、italic
+                斜体 &lt;i&gt;&lt;/i&gt;
+    5、小型大写字符
+        效果：将小写英文字符变成大写，但是大小和小写字符一样
+        属性：font-variant
+        取值：
+            1、normal
+                正常，默认值
+            2、small-caps
+                小型大写字符
+    6、字体属性
+        属性：font
+        取值：style variant weight size family;
+        注意：该简写属性中，必须包含 family 的值
+2、文本属性
+    1、文本颜色
+        属性：color
+        取值：~
+    2、文本排列
+        作用：控制内容的的水平对齐方式
+        属性：text-align
+        取值：left/center/right/justify(两端对齐)
+    3、文本修饰
+        线条修饰
+        属性：text-decoration
+        取值：
+            1、none
+                无线条修饰
+            2、underline
+                显示下划线
+            3、line-through
+                显示删除线 &lt;s&gt;&lt;/s&gt;
+            4、overline
+                显示上划线
+    4、行高
+        作用：一行数据的高度
+        属性：line-height
+        取值：以px为单位 或 当前字体大小的倍数
+            line-height:50px;
+            line-height:1.5;
+        注意：文字将在指定行高的范围内垂直居中显示
+        场合：
+            1、文字垂直居中
+            2、行间距的设置
+    5、文本阴影
+        属性：text-shadow
+        取值：h-shadow v-shadow blur color;
+</code></pre><p>3、表格</p>
+<pre><code>1、表格常用属性
+    1、边距属性
+        padding，margin(不能为td设置margin)
+    2、尺寸属性
+        width,height
+    3、文本格式化属性
+        font-*,text-*,line-height,color,... ...
+    4、背景属性
+        颜色，图片，渐变
+    5、border属性
+    6、垂直方向对齐
+        属性：vertical-align
+        取值：top / middle / bottom
+2、表格特有属性
+    1、边框合并属性
+        属性：border-collapse
+        取值：
+            1、separate
+                默认值
+            2、collapse
+                合并
+    2、边框边距
+        类似于 cellspacing
+        属性：border-spacing
+        取值：
+            1、指定1个值
+                每个单元格的水平和垂直间距相同
+            2、指定2个值
+                第一个值，表示水平间距
+                第二个值，表示垂直间距
+        注意：
+            必须保证border-collapse是separate时才有效
+    3、标题位置
+        默认情况下，标题表格上方，水平居中
+        属性：caption-side
+        取值：
+            1、top
+                默认值
+            2、bottom
+                底部
+    4、显示规则
+        作用：指定浏览器如何来布局一张表格(指定行和列的尺寸的计算模式)
+        属性：table-layout
+        取值：
+            1、auto
+                自动，即自动表格布局，默认值
+                列的宽度高度实际上是由内容来决定的
+            2、fixed
+                固定，即固定表格布局。
+                列的宽度和高度由设定的值决定
+        自动表格布局 VS 固定表格布局
+            1、自动表格布局
+                1、单元格的大小会适应内容
+                2、表格复杂时，加载速度较慢(缺点)
+                3、适用于不确定每列大小时使用
+                4、特别灵活(优点)
+            2、固定表格布局
+                1、尺寸取决于设定的值，与单元格内容无关
+                2、任何情况下，都会加速显示表格(优点)
+                3、不够灵活(缺点)
+        推荐：
+            复杂的布局不能使用table
+            简单，显示数据的布局，可以使用table
+</code></pre><p>4、浮动</p>
+<pre><code>1、定位
+    改变元素在网页中的默认位置
+2、定位的分类
+    按照定位效果，可以分为以下几种方式：
+    1、普通流定位/文档流定位
+    2、浮动定位
+    3、相对定位
+    4、绝对定位
+    5、固定定位
+3、定位-普通流定位
+    普通流定位，又称为 文档流定位，网页元素默认定位方式
+    1、页面中所有元素都有自己的位置
+    2、按照从左到右，从上到下的方式排列
+    3、块级元素 - 从上到下排列
+    4、行内/行内块 - 从左到右排列
+
+    问题：让多个块级元素在一行内显示?
+4、定位 - 浮动定位
+    1、浮动定位特点
+        将元素设置为浮动定位，将具备以下特征
+        1、会排除在文档流之外即&quot;脱离文档流&quot;，不再占据页面空间，后续元素则上前补位
+        2、浮动元素只在当前行内浮动
+        3、浮动元素会停靠在父元素的左边或右边或其他已浮动元素的边缘上
+        4、浮动元素依然位于父元素之内
+        5、解决问题-多个块级元素在一行内的显示问题
+    2、语法
+        属性：float
+        取值：
+            1、none
+                默认值，即无任何浮动
+            2、left
+                元素左浮动
+                停靠在父元素的左边 或 其他已浮动元素的右边上
+            3、right
+                元素右浮动
+                停靠在父元素的右边 或 其他已浮动元素的左边上
+    3、浮动引发的特殊效果
+        1、当父元素容纳不下所有已浮动子元素，最后一个将换行显示(有可能被卡住)
+        2、元素一旦浮动起来后，宽度将变成自适应(非手动指定情况下)
+        3、元素一旦浮动起来后，都将变成块级元素
+            块级：允许修改尺寸，允许设置上下margin
+            行内元素：不能改尺寸，不能设置上下margin
+        4、行内元素，行内块元素，文本 采用的是环绕的排列方式，无法被浮动元素压在底下
+</code></pre><p>1、浮动定位</p>
+<pre><code>1、清除浮动
+    1、什么是清除浮动
+        清除当前元素前面的元素浮动所带来的影响
+        清除浮动影响后，当前元素不会上前占位
+    2、属性
+        属性：clear
+        取值：
+            1、none
+                默认值，无清除效果
+            2、left
+                清除当前元素前面元素左浮动带来的影响
+            3、right
+                清除当前元素前面元素右浮动带来的影响
+            4、both
+                清除当前元素前面元素任何一种浮动方向所带来的影响
+    3、浮动元素为父元素高度带来的影响
+        父元素的高度是以未浮动的子元素高度为准
+        如果一个元素中所有的子元素全部都是浮动的，那么该父元素的高度为 0
+        解决父元素的高度问题方案：
+        1、直接设置父元素高度
+            弊端：必须知道父元素的高度
+        2、让父元素也浮动
+            弊端：对后续元素会产生影响
+        3、为父元素增加溢出处理属性
+            属性：overflow
+            取值：hidden 或 auto
+            弊端：要溢出显示的内容，也一同被隐藏
+        4、在父元素中，增加空子元素到最后一个位置处,并且设置其clear属性为both
+            弊端：多一个子元素在页面上
+</code></pre><p>2、显示</p>
+<pre><code>1、显示方式
+    属性：display
+    取值：
+        1、none
+            让指定的元素不显示 并且 不占据页面空间
+            (脱离文档流)
+        2、block
+            将指定的元素显示为块级
+        3、inline
+            将指定的元素显示为行内
+        4、inline-block
+            将指定的元素显示为行内块
+            行内块特点：
+                1、多个元素能够在一行内显示
+                2、允许修改尺寸
+        5、table
+            将指定的元素显示为 table
+2、显示效果
+    1、visibility 属性
+        作用：规范元素可见性
+        取值：
+            1、visible
+                默认值，元素可见
+            2、hidden
+                元素不可见，但是占据页面空间
+            3、collapse
+                用在表格元素上，删除一行或一列时，不影响表格整体布局
+        面试：
+            display:none 和 visibility:hidden 区别
+            1、display:none; 脱离文档流，所以不占据页面空间
+            2、visibility:hidden; 只是改变可见性，并不脱离文档流，空间依然占据
+    2、opacity 属性
+        作用：改变元素的透明度
+        取值：从0.0(完全透明) ~ 1.0(完全不透明) 之间的数字
+    3、vertical-align 属性
+        1、在 td 中，设置文本的垂直对齐方式
+        2、设置行内块元素两边文本的垂直对齐方式
+        3、设置图片两端文本垂直对齐方式
+
+        语法：
+            属性：vertical-align
+            取值：
+                1、top
+                2、middle
+                3、bottom
+                4、baseline
+                    基线对齐
+3、光标
+    改变鼠标在页面(元素)中的状态
+    属性：cursor
+    取值：
+        1、default
+        2、pointer
+            小手
+        3、crosshair
+            +
+        4、text
+            文本状态 I
+        5、wait
+            等待
+        6、help
+            帮助
+</code></pre><p>3、列表</p>
+<pre><code>1、列表项标识
+    属性：list-style-type
+    取值：
+        1、none
+        2、disc ：实心圆
+        ... ...
+2、列表项图像
+    属性：list-style-image
+    取值：url()
+3、列表项标识位置
+    列表项标识的默认位置是在内容区域之外
+    属性：list-style-position
+    取值：
+        1、outside
+            默认值
+        2、inside
+            将列表项标识的位置改为内容区域之内
+4、列表属性
+    属性：list-style
+    取值：type url position;
+    常用方式：list-style:none;
+5、CSS重写
+    CSS Reset，修改元素的默认样式
+    body,p,h1,h2,h3,h4,h5,h6,pre,ul,ol,dl,dd{
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+</code></pre><p>4、定位(相对，绝对，固定)</p>
+<pre><code>1、定位属性
+    1、定位属性
+        属性：position
+        作用：改变元素定位方式
+        取值：
+            1、static
+                静态的，默认值
+            2、relative
+                相对的
+            3、absolute
+                绝对的
+            4、fixed
+                固定定位
+        注意：relative，absolute，fixed被称之为 &quot;已定位元素&quot;
+    2、偏移属性
+        作用：改变元素在页面中的位置
+        属性：
+            1、top
+            2、bottom
+            3、left
+            4、right
+        取值：偏移距离(px)
+    3、堆叠顺序
+        作用：在已定位元素中调整堆叠顺序
+        属性：z-index
+        取值：无单位的数字
+2、定位 - 相对定位
+    1、什么是相对定位
+        元素会相对于它原来的位置偏移某个距离
+        元素原来所占的空间会被保留
+    2、语法
+        position:relative;
+        配合 top/right/bottom/left 偏移属性实现位置的微调
+    3、使用场合
+        1、元素位置微调
+3、定位 - 绝对定位
+    1、什么是绝对定位 &amp; 特点
+        1、绝对定位的元素会脱离文档流即不占据页面空间
+        2、绝对定位的元素会相对于离它最近的已定位的祖先元素去实现定位
+        3、如果没有已定位的祖先元素，那么就会相对于最初的包含块去实现定位比如body或html
+    2、语法
+        position:absolute;
+        配合着 top/right/bottom/left 实现位置定位
+    3、特点
+        1、绝对定位元素会变成块级元素
+        2、绝对定位元素的margin可以使用，默认情况下，auto会失效
+        &lt;div id=&quot;d1&quot;&gt;(无定位)
+            &lt;div id=&quot;d2&quot;&gt;(无定位)
+                &lt;p id=&quot;p1&quot;&gt;(无定位)
+                    &lt;span&gt;这是一个span&lt;/span&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+4、堆叠顺序
+    属性：z-index
+    取值：无单位的数值
+        数值越大，越靠前，默认是0
+        可以取负值，当前元素在页面所有内容之下
+    注意：
+        1、只有已定位元素才能设置z-index
+        2、默认的堆叠顺序是 后来者居上
+        3、父子元素中，永远都是子压在父上,是不受z-index影响的
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、CSS概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、问题
+    1、控制页面中所有的文本颜色为 红色
+    2、控制页面中所有div的文本颜色 为蓝色
+    3、将 所有div 的颜色 变为 黄色
+
+    HTML元素的不足：
+        1、要完成相同的效果，使
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+    
+      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
+    <id>www.wangchengzou.cn/2017/07/22/git/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-14T13:27:47.886Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用方法</p>
+<pre><code>git  config  --global   user.name   &quot;name&quot;
+git  config  --global   user.email   &quot;email@qq.com&quot;
+</code></pre><p>指令说明</p>
+<pre><code>git  status               查看工作区所有文件状态
+git  add  1.jpg          把指定文件添加到暂存区
+git  add  *.jpg          把指定后缀名的文件添加到暂存区
+git  add  *              把所有文件添加到暂存区
+git  add  .              把所有文件添加到暂存区
+git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
+git  log                 查看仓库中所有的提交记录
+
+git  reset  --hard  版本号     工作区回退到指定的版本
+git  log       查看当前已经生效的所有版本号
+git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
+</code></pre><p>远程仓库相关</p>
+<pre><code>git  clone  远程仓库的地址
+git  clone  git@github.com:jquery/jquery.git
+git  clone  https://github.com/jquery/jquery.git
+</code></pre><p>创建关联使用方法</p>
+<pre><code>git  init           本地创建一个空白仓库
+git  remote       查看当前仓库关联到哪些远程仓库
+git  remote  add  关联仓库名  远程仓库的地址
+git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
+git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
+git  commit   -m   &quot;说明信息&quot;
+git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
+
+git subtree push --prefix=dist origin gh-pages  建立分支结构
+</code></pre><p>关于分支的使用方法</p>
+<pre><code>1，将远程仓库克隆到本地：
+    git clone https://github.com/**.git(项目克隆地址)
+2，生成分支gh-pages并切换到此分支
+    cd flexSupplement （进入到你克隆仓库的本地文件夹）
+    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
+3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
+    再将根目录下dist文件夹里面的内容复制到克隆文件中。
+    依次执行以下命令：
+    git add . （将本地所有文件加到仓库里）
+    git commit -m “message” （设置提交信息）
+    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
+    git push -u origin gh-pages （push文件到仓库中）
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
+git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
+&lt;/
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
+    
+      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
     
   </entry>
   
@@ -4906,6 +5979,93 @@ less中提供的功能函数
   </entry>
   
   <entry>
+    <title>hexo使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
+    <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:10:17.259Z</updated>
+    
+    <content type="html"><![CDATA[<p>安装</p>
+<pre><code>$ npm install -g hexo-cli
+Hexo 将会在指定文件夹
+$ hexo init
+新建完成后 文件夹的目录如下
+    .
+    ├── _config.yml
+    ├── package.json
+    ├── scaffolds
+    ├── source
+    |   ├── _drafts
+    |   └── _posts
+    └── themes
+</code></pre><p>配置</p>
+<pre><code>_config.yml 中修改大部份的配置
+title    网站标题
+subtitle    网站副标题
+description    网站描述
+author    您的名字
+language    网站使用的语言
+timezone    网站时区。Hexo 默认使用您电脑的时区。时区列表。
+    比如说：America/New_York, Japan, 和 UTC 。
+网站存放在子目录
+    例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/
+</code></pre><p>目录</p>
+<pre><code>source_dir    资源文件夹，这个文件夹用来存放内容。    source
+public_dir    公共文件夹，这个文件夹用于存放生成的站点文件。    public
+tag_dir    标签文件夹    tags
+archive_dir    归档文件夹    archives
+category_dir    分类文件夹    categories
+code_dir    Include code 文件夹    downloads/code
+i18n_dir    国际化（i18n）文件夹    :lang
+skip_render    跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。
+</code></pre><p>文章</p>
+<pre><code>new_post_name    新文章的文件名称    :title.md
+default_layout    预设布局    post
+auto_spacing    在中文和英文之间加入空格    false
+titlecase    把标题转换为 title case    false
+external_link    在新标签中打开链接    true
+filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0
+render_drafts    显示草稿    false
+post_asset_folder    启动 Asset 文件夹    false
+relative_link    把链接改为与根目录的相对位址    false
+future    显示未来的文章    true
+highlight    代码块的设置
+</code></pre><p>分类 &amp; 标签</p>
+<pre><code>default_category    默认分类    uncategorized
+category_map    分类别名
+tag_map    标签别名
+</code></pre><p>日期 / 时间格式</p>
+<pre><code>date_format    日期格式    YYYY-MM-DD
+time_format    时间格式    H:mm:ss
+</code></pre><p>分页</p>
+<pre><code>per_page    每页显示的文章量 (0 = 关闭分页功能)    10
+pagination_dir    分页目录    page
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ npm install -g hexo-cli
+Hexo 将会在指定文件夹
+$ hexo init
+新建完成后 文件夹的目录如下
+    .
+    ├── _config.yml
+    ├── package.json
+    ├
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
+    
+      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>html和css3</title>
     <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
@@ -5050,162 +6210,6 @@ sessionStorage  数据在浏览器关闭后自动删除。
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
-    <id>www.wangchengzou.cn/2017/07/22/git/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-14T13:27:47.886Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用方法</p>
-<pre><code>git  config  --global   user.name   &quot;name&quot;
-git  config  --global   user.email   &quot;email@qq.com&quot;
-</code></pre><p>指令说明</p>
-<pre><code>git  status               查看工作区所有文件状态
-git  add  1.jpg          把指定文件添加到暂存区
-git  add  *.jpg          把指定后缀名的文件添加到暂存区
-git  add  *              把所有文件添加到暂存区
-git  add  .              把所有文件添加到暂存区
-git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
-git  log                 查看仓库中所有的提交记录
-
-git  reset  --hard  版本号     工作区回退到指定的版本
-git  log       查看当前已经生效的所有版本号
-git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
-</code></pre><p>远程仓库相关</p>
-<pre><code>git  clone  远程仓库的地址
-git  clone  git@github.com:jquery/jquery.git
-git  clone  https://github.com/jquery/jquery.git
-</code></pre><p>创建关联使用方法</p>
-<pre><code>git  init           本地创建一个空白仓库
-git  remote       查看当前仓库关联到哪些远程仓库
-git  remote  add  关联仓库名  远程仓库的地址
-git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
-git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
-git  commit   -m   &quot;说明信息&quot;
-git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
-
-git subtree push --prefix=dist origin gh-pages  建立分支结构
-</code></pre><p>关于分支的使用方法</p>
-<pre><code>1，将远程仓库克隆到本地：
-    git clone https://github.com/**.git(项目克隆地址)
-2，生成分支gh-pages并切换到此分支
-    cd flexSupplement （进入到你克隆仓库的本地文件夹）
-    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
-3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
-    再将根目录下dist文件夹里面的内容复制到克隆文件中。
-    依次执行以下命令：
-    git add . （将本地所有文件加到仓库里）
-    git commit -m “message” （设置提交信息）
-    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
-    git push -u origin gh-pages （push文件到仓库中）
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用方法&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
-git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
-&lt;/
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
-    
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
-    <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:10:17.259Z</updated>
-    
-    <content type="html"><![CDATA[<p>安装</p>
-<pre><code>$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├── scaffolds
-    ├── source
-    |   ├── _drafts
-    |   └── _posts
-    └── themes
-</code></pre><p>配置</p>
-<pre><code>_config.yml 中修改大部份的配置
-title    网站标题
-subtitle    网站副标题
-description    网站描述
-author    您的名字
-language    网站使用的语言
-timezone    网站时区。Hexo 默认使用您电脑的时区。时区列表。
-    比如说：America/New_York, Japan, 和 UTC 。
-网站存放在子目录
-    例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/
-</code></pre><p>目录</p>
-<pre><code>source_dir    资源文件夹，这个文件夹用来存放内容。    source
-public_dir    公共文件夹，这个文件夹用于存放生成的站点文件。    public
-tag_dir    标签文件夹    tags
-archive_dir    归档文件夹    archives
-category_dir    分类文件夹    categories
-code_dir    Include code 文件夹    downloads/code
-i18n_dir    国际化（i18n）文件夹    :lang
-skip_render    跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。
-</code></pre><p>文章</p>
-<pre><code>new_post_name    新文章的文件名称    :title.md
-default_layout    预设布局    post
-auto_spacing    在中文和英文之间加入空格    false
-titlecase    把标题转换为 title case    false
-external_link    在新标签中打开链接    true
-filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0
-render_drafts    显示草稿    false
-post_asset_folder    启动 Asset 文件夹    false
-relative_link    把链接改为与根目录的相对位址    false
-future    显示未来的文章    true
-highlight    代码块的设置
-</code></pre><p>分类 &amp; 标签</p>
-<pre><code>default_category    默认分类    uncategorized
-category_map    分类别名
-tag_map    标签别名
-</code></pre><p>日期 / 时间格式</p>
-<pre><code>date_format    日期格式    YYYY-MM-DD
-time_format    时间格式    H:mm:ss
-</code></pre><p>分页</p>
-<pre><code>per_page    每页显示的文章量 (0 = 关闭分页功能)    10
-pagination_dir    分页目录    page
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
-    
-      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
     
   </entry>
   
@@ -6083,525 +7087,6 @@ xml语法要求:
       <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
     
       <category term="php" scheme="www.wangchengzou.cn/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Angular基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T12:53:02.708Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
-<pre><code>拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple and stupid
-语义化的标记、命名规则、减少嵌套
-
-3、DRY（善于使用封装和重用）
-Don&apos;t Repeat Yourself
-
-4、高内聚 低耦合（High cohesion,low coupling）
-内聚：一个组件（模块）内部的不同部分的关系
-耦合：不同组件（模块）之间的关系
-
-5、SRP 单一责任原则
-Single Responsibility Principle
-实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
-
-6、OCP原则(对于扩展开放、对于修改关闭)
-open close principle
-
-7、LCP（迪米特法则）
-Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
-
-常用的设计模式分为3大类：①创建 ②结构 ③行为
-
-常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
-先去实现功能，在迭代的过程中优化代码。
-</code></pre><p>2、AngularJS</p>
-<pre><code>认识新东西最好的方式：
-①官网
-②维基百科 wikipedia.org
-what?--ng(AngularJS)是一个开源的js框架
-where？--用来实现SPA应用程序（单一页面应用程序single page application）
-Gmail邮箱是由Google退出的前端历史中第一个SPA应用
-why？
-四大特征：
-①采用了MVC的设计模式
-Model 模型数据
-View  视图
-Controller 控制器
-</code></pre><p>3、MVC的工作原理：</p>
-<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
-1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
-2.双向数据绑定
-    数据-》视图
-    视图用户的输入 -》 数据
-3.依赖注入
-4.模块化设计
-</code></pre><p>4、使用ng</p>
-<pre><code>1、基本语法
-    &lt;any&gt;{{表达式}} &lt;/any&gt;
-    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
-
-2、常用指令
-    ngApp
-        ①启动ng
-        ②指定作用范围，将指令写在根标签
-    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
-    ngInit 指令 来完成数据的初始化
-    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
-        ①不需要在通过ngInit指令定义数据时候，加上var关键字
-        ②ngInit所初始化的变量是可以在整个html去使用变量
-</code></pre><p>5、常用指令</p>
-<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
-
-作为扩展属性来使用：
-    &lt;div ng-**&gt;&lt;/div&gt;
-    ngInit  --&gt; ng-init
-    ngApp --&gt; ng-app
-作为扩展标签来使用：
-    &lt;ngView/&gt;
-①ngApp
-    启动ng
-    指定作用范围，将指令写在根标签
-    注意事项：调用一次ngApp
-②ngInit
-    通过ngInit调用一次，初始化多个变量？？
-    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
-③ngRepeat
-    重复实例化模板
-    两种语法：
-    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
-    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
-
-    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
-        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
-
-④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
-    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
-    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
-    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
-    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
-    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
-    但是控制台是会报错的，通过ngSrc去指定就搞定了
-    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
-    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
-</code></pre><p>6、MVC</p>
-<pre><code>在ng中：
-    Model 模型数据：在ng中定义的一些变量
-    View  视图：通过ng指令和表达式增强版的html
-    Controller 控制器：负责数据的增删改查的
-MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
-在ng中应该怎么做才能实现一个SPA？
-准备工作：
-①创建一个模块
-    因为在ng中是以模块为基本单位的
-    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
-②使用模块
-    采用ngApp指令
-    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
-③创建一个控制器
-    app.controller(&apos;控制器的名称&apos;,function(){})
-    第二个参数时控制器被调用时，要执行的方法
-④调用控制器
-    采用ngController指令来调用控制器
-    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
-    实现数据的创建和显示等：
-⑤操作数据、显示出来
-
-$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
-    建立起控制器中的数据和控制器的所指定的视图的桥梁
-
-绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
-&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
-
-注意事项：
-由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
-</code></pre><p>7、ng是由很多指令的：</p>
-<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
-ngBind ngClass ngStyle
-
-在webStorm中创建一个文件模板的基本步骤：
-①拷贝要使用的代码
-②点击左上角的file，选择new
-③选择Edit File Templates
-④点击弹窗中右上角的+号
-⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
-</code></pre><p>8、自定义指令</p>
-<pre><code>1、如何自定义？？
-    angular.module()
-    app.controller()
-    //创建指令
-    app.directive(&apos;指令的名称&apos;，function(){
-        return {}
-    })
-    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
-    后缀：用来描述指令的功能
-    属性：
-    template：指定要显示的模板内容
-    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
-    replace: true,替换并显示出来
-    scope
-
-2、如何使用自定义的指令？？
-    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
-    &apos;tsHello&apos; --&gt; ts-hello
-    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
-
-3、自定义指令传递参数
-    怎么传？
-        在调用指令的时候可以传 将参数作为属性对应的值
-    怎么接受？
-        scope
-</code></pre><p>9、双向数据绑定</p>
-<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
-绑定方式：
-①常用指令： ngRepeat/ngIf/ngShow...
-②双花括号：{{}}
-
-方向2：从‘视图中用户的输入’绑定到‘数据’
-绑定方式：指令：ngModel
-
-如果要监听数据的变化：
-$scope.$watch(&apos;txt&apos;,function(){
-
-})
-
-在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
-ngOptions语法：
- &lt;select
-    ng-model=&quot;city&quot;
-    ng-options=&quot;city.cityName for city in cities&quot;&gt;
- &lt;/select&gt;
-</code></pre><p>10、过滤器</p>
-<pre><code>a.内置的过滤器
-    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
-    过滤器的语法：支持多重过滤和传参
-    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
-            | => 管道
-            常用的过滤器：
-                currency 货币样式的过滤器
-                date 日期
-                uppercase/lowercase 大小写的处理
-                orderBy 对指定的数组进行升序或者降序排列
-                number 格式化数字为文本（对有小数点的数据的处理）
-                limitTo 限定数组或者字符串要显示的个数
-        b.自定义过滤器
-            自定义过滤器方式：
-            app.filter('过滤器名称',function(){
-                return function(input，arg){
-                        //input是传递给过滤器的数据
-                        //arg 是过滤器本身的参数
-                    return '过滤后的结果'
-                }
-            })
-            使用自定义的过滤器:
-            和内置的过滤器用法是一样的
-
-11、ng模块内置的方法
-
-        序列化、反序列化
-        toJson:将对象或者数组 序列化 为json格式的字符串
-        fromJson：相反的过程
-
-12、服务
-
-    服务的本质是一个单例对象，提供数据和对象。
-    两大类：
-    ①内置服务
-        $location、$http、$window、$scope...
-        使用内置服务中提供的方法：
-            第一步 将需要用到的服务注入进来 function($scope,$location)
-            第二步 调用服务中提供的方法 数据。。
-    ②自定义的服务
-        面试题：$scope与$rootScope之间的关系
-        1、不同的控制器之间的数据是彼此隔离的
-        2、不同的控制器之间如何共享数据？？
-        $scope的id是从2开始依次往上递增，
-        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
-            方式1：借助于$rootScope
-                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
-            方式2：借助于控制器之间的嵌套
-                在调用控制器的元素 之间的嵌套关系
-                @@div ng-controller='myCtrl02'>
-                    @@<div ng-controller="myCtrl03"></div>
-                @@
-            方式3：触发事件传递参数
-                绑定事件：
-                $scope.$on('事件名称',function(event,data){
-
-                })
-        触发事件：
-        //从子作用对象 向 父作用域对象 传递事件
-        $scope.$emit()
-        //从父作用对象 向 子作用域对象 传递事件
-        $scope.$broadcaset()
-
-13、服务
-
-        双向数据绑定的工作原理：
-        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
-        怎么知道数据发生了变化？
-        在ng中有一个循环$digest,会不断的对比数据，
-        需要手工的触发循环做对比，可以通过：
-        $scope.$digest();
-        $scope.$apply();//触发$rootScope.$digest();
-
-14、ng内置的服务：
-
-        $location $scope $rootScope $window $interval $timeout
-        1、在ng中定时器相关的处理--》$interval $timeout
-        2、$http
-        $http({method:'',url:''}).success().error()
-        $http.get()
-        $http.post()
-        注意：如果需要发起post请求，需要设置:
-         app.run(function ($http) {
-                $http.defaults.headers.post =
-        {'Content-Type':'application/x-www-form-urlencoded'};})
-
-        在发起post请求时，如果需要对参数进行序列化:
-        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
-
-15、自定义服务
-
-        服务的目的是为了封装业务逻辑，提高代码的复用率
-        自定义指令 app.directive
-        自定义过滤器 app.filter
-        自定义服务的方法：
-        app.factory ('服务名称',function(){//普通方法 return {}})
-app.service(&apos;服务名称&apos;,function(){//构造函数})
-app.constant(&apos;服务名称&apos;，{})//创建常量服务
-app.value(&apos;服务名称&apos;，{})//创建变量服务
-
-注意事项：
-自定义的服务 需要用到其它服务中方法
-图：两个按钮：开始 结束。
-</code></pre><p>16、依赖注入</p>
-<pre><code>将代码部署到线上，都会对代码做压缩。
-使用YUI-Compressor.jar （有java的运行环境）
-①借助于CLI（command line）
-    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
-
-②IDE（webStorm）
-    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
-    在弹窗中的program选中对应的jar，保存即可
-压缩效果：
-会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
-但是数字、字符串、关键字是不会改变的。
-
-解决压缩后的问题方式：
-依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
-让我们可以去直接使用
-
-注入的方式：
-①推断式（猜测）
-    这种方式在进行压缩会有问题
-    app.controller(&apos;myCtrl&apos;,function($scope){});
-
-②标记式
-    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
-    存在一个字符串（服务名称）数组。
-    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
-    实现方式：
-    1、将处理函数单独的存在一个变量中
-    2、给变量设置$inject，值是一个由字符串构成的数组
-    3、使用服务即可
-③行内式（内联式）
-    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
-    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
-    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
-    依赖注入3种方式，官方推荐采用行内式依赖注入。
-    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
-    整个ng应用的注入对象都是由$injector定位和创建。
-    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
-    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
-</code></pre><p>17、模块化设计</p>
-<pre><code>ng有4大特征：
-①MVC
-②双向数据绑定
-③依赖注入
-④模块化设计
-
-高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
-
-如何自定义模块？
-angular.module();
-
-使用模块？
-ng-app=&quot;&quot;
-在创建模块时，在第二个参数所对应的数组中写上服务的名称
-
-一个ng的模块都可以包含哪些？
-控制器：对应部分业务逻辑的封装
-服务：经常用到的重复代码封装
-指令：扩展html标签、属性
-过滤器：针对数据做一些筛选 过滤 格式化的处理
-</code></pre><p>18、ngRoute（路由模块）</p>
-<pre><code>ng是主要实现SPA（单一页面应用程序）
-SPA的工作原理：
-    1、页面url
-    http://127.0.0.1/index.html#/路由地址
-    例如：http://127.0.0.1/index.html#/start
-    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
-    3、在路由词典中寻找路由地址(start)所对应的路由信息
-    4、在路由信息所对应的对象中找到真实的模板页面地址
-    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
-
-ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
-自动发起ajax请求加载页面显示。
-    0、在创建自定义模块，在依赖列表中指定ngRoute
-    1、指定盛放代码片段的容器
-    2、配置路由词典
-
-使用ngRoute的基本步骤：
-①创建一个完整的html页面
-    记得引入angular.js angular-route.js
-
-②创建模块，并指定依赖于ngRoute模块
-    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
-
-③使用指令创建一个盛放代码片段的容器
-    调用ngView指令：创建一个容器，代码片段会加载到这里
-
-④创建模板页面
-
-⑤配置路由词典
-    $routeProvider
-    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
-    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
-    otherwise是用来指定异常的处理
-    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
-
-SPA在ng实现过程，代码片段的跳转：
-①直接修改地址栏中的路由地址
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
-②通过js的方式
-    $location.path(&apos;路由地址&apos;)
-③超链接的方式
-    a href=&quot;#/myRegister&quot;
-    login-&gt;start 10
-
-SPA应用程序通过ngRoute来传递参数：
-①搞明白 发送 接收
-②配置接收方的路由
-    $routeProvider.when(&apos;/myStart/:num&apos;,{
-    templateUrl:&apos;tpl/start.html&apos;
-    })
-③拿到传递过来的参数
-    $routeParams.num
-④发送
-    a href=&apos;#/myStart/10&apos;
-    $location.path(&apos;/myStart/10&apos;)
-
-注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
-    myStart/:id $routeParams.id
-
-练习：实现一个SPA
-完整的html manager.html
-代码片段： checkProduct.html pay.html send.html
-
-要求：能够实现不同页面的跳转以及参数的传递
-checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
-pay 点击button跳转到send
-send button以及a跳转到check.html
-
-优化思路：如果多个控制器需要用到同一个方法或者数据，
-    ①将方法和数据封装成一个服务
-    ②$rootScope
-    ③控制器之间的嵌套
-    ④借助于事件
-
-由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
-控制器中的方法和数据，代码片段就可以用了。
-①发送 接收
-    checkProduct --&gt; pay
-
-②配置接收方路由
-    .when(&apos;/myPay/:price&apos;,{})
-
-③$routeParams
-    $routeParams.price
-
-④发送参数
-    href=&apos;#/myPay/20&apos;
-    $location.path(&apos;/myPay/20&apos;)
-
-ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
-
-要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
-
-注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
-</code></pre><p>19、ngAnimate（动画模块）</p>
-<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
-基本步骤：
-①引入对应的js文件
-    angular-animate.js
-②指定自定义模块依赖于ngAnimate
-    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
-③css给ng应用程序添加动画效果：
-    ngEnter 准备进入
-    ngEnterActive 进入完成
-    ngLeave 准备离开
-    ngLeaveActive 离开完成
-④引入对应的css文件
-
-如果用到其它的模块整体思路：
-    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
-    ②在创建模块，指定依赖列表
-    ③根据模块中所提供的指令、服务。。结合业务需要进行
-</code></pre><p>20、表单验证</p>
-<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
-布尔类型：
-$valid
-$invalid
-$dirty
-$pristine
-对象：
-$error
-
-注意事项：
-①给表单以及表单组件 加上name属性
-②给需要用到的表单组件 ，加上ngModel
-③属性的用法
-myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&amp;apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple 
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
     
   </entry>
   
