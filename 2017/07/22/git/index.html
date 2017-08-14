@@ -298,11 +298,24 @@ git  commit   -m   &quot;说明信息&quot;
 git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
 
 git subtree push --prefix=dist origin gh-pages  建立分支结构
+</code></pre><p>关于分支的使用方法</p>
+<pre><code>1，将远程仓库克隆到本地：
+    git clone https://github.com/**.git(项目克隆地址)
+2，生成分支gh-pages并切换到此分支
+    cd flexSupplement （进入到你克隆仓库的本地文件夹）
+    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
+3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
+    再将根目录下dist文件夹里面的内容复制到克隆文件中。
+    依次执行以下命令：
+    git add . （将本地所有文件加到仓库里）
+    git commit -m “message” （设置提交信息）
+    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
+    git push -u origin gh-pages （push文件到仓库中）
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/CSS3高级/" rel="next" title="CSS3高级笔记">
-    上一篇：CSS3高级笔记
+    <a href="/2017/07/22/css3+HTML5面试题/" rel="next" title="html和css3">
+    上一篇：html和css3
   </a>
 </p>
 
