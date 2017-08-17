@@ -7,7 +7,7 @@
 
     
 
-    <title>react基础知识 | 千帆渡</title>
+    <title>css hack兼容性 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="react基础知识"/>
+    <meta property="og:title" content="css hack兼容性"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -241,12 +241,12 @@
             <div class="article-title">
                 
     
-        <h1>react基础知识</h1>
+        <h1>css hack兼容性</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/react/">2017-07-22</a></time>
+            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/css_hack/">2017-07-22</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -256,9 +256,7 @@
             
     <div class="tags-row">
         
-            <a href="/tags/App/" class="chip pink lighten-1">App</a>
-        
-            <a href="/tags/react/" class="chip pink lighten-1">react</a>
+            <a href="/tags/css3/" class="chip pink lighten-1">css3</a>
         
     </div>
 
@@ -269,114 +267,149 @@
 
 
             <div class="entry pink-link-context">
-                <p>一、React介绍</p>
-<pre><code>官网：
-reactjs.com(https://facebook.github.io/react/)
+                <p>css hack解决浏览器兼容性问题</p>
+<pre><code>网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
+因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
+致设计的页面效果不一样，用于解决这个问题的方法就是css hack，
+使用特别的css定义显示网页在不同浏览器的设计风格，针对不同的浏览器去写不同的css,
+最大化兼容浏览器
+</code></pre><p>比较频繁使用的css hack技巧</p>
+<pre><code>！important，它可以针对ie和非IE浏览器设置不同的样式
+*+html{...} 只无法充分IE7做样式时候使用
+IE的if条件hack
+    &lt;!--[if IE]&gt; Only IE &lt;![endif]--&gt; 所有的IE可识别
+    &lt;!--[if IE 5.0]&gt; Only IE 5.0 &lt;![endif]--&gt; 只有IE5.0可以识别
+    &lt;!--[if gt IE 5.0]&gt; Only IE 5.0+ &lt;![endif]--&gt; IE5.0包换IE5.5都可以识别
+    &lt;!--[if lt IE 6]&gt; Only IE 6- &lt;![endif]--&gt; 仅IE6可识别
+    &lt;!--[if gte IE 6]&gt; Only IE 6/+ &lt;![endif]--&gt; IE6以及IE6以下的IE5.x都可识别
+    &lt;!--[if lte IE 7]&gt; Only IE 7/- &lt;![endif]--&gt; 仅IE7可识别
+</code></pre><p>1、CSS HACK</p>
+<pre><code>以下两种方法几乎能解决现今所有HACK.
+1, !important (不是很推荐，用下面的一种感觉最安全)
+    随着IE7对!important的支持, !important 方法现在只针对IE6的HACK.
+    (注意写法.记得该声明位置需要提前.)
+    代码: &lt;style&gt;
+        #wrapper {
+            width: 100px!important; /* IE7+FF */
+            width: 80px; /* IE6 */ }
+        &lt;/style&gt;
 
-what?
-React是一个开源的js库
+2, IE6/IE77对FireFox &lt;from 针对firefox ie6 ie7的css样式&gt;
+    *+html 与 *html 是IE特有的标签, firefox 暂不支持.而*+html 又为 IE7特有标签.
+        代码: &lt;style&gt;
+                    #wrapper { width: 120px; } /* FireFox */
+              *html #wrapper { width: 80px;} /* ie6 fixed */
+             *+html #wrapper { width: 60px;} /* ie7 fixed, 注意顺序 */
+            &lt;/style&gt;
+        注意:  *+html 对IE7的HACK 必须保证HTML顶部有如下声明：
+        代码:  &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+        &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+</code></pre><p>2、万能 float 闭合(非常重要!)</p>
+<pre><code>可以用这个解决多个div对齐时的间距不对，
+关于 clear float 的原理可参见 [How To Clear Floats Without Structural Markup]
+将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.
+代码: &lt;style&gt;
+    /* Clear Fix */
+    .clearfix:after { content:&quot;.&quot;; display:block;
+                    height:0; clear:both;
+                    visibility:hidden; }
+    .clearfix {  display:inline-block; }  /* Hide from IE Mac \*/
+    .clearfix {display:block;} /* End hide from IE Mac */
+                                /* end of clearfix */
+    &lt;/style&gt;
+</code></pre><p>3、其它兼容性技巧</p>
+<pre><code>1、FF下给div设置padding后会导致width和height增加，但ie不会
+    解决：可用！important
 
-where？
-提供视图（DOM操作非常频繁）
+2、居中问题
+    垂直居中
+        将line-heigth设置为 当前div相同高度，再通过vertical-align:middle
+    水平居中
+        margin:0 auto;
 
-why？
-①组件化的思维模式
-②声明式设计
-③高效、灵活
-④JSX 基于js语法的扩展
+3、若需要给a标签内容加上样式，需要设置
+    display:block;(常用于导航标签)
 
-历史：
-React 11年 被fb工程师部署在newsfeed
-12年 部署在Instagram
-13年5 fb宣布将React开源
-15年 fb宣布ReactNative 定位于移动端原生开发提供视图层
-16年 发布现版本 V15
-</code></pre><p>二、搭建React开发环境</p>
-<pre><code>1、CLI
-    https://github.com/facebookincubator/create-react-app
-2、引入对应的js文件
-    react reactDOM browser
-</code></pre><p>三、使用React</p>
-<pre><code>1、render方法介绍
-    ReactDOM.render(要渲染的元素， 容器)
-    ReactDOM.render(
-    &lt;h1&gt; Hello React &lt;/h1&gt;,
-    document.getElementById(&apos;example&apos;)
-    )
+4、FF和IE对BOX理解的差异导致相差2px
+    设为float的div在IE下margin加倍问题
 
-2、React开发的核心思想和核心概念
-    核心思想：组件化
-    核心概念：
-    组件
-    JSX：并不是React强制要求的，只是建议
-    VirtualDOM
-    单向数据流
+5、ul标签在FF下面默认有list-style和padding
 
-3、jsx语法
-    遇到花括号就会使用js来解析表达式，遇到&lt;就会使用html来解析
+6、作为外部wrapper的div不要定死高度，最好加上overflow:hidden
+    以达到高度自适应
 
-    注意事项：
-    react规定渲染的元素有多个，指定在顶层标签中
-
-4、组件的创建和使用
-    创建组件:
-    var HelloMsg = React.createClass({
-        render:function(){
-            return &lt;p&gt;test&lt;/p&gt;
-        }
-    })
-    使用组件：
-    就像使用html标签一样去使用组件
-    &lt;HelloMsg&gt;&lt;/HelloMsg&gt;
-
-    注意事项：
-    ①组件名称首字母必须是大写的，遵循驼峰式命名和使用
-    ②返回多个元素时，放到顶层标签中，在return时，顶层标签不能直接换行
-        return &lt;div&gt;
-        ..
-        &lt;/div&gt;
-    ③在创建组件时，一定要写上render方法，用来指定渲染的内容
-
-5、复合组件
-    就是一个普通的组件，只不过包含其他的组件
-
-6、props 属性
-    &lt;a href=&quot;&quot;&gt;
-    &lt;ButtonComponent name=&apos;123&apos;/&gt;
-
-    使用组件的过程中是可以使用属性传递给组件值，接收的时候是通过this.props对象读取属性所对应的值。
-    组件不仅可以通过属性传递值，还可以传递方法，执行方法依然是通过this.props.属性名字
-    &lt;ButtonComponent funcClick={this.showLog}/&gt;
-    this.props.funcClick();
-    props对象中的属性和调用的组件指定的属性是一一对应的，有一个比较特殊：
-    this.props.children
-
-7、VDOM
-    virtual DOM 虚拟DOM
-    组件并不是真实的DOM节点，而是存在内存中的一种数据结构，称之为VDOM
-    只有组件插入到文档之后，真实的DOM。
-
-    Diff算法：当组件中有用户交互或者数据修改时，通过广度优先算法对比虚拟DOM和真实DOM，
-    找到真正需要更新的DOM节点，最大限度的减少对DOM的操作
-    refs 找到真实的DOM节点。
-    input ref=&quot;inputTxt&quot;
-    this.refs.inputTxt
-    要求通过ref来实现。
-    ①组件的创建和使用
-    ②指定按钮点击的处理函数
+7、 关于手形光标. cursor: pointer. 而hand 只适用于 IE
+</code></pre><p>4、针对firefox ie6 ie7的css样式</p>
+<pre><code>现在大部分都是用!important来hack，对于ie6和firefox测试可以正常显示，
+但是ie7对!important可以正确解释，会导致页 面没按要求显示！
+找到一个针对IE7不错的hack方式就是使用“*+html”，现在用IE7浏览一下，
+应该没有问题了现在写一个CSS可以这样：
+    #1 { color: #333; } /* Moz */
+    * html #1 { color: #666; } /* IE6 */
+    *+html #1 { color: #999; } /* IE7 */
+    那么在firefox下字体颜色显示为#333，
+    IE6下字体颜色显示为#666，
+    IE7下字体颜色显示为#999。
+</code></pre><p>5、css布局中的居中问题</p>
+<pre><code>主要的样式定义如下：
+body {TEXT-ALIGN: center;}
+#center { MARGIN-RIGHT: auto; MARGIN-LEFT: auto; }
+说明：
+    首先在父级元素定义TEXT-ALIGN: center;这个的意思就是在父级元素内的内容居中；
+    对于IE这样设定就已经可以了。但在mozilla中不能居中。
+    解决办法就是在子元素定义时候设定时再加上“MARGIN-RIGHT: auto;MARGIN-LEFT: auto; ”
+    需要说明的是，如果你想用这个方法使整个页面要居中，建议不要套在一个DIV里，
+    你可以依次拆出多个div，只要在每个拆出的div里定义
+    MARGIN-RIGHT: auto;MARGIN-LEFT: auto; 就可以了。
+</code></pre><p>6、盒模型不同解释</p>
+<pre><code>#box{  width:600px;
+    //for ie6.0- w\idth:500px;
+    //for ff+ie6.0 }
+#box{  width:600px!important
+    //for ff  width:600px;
+    //for ff+ie6.0  width /**/:500px;
+    //for ie6.0- }
+</code></pre><p>7、浮动IE产生的双倍距离</p>
+<pre><code>#box{float:left;width:100px;margin:0 0 0 100px;}
+解决：didplay:inline
+block,inline两个元素
+    Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);
+inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);
+#box{ display:block; //可以为内嵌元素模拟为块元素
+      display:inline; //实现同一行排列的的效果
+      diplay:table;
+</code></pre><p>8、IE与宽度和高度的问题</p>
+<pre><code>IE不认得min-这个定义，但实际上它把正常的width和heigth当作有min的情况来使，
+如果设置了min-，则ie下就等于没有设置宽高，设置背景图片最小宽度比较重要
+解决:#box{width:80px;height:35px;}
+    html&gt;body #box{width:auto;heigth:auto;min-width:80px;min-height:35px;}
+</code></pre><p>9、清除浮动</p>
+<pre><code>#box:after{
+    content:&quot;&quot;;
+    display:block;
+    height；0；
+    clear:both;
+    visibility:hidden;
+    }
+</code></pre><p>10、DIV浮动IE文本产生3px的bug</p>
+<pre><code>左边对象浮动，右边采用外补丁的左边距定位，右边对象内的文本会离左边有3px的间距
+#box{float:left;width:800px;}
+#left{float:left;width:50%}
+#right{width:50%}
+*html #left{margin-right:-3px;}
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/07/22/phoneGap/" rel="next" title="phoneGap基础知识">
-    上一篇：phoneGap基础知识
+    <a href="/2017/07/22/css3+HTML5面试题/" rel="next" title="html和css3">
+    上一篇：html和css3
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/MySql/" rel="next" title="MySql常用方法知识">
-    下一篇：MySql常用方法知识
+    <a href="/2017/07/22/JQuery/" rel="next" title="JQuery基础知识">
+    下一篇：JQuery基础知识
   </a>
 </p>
 
