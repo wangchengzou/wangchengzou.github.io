@@ -1035,6 +1035,482 @@ when？ 实现UI层的渐进式的框架
   </entry>
   
   <entry>
+    <title>DOM_BOM笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/DOM_BOM%E7%AC%94%E8%AE%B0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/DOM_BOM笔记/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:57:34.367Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p>DOM: Document Object Model</p>
+<p> DOM是专门操作网页内容的API标准<br> 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题<br> 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商都遵照执行。<br> 结果，使用DOM API操作网页内容，几乎100%兼容所有浏览器<br> 何时: 只要操作网页内容，就用DOM API查找, 修改(内容,属性,样式), 添加, 删除.</p>
+</li>
+</ol>
+<p>DOM Tree:</p>
+<pre><code>什么是: 网页中一切内容在内存中都是以树形结构存储的
+       网页中每一项内容都是树上的一个节点对象
+       包括: 元素, 文字, 属性...
+       树只有一个根节点: document, 包含了所有网页内容
+Node: 每个节点都是一个node类型的对象
+      node是所有节点的父类型
+</code></pre><p>三大公共: nodeType  nodeName  nodeValue</p>
+<pre><code>nodeType: 节点的类型
+  值: document   9
+     element     1
+     attribute     2
+     text         3
+  何时: 只要判断节点类型，就用nodeType
+        因为不同类型的节点，能执行的操作是不一样的
+  问题: 不能进一步区分元素的名称
+  解决:
+nodeName: 节点的名称
+  值: document   #document
+     element    全大写的标签名
+     attribute    属性名
+     text        #text
+  何时: 只要细致鉴别元素的标签名时
+    强调: nodeName返回的是全大写的标签名
+nodeValue: 节点值:
+  值: document   null
+     element     null
+     attribute     属性值
+     text         文本内容
+</code></pre><p>2、查找: 4种:</p>
+<pre><code>  a. 不需要查找，可直接获得的元素
+        html   document.documentElement
+        head   document.head
+        body   document.body
+  b. 按节点间关系查找:
+节点树: 包含所有节点: 元素和文本
+  1. 父子: elem.parentNode  找elem的父节点
+        elem.childNodes  找elem的所有*直接*子节点
+            返回，所有直接子节点组成的集合(类数组)
+        elem.firstChild   找elem的第一个*直接*子节点
+        elem.lastChild   找elem的最后一个*直接*子节点
+  2. 兄弟: elem.previousSibling 找elem的前一个兄弟
+        elem.nextSibling   找elem的下一个兄弟
+ 何时: 前提: 已经获得了一个节点
+      要找周围临近的节点时
+ 问题: 连看不见的空字符，也算文本节点——干扰
+ 解决:
+元素树: 仅包含元素节点的树结构
+       不是一棵新树，仅是节点树的子集
+ 1. 父子: elem.parentElement  找elem的父元素
+        elem.children  找elem的所有*直接*子元素
+            返回，所有直接子元素组成的集合(类数组)
+        elem.firstElementChild   第一个*直接*子元素
+        elem.lastElementChild   最后一个*直接*子元素
+ 2. 兄弟:
+   elem.previousElementSibling 找elem的前一个兄弟元素
+   elem.nextElementSibling   找elem的下一个兄弟元素
+ 何时: 只要仅关心元素节点，不关心文本节点时
+ 问题: IE9+
+ 强调: childNodes和children返回的都是动态集合！
+   凡是遍历动态集合，都要先缓存元素个数，再遍历
+   for(var i=0,len= childNodes.length;i&lt;len;i++)
+     不会导致反复查找DOM树
+</code></pre><p>3、 按HTML查找:</p>
+<pre><code>    优: 范围可大可小,可设置条件
+a、按id查找: var elem=document.getElementById(&quot;id&quot;)
+  强调: 1. 只能在document对象上调用
+       2. 返回一个元素对象
+b、按标签名查找:
+    var elems=parent.getElementsByTagName(&quot;标签名&quot;);
+  强调: 1. 可在任意父元素上
+       2. 返回多个元素组成的集合
+       3. 不但查找直接子元素，还查找所有后代元素
+c、按name属性查找: 了解
+   专门找表单中有name属性的表单元素
+    var elems=document.getElementsByName(&quot;name&quot;)
+    强调: 1. 只能在document上调用
+         2. 返回多个元素组成的集合
+d、按class属性查找:
+    var elems=parent.getElementsByClassName(&quot;class&quot;)
+    强调: 1. 可在任意父元素上调用
+         2. 返回多个元素组成的集合
+         3. 不要求完整匹配，只要包含即可！
+缺: 每次只能按一个条件查找
+   如果条件复杂，就无法一句话获得想要的元素
+</code></pre><p>4、 按选择器查找:</p>
+<pre><code>a. 只找一个元素:
+  var elem=parent.querySelector(&quot;selector&quot;);
+b. 找多个元素
+  var elems=parent.querySelectorAll(&quot;selector&quot;);
+</code></pre><p>5、 总结:</p>
+<pre><code> A首次查找:
+    1. 如果条件简单: 按HTML查找: id, 标签, className
+    2. 如果条件复杂: 按选择器查找:
+ B已经获得一个元素，找周围相邻: 按节点间关系
+鄙视: 按HTML查找 vs 按选择器查找
+ 1.使用的难易程度: 当条件复杂时:
+    按选择器查找——简单, 按HTML查找——繁琐
+ 2.返回值:
+    getElementsByTagName() 返回多个元素的*动态*集合
+      什么是动态集合: 不实际存储对象的属性值，每次访问，都要重新查找DOM树
+    querySelectorAll()  返回多个元素的*非动态*集合
+      什么是非动态集合: 实际存储对象的所有属性值，即使反复访问集合，也不会导致反复查找DOM树
+ 3.单次效率:
+    按HTML查找——效率高!
+    按选择器查找——效率低
+</code></pre><p>3、 修改: (内容, 属性, 样式)</p>
+<pre><code>1. 修改:
+标准属性: 2种:
+  1. 核心DOM: 操作一切结构化文档的API(HTML，XML)
+    elem.attributes集合: 保存了当前元素的所有属性节点
+    获取属性值: elem.getAttribute(&quot;属性名&quot;)
+    修改属性值: elem.setAttribute(&quot;属性名&quot;,&quot;值&quot;)
+    判断是否包含属性: elem.hasAttribute(&quot;属性名&quot;)
+    移除属性: elem.removeAttribute(&quot;属性名&quot;)
+  2. HTML DOM: 对部分常用DOM API的简化版本
+     HTML DOM将标准属性都预定义在元素对象中
+    获取属性值: elem.属性名
+    修改属性值: elem.属性名=&quot;值&quot;;
+    判断是否包含属性: elem.属性名===&quot;&quot; 不包含
+    移除属性: elem.属性名=&quot;&quot;
+    特例: class属性和ES标准中的class重名
+          -&gt; DOM -&gt; className
+    自定义属性: 比如: data-toggle=&quot;dropdown&quot;
+      HTML DOM不能操作自定义属性
+      暂时只能用核心DOM操作:
+    三大状态: disabled  selected   checked
+      核心DOM无法操作三大状态属性
+      HTMLDOM: elem.disabled elem.selected  elem.checked
+            值都是bool类型true/false
+</code></pre><p>3.1、修改css样式:</p>
+<pre><code>1. 仅获取/修改内联样式:  elem.style.css属性名
+  问题1: css属性名有的带-
+  解决: 所有css属性名都要去横线变驼峰
+     比如: background-color: backgroundColor
+          list-style-type: listStyleType
+  问题2: 所有数值类型的属性值都是带单位的字符串
+  解决: 获取时: 都要去单位，转数值
+        修改时: 将单位拼回数值
+  问题3: 仅能获得内联样式, 无法获得样式表中的样式
+  解决: 计算后的样式: 最终应用到元素上的完整样式
+    何时: 只要希望获得元素完整的样式时
+    如何: 2步:
+      1. 获得完整样式对象style
+        var style=getComputedStyle(elem)
+      2. 获得style对象中的css属性
+        style.css属性名
+     强调: style对象中的样式都是只读
+结论: 1. 获取样式: getComputedStyle
+     2. 修改样式: elem.style.css属性名
+2. 运行时修改样式表中的样式:
+  Step1: 获得样式表对象:
+   var sheet=document.styleSheets[i]
+  Step2: 获得样式表对象中某个CSSRule(一个选择器{})
+   var rule=sheet.cssRules[i]
+  Step3: 修改rule.style.css属性名=值
+</code></pre><p>4、 添加和删除:</p>
+<pre><code>添加: 3步:
+ Step1: 创建空元素:
+  var a=document.createElement(&quot;a&quot;);
+  &lt;a&gt;&lt;/a&gt;
+ Step2: 设置关键属性:
+     a.href=&quot;http://tmooc.cn&quot;
+     a.innerHTML=&quot;go to tmooc&quot;;
+  &lt;a href=&quot;http://tmooc.cn&quot;&gt;go to tmooc&lt;/a&gt;
+ Step3: 将元素添加到DOM树: 3种:
+   1. 末尾追加: parent.appendChild(child)
+   2. 中间插入: parent.insertBefore(child, oldChild)
+   3. 替换: parent.replaceChild(child, oldChild)
+</code></pre><p>优化: 尽量少的修改DOM树</p>
+<pre><code>原因: 页面加载过程:
+  html -&gt; DOM Tree(松树)
+           ↓
+        render Tree(圣诞树)-&gt; layout(计算绝对布局)-&gt;paint
+           ↑                 最耗时
+  css  -&gt; cssRules(装饰品)
+  每次修改DOM树，都会导致重新layout，耗时。
+如何: 2种:
+ 1. 如果同时添加父元素和子元素时，应该先在内存将子元素都添加到父元素中，再将父元素一次性整体添加到DOM树
+    结果: 只触发一次layout
+</code></pre><p>1、 HTML DOM 常用对象: 对常用HTML元素操作的简化</p>
+<pre><code>Select: 代表页面上的一个select元素
+ 属性: select.value 当前选中项的value
+                 没有value，就返回选中项的内容
+      select.options 保存select下所有option元素对象
+        相当于: select.getElementsByTagName(&quot;option&quot;)
+        select.options.length 保存select下option的个数
+        清空select下所有option: select.options.length=0;
+      select.length 等效于select.options.length
+        清空select下所有option: select.length=0;
+                               select.innerHTML=&quot;&quot;;
+      select.selectedIndex 当前选中项的下标
+  事件: onchange 当选中项发生改变时
+  方法: select.add(option) 向select中添加一个option
+         相当于: select.appendChild(option)
+         不支持文档片段
+       select.remove(i) 移除select中i位置的一个option
+Option: 代表页面上的一个option元素
+  创建: var opt=new Option(text,value);
+     创建一个option对象，同时设置opt的内容为text，设置opt的值为value
+     相当于: var opt=document.createElement(&quot;option&quot;);
+            opt.innerHTML=text;
+            opt.value=value;
+  属性: .text 代替.innerHTML
+       .index  表示当前option在select下的下标位置
+</code></pre><p>Table: 代表网页中一个table元素</p>
+<pre><code> 管着行分组：
+   添加行分组: var 行分组=table.createTHead|TBody|TFoot();
+       强调: 即创建，同时又将行分组添加到table
+   删除行分组: table.deleteTHead|TFoot()
+   获取行分组: table.tHead|tFoot
+              table.tBodies[i]
+行分组: THead TBody TFoot
+  管着行:
+   添加行: var tr=行分组.insertRow(i)
+       在行分组中i位置插入一个新行
+       强调: 中间插入行，原i位置的行向后顺移
+       固定套路: 1. 末尾追加一个新行: 行分组.insertRow()
+                2. 开头插入: 行分组.insertRow(0)
+   删除行: 行分组.deleteRow(i)
+       删除行分组中第i行
+       强调: i是当前行在行分组内的相对下标位置
+   获取行: 行分组.rows
+
+行: tr
+  管着td:
+    添加td: var td=tr.insertCell(i);
+        省略i表示右侧末尾追加
+        insertCell不支持添加th，只能添加td
+    删除td: tr.deleteCell(i);
+    获取td: tr.cells
+
+删除行:
+ tr上都有一个属性: tr.rowIndex 行在整个表的绝对下标
+ 问题：行分组，无法使用tr.rowIndex删除行。
+ 解决: table.deleteRow(tr.rowIndex)
+ 总结: 今后，删除行都用table.deleteRow(tr.rowIndex)
+</code></pre><p>form: 代表页面上一个表单元素</p>
+<pre><code> 获取: var form=document.forms[i/id]
+ 属性: form.elements 保存了表单中所有表单元素的数组
+        包括: input   select   textarea  button
+      form.elements.length 获得表单中表单元素的个数
+      form.length =&gt; form.elements.length
+ 方法: form.submit();  用于手动提交表单
+ 事件: form.onsubmit  以任何方式提交表单之前自动触发
+          常用于在提交之前，验证所有表单元素的内容
+表单元素:
+ 获取: var elem=form.elements[i/id/name]
+        简写: 如果表单元素有name属性: form.name
+ 方法: elem.focus() 让elem获得焦点
+      elem.blur()  让elem失去焦点
+
+Image: 代表页面上一个img元素
+  创建: var img=new Image();
+</code></pre><p>DOM总结: 查找-&gt;绑定事件-&gt;查找-&gt;修改/添加/删除</p>
+<pre><code>查找: 4种:
+  1. 不需要查找可直接获得: html  head  body  form
+  2. 节点间关系: 节点树/元素树
+      鄙视: 递归遍历
+  3. 按HTML: 4种: ById, ByTagName, ByName, ByClassName
+  4. 按选择器: 2种:
+      只找一个: querySelector()
+      找多个: querySelectorAll()
+修改:
+  内容: .innerHTML  .textContent/.innerText  .value
+  属性:
+    1. 标准属性: 1. 核心DOM; 2. HTML DOM
+    2. 自定义属性: 核心DOM
+    3. 状态属性: HTML DOM
+  样式:
+    修改: elem.style.css属性=值
+    获取: var style=getComputedStyle(elem)
+         style.css属性 ——只读
+    可通过修改class属性批量应用修改多个css属性
+添加: 3步:
+   1. createElement,
+   2.设置关键属性,
+   3. appendChild/insertBefore/replaceChild
+  优化: 尽量少的操作DOM树
+  如何: 2种:
+   1. 同时添加父子元素: 先将子元素加入父元素，再将父元素整体添加到页面
+   2. 同时添加多个平级子元素: fragment
+删除: parent.removeChild(child)
+HTML DOM: Select/Option  Table/...  From/Element  Image
+过渡动画: 2步:
+  css中: 添加transition
+  js中: 修改css属性值
+   不支持transition: display  zIndex
+   支持: width  height  opacity   bottom/top/left/right ...
+</code></pre><p>2、BOM: Browser Object Model</p>
+<pre><code>什么是: 专门操作浏览器窗口的API
+比如: alert prompt confirm
+问题: 1. 没有标准——兼容性问题;
+     2. 不可定制
+window对象: 2个角色:
+  1. 代替ES中的Global充当全局作用域对象
+  2. 封装所有BOM和DOM的API
+
+打开超链接: 4种:
+  1. 在当前窗口打开，可后退
+    html: &lt;a href=&quot;url&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
+    js: /*window.*/open(&quot;url&quot;,&quot;_self&quot;)
+  2. 在当前窗口打开，不可后退
+    js: location.replace(&quot;url&quot;);
+       用新url代替history中当前url，结果: 无法后退
+  3. 在新窗口打开，可打开多个
+    html: &lt;a href=&quot;url&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;_blank&quot;)
+  4. 在新窗口打开，只能打开一个
+    html: &lt;a href=&quot;url&quot; target=&quot;自定义name属性值&quot;&gt;&lt;/a&gt;
+    js: open(&quot;url&quot;,&quot;自定义name属性值&quot;)
+    原理: 内存中每个窗口都有一个唯一的name属性来唯一标示一个窗口
+      浏览器规定，相同name属性的窗口只能打开一个
+    其实: html中的target属性就是在设置新窗口的name属性值。
+    如果target中使用自定义的窗口名，则只能打开一个
+    预定义:
+      _self: 默认使用当前窗口自己的name属性
+           结果，新窗口覆盖当前窗口
+      _blank: 意为不指定窗口名, 浏览器会随机生成不同的窗口名。
+           结果: 每次打开新窗口都随机生成不同的name
+                 结果: 可打开任意多个
+</code></pre><p>定时器: 2种:</p>
+<pre><code>1. 周期性定时器:
+  什么是: 让程序按照指定时间间隔，反复执行一项任务
+  何时: 只要让程序按照指定时间间隔，反复执行一项任务
+  如何: 3件事:
+    1. 任务函数: 让定时器反复调用的函数
+    2. 启动定时器:
+     var timer=setInterval(任务函数, 间隔的毫秒数)
+    3. 停止定时器: clearInterval(timer)
+        问题: timer中的序号会残留在timer变量中
+        解决: 停止定时器后，主动清空timer
+             timer=null
+  停止定时器: 2种:
+    1. 用户手动停止定时器: 用按钮调用clearInterval
+    2. 自动停止定时器: 在任务函数中:
+       1. 设定临界条件
+       2. 如果达到临界条件就自动调用clearInterval
+
+2. 一次性定时器:
+ 什么是: 让程序先等待一段时间，再自动执行一次任务
+         执行一次后，定时器自动停止
+ 何时: 只要先等待，再执行一次任务
+ 如何: 三件事
+   1. 任务函数
+   2. 启动: var timer=setTimeout(任务函数, 等待的毫秒数)
+   3. 停止: clearTimeout(timer)
+</code></pre><p>鄙视: 定时器中的函数，只能在主程序所有程序执行后才能执行</p>
+<pre><code>for(var i=0;i&lt;3;i++){
+  setTimeout(function(){
+    console.log(i);
+  },0);
+}//结果: 3 3 3
+//alert(&quot;Hello&quot;) 如果不点确定，则永远不输出333
+</code></pre><p>window:<br> history，location，document，navigator，screen，event</p>
+<pre><code>history: 保存当前窗口打开后，成功访问过的历史记录的栈
+  history封装的非常严密
+  只能前进，后退，刷新: history.go(n)
+   前进: go(1)  后退:go(-1)  刷新:go(0)
+
+location: 专门保存当前窗口正在打开的url的对象
+ 属性: location.href 保存了完整的url
+        在当前窗口打开: location.href=新url
+      location.protocol: 协议
+            .host: 主机名+端口号
+            .hostname: 主机名
+            .port: 端口号
+      location.pathname: 相对路径
+            .hash: 锚点地址#xxx
+            .search: 表单提交后地址栏中的查询字符串
+                   ?变量名=值&amp;变量名=值&amp;...
+ 方法:
+   1. 替换history中当前url,实现进制后退:
+     location.replace(&quot;新url&quot;)
+   2. 在当前页面打开，可后退:
+     location.assign(&quot;新url&quot;)
+       =&gt; location.href=&quot;新url&quot;
+        =&gt; location=&quot;新url&quot;
+   3. 刷新页面:  location.reload(false/true);
+     鄙视: false/true的差别
+       浏览器本地是有缓存的
+         浏览器的缓存中会保存css，图片等静态资源
+       每次请求时，首先查看缓存中是否有想要文件
+         没有想要文件，或文件过期，才去服务器下载新文件
+       reload(false) 优先使用本地缓存的文件
+       reload(true) 强制去服务器下载新文件
+     查 浏览器缓存的原理！
+</code></pre><p>1、event</p>
+<pre><code>绑定事件: 2种:
+ 1. 在HTML中绑定: &lt;ANY on事件名=&quot;js语句&quot;
+    问题: 不符合内容与行为分离的原则——不便于维护
+ 2. 在js中动态绑定: 2种:
+    1. 一个事件只绑定一个处理函数:
+       elem.on事件名=function(){
+         //this-&gt;elem
+       }
+       解除绑定: elem.on事件名=null;
+       问题: 每个事件只能绑定一个处理函数
+       解决:
+    2. 一个事件可同时绑定多个处理函数:
+       elem.addEventListener(&quot;事件名&quot;,function(){
+         //this-&gt;elem
+       })
+       解除绑定:
+        elem.removeEventListener(&quot;事件名&quot;,&quot;函数名&quot;);
+        强调: 如果一个事件处理函数可能被动态移除，则绑定时，不能使用匿名函数，必须使用有名称的函数
+
+    事件模型: DOM标准: 3个阶段
+      1. 捕获: 由外向内，记录各级父元素绑定的事件处理函数
+      2. 目标触发: 首先执行目标元素上的事件处理函数
+      3. 冒泡: 由内向外，反向执行捕获阶段记录的处理函数
+
+    事件对象: 事件发生时自动创建的
+             封装事件信息
+             提供操作事件的API 的对象
+      何时: 只要希望获得事件信息或修改事件的默认行为
+      如何: 事件对象，在事件发生时，通常作为事件处理函数的第一个参数，默认自动传入！
+          .on事件名=function(e){
+             //e会自动获得事件对象
+          }
+    阻止蔓延/冒泡: e.stopPropagation();
+    利用冒泡:
+      优化: 尽量少的添加事件监听
+      原理: 因为浏览器触发事件监听，是采用遍历查找的方式。添加的监听越多，遍历的速度越慢
+      如何: 如果多个子元素都要绑定相同的事件
+          只要在父元素绑定一次，所有子元素即可共用
+      难题:
+         1. 获得目标元素:
+            不能用this, 因为this指父元素
+            应该用e.target，保存实际点击的目标元素
+         2. 鉴别目标元素:
+            先判断目标元素的nodeName或className...
+            只有目标元素符合要求时，才执行事件操作
+    取消事件/阻止默认行为: e.preventDefault();
+    事件坐标: 3对儿:
+      1. 相对于整个屏幕左上角的坐标: e.screenX|screenY
+      2. 相对于文档显示区左上角的坐标: e.clientX|clientY
+      3. 相对于当前元素左上角的坐标: e.offsetX|offsetY
+
+    页面滚动:
+      事件: window.onscroll
+      获得页面滚动位置: document.body.scrollTop
+          页面超出文档显示区顶部的距离
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;DOM: Document Object Model&lt;/p&gt;
+&lt;p&gt; DOM是专门操作网页内容的API标准&lt;br&gt; 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题&lt;br&gt; 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+      <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
+    
+      <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Html5基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/HTML5/"/>
     <id>www.wangchengzou.cn/2017/07/22/HTML5/</id>
@@ -1676,652 +2152,6 @@ localStorage中若数据发生了修改，会触发一次window.onstorage事件�
       <category term="h5" scheme="www.wangchengzou.cn/tags/h5/"/>
     
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySql常用方法知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
-    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T16:08:55.461Z</updated>
-    
-    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
-
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
-}
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
-&amp;gt;on tutorials.*
-&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
-    
-      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
-    
-      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS3高级笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:33:13.367Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、复杂选择器</p>
-<pre><code>1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选择器2
-        如：div+p   #top+.important
-                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
-        选择器1~选择器2
-        如#d1~div
-2、属性选择器
-    通过元素所附带的属性及其值来匹配页面中的元素
-    语法：
-        基础属性选择器  [attr]
-            匹配页面中的有附带attr属性的元素
-        elem[attr]
-            elem:表示任意元素名称
-            attr:表示任意属性名称
-            匹配页面中附带attr属性的elem元素
-            如：div[id]:匹配页面中所有附带id属性的div元素
-        [attr1][attr2][attr3]
-            匹配页面中同时附带attr1和attr2属性的所有元素
-            如 input[name][hype]
-        [attr=value]
-            匹配页面中所有attr属性的值为value的元素
-            如input[type=text]
-        [class~=value]
-            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
-        [attr^=value]
-            匹配以value值作为开始的attr属性的元素
-        [attr$=value]
-            匹配以value值作为结束的attr属性的元素
-        [attr*=value]
-            匹配attr属性值中包含value字符的所有元素
-3、伪类选择器
-    目标伪类
-        突出显示活动的HTML锚元素
-        语法： ：target
-    结构伪类
-        通过元素之间的结构关系来匹配元素
-        ：first-child     获取属于其父元素中的首个子元素
-        ：last-child     获取属于其父元素中的尾（最后）子元素
-        :nth-child(N)  获取属于其父元素中的第N个子元素
-        ：empty   空的，匹配没有子元素的元素，包含文本
-        ：only-child   匹配属于其父元素中的唯一子元素
-    否定伪类
-        把匹配某选择器元素排除出去
-        ：not(选择器 )
-4、伪元素选择器
-    伪类与伪元素
-        伪类：匹配元素不同的状态
-        伪元素：是匹配元素中的内容
-    语法：
-        ：first-letter
-        ::first-letter  匹配某元素的首字符
-        ：first-line    匹配某元素的首行字符
-        ：：selection 匹配用户选取的内容部分
-    ：和：：区别
-        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
-        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
-</code></pre><p>2、内容生成</p>
-<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
-伪元素选择器
-    ：before   定位到元素内容区域之前
-    ：after    定位到元素内容区域之后
-语法：
-    属性：content
-    取值：普通文本
-         图像，url(...)
-         计数器
-问题处理：
-    外边距溢出问题
-        为父元素添加边框
-        使用父元素的内边距取代子元素的外边距
-        在父元素的第一个或最后一个子元素位置处增加一个空的table
-    浮动元素父元素的高度问题
-</code></pre><p>3、弹性布局</p>
-<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
-基本概念‘
-    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
-    flex项目：简称项目，存放在flex容器中的内容
-
-语法：
-    容器：display
-        取值：flex 将块级元素变为flex容器
-              inline-flex  将行内元素变为flex容器
-        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
-    容器属性;
-        该组属性要添加在容器元素上，控制子元素的位置
-        flex-direction  决定主轴的方向（main-axsis）
-            取值：
-                row  主轴为水平方向的轴，起点在容器左端，默认值
-                row-reverse 主轴为水平方向的轴，起点在容器右端
-                column  主轴为交叉轴，起点在容器的顶端
-                column-reverse 主轴为交叉轴，起点在容器的底端
-        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
-            取值：
-                nowrap     默认值，不换行
-                wrap        换行
-                wrap-reverse  反方向换行
-        flex-flow   dirextion和wrap的缩写方式
-            取值：
-                row nowrap 默认值
-                direction wrap
-        justify-content   定义项目在主轴上的对齐方式
-            取值：
-                flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                space-between  两端对齐，项目之间的距离是相等的
-                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
-        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
-            取值：
-                flex-start  交叉轴起点对齐
-                flex-end   交叉轴终点对齐
-                center     交叉轴中间对齐
-                baseline   基线对齐，以所有项目中的第一行文本为准
-                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
-        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
-            取值：
-                flex-start   交叉轴顶端对齐
-                flex-end    交叉轴底端对齐
-                center      交叉轴中间对齐
-                space-between  与交叉轴两端对齐
-                space-around     项目与项目间对齐
-    项目属性：
-        该组属性主要设置于项目中
-        order  定义项目在排列顺序，值越小，越靠前，默认为0
-        flex-grow  指定项目的放大比例，默认为0，即不放大
-        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
-        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
-        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
-            取值，auto  相当于1  1   auto
-                 none  相当于0 0  auto
-                 flex-grow【,flex-shrink,flex-basis】
-        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
-            取值： auto 默认值，使用
-                  flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                base-line
-                stretch
-</code></pre><p>4、CSS Hack 兼容性</p>
-<pre><code>标准模式和混杂模式和准标准模式
-IE6之前，没有兼容性说法
-IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
-    混杂模式  无标准可言
-        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
-    标准模式  安全支持
-    准标准模式，即支持标准，也同时向前兼容非标准代码
-如何根据不同的浏览器编写不同的css
-    css类内部Hack
-        在属性名称前和值添加前后缀以便识别不同的浏览器
-    选择器Hack
-        在选择器前添加特殊标识以便识别不同的浏览器
-    头部引用hack
-        通过html的条件注释来判断浏览器版本，去执行不同的CSS
-        条件注释
-            条件：
-                gt:判断当前浏览器是否大于指定定版本
-                gte：判断当前浏览器是否大于等于指定定版本
-                it:   判断当前浏览器是否小于指定版本
-                ite： 判断当前浏览器是否小于等于指定版本
-                !：   判断当前浏览器是否为非指定版本
-                    &lt;!--[if !IE 8]&gt;
-                        该段内容在除IE8以外浏览器中显示
-                    &lt;![endif]--&gt;
-</code></pre><p>5、转换</p>
-<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
-    允许进行2D和3D方向的转换
-    2D转换：在平面中进行的操作
-    3D转换：在空间中进行的操作
-转换属性：
-    rtansform:为元素应用2D或3D转换效果
-        取值：none;  没有效果
-
-            transform-functions:一组转换函数
-                位移转换函数：translate()
-                改变形状函数：skew()
-                注意：如果指定多个转换函数的话中间用空格隔开
-    转换原点：
-        属性：transform-origin
-        默认：转换原点在元素中心处
-        取值：轴线给值
-            两个轴线值：X Y
-            三个轴线值：X Y Z
-2D转换
-    位移：改变元素在页面中的位置
-        语法：transform
-            fransform(x)  改变元素在X轴的位置
-            fransform(X ,Y)  改变元素在两轴的位置
-            fransformX(X) 只在X轴上位置移动
-            fransformY(Y)  只在Y轴上位置移动
-    缩放： 改变元素在页面中的大小】
-        语法：transform
-            scale(value)  表示两轴等比缩放
-                取值：默认  为1
-                    放大   为大于1的数值
-                    缩小   为0~1之间小数
-                    返转   负数
-            sacle(X,Y)
-            saclex(y)
-            sacley(y)
-    旋转：改变元素在页面上的角度，要根据原点实现转换效果
-        语法：transform
-            rotate(ndeg)
-                n 取值正，顺时针旋转
-                n 取值负，逆时针旋转
-                deg 为角度
-                0~360范围
-        注意：转换原点问题
-            元素坐标轴也跟着旋转
-    倾斜：改变元素在页面中形状
-        语法：transform
-            skew(xdeg)  横向倾斜指定度数
-                x 取值正，y轴逆时针倾斜一定角度
-                  取值负，Y轴顺时针倾斜一定角度
-            skew(xdeg,ydeg)
-            skewx(xdeg)
-            skewy(ydeg)
-3D转换
-    感觉空间
-    属性：perspetive 假定人眼到投射平面的距离
-    注意：该属性要放在3D转换元素的父元素上
-        兼容性chrome和safari需要加前缀
-            -wedkit-perspective:500px;
-    旋转：以X轴中心轴旋转
-            rotatex(xdeg)
-          以Y轴中心轴旋转
-            rotatey(ydeg)
-          以Z轴中心轴旋转
-            rotatez(zdeg)
-        取值：正  顺时针
-            负   逆时针
-        以多个轴同时进行旋转
-            rotate3d(x ,y, z ,ndeg)
-                x y z 取值为1，该轴参与旋转
-                x y z  取值为0 ，该轴不参与旋转
-    位移：改变元素在Z轴上的位置
-        语法：transform
-            translatez(z)
-
-            transform-style
-                取值：flat  默认值，子元素不保留3D位置
-                     preserve-3D  子元素保留3D位置
-</code></pre><p>6、过渡</p>
-<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
-要素与属性：
-    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
-        transition-property: 属性名称（width）
-                      all   全部属性
-                      none
-        允许设置过渡效果的属性：
-            颜色属性
-            渐变属性
-            取值为数字属性
-            转换属性 transition-property:transform;
-            visibility属性
-            阴影属性
-    指定过渡时长
-        transition-duration: 以S、MS为单位数值
-    指定过渡时速曲线函数  可选
-        transition-timing-function
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-    指定过渡的延迟时间   可选
-        transition-delay
-            取值：以S或MS做为单位
-    简写属性：transition:prop duration  timing-fun delay;
-        多个过渡效果
-            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
-触发过渡条件
-    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
-    将过渡编写在:hover,:active伪类中
-</code></pre><p>7、动画</p>
-<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
-动画使用步骤
-    声明动画
-        指定动画名称
-        指定动画中的关键帧（keyframes）
-            时间点（以百分比描述时间）
-            元素状态（CSS样式）
-    为元素调用动画
-        指定调用动画的名称以及执行时长
-语法：
-    声明动画     注意前缀，兼容性问题
-        &lt;style&gt;
-            @keyframes 名称{
-                0%{   动画开始时，元素的状态   }
-                。。。。
-                100%{  动画结束时，元素的状态  }
-            }
-        &lt;/style&gt;
-    调用动画(animation)
-        animation-name  指定调用动画名称
-        animation-duration   指定动画周期时长，以S或MS为单位
-        animation-timing-function  指定动画的速度时间出线函数
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-        animation-delay  指定动画延迟时间
-        animation-iteration-count  指定动画播放次数
-            取值：默认1次，具体数值
-                infinite:无限次播放
-        animation-direction  指定动画的播放方向
-            取值：normal  从0%~100%
-                reverse  从100%~0%
-                alternate  轮流来回播放 奇数 0%~100%
-                                 偶数 100%~0%
-        animation  简写方式
-            取值：name  duration  timing-fun delay  iteration-count direction;
-        animation-fill-mode  指定动画播放之前、之后的填充模式
-            取值：none  默认值
-                 forwards  动画播放完成后，保持在最后一帧的位置
-                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
-                 both 同时应用在开始和最后的位置帧上
-        animation-play-state  动画播放状态
-            取值：paused 暂停
-                 running 播放
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、复杂选择器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
-    
-      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
     
   </entry>
   
@@ -3122,6 +2952,297 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
+    <title>MySql常用方法知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
+    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T16:08:55.461Z</updated>
+    
+    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
+<pre><code>&gt;grant select,insert,update,delete,create,drop
+&gt;on tutorials.*
+&gt;to &apos;zara&apos;@&apos;localhost&apos;
+&gt;identified by &apos;zara123&apos;;
+以上为为指定数据库tutorials添加用户zara 密码为zara123
+
+&gt;use数据库名；--选择操作的数据库
+&gt;show databases;   ---列出所有数据库
+&gt;show tables;      ---列出数据库所有表
+&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
+&gt;show index from 数据表； ---显示数据表索引信息
+&gt;show table status like 数据表\G; ---输出统计信息
+&gt;create database库名； ----创建库名
+&gt;drop database库名；   ----弹出框显示是否删除库名
+&gt;int bigint double varchar datetime now()  四大数据类型
+&gt;create table 表名；  ---创建数据表
+&gt;drop table 表名；    ---删除表
+&gt;insert into 表名（列，列）values(值，值)；---添加数据
+&gt;select 列名 from 表名 where 条件；  ----查询
+&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
+&gt;delete from 表名 where 条件； ---直接删除表内记录列
+&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
+&gt;create database 库名 charset=utf8；  ---指定库名编码
+&gt;set names utf8  -----设置语句编码
+&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
+&gt;$_request[&apos;title&apos;];--获取表单中的参数
+&gt;desc 表名；----将查看该表里面的所有类型
+&gt;require();  ---引用初始化PHP文件
+多表查询方法（
+    SELECT n.title,n.ctime,u.uname    多表联系
+    FROM t_user u,t_news n;           创建别名
+    WHERE u.id==n.uid          条件关系
+）
+
+{命令窗口使用SQL文件加载数据库，中文显示
+    &gt;set names utf8        --文件转换编码格式
+    &gt;source 文件位置    --加载文件位置
+    &gt;set names gbk        --临时使用gbk格式显示中文
+}
+</code></pre><p>php学习基本函数</p>
+<pre><code>phpinfo();显示软件版本信息
+var_dump();输出数组元素
+count();输出数组里面元素的个数
+foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
+</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
+<pre><code>1创建到MySQL服务器的连接
+  $conn=mysqli_connect(...);
+    服务器地址IP    本机127.0.0.1：8081
+    用户名      root
+    密码          p
+    选择库      库名
+2向MySQL服务器发送sql指令，等待服务器执行
+  $sql=&quot;...&quot;;//insert/delete/update
+3读取MySQL服务器返回结果
+  $result=mysqli_query($conn,$sql);
+4判断返回结果是否成功
+  if($result===false);
+5断开与MySQL服务器连接
+  mysqli_close($conn);
+</code></pre><p>php mysql查询操作</p>
+<pre><code>1:连接数据库
+  $conn=mysqli_connect(...);
+  服务器地址IP    本机127.0.0.1：8081
+  用户名            root
+  密码          p
+  选择库      库名
+2:发送查询sql   SELECT
+   $sql=&quot;...&quot;;    SELECT * FROM t_user;
+3:读取MySQL服务器返回结果 是不是true/false
+   $result=mysqli_query($conn,$sql);
+4:抓取结果中数据并且转换数组
+   a:抓取一行数据{关联数组}
+    mysqli_fetch_assoc(结果集对象);
+   b:抓取一行数据{索引数组
+    mysqli_fetch_row(结果集对象);
+5:断开与MySQL服务器连接
+   mysqli_close($conn);
+</code></pre><p>php常用函数说明</p>
+<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
+@    压制住当前行代码警告消息，在行首位置添加！
+#time() 返回当前系统时间，以毫秒为单位整数
+#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
+#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
+location.href   为跳转方式
+</code></pre><p>ajax  GET的使用方法</p>
+<pre><code>1.创建Ajax对象
+    var xhr= new XMLHttpRequest();
+2.绑定事件
+    xhr.onreadystatechange=function(){
+        alert(xhr.responseText);--输出事件运行文本状态
+    }
+3.打开连接
+    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
+4.发送请求
+    xhr.send(null)
+</code></pre><p>Ajax 常用对象和属性事件方法</p>
+<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
+    var xhr =new XMLHttpRequest();
+    兼容性问题，老IE8以下不支持
+    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
+    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
+
+readyState ;xhr对象当前状态，会自动改变
+    对应值：0 UNSENT 请求消息未发送
+        1 OPENED XHR已经找开连接
+        2 HEADERS_RECEVIED xhr已经接收信息
+        3 LOADING  XHR正在加载消息
+        4 DONE XHR接收完成消息
+
+status  表示服务器返回的状态码
+responseText  表示服务器响应文本
+responseXML   表示服务器响应XML文本
+
+属性使用方法
+    open(method,url.isAsyn)  表示打开服务器连接
+        method：请求方式，GET POST
+        Ulr  请求地址
+        isasyn：请求方式是异步TRUE还是同步FALSE
+
+    send（data）请求消息发送web服务器
+        data：请示消息主体内容:
+           GET为send(null)
+           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
+</code></pre><p>#AJAX POST  标准语法和用法</p>
+<pre><code>1.创建AJAX对象
+ xhr=new XMLHttpRequest()
+2.绑定事件
+    xhr.onreadystatechange=function(){
+    判断事件输出信息，返回数据
+    if(xhr.readyState===4&amp;&amp;xhr.status===200){
+        if(parseInt(xhr.responseText)&gt;0){
+            作输出 ，返回成功结果
+        }else{
+            输出 失败结果
+        }
+    }
+  }
+3.打开连接
+  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
+  修改头部信息
+   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4.发送请求
+  xhr.send(发送参数);
+</code></pre><p>修改头部信息–php首行加头部信息</p>
+<pre><code>纯文本text
+    header(&quot;Content-Type:text/plain&quot;);
+        html-&gt;ajax
+        xhr.responseText
+网页页面HTML
+    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+javascript
+    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+                html-&gt;ajax
+      eval(xhr.responseText);
+      示例:国际化
+       当前浏览器 zh-CN  你好
+                 en-US   hello
+</code></pre><p>json语法和要求</p>
+<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
+JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
+数组中可以包含多值 ，用， 分开
+对象中可以包含多个键值，使用逗号分开，
+
+怎么处理JSON数据
+服务器端PHP
+    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+    $str=json_encode($arr)
+    echo $str;
+
+javascript 接收
+    var obj=JSON.parse(xhr.responstText);
+</code></pre><p>XML语法要求</p>
+<pre><code>XML 文档声明
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
+所有属性必须用双引号
+
+XML方法
+    服务器PHP
+    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
+    echo &quot; xml....&quot;;
+    客户端JS
+    AJXX请求接收数据
+    var xmlDoc=xhr.responseXML;---
+    获取所有标签
+    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
+    获取其中属性
+    var name=xmldDoc.querySelector(&quot;name&quot;)
+</code></pre><p>jquery 常用AJAX函数</p>
+<pre><code>$.get(url,callback);    发送get请求
+$.post(url,data,callback);   发送post请求
+$.getJSON(url,callback);    发送JSON请求‘
+$.load(url);       加载
+$.getScript(url.callback);
+$.ajax({})   全能
+    全能使用方法
+    ajax({
+        type:&quot;GET&quot;        请求方式post,pub,delete
+        url:&quot;  url&quot;        请求地址
+        data:&quot;{---:--,--:--}&quot;
+            请求服务器数据
+        beforeSend:fn
+            请求消息发送前调用函数
+        success:fn
+            响应完成并且成功调用函数
+        error:fn
+            响应完成但是有问题的调用函数
+        complete:fn
+            响应完成但是无论成功与否都调用函数
+    })
+</code></pre><p>开发项目</p>
+<pre><code>开发流程
+    需求说明书---技术经理，美工
+    剪切图片集---UI
+    静态网页----前端
+    动态网页---后端
+    部署服务器----运维
+    测试---------功能
+    上线-----
+    调试---加新功能--升级
+</code></pre><p>针对cookie作了解</p>
+<pre><code>添加
+    document.cookie = &apos;uid=10&apos;;
+    document.cookie = &apos;uname=qiangdong&apos;;
+
+读取
+    function getCookieVal(key){
+            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
+        var rs = null;
+            //1:创建变量保存最终返回结果值
+        var line = document.cookie;
+        var arr = line.split(&quot;;&quot;);
+            //2:按照;拆分cookie中字符串
+        for(var i=0;i&lt;arr.length;i++){
+            //3:循环数组中每一个键值
+            var kv = arr[i];
+            var option = kv.split(&quot;=&quot;);
+            //4:按照=拆分
+            var k = option[0].trim();
+            //5:下标0 k  ---  trim()去除字符串前后空格
+            var v = option[1];
+            //6:下标0 v
+            if(key===k){
+                //7:判断如果参数中指定
+                key == k
+                return v;
+                //8:返回v
+            }
+        }
+        return rs;
+        //9:否则返回 null
+    }
+     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
+         console.log(rs);
+     var rs = getCookieVal(&quot;uname&quot;);
+         console.log(rs);
+     var age = getCookieVal(&quot;age&quot;);
+         console.log(age);
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
+&amp;gt;on tutorials.*
+&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
+    
+      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
+    
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Vue快速上手知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
     <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
@@ -3712,471 +3833,6 @@ post请求方式主要用来提交数据，没有数据长度的限制，提交�
       <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
     
       <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>axios使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
-    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-02T03:25:25.164Z</updated>
-    
-    <content type="html"><![CDATA[<p>axios</p>
-<p>##基于http客户端的promise，面向浏览器和nodejs</p>
-<pre><code>特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取消请求
-自动转化json数据
-客户端支持抵御XSRF（跨站请求伪造）
-</code></pre><p>安装</p>
-<pre><code>使用npm：
-
-$ npm i axios
-使用 bower
-
-$ bower instal axios
-使用cdn
-
-&lt;!--国内bootCDN--&gt;
-&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>示例</p>
-<pre><code>发起一个GET请求
-//发起一个user请求，参数为给定的ID
-axios.get(&apos;/user?ID=1234&apos;)
-.then(function(respone){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-//上面的请求也可选择下面的方式来写
-axios.get(&apos;/user&apos;,{
-    params:{
-        ID:12345
-    }
-})
-    .then(function(response){
-        console.log(response);
-    })
-    .catch(function(error){
-        console.log(error)
-    });
-
-发起一个POST请求
-axios.post(&apos;/user&apos;,{
-    firstName:&apos;friend&apos;,
-    lastName:&apos;Flintstone&apos;
-})
-.then(function(response){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-发起一个多重并发请求
-function getUserAccount(){
-    return axios.get(&apos;/user/12345&apos;);
-}
-
-function getUserPermissions(){
-    return axios.get(&apos;/user/12345/permissions&apos;);
-}
-
-axios.all([getUerAccount(),getUserPermissions()])
-    .then(axios.spread(function(acc,pers){
-        //两个请求现在都完成
-    }));
-</code></pre><p>axios API</p>
-<pre><code>可以对axios进行一些设置来生成请求。axios(config)
-
-//发起 POST请求
-axios({
-    method:&apos;post&apos;,//方法
-    url:&apos;/user/12345&apos;,//地址
-    data:{//参数
-        firstName:&apos;Fred&apos;,
-        lastName:&apos;Flintstone&apos;
-    }
-});
-
-//通过请求获取远程图片
-axios({
-    method:&apos;get&apos;,
-    url:&apos;http://bit.ly/2mTM3Ny&apos;,
-    responseType:&apos;stream&apos;
-})
-    .then(function(response){
-        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
-    })
-axios(url[,config])
-
-//发起一个GET请求
-axios(&apos;/user/12345/);
-请求方法的重命名。
-
-为了方便，axios提供了所有请求方法的重命名支持
-axios.request(config)
-axios.get(url[,config])
-axios.delete(url[,config])
-axios.head(url[,config])
-axios.options(url[,config])
-axios.post(url[,data[,config]])
-axios.put(url[,data[,config]])
-axios.patch(url[,data[,config]])
-
-注意
-当时用重命名方法时url,method,以及data属性不需要在config中指定。
-
-并发 Concurrency
-有用的方法
-axios.all(iterable)
-axios.spread(callback)
-
-创建一个实例
-你可以使用自定义设置创建一个新的实例
-axios.create([config])
-var instance = axios.create({
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-    timeout:1000,
-    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
-});
-实例方法
-
-下面列出了一些实例方法。具体的设置将在实例设置中被合并。
-axios#request(config)
-axios#get(url[,config])
-axios#delete(url[,config])
-axios#head(url[,config])
-axios#post(url[,data[,config]])
-axios#put(url[,data[,config]])
-axios#patch(url[,data[,config]])
-
-Requese Config请求设置
-以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
-{
-    //`url`是服务器链接，用来请求
-    url:&apos;/user&apos;,
-
-    //`method`是发起请求时的请求方法
-    method:`get`,
-
-    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
-    //当axios使用相对地址时这个设置非常方便
-    //在其实例中的方法
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-
-    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
-    //这个只适用于`PUT`,`GET`,`PATCH`方法。
-    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
-        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
-    transformRequest:[function(data){
-        //依自己的需求对请求数据进行处理
-        return data;
-    }],
-
-    //`transformResponse`允许返回的数据传入then/catch之前进行处理
-    transformResponse:[function(data){
-        //依需要对数据进行处理
-        return data;
-    }],
-
-    //`headers`是自定义的要被发送的头信息
-    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
-
-    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
-    params:{
-        ID:12345
-    },
-
-    //`paramsSerializer`是一个可选的函数，是用来序列化参数
-    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
-    paramsSerializer: function(params){
-        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
-    },
-
-    //`data`是请求提需要设置的数据
-    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
-    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
-    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
-    //-仅浏览器：FormData,File,Blob
-    //-仅Node：Stream
-    data:{
-        firstName:&apos;fred&apos;
-    },
-    //`timeout`定义请求的时间，单位是毫秒。
-    //如果请求的时间超过这个设定时间，请求将会停止。
-    timeout:1000,
-
-    //`withCredentials`表明是否跨网站访问协议，
-    //应该使用证书
-    withCredentials:false //默认值
-
-    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
-    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
-    adapter:function(config){
-        /*...*/
-    },
-
-    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
-    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
-    auth:{
-        username:&apos;janedoe&apos;,
-        password:&apos;s00pers3cret&apos;
-    },
-
-    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
-    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
-    responsetype:&apos;json&apos;,
-
-    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
-    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
-
-    //`onUploadProgress`允许处理上传过程的事件
-    onUploadProgress: function(progressEvent){
-        //本地过程事件发生时想做的事
-    },
-
-    //`onDownloadProgress`允许处理下载过程的事件
-    onDownloadProgress: function(progressEvent){
-        //下载过程中想做的事
-    },
-
-    //`maxContentLength` 定义http返回内容的最大容量
-    maxContentLength: 2000,
-
-    //`validateStatus` 定义promise的resolve和reject。
-    //http返回状态码，如果`validateStatus`返回true
-        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
-    validateStatus: function(status){
-        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
-    },
-
-    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
-        定义一个自定义的代理，在nodejs中。
-    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
-    httpAgent: new http.Agent({keepAlive:treu}),
-    httpsAgent: new https.Agent({keepAlive:true}),
-
-    //`proxy`定义服务器的主机名字和端口号。
-    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
-    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
-    proxy:{
-        host:127.0.0.1,
-        port:9000,
-        auth:{
-            username:&apos;cdd&apos;,
-            password:&apos;123456&apos;
-        }
-    },
-
-    //`cancelTaken` 定义一个取消，能够用来取消请求
-    //（查看 下面的Cancellation 的详细部分）
-    cancelToken: new CancelToken(function(cancel){
-    })
-}
-
-返回响应概要 Response Schema
-一个请求的返回包含以下信息
-{
-    //`data`是服务器的提供的回复（相对于请求）
-    data{},
-
-    //`status`是服务器返回的http状态码
-    status:200,
-
-
-    //`statusText`是服务器返回的http状态信息
-    statusText: &apos;ok&apos;,
-
-    //`headers`是服务器返回中携带的headers
-    headers:{},
-
-    //`config`是对axios进行的设置，目的是为了请求（request）
-    config:{}
-}
-
-使用then，你会接受打下面的信息
-axios.get(&apos;/user/12345&apos;)
-    .then(function(response){
-        console.log(response.data);
-        console.log(response.status);
-        console.log(response.statusText);
-        console.log(response.headers);
-        console.log(response.config);
-    });
-使用catch时，或者传入一个reject callback作为then的第二个参数，
-那么返回的错误信息将能够被使用。
-</code></pre><p>默认设置（Config Default)</p>
-<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
-全局默认设置 Global axios defaults
-axios.defaults.baseURL = &apos;https://api.example.com&apos;;
-axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
-实例中自定义默认值 Custom instance default
-//当创建一个实例时进行默认设置
-var instance = axios.create({
-    baseURL:&apos;https://api.example.com&apos;
-});
-
-//在实例创建之后改变默认值
-instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-设置优先级 Config order of precedence
-设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
-    其次是defaults实例属性的设置，最后是请求中config参数的设置。
-    越往后面的等级越高，会覆盖前面的设置。
-看下面这个例子：
-
-//使用默认库的设置创建一个实例，
-//这个实例中，使用的是默认库的timeout设置，默认值是0。
-var instance = axios.create();
-
-//覆盖默认库中timeout的默认值
-//此时，所有的请求的timeout时间是2.5秒
-instance.defaults.timeout = 2500;
-
-//覆盖该次请求中timeout的值，这个值设置的时间更长一些
-instance.get(&apos;/longRequest&apos;,{
-    timeout:5000
-});
-</code></pre><p>拦截器 interceptors</p>
-<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
-//添加一个请求拦截器
-axios.interceptors.request.use(function(config){
-    //在请求发送之前做一些事
-    return config;
-},function(error){
-    //当出现请求错误是做一些事
-    return Promise.reject(error);
-});
-
-//添加一个返回拦截器
-axios.interceptors.response.use(function(response){
-    //对返回的数据进行一些处理
-    return response;
-},function(error){
-    //对返回的错误进行一些处理
-    return Promise.reject(error);
-});
-
-如果你需要在稍后移除拦截器,你可以
-var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
-axios.interceptors.rquest.eject(myInterceptor);
-
-你可以在一个axios实例中使用拦截器
-var instance = axios.create();
-instance.interceptors.request.use(function(){/*...*/});
-</code></pre><p>错误处理 Handling Errors</p>
-<pre><code>axios.get(&apos;user/12345&apos;)
-    .catch(function(error){
-        if(error.response){
-            //存在请求，但是服务器的返回一个状态码
-            //他们都在2xx之外
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-        }else{
-            //一些错误是在设置请求时触发的
-            console.log(&apos;Error&apos;,error.message);
-        }
-        console.log(error.config);
-    });
-
-你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
-axios.get(&apos;user/12345&apos;,{
-    validateStatus:function(status){
-        return status &lt; 500;//当返回码小于等于500时视为错误
-    }
-});
-</code></pre><p>取消 Cancellation</p>
-<pre><code>你可以使用cancel token取消一个请求
-axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
-
-你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
-var CancelToken = axios.CancelToken;
-var source = CancelToken.source();
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken:source.toke
-}).catch(function(thrown){
-    if(axiso.isCancel(thrown)){
-        console.log(&apos;Rquest canceled&apos;, thrown.message);
-    }else{
-        //handle error
-    }
-});
-
-//取消请求(信息参数设可设置的)
-source.cancel(&quot;操作被用户取消&quot;);
-你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
-var CancelToken = axios.CancelToken;
-var cancel;
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken: new CancelToken(function executor(c){
-        //这个executor 函数接受一个cancel function作为参数
-        cancel = c;
-    })
-});
-
-//取消请求
-cancel();
-注意：你可以使用同一个cancel token取消多个请求。
-使用 application/x-www-form-urlencoded 格式化
-默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
-你可以使用一下的设置。
-</code></pre><p>浏览器 Browser</p>
-<pre><code>在浏览器中你可以如下使用URLSearchParams API:
-var params = new URLSearchParams();
-params.append(&apos;param1&apos;,&apos;value1&apos;);
-params.append(&apos;param2&apos;,&apos;value2&apos;);
-axios.post(&apos;/foo&apos;,params);
-注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
-（poly fill）可用（确保垫片在浏览器全局环境中）
-
-其他方法：你可以使用qs库来格式化数据。
-var qs = require(&apos;qs&apos;);
-axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
-Node.js
-
-在nodejs中，你可以如下使用querystring:
-var querystring = require(&apos;querystring&apos;);
-axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
-你同样可以使用qs库。
-promises
-axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
-
-TypeScript
-axios 包含TypeScript定义
-
-import axios from &apos;axios&apos;
-axios.get(&apos;/user?ID=12345&apos;)
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;axios&lt;/p&gt;
-&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
-    
-      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
     
   </entry>
   
@@ -4906,6 +4562,471 @@ less中提供的功能函数
   </entry>
   
   <entry>
+    <title>axios使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
+    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-02T03:25:25.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>axios</p>
+<p>##基于http客户端的promise，面向浏览器和nodejs</p>
+<pre><code>特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取消请求
+自动转化json数据
+客户端支持抵御XSRF（跨站请求伪造）
+</code></pre><p>安装</p>
+<pre><code>使用npm：
+
+$ npm i axios
+使用 bower
+
+$ bower instal axios
+使用cdn
+
+&lt;!--国内bootCDN--&gt;
+&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>示例</p>
+<pre><code>发起一个GET请求
+//发起一个user请求，参数为给定的ID
+axios.get(&apos;/user?ID=1234&apos;)
+.then(function(respone){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+//上面的请求也可选择下面的方式来写
+axios.get(&apos;/user&apos;,{
+    params:{
+        ID:12345
+    }
+})
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function(error){
+        console.log(error)
+    });
+
+发起一个POST请求
+axios.post(&apos;/user&apos;,{
+    firstName:&apos;friend&apos;,
+    lastName:&apos;Flintstone&apos;
+})
+.then(function(response){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+发起一个多重并发请求
+function getUserAccount(){
+    return axios.get(&apos;/user/12345&apos;);
+}
+
+function getUserPermissions(){
+    return axios.get(&apos;/user/12345/permissions&apos;);
+}
+
+axios.all([getUerAccount(),getUserPermissions()])
+    .then(axios.spread(function(acc,pers){
+        //两个请求现在都完成
+    }));
+</code></pre><p>axios API</p>
+<pre><code>可以对axios进行一些设置来生成请求。axios(config)
+
+//发起 POST请求
+axios({
+    method:&apos;post&apos;,//方法
+    url:&apos;/user/12345&apos;,//地址
+    data:{//参数
+        firstName:&apos;Fred&apos;,
+        lastName:&apos;Flintstone&apos;
+    }
+});
+
+//通过请求获取远程图片
+axios({
+    method:&apos;get&apos;,
+    url:&apos;http://bit.ly/2mTM3Ny&apos;,
+    responseType:&apos;stream&apos;
+})
+    .then(function(response){
+        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
+    })
+axios(url[,config])
+
+//发起一个GET请求
+axios(&apos;/user/12345/);
+请求方法的重命名。
+
+为了方便，axios提供了所有请求方法的重命名支持
+axios.request(config)
+axios.get(url[,config])
+axios.delete(url[,config])
+axios.head(url[,config])
+axios.options(url[,config])
+axios.post(url[,data[,config]])
+axios.put(url[,data[,config]])
+axios.patch(url[,data[,config]])
+
+注意
+当时用重命名方法时url,method,以及data属性不需要在config中指定。
+
+并发 Concurrency
+有用的方法
+axios.all(iterable)
+axios.spread(callback)
+
+创建一个实例
+你可以使用自定义设置创建一个新的实例
+axios.create([config])
+var instance = axios.create({
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+    timeout:1000,
+    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
+});
+实例方法
+
+下面列出了一些实例方法。具体的设置将在实例设置中被合并。
+axios#request(config)
+axios#get(url[,config])
+axios#delete(url[,config])
+axios#head(url[,config])
+axios#post(url[,data[,config]])
+axios#put(url[,data[,config]])
+axios#patch(url[,data[,config]])
+
+Requese Config请求设置
+以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
+{
+    //`url`是服务器链接，用来请求
+    url:&apos;/user&apos;,
+
+    //`method`是发起请求时的请求方法
+    method:`get`,
+
+    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
+    //当axios使用相对地址时这个设置非常方便
+    //在其实例中的方法
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+
+    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
+    //这个只适用于`PUT`,`GET`,`PATCH`方法。
+    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
+        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
+    transformRequest:[function(data){
+        //依自己的需求对请求数据进行处理
+        return data;
+    }],
+
+    //`transformResponse`允许返回的数据传入then/catch之前进行处理
+    transformResponse:[function(data){
+        //依需要对数据进行处理
+        return data;
+    }],
+
+    //`headers`是自定义的要被发送的头信息
+    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
+
+    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
+    params:{
+        ID:12345
+    },
+
+    //`paramsSerializer`是一个可选的函数，是用来序列化参数
+    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
+    paramsSerializer: function(params){
+        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
+    },
+
+    //`data`是请求提需要设置的数据
+    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
+    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
+    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
+    //-仅浏览器：FormData,File,Blob
+    //-仅Node：Stream
+    data:{
+        firstName:&apos;fred&apos;
+    },
+    //`timeout`定义请求的时间，单位是毫秒。
+    //如果请求的时间超过这个设定时间，请求将会停止。
+    timeout:1000,
+
+    //`withCredentials`表明是否跨网站访问协议，
+    //应该使用证书
+    withCredentials:false //默认值
+
+    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
+    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
+    adapter:function(config){
+        /*...*/
+    },
+
+    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
+    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
+    auth:{
+        username:&apos;janedoe&apos;,
+        password:&apos;s00pers3cret&apos;
+    },
+
+    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
+    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
+    responsetype:&apos;json&apos;,
+
+    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
+    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
+
+    //`onUploadProgress`允许处理上传过程的事件
+    onUploadProgress: function(progressEvent){
+        //本地过程事件发生时想做的事
+    },
+
+    //`onDownloadProgress`允许处理下载过程的事件
+    onDownloadProgress: function(progressEvent){
+        //下载过程中想做的事
+    },
+
+    //`maxContentLength` 定义http返回内容的最大容量
+    maxContentLength: 2000,
+
+    //`validateStatus` 定义promise的resolve和reject。
+    //http返回状态码，如果`validateStatus`返回true
+        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
+    validateStatus: function(status){
+        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
+    },
+
+    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
+        定义一个自定义的代理，在nodejs中。
+    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
+    httpAgent: new http.Agent({keepAlive:treu}),
+    httpsAgent: new https.Agent({keepAlive:true}),
+
+    //`proxy`定义服务器的主机名字和端口号。
+    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
+    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
+    proxy:{
+        host:127.0.0.1,
+        port:9000,
+        auth:{
+            username:&apos;cdd&apos;,
+            password:&apos;123456&apos;
+        }
+    },
+
+    //`cancelTaken` 定义一个取消，能够用来取消请求
+    //（查看 下面的Cancellation 的详细部分）
+    cancelToken: new CancelToken(function(cancel){
+    })
+}
+
+返回响应概要 Response Schema
+一个请求的返回包含以下信息
+{
+    //`data`是服务器的提供的回复（相对于请求）
+    data{},
+
+    //`status`是服务器返回的http状态码
+    status:200,
+
+
+    //`statusText`是服务器返回的http状态信息
+    statusText: &apos;ok&apos;,
+
+    //`headers`是服务器返回中携带的headers
+    headers:{},
+
+    //`config`是对axios进行的设置，目的是为了请求（request）
+    config:{}
+}
+
+使用then，你会接受打下面的信息
+axios.get(&apos;/user/12345&apos;)
+    .then(function(response){
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    });
+使用catch时，或者传入一个reject callback作为then的第二个参数，
+那么返回的错误信息将能够被使用。
+</code></pre><p>默认设置（Config Default)</p>
+<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
+全局默认设置 Global axios defaults
+axios.defaults.baseURL = &apos;https://api.example.com&apos;;
+axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
+实例中自定义默认值 Custom instance default
+//当创建一个实例时进行默认设置
+var instance = axios.create({
+    baseURL:&apos;https://api.example.com&apos;
+});
+
+//在实例创建之后改变默认值
+instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+设置优先级 Config order of precedence
+设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
+    其次是defaults实例属性的设置，最后是请求中config参数的设置。
+    越往后面的等级越高，会覆盖前面的设置。
+看下面这个例子：
+
+//使用默认库的设置创建一个实例，
+//这个实例中，使用的是默认库的timeout设置，默认值是0。
+var instance = axios.create();
+
+//覆盖默认库中timeout的默认值
+//此时，所有的请求的timeout时间是2.5秒
+instance.defaults.timeout = 2500;
+
+//覆盖该次请求中timeout的值，这个值设置的时间更长一些
+instance.get(&apos;/longRequest&apos;,{
+    timeout:5000
+});
+</code></pre><p>拦截器 interceptors</p>
+<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
+//添加一个请求拦截器
+axios.interceptors.request.use(function(config){
+    //在请求发送之前做一些事
+    return config;
+},function(error){
+    //当出现请求错误是做一些事
+    return Promise.reject(error);
+});
+
+//添加一个返回拦截器
+axios.interceptors.response.use(function(response){
+    //对返回的数据进行一些处理
+    return response;
+},function(error){
+    //对返回的错误进行一些处理
+    return Promise.reject(error);
+});
+
+如果你需要在稍后移除拦截器,你可以
+var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
+axios.interceptors.rquest.eject(myInterceptor);
+
+你可以在一个axios实例中使用拦截器
+var instance = axios.create();
+instance.interceptors.request.use(function(){/*...*/});
+</code></pre><p>错误处理 Handling Errors</p>
+<pre><code>axios.get(&apos;user/12345&apos;)
+    .catch(function(error){
+        if(error.response){
+            //存在请求，但是服务器的返回一个状态码
+            //他们都在2xx之外
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }else{
+            //一些错误是在设置请求时触发的
+            console.log(&apos;Error&apos;,error.message);
+        }
+        console.log(error.config);
+    });
+
+你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
+axios.get(&apos;user/12345&apos;,{
+    validateStatus:function(status){
+        return status &lt; 500;//当返回码小于等于500时视为错误
+    }
+});
+</code></pre><p>取消 Cancellation</p>
+<pre><code>你可以使用cancel token取消一个请求
+axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
+
+你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
+var CancelToken = axios.CancelToken;
+var source = CancelToken.source();
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken:source.toke
+}).catch(function(thrown){
+    if(axiso.isCancel(thrown)){
+        console.log(&apos;Rquest canceled&apos;, thrown.message);
+    }else{
+        //handle error
+    }
+});
+
+//取消请求(信息参数设可设置的)
+source.cancel(&quot;操作被用户取消&quot;);
+你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
+var CancelToken = axios.CancelToken;
+var cancel;
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken: new CancelToken(function executor(c){
+        //这个executor 函数接受一个cancel function作为参数
+        cancel = c;
+    })
+});
+
+//取消请求
+cancel();
+注意：你可以使用同一个cancel token取消多个请求。
+使用 application/x-www-form-urlencoded 格式化
+默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
+你可以使用一下的设置。
+</code></pre><p>浏览器 Browser</p>
+<pre><code>在浏览器中你可以如下使用URLSearchParams API:
+var params = new URLSearchParams();
+params.append(&apos;param1&apos;,&apos;value1&apos;);
+params.append(&apos;param2&apos;,&apos;value2&apos;);
+axios.post(&apos;/foo&apos;,params);
+注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
+（poly fill）可用（确保垫片在浏览器全局环境中）
+
+其他方法：你可以使用qs库来格式化数据。
+var qs = require(&apos;qs&apos;);
+axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
+Node.js
+
+在nodejs中，你可以如下使用querystring:
+var querystring = require(&apos;querystring&apos;);
+axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
+你同样可以使用qs库。
+promises
+axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
+
+TypeScript
+axios 包含TypeScript定义
+
+import axios from &apos;axios&apos;
+axios.get(&apos;/user?ID=12345&apos;)
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;axios&lt;/p&gt;
+&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
+    
+      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>css hack兼容性</title>
     <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
     <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
@@ -5057,742 +5178,6 @@ inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌�
     
     
       <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>html和css3</title>
-    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-28T01:27:39.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
-<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
- skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
-4. 增加了更多的CSS选择器  多背景 rgba
-5. 在CSS3中唯一引入的伪元素是 ::selection.
-6. 媒体查询，多栏布局
-7. border-image
-</code></pre><ol>
-<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
-<li>拖拽释放(Drag and drop) API</li>
-<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
-<li>音频、视频API(audio,video)</li>
-<li>画布(Canvas) API</li>
-<li>地理(Geolocation) API</li>
-<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
-<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
-<li>表单控件，calendar、date、time、email、url、search</li>
-<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
-<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
-<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
-<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
-</ol>
-</li>
-</ol>
-<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
-<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
-本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
-或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
-清除或者使用Javascript代码移除
-</code></pre><p>6、    什么是响应式设计？</p>
-<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
-响应式设计是让所有的人能在这些设备上让网站运行正常
-</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
-<pre><code>HTML5文档类型：&lt;!doctype html&gt;
-HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
-</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
-<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
-在 HTML 上进行图形操作。
-</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
-<pre><code>Media API、Text Track API、Application Cache API、
-User Interaction、Data Transfer API、Command API、
-Constraint Validation API、History API
-</code></pre><p>11、    CSS3新增伪类有那些？</p>
-<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
-p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
-:enabled、:disabled 控制表单控件的禁用状态。
-:checked，单选框或复选框被选中。
-</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
-<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
-* 绘画 canvas 元素
-  用于媒介回放的 video 和 audio 元素
-  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
-  sessionStorage 的数据在浏览器关闭后自动删除
-  语意化更好的内容元素，比如 article、footer、header、nav、section
-  表单控件，calendar、date、time、email、url、search
-  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
-  新的技术webworker, websockt, Geolocation
-移除的元素
-纯表现的元素：basefont，big，center，font, s，strike，tt，u；
-对可用性产生负面影响的元素：frame，frameset，noframes；
-* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
-  可以利用这一特性让这些浏览器支持HTML5新标签，
-  浏览器支持新标签后，还需要添加标签默认的样式：
-* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
-&lt;!--[if lt IE 9]&gt;
-&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
-&lt;![endif]--&gt;
-</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
-<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
-保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
-优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
-　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
-从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
-降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
-　
-</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
-<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
-<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
-最常见的应用是利用伪类清除浮动。
-//一种常见利用伪类清除浮动的代码
-.clearfix:after {
-    content:&quot;.&quot;; //这里利用到了content属性
-    display:block;
-    height:0;
-    visibility:hidden;
-    clear:both; }
-.clearfix {
-    *zoom:1;
-}
-after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
-再利用clear:both清除浮动。
-</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
-<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
-&lt;audio controls&gt;
-  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-   Your browser does&apos;nt support audio embedding feature.
-&lt;/audio&gt;
-</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
-<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
-&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
-  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
-   Your browser does&apos;nt support video embedding feature.
-&lt;/video&gt;
-</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
-<pre><code>Datalist   datetime   output   keygen  date  month  week
-time  number   range   emailurl
-</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
-<pre><code>sessionStorage和localStorage的存储空间更大；
-sessionStorage和localStorage有更多丰富易用的接口；
-sessionStorage和localStorage各自独立的存储空间；
-</code></pre><p>30、    HTML5的离线储存？</p>
-<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
-sessionStorage  数据在浏览器关闭后自动删除。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transf
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
-    <id>www.wangchengzou.cn/2017/07/22/git/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-14T13:27:47.886Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用方法</p>
-<pre><code>git  config  --global   user.name   &quot;name&quot;
-git  config  --global   user.email   &quot;email@qq.com&quot;
-</code></pre><p>指令说明</p>
-<pre><code>git  status               查看工作区所有文件状态
-git  add  1.jpg          把指定文件添加到暂存区
-git  add  *.jpg          把指定后缀名的文件添加到暂存区
-git  add  *              把所有文件添加到暂存区
-git  add  .              把所有文件添加到暂存区
-git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
-git  log                 查看仓库中所有的提交记录
-
-git  reset  --hard  版本号     工作区回退到指定的版本
-git  log       查看当前已经生效的所有版本号
-git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
-</code></pre><p>远程仓库相关</p>
-<pre><code>git  clone  远程仓库的地址
-git  clone  git@github.com:jquery/jquery.git
-git  clone  https://github.com/jquery/jquery.git
-</code></pre><p>创建关联使用方法</p>
-<pre><code>git  init           本地创建一个空白仓库
-git  remote       查看当前仓库关联到哪些远程仓库
-git  remote  add  关联仓库名  远程仓库的地址
-git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
-git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
-git  commit   -m   &quot;说明信息&quot;
-git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
-
-git subtree push --prefix=dist origin gh-pages  建立分支结构
-</code></pre><p>关于分支的使用方法</p>
-<pre><code>1，将远程仓库克隆到本地：
-    git clone https://github.com/**.git(项目克隆地址)
-2，生成分支gh-pages并切换到此分支
-    cd flexSupplement （进入到你克隆仓库的本地文件夹）
-    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
-3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
-    再将根目录下dist文件夹里面的内容复制到克隆文件中。
-    依次执行以下命令：
-    git add . （将本地所有文件加到仓库里）
-    git commit -m “message” （设置提交信息）
-    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
-    git push -u origin gh-pages （push文件到仓库中）
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用方法&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
-git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
-&lt;/
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
-    
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Angular基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T12:53:02.708Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
-<pre><code>拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple and stupid
-语义化的标记、命名规则、减少嵌套
-
-3、DRY（善于使用封装和重用）
-Don&apos;t Repeat Yourself
-
-4、高内聚 低耦合（High cohesion,low coupling）
-内聚：一个组件（模块）内部的不同部分的关系
-耦合：不同组件（模块）之间的关系
-
-5、SRP 单一责任原则
-Single Responsibility Principle
-实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
-
-6、OCP原则(对于扩展开放、对于修改关闭)
-open close principle
-
-7、LCP（迪米特法则）
-Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
-
-常用的设计模式分为3大类：①创建 ②结构 ③行为
-
-常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
-先去实现功能，在迭代的过程中优化代码。
-</code></pre><p>2、AngularJS</p>
-<pre><code>认识新东西最好的方式：
-①官网
-②维基百科 wikipedia.org
-what?--ng(AngularJS)是一个开源的js框架
-where？--用来实现SPA应用程序（单一页面应用程序single page application）
-Gmail邮箱是由Google退出的前端历史中第一个SPA应用
-why？
-四大特征：
-①采用了MVC的设计模式
-Model 模型数据
-View  视图
-Controller 控制器
-</code></pre><p>3、MVC的工作原理：</p>
-<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
-1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
-2.双向数据绑定
-    数据-》视图
-    视图用户的输入 -》 数据
-3.依赖注入
-4.模块化设计
-</code></pre><p>4、使用ng</p>
-<pre><code>1、基本语法
-    &lt;any&gt;{{表达式}} &lt;/any&gt;
-    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
-
-2、常用指令
-    ngApp
-        ①启动ng
-        ②指定作用范围，将指令写在根标签
-    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
-    ngInit 指令 来完成数据的初始化
-    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
-        ①不需要在通过ngInit指令定义数据时候，加上var关键字
-        ②ngInit所初始化的变量是可以在整个html去使用变量
-</code></pre><p>5、常用指令</p>
-<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
-
-作为扩展属性来使用：
-    &lt;div ng-**&gt;&lt;/div&gt;
-    ngInit  --&gt; ng-init
-    ngApp --&gt; ng-app
-作为扩展标签来使用：
-    &lt;ngView/&gt;
-①ngApp
-    启动ng
-    指定作用范围，将指令写在根标签
-    注意事项：调用一次ngApp
-②ngInit
-    通过ngInit调用一次，初始化多个变量？？
-    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
-③ngRepeat
-    重复实例化模板
-    两种语法：
-    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
-    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
-
-    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
-        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
-
-④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
-    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
-    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
-    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
-    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
-    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
-    但是控制台是会报错的，通过ngSrc去指定就搞定了
-    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
-    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
-</code></pre><p>6、MVC</p>
-<pre><code>在ng中：
-    Model 模型数据：在ng中定义的一些变量
-    View  视图：通过ng指令和表达式增强版的html
-    Controller 控制器：负责数据的增删改查的
-MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
-在ng中应该怎么做才能实现一个SPA？
-准备工作：
-①创建一个模块
-    因为在ng中是以模块为基本单位的
-    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
-②使用模块
-    采用ngApp指令
-    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
-③创建一个控制器
-    app.controller(&apos;控制器的名称&apos;,function(){})
-    第二个参数时控制器被调用时，要执行的方法
-④调用控制器
-    采用ngController指令来调用控制器
-    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
-    实现数据的创建和显示等：
-⑤操作数据、显示出来
-
-$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
-    建立起控制器中的数据和控制器的所指定的视图的桥梁
-
-绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
-&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
-
-注意事项：
-由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
-</code></pre><p>7、ng是由很多指令的：</p>
-<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
-ngBind ngClass ngStyle
-
-在webStorm中创建一个文件模板的基本步骤：
-①拷贝要使用的代码
-②点击左上角的file，选择new
-③选择Edit File Templates
-④点击弹窗中右上角的+号
-⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
-</code></pre><p>8、自定义指令</p>
-<pre><code>1、如何自定义？？
-    angular.module()
-    app.controller()
-    //创建指令
-    app.directive(&apos;指令的名称&apos;，function(){
-        return {}
-    })
-    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
-    后缀：用来描述指令的功能
-    属性：
-    template：指定要显示的模板内容
-    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
-    replace: true,替换并显示出来
-    scope
-
-2、如何使用自定义的指令？？
-    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
-    &apos;tsHello&apos; --&gt; ts-hello
-    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
-
-3、自定义指令传递参数
-    怎么传？
-        在调用指令的时候可以传 将参数作为属性对应的值
-    怎么接受？
-        scope
-</code></pre><p>9、双向数据绑定</p>
-<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
-绑定方式：
-①常用指令： ngRepeat/ngIf/ngShow...
-②双花括号：{{}}
-
-方向2：从‘视图中用户的输入’绑定到‘数据’
-绑定方式：指令：ngModel
-
-如果要监听数据的变化：
-$scope.$watch(&apos;txt&apos;,function(){
-
-})
-
-在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
-ngOptions语法：
- &lt;select
-    ng-model=&quot;city&quot;
-    ng-options=&quot;city.cityName for city in cities&quot;&gt;
- &lt;/select&gt;
-</code></pre><p>10、过滤器</p>
-<pre><code>a.内置的过滤器
-    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
-    过滤器的语法：支持多重过滤和传参
-    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
-            | => 管道
-            常用的过滤器：
-                currency 货币样式的过滤器
-                date 日期
-                uppercase/lowercase 大小写的处理
-                orderBy 对指定的数组进行升序或者降序排列
-                number 格式化数字为文本（对有小数点的数据的处理）
-                limitTo 限定数组或者字符串要显示的个数
-        b.自定义过滤器
-            自定义过滤器方式：
-            app.filter('过滤器名称',function(){
-                return function(input，arg){
-                        //input是传递给过滤器的数据
-                        //arg 是过滤器本身的参数
-                    return '过滤后的结果'
-                }
-            })
-            使用自定义的过滤器:
-            和内置的过滤器用法是一样的
-
-11、ng模块内置的方法
-
-        序列化、反序列化
-        toJson:将对象或者数组 序列化 为json格式的字符串
-        fromJson：相反的过程
-
-12、服务
-
-    服务的本质是一个单例对象，提供数据和对象。
-    两大类：
-    ①内置服务
-        $location、$http、$window、$scope...
-        使用内置服务中提供的方法：
-            第一步 将需要用到的服务注入进来 function($scope,$location)
-            第二步 调用服务中提供的方法 数据。。
-    ②自定义的服务
-        面试题：$scope与$rootScope之间的关系
-        1、不同的控制器之间的数据是彼此隔离的
-        2、不同的控制器之间如何共享数据？？
-        $scope的id是从2开始依次往上递增，
-        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
-            方式1：借助于$rootScope
-                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
-            方式2：借助于控制器之间的嵌套
-                在调用控制器的元素 之间的嵌套关系
-                @@div ng-controller='myCtrl02'>
-                    @@<div ng-controller="myCtrl03"></div>
-                @@
-            方式3：触发事件传递参数
-                绑定事件：
-                $scope.$on('事件名称',function(event,data){
-
-                })
-        触发事件：
-        //从子作用对象 向 父作用域对象 传递事件
-        $scope.$emit()
-        //从父作用对象 向 子作用域对象 传递事件
-        $scope.$broadcaset()
-
-13、服务
-
-        双向数据绑定的工作原理：
-        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
-        怎么知道数据发生了变化？
-        在ng中有一个循环$digest,会不断的对比数据，
-        需要手工的触发循环做对比，可以通过：
-        $scope.$digest();
-        $scope.$apply();//触发$rootScope.$digest();
-
-14、ng内置的服务：
-
-        $location $scope $rootScope $window $interval $timeout
-        1、在ng中定时器相关的处理--》$interval $timeout
-        2、$http
-        $http({method:'',url:''}).success().error()
-        $http.get()
-        $http.post()
-        注意：如果需要发起post请求，需要设置:
-         app.run(function ($http) {
-                $http.defaults.headers.post =
-        {'Content-Type':'application/x-www-form-urlencoded'};})
-
-        在发起post请求时，如果需要对参数进行序列化:
-        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
-
-15、自定义服务
-
-        服务的目的是为了封装业务逻辑，提高代码的复用率
-        自定义指令 app.directive
-        自定义过滤器 app.filter
-        自定义服务的方法：
-        app.factory ('服务名称',function(){//普通方法 return {}})
-app.service(&apos;服务名称&apos;,function(){//构造函数})
-app.constant(&apos;服务名称&apos;，{})//创建常量服务
-app.value(&apos;服务名称&apos;，{})//创建变量服务
-
-注意事项：
-自定义的服务 需要用到其它服务中方法
-图：两个按钮：开始 结束。
-</code></pre><p>16、依赖注入</p>
-<pre><code>将代码部署到线上，都会对代码做压缩。
-使用YUI-Compressor.jar （有java的运行环境）
-①借助于CLI（command line）
-    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
-
-②IDE（webStorm）
-    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
-    在弹窗中的program选中对应的jar，保存即可
-压缩效果：
-会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
-但是数字、字符串、关键字是不会改变的。
-
-解决压缩后的问题方式：
-依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
-让我们可以去直接使用
-
-注入的方式：
-①推断式（猜测）
-    这种方式在进行压缩会有问题
-    app.controller(&apos;myCtrl&apos;,function($scope){});
-
-②标记式
-    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
-    存在一个字符串（服务名称）数组。
-    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
-    实现方式：
-    1、将处理函数单独的存在一个变量中
-    2、给变量设置$inject，值是一个由字符串构成的数组
-    3、使用服务即可
-③行内式（内联式）
-    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
-    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
-    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
-    依赖注入3种方式，官方推荐采用行内式依赖注入。
-    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
-    整个ng应用的注入对象都是由$injector定位和创建。
-    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
-    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
-</code></pre><p>17、模块化设计</p>
-<pre><code>ng有4大特征：
-①MVC
-②双向数据绑定
-③依赖注入
-④模块化设计
-
-高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
-
-如何自定义模块？
-angular.module();
-
-使用模块？
-ng-app=&quot;&quot;
-在创建模块时，在第二个参数所对应的数组中写上服务的名称
-
-一个ng的模块都可以包含哪些？
-控制器：对应部分业务逻辑的封装
-服务：经常用到的重复代码封装
-指令：扩展html标签、属性
-过滤器：针对数据做一些筛选 过滤 格式化的处理
-</code></pre><p>18、ngRoute（路由模块）</p>
-<pre><code>ng是主要实现SPA（单一页面应用程序）
-SPA的工作原理：
-    1、页面url
-    http://127.0.0.1/index.html#/路由地址
-    例如：http://127.0.0.1/index.html#/start
-    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
-    3、在路由词典中寻找路由地址(start)所对应的路由信息
-    4、在路由信息所对应的对象中找到真实的模板页面地址
-    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
-
-ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
-自动发起ajax请求加载页面显示。
-    0、在创建自定义模块，在依赖列表中指定ngRoute
-    1、指定盛放代码片段的容器
-    2、配置路由词典
-
-使用ngRoute的基本步骤：
-①创建一个完整的html页面
-    记得引入angular.js angular-route.js
-
-②创建模块，并指定依赖于ngRoute模块
-    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
-
-③使用指令创建一个盛放代码片段的容器
-    调用ngView指令：创建一个容器，代码片段会加载到这里
-
-④创建模板页面
-
-⑤配置路由词典
-    $routeProvider
-    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
-    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
-    otherwise是用来指定异常的处理
-    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
-
-SPA在ng实现过程，代码片段的跳转：
-①直接修改地址栏中的路由地址
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
-②通过js的方式
-    $location.path(&apos;路由地址&apos;)
-③超链接的方式
-    a href=&quot;#/myRegister&quot;
-    login-&gt;start 10
-
-SPA应用程序通过ngRoute来传递参数：
-①搞明白 发送 接收
-②配置接收方的路由
-    $routeProvider.when(&apos;/myStart/:num&apos;,{
-    templateUrl:&apos;tpl/start.html&apos;
-    })
-③拿到传递过来的参数
-    $routeParams.num
-④发送
-    a href=&apos;#/myStart/10&apos;
-    $location.path(&apos;/myStart/10&apos;)
-
-注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
-    myStart/:id $routeParams.id
-
-练习：实现一个SPA
-完整的html manager.html
-代码片段： checkProduct.html pay.html send.html
-
-要求：能够实现不同页面的跳转以及参数的传递
-checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
-pay 点击button跳转到send
-send button以及a跳转到check.html
-
-优化思路：如果多个控制器需要用到同一个方法或者数据，
-    ①将方法和数据封装成一个服务
-    ②$rootScope
-    ③控制器之间的嵌套
-    ④借助于事件
-
-由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
-控制器中的方法和数据，代码片段就可以用了。
-①发送 接收
-    checkProduct --&gt; pay
-
-②配置接收方路由
-    .when(&apos;/myPay/:price&apos;,{})
-
-③$routeParams
-    $routeParams.price
-
-④发送参数
-    href=&apos;#/myPay/20&apos;
-    $location.path(&apos;/myPay/20&apos;)
-
-ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
-
-要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
-
-注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
-</code></pre><p>19、ngAnimate（动画模块）</p>
-<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
-基本步骤：
-①引入对应的js文件
-    angular-animate.js
-②指定自定义模块依赖于ngAnimate
-    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
-③css给ng应用程序添加动画效果：
-    ngEnter 准备进入
-    ngEnterActive 进入完成
-    ngLeave 准备离开
-    ngLeaveActive 离开完成
-④引入对应的css文件
-
-如果用到其它的模块整体思路：
-    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
-    ②在创建模块，指定依赖列表
-    ③根据模块中所提供的指令、服务。。结合业务需要进行
-</code></pre><p>20、表单验证</p>
-<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
-布尔类型：
-$valid
-$invalid
-$dirty
-$pristine
-对象：
-$error
-
-注意事项：
-①给表单以及表单组件 加上name属性
-②给需要用到的表单组件 ，加上ngModel
-③属性的用法
-myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&amp;apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple 
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
     
   </entry>
   
@@ -6674,927 +6059,792 @@ xml语法要求:
   </entry>
   
   <entry>
-    <title>javaScript基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/javaScript/"/>
-    <id>www.wangchengzou.cn/2017/07/22/javaScript/</id>
+    <title>git使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
+    <id>www.wangchengzou.cn/2017/07/22/git/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-11T01:06:28.956Z</updated>
+    <updated>2017-08-14T13:27:47.886Z</updated>
     
-    <content type="html"><![CDATA[<p>JavaScript</p>
-<pre><code>什么是JavaScript: 专门编写网页交互行为的语言
-为什么: HTML和CSS是静态语言，编写静态内容，无法编写逻辑，无法执行计算。
-何时: 今后所有静态网页必须使用JavaScript添加上交互行为，才能让用户使用。
-什么是交互: 3步:
- 1. 用户输入数据或执行操作
- 2. 程序接受并处理用户输入的数据
- 3. 程序返回处理结果
-JavaScript典型用途: 3个
-1. 客户端表单验证:
-2. 数据计算:
-3. 动画效果:
-ECMAScript  JavaScript  JScript
-ECMA: 欧洲计算机制造协会:
-ECMAScript: 是欧洲计算机制造协会以第一版JavaScript为基础，指定的JavaScript语言标准。
-    简称ES。3.1  5  6  只固定了JS语言的核心语法
-JavaScript: 狭义: 网景参照ES标准，实现的自己的JavaScript语言版本。
-JScript: 微软参照ES标准，实现的自己的JavaScript语言版本。
-</code></pre><p>广义的JavaScript: 包括三大部分:</p>
-<pre><code>1. ES: 固定了核心语法， 7天+4天
-2. DOM: 专门操作网页内容的程序 3天
-3. BOM: 专门操作浏览器窗口的程序 2天
-</code></pre><p>JavaScript语言的特点:</p>
-<pre><code>1、 运行在脚本解释引擎中:
-  1. 浏览器已经自带: 不用单独安装
-     内容排版引擎：专门解析HTML和CSS，并绘制网页内容的软件
-     脚本解释引擎: 专门解析js程序，并执行任务的软件
-     鄙视题: 做动画首选css，还是js
-       首先CSS，因为CSS是内容排版引擎执行，效率高
-       但如果动画要求交互，就只能用js做
+    <content type="html"><![CDATA[<p>使用方法</p>
+<pre><code>git  config  --global   user.name   &quot;name&quot;
+git  config  --global   user.email   &quot;email@qq.com&quot;
+</code></pre><p>指令说明</p>
+<pre><code>git  status               查看工作区所有文件状态
+git  add  1.jpg          把指定文件添加到暂存区
+git  add  *.jpg          把指定后缀名的文件添加到暂存区
+git  add  *              把所有文件添加到暂存区
+git  add  .              把所有文件添加到暂存区
+git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
+git  log                 查看仓库中所有的提交记录
 
-  2. 独立安装: Node.js    Chrome V8-&gt;单独提取
-     以前: 前端 JS  服务器端 PHP/Java  数据库 SQL
-     现在: 前端 JS  服务器端 Node.js   数据库 MongoDB JS
-    启动: win+R 输入node 回车
-2、 弱类型: 3个特点:
-  1. 声明变量时，不必提前固定变量的数据类型
+git  reset  --hard  版本号     工作区回退到指定的版本
+git  log       查看当前已经生效的所有版本号
+git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
+</code></pre><p>远程仓库相关</p>
+<pre><code>git  clone  远程仓库的地址
+git  clone  git@github.com:jquery/jquery.git
+git  clone  https://github.com/jquery/jquery.git
+</code></pre><p>创建关联使用方法</p>
+<pre><code>git  init           本地创建一个空白仓库
+git  remote       查看当前仓库关联到哪些远程仓库
+git  remote  add  关联仓库名  远程仓库的地址
+git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
+git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
+git  commit   -m   &quot;说明信息&quot;
+git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
 
-练习: 所有程序都可概括为3步:
- 网页中的所有js程序，必须写在script标签内:
- script标签可放在网页任何位置，但强烈建议放在body最后
- 1. Input输入:  input=prompt(&quot;提示信息&quot;)
- 2. Process处理数据
- 3. Output输出: 3种:
-   1. 在网页内容中输出一句话: document.write(&quot;内容&quot;)
-                               网页    写
-     问题: 会破坏网页结构 —— 几乎不用
-   2. 弹出提示框: alert(&quot;内容&quot;)
-     问题: 无法修改样式和字体 ——少用
-   3. 在控制台输出: console.log(&quot;内容&quot;)
-                   控制台 输出一行日志
-     控制台: 专门编写和测试javascript程序的窗口
-      为什么: 即不影响网页内容，又可修改字体大小
-      何时: 1. 测试简短的js小程序
-           2. 查看正式的js程序的输出结果和错误提示
-      如何: 1. 输出一条js语句，回车执行
-           2. 多行输入: shift+回车
-           3. 清屏: ctrl+L 或 点左上角×
-           4. 切换出曾经写过的程序 上下箭头
-
-错误: 程序执行过程中，导致程序无法正常执行的现象
-一旦出错，程序立刻停止。预期的效果出不来。
-今后只要想要的效果没出来，先开F12-&gt;console，看错误原因，定义错误位置。
-</code></pre><p>2、变量:</p>
-<pre><code>什么是: 内存中存储一个数据的存储空间
-何时: 今后只要反复使用的数据，必须先保存在变量中，再反复使用变量。
-如何: 3件事:
-1. 声明: 创建一个存储空间，并起一个名字
-   何时: 所有变量使用前必须先声明再使用
-   如何: var 变量名;
-     强调: 所有变量都用var声明
-     简写: var 变量1,变量2,...;
-   变量名:
-      1. 不能使用js语言的保留字
-      2. 字母，数字或下划线，不能以数字开头
-      3. 见名知意
-      4. 驼峰命名: 首字母小写，之后每个单词首字母大写
-         list-style-type    listStyleType
-         background-color  backgroundColor
-   强调: 仅声明，但暂未赋值的变量，默认值为undefined
-    什么是undefined: 一个特殊值，表示空变量
-2. 赋值: 将等号右边的数据，保存到等号左边的变量中
-    如何: 变量=值;
-    简写: var 变量名=值;
-    特殊: 鄙视: var a , b=2;
-          结果: a=undefined    b=2
-          如果非要简写: var a,
-                          b=2,
-                          c=3;
-3. 取值: 取出变量中的值做处理
-    如何: 任何情况下，使用变量等效于使用变量中的值
-    强调: 只有=才能改变变量的值
-          如果仅取出变量值做计算，则原变量中的值不变。
-特殊:
- 1. 仅声明但未赋值的变量，其中不是空的，而是保存默认值undefined
- 2. 尝试从未声明过的变量中取值，会报错！——ReferenceError
-    引用错误: 要找的变量没找到
-       可能: 1. 根本没声明
-            2. 声明了，但后边使用时，变量名拼写错误
- 3. 尝试给未声明的变量赋值，会自动创建该变量，并保存值
-     会产生歧义，禁止使用！
-    ES5: 严格模式: 比普通js运行模式更严格的机制
-     何时: 今后，凡是新项目，所有js必须启用严格模式
-     要求1: 禁止给未声明过的变量赋值，报错: ReferenceError
-</code></pre><p>3、常量:</p>
-<pre><code>什么是: 一旦赋值，值不能改变的变量
-何时: 只要一个变量的值不允许修改，就必须使用常量
-如何: const 常量名=值;
- 强调: 常量声明时必须初始化
-   什么是初始化: 第一个为变量赋值
- 命名: 常量习惯全大写
- 问题: 在旧版本浏览器中:
-   修改常量的值，虽然无法修改，但也不报错。——静默失败
-   解决: 启用严格模式:
-     严格模式要求2: 将所有静默失败升级为错误！
-练习: 角度 to 弧度
- 弧度: 弧长等于半径的角度，称为1弧度
-   周长: 2πr  一周: 2π个弧度=360角度
-   30角度=π/6弧度
-</code></pre><p>4、数据类型:</p>
-<pre><code>什么是: 数据在内存中的存储格式
-为什么: 不同用途的数据，就必须保存为对应的数据类型
-包括: 2大类:
-  1. 原始类型: 值直接保存在变量本地的数据类型
-     5个: number string boolean undefined null
-  2. 引用类型: 值无法直接保存在变量本地的数据类型
-
-补: typeof 变量 返回变量中数据的类型名
-
-number:
-什么是: 专门存储数字的数据类型
-何时: 凡是用作比较和计算的数字都必须保存为number类型
-如何: 凡是不加引号的数字，自动就是number类型
-存储结构: 都是用二进制存储数字
-  十进制转二进制:  n.toString(2)
-存储空间: 整数: 4字节, 浮点数(小数):8字节
-  强调: 不管数值大小，所有整数所占空间都是一样的。
-
-string:
-什么是: 专门存储文字字符的数据类型
-何时: 经常用作标识和描述的字符内容保存为string类型
-如何: 凡是包裹在一对儿引号之间的字符，都是字符串类型
-存储结构:
- unicode编码: 人为的为全球主要语言中的每个文字编一个号
-      为什么: 因为计算机只认数字，不认字符
-   查看每个字符的unicode编码:
-     str.charCodeAt();
- 存储空间: 一位字母或数字，占1个字节(8位)
-           一位汉字，占2个字节
- &quot;张东666&quot; 共7个字节
-转义字符:
- 1. 防止字符串内容和程序的标点符号冲突
-   比如: &quot;来自\&quot;新华社\&quot;的消息&quot;
- 2. 表示特殊意义: \n换行  \t 制表符  \u unicode编码的一个字符
-   比如: &quot;\u4e00&quot; 表示汉字&quot;一&quot;
- 特殊: 路径:&quot;c:\window\temp&quot;
-   问题: 1. 查找不到\w，就擅自去掉\，就保留w
-        2. \t误翻译为制表符
-   解决: 1. 字符串中所有作为正文的\，都必须写为\\
-     如果是路径: 2. 所有路径中的\必须都换位/
-        &quot;/imgs/products/product01-s.jpg&quot;
-boolean:
-什么是: 只有两个值true/false的数据类型
-何时: 经常用作表示判断的结果
-如何: 只要不加引号的true/false,自动就保存为bool类型
-undefined:
-什么是: 专门表示一个变量声明后暂时未赋值
-何时: 不会主动使用
-      都是js程序自动为变量赋初值之用
-经常用于判断变量赋值错误。
-null:
-什么是: 专门用于清空一个变量的特殊值
-何时: 如果一个变量中的值不想要了，可将变量赋值为null
-经常用于程序员主动清空变量
-</code></pre><p>4、 数据类型转换:</p>
-<pre><code>弱类型: 1. 声明变量时不必提前指定变量的数据类型
-       2. 同一个变量先后可保存不同类型的数据
-       3.  js引擎会根据自身的需要隐式自动转换数据的类型
-优: 为程序员省事
-缺: 混乱, 转换的结果也不一定是想要的。
-解决: 如果数据类型不是想要的，就需要类型转换
-包括: 隐式转换和强制转换
-  隐式转换: 程序根据自身的需要，自动完成的数据类型转换
-            无需程序员干预
-       何时: 伴随运算和判断自动执行。
-  强制转换: 程序员主动调用功能，执行的数据类型转换
-       何时: 如果隐式转换的结果还不是想要的，就要强制转换
-隐式转换: 暂时只以算数计算中的隐式转换为例
-  算数计算:
-      默认: 一切转为数字(number)类型，再计算
-               bool:  true 转为1   false  转为0
-        因为: 只有数字类型才最适合算数计算
-      特殊: +运算中，只要碰到一个字符串，另一个也被转为字符串，+法计算，变为字符串拼接。
-        因为: 开发中字符串拼接使用非常频繁，所以为了简化字符串拼接，就用+代替。
-
-练习: 强调: 凡是从页面上获得的数据，都是字符串类型
-            不可能从页面上直接获得number和bool类型
-   问题: 字符串参与+运算，不再做加法计算，而改为字符串拼接
-         隐式转换不是想要的
-   解决：凡是从页面上获得的字符串，要参与算数计算，必须先强制转为数字类型，再计算。
-
-强制转换: 3种:
-  转数字: 2种:
-    何时: 今后只要参与算数计算的非数字类型，都要先转数字再计算
-    1. 将纯数字字符串或布尔类型转为数字: Number(x)
-      其实，隐式转换中，转数字，用的都是Number(x)
-      特殊: Number(null/&quot;&quot;) =&gt; 0   Number(undefined) =&gt; NaN
-      问题: CSS中样式属性都是带单位，Number不能转换包含非数字字符的字符串。
-      现象: 如果Number无法转换，就返回NaN
-      什么是NaN: 一个特殊值，表示所有非数字的数据
-             Not a Number
-           何时: 不会主动使用，只在无法转为数字时，自动返回。
-           NaN参与任何算数计算，结果依然为NaN
-      解决:
-    2. 将带单位的字符串，去单位后，转为数字:
-      parseFloat(str) :
-        原理: 从第一个字符开始，读取字符串中每个字符
-              碰到第一个非数字字符就停止
-        坑: parseFloat(true) =&gt; parseFloat(&quot;true&quot;) =&gt; NaN
-        说明: 只能去掉结尾的非数字字符，不能去掉开头的非数字字符
-      parseInt(str): 原理同parseFloat,只不过，不认识小数点
-             结果: 省略小数部分,转为整数
-      开发中: 首选parseFloat，除非确实需要去掉小数部分时，采用parseInt
-  转字符串: 2种:
-    何时: 今后，只要查看一个复杂数据结构中的内容时，就可将复杂的数据结构转为字符串再输出。
-    1. x.toString(); 将除null和undefined之外的任意数据，转为字符串
-       无法转null和undefined，报错！
-    2. String(x); 万能！将任意x数据，转为字符串
-    总结: 今后，只要转字符串，就用String(x)
-    固定用法: 进制转换:
-      1. 如果查看十进制数字的2,8,16进制结果，可用toString(n)
-      2. 将其他进制转回十进制: parseInt(&quot;num&quot;,进制)
-  转布尔: Boolean(x)
-    结论: 只有5个值被转为false:  0, NaN, null, undefined, &quot;&quot;
-      将来判断中只要见到这五个值，就等同于false
-          其余都转为true
-</code></pre><p>5、 运算符和表达式:</p>
-<pre><code>什么是程序: 人的想法在计算机中的执行
-什么是运算符: 程序中模拟人的想法的特殊符号
-什么是表达式: 又数据，变量和运算符组成的一条程序语句
-
-包括:
-算数计算: +, -, *, /, %
- %模运算(取余数): m%n m除以n，不取商，取除不尽的余数部分
-  何时: 1. 取零头
-       2. 限制计算的结果不能超出一个最大值
- 隐式转换:
-   默认: 一切都转为数字, 布尔(true: 1, false: 0)
-     如果转不了，返回NaN，NaN参与任何计算，结果还是NaN
-   特殊: +运算, 只要碰到字符串，就都转为字符串，+法计算变为字符串拼接
- 舍入误差: 计算机中也有计算不尽的小数
-     解决: 1. 存储: 尽量多的保留小数位数, 比如: 8位或9位
-          2. 显示: 按指定小数位数四舍五入
-                   n.toFixed(2) 将n按2位小数四舍五入
-             今后，只要显示钱数，都要toFixed(2)
-
-关系运算: 做比较做判断
-  包括: &gt;  &lt;   &gt;=   &lt;=   ==  !=
-  返回值: 一定返回bool: true/false
-  隐式转换:
-    默认: 都转为数字比较大小
-      如果转不了，返回NaN，
-      NaN做比较: 不大于,不小于,不等于任何值
-                  NaN不等于一切
-    特殊:
-     1. 两个字符串作比较: 不再转数字
-            而是依次比较每个字符的unicode号大小
-        unicode范围: 数字: &quot;0&quot;-&quot;9&quot;  48~57
-                          &quot;A&quot;-&quot;Z&quot;  65~90
-                          &quot;a&quot;-&quot;z&quot;  97~122
-     2. NaN: 问题: 用普通的==无法鉴别一个值是否是NaN
-                因为NaN不等于一切，甚至NaN==NaN 返回false
-            解决: 今后只要判断NaN，必须用专门的isNaN(num)
-        扩大用途: 可用isNaN来判断一个数据是否是数字或是否可当做数字使用
-     3. null和undefined:
-       问题: 关系运算中，自动将undefined隐式转为null，再比较
-       解决: 全等=== 首先类型相同，其次值相等
-                相当于不带隐式转换的==比较
-                优: 严格，避免不必要的隐式转换
-                缺: 必须自己手动转换数据类型，再比较
-           不全等!==  全等的反义词
-       何时使用===: 今后只要不希望比较时，自动隐式转换，就可用===代替==
-
-逻辑运算: 将多个关系运算综合起来，得出一个最终结论
-         其实还是做比较和做判断
-包括: &amp;&amp;  ||   !
-  &amp;&amp;: 而且
-   如何使用: 条件1&amp;&amp;条件2&amp;&amp;....
-       何时: 只要必须满足多个条件时，就使用&amp;&amp;
-  ||: 或者/要么
-   如何使用: 条件1||条件2||....
-       何时: 多个条件，只要满足其一即可
-  !: 颠倒一个判断结果: !true=&gt;false  !false=&gt;true
-  返回结果: 依然是bool类型: true/false
-  隐式转换: 将每个条件自动转为bool类型
-  短路逻辑: 只要前一个条件已经可以得出最终结论，则后续条件不再执行
-    &amp;&amp;: 只要前一个条件为false，则后续所有条件不再执行
-    ||: 只要前一个条件为true，则后续条件不再执行
-    鄙视: 见9_logic
-   利用短路: 不再关心逻辑运算的返回值
-     利用&amp;&amp;短路: 实现简单分支结构:
-         一个条件，一件事儿，满足条件才执行，不满足就不执行
-         如何: 条件&amp;&amp;(操作)
-     利用||短路: 实现默认值
-         如何: var 变量=值1||默认值
-           如果值1有效: 不是0,null,undefined,NaN,&quot;&quot;，就使用值1
-              否则，使用值2
-练习: 运算符优先级:
-
-位运算: 用二进制移动位置
- 1. 左移/右移:
-    左移: m&lt;&lt;n  读作m左移n位: 相当于m*  2的n次方
-      比如: 1&lt;&lt;2=4   1&lt;&lt;3=8 (不用位运算: 1*Math.pow(2,3))
-    右移: m&gt;&gt;n  读作m右移n 位: 相当于m/  2的n次方
-      比如: 4&gt;&gt;2=1   8&gt;&gt;3=1
- 2. 取整:
-   m^0  m&gt;&gt;&gt;0   m|0
- 3. 不声明第三个变量，而交换两个变量的值，共有几种方法:
-   方法一: a+=b; b=a-b; a-=b
-   方法二: a^=b; b^=a; a^=b
-   问题: +和^运算只能计算数字，所以以上两种方法只能交换数字类型
-
-赋值运算:
- 扩展赋值运算: 对普通赋值运算的简写:
-   a=a+b 可简写为: a+=b 也称为将b累加到a中
-   a=a-b  可简写为: a-=b
-   a=a*b  可简写为: a*=b
-   a=a/b  可简写为: a/=b
-   a=a%b  可简写为: a%=b
- 更简写: 等b始终等于1时:
-   a+=1 可简写为a++，也称为递增
-   a-=1 可简写为a--，也称为递减
- 前++和后++:  a++ 和 ++a
-   相同: 无论前++还是后++，a中的值都被+1
-   不同: a++返回+1之前的&quot;旧&quot;值
-          何时: 只要希望先用旧值做操作，然后再加一
-        ++a返回+1之后的&quot;新&quot;值
-          何时: 只要希望先加一，再用新值做操作
- 鄙视题:
-   var n=3;
-   n++ + ++n + n++;
-  //?  +  ? +  ?
-   //++n + n++ + ++n;
-   n=6
-   提示: 所有表达式都是从左向右依次执行
-         先执行的会影响后执行的
-</code></pre><p>5、 函数:</p>
-<pre><code>什么是函数: 封装一项任务的步骤清单的代码段，再起一个名字。
-为什么: 代码重用！
-何时: 只要一项任务，可能被反复使用，都要将任务的代码定义为一个函数，再反复使用函数。
-如何:
-声明:
- function 函数名(参数1,参数2,...){
-   函数体;
-   return 返回值;
- }
- 参数: 保存一项任务必须的数据的变量
-  参数其实就是变量，只不过不用var声明, 用逗号分隔多个参数变量
-  参数变量只能在函数内使用
-  何时: 只要一项任务必须某些数据才能正常执行时
-  为什么: 让函数变的更灵活
- 函数体: 就是执行任务的步骤清单的代码段
- 返回值: 任务的执行结果
-  何时: 如果使用函数的人希望获得函数的执行结果时
-
-调用: 让引擎按照函数的步骤执行任务
-  强调: 任何函数，只要不调用！就不执行！
-        只有调用才执行函数中的代码段
-  如何: var 变量=函数名(参数值1,参数值2,...)
-    其中:
-      参数值: 传递给函数参数变量的执行任务必须的数据
-        强调: 参数值的顺序，个数和定义函数是参数变量的顺序和个数保持一致。
-      返回值: 除非定义函数时，内部定义了return 返回值，才有必要用变量保存住函数的执行结果。
-</code></pre><p>6、 函数的原理:</p>
-<pre><code>存储:
- 函数名其实就是一个普通的变量
- 函数本身是一个引用类型的对象(保存多个数据的复杂数据结构)
- 函数名通过函数的地址值，引用函数对象
-强调: 声明时，不会执行函数的内容。
-调用:
-  1. window中声明变量，准备保存函数的返回值
-  2. 找到函数对象，创建函数执行时的临时存储空间
-  3. 将调用时传入的参数值，放入临时存储空间的参数变量中
-  4. 执行函数体，修改临时存储空间中的变量值
-  5. 将返回值，返回window中，保存到指定变量
-  6. 函数执行后，临时存储空间释放！导致，函数内局部变量一同释放
-  所以: 函数中的参数变量和var的变量，只能在函数调用时，内部使用，出了函数，无法使用。
-</code></pre><p>7、 作用域(scope): 一个变量的可用范围</p>
-<pre><code>包括: 2种:
- 1. 全局作用域: window
-    特点: 始终存在
-    全局变量: 直接保存在window中的变量
-        特点: 可重复使用，随处可用
-    何时: 如果希望一个变量可反复使用，可随处使用时
- 2. 函数作用域: Actived Object(AO 活动对象)
-    特点: 仅函数调用时存在，调用后就释放了！
-    局部变量: 保存在函数作用AO中的变量
-        特点: 不可重用，仅函数调用时，函数内可用
-    何时: 如果希望变量仅在函数内可用时
-
- 调用函数时，变量的使用顺序: 优先使用局部变量
-                              只要局部有，就不用全局的
-                              如果局部没有，会去全局找
- 判断函数是否包含局部变量: 2种: 1. 参数变量; 2. 函数内var的变量
-</code></pre><p>8、 循环:</p>
-<pre><code>什么是: 让程序反复执行相同代码段
-何时: 只要让程序反复执行同一任务
-三要素:
-  1. 循环条件: 让循环可以继续执行的条件
-  2. 循环变量: 循环条件中用作判断和比较的变量
-      循环变量的值，每循环一次，都要向着不满足循环条件的趋势不断变化。
-      如果循环变量值不变，或循环条件始终为true，循环无法退出——死循环。
-  3. 循环体: 反复执行的代码段
-如何: 3种:
- 1. while循环:
-   声明并初始化循环变量;
-   while(循环条件){
-     循环体;
-     修改循环变量的值;
-   }
-  当循环条件和逻辑非常复杂时:
-    1. 使用while(true), 不用预设循环条件，也能先进入循环再说
-    2. 循环体中，根据条件，手动退出循环: break;
- 2. do while循环: 其实就是有一次试用机会的while循环
-  声明并初始化循环变量;
-  do{
-     循环体;
-     修改循环变量的值;
-  }while(循环条件); //强调: 结尾必须有分号!
-  vs while:
-    如果第一次循环条件都满足，则while和do while完全等效
-    如果第一次循环条件不满足，则while是一次都不执行
-                                 do while至少可以执行一次
- 3. for循环: 就是循环变量的变化有规律的while循环
-  for(声明并初始化循环变量;循环条件;修改循环变量的值){
-     循环体;
-  }
-  总结: 循环变量要考虑三件事:
-         1. 从几开始;  2. 每次递增/减几;  3.到几结束
-  for循环的简写:
-   1. for的第一部分: 可同时声明并初始化多个变量:
-      强调: js语言没有块级作用域: if(){}  while(){}
-            for(){}都不是作用域。其中的变量，在块{}外，依然可用。
-           只有function(){}才是作用域
-         vs Java: 有块级作用域。if(){}  while(){}
-         for(){}都是块级作用域。其中的变量出了块{}，就无法使用。
-   2. for的第三部分: 可同时执行多个短小的表达式，用逗号分隔
-      简写不能改变原程序的执行顺序
- 简写: 其实if else else if while for之后如果只有一句话,都可省略大括号
-
- 循环嵌套:
-      什么是: 在一个循环内，又执行了另一个循环
-</code></pre><p>8、数组:</p>
-<pre><code>什么是: 内存中连续存储多个数据的存储空间，再起一个名字
-为什么: 便于批量管理和操作多个相关的数据
-何时: 今后，只要存储多个相关的数据，都要放在数组中
-程序=数据结构+算法
-  好的数据结构可极大提高程序的执行效率
-如何:
- 创建: 3种:
-   1. 创建空数组: var arr=[];
-                 var arr=new Array();
-       何时: 如果创建数组时，暂时不知道数组的内容
-   2. 创建数组时就初始化数组内容: var arr=[值1,值2,...]
-                                 var arr=new Array(值1,值2,...)
-       何时: 如果创建数组时，已经知道数组的内容
-   3. 创建n个空元素的数组: var arr=new Array(n);
-       何时: 如果创建数组时，已知数组的元素个数，但暂时不知道内容时。
- 访问数组元素:
-   数组中每一个数据称为一个元素
-   下标(index): 数组中唯一标示一个元素存储位置的序号
-     从0开始，默认连续不重复
-       索引数组: 下标都是数字序号的数组
-     每个元素都有其对应的下标
-   访问数组元素: arr[i]
-     每个数组元素的用法和普通变量完全一样!
-     所以，数组也称为一组连续的变量的集合，共用同一个变量名
-   特殊: 3个:
-     1. js数组不限制元素的数据类型
-     2. js数组不限制下标越界
-        赋值: 如果下标越界，不报错，会自动在新位置创建新元素保存数据。
-          稀疏数组: 下标不连续的数组
-        取值: 如果下标越界，不报错，会返回undefined
-     3. js数组不限制元素的个数
-数组的length属性:
-   属性: 保存在对象中的一个变量
-       访问属性: arr.length  属性的用法和普通变量完全一样
-       强调: 访问length必须用arr. ，其中.读作&quot;的&quot;
-   length属性，记录了数组中理论上的元素个数。
-        还可修改元素个数: arr.length-- ; 相当于数组容量-1，最后一个
-     length属性始终等于最大下标+1
-     length属性始终标记着最后一个元素之后的下一个新位置
-   固定套路:
-    1. 向数组末尾追加一个新元素: arr[arr.length]=新值;
-    2. 获取数组最后一个位置的元素: arr[arr.length-1]
-       获取数组倒数第n个元素: arr[arr.length-n]
-    3. 删除末尾的n个元素: arr.length-=n;
-
-数组是引用类型的对象:
- 按值传递: 两变量间赋值或将变量传递给函数作为参数时，
-            其实仅是将原变量中的值复制一个副本给对方。
-     原始类型: 修改新变量，不影响原变量的值
-     引用类型: 用新变量修改对象，等效于直接修改原对象，原变量同样受影响。
-
-垃圾回收:
-什么是: 引擎会自动释放不再被任何变量引用的对象
-垃圾回收器: 专门释放不再被使用的对象的小程序
-  垃圾回收器，伴随主程序执行而执行，会自动回收不再使用的对象
-原理:
-  每个对象都有一个引用计数器count: 记录该对象被几个变量引用着。
-     每多一个变量引用对象，count就+1，每当一个变量不再引用该对象时，count就-1。
-  垃圾回收器会定时检查每个变量的引用计数器。
-  如果对象的引用计数器为0，垃圾回收器会自动回收该对象。
-建议: 如果使用一个较大的对象后，应该尽快主动释放: 赋值为null
-</code></pre><p>9、遍历数组:</p>
-<pre><code>什么是: 依次访问数组中每个元素，并对每个元素执行相同的操作。
-何时: 只要对数组中每个元素执行相同操作时
-如何: 固定套路:
-  for(var i=0; i&lt;arr.length;i++){
-    arr[i] //当前正在遍历的元素
-  }
-</code></pre><p>10、关联数组:</p>
-<pre><code>什么是: 下标可自定义名称的数组
-为什么: 索引数组的下标是无意义的数字，不便于快速定位想要的元素
-       如果可给每个元素起一个有意义的名字，就可用名称，快速定义想要的元素
-何时: 只要希望使用名称，快速定位想要的元素时
-如何定义: 2步:
-  1. 先定义空数组: var ym=[];
-  2. 向空数组中添加新元素，下标使用自定义的名称字符串
-     ym[&quot;name&quot;]=&quot;杨幂&quot;;
-     ym[&quot;math&quot;]=81;
-     ym[&quot;chs&quot;]=59;
-     ym[&quot;eng&quot;]=89;
-  如何访问关联数组的元素: ym[&quot;下标名称&quot;]
-遍历关联数组:
-  问题: 关联数组的下标都是自定义的字符串:
-        导致: 关联数组length属性失效，始终为0
-             导致: for(var i=0;i&lt;arr.length;i++) 中i和lenght都不能用了
-  解决: for(var key in ym){
-        //in会自动依次取出关联数组中每个元素的下标名称，保存到变量key中。
-         //要想进一步获得每个元素值: ym[key]
-             //强调: key是变量，不要加&quot;&quot;
-       }
-</code></pre><p>11、 数组API:</p>
-<pre><code>数组转字符串: 2种:
-  1. String(arr): 将每个元素都转为字符串，然后用逗号连接
-  2. arr.join(&quot;连接符&quot;):将每个元素都转为字符串，可自定义连接符
-    固定套路: 1. 将字符数组，拼接为单词——无缝拼接: arr.join(&quot;&quot;)
-             2. 动态生成页面元素的内容:
-拼接和选取:
- 拼接: var newArr=arr1.concat(值1,值2,arr2,...);
-   强调: 1. 不修改原数组，而是返回新数组
-        2. 将另一个数组作为参数，则首先打撒数组为单个元素，再分别拼接。
- 选取: 复制出原数组中开始位置到结束位置之前的元素组成临时子数组
-   如何: var subarr=arr.slice(starti,endi+1);
-   强调: 1. 不修改原数组，仅复制指定位置的元素，组成新的临时数组
-        2. 凡是两个参数都是下标的函数，都含头不含尾
-   简写: 1. 省略第二个参数: 从starti位置开始选取所有剩余元素
-        2. 两个参数全省略: 复制一个数组
-        3. 支持负数参数: 表示倒数第n个
-           何时: 只要位置离结尾近时
-            arr.slice(-n)等效于: arr.slice(arr.length-n)
-修改数组: splice，删除，插入，替换
-  删除: arr.splice(starti,n)删除arr中starti位置开始的n个元素
-    强调: 1. 直接修改原数组
-    简写: 1. 省略n : 表示删除starti之后所有剩余元素
-         2. starti支持负数参数: 表示倒数下标
-    其实: splice是有返回值的: 被删除的元素组成的临时数组
-        var deletes=arr.splice(starti,n);
-  插入: arr.splice(starti,0,值1,值2,....) 在arr中starti位置插入值1,值2,...
-    强调: splice不能打散数组参数，后果，将数组作为一个整体保存在一个元素中
-            ——形成二维数组
-   vs concat: 1. concat不修改原数组，而是返回新数组
-              splice 直接修改原数组
-            2. concat会打散数组参数，单个元素拼接
-              splice 不打散数组参数，将数组整体插入到一个元素中
-            3. concat只能在数组结尾拼接
-              splice 可插入到任何位置
-  替换: 先删除，再插入
-    arr.splice(starti,n,值1,值2,...)
-    强调: 删除的元素个数和插入的新元素个数不必相同
-</code></pre><p>12、 排序: arr.sort()</p>
-<pre><code>原理: 默认将所有元素，临时转为字符串，再按字符串，升序排列
-问题1: 只能按字符串类型升序排列
-解决: 比较器函数:
-  什么是: 比较任意两数大小的函数
-  何时: 只要按数字类型排序时，都要定义比较器函数
-  如何: 2步:
-   1. 定义比较器函数: function compare(a,b){return a-b;}
-   2. 将比较器函数作为sort函数的参数传入:
-         arr.sort(compare)
-  强调: 将比较器函数作为sort的参数时，不加()
-问题2: 按数字降序排列:
-解决: 颠倒比较器结果的正负号
-  如何: function compare(a,b){return b-a;}
-</code></pre><p>13、 栈和队列:</p>
-<pre><code>今后，只要必须按一定的顺序使用数组元素时
-js中没有专门的栈和队列结构，都是用普通数组模拟的
-栈(stack): 一端封闭，只能从另一端进出的数组
-特点: FILO 先进后出
-  如何: 2种:
-    1. 结尾出入栈:
-       入: arr.push(值) 代替 arr[arr.length]=值
-       出: var last=arr.pop();
-    2. 开头出入栈:
-       入: arr.unshift(值)
-       出: var first=arr.shift()
-    强调: 开头入栈的结果和结尾入栈的结果刚好是颠倒的
-队列(queue): 只能从一头进入，从另一头出的数组
-特点: FIFO
-  如何: 结尾入: arr.push(值); 开头出: var first=arr.shift()
-</code></pre><p>14、 二维数组:</p>
-<pre><code>什么是: 数组中的元素又引用了另一个子数组
-何时: 1. 在大数组中，对内部元素，进行更细致分类时
-     2. 保存横行竖列的二维数据时
-如何:
-  创建: 2种
-    1. 先创建空数组，再向数组中添加子数组
-       var arr=[];
-       arr[0]=[0,0,0,0];
-       arr[1]=[0,0,0,0];
-    2. 创建数组同时，就初始化子数组:
-       var arr=[
-        [0,0,0,0],//0 \n
-        [0,0,0,0],//1 \n
-        [0,0,0,0],//2 \n
-        [0,0,0,0] //3
-       ]
-  访问元素: arr[r][c] 二维数组中每个元素的用法和普通数组元素的用法完全一样!
-    强调: 访问二维数组: 列下标越界，不报错，返回undefined
-                        行下标越界，报错！
-  遍历: 外层循环控制行，内存循环控制列
-    for(var r=0;r&lt;arr.length;r++){
-      for(var c=0;c&lt;arr[r].length;c++){
-         arr[r][c] //当前正在遍历的元素
-      }
-    }
-</code></pre><p>15、String</p>
-<pre><code>什么是: 一串字符组成的字符数组
-  vs 数组: 相同: 1. 下标
-                2. .length
-                3. slice
-          不同: 类型不同: String不能使用数组类型的API
-                   因为String是只读的字符数组
-内置对象: ES标准中规定的，浏览器厂商已经实现的类型
-  包括11个:
-    String Number Boolean ——包装类型
-    Array Date RegExp Math
-    Error
-    Function Object
-    Global(在浏览器中被window代替)
-包装类型:
-什么是: 专门封装原始类型的值，并提供操作原始类型值的API 的对象
-为什么: 原始类型的值本身不具有任何功能
-        如果要对原始类型的值做操作，必须有其他工具的辅助
-何时: 只要希望对原始类型的值执行操作时
-如何: 不用自己使用。都是自动调用。
-  原理: 浏览器中内置了3种包装类型的对象，一一对应一种原始类型:
-     String   Number  Boolean
-     每种包装类型，都能够保存一个原始类型的值，并已经预定义了操作原始类型值的现成API
-     当试图对原始类型的值调用函数时，引擎首先判断原始类型值的类型名，根据类型名，
-     创建对应的包装类型的对象，保存原始类型的值。再调用包装类型对象预定义好的方法。
-     任务执行完，包装类型对象自动释放。
-</code></pre><p>16、String API:</p>
-<pre><code>大小写转换: 将一个字符串中的字母统一都转为大写/小写
- 何时: 只要不区分大小写时，都要先转为统一的大小写，再判断和比较
-       比如: 验证码,
- 如何: str.toUpperCase();
-      str.toLowerCase();
-获得指定位置的字符:  str.charAt(i) =&gt; str[i]
-获得指定位置字符的unicode号: var uncode=str.charCodeAt(i);
-    从unicode号转回字符: var char=String.fromCharCode(unicode);
-获得子字符串:
-  str.substring(starti,endi+1) =&gt; str.slice(starti,endi+1)
-   强调: substring用法和slice几乎完全一样
-        唯一的差别: substring不支持负数参数 =&gt; 可用length-n代替
-  str.substr(starti, n) 选取str中starti位置开始的n个字符
-</code></pre><p>17、 查找: 在一个字符串中查找指定关键词出现的位置</p>
-<pre><code>4种:
-1. 查找一个固定的关键词出现的位置:
-  var index=str.indexOf(&quot;关键词&quot;,fromi);
-    在str中查找fromi 位置后的下一个&quot;关键词&quot;出现的位置
-    省略fromi: 默认从头开始查找
-  强调:1. 每次只找一个
-       2. 如果找不到，返回-1
-  var lastIndex=str.lastIndexOf(&quot;关键词&quot;);
-    查找str中最后一个&quot;关键词&quot;的位置
- 问题: 关键词稍微一变化，就找不到
-   比如: 我操, 我草，我艹，卧槽
- 解决: 用正则表达式模糊查找:
-2. 判断是否包含指定关键词(支持正则):
- var i=str.search(/正则表达式/);
-  在str中找符合正则表达式要求的敏感词的位置
-  返回值: 返回第一个找到的敏感词的下标
-           如果没找到返回-1。
-  问题: 正则表达式默认都是区分大小写的
-  解决: 第二个/后加后缀i: ignore 忽略大小写
-  缺: 1. 永远只能找第一个
-     2. 只能返回位置，无法返回关键词内容。
-3. 获得所有关键词的内容:
-  var kwords=str.match(/正则表达式/ig);
-   查找str中所有和正则表达式匹配的关键词内容
-   返回值: 包含所有关键词内容的数组
-        如果没找到，返回null!
-   问题: 正则表达式默认仅匹配第一个关键词
-   解决: 第二个/后加后缀g: global 全部
-   缺: 仅返回关键词的内容，无法返回每个关键词的位置
-   解决:
-4. 即查找每个关键词的内容，又查找每个关键词的位置:
-</code></pre><p>18、 替换: 将找到的关键词替换为指定的新字符</p>
-<pre><code> 简单替换: 将所有敏感词都替换为统一的新值:
-   str=str.replace(/正则/ig,&quot;替换值&quot;);
-   强调: 所有字符串API都无权修改原字符串，只能返回新字符串
- 高级替换: 根据不同的关键词，动态选择替换不同的值
-   str=str.replace(/正则/ig,function(kw){
-     return 根据本次kw的不同，动态决定返回何种替换值
-   });
- 删除: 其实就是将敏感词替换为&quot;&quot;
-
-分隔: 按指定的字符，将字符串分割为多段子字符串
-  var arr=str.split(&quot;固定的分隔符&quot;|/正则表达式/);
-    返回值: 切割后的子字符串组成的数组
-    强调: 切割后的结果中，不包含切割符本身
-    固定套路: 将字符串打散为字符数组: var chars=str.split(&quot;&quot;);
-</code></pre><p>19、正则表达式:</p>
-<pre><code>什么是: 规定一个字符串中字符出现规律的规则
-何时: 2种:
-  1. 使用规则模糊查找多种关键词
-  2. 表单中验证输入项的格式
-如何:
-  1. 最简单的规则，就是关键词原文:
-  2. 字符集:
-    什么是: 规定一位字符备选字符列表的集合
-    何时: 如果关键词中某一位字符有多种备选时
-    如何: [备选字符列表]
-      强调: 1. 一个字符集[]，包含的字符再多，也只能匹配1位
-           2. 不能不选
-    简写: 如果备选字符列表中部分字符是连续的，可用-省略中间字符
-      常用字符集:
-        [0-9] 1位数字;
-        [a-z] 1位小写字母; [A-Z] 1位大写字母
-        [A-Za-z] 1位字母
-        [A-Za-z0-9] 1位字母或数字
-        [\u3e00-\u9fa5] 1位汉字
-    特殊: 除了xxx  [^xxx]
-  3. 预定义字符集: 4个
-    \d  1位数字: [0-9]
-    \w  1位字母,数字或下划线: [A-Za-z0-9_]
-    \s   1位空白字符: 空格 制表符...
-    .    1位任意字符
-  问题: 只能匹配固定字符个数的关键词
-  解决: 量词:
-  4. 量词:
-    什么是: 规定一位字符集出现次数的规则
-    何时: 只要规定一位字符集出现的次数
-    如何: 2种:
-      1. 有明确个数限制: 3种
-        字符集{m,n} 至少出现m次，最多n次
-        字符集{m,}  至少出现m次，多了不限
-        字符集{m}   必须m位，不能多也不能少
-      2. 没有明确个数: 3种:
-        字符集?    可有可无，最多1个
-        字符集*    可有可无，多了不限
-        字符集+    至少一个，多了不限
-     问题: 一个量词只能修饰紧邻的前一个字符集
-     解决: 分组
-   5. 选择和分组:
-     分组: 用()将多个字符集，分为一组
-       何时: 希望量词同时修饰一个分组内的多个字符集时
-     选择: 或  规则1|规则2
-       只要匹配任意一个规则即可
-
-   身份证号:  15位数字 2位数字 1位数字或Xx
-                \d{15}  (  \d\d      [0-9Xx] )    ?
-                        后三位整体可有可无，最多1次
-   手机号: +86或0086   可有可无，最多1次
-          空字符        可有可无，多了不限
-          1
-          3,4,5,7,8中任选一个
-          9位数字
-     (\+86|0086)?\s*1[34578]\d{9}
-
-   微信  微 信 wei xin  w x  wechat
-   (微|w(ei)?)\s*(信|x(in)?)
-
-   6. 指定匹配位置: 3个特殊位置:
-     ^字符串开头 比如: 开头的空字符: ^\s+
-     $字符串结尾 比如: 结尾的空字符: \s+$
-        开头或结尾的空字符: ^\s+|\s+$
-     \b 单词边界: 开头, 结尾, 空字符, 标点符号...
-</code></pre><p>20、 RegExp: (Regular Expression)</p>
-<pre><code>什么是: 封装一个正则表达式，并提供使用正则表达式执行验证和查找功能的API的对象
-何时: 2种:
-  1. 格式验证:
-  2. 即查找关键词内容，又查找关键词位置:
-如何:
-  创建: 2种:
-   1. 创建一个固定的正则表达式: var reg=/正则/ig;
-       字符冲突: 两/之间如果再包含/，需要将内部的/转为\/
-         比如: /&lt;\/option&gt;/
-   2. 动态生成一个正则表达式:
-      var reg=new RegExp(&quot;正则&quot;,&quot;ig&quot;);
-       字符冲突: &quot;&quot;之间如果包含\和&quot;, 都要变为\\和\&quot;
-         比如: new RegExp(&quot;\\d{6}&quot;,&quot;ig&quot;)
-  验证格式:
-    var bool=reg.test(str); 验证str是否符合reg的规则要求
-    问题: 正则表达式默认只要包含就算匹配
-    解决: 今后，凡是验证，必须前加^，后加$，表示从头到尾完全匹配
-  查找关键词: 即查找所有关键词内容，又查找位置:
-    var arr=reg.exec(str); 在str中查找符合reg要求的下一个关键词的位置和内容保存在数组arr中
-      返回值: arr: [0: 关键词,  &quot;index&quot;: 下标 ]
-      强调: 1. reg.exec可自动从本次查找位置开始执行下一次查找。但是需要循环推动。
-           2. 要想找所有，reg也必须加g
-</code></pre><p>21、 Math:</p>
-<pre><code>什么是: 专门封装算数计算的常量和函数的对象
-强调: 不能new！所有API都通过大写Math直接调用
-API:
-  1. 取整: 3种:
-   上取整: Math.ceil(num)
-   下取整: Math.floor(num)
-     vs parseInt(str): 类型转换: Math.floor只能对纯数字的内容下取整
-                             parseInt 可去掉结尾非数字单位
-   四舍五入取整: Math.round(num)
-     vs n.toFixed(d):
-       1. round只能取整, toFixed可按任意小数位数四舍五入
-       2. 返回值: round返回数字，可直接做计算
-                 toFixed返回字符串，做+运算前必须强转为数字
-     自定义四舍五入:
-  2. 乘方和开平方:
-      Math.pow(底数,幂) 比如: Math.pow(10,2) =&gt;10的2次方=&gt;100
-      Math.sqrt(num) 比如Math.sqrt(9)=3
-  3. 最大值和最小值:
-     Math.max/min(值1, 值2,....)
-     强调: 不支持获得数组中的最大/最小值
-     解决: Math.max.apply(null,arr);
-  4. 随机数:
-       Math.random()   返回0~1之间的一个随机小数0&lt;=r&lt;1
-       公式: 在任意min~max之间取一个随机整数:
-       parseInt(Math.random()*(max-min+1)+min)
-       简化: 从0~n之间生成一个随机整数
-       parseInt(Math.random()*(n+1))
-</code></pre><p>22、Date:</p>
-<pre><code>什么是: 封装一个时间，并提供操作时间的API的对象
-何时: 只要存储时间或计算时间
-如何:
-  创建: 4种:
-   1. 创建日期对象，同时获得客户端当前系统时间:
-       var now=new Date();
-   2. 创建日期对象并保存自定义时间:
-       var date=new Date(&quot;yyyy/MM/dd hh:mm:ss&quot;)
-               new Date(yyyy,MM-1,dd,hh,mm,ss)
-   3. 使用毫秒数创建日期对象:
-     日期对象的原理: 日期对象中保存的是一个毫秒数
-                     起点: 1970年1月1日至今
-       为什么: 毫秒数不受时区影响。
-       惯例: 在跨国系统中存储时间，不要使用字符串
-             而要使用毫秒数。
-     何时: 只要将存储的毫秒数，转化为日期对象时
-     如何: var date=new Date(ms);
-   4. 复制一个日期对象:
-     为什么: 日期计算时，都是直接修改原日期对象
-             无法同时保存计算前后的两个时间
-     何时: 只要希望同时保存计算前后的两个时间
-           就要在计算前，将起始时间复制一个副本，再用副本计算截止时间。
-     如何: var date2=new Date(date1);
-</code></pre><p>  23、 日期API:</p>
-<pre><code>8个单位: FullYear   Month   Date    Day  没有s结尾
-         Hours    Minutes  Seconds  Milliseconds
-1. 每个单位都有一对儿get/set方法:
-  其中getXXX()负责获取指定单位的值
-      setXXX()负责设置指定单位的值
-   比如: date.getDate() //获得date中的日期
-        date.getHours() //获得date中的小时
-        date.setDate(20) //将date中的日期设置为20号
-        date.setHours(11) //将date中的小时设置为11点
-   特例: Day没有set方法，因为星期几是通过换算得到的，不能人为修改。
-2. 返回值/取值范围:
-  FullYear  年份该是多少就是多少
-  Month  0~11  计算机中保存的月份比现实中小1
-  Date    1~31
-  Day     0~6
-  Hours   0~23
-  Minutes/Seconds  0~59
-</code></pre><p>   24、 日期计算: 2种:</p>
-<pre><code>  1. 两日期对象可相减,结果是毫秒差:
-     何时: 计算倒计时或时间差
-  2. 对任意单位做加减: 3步:
-    简写: date.setDate(date.getDate()+/-n)
-      比如: 当前时间+30天
-        now.setDate(now.getDate()+30) //52
-            当前时间-2个月
-        now.setMonth(now.getMonth()-2)
-    问题: setXXX会直接修改原日期对象，旧时间无法保存
-    解决: 先将起始时间复制一个副本，再用副本计算截止时间
-日期转字符串:
-  String(date) 将date转为当地时间的完整日期格式
-  date.toLocaleString() 转为当地时间的简化版格式
-  date.toLocaleDateString() 仅保留日期部分
-  date.toLocaleTimeString() 仅保留时间部分
-  date.toGMTString()  转为国际标准时间(0时区)
+git subtree push --prefix=dist origin gh-pages  建立分支结构
+</code></pre><p>关于分支的使用方法</p>
+<pre><code>1，将远程仓库克隆到本地：
+    git clone https://github.com/**.git(项目克隆地址)
+2，生成分支gh-pages并切换到此分支
+    cd flexSupplement （进入到你克隆仓库的本地文件夹）
+    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
+3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
+    再将根目录下dist文件夹里面的内容复制到克隆文件中。
+    依次执行以下命令：
+    git add . （将本地所有文件加到仓库里）
+    git commit -m “message” （设置提交信息）
+    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
+    git push -u origin gh-pages （push文件到仓库中）
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;JavaScript&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;什么是JavaScript: 专门编写网页交互行为的语言
-为什么: HTML和CSS是静态语言，编写静态内容，无法编写逻辑，无法执行计算。
-何时: 今后所有静态网页必须使用JavaScript添加上交互行为，才能让用户使用
+      &lt;p&gt;使用方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
+git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
+&lt;/
     
     </summary>
     
       <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
+    
+      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
+    <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:10:17.259Z</updated>
+    
+    <content type="html"><![CDATA[<p>安装</p>
+<pre><code>$ npm install -g hexo-cli
+Hexo 将会在指定文件夹
+$ hexo init
+新建完成后 文件夹的目录如下
+    .
+    ├── _config.yml
+    ├── package.json
+    ├── scaffolds
+    ├── source
+    |   ├── _drafts
+    |   └── _posts
+    └── themes
+</code></pre><p>配置</p>
+<pre><code>_config.yml 中修改大部份的配置
+title    网站标题
+subtitle    网站副标题
+description    网站描述
+author    您的名字
+language    网站使用的语言
+timezone    网站时区。Hexo 默认使用您电脑的时区。时区列表。
+    比如说：America/New_York, Japan, 和 UTC 。
+网站存放在子目录
+    例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/
+</code></pre><p>目录</p>
+<pre><code>source_dir    资源文件夹，这个文件夹用来存放内容。    source
+public_dir    公共文件夹，这个文件夹用于存放生成的站点文件。    public
+tag_dir    标签文件夹    tags
+archive_dir    归档文件夹    archives
+category_dir    分类文件夹    categories
+code_dir    Include code 文件夹    downloads/code
+i18n_dir    国际化（i18n）文件夹    :lang
+skip_render    跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。
+</code></pre><p>文章</p>
+<pre><code>new_post_name    新文章的文件名称    :title.md
+default_layout    预设布局    post
+auto_spacing    在中文和英文之间加入空格    false
+titlecase    把标题转换为 title case    false
+external_link    在新标签中打开链接    true
+filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0
+render_drafts    显示草稿    false
+post_asset_folder    启动 Asset 文件夹    false
+relative_link    把链接改为与根目录的相对位址    false
+future    显示未来的文章    true
+highlight    代码块的设置
+</code></pre><p>分类 &amp; 标签</p>
+<pre><code>default_category    默认分类    uncategorized
+category_map    分类别名
+tag_map    标签别名
+</code></pre><p>日期 / 时间格式</p>
+<pre><code>date_format    日期格式    YYYY-MM-DD
+time_format    时间格式    H:mm:ss
+</code></pre><p>分页</p>
+<pre><code>per_page    每页显示的文章量 (0 = 关闭分页功能)    10
+pagination_dir    分页目录    page
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ npm install -g hexo-cli
+Hexo 将会在指定文件夹
+$ hexo init
+新建完成后 文件夹的目录如下
+    .
+    ├── _config.yml
+    ├── package.json
+    ├
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
+    
+      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Angular基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-27T12:53:02.708Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
+<pre><code>拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple and stupid
+语义化的标记、命名规则、减少嵌套
+
+3、DRY（善于使用封装和重用）
+Don&apos;t Repeat Yourself
+
+4、高内聚 低耦合（High cohesion,low coupling）
+内聚：一个组件（模块）内部的不同部分的关系
+耦合：不同组件（模块）之间的关系
+
+5、SRP 单一责任原则
+Single Responsibility Principle
+实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
+
+6、OCP原则(对于扩展开放、对于修改关闭)
+open close principle
+
+7、LCP（迪米特法则）
+Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
+
+常用的设计模式分为3大类：①创建 ②结构 ③行为
+
+常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
+先去实现功能，在迭代的过程中优化代码。
+</code></pre><p>2、AngularJS</p>
+<pre><code>认识新东西最好的方式：
+①官网
+②维基百科 wikipedia.org
+what?--ng(AngularJS)是一个开源的js框架
+where？--用来实现SPA应用程序（单一页面应用程序single page application）
+Gmail邮箱是由Google退出的前端历史中第一个SPA应用
+why？
+四大特征：
+①采用了MVC的设计模式
+Model 模型数据
+View  视图
+Controller 控制器
+</code></pre><p>3、MVC的工作原理：</p>
+<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
+1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
+2.双向数据绑定
+    数据-》视图
+    视图用户的输入 -》 数据
+3.依赖注入
+4.模块化设计
+</code></pre><p>4、使用ng</p>
+<pre><code>1、基本语法
+    &lt;any&gt;{{表达式}} &lt;/any&gt;
+    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
+
+2、常用指令
+    ngApp
+        ①启动ng
+        ②指定作用范围，将指令写在根标签
+    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
+    ngInit 指令 来完成数据的初始化
+    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
+        ①不需要在通过ngInit指令定义数据时候，加上var关键字
+        ②ngInit所初始化的变量是可以在整个html去使用变量
+</code></pre><p>5、常用指令</p>
+<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
+
+作为扩展属性来使用：
+    &lt;div ng-**&gt;&lt;/div&gt;
+    ngInit  --&gt; ng-init
+    ngApp --&gt; ng-app
+作为扩展标签来使用：
+    &lt;ngView/&gt;
+①ngApp
+    启动ng
+    指定作用范围，将指令写在根标签
+    注意事项：调用一次ngApp
+②ngInit
+    通过ngInit调用一次，初始化多个变量？？
+    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
+③ngRepeat
+    重复实例化模板
+    两种语法：
+    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
+    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
+
+    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
+        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
+
+④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
+    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
+    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
+    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
+    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
+    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
+    但是控制台是会报错的，通过ngSrc去指定就搞定了
+    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
+    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
+</code></pre><p>6、MVC</p>
+<pre><code>在ng中：
+    Model 模型数据：在ng中定义的一些变量
+    View  视图：通过ng指令和表达式增强版的html
+    Controller 控制器：负责数据的增删改查的
+MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
+在ng中应该怎么做才能实现一个SPA？
+准备工作：
+①创建一个模块
+    因为在ng中是以模块为基本单位的
+    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
+②使用模块
+    采用ngApp指令
+    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
+③创建一个控制器
+    app.controller(&apos;控制器的名称&apos;,function(){})
+    第二个参数时控制器被调用时，要执行的方法
+④调用控制器
+    采用ngController指令来调用控制器
+    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
+    实现数据的创建和显示等：
+⑤操作数据、显示出来
+
+$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
+    建立起控制器中的数据和控制器的所指定的视图的桥梁
+
+绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
+&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
+
+注意事项：
+由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
+</code></pre><p>7、ng是由很多指令的：</p>
+<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
+ngBind ngClass ngStyle
+
+在webStorm中创建一个文件模板的基本步骤：
+①拷贝要使用的代码
+②点击左上角的file，选择new
+③选择Edit File Templates
+④点击弹窗中右上角的+号
+⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
+</code></pre><p>8、自定义指令</p>
+<pre><code>1、如何自定义？？
+    angular.module()
+    app.controller()
+    //创建指令
+    app.directive(&apos;指令的名称&apos;，function(){
+        return {}
+    })
+    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
+    后缀：用来描述指令的功能
+    属性：
+    template：指定要显示的模板内容
+    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
+    replace: true,替换并显示出来
+    scope
+
+2、如何使用自定义的指令？？
+    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
+    &apos;tsHello&apos; --&gt; ts-hello
+    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
+
+3、自定义指令传递参数
+    怎么传？
+        在调用指令的时候可以传 将参数作为属性对应的值
+    怎么接受？
+        scope
+</code></pre><p>9、双向数据绑定</p>
+<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
+绑定方式：
+①常用指令： ngRepeat/ngIf/ngShow...
+②双花括号：{{}}
+
+方向2：从‘视图中用户的输入’绑定到‘数据’
+绑定方式：指令：ngModel
+
+如果要监听数据的变化：
+$scope.$watch(&apos;txt&apos;,function(){
+
+})
+
+在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
+ngOptions语法：
+ &lt;select
+    ng-model=&quot;city&quot;
+    ng-options=&quot;city.cityName for city in cities&quot;&gt;
+ &lt;/select&gt;
+</code></pre><p>10、过滤器</p>
+<pre><code>a.内置的过滤器
+    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
+    过滤器的语法：支持多重过滤和传参
+    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
+            | => 管道
+            常用的过滤器：
+                currency 货币样式的过滤器
+                date 日期
+                uppercase/lowercase 大小写的处理
+                orderBy 对指定的数组进行升序或者降序排列
+                number 格式化数字为文本（对有小数点的数据的处理）
+                limitTo 限定数组或者字符串要显示的个数
+        b.自定义过滤器
+            自定义过滤器方式：
+            app.filter('过滤器名称',function(){
+                return function(input，arg){
+                        //input是传递给过滤器的数据
+                        //arg 是过滤器本身的参数
+                    return '过滤后的结果'
+                }
+            })
+            使用自定义的过滤器:
+            和内置的过滤器用法是一样的
+
+11、ng模块内置的方法
+
+        序列化、反序列化
+        toJson:将对象或者数组 序列化 为json格式的字符串
+        fromJson：相反的过程
+
+12、服务
+
+    服务的本质是一个单例对象，提供数据和对象。
+    两大类：
+    ①内置服务
+        $location、$http、$window、$scope...
+        使用内置服务中提供的方法：
+            第一步 将需要用到的服务注入进来 function($scope,$location)
+            第二步 调用服务中提供的方法 数据。。
+    ②自定义的服务
+        面试题：$scope与$rootScope之间的关系
+        1、不同的控制器之间的数据是彼此隔离的
+        2、不同的控制器之间如何共享数据？？
+        $scope的id是从2开始依次往上递增，
+        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
+            方式1：借助于$rootScope
+                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
+            方式2：借助于控制器之间的嵌套
+                在调用控制器的元素 之间的嵌套关系
+                @@div ng-controller='myCtrl02'>
+                    @@<div ng-controller="myCtrl03"></div>
+                @@
+            方式3：触发事件传递参数
+                绑定事件：
+                $scope.$on('事件名称',function(event,data){
+
+                })
+        触发事件：
+        //从子作用对象 向 父作用域对象 传递事件
+        $scope.$emit()
+        //从父作用对象 向 子作用域对象 传递事件
+        $scope.$broadcaset()
+
+13、服务
+
+        双向数据绑定的工作原理：
+        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
+        怎么知道数据发生了变化？
+        在ng中有一个循环$digest,会不断的对比数据，
+        需要手工的触发循环做对比，可以通过：
+        $scope.$digest();
+        $scope.$apply();//触发$rootScope.$digest();
+
+14、ng内置的服务：
+
+        $location $scope $rootScope $window $interval $timeout
+        1、在ng中定时器相关的处理--》$interval $timeout
+        2、$http
+        $http({method:'',url:''}).success().error()
+        $http.get()
+        $http.post()
+        注意：如果需要发起post请求，需要设置:
+         app.run(function ($http) {
+                $http.defaults.headers.post =
+        {'Content-Type':'application/x-www-form-urlencoded'};})
+
+        在发起post请求时，如果需要对参数进行序列化:
+        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
+
+15、自定义服务
+
+        服务的目的是为了封装业务逻辑，提高代码的复用率
+        自定义指令 app.directive
+        自定义过滤器 app.filter
+        自定义服务的方法：
+        app.factory ('服务名称',function(){//普通方法 return {}})
+app.service(&apos;服务名称&apos;,function(){//构造函数})
+app.constant(&apos;服务名称&apos;，{})//创建常量服务
+app.value(&apos;服务名称&apos;，{})//创建变量服务
+
+注意事项：
+自定义的服务 需要用到其它服务中方法
+图：两个按钮：开始 结束。
+</code></pre><p>16、依赖注入</p>
+<pre><code>将代码部署到线上，都会对代码做压缩。
+使用YUI-Compressor.jar （有java的运行环境）
+①借助于CLI（command line）
+    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
+
+②IDE（webStorm）
+    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
+    在弹窗中的program选中对应的jar，保存即可
+压缩效果：
+会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
+但是数字、字符串、关键字是不会改变的。
+
+解决压缩后的问题方式：
+依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
+让我们可以去直接使用
+
+注入的方式：
+①推断式（猜测）
+    这种方式在进行压缩会有问题
+    app.controller(&apos;myCtrl&apos;,function($scope){});
+
+②标记式
+    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
+    存在一个字符串（服务名称）数组。
+    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
+    实现方式：
+    1、将处理函数单独的存在一个变量中
+    2、给变量设置$inject，值是一个由字符串构成的数组
+    3、使用服务即可
+③行内式（内联式）
+    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
+    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
+    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
+    依赖注入3种方式，官方推荐采用行内式依赖注入。
+    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
+    整个ng应用的注入对象都是由$injector定位和创建。
+    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
+    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
+</code></pre><p>17、模块化设计</p>
+<pre><code>ng有4大特征：
+①MVC
+②双向数据绑定
+③依赖注入
+④模块化设计
+
+高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
+
+如何自定义模块？
+angular.module();
+
+使用模块？
+ng-app=&quot;&quot;
+在创建模块时，在第二个参数所对应的数组中写上服务的名称
+
+一个ng的模块都可以包含哪些？
+控制器：对应部分业务逻辑的封装
+服务：经常用到的重复代码封装
+指令：扩展html标签、属性
+过滤器：针对数据做一些筛选 过滤 格式化的处理
+</code></pre><p>18、ngRoute（路由模块）</p>
+<pre><code>ng是主要实现SPA（单一页面应用程序）
+SPA的工作原理：
+    1、页面url
+    http://127.0.0.1/index.html#/路由地址
+    例如：http://127.0.0.1/index.html#/start
+    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
+    3、在路由词典中寻找路由地址(start)所对应的路由信息
+    4、在路由信息所对应的对象中找到真实的模板页面地址
+    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
+
+ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
+自动发起ajax请求加载页面显示。
+    0、在创建自定义模块，在依赖列表中指定ngRoute
+    1、指定盛放代码片段的容器
+    2、配置路由词典
+
+使用ngRoute的基本步骤：
+①创建一个完整的html页面
+    记得引入angular.js angular-route.js
+
+②创建模块，并指定依赖于ngRoute模块
+    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
+
+③使用指令创建一个盛放代码片段的容器
+    调用ngView指令：创建一个容器，代码片段会加载到这里
+
+④创建模板页面
+
+⑤配置路由词典
+    $routeProvider
+    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
+    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
+    otherwise是用来指定异常的处理
+    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
+
+SPA在ng实现过程，代码片段的跳转：
+①直接修改地址栏中的路由地址
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
+②通过js的方式
+    $location.path(&apos;路由地址&apos;)
+③超链接的方式
+    a href=&quot;#/myRegister&quot;
+    login-&gt;start 10
+
+SPA应用程序通过ngRoute来传递参数：
+①搞明白 发送 接收
+②配置接收方的路由
+    $routeProvider.when(&apos;/myStart/:num&apos;,{
+    templateUrl:&apos;tpl/start.html&apos;
+    })
+③拿到传递过来的参数
+    $routeParams.num
+④发送
+    a href=&apos;#/myStart/10&apos;
+    $location.path(&apos;/myStart/10&apos;)
+
+注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
+    myStart/:id $routeParams.id
+
+练习：实现一个SPA
+完整的html manager.html
+代码片段： checkProduct.html pay.html send.html
+
+要求：能够实现不同页面的跳转以及参数的传递
+checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
+pay 点击button跳转到send
+send button以及a跳转到check.html
+
+优化思路：如果多个控制器需要用到同一个方法或者数据，
+    ①将方法和数据封装成一个服务
+    ②$rootScope
+    ③控制器之间的嵌套
+    ④借助于事件
+
+由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
+控制器中的方法和数据，代码片段就可以用了。
+①发送 接收
+    checkProduct --&gt; pay
+
+②配置接收方路由
+    .when(&apos;/myPay/:price&apos;,{})
+
+③$routeParams
+    $routeParams.price
+
+④发送参数
+    href=&apos;#/myPay/20&apos;
+    $location.path(&apos;/myPay/20&apos;)
+
+ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
+
+要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
+
+注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
+</code></pre><p>19、ngAnimate（动画模块）</p>
+<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
+基本步骤：
+①引入对应的js文件
+    angular-animate.js
+②指定自定义模块依赖于ngAnimate
+    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
+③css给ng应用程序添加动画效果：
+    ngEnter 准备进入
+    ngEnterActive 进入完成
+    ngLeave 准备离开
+    ngLeaveActive 离开完成
+④引入对应的css文件
+
+如果用到其它的模块整体思路：
+    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
+    ②在创建模块，指定依赖列表
+    ③根据模块中所提供的指令、服务。。结合业务需要进行
+</code></pre><p>20、表单验证</p>
+<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
+布尔类型：
+$valid
+$invalid
+$dirty
+$pristine
+对象：
+$error
+
+注意事项：
+①给表单以及表单组件 加上name属性
+②给需要用到的表单组件 ，加上ngModel
+③属性的用法
+myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&amp;apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple 
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>http状态码总表</title>
+    <link href="www.wangchengzou.cn/2017/07/22/http%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+    <id>www.wangchengzou.cn/2017/07/22/http状态码/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-27T14:13:07.866Z</updated>
+    
+    <content type="html"><![CDATA[<p>简单版</p>
+<pre><code>100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK         正常返回信息
+201  Created    请求成功并且服务器创建了新的资源
+202  Accepted   服务器已接受请求，但尚未处理
+301  Moved Permanently  请求的网页已永久移动到新位置。
+302 Found       临时性重定向。
+303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。
+304  Not Modified 自从上次请求后，请求的网页未修改过。
+400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+401 Unauthorized 请求未授权。
+403 Forbidden   禁止访问。
+404 Not Found   找不到如何与 URI 相匹配的资源。
+500 Internal Server Error  最常见的服务器端错误。
+503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。     ]
+</code></pre><p>完整版</p>
+<pre><code>1**(信息类)：表示接收到请求并且继续处理
+   100——客户必须继续发出请求
+   101——客户要求服务器根据请求转换HTTP协议版本
+2**(响应成功)：表示动作被成功接收、理解和接受
+   200——表明该请求被成功地完成，所请求的资源发送回客户端
+   201——提示知道新文件的URL
+   202——接受和处理、但处理未完成
+   203——返回信息不确定或不完整
+   204——请求收到，但返回信息为空
+   205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件
+   206——服务器已经完成了部分用户的GET请求
+3**(重定向类)：为了完成指定的动作，必须接受进一步处理
+   300——请求的资源可在多处得到
+   301——本网页被永久性转移到另一个URL
+   302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，
+       重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。
+   303——建议客户访问其他URL或访问方式
+   304——自从上次请求后，请求的网页未修改过，服务器返回此响应时，不会返回网页内容，
+       代表上次的文档已经被缓存了，还可以继续使用     305——请求的资源必须从服务器指定的地址得到
+   306——前一版本HTTP中使用的代码，现行版本中不再使用
+   307——申明请求的资源临时性删除
+4**(客户端错误类)：请求包含错误语法或不能正确执行
+   400——客户端请求有语法错误，不能被服务器所理解
+   401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
+   HTTP 401.1 - 未授权：登录失败     　　
+   HTTP 401.2 - 未授权：服务器配置问题导致登录失败     　　
+   HTTP 401.3 - ACL 禁止访问资源     　　
+   HTTP 401.4 - 未授权：授权被筛选器拒绝
+   HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败
+   402——保留有效ChargeTo头响应
+   403——禁止访问，服务器收到请求，但是拒绝提供服务
+   HTTP 403.1 禁止访问：禁止可执行访问     　　
+   HTTP 403.2 - 禁止访问：禁止读访问     　　
+   HTTP 403.3 - 禁止访问：禁止写访问     　　
+   HTTP 403.4 - 禁止访问：要求 SSL     　　
+   HTTP 403.5 - 禁止访问：要求 SSL 128     　　
+   HTTP 403.6 - 禁止访问：IP 地址被拒绝     　　
+   HTTP 403.7 - 禁止访问：要求客户证书     　　
+   HTTP 403.8 - 禁止访问：禁止站点访问     　　
+   HTTP 403.9 - 禁止访问：连接的用户过多     　　
+   HTTP 403.10 - 禁止访问：配置无效     　　
+   HTTP 403.11 - 禁止访问：密码更改     　　
+   HTTP 403.12 - 禁止访问：映射器拒绝访问     　　
+   HTTP 403.13 - 禁止访问：客户证书已被吊销     　　
+   HTTP 403.15 - 禁止访问：客户访问许可过多     　　
+   HTTP 403.16 - 禁止访问：客户证书不可信或者无效
+   HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效
+   404——一个404错误表明可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。
+   405——用户在Request-Line字段定义的方法不允许
+   406——根据用户发送的Accept拖，请求资源不可访问
+   407——类似401，用户必须首先在代理服务器上得到授权
+   408——客户端没有在用户指定的饿时间内完成请求
+   409——对当前资源状态，请求不能完成
+   410——服务器上不再有此资源且无进一步的参考地址
+   411——服务器拒绝用户定义的Content-Length属性请求
+   412——一个或多个请求头字段在当前请求中错误
+   413——请求的资源大于服务器允许的大小
+   414——请求的资源URL长于服务器允许的长度
+   415——请求资源不支持请求项目格式
+   416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段
+   417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。
+5**(服务端错误类)：服务器不能正确执行一个正确的请求
+    HTTP 500 - 服务器遇到错误，无法完成请求     　　
+    HTTP 500.100 - 内部服务器错误 - ASP 错误     　　
+    HTTP 500-11 服务器关闭     　　
+    HTTP 500-12 应用程序重新启动     　　
+    HTTP 500-13 - 服务器太忙     　　
+    HTTP 500-14 - 应用程序无效     　　
+    HTTP 500-15 - 不允许请求 global.asa     　　
+    Error 501 - 未实现
+    HTTP 502 - 网关错误
+    HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单版&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK         正常返回信息
+201  Created    请求成功
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="http" scheme="www.wangchengzou.cn/tags/http/"/>
     
   </entry>
   
