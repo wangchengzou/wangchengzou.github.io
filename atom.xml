@@ -2156,6 +2156,297 @@ localStorage中若数据发生了修改，会触发一次window.onstorage事件�
   </entry>
   
   <entry>
+    <title>MySql常用方法知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
+    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T16:08:55.461Z</updated>
+    
+    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
+<pre><code>&gt;grant select,insert,update,delete,create,drop
+&gt;on tutorials.*
+&gt;to &apos;zara&apos;@&apos;localhost&apos;
+&gt;identified by &apos;zara123&apos;;
+以上为为指定数据库tutorials添加用户zara 密码为zara123
+
+&gt;use数据库名；--选择操作的数据库
+&gt;show databases;   ---列出所有数据库
+&gt;show tables;      ---列出数据库所有表
+&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
+&gt;show index from 数据表； ---显示数据表索引信息
+&gt;show table status like 数据表\G; ---输出统计信息
+&gt;create database库名； ----创建库名
+&gt;drop database库名；   ----弹出框显示是否删除库名
+&gt;int bigint double varchar datetime now()  四大数据类型
+&gt;create table 表名；  ---创建数据表
+&gt;drop table 表名；    ---删除表
+&gt;insert into 表名（列，列）values(值，值)；---添加数据
+&gt;select 列名 from 表名 where 条件；  ----查询
+&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
+&gt;delete from 表名 where 条件； ---直接删除表内记录列
+&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
+&gt;create database 库名 charset=utf8；  ---指定库名编码
+&gt;set names utf8  -----设置语句编码
+&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
+&gt;$_request[&apos;title&apos;];--获取表单中的参数
+&gt;desc 表名；----将查看该表里面的所有类型
+&gt;require();  ---引用初始化PHP文件
+多表查询方法（
+    SELECT n.title,n.ctime,u.uname    多表联系
+    FROM t_user u,t_news n;           创建别名
+    WHERE u.id==n.uid          条件关系
+）
+
+{命令窗口使用SQL文件加载数据库，中文显示
+    &gt;set names utf8        --文件转换编码格式
+    &gt;source 文件位置    --加载文件位置
+    &gt;set names gbk        --临时使用gbk格式显示中文
+}
+</code></pre><p>php学习基本函数</p>
+<pre><code>phpinfo();显示软件版本信息
+var_dump();输出数组元素
+count();输出数组里面元素的个数
+foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
+</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
+<pre><code>1创建到MySQL服务器的连接
+  $conn=mysqli_connect(...);
+    服务器地址IP    本机127.0.0.1：8081
+    用户名      root
+    密码          p
+    选择库      库名
+2向MySQL服务器发送sql指令，等待服务器执行
+  $sql=&quot;...&quot;;//insert/delete/update
+3读取MySQL服务器返回结果
+  $result=mysqli_query($conn,$sql);
+4判断返回结果是否成功
+  if($result===false);
+5断开与MySQL服务器连接
+  mysqli_close($conn);
+</code></pre><p>php mysql查询操作</p>
+<pre><code>1:连接数据库
+  $conn=mysqli_connect(...);
+  服务器地址IP    本机127.0.0.1：8081
+  用户名            root
+  密码          p
+  选择库      库名
+2:发送查询sql   SELECT
+   $sql=&quot;...&quot;;    SELECT * FROM t_user;
+3:读取MySQL服务器返回结果 是不是true/false
+   $result=mysqli_query($conn,$sql);
+4:抓取结果中数据并且转换数组
+   a:抓取一行数据{关联数组}
+    mysqli_fetch_assoc(结果集对象);
+   b:抓取一行数据{索引数组
+    mysqli_fetch_row(结果集对象);
+5:断开与MySQL服务器连接
+   mysqli_close($conn);
+</code></pre><p>php常用函数说明</p>
+<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
+@    压制住当前行代码警告消息，在行首位置添加！
+#time() 返回当前系统时间，以毫秒为单位整数
+#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
+#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
+location.href   为跳转方式
+</code></pre><p>ajax  GET的使用方法</p>
+<pre><code>1.创建Ajax对象
+    var xhr= new XMLHttpRequest();
+2.绑定事件
+    xhr.onreadystatechange=function(){
+        alert(xhr.responseText);--输出事件运行文本状态
+    }
+3.打开连接
+    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
+4.发送请求
+    xhr.send(null)
+</code></pre><p>Ajax 常用对象和属性事件方法</p>
+<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
+    var xhr =new XMLHttpRequest();
+    兼容性问题，老IE8以下不支持
+    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
+    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
+
+readyState ;xhr对象当前状态，会自动改变
+    对应值：0 UNSENT 请求消息未发送
+        1 OPENED XHR已经找开连接
+        2 HEADERS_RECEVIED xhr已经接收信息
+        3 LOADING  XHR正在加载消息
+        4 DONE XHR接收完成消息
+
+status  表示服务器返回的状态码
+responseText  表示服务器响应文本
+responseXML   表示服务器响应XML文本
+
+属性使用方法
+    open(method,url.isAsyn)  表示打开服务器连接
+        method：请求方式，GET POST
+        Ulr  请求地址
+        isasyn：请求方式是异步TRUE还是同步FALSE
+
+    send（data）请求消息发送web服务器
+        data：请示消息主体内容:
+           GET为send(null)
+           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
+</code></pre><p>#AJAX POST  标准语法和用法</p>
+<pre><code>1.创建AJAX对象
+ xhr=new XMLHttpRequest()
+2.绑定事件
+    xhr.onreadystatechange=function(){
+    判断事件输出信息，返回数据
+    if(xhr.readyState===4&amp;&amp;xhr.status===200){
+        if(parseInt(xhr.responseText)&gt;0){
+            作输出 ，返回成功结果
+        }else{
+            输出 失败结果
+        }
+    }
+  }
+3.打开连接
+  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
+  修改头部信息
+   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4.发送请求
+  xhr.send(发送参数);
+</code></pre><p>修改头部信息–php首行加头部信息</p>
+<pre><code>纯文本text
+    header(&quot;Content-Type:text/plain&quot;);
+        html-&gt;ajax
+        xhr.responseText
+网页页面HTML
+    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+javascript
+    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+                html-&gt;ajax
+      eval(xhr.responseText);
+      示例:国际化
+       当前浏览器 zh-CN  你好
+                 en-US   hello
+</code></pre><p>json语法和要求</p>
+<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
+JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
+数组中可以包含多值 ，用， 分开
+对象中可以包含多个键值，使用逗号分开，
+
+怎么处理JSON数据
+服务器端PHP
+    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+    $str=json_encode($arr)
+    echo $str;
+
+javascript 接收
+    var obj=JSON.parse(xhr.responstText);
+</code></pre><p>XML语法要求</p>
+<pre><code>XML 文档声明
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
+所有属性必须用双引号
+
+XML方法
+    服务器PHP
+    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
+    echo &quot; xml....&quot;;
+    客户端JS
+    AJXX请求接收数据
+    var xmlDoc=xhr.responseXML;---
+    获取所有标签
+    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
+    获取其中属性
+    var name=xmldDoc.querySelector(&quot;name&quot;)
+</code></pre><p>jquery 常用AJAX函数</p>
+<pre><code>$.get(url,callback);    发送get请求
+$.post(url,data,callback);   发送post请求
+$.getJSON(url,callback);    发送JSON请求‘
+$.load(url);       加载
+$.getScript(url.callback);
+$.ajax({})   全能
+    全能使用方法
+    ajax({
+        type:&quot;GET&quot;        请求方式post,pub,delete
+        url:&quot;  url&quot;        请求地址
+        data:&quot;{---:--,--:--}&quot;
+            请求服务器数据
+        beforeSend:fn
+            请求消息发送前调用函数
+        success:fn
+            响应完成并且成功调用函数
+        error:fn
+            响应完成但是有问题的调用函数
+        complete:fn
+            响应完成但是无论成功与否都调用函数
+    })
+</code></pre><p>开发项目</p>
+<pre><code>开发流程
+    需求说明书---技术经理，美工
+    剪切图片集---UI
+    静态网页----前端
+    动态网页---后端
+    部署服务器----运维
+    测试---------功能
+    上线-----
+    调试---加新功能--升级
+</code></pre><p>针对cookie作了解</p>
+<pre><code>添加
+    document.cookie = &apos;uid=10&apos;;
+    document.cookie = &apos;uname=qiangdong&apos;;
+
+读取
+    function getCookieVal(key){
+            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
+        var rs = null;
+            //1:创建变量保存最终返回结果值
+        var line = document.cookie;
+        var arr = line.split(&quot;;&quot;);
+            //2:按照;拆分cookie中字符串
+        for(var i=0;i&lt;arr.length;i++){
+            //3:循环数组中每一个键值
+            var kv = arr[i];
+            var option = kv.split(&quot;=&quot;);
+            //4:按照=拆分
+            var k = option[0].trim();
+            //5:下标0 k  ---  trim()去除字符串前后空格
+            var v = option[1];
+            //6:下标0 v
+            if(key===k){
+                //7:判断如果参数中指定
+                key == k
+                return v;
+                //8:返回v
+            }
+        }
+        return rs;
+        //9:否则返回 null
+    }
+     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
+         console.log(rs);
+     var rs = getCookieVal(&quot;uname&quot;);
+         console.log(rs);
+     var age = getCookieVal(&quot;age&quot;);
+         console.log(age);
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
+&amp;gt;on tutorials.*
+&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
+    
+      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
+    
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Ionic基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
     <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
@@ -2952,297 +3243,6 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
-    <title>MySql常用方法知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
-    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T16:08:55.461Z</updated>
-    
-    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
-
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
-}
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
-&amp;gt;on tutorials.*
-&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
-    
-      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
-    
-      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vue快速上手知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
     <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
@@ -3685,6 +3685,471 @@ how？类似jQuery的用法 只需要
       <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
     
       <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>axios使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
+    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-02T03:25:25.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>axios</p>
+<p>##基于http客户端的promise，面向浏览器和nodejs</p>
+<pre><code>特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取消请求
+自动转化json数据
+客户端支持抵御XSRF（跨站请求伪造）
+</code></pre><p>安装</p>
+<pre><code>使用npm：
+
+$ npm i axios
+使用 bower
+
+$ bower instal axios
+使用cdn
+
+&lt;!--国内bootCDN--&gt;
+&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>示例</p>
+<pre><code>发起一个GET请求
+//发起一个user请求，参数为给定的ID
+axios.get(&apos;/user?ID=1234&apos;)
+.then(function(respone){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+//上面的请求也可选择下面的方式来写
+axios.get(&apos;/user&apos;,{
+    params:{
+        ID:12345
+    }
+})
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function(error){
+        console.log(error)
+    });
+
+发起一个POST请求
+axios.post(&apos;/user&apos;,{
+    firstName:&apos;friend&apos;,
+    lastName:&apos;Flintstone&apos;
+})
+.then(function(response){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+发起一个多重并发请求
+function getUserAccount(){
+    return axios.get(&apos;/user/12345&apos;);
+}
+
+function getUserPermissions(){
+    return axios.get(&apos;/user/12345/permissions&apos;);
+}
+
+axios.all([getUerAccount(),getUserPermissions()])
+    .then(axios.spread(function(acc,pers){
+        //两个请求现在都完成
+    }));
+</code></pre><p>axios API</p>
+<pre><code>可以对axios进行一些设置来生成请求。axios(config)
+
+//发起 POST请求
+axios({
+    method:&apos;post&apos;,//方法
+    url:&apos;/user/12345&apos;,//地址
+    data:{//参数
+        firstName:&apos;Fred&apos;,
+        lastName:&apos;Flintstone&apos;
+    }
+});
+
+//通过请求获取远程图片
+axios({
+    method:&apos;get&apos;,
+    url:&apos;http://bit.ly/2mTM3Ny&apos;,
+    responseType:&apos;stream&apos;
+})
+    .then(function(response){
+        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
+    })
+axios(url[,config])
+
+//发起一个GET请求
+axios(&apos;/user/12345/);
+请求方法的重命名。
+
+为了方便，axios提供了所有请求方法的重命名支持
+axios.request(config)
+axios.get(url[,config])
+axios.delete(url[,config])
+axios.head(url[,config])
+axios.options(url[,config])
+axios.post(url[,data[,config]])
+axios.put(url[,data[,config]])
+axios.patch(url[,data[,config]])
+
+注意
+当时用重命名方法时url,method,以及data属性不需要在config中指定。
+
+并发 Concurrency
+有用的方法
+axios.all(iterable)
+axios.spread(callback)
+
+创建一个实例
+你可以使用自定义设置创建一个新的实例
+axios.create([config])
+var instance = axios.create({
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+    timeout:1000,
+    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
+});
+实例方法
+
+下面列出了一些实例方法。具体的设置将在实例设置中被合并。
+axios#request(config)
+axios#get(url[,config])
+axios#delete(url[,config])
+axios#head(url[,config])
+axios#post(url[,data[,config]])
+axios#put(url[,data[,config]])
+axios#patch(url[,data[,config]])
+
+Requese Config请求设置
+以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
+{
+    //`url`是服务器链接，用来请求
+    url:&apos;/user&apos;,
+
+    //`method`是发起请求时的请求方法
+    method:`get`,
+
+    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
+    //当axios使用相对地址时这个设置非常方便
+    //在其实例中的方法
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+
+    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
+    //这个只适用于`PUT`,`GET`,`PATCH`方法。
+    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
+        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
+    transformRequest:[function(data){
+        //依自己的需求对请求数据进行处理
+        return data;
+    }],
+
+    //`transformResponse`允许返回的数据传入then/catch之前进行处理
+    transformResponse:[function(data){
+        //依需要对数据进行处理
+        return data;
+    }],
+
+    //`headers`是自定义的要被发送的头信息
+    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
+
+    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
+    params:{
+        ID:12345
+    },
+
+    //`paramsSerializer`是一个可选的函数，是用来序列化参数
+    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
+    paramsSerializer: function(params){
+        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
+    },
+
+    //`data`是请求提需要设置的数据
+    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
+    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
+    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
+    //-仅浏览器：FormData,File,Blob
+    //-仅Node：Stream
+    data:{
+        firstName:&apos;fred&apos;
+    },
+    //`timeout`定义请求的时间，单位是毫秒。
+    //如果请求的时间超过这个设定时间，请求将会停止。
+    timeout:1000,
+
+    //`withCredentials`表明是否跨网站访问协议，
+    //应该使用证书
+    withCredentials:false //默认值
+
+    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
+    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
+    adapter:function(config){
+        /*...*/
+    },
+
+    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
+    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
+    auth:{
+        username:&apos;janedoe&apos;,
+        password:&apos;s00pers3cret&apos;
+    },
+
+    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
+    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
+    responsetype:&apos;json&apos;,
+
+    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
+    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
+
+    //`onUploadProgress`允许处理上传过程的事件
+    onUploadProgress: function(progressEvent){
+        //本地过程事件发生时想做的事
+    },
+
+    //`onDownloadProgress`允许处理下载过程的事件
+    onDownloadProgress: function(progressEvent){
+        //下载过程中想做的事
+    },
+
+    //`maxContentLength` 定义http返回内容的最大容量
+    maxContentLength: 2000,
+
+    //`validateStatus` 定义promise的resolve和reject。
+    //http返回状态码，如果`validateStatus`返回true
+        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
+    validateStatus: function(status){
+        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
+    },
+
+    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
+        定义一个自定义的代理，在nodejs中。
+    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
+    httpAgent: new http.Agent({keepAlive:treu}),
+    httpsAgent: new https.Agent({keepAlive:true}),
+
+    //`proxy`定义服务器的主机名字和端口号。
+    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
+    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
+    proxy:{
+        host:127.0.0.1,
+        port:9000,
+        auth:{
+            username:&apos;cdd&apos;,
+            password:&apos;123456&apos;
+        }
+    },
+
+    //`cancelTaken` 定义一个取消，能够用来取消请求
+    //（查看 下面的Cancellation 的详细部分）
+    cancelToken: new CancelToken(function(cancel){
+    })
+}
+
+返回响应概要 Response Schema
+一个请求的返回包含以下信息
+{
+    //`data`是服务器的提供的回复（相对于请求）
+    data{},
+
+    //`status`是服务器返回的http状态码
+    status:200,
+
+
+    //`statusText`是服务器返回的http状态信息
+    statusText: &apos;ok&apos;,
+
+    //`headers`是服务器返回中携带的headers
+    headers:{},
+
+    //`config`是对axios进行的设置，目的是为了请求（request）
+    config:{}
+}
+
+使用then，你会接受打下面的信息
+axios.get(&apos;/user/12345&apos;)
+    .then(function(response){
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    });
+使用catch时，或者传入一个reject callback作为then的第二个参数，
+那么返回的错误信息将能够被使用。
+</code></pre><p>默认设置（Config Default)</p>
+<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
+全局默认设置 Global axios defaults
+axios.defaults.baseURL = &apos;https://api.example.com&apos;;
+axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
+实例中自定义默认值 Custom instance default
+//当创建一个实例时进行默认设置
+var instance = axios.create({
+    baseURL:&apos;https://api.example.com&apos;
+});
+
+//在实例创建之后改变默认值
+instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+设置优先级 Config order of precedence
+设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
+    其次是defaults实例属性的设置，最后是请求中config参数的设置。
+    越往后面的等级越高，会覆盖前面的设置。
+看下面这个例子：
+
+//使用默认库的设置创建一个实例，
+//这个实例中，使用的是默认库的timeout设置，默认值是0。
+var instance = axios.create();
+
+//覆盖默认库中timeout的默认值
+//此时，所有的请求的timeout时间是2.5秒
+instance.defaults.timeout = 2500;
+
+//覆盖该次请求中timeout的值，这个值设置的时间更长一些
+instance.get(&apos;/longRequest&apos;,{
+    timeout:5000
+});
+</code></pre><p>拦截器 interceptors</p>
+<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
+//添加一个请求拦截器
+axios.interceptors.request.use(function(config){
+    //在请求发送之前做一些事
+    return config;
+},function(error){
+    //当出现请求错误是做一些事
+    return Promise.reject(error);
+});
+
+//添加一个返回拦截器
+axios.interceptors.response.use(function(response){
+    //对返回的数据进行一些处理
+    return response;
+},function(error){
+    //对返回的错误进行一些处理
+    return Promise.reject(error);
+});
+
+如果你需要在稍后移除拦截器,你可以
+var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
+axios.interceptors.rquest.eject(myInterceptor);
+
+你可以在一个axios实例中使用拦截器
+var instance = axios.create();
+instance.interceptors.request.use(function(){/*...*/});
+</code></pre><p>错误处理 Handling Errors</p>
+<pre><code>axios.get(&apos;user/12345&apos;)
+    .catch(function(error){
+        if(error.response){
+            //存在请求，但是服务器的返回一个状态码
+            //他们都在2xx之外
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }else{
+            //一些错误是在设置请求时触发的
+            console.log(&apos;Error&apos;,error.message);
+        }
+        console.log(error.config);
+    });
+
+你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
+axios.get(&apos;user/12345&apos;,{
+    validateStatus:function(status){
+        return status &lt; 500;//当返回码小于等于500时视为错误
+    }
+});
+</code></pre><p>取消 Cancellation</p>
+<pre><code>你可以使用cancel token取消一个请求
+axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
+
+你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
+var CancelToken = axios.CancelToken;
+var source = CancelToken.source();
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken:source.toke
+}).catch(function(thrown){
+    if(axiso.isCancel(thrown)){
+        console.log(&apos;Rquest canceled&apos;, thrown.message);
+    }else{
+        //handle error
+    }
+});
+
+//取消请求(信息参数设可设置的)
+source.cancel(&quot;操作被用户取消&quot;);
+你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
+var CancelToken = axios.CancelToken;
+var cancel;
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken: new CancelToken(function executor(c){
+        //这个executor 函数接受一个cancel function作为参数
+        cancel = c;
+    })
+});
+
+//取消请求
+cancel();
+注意：你可以使用同一个cancel token取消多个请求。
+使用 application/x-www-form-urlencoded 格式化
+默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
+你可以使用一下的设置。
+</code></pre><p>浏览器 Browser</p>
+<pre><code>在浏览器中你可以如下使用URLSearchParams API:
+var params = new URLSearchParams();
+params.append(&apos;param1&apos;,&apos;value1&apos;);
+params.append(&apos;param2&apos;,&apos;value2&apos;);
+axios.post(&apos;/foo&apos;,params);
+注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
+（poly fill）可用（确保垫片在浏览器全局环境中）
+
+其他方法：你可以使用qs库来格式化数据。
+var qs = require(&apos;qs&apos;);
+axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
+Node.js
+
+在nodejs中，你可以如下使用querystring:
+var querystring = require(&apos;querystring&apos;);
+axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
+你同样可以使用qs库。
+promises
+axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
+
+TypeScript
+axios 包含TypeScript定义
+
+import axios from &apos;axios&apos;
+axios.get(&apos;/user?ID=12345&apos;)
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;axios&lt;/p&gt;
+&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
+    
+      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
     
   </entry>
   
@@ -4562,467 +5027,150 @@ less中提供的功能函数
   </entry>
   
   <entry>
-    <title>axios使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
-    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
+    <title>html和css3</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-02T03:25:25.164Z</updated>
+    <updated>2017-07-28T01:27:39.844Z</updated>
     
-    <content type="html"><![CDATA[<p>axios</p>
-<p>##基于http客户端的promise，面向浏览器和nodejs</p>
-<pre><code>特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取消请求
-自动转化json数据
-客户端支持抵御XSRF（跨站请求伪造）
-</code></pre><p>安装</p>
-<pre><code>使用npm：
-
-$ npm i axios
-使用 bower
-
-$ bower instal axios
-使用cdn
-
-&lt;!--国内bootCDN--&gt;
-&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>示例</p>
-<pre><code>发起一个GET请求
-//发起一个user请求，参数为给定的ID
-axios.get(&apos;/user?ID=1234&apos;)
-.then(function(respone){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-//上面的请求也可选择下面的方式来写
-axios.get(&apos;/user&apos;,{
-    params:{
-        ID:12345
-    }
-})
-    .then(function(response){
-        console.log(response);
-    })
-    .catch(function(error){
-        console.log(error)
-    });
-
-发起一个POST请求
-axios.post(&apos;/user&apos;,{
-    firstName:&apos;friend&apos;,
-    lastName:&apos;Flintstone&apos;
-})
-.then(function(response){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-发起一个多重并发请求
-function getUserAccount(){
-    return axios.get(&apos;/user/12345&apos;);
+    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
+<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
+ skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
+4. 增加了更多的CSS选择器  多背景 rgba
+5. 在CSS3中唯一引入的伪元素是 ::selection.
+6. 媒体查询，多栏布局
+7. border-image
+</code></pre><ol>
+<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
+<li>拖拽释放(Drag and drop) API</li>
+<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
+<li>音频、视频API(audio,video)</li>
+<li>画布(Canvas) API</li>
+<li>地理(Geolocation) API</li>
+<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
+<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
+<li>表单控件，calendar、date、time、email、url、search</li>
+<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
+<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
+<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
+<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
+<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+<![endif]-->
+如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
+</ol>
+</li>
+</ol>
+<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
+<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
+本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
+或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
+清除或者使用Javascript代码移除
+</code></pre><p>6、    什么是响应式设计？</p>
+<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
+响应式设计是让所有的人能在这些设备上让网站运行正常
+</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
+<pre><code>HTML5文档类型：&lt;!doctype html&gt;
+HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
+</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
+<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
+在 HTML 上进行图形操作。
+</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
+<pre><code>Media API、Text Track API、Application Cache API、
+User Interaction、Data Transfer API、Command API、
+Constraint Validation API、History API
+</code></pre><p>11、    CSS3新增伪类有那些？</p>
+<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+:enabled、:disabled 控制表单控件的禁用状态。
+:checked，单选框或复选框被选中。
+</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
+<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
+* 绘画 canvas 元素
+  用于媒介回放的 video 和 audio 元素
+  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
+  sessionStorage 的数据在浏览器关闭后自动删除
+  语意化更好的内容元素，比如 article、footer、header、nav、section
+  表单控件，calendar、date、time、email、url、search
+  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
+  新的技术webworker, websockt, Geolocation
+移除的元素
+纯表现的元素：basefont，big，center，font, s，strike，tt，u；
+对可用性产生负面影响的元素：frame，frameset，noframes；
+* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+  可以利用这一特性让这些浏览器支持HTML5新标签，
+  浏览器支持新标签后，还需要添加标签默认的样式：
+* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
+&lt;!--[if lt IE 9]&gt;
+&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
+<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
+保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
+从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
+降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
+　
+</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
+<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
+<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
+最常见的应用是利用伪类清除浮动。
+//一种常见利用伪类清除浮动的代码
+.clearfix:after {
+    content:&quot;.&quot;; //这里利用到了content属性
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both; }
+.clearfix {
+    *zoom:1;
 }
-
-function getUserPermissions(){
-    return axios.get(&apos;/user/12345/permissions&apos;);
-}
-
-axios.all([getUerAccount(),getUserPermissions()])
-    .then(axios.spread(function(acc,pers){
-        //两个请求现在都完成
-    }));
-</code></pre><p>axios API</p>
-<pre><code>可以对axios进行一些设置来生成请求。axios(config)
-
-//发起 POST请求
-axios({
-    method:&apos;post&apos;,//方法
-    url:&apos;/user/12345&apos;,//地址
-    data:{//参数
-        firstName:&apos;Fred&apos;,
-        lastName:&apos;Flintstone&apos;
-    }
-});
-
-//通过请求获取远程图片
-axios({
-    method:&apos;get&apos;,
-    url:&apos;http://bit.ly/2mTM3Ny&apos;,
-    responseType:&apos;stream&apos;
-})
-    .then(function(response){
-        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
-    })
-axios(url[,config])
-
-//发起一个GET请求
-axios(&apos;/user/12345/);
-请求方法的重命名。
-
-为了方便，axios提供了所有请求方法的重命名支持
-axios.request(config)
-axios.get(url[,config])
-axios.delete(url[,config])
-axios.head(url[,config])
-axios.options(url[,config])
-axios.post(url[,data[,config]])
-axios.put(url[,data[,config]])
-axios.patch(url[,data[,config]])
-
-注意
-当时用重命名方法时url,method,以及data属性不需要在config中指定。
-
-并发 Concurrency
-有用的方法
-axios.all(iterable)
-axios.spread(callback)
-
-创建一个实例
-你可以使用自定义设置创建一个新的实例
-axios.create([config])
-var instance = axios.create({
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-    timeout:1000,
-    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
-});
-实例方法
-
-下面列出了一些实例方法。具体的设置将在实例设置中被合并。
-axios#request(config)
-axios#get(url[,config])
-axios#delete(url[,config])
-axios#head(url[,config])
-axios#post(url[,data[,config]])
-axios#put(url[,data[,config]])
-axios#patch(url[,data[,config]])
-
-Requese Config请求设置
-以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
-{
-    //`url`是服务器链接，用来请求
-    url:&apos;/user&apos;,
-
-    //`method`是发起请求时的请求方法
-    method:`get`,
-
-    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
-    //当axios使用相对地址时这个设置非常方便
-    //在其实例中的方法
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-
-    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
-    //这个只适用于`PUT`,`GET`,`PATCH`方法。
-    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
-        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
-    transformRequest:[function(data){
-        //依自己的需求对请求数据进行处理
-        return data;
-    }],
-
-    //`transformResponse`允许返回的数据传入then/catch之前进行处理
-    transformResponse:[function(data){
-        //依需要对数据进行处理
-        return data;
-    }],
-
-    //`headers`是自定义的要被发送的头信息
-    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
-
-    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
-    params:{
-        ID:12345
-    },
-
-    //`paramsSerializer`是一个可选的函数，是用来序列化参数
-    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
-    paramsSerializer: function(params){
-        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
-    },
-
-    //`data`是请求提需要设置的数据
-    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
-    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
-    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
-    //-仅浏览器：FormData,File,Blob
-    //-仅Node：Stream
-    data:{
-        firstName:&apos;fred&apos;
-    },
-    //`timeout`定义请求的时间，单位是毫秒。
-    //如果请求的时间超过这个设定时间，请求将会停止。
-    timeout:1000,
-
-    //`withCredentials`表明是否跨网站访问协议，
-    //应该使用证书
-    withCredentials:false //默认值
-
-    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
-    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
-    adapter:function(config){
-        /*...*/
-    },
-
-    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
-    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
-    auth:{
-        username:&apos;janedoe&apos;,
-        password:&apos;s00pers3cret&apos;
-    },
-
-    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
-    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
-    responsetype:&apos;json&apos;,
-
-    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
-    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
-
-    //`onUploadProgress`允许处理上传过程的事件
-    onUploadProgress: function(progressEvent){
-        //本地过程事件发生时想做的事
-    },
-
-    //`onDownloadProgress`允许处理下载过程的事件
-    onDownloadProgress: function(progressEvent){
-        //下载过程中想做的事
-    },
-
-    //`maxContentLength` 定义http返回内容的最大容量
-    maxContentLength: 2000,
-
-    //`validateStatus` 定义promise的resolve和reject。
-    //http返回状态码，如果`validateStatus`返回true
-        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
-    validateStatus: function(status){
-        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
-    },
-
-    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
-        定义一个自定义的代理，在nodejs中。
-    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
-    httpAgent: new http.Agent({keepAlive:treu}),
-    httpsAgent: new https.Agent({keepAlive:true}),
-
-    //`proxy`定义服务器的主机名字和端口号。
-    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
-    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
-    proxy:{
-        host:127.0.0.1,
-        port:9000,
-        auth:{
-            username:&apos;cdd&apos;,
-            password:&apos;123456&apos;
-        }
-    },
-
-    //`cancelTaken` 定义一个取消，能够用来取消请求
-    //（查看 下面的Cancellation 的详细部分）
-    cancelToken: new CancelToken(function(cancel){
-    })
-}
-
-返回响应概要 Response Schema
-一个请求的返回包含以下信息
-{
-    //`data`是服务器的提供的回复（相对于请求）
-    data{},
-
-    //`status`是服务器返回的http状态码
-    status:200,
-
-
-    //`statusText`是服务器返回的http状态信息
-    statusText: &apos;ok&apos;,
-
-    //`headers`是服务器返回中携带的headers
-    headers:{},
-
-    //`config`是对axios进行的设置，目的是为了请求（request）
-    config:{}
-}
-
-使用then，你会接受打下面的信息
-axios.get(&apos;/user/12345&apos;)
-    .then(function(response){
-        console.log(response.data);
-        console.log(response.status);
-        console.log(response.statusText);
-        console.log(response.headers);
-        console.log(response.config);
-    });
-使用catch时，或者传入一个reject callback作为then的第二个参数，
-那么返回的错误信息将能够被使用。
-</code></pre><p>默认设置（Config Default)</p>
-<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
-全局默认设置 Global axios defaults
-axios.defaults.baseURL = &apos;https://api.example.com&apos;;
-axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
-实例中自定义默认值 Custom instance default
-//当创建一个实例时进行默认设置
-var instance = axios.create({
-    baseURL:&apos;https://api.example.com&apos;
-});
-
-//在实例创建之后改变默认值
-instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-设置优先级 Config order of precedence
-设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
-    其次是defaults实例属性的设置，最后是请求中config参数的设置。
-    越往后面的等级越高，会覆盖前面的设置。
-看下面这个例子：
-
-//使用默认库的设置创建一个实例，
-//这个实例中，使用的是默认库的timeout设置，默认值是0。
-var instance = axios.create();
-
-//覆盖默认库中timeout的默认值
-//此时，所有的请求的timeout时间是2.5秒
-instance.defaults.timeout = 2500;
-
-//覆盖该次请求中timeout的值，这个值设置的时间更长一些
-instance.get(&apos;/longRequest&apos;,{
-    timeout:5000
-});
-</code></pre><p>拦截器 interceptors</p>
-<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
-//添加一个请求拦截器
-axios.interceptors.request.use(function(config){
-    //在请求发送之前做一些事
-    return config;
-},function(error){
-    //当出现请求错误是做一些事
-    return Promise.reject(error);
-});
-
-//添加一个返回拦截器
-axios.interceptors.response.use(function(response){
-    //对返回的数据进行一些处理
-    return response;
-},function(error){
-    //对返回的错误进行一些处理
-    return Promise.reject(error);
-});
-
-如果你需要在稍后移除拦截器,你可以
-var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
-axios.interceptors.rquest.eject(myInterceptor);
-
-你可以在一个axios实例中使用拦截器
-var instance = axios.create();
-instance.interceptors.request.use(function(){/*...*/});
-</code></pre><p>错误处理 Handling Errors</p>
-<pre><code>axios.get(&apos;user/12345&apos;)
-    .catch(function(error){
-        if(error.response){
-            //存在请求，但是服务器的返回一个状态码
-            //他们都在2xx之外
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-        }else{
-            //一些错误是在设置请求时触发的
-            console.log(&apos;Error&apos;,error.message);
-        }
-        console.log(error.config);
-    });
-
-你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
-axios.get(&apos;user/12345&apos;,{
-    validateStatus:function(status){
-        return status &lt; 500;//当返回码小于等于500时视为错误
-    }
-});
-</code></pre><p>取消 Cancellation</p>
-<pre><code>你可以使用cancel token取消一个请求
-axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
-
-你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
-var CancelToken = axios.CancelToken;
-var source = CancelToken.source();
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken:source.toke
-}).catch(function(thrown){
-    if(axiso.isCancel(thrown)){
-        console.log(&apos;Rquest canceled&apos;, thrown.message);
-    }else{
-        //handle error
-    }
-});
-
-//取消请求(信息参数设可设置的)
-source.cancel(&quot;操作被用户取消&quot;);
-你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
-var CancelToken = axios.CancelToken;
-var cancel;
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken: new CancelToken(function executor(c){
-        //这个executor 函数接受一个cancel function作为参数
-        cancel = c;
-    })
-});
-
-//取消请求
-cancel();
-注意：你可以使用同一个cancel token取消多个请求。
-使用 application/x-www-form-urlencoded 格式化
-默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
-你可以使用一下的设置。
-</code></pre><p>浏览器 Browser</p>
-<pre><code>在浏览器中你可以如下使用URLSearchParams API:
-var params = new URLSearchParams();
-params.append(&apos;param1&apos;,&apos;value1&apos;);
-params.append(&apos;param2&apos;,&apos;value2&apos;);
-axios.post(&apos;/foo&apos;,params);
-注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
-（poly fill）可用（确保垫片在浏览器全局环境中）
-
-其他方法：你可以使用qs库来格式化数据。
-var qs = require(&apos;qs&apos;);
-axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
-Node.js
-
-在nodejs中，你可以如下使用querystring:
-var querystring = require(&apos;querystring&apos;);
-axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
-你同样可以使用qs库。
-promises
-axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
-
-TypeScript
-axios 包含TypeScript定义
-
-import axios from &apos;axios&apos;
-axios.get(&apos;/user?ID=12345&apos;)
+after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
+再利用clear:both清除浮动。
+</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
+<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
+&lt;audio controls&gt;
+  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+   Your browser does&apos;nt support audio embedding feature.
+&lt;/audio&gt;
+</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
+<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
+&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
+  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
+   Your browser does&apos;nt support video embedding feature.
+&lt;/video&gt;
+</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
+<pre><code>Datalist   datetime   output   keygen  date  month  week
+time  number   range   emailurl
+</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
+<pre><code>sessionStorage和localStorage的存储空间更大；
+sessionStorage和localStorage有更多丰富易用的接口；
+sessionStorage和localStorage各自独立的存储空间；
+</code></pre><p>30、    HTML5的离线储存？</p>
+<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
+sessionStorage  数据在浏览器关闭后自动删除。
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;axios&lt;/p&gt;
-&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取
+      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transf
     
     </summary>
     
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -6059,75 +6207,6 @@ xml语法要求:
   </entry>
   
   <entry>
-    <title>git使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
-    <id>www.wangchengzou.cn/2017/07/22/git/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-14T13:27:47.886Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用方法</p>
-<pre><code>git  config  --global   user.name   &quot;name&quot;
-git  config  --global   user.email   &quot;email@qq.com&quot;
-</code></pre><p>指令说明</p>
-<pre><code>git  status               查看工作区所有文件状态
-git  add  1.jpg          把指定文件添加到暂存区
-git  add  *.jpg          把指定后缀名的文件添加到暂存区
-git  add  *              把所有文件添加到暂存区
-git  add  .              把所有文件添加到暂存区
-git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
-git  log                 查看仓库中所有的提交记录
-
-git  reset  --hard  版本号     工作区回退到指定的版本
-git  log       查看当前已经生效的所有版本号
-git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
-</code></pre><p>远程仓库相关</p>
-<pre><code>git  clone  远程仓库的地址
-git  clone  git@github.com:jquery/jquery.git
-git  clone  https://github.com/jquery/jquery.git
-</code></pre><p>创建关联使用方法</p>
-<pre><code>git  init           本地创建一个空白仓库
-git  remote       查看当前仓库关联到哪些远程仓库
-git  remote  add  关联仓库名  远程仓库的地址
-git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
-git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
-git  commit   -m   &quot;说明信息&quot;
-git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
-
-git subtree push --prefix=dist origin gh-pages  建立分支结构
-</code></pre><p>关于分支的使用方法</p>
-<pre><code>1，将远程仓库克隆到本地：
-    git clone https://github.com/**.git(项目克隆地址)
-2，生成分支gh-pages并切换到此分支
-    cd flexSupplement （进入到你克隆仓库的本地文件夹）
-    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
-3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
-    再将根目录下dist文件夹里面的内容复制到克隆文件中。
-    依次执行以下命令：
-    git add . （将本地所有文件加到仓库里）
-    git commit -m “message” （设置提交信息）
-    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
-    git push -u origin gh-pages （push文件到仓库中）
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用方法&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
-git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
-&lt;/
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
-    
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
     <title>hexo使用基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
     <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
@@ -6208,9 +6287,9 @@ $ hexo init
       <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
-    
       <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
+    
+      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
     
   </entry>
   
