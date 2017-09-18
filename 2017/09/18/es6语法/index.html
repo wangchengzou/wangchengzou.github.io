@@ -1,0 +1,1571 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>ES6 语法 | 千帆渡</title>
+    <meta name="author" content="汪成邹">
+    
+    <meta name="description" content="前端有我，我会前端">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="ES6 语法"/>
+    <meta property="og:site_name" content="~~博客园~~"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="~~博客园~~" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">~~博客园~~</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://wx3.sinaimg.cn/mw690/006JXC2kgy1fhtihebefjj31i0200e81.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">汪成邹</p>
+                        <p class="desc">Web前端/H5/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/学习笔记/">
+                    学习笔记 <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试题目/">
+                    面试题目 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/算法和函数/">
+                    算法和函数 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>ES6 语法</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-09-18T12:48:26.000Z"><a href="/2017/09/18/es6语法/">2017-09-18</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/javaScript/" class="chip pink lighten-1">javaScript</a>
+        
+            <a href="/tags/ES6/" class="chip pink lighten-1">ES6</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>ES6语法</p>
+<p>1、let_const</p>
+<pre><code>块级作用域，和常量声明
+ function text(){
+    for(let i=1;i&lt;3;i++){
+        console.log(i)
+    }
+}
+function last(){
+    const PI=3.1415926;
+    const k={
+        a:1
+    }
+    k.b=3;
+    console.log(PI,k)
+}
+
+text();
+last();
+</code></pre><p> 2、解构赋值</p>
+<pre><code>//  { ... }这是一个块作用域的方法
+{
+    let a,b,rest;
+    [a,b]=[1,2];
+    console.log(a,b);//2 1
+}
+{
+    let a,b,rest;
+    [a,b,c=3]=[1,2];
+    console.log(a,b,c);//1 2 3
+}
+{
+    let a,b,rest;
+    [a,b,...rest]=[1,2,3,4,5,6]
+    console.log(a,b,rest)  //1 2 [3 4 5 6]
+}
+{
+    let a,b;
+    ({a,b}={a:1,b:2})
+    console.log(a,b) //1 2
+}
+//变量交换
+{
+    let a=1;
+    let b=2;
+    [a,b]=[b,a];
+    console.log(a,b) //2 1
+}
+{
+    function f(){
+        return [1,2]
+    }
+    let a,b;
+    [a,b]=f();
+    console.log(a,b) //1 2
+}
+//选择性接收数据
+{
+    function f(){
+        return [1,2,3,4,5]
+    }
+    let a,b,c;
+    [a,,,b]=f();
+    console.log(a,b) //1 4
+}
+//不确定元素时使用方法
+{
+    function f(){
+        return [1,2,3,4,5]
+    }
+    let a,b,c;
+    [a,...b]=f();
+    console.log(a,b) //1 [2 3 4 5]
+}
+
+//对象解构
+{
+    let o={p:42,q:true}
+    let {p,q}=o;
+    console.log(p,q)  //42 true
+}
+{
+    let {a=10,b=5}={a:3}
+    console.log(a,b)  //3 5
+}
+//json数据格式的处理,嵌套的使用方法
+{
+    let metaData={
+        title:&apos;abc&apos;,
+        test:[{
+            title:&apos;text&apos;,
+            desc:&apos;description&apos;
+        }]
+    }
+    let {title:estitle,test:[{title:cntitle}]}=metaData;
+    console.log(estitle,cntitle)  //abc text
+}
+</code></pre><p>3、正则扩展</p>
+<pre><code>{
+    // #构造函数#
+    let regex = new RegExp(&apos;xyz&apos;, &apos;i&apos;);
+    //第一个参数是字符串，第二个是修饰符
+    let regex2 = new RegExp(/xyz/i);
+    //第一个参数是正则表达式，不接受第二个参数，否则会报错
+    console.log(regex.test(&apos;xyz123&apos;), regex2.test(&apos;xyz123&apos;));//true true
+    console.log(regex.test(&apos;xyZ123&apos;), regex2.test(&apos;xyZ123&apos;));//true true
+
+    let regex3 = new RegExp(/abc/ig, &apos;i&apos;);//i
+    console.log(regex3.flags); //原有正则对象的修饰符是ig，它会被第二个参数i覆盖
+
+}
+
+// 字符串对象的4个使用正则表达式的方法：
+    match(),replace(),search(),split()
+    这四个方法全部调用RegExp的实例的方法。
+
+{
+    let regex = new RegExp(&apos;xyz&apos;, &apos;ig&apos;);
+    console.log(regex.test(&apos;xyz0XYZ1xyz2&apos;), regex.exec(&apos;xyz0XYZ1xyz2&apos;));
+}   //true [&quot;XYZ&quot;, index: 4, input: &quot;xyz0XYZ1xyz2&quot;]
+
+{
+    // y修饰符
+    let s = &apos;bbbb_bbb_bb_b&apos;;
+    var a1 = /b+/g;
+    var a2 = /b+/y;
+
+    console.log(a1.exec(s), a2.exec(s)); // [&quot;bbbb&quot;],[&quot;bbbb&quot;]
+    console.log(a1.exec(s), a2.exec(s)); // [&quot;bbb&quot;],null
+
+    console.log(a1.sticky, a2.sticky); //false true 表示是否开启了粘连模式
+}
+
+{
+    console.log(&apos;u修饰符&apos;,/^\uD83D/.test(&apos;\uD83D\uDC2A&apos;)); // true
+    console.log(&apos;u修饰符&apos;,/^\uD83D/u.test(&apos;\uD83D\uDC2A&apos;)); // false
+    // 大括号表示Unicode字符，只有加上u才能识别
+    console.log(/\u{61}/.test(&apos;a&apos;)); // false
+    console.log(/\u{61}/u.test(&apos;a&apos;)); // true
+    console.log(/\u{20BB7}/u.test(&apos;𠮷&apos;)); // true
+    // 点（.）字符不能识别码点大于0xFFFF的Unicode字符，必须加上u修饰符。
+    let s = &apos;𠮷&apos;;
+    console.log(&apos;大于0xFFFF的Unicode字符&apos;,/^.$/.test(s)); // false
+    console.log(&apos;使用u字符&apos;,/^.$/u.test(s)); // true
+
+    // 使用u修饰符后，所有量词都会正确识别大于码点大于0xFFFF的Unicode字符。
+    console.log(&apos;量词&apos;,/a{2}/.test(&apos;aa&apos;)); // true
+    console.log(&apos;量词&apos;,/a{2}/u.test(&apos;aa&apos;)); // true
+    console.log(&apos;量词&apos;,/𠮷{2}/.test(&apos;𠮷𠮷&apos;)); // false
+    console.log(&apos;量词&apos;,/𠮷{2}/u.test(&apos;𠮷𠮷&apos;)); // true
+}
+
+{
+    // #正则表达式中，点（.）是一个特殊字符，代表任意的单个字符，
+    但是行终止符（line terminator character）除外
+    // U+000A 换行符（\n）
+    // U+000D 回车符（\r）
+    // U+2028 行分隔符（line separator）
+    // U+2029 段分隔符（paragraph separator）
+    // 只是一个提案目前还不支持
+    // let reg=/test.go/s;
+    // console.log(reg.test(&apos;test\ngo&apos;));
+    // console.log(reg.test(&apos;test\ngo&apos;));
+    console.log(&apos;s变通方法&apos;,/foo.bar/.test(&apos;foo\nbar&apos;));//false
+    console.log(&apos;s变通方法&apos;,/foo[^]bar/.test(&apos;foo\nbar&apos;));//true
+}
+</code></pre><p>4、字符串的扩展</p>
+<pre><code>{
+  console.log(&apos;a&apos;,`\u0061`);//a
+  console.log(&apos;s&apos;,`\u20BB7`);//超出范围--乱码
+  console.log(&apos;s&apos;,`\u{20BB7}`);//吉
+}
+
+{
+  let s=&apos;𠮷&apos;;
+  console.log(&apos;length&apos;,s.length);//2
+  console.log(&apos;0&apos;,s.charAt(0));//乱码
+  console.log(&apos;1&apos;,s.charAt(1));//乱码
+  console.log(&apos;at0&apos;,s.charCodeAt(0));//55367
+  console.log(&apos;at1&apos;,s.charCodeAt(1));//57271
+
+  let s1=&apos;𠮷a&apos;;
+  console.log(&apos;length&apos;,s1.length);//3
+  console.log(&apos;code0&apos;,s1.codePointAt(0));//134071
+  console.log(&apos;code0&apos;,s1.codePointAt(0).toString(16));//20bb7
+  console.log(&apos;code1&apos;,s1.codePointAt(1));//57271
+  console.log(&apos;code2&apos;,s1.codePointAt(2));//97
+}
+
+{
+  console.log(String.fromCharCode(&quot;0x20bb7&quot;));//乱码
+  console.log(String.fromCodePoint(&quot;0x20bb7&quot;));//吉
+}
+
+{
+  let str=&apos;\u{20bb7}abc&apos;;
+  for(let i=0;i&lt;str.length;i++){
+    console.log(&apos;es5&apos;,str[i]);//乱码abc
+  }
+  for(let code of str){
+    console.log(&apos;es6&apos;,code);// 吉abc
+  }
+}
+
+{
+  let str=&quot;string&quot;;
+  console.log(&apos;includes&apos;,str.includes(&quot;c&quot;));//包含在里面 false
+  console.log(&apos;start&apos;,str.startsWith(&apos;str&apos;));//以它开头 true
+  console.log(&apos;end&apos;,str.endsWith(&apos;ng&apos;));//以它结尾 true
+}
+
+{
+  let str=&quot;abc&quot;;
+  console.log(str.repeat(2));// 字符复制 abcabc
+}
+
+{
+  let name=&quot;list&quot;;
+  let info=&quot;hello world&quot;;
+  let m=`i am ${name},${info}`;
+  console.log(m);//i am list ,hello world
+}
+
+{
+  console.log(&apos;1&apos;.padStart(2,&apos;0&apos;));//向前补全 01
+  console.log(&apos;1&apos;.padEnd(2,&apos;0&apos;));//向后补全 10
+}
+
+{
+  let user={
+    name:&apos;list&apos;,
+    info:&apos;hello world&apos;
+  };
+  console.log(abc`i am ${user.name},${user.info}`);//[&quot;list&quot; &quot;hello world&quot;]
+  function abc(s,v1,v2){
+    console.log(s,v1,v2);
+    return s+v1+v2
+  }
+}//i am ,,,listhello world
+
+{
+  console.log(String.raw`Hi\n${1+2}`);//转义字符失效 Hi\n3
+  console.log(`Hi\n${1+2}`); //hi  3
+}
+</code></pre><p>5、数值扩展</p>
+<pre><code>{
+    console.log(0b0101010111010)//二进制表示
+    console.log(0o2746)//八进制表示
+}
+{
+    console.log(Number.isFinite(15))//是不是有尽值
+    console.log(Number.isFinite(NaN))
+    console.log(Number.isFinite(1/0))
+}
+{
+    console.log(Number.isNaN(NaN));//判断是不是数
+}
+{
+    console.log(Number.isInteger(25))//判断是不是整数
+    console.log(Number.isInteger(25.0))//判断是不是整数
+    console.log(Number.isInteger(25.2))//判断是不是整数
+    console.log(Number.isInteger(&apos;21432&apos;))//判断是不是整数
+}
+{
+    console.log(Number.MAX_SAFE_INTEGER)
+    console.log(Number.MIN_SAFE_INTEGER)//表示数值的上下限
+    console.log(Number.isSafeInteger(67))//表示数值在不在这个范围内
+}
+{
+    console.log(4.1,Math.trunc(4.1))//4
+    console.log(4.9,Math.trunc(4.9))//4
+}
+{
+    console.log(Math.sign(-5))//-1
+    console.log(Math.sign(0))//0
+    console.log(Math.sign(5))//判断正负还是零 1
+}
+{
+    console.log(Math.cbrt(-1))//-1
+    console.log(Math.cbrt(8))//立方根 2
+}
+</code></pre><p>6、数组扩展</p>
+<pre><code>{
+  let arr = Array.of(3,4,7,9,11);
+  console.log(&apos;arr=&apos;,arr);
+
+  let empty=Array.of();
+  console.log(&apos;empty&apos;,empty);
+}
+
+{
+  let p=document.querySelectorAll(&apos;p&apos;);
+  let pArr=Array.from(p);
+  pArr.forEach(function(item){
+    console.log(item.textContent);
+  });
+
+  console.log(Array.from([1,3,5],function(item){return item*2}));
+}
+
+{
+  console.log(&apos;fill-7&apos;,[1,&apos;a&apos;,undefined].fill(7));
+  console.log(&apos;fill,pos&apos;,[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;].fill(7,1,3));
+}
+
+{
+  for(let index of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].keys()){
+    console.log(&apos;keys&apos;,index);
+  }
+  for(let value of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].values()){
+    console.log(&apos;values&apos;,value);
+  }
+  for(let [index,value] of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].entries()){
+    console.log(&apos;values&apos;,index,value);
+  }
+}
+
+{
+  console.log([1,2,3,4,5].copyWithin(0,3,4));
+}
+
+{
+  console.log([1,2,3,4,5,6].find(function(item){return item&gt;3}));
+  console.log([1,2,3,4,5,6].findIndex(function(item){return item&gt;3}));
+}
+
+{
+  console.log(&apos;number&apos;,[1,2,NaN].includes(1));
+  console.log(&apos;number&apos;,[1,2,NaN].includes(NaN));
+}
+</code></pre><p>7、函数扩展</p>
+<pre><code>{
+    function test(x,y=&apos;world&apos;){
+        console.log(x,y)
+    }
+    test(&apos;hello&apos;)
+    test(&apos;hello&apos;,&apos;wang&apos;)
+}//处理参数默认值
+
+{
+    let x=&apos;test&apos;;
+    function test1(x,y=x){
+        console.log(x,y)
+    }
+    test1(&apos;kill&apos;)
+    test1(x)
+    test1()
+}
+{
+    function test2(...arg){
+        for(let v of arg){
+            console.log(&apos;rest&apos;,v)
+        }
+    }
+    test2(1,2,3,4,5,6)
+}
+{
+    console.log(...[1,2,3,5])
+    console.log(&apos;a&apos;,...[1,2,3,5])
+}//数组离散
+{
+    let arrow=v=&gt;v+2;
+    console.log(arrow(3))
+    let arrow1=()=&gt;5;
+    console.log(arrow1())
+}
+{
+    function tail(x){
+        console.log(x)
+    }
+    function fx(x) {
+        return tail(x)
+    }
+    fx(123)
+}//尾调用
+</code></pre><p>8、对象扩展</p>
+<pre><code> {
+  let o=1;
+  let k=2;
+  let es5={
+      o:o,
+      k:k
+  };
+  let es6={
+      o,k
+  }
+  console.log(es5,es6)
+
+  let es5_method={
+      hello:function(){
+          console.log(&apos;hello&apos;)
+      }
+  };
+  let es6_method={
+      hello(){
+          console.log(&apos;hello&apos;)
+      }
+  }
+  console.log(es5_method.hello(),es6_method.hello())
+  }
+  {
+      //属性表达式
+      let a=&apos;b&apos;;
+      let es5_obj={
+          a:&apos;c&apos;
+      }
+      let es6_obj={
+          [a]:&apos;c&apos;
+      }
+      console.log(es5_obj,es6_obj)
+}
+  {
+      //新的API 是不是同一类型
+      console.log(Object.is(&apos;abc&apos;,&apos;abc&apos;),&apos;abc&apos;===&apos;abc&apos;)
+      console.log(Object.is([],[]),[]===[])
+
+      //拷北
+      console.log(Object.assign({a:&apos;a&apos;},{b:&apos;b&apos;}))
+      let test={k:123,o:456}
+      for(let [key,value] of Object .entries(test)){
+          console.log([key,value])
+      }
+  }
+</code></pre><p>9、symbol使用</p>
+<pre><code>{
+    let a1=Symbol();
+    let a2=Symbol();
+    console.log(a1===a2);
+
+    let a3=Symbol.for(&apos;a3&apos;)
+    let a4=Symbol.for(&apos;a3&apos;)
+    console.log(a3===a4)
+}
+{
+    let a1=Symbol.for(&apos;abc&apos;);
+    let obj={
+        [a1]:&apos;123&apos;,
+        &apos;abc&apos;:345,
+        &apos;c&apos;:678
+    }
+    console.log(obj);
+
+    for(let [key,value] of Object.entries(obj)){
+        console.log(key,value);
+    }//不能取到symbols定义的值
+    Object.getOwnPropertySymbols(obj).forEach(function(item){
+        console.log(obj[item])
+    });//能取到symbols的值
+    Reflect.ownKeys(obj).forEach(function (item){
+        console.log(item,obj[item])
+    })//能同时取到所有值
+}
+</code></pre><p>10、set和map的使用</p>
+<pre><code>{
+    //数据结构对比，增查改删
+    let map=new Map()
+    let array=[]
+    //添加
+    map.set(&apos;t&apos;,1)
+    array.push({t:1})
+    console.info(map,array)
+    //  查
+    let map_exist=map.has(&apos;t&apos;)
+    let array_exist=array.find(item=&gt;item.t)
+    console.info(map_exist,array_exist)
+    //改
+    map.set(&apos;t&apos;,2)
+    array.forEach(item=&gt;item.t?item.t=2:&apos;&apos;)
+    console.info(map_exist,array_exist)
+    //删除
+    map.delete(&apos;t&apos;)
+    let index=array.findIndex(item=&gt;item.t)
+    array.splice(index,1)
+}
+
+{
+     //SET对数据 的对比
+    let set=new Set()
+    let  array=[]
+    //增
+    set.add({t:1})
+    //查
+    set.has({t:1})
+    //改
+    set.forEach(item=&gt;item.t?item.t=2:&apos;&apos;)
+    //删
+    set.forEach(item=&gt;item.t?set.delete(item):&apos;&apos;)
+}
+{
+    //map set对Object对比
+    let item={t:1}
+    let map=new Map()
+    let set=new Set()
+    let obj={}
+    //增
+    map.set(&apos;t&apos;,1)
+    set.add(item)
+    obj[&apos;t&apos;]=1
+    //查
+    console.info({
+        a:map.has(&apos;t&apos;),
+        b:set.has(item),
+        c:&apos;t&apos; in obj
+    })
+    //改
+    map.set(&apos;t&apos;,2)
+    item.t=2
+    obj[&apos;t&apos;]=2
+    //删
+    map.delete(&apos;t&apos;)
+    set.delete(item)
+    delete obj[&apos;t&apos;]
+}
+</code></pre><p>11、数据结构使用</p>
+<pre><code>{
+    let list=new Set();
+    list.add(5);//添加
+    list.add(7);
+    console.log(list .size)//个数。
+}
+{
+    let arr=[1,2,3,4,5]
+    let list=new Set(arr)
+    console.log(list .size)
+}
+{
+    let list=new Set()
+    list.add(1)
+    list.add(2)
+    list.add(1)
+    console.log(list.size)
+
+    let arr=[1,2,3,4,5,6,3,4,34,5,]
+    let list1=new Set(arr);
+    console.log(list1)
+}//此方法可以去重
+{
+    let arr=[&apos;add&apos;,&apos;delete&apos;,&apos;clear&apos;,&apos;has&apos;]//使用方法
+    let list=new Set(arr);
+    console.log(list.has(&apos;add&apos;))//是否存在
+    console.log(list.delete(&apos;add&apos;))//删除一个
+    console.log(list.clear())//清空
+    console.log(list.add(&apos;add&apos;))//添加 一个
+}
+{
+    let arr=[&apos;add&apos;,&apos;delete&apos;,&apos;clear&apos;,&apos;has&apos;]
+    let list=new Set(arr)
+    for(let [key,value] of list.entries()){
+        console.log(key,value)
+    }
+}
+{
+    let weaklist=new WeakSet();
+    let arg={}
+    weaklist.add(arg)
+    console.log(weaklist)
+}//只支持对象数据
+{
+    let map=new Map()
+    let arr=[&apos;123&apos;]
+    map.set(arr,&apos;455&apos;)
+    console.log(map,map.get(arr))
+}
+{
+    let map=new Map([[&apos;a&apos;,&apos;123&apos;],[&apos;b&apos;,&apos;456&apos;]])
+    console.log(map,map.size)
+    console.log(map,map.delete(&apos;a&apos;))
+    console.log(map,map.clear())
+}
+{
+    let weakmap=new WeakMap()
+    let o={}
+    weakmap.set(o,123)
+    console.log(weakmap.get(o))
+}
+</code></pre><p>12、proxy和reflect的使用</p>
+<pre><code>{
+    let obj={
+        time:&apos;2017-09-11&apos;,
+        name:&apos;wang&apos;,
+        _r:123
+    }
+    let monitor=new Proxy(obj, {
+        //拦截对象属性的读取
+        get (target, key) {
+            return target[key].replace(&apos;2017&apos;, &apos;2018&apos;)
+        },
+        //拦对象设置属性
+        set (target, key, value) {
+            if (key === &apos;name&apos;) {
+                return target[key] = value;
+            } else {
+                return target[key]
+            }
+
+        },
+        has(target, key) {
+            if (key === &apos;name&apos;) {
+                return target[key]
+            } else {
+                return false;
+            }
+        },
+        deleteProperty(target, key) {
+            if (key.indexOf(&apos;_&apos;) &gt; -1) {
+                delete target[key]
+            } else {
+                return target[key]
+            }
+        },
+        //拦截object.keys,objoct.getownpropertysymbols.
+        ownKeys() {
+        }
+
+    })
+    console.log(monitor.time)
+    monitor.time=&apos;2019&apos;;
+    monitor.name=&apos;cheng&apos;
+    console.log(monitor,monitor.name)
+}
+{
+    let obj={
+        time:&apos;2017-09-11&apos;,
+        name:&apos;wang&apos;,
+        _r:123
+    }
+    console.log(Reflect.get(obj,&apos;time&apos;))
+    Reflect.set(obj,&apos;name&apos;,&apos;cheng&apos;)
+    Reflect.has(obj,&apos;name&apos;)
+}
+
+//数据验证
+{
+    function validator(target,validator){
+        return new Proxy(target,{
+            _validator:validator,
+            set(target,key ,value,proxy){
+                if(target.hasOwnProperty(key)){
+                    let va=this._validator[key];
+                    if(!!va(value)){
+                        return Reflect.set(target,key,value,proxy)
+                    }else{
+                        throw Error(`不能设置 ${key}到${value}`)
+                    }
+                }else{
+                    throw Error(`${key}不存在`)
+                }
+            }
+        })
+    }
+    const personValidators={
+        name(val){
+            return typeof val===&apos;string&apos;
+        },
+        age(val){
+            return typeof val===&apos;number&apos;&amp;&amp;val&gt;18
+        }
+    }
+    class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+            return validator(this,personValidators)
+        }
+    }
+    const person=new Person(&apos;wang&apos;,12)
+    console.log(person)
+    person.name=13;
+    console.log(person)
+}
+</code></pre><p>13、类和对象的使用</p>
+<pre><code>{
+    class Parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+    }
+
+    class child extends Parent{
+        constructor(name=&apos;child&apos;){
+            super(name);
+            this.type=&apos;child&apos;
+        }
+    }
+
+    let parent1=new Parent(&apos;cheng&apos;)
+    console.log(parent1)
+    console.log(new child())
+}
+{
+    class Parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+        get longname(){
+            return &apos;mk&apos;+this.name;
+        }
+        set longname(value){
+            this.name=value;
+        }
+    }
+
+    let parent1=new Parent()
+    console.log(parent1.longname)
+    parent1.longname=&apos;tsHell&apos;
+    console.log(parent1.longname)
+
+}
+{
+    class parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+        static tell(){
+            console.log(&apos;tell&apos;)
+        }
+    }
+    parent.tell()
+    parent.type=&apos;3454354&apos;
+}
+</code></pre><p>14、promise异步操作的使用</p>
+<pre><code>{
+  // 基本定义
+  let ajax=function(callback){
+    console.log(&apos;执行&apos;);
+    setTimeout(function () {
+      callback&amp;&amp;callback.call()
+    }, 1000);
+  };
+  ajax(function(){
+    console.log(&apos;timeout1&apos;);
+  })
+}
+
+{
+  let ajax=function(){
+    console.log(&apos;执行2&apos;);
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax().then(function(){
+    console.log(&apos;promise&apos;,&apos;timeout2&apos;);
+  })
+}
+
+{
+  let ajax=function(){
+    console.log(&apos;执行3&apos;);
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax()
+    .then(function(){
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 2000);
+    });
+  })
+    .then(function(){
+    console.log(&apos;timeout3&apos;);
+  })
+}
+
+{
+  let ajax=function(num){
+    console.log(&apos;执行4&apos;);
+    return new Promise(function(resolve,reject){
+      if(num&gt;5){
+        resolve()
+      }else{
+        throw new Error(&apos;出错了&apos;)
+      }
+    })
+  }
+
+  ajax(6).then(function(){
+    console.log(&apos;log&apos;,6);
+  }).catch(function(err){
+    console.log(&apos;catch&apos;,err);
+  });
+
+  ajax(3).then(function(){
+    console.log(&apos;log&apos;,3);
+  }).catch(function(err){
+    console.log(&apos;catch&apos;,err);
+  });
+}
+</code></pre><p>15、iterator的使用</p>
+<pre><code>{
+  let arr=[&apos;hello&apos;,&apos;world&apos;];
+  let map=arr[Symbol.iterator]();
+  console.log(map.next());
+  console.log(map.next());
+  console.log(map.next());
+}
+
+{
+  let obj={
+    start:[1,3,2],
+    end:[7,9,8],
+    [Symbol.iterator](){
+      let self=this;
+      let index=0;
+      let arr=self.start.concat(self.end);
+      let len=arr.length;
+      return {
+        next(){
+          if(index&lt;len){
+            return {
+              value:arr[index++],
+              done:false
+            }
+          }else{
+            return {
+              value:arr[index++],
+              done:true
+            }
+          }
+        }
+      }
+    }
+  }
+  for(let key of obj){
+    console.log(key);
+  }
+}
+
+{
+  let arr=[&apos;hello&apos;,&apos;world&apos;];
+  for(let value of arr){
+    console.log(&apos;value&apos;,value);
+  }
+}
+</code></pre><p>16、generator的使用</p>
+<pre><code>{
+  // genertaor基本定义
+  let tell=function* (){
+    yield &apos;a&apos;;
+    yield &apos;b&apos;;
+    return &apos;c&apos;
+  };
+
+  let k=tell();
+
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+}
+
+{
+  let obj={};
+  obj[Symbol.iterator]=function* (){
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+
+  for(let value of obj){
+    console.log(&apos;value&apos;,value);
+  }
+}
+
+{
+  let state=function* (){
+    while(1){
+      yield &apos;A&apos;;
+      yield &apos;B&apos;;
+      yield &apos;C&apos;;
+    }
+  }
+  let status=state();
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+}
+
+// {
+//   let state=async function (){
+//     while(1){
+//       await &apos;A&apos;;
+//       await &apos;B&apos;;
+//       await &apos;C&apos;;
+//     }
+//   }
+//   let status=state();
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+// }
+</code></pre><p>17、decorator的使用</p>
+<pre><code>{
+  let readonly=function(target,name,descriptor){
+    descriptor.writable=false;
+    return descriptor
+  };
+
+  class Test{
+    @readonly
+    time(){
+      return &apos;2017-03-11&apos;
+    }
+  }
+
+  let test=new Test();
+
+  // test.time=function(){
+  //   console.log(&apos;reset time&apos;);
+  // };
+
+  console.log(test.time());
+}
+
+
+{
+  let typename=function(target,name,descriptor){
+    target.myname=&apos;hello&apos;;
+  }
+
+  @typename
+  class Test{
+
+  }
+
+  console.log(&apos;类修饰符&apos;,Test.myname);
+  // 第三方库修饰器的js库：core-decorators; npm install core-decorators
+}
+</code></pre><p>18、模块化使用方法</p>
+<pre><code>// export let A=123;
+//
+// export function test(){
+//   console.log(&apos;test&apos;);
+// }
+//
+// export class Hello{
+//   test(){
+//     console.log(&apos;class&apos;);
+//   }
+// }
+
+let A=123;
+let test=function(){
+  console.log(&apos;test&apos;);
+}
+class Hello{
+  test(){
+    console.log(&apos;class&apos;);
+  }
+}
+
+export default {
+  A,
+  test,
+  Hello
+}
+</code></pre>
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/08/04/mock数据模拟/" rel="next" title="mock数据模拟">
+    下一篇：mock数据模拟
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/6175939680" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.qianfandu@163.com" target="_blank">网易邮箱</a>
+                
+                    <a class="social-link" href="https://github.com/wangchengzou" target="_blank">Github</a>
+                
+                    <a class="social-link" href="http://www.baidu.com" target="_blank">百度</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/wangchengzou">ChengZou Wang</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

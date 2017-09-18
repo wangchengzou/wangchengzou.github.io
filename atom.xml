@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.wangchengzou.cn/"/>
-  <updated>2017-08-04T03:00:58.315Z</updated>
+  <updated>2017-09-18T12:17:34.498Z</updated>
   <id>www.wangchengzou.cn/</id>
   
   <author>
@@ -14,6 +14,1006 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ES6 语法</title>
+    <link href="www.wangchengzou.cn/2017/09/18/es6%E8%AF%AD%E6%B3%95/"/>
+    <id>www.wangchengzou.cn/2017/09/18/es6语法/</id>
+    <published>2017-09-18T12:48:26.000Z</published>
+    <updated>2017-09-18T12:17:34.498Z</updated>
+    
+    <content type="html"><![CDATA[<p>ES6语法</p>
+<p>1、let_const</p>
+<pre><code>块级作用域，和常量声明
+ function text(){
+    for(let i=1;i&lt;3;i++){
+        console.log(i)
+    }
+}
+function last(){
+    const PI=3.1415926;
+    const k={
+        a:1
+    }
+    k.b=3;
+    console.log(PI,k)
+}
+
+text();
+last();
+</code></pre><p> 2、解构赋值</p>
+<pre><code>//  { ... }这是一个块作用域的方法
+{
+    let a,b,rest;
+    [a,b]=[1,2];
+    console.log(a,b);//2 1
+}
+{
+    let a,b,rest;
+    [a,b,c=3]=[1,2];
+    console.log(a,b,c);//1 2 3
+}
+{
+    let a,b,rest;
+    [a,b,...rest]=[1,2,3,4,5,6]
+    console.log(a,b,rest)  //1 2 [3 4 5 6]
+}
+{
+    let a,b;
+    ({a,b}={a:1,b:2})
+    console.log(a,b) //1 2
+}
+//变量交换
+{
+    let a=1;
+    let b=2;
+    [a,b]=[b,a];
+    console.log(a,b) //2 1
+}
+{
+    function f(){
+        return [1,2]
+    }
+    let a,b;
+    [a,b]=f();
+    console.log(a,b) //1 2
+}
+//选择性接收数据
+{
+    function f(){
+        return [1,2,3,4,5]
+    }
+    let a,b,c;
+    [a,,,b]=f();
+    console.log(a,b) //1 4
+}
+//不确定元素时使用方法
+{
+    function f(){
+        return [1,2,3,4,5]
+    }
+    let a,b,c;
+    [a,...b]=f();
+    console.log(a,b) //1 [2 3 4 5]
+}
+
+//对象解构
+{
+    let o={p:42,q:true}
+    let {p,q}=o;
+    console.log(p,q)  //42 true
+}
+{
+    let {a=10,b=5}={a:3}
+    console.log(a,b)  //3 5
+}
+//json数据格式的处理,嵌套的使用方法
+{
+    let metaData={
+        title:&apos;abc&apos;,
+        test:[{
+            title:&apos;text&apos;,
+            desc:&apos;description&apos;
+        }]
+    }
+    let {title:estitle,test:[{title:cntitle}]}=metaData;
+    console.log(estitle,cntitle)  //abc text
+}
+</code></pre><p>3、正则扩展</p>
+<pre><code>{
+    // #构造函数#
+    let regex = new RegExp(&apos;xyz&apos;, &apos;i&apos;);
+    //第一个参数是字符串，第二个是修饰符
+    let regex2 = new RegExp(/xyz/i);
+    //第一个参数是正则表达式，不接受第二个参数，否则会报错
+    console.log(regex.test(&apos;xyz123&apos;), regex2.test(&apos;xyz123&apos;));//true true
+    console.log(regex.test(&apos;xyZ123&apos;), regex2.test(&apos;xyZ123&apos;));//true true
+
+    let regex3 = new RegExp(/abc/ig, &apos;i&apos;);//i
+    console.log(regex3.flags); //原有正则对象的修饰符是ig，它会被第二个参数i覆盖
+
+}
+
+// 字符串对象的4个使用正则表达式的方法：
+    match(),replace(),search(),split()
+    这四个方法全部调用RegExp的实例的方法。
+
+{
+    let regex = new RegExp(&apos;xyz&apos;, &apos;ig&apos;);
+    console.log(regex.test(&apos;xyz0XYZ1xyz2&apos;), regex.exec(&apos;xyz0XYZ1xyz2&apos;));
+}   //true [&quot;XYZ&quot;, index: 4, input: &quot;xyz0XYZ1xyz2&quot;]
+
+{
+    // y修饰符
+    let s = &apos;bbbb_bbb_bb_b&apos;;
+    var a1 = /b+/g;
+    var a2 = /b+/y;
+
+    console.log(a1.exec(s), a2.exec(s)); // [&quot;bbbb&quot;],[&quot;bbbb&quot;]
+    console.log(a1.exec(s), a2.exec(s)); // [&quot;bbb&quot;],null
+
+    console.log(a1.sticky, a2.sticky); //false true 表示是否开启了粘连模式
+}
+
+{
+    console.log(&apos;u修饰符&apos;,/^\uD83D/.test(&apos;\uD83D\uDC2A&apos;)); // true
+    console.log(&apos;u修饰符&apos;,/^\uD83D/u.test(&apos;\uD83D\uDC2A&apos;)); // false
+    // 大括号表示Unicode字符，只有加上u才能识别
+    console.log(/\u{61}/.test(&apos;a&apos;)); // false
+    console.log(/\u{61}/u.test(&apos;a&apos;)); // true
+    console.log(/\u{20BB7}/u.test(&apos;𠮷&apos;)); // true
+    // 点（.）字符不能识别码点大于0xFFFF的Unicode字符，必须加上u修饰符。
+    let s = &apos;𠮷&apos;;
+    console.log(&apos;大于0xFFFF的Unicode字符&apos;,/^.$/.test(s)); // false
+    console.log(&apos;使用u字符&apos;,/^.$/u.test(s)); // true
+
+    // 使用u修饰符后，所有量词都会正确识别大于码点大于0xFFFF的Unicode字符。
+    console.log(&apos;量词&apos;,/a{2}/.test(&apos;aa&apos;)); // true
+    console.log(&apos;量词&apos;,/a{2}/u.test(&apos;aa&apos;)); // true
+    console.log(&apos;量词&apos;,/𠮷{2}/.test(&apos;𠮷𠮷&apos;)); // false
+    console.log(&apos;量词&apos;,/𠮷{2}/u.test(&apos;𠮷𠮷&apos;)); // true
+}
+
+{
+    // #正则表达式中，点（.）是一个特殊字符，代表任意的单个字符，
+    但是行终止符（line terminator character）除外
+    // U+000A 换行符（\n）
+    // U+000D 回车符（\r）
+    // U+2028 行分隔符（line separator）
+    // U+2029 段分隔符（paragraph separator）
+    // 只是一个提案目前还不支持
+    // let reg=/test.go/s;
+    // console.log(reg.test(&apos;test\ngo&apos;));
+    // console.log(reg.test(&apos;test\ngo&apos;));
+    console.log(&apos;s变通方法&apos;,/foo.bar/.test(&apos;foo\nbar&apos;));//false
+    console.log(&apos;s变通方法&apos;,/foo[^]bar/.test(&apos;foo\nbar&apos;));//true
+}
+</code></pre><p>4、字符串的扩展</p>
+<pre><code>{
+  console.log(&apos;a&apos;,`\u0061`);//a
+  console.log(&apos;s&apos;,`\u20BB7`);//超出范围--乱码
+  console.log(&apos;s&apos;,`\u{20BB7}`);//吉
+}
+
+{
+  let s=&apos;𠮷&apos;;
+  console.log(&apos;length&apos;,s.length);//2
+  console.log(&apos;0&apos;,s.charAt(0));//乱码
+  console.log(&apos;1&apos;,s.charAt(1));//乱码
+  console.log(&apos;at0&apos;,s.charCodeAt(0));//55367
+  console.log(&apos;at1&apos;,s.charCodeAt(1));//57271
+
+  let s1=&apos;𠮷a&apos;;
+  console.log(&apos;length&apos;,s1.length);//3
+  console.log(&apos;code0&apos;,s1.codePointAt(0));//134071
+  console.log(&apos;code0&apos;,s1.codePointAt(0).toString(16));//20bb7
+  console.log(&apos;code1&apos;,s1.codePointAt(1));//57271
+  console.log(&apos;code2&apos;,s1.codePointAt(2));//97
+}
+
+{
+  console.log(String.fromCharCode(&quot;0x20bb7&quot;));//乱码
+  console.log(String.fromCodePoint(&quot;0x20bb7&quot;));//吉
+}
+
+{
+  let str=&apos;\u{20bb7}abc&apos;;
+  for(let i=0;i&lt;str.length;i++){
+    console.log(&apos;es5&apos;,str[i]);//乱码abc
+  }
+  for(let code of str){
+    console.log(&apos;es6&apos;,code);// 吉abc
+  }
+}
+
+{
+  let str=&quot;string&quot;;
+  console.log(&apos;includes&apos;,str.includes(&quot;c&quot;));//包含在里面 false
+  console.log(&apos;start&apos;,str.startsWith(&apos;str&apos;));//以它开头 true
+  console.log(&apos;end&apos;,str.endsWith(&apos;ng&apos;));//以它结尾 true
+}
+
+{
+  let str=&quot;abc&quot;;
+  console.log(str.repeat(2));// 字符复制 abcabc
+}
+
+{
+  let name=&quot;list&quot;;
+  let info=&quot;hello world&quot;;
+  let m=`i am ${name},${info}`;
+  console.log(m);//i am list ,hello world
+}
+
+{
+  console.log(&apos;1&apos;.padStart(2,&apos;0&apos;));//向前补全 01
+  console.log(&apos;1&apos;.padEnd(2,&apos;0&apos;));//向后补全 10
+}
+
+{
+  let user={
+    name:&apos;list&apos;,
+    info:&apos;hello world&apos;
+  };
+  console.log(abc`i am ${user.name},${user.info}`);//[&quot;list&quot; &quot;hello world&quot;]
+  function abc(s,v1,v2){
+    console.log(s,v1,v2);
+    return s+v1+v2
+  }
+}//i am ,,,listhello world
+
+{
+  console.log(String.raw`Hi\n${1+2}`);//转义字符失效 Hi\n3
+  console.log(`Hi\n${1+2}`); //hi  3
+}
+</code></pre><p>5、数值扩展</p>
+<pre><code>{
+    console.log(0b0101010111010)//二进制表示
+    console.log(0o2746)//八进制表示
+}
+{
+    console.log(Number.isFinite(15))//是不是有尽值
+    console.log(Number.isFinite(NaN))
+    console.log(Number.isFinite(1/0))
+}
+{
+    console.log(Number.isNaN(NaN));//判断是不是数
+}
+{
+    console.log(Number.isInteger(25))//判断是不是整数
+    console.log(Number.isInteger(25.0))//判断是不是整数
+    console.log(Number.isInteger(25.2))//判断是不是整数
+    console.log(Number.isInteger(&apos;21432&apos;))//判断是不是整数
+}
+{
+    console.log(Number.MAX_SAFE_INTEGER)
+    console.log(Number.MIN_SAFE_INTEGER)//表示数值的上下限
+    console.log(Number.isSafeInteger(67))//表示数值在不在这个范围内
+}
+{
+    console.log(4.1,Math.trunc(4.1))//4
+    console.log(4.9,Math.trunc(4.9))//4
+}
+{
+    console.log(Math.sign(-5))//-1
+    console.log(Math.sign(0))//0
+    console.log(Math.sign(5))//判断正负还是零 1
+}
+{
+    console.log(Math.cbrt(-1))//-1
+    console.log(Math.cbrt(8))//立方根 2
+}
+</code></pre><p>6、数组扩展</p>
+<pre><code>{
+  let arr = Array.of(3,4,7,9,11);
+  console.log(&apos;arr=&apos;,arr);
+
+  let empty=Array.of();
+  console.log(&apos;empty&apos;,empty);
+}
+
+{
+  let p=document.querySelectorAll(&apos;p&apos;);
+  let pArr=Array.from(p);
+  pArr.forEach(function(item){
+    console.log(item.textContent);
+  });
+
+  console.log(Array.from([1,3,5],function(item){return item*2}));
+}
+
+{
+  console.log(&apos;fill-7&apos;,[1,&apos;a&apos;,undefined].fill(7));
+  console.log(&apos;fill,pos&apos;,[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;].fill(7,1,3));
+}
+
+{
+  for(let index of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].keys()){
+    console.log(&apos;keys&apos;,index);
+  }
+  for(let value of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].values()){
+    console.log(&apos;values&apos;,value);
+  }
+  for(let [index,value] of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].entries()){
+    console.log(&apos;values&apos;,index,value);
+  }
+}
+
+{
+  console.log([1,2,3,4,5].copyWithin(0,3,4));
+}
+
+{
+  console.log([1,2,3,4,5,6].find(function(item){return item&gt;3}));
+  console.log([1,2,3,4,5,6].findIndex(function(item){return item&gt;3}));
+}
+
+{
+  console.log(&apos;number&apos;,[1,2,NaN].includes(1));
+  console.log(&apos;number&apos;,[1,2,NaN].includes(NaN));
+}
+</code></pre><p>7、函数扩展</p>
+<pre><code>{
+    function test(x,y=&apos;world&apos;){
+        console.log(x,y)
+    }
+    test(&apos;hello&apos;)
+    test(&apos;hello&apos;,&apos;wang&apos;)
+}//处理参数默认值
+
+{
+    let x=&apos;test&apos;;
+    function test1(x,y=x){
+        console.log(x,y)
+    }
+    test1(&apos;kill&apos;)
+    test1(x)
+    test1()
+}
+{
+    function test2(...arg){
+        for(let v of arg){
+            console.log(&apos;rest&apos;,v)
+        }
+    }
+    test2(1,2,3,4,5,6)
+}
+{
+    console.log(...[1,2,3,5])
+    console.log(&apos;a&apos;,...[1,2,3,5])
+}//数组离散
+{
+    let arrow=v=&gt;v+2;
+    console.log(arrow(3))
+    let arrow1=()=&gt;5;
+    console.log(arrow1())
+}
+{
+    function tail(x){
+        console.log(x)
+    }
+    function fx(x) {
+        return tail(x)
+    }
+    fx(123)
+}//尾调用
+</code></pre><p>8、对象扩展</p>
+<pre><code> {
+  let o=1;
+  let k=2;
+  let es5={
+      o:o,
+      k:k
+  };
+  let es6={
+      o,k
+  }
+  console.log(es5,es6)
+
+  let es5_method={
+      hello:function(){
+          console.log(&apos;hello&apos;)
+      }
+  };
+  let es6_method={
+      hello(){
+          console.log(&apos;hello&apos;)
+      }
+  }
+  console.log(es5_method.hello(),es6_method.hello())
+  }
+  {
+      //属性表达式
+      let a=&apos;b&apos;;
+      let es5_obj={
+          a:&apos;c&apos;
+      }
+      let es6_obj={
+          [a]:&apos;c&apos;
+      }
+      console.log(es5_obj,es6_obj)
+}
+  {
+      //新的API 是不是同一类型
+      console.log(Object.is(&apos;abc&apos;,&apos;abc&apos;),&apos;abc&apos;===&apos;abc&apos;)
+      console.log(Object.is([],[]),[]===[])
+
+      //拷北
+      console.log(Object.assign({a:&apos;a&apos;},{b:&apos;b&apos;}))
+      let test={k:123,o:456}
+      for(let [key,value] of Object .entries(test)){
+          console.log([key,value])
+      }
+  }
+</code></pre><p>9、symbol使用</p>
+<pre><code>{
+    let a1=Symbol();
+    let a2=Symbol();
+    console.log(a1===a2);
+
+    let a3=Symbol.for(&apos;a3&apos;)
+    let a4=Symbol.for(&apos;a3&apos;)
+    console.log(a3===a4)
+}
+{
+    let a1=Symbol.for(&apos;abc&apos;);
+    let obj={
+        [a1]:&apos;123&apos;,
+        &apos;abc&apos;:345,
+        &apos;c&apos;:678
+    }
+    console.log(obj);
+
+    for(let [key,value] of Object.entries(obj)){
+        console.log(key,value);
+    }//不能取到symbols定义的值
+    Object.getOwnPropertySymbols(obj).forEach(function(item){
+        console.log(obj[item])
+    });//能取到symbols的值
+    Reflect.ownKeys(obj).forEach(function (item){
+        console.log(item,obj[item])
+    })//能同时取到所有值
+}
+</code></pre><p>10、set和map的使用</p>
+<pre><code>{
+    //数据结构对比，增查改删
+    let map=new Map()
+    let array=[]
+    //添加
+    map.set(&apos;t&apos;,1)
+    array.push({t:1})
+    console.info(map,array)
+    //  查
+    let map_exist=map.has(&apos;t&apos;)
+    let array_exist=array.find(item=&gt;item.t)
+    console.info(map_exist,array_exist)
+    //改
+    map.set(&apos;t&apos;,2)
+    array.forEach(item=&gt;item.t?item.t=2:&apos;&apos;)
+    console.info(map_exist,array_exist)
+    //删除
+    map.delete(&apos;t&apos;)
+    let index=array.findIndex(item=&gt;item.t)
+    array.splice(index,1)
+}
+
+{
+     //SET对数据 的对比
+    let set=new Set()
+    let  array=[]
+    //增
+    set.add({t:1})
+    //查
+    set.has({t:1})
+    //改
+    set.forEach(item=&gt;item.t?item.t=2:&apos;&apos;)
+    //删
+    set.forEach(item=&gt;item.t?set.delete(item):&apos;&apos;)
+}
+{
+    //map set对Object对比
+    let item={t:1}
+    let map=new Map()
+    let set=new Set()
+    let obj={}
+    //增
+    map.set(&apos;t&apos;,1)
+    set.add(item)
+    obj[&apos;t&apos;]=1
+    //查
+    console.info({
+        a:map.has(&apos;t&apos;),
+        b:set.has(item),
+        c:&apos;t&apos; in obj
+    })
+    //改
+    map.set(&apos;t&apos;,2)
+    item.t=2
+    obj[&apos;t&apos;]=2
+    //删
+    map.delete(&apos;t&apos;)
+    set.delete(item)
+    delete obj[&apos;t&apos;]
+}
+</code></pre><p>11、数据结构使用</p>
+<pre><code>{
+    let list=new Set();
+    list.add(5);//添加
+    list.add(7);
+    console.log(list .size)//个数。
+}
+{
+    let arr=[1,2,3,4,5]
+    let list=new Set(arr)
+    console.log(list .size)
+}
+{
+    let list=new Set()
+    list.add(1)
+    list.add(2)
+    list.add(1)
+    console.log(list.size)
+
+    let arr=[1,2,3,4,5,6,3,4,34,5,]
+    let list1=new Set(arr);
+    console.log(list1)
+}//此方法可以去重
+{
+    let arr=[&apos;add&apos;,&apos;delete&apos;,&apos;clear&apos;,&apos;has&apos;]//使用方法
+    let list=new Set(arr);
+    console.log(list.has(&apos;add&apos;))//是否存在
+    console.log(list.delete(&apos;add&apos;))//删除一个
+    console.log(list.clear())//清空
+    console.log(list.add(&apos;add&apos;))//添加 一个
+}
+{
+    let arr=[&apos;add&apos;,&apos;delete&apos;,&apos;clear&apos;,&apos;has&apos;]
+    let list=new Set(arr)
+    for(let [key,value] of list.entries()){
+        console.log(key,value)
+    }
+}
+{
+    let weaklist=new WeakSet();
+    let arg={}
+    weaklist.add(arg)
+    console.log(weaklist)
+}//只支持对象数据
+{
+    let map=new Map()
+    let arr=[&apos;123&apos;]
+    map.set(arr,&apos;455&apos;)
+    console.log(map,map.get(arr))
+}
+{
+    let map=new Map([[&apos;a&apos;,&apos;123&apos;],[&apos;b&apos;,&apos;456&apos;]])
+    console.log(map,map.size)
+    console.log(map,map.delete(&apos;a&apos;))
+    console.log(map,map.clear())
+}
+{
+    let weakmap=new WeakMap()
+    let o={}
+    weakmap.set(o,123)
+    console.log(weakmap.get(o))
+}
+</code></pre><p>12、proxy和reflect的使用</p>
+<pre><code>{
+    let obj={
+        time:&apos;2017-09-11&apos;,
+        name:&apos;wang&apos;,
+        _r:123
+    }
+    let monitor=new Proxy(obj, {
+        //拦截对象属性的读取
+        get (target, key) {
+            return target[key].replace(&apos;2017&apos;, &apos;2018&apos;)
+        },
+        //拦对象设置属性
+        set (target, key, value) {
+            if (key === &apos;name&apos;) {
+                return target[key] = value;
+            } else {
+                return target[key]
+            }
+
+        },
+        has(target, key) {
+            if (key === &apos;name&apos;) {
+                return target[key]
+            } else {
+                return false;
+            }
+        },
+        deleteProperty(target, key) {
+            if (key.indexOf(&apos;_&apos;) &gt; -1) {
+                delete target[key]
+            } else {
+                return target[key]
+            }
+        },
+        //拦截object.keys,objoct.getownpropertysymbols.
+        ownKeys() {
+        }
+
+    })
+    console.log(monitor.time)
+    monitor.time=&apos;2019&apos;;
+    monitor.name=&apos;cheng&apos;
+    console.log(monitor,monitor.name)
+}
+{
+    let obj={
+        time:&apos;2017-09-11&apos;,
+        name:&apos;wang&apos;,
+        _r:123
+    }
+    console.log(Reflect.get(obj,&apos;time&apos;))
+    Reflect.set(obj,&apos;name&apos;,&apos;cheng&apos;)
+    Reflect.has(obj,&apos;name&apos;)
+}
+
+//数据验证
+{
+    function validator(target,validator){
+        return new Proxy(target,{
+            _validator:validator,
+            set(target,key ,value,proxy){
+                if(target.hasOwnProperty(key)){
+                    let va=this._validator[key];
+                    if(!!va(value)){
+                        return Reflect.set(target,key,value,proxy)
+                    }else{
+                        throw Error(`不能设置 ${key}到${value}`)
+                    }
+                }else{
+                    throw Error(`${key}不存在`)
+                }
+            }
+        })
+    }
+    const personValidators={
+        name(val){
+            return typeof val===&apos;string&apos;
+        },
+        age(val){
+            return typeof val===&apos;number&apos;&amp;&amp;val&gt;18
+        }
+    }
+    class Person{
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+            return validator(this,personValidators)
+        }
+    }
+    const person=new Person(&apos;wang&apos;,12)
+    console.log(person)
+    person.name=13;
+    console.log(person)
+}
+</code></pre><p>13、类和对象的使用</p>
+<pre><code>{
+    class Parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+    }
+
+    class child extends Parent{
+        constructor(name=&apos;child&apos;){
+            super(name);
+            this.type=&apos;child&apos;
+        }
+    }
+
+    let parent1=new Parent(&apos;cheng&apos;)
+    console.log(parent1)
+    console.log(new child())
+}
+{
+    class Parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+        get longname(){
+            return &apos;mk&apos;+this.name;
+        }
+        set longname(value){
+            this.name=value;
+        }
+    }
+
+    let parent1=new Parent()
+    console.log(parent1.longname)
+    parent1.longname=&apos;tsHell&apos;
+    console.log(parent1.longname)
+
+}
+{
+    class parent{
+        constructor(name=&apos;wang&apos;){
+            this.name=name;
+        }
+        static tell(){
+            console.log(&apos;tell&apos;)
+        }
+    }
+    parent.tell()
+    parent.type=&apos;3454354&apos;
+}
+</code></pre><p>14、promise异步操作的使用</p>
+<pre><code>{
+  // 基本定义
+  let ajax=function(callback){
+    console.log(&apos;执行&apos;);
+    setTimeout(function () {
+      callback&amp;&amp;callback.call()
+    }, 1000);
+  };
+  ajax(function(){
+    console.log(&apos;timeout1&apos;);
+  })
+}
+
+{
+  let ajax=function(){
+    console.log(&apos;执行2&apos;);
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax().then(function(){
+    console.log(&apos;promise&apos;,&apos;timeout2&apos;);
+  })
+}
+
+{
+  let ajax=function(){
+    console.log(&apos;执行3&apos;);
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 1000);
+    })
+  };
+
+  ajax()
+    .then(function(){
+    return new Promise(function(resolve,reject){
+      setTimeout(function () {
+        resolve()
+      }, 2000);
+    });
+  })
+    .then(function(){
+    console.log(&apos;timeout3&apos;);
+  })
+}
+
+{
+  let ajax=function(num){
+    console.log(&apos;执行4&apos;);
+    return new Promise(function(resolve,reject){
+      if(num&gt;5){
+        resolve()
+      }else{
+        throw new Error(&apos;出错了&apos;)
+      }
+    })
+  }
+
+  ajax(6).then(function(){
+    console.log(&apos;log&apos;,6);
+  }).catch(function(err){
+    console.log(&apos;catch&apos;,err);
+  });
+
+  ajax(3).then(function(){
+    console.log(&apos;log&apos;,3);
+  }).catch(function(err){
+    console.log(&apos;catch&apos;,err);
+  });
+}
+</code></pre><p>15、iterator的使用</p>
+<pre><code>{
+  let arr=[&apos;hello&apos;,&apos;world&apos;];
+  let map=arr[Symbol.iterator]();
+  console.log(map.next());
+  console.log(map.next());
+  console.log(map.next());
+}
+
+{
+  let obj={
+    start:[1,3,2],
+    end:[7,9,8],
+    [Symbol.iterator](){
+      let self=this;
+      let index=0;
+      let arr=self.start.concat(self.end);
+      let len=arr.length;
+      return {
+        next(){
+          if(index&lt;len){
+            return {
+              value:arr[index++],
+              done:false
+            }
+          }else{
+            return {
+              value:arr[index++],
+              done:true
+            }
+          }
+        }
+      }
+    }
+  }
+  for(let key of obj){
+    console.log(key);
+  }
+}
+
+{
+  let arr=[&apos;hello&apos;,&apos;world&apos;];
+  for(let value of arr){
+    console.log(&apos;value&apos;,value);
+  }
+}
+</code></pre><p>16、generator的使用</p>
+<pre><code>{
+  // genertaor基本定义
+  let tell=function* (){
+    yield &apos;a&apos;;
+    yield &apos;b&apos;;
+    return &apos;c&apos;
+  };
+
+  let k=tell();
+
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+  console.log(k.next());
+}
+
+{
+  let obj={};
+  obj[Symbol.iterator]=function* (){
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+
+  for(let value of obj){
+    console.log(&apos;value&apos;,value);
+  }
+}
+
+{
+  let state=function* (){
+    while(1){
+      yield &apos;A&apos;;
+      yield &apos;B&apos;;
+      yield &apos;C&apos;;
+    }
+  }
+  let status=state();
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+  console.log(status.next());
+}
+
+// {
+//   let state=async function (){
+//     while(1){
+//       await &apos;A&apos;;
+//       await &apos;B&apos;;
+//       await &apos;C&apos;;
+//     }
+//   }
+//   let status=state();
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+//   console.log(status.next());
+// }
+</code></pre><p>17、decorator的使用</p>
+<pre><code>{
+  let readonly=function(target,name,descriptor){
+    descriptor.writable=false;
+    return descriptor
+  };
+
+  class Test{
+    @readonly
+    time(){
+      return &apos;2017-03-11&apos;
+    }
+  }
+
+  let test=new Test();
+
+  // test.time=function(){
+  //   console.log(&apos;reset time&apos;);
+  // };
+
+  console.log(test.time());
+}
+
+
+{
+  let typename=function(target,name,descriptor){
+    target.myname=&apos;hello&apos;;
+  }
+
+  @typename
+  class Test{
+
+  }
+
+  console.log(&apos;类修饰符&apos;,Test.myname);
+  // 第三方库修饰器的js库：core-decorators; npm install core-decorators
+}
+</code></pre><p>18、模块化使用方法</p>
+<pre><code>// export let A=123;
+//
+// export function test(){
+//   console.log(&apos;test&apos;);
+// }
+//
+// export class Hello{
+//   test(){
+//     console.log(&apos;class&apos;);
+//   }
+// }
+
+let A=123;
+let test=function(){
+  console.log(&apos;test&apos;);
+}
+class Hello{
+  test(){
+    console.log(&apos;class&apos;);
+  }
+}
+
+export default {
+  A,
+  test,
+  Hello
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ES6语法&lt;/p&gt;
+&lt;p&gt;1、let_const&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;块级作用域，和常量声明
+ function text(){
+    for(let i=1;i&amp;lt;3;i++){
+        console.log(i)
+    }
+}
+functio
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+      <category term="ES6" scheme="www.wangchengzou.cn/tags/ES6/"/>
+    
+  </entry>
   
   <entry>
     <title>mock数据模拟</title>
@@ -1004,565 +2004,117 @@ when？ 实现UI层的渐进式的框架
   </entry>
   
   <entry>
-    <title>hexo使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
-    <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
+    <title>http状态码总表</title>
+    <link href="www.wangchengzou.cn/2017/07/22/http%E7%8A%B6%E6%80%81%E7%A0%81/"/>
+    <id>www.wangchengzou.cn/2017/07/22/http状态码/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:10:17.259Z</updated>
+    <updated>2017-07-27T14:13:07.866Z</updated>
     
-    <content type="html"><![CDATA[<p>安装</p>
-<pre><code>$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├── scaffolds
-    ├── source
-    |   ├── _drafts
-    |   └── _posts
-    └── themes
-</code></pre><p>配置</p>
-<pre><code>_config.yml 中修改大部份的配置
-title    网站标题
-subtitle    网站副标题
-description    网站描述
-author    您的名字
-language    网站使用的语言
-timezone    网站时区。Hexo 默认使用您电脑的时区。时区列表。
-    比如说：America/New_York, Japan, 和 UTC 。
-网站存放在子目录
-    例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/
-</code></pre><p>目录</p>
-<pre><code>source_dir    资源文件夹，这个文件夹用来存放内容。    source
-public_dir    公共文件夹，这个文件夹用于存放生成的站点文件。    public
-tag_dir    标签文件夹    tags
-archive_dir    归档文件夹    archives
-category_dir    分类文件夹    categories
-code_dir    Include code 文件夹    downloads/code
-i18n_dir    国际化（i18n）文件夹    :lang
-skip_render    跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。
-</code></pre><p>文章</p>
-<pre><code>new_post_name    新文章的文件名称    :title.md
-default_layout    预设布局    post
-auto_spacing    在中文和英文之间加入空格    false
-titlecase    把标题转换为 title case    false
-external_link    在新标签中打开链接    true
-filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0
-render_drafts    显示草稿    false
-post_asset_folder    启动 Asset 文件夹    false
-relative_link    把链接改为与根目录的相对位址    false
-future    显示未来的文章    true
-highlight    代码块的设置
-</code></pre><p>分类 &amp; 标签</p>
-<pre><code>default_category    默认分类    uncategorized
-category_map    分类别名
-tag_map    标签别名
-</code></pre><p>日期 / 时间格式</p>
-<pre><code>date_format    日期格式    YYYY-MM-DD
-time_format    时间格式    H:mm:ss
-</code></pre><p>分页</p>
-<pre><code>per_page    每页显示的文章量 (0 = 关闭分页功能)    10
-pagination_dir    分页目录    page
+    <content type="html"><![CDATA[<p>简单版</p>
+<pre><code>100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK         正常返回信息
+201  Created    请求成功并且服务器创建了新的资源
+202  Accepted   服务器已接受请求，但尚未处理
+301  Moved Permanently  请求的网页已永久移动到新位置。
+302 Found       临时性重定向。
+303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。
+304  Not Modified 自从上次请求后，请求的网页未修改过。
+400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+401 Unauthorized 请求未授权。
+403 Forbidden   禁止访问。
+404 Not Found   找不到如何与 URI 相匹配的资源。
+500 Internal Server Error  最常见的服务器端错误。
+503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。     ]
+</code></pre><p>完整版</p>
+<pre><code>1**(信息类)：表示接收到请求并且继续处理
+   100——客户必须继续发出请求
+   101——客户要求服务器根据请求转换HTTP协议版本
+2**(响应成功)：表示动作被成功接收、理解和接受
+   200——表明该请求被成功地完成，所请求的资源发送回客户端
+   201——提示知道新文件的URL
+   202——接受和处理、但处理未完成
+   203——返回信息不确定或不完整
+   204——请求收到，但返回信息为空
+   205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件
+   206——服务器已经完成了部分用户的GET请求
+3**(重定向类)：为了完成指定的动作，必须接受进一步处理
+   300——请求的资源可在多处得到
+   301——本网页被永久性转移到另一个URL
+   302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，
+       重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。
+   303——建议客户访问其他URL或访问方式
+   304——自从上次请求后，请求的网页未修改过，服务器返回此响应时，不会返回网页内容，
+       代表上次的文档已经被缓存了，还可以继续使用     305——请求的资源必须从服务器指定的地址得到
+   306——前一版本HTTP中使用的代码，现行版本中不再使用
+   307——申明请求的资源临时性删除
+4**(客户端错误类)：请求包含错误语法或不能正确执行
+   400——客户端请求有语法错误，不能被服务器所理解
+   401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
+   HTTP 401.1 - 未授权：登录失败     　　
+   HTTP 401.2 - 未授权：服务器配置问题导致登录失败     　　
+   HTTP 401.3 - ACL 禁止访问资源     　　
+   HTTP 401.4 - 未授权：授权被筛选器拒绝
+   HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败
+   402——保留有效ChargeTo头响应
+   403——禁止访问，服务器收到请求，但是拒绝提供服务
+   HTTP 403.1 禁止访问：禁止可执行访问     　　
+   HTTP 403.2 - 禁止访问：禁止读访问     　　
+   HTTP 403.3 - 禁止访问：禁止写访问     　　
+   HTTP 403.4 - 禁止访问：要求 SSL     　　
+   HTTP 403.5 - 禁止访问：要求 SSL 128     　　
+   HTTP 403.6 - 禁止访问：IP 地址被拒绝     　　
+   HTTP 403.7 - 禁止访问：要求客户证书     　　
+   HTTP 403.8 - 禁止访问：禁止站点访问     　　
+   HTTP 403.9 - 禁止访问：连接的用户过多     　　
+   HTTP 403.10 - 禁止访问：配置无效     　　
+   HTTP 403.11 - 禁止访问：密码更改     　　
+   HTTP 403.12 - 禁止访问：映射器拒绝访问     　　
+   HTTP 403.13 - 禁止访问：客户证书已被吊销     　　
+   HTTP 403.15 - 禁止访问：客户访问许可过多     　　
+   HTTP 403.16 - 禁止访问：客户证书不可信或者无效
+   HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效
+   404——一个404错误表明可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。
+   405——用户在Request-Line字段定义的方法不允许
+   406——根据用户发送的Accept拖，请求资源不可访问
+   407——类似401，用户必须首先在代理服务器上得到授权
+   408——客户端没有在用户指定的饿时间内完成请求
+   409——对当前资源状态，请求不能完成
+   410——服务器上不再有此资源且无进一步的参考地址
+   411——服务器拒绝用户定义的Content-Length属性请求
+   412——一个或多个请求头字段在当前请求中错误
+   413——请求的资源大于服务器允许的大小
+   414——请求的资源URL长于服务器允许的长度
+   415——请求资源不支持请求项目格式
+   416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段
+   417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。
+5**(服务端错误类)：服务器不能正确执行一个正确的请求
+    HTTP 500 - 服务器遇到错误，无法完成请求     　　
+    HTTP 500.100 - 内部服务器错误 - ASP 错误     　　
+    HTTP 500-11 服务器关闭     　　
+    HTTP 500-12 应用程序重新启动     　　
+    HTTP 500-13 - 服务器太忙     　　
+    HTTP 500-14 - 应用程序无效     　　
+    HTTP 500-15 - 不允许请求 global.asa     　　
+    Error 501 - 未实现
+    HTTP 502 - 网关错误
+    HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├
+      &lt;p&gt;简单版&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200  OK         正常返回信息
+201  Created    请求成功
     
     </summary>
     
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
-      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DOM_BOM笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/DOM_BOM%E7%AC%94%E8%AE%B0/"/>
-    <id>www.wangchengzou.cn/2017/07/22/DOM_BOM笔记/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:57:34.367Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><p>DOM: Document Object Model</p>
-<p> DOM是专门操作网页内容的API标准<br> 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题<br> 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商都遵照执行。<br> 结果，使用DOM API操作网页内容，几乎100%兼容所有浏览器<br> 何时: 只要操作网页内容，就用DOM API查找, 修改(内容,属性,样式), 添加, 删除.</p>
-</li>
-</ol>
-<p>DOM Tree:</p>
-<pre><code>什么是: 网页中一切内容在内存中都是以树形结构存储的
-       网页中每一项内容都是树上的一个节点对象
-       包括: 元素, 文字, 属性...
-       树只有一个根节点: document, 包含了所有网页内容
-Node: 每个节点都是一个node类型的对象
-      node是所有节点的父类型
-</code></pre><p>三大公共: nodeType  nodeName  nodeValue</p>
-<pre><code>nodeType: 节点的类型
-  值: document   9
-     element     1
-     attribute     2
-     text         3
-  何时: 只要判断节点类型，就用nodeType
-        因为不同类型的节点，能执行的操作是不一样的
-  问题: 不能进一步区分元素的名称
-  解决:
-nodeName: 节点的名称
-  值: document   #document
-     element    全大写的标签名
-     attribute    属性名
-     text        #text
-  何时: 只要细致鉴别元素的标签名时
-    强调: nodeName返回的是全大写的标签名
-nodeValue: 节点值:
-  值: document   null
-     element     null
-     attribute     属性值
-     text         文本内容
-</code></pre><p>2、查找: 4种:</p>
-<pre><code>  a. 不需要查找，可直接获得的元素
-        html   document.documentElement
-        head   document.head
-        body   document.body
-  b. 按节点间关系查找:
-节点树: 包含所有节点: 元素和文本
-  1. 父子: elem.parentNode  找elem的父节点
-        elem.childNodes  找elem的所有*直接*子节点
-            返回，所有直接子节点组成的集合(类数组)
-        elem.firstChild   找elem的第一个*直接*子节点
-        elem.lastChild   找elem的最后一个*直接*子节点
-  2. 兄弟: elem.previousSibling 找elem的前一个兄弟
-        elem.nextSibling   找elem的下一个兄弟
- 何时: 前提: 已经获得了一个节点
-      要找周围临近的节点时
- 问题: 连看不见的空字符，也算文本节点——干扰
- 解决:
-元素树: 仅包含元素节点的树结构
-       不是一棵新树，仅是节点树的子集
- 1. 父子: elem.parentElement  找elem的父元素
-        elem.children  找elem的所有*直接*子元素
-            返回，所有直接子元素组成的集合(类数组)
-        elem.firstElementChild   第一个*直接*子元素
-        elem.lastElementChild   最后一个*直接*子元素
- 2. 兄弟:
-   elem.previousElementSibling 找elem的前一个兄弟元素
-   elem.nextElementSibling   找elem的下一个兄弟元素
- 何时: 只要仅关心元素节点，不关心文本节点时
- 问题: IE9+
- 强调: childNodes和children返回的都是动态集合！
-   凡是遍历动态集合，都要先缓存元素个数，再遍历
-   for(var i=0,len= childNodes.length;i&lt;len;i++)
-     不会导致反复查找DOM树
-</code></pre><p>3、 按HTML查找:</p>
-<pre><code>    优: 范围可大可小,可设置条件
-a、按id查找: var elem=document.getElementById(&quot;id&quot;)
-  强调: 1. 只能在document对象上调用
-       2. 返回一个元素对象
-b、按标签名查找:
-    var elems=parent.getElementsByTagName(&quot;标签名&quot;);
-  强调: 1. 可在任意父元素上
-       2. 返回多个元素组成的集合
-       3. 不但查找直接子元素，还查找所有后代元素
-c、按name属性查找: 了解
-   专门找表单中有name属性的表单元素
-    var elems=document.getElementsByName(&quot;name&quot;)
-    强调: 1. 只能在document上调用
-         2. 返回多个元素组成的集合
-d、按class属性查找:
-    var elems=parent.getElementsByClassName(&quot;class&quot;)
-    强调: 1. 可在任意父元素上调用
-         2. 返回多个元素组成的集合
-         3. 不要求完整匹配，只要包含即可！
-缺: 每次只能按一个条件查找
-   如果条件复杂，就无法一句话获得想要的元素
-</code></pre><p>4、 按选择器查找:</p>
-<pre><code>a. 只找一个元素:
-  var elem=parent.querySelector(&quot;selector&quot;);
-b. 找多个元素
-  var elems=parent.querySelectorAll(&quot;selector&quot;);
-</code></pre><p>5、 总结:</p>
-<pre><code> A首次查找:
-    1. 如果条件简单: 按HTML查找: id, 标签, className
-    2. 如果条件复杂: 按选择器查找:
- B已经获得一个元素，找周围相邻: 按节点间关系
-鄙视: 按HTML查找 vs 按选择器查找
- 1.使用的难易程度: 当条件复杂时:
-    按选择器查找——简单, 按HTML查找——繁琐
- 2.返回值:
-    getElementsByTagName() 返回多个元素的*动态*集合
-      什么是动态集合: 不实际存储对象的属性值，每次访问，都要重新查找DOM树
-    querySelectorAll()  返回多个元素的*非动态*集合
-      什么是非动态集合: 实际存储对象的所有属性值，即使反复访问集合，也不会导致反复查找DOM树
- 3.单次效率:
-    按HTML查找——效率高!
-    按选择器查找——效率低
-</code></pre><p>3、 修改: (内容, 属性, 样式)</p>
-<pre><code>1. 修改:
-标准属性: 2种:
-  1. 核心DOM: 操作一切结构化文档的API(HTML，XML)
-    elem.attributes集合: 保存了当前元素的所有属性节点
-    获取属性值: elem.getAttribute(&quot;属性名&quot;)
-    修改属性值: elem.setAttribute(&quot;属性名&quot;,&quot;值&quot;)
-    判断是否包含属性: elem.hasAttribute(&quot;属性名&quot;)
-    移除属性: elem.removeAttribute(&quot;属性名&quot;)
-  2. HTML DOM: 对部分常用DOM API的简化版本
-     HTML DOM将标准属性都预定义在元素对象中
-    获取属性值: elem.属性名
-    修改属性值: elem.属性名=&quot;值&quot;;
-    判断是否包含属性: elem.属性名===&quot;&quot; 不包含
-    移除属性: elem.属性名=&quot;&quot;
-    特例: class属性和ES标准中的class重名
-          -&gt; DOM -&gt; className
-    自定义属性: 比如: data-toggle=&quot;dropdown&quot;
-      HTML DOM不能操作自定义属性
-      暂时只能用核心DOM操作:
-    三大状态: disabled  selected   checked
-      核心DOM无法操作三大状态属性
-      HTMLDOM: elem.disabled elem.selected  elem.checked
-            值都是bool类型true/false
-</code></pre><p>3.1、修改css样式:</p>
-<pre><code>1. 仅获取/修改内联样式:  elem.style.css属性名
-  问题1: css属性名有的带-
-  解决: 所有css属性名都要去横线变驼峰
-     比如: background-color: backgroundColor
-          list-style-type: listStyleType
-  问题2: 所有数值类型的属性值都是带单位的字符串
-  解决: 获取时: 都要去单位，转数值
-        修改时: 将单位拼回数值
-  问题3: 仅能获得内联样式, 无法获得样式表中的样式
-  解决: 计算后的样式: 最终应用到元素上的完整样式
-    何时: 只要希望获得元素完整的样式时
-    如何: 2步:
-      1. 获得完整样式对象style
-        var style=getComputedStyle(elem)
-      2. 获得style对象中的css属性
-        style.css属性名
-     强调: style对象中的样式都是只读
-结论: 1. 获取样式: getComputedStyle
-     2. 修改样式: elem.style.css属性名
-2. 运行时修改样式表中的样式:
-  Step1: 获得样式表对象:
-   var sheet=document.styleSheets[i]
-  Step2: 获得样式表对象中某个CSSRule(一个选择器{})
-   var rule=sheet.cssRules[i]
-  Step3: 修改rule.style.css属性名=值
-</code></pre><p>4、 添加和删除:</p>
-<pre><code>添加: 3步:
- Step1: 创建空元素:
-  var a=document.createElement(&quot;a&quot;);
-  &lt;a&gt;&lt;/a&gt;
- Step2: 设置关键属性:
-     a.href=&quot;http://tmooc.cn&quot;
-     a.innerHTML=&quot;go to tmooc&quot;;
-  &lt;a href=&quot;http://tmooc.cn&quot;&gt;go to tmooc&lt;/a&gt;
- Step3: 将元素添加到DOM树: 3种:
-   1. 末尾追加: parent.appendChild(child)
-   2. 中间插入: parent.insertBefore(child, oldChild)
-   3. 替换: parent.replaceChild(child, oldChild)
-</code></pre><p>优化: 尽量少的修改DOM树</p>
-<pre><code>原因: 页面加载过程:
-  html -&gt; DOM Tree(松树)
-           ↓
-        render Tree(圣诞树)-&gt; layout(计算绝对布局)-&gt;paint
-           ↑                 最耗时
-  css  -&gt; cssRules(装饰品)
-  每次修改DOM树，都会导致重新layout，耗时。
-如何: 2种:
- 1. 如果同时添加父元素和子元素时，应该先在内存将子元素都添加到父元素中，再将父元素一次性整体添加到DOM树
-    结果: 只触发一次layout
-</code></pre><p>1、 HTML DOM 常用对象: 对常用HTML元素操作的简化</p>
-<pre><code>Select: 代表页面上的一个select元素
- 属性: select.value 当前选中项的value
-                 没有value，就返回选中项的内容
-      select.options 保存select下所有option元素对象
-        相当于: select.getElementsByTagName(&quot;option&quot;)
-        select.options.length 保存select下option的个数
-        清空select下所有option: select.options.length=0;
-      select.length 等效于select.options.length
-        清空select下所有option: select.length=0;
-                               select.innerHTML=&quot;&quot;;
-      select.selectedIndex 当前选中项的下标
-  事件: onchange 当选中项发生改变时
-  方法: select.add(option) 向select中添加一个option
-         相当于: select.appendChild(option)
-         不支持文档片段
-       select.remove(i) 移除select中i位置的一个option
-Option: 代表页面上的一个option元素
-  创建: var opt=new Option(text,value);
-     创建一个option对象，同时设置opt的内容为text，设置opt的值为value
-     相当于: var opt=document.createElement(&quot;option&quot;);
-            opt.innerHTML=text;
-            opt.value=value;
-  属性: .text 代替.innerHTML
-       .index  表示当前option在select下的下标位置
-</code></pre><p>Table: 代表网页中一个table元素</p>
-<pre><code> 管着行分组：
-   添加行分组: var 行分组=table.createTHead|TBody|TFoot();
-       强调: 即创建，同时又将行分组添加到table
-   删除行分组: table.deleteTHead|TFoot()
-   获取行分组: table.tHead|tFoot
-              table.tBodies[i]
-行分组: THead TBody TFoot
-  管着行:
-   添加行: var tr=行分组.insertRow(i)
-       在行分组中i位置插入一个新行
-       强调: 中间插入行，原i位置的行向后顺移
-       固定套路: 1. 末尾追加一个新行: 行分组.insertRow()
-                2. 开头插入: 行分组.insertRow(0)
-   删除行: 行分组.deleteRow(i)
-       删除行分组中第i行
-       强调: i是当前行在行分组内的相对下标位置
-   获取行: 行分组.rows
-
-行: tr
-  管着td:
-    添加td: var td=tr.insertCell(i);
-        省略i表示右侧末尾追加
-        insertCell不支持添加th，只能添加td
-    删除td: tr.deleteCell(i);
-    获取td: tr.cells
-
-删除行:
- tr上都有一个属性: tr.rowIndex 行在整个表的绝对下标
- 问题：行分组，无法使用tr.rowIndex删除行。
- 解决: table.deleteRow(tr.rowIndex)
- 总结: 今后，删除行都用table.deleteRow(tr.rowIndex)
-</code></pre><p>form: 代表页面上一个表单元素</p>
-<pre><code> 获取: var form=document.forms[i/id]
- 属性: form.elements 保存了表单中所有表单元素的数组
-        包括: input   select   textarea  button
-      form.elements.length 获得表单中表单元素的个数
-      form.length =&gt; form.elements.length
- 方法: form.submit();  用于手动提交表单
- 事件: form.onsubmit  以任何方式提交表单之前自动触发
-          常用于在提交之前，验证所有表单元素的内容
-表单元素:
- 获取: var elem=form.elements[i/id/name]
-        简写: 如果表单元素有name属性: form.name
- 方法: elem.focus() 让elem获得焦点
-      elem.blur()  让elem失去焦点
-
-Image: 代表页面上一个img元素
-  创建: var img=new Image();
-</code></pre><p>DOM总结: 查找-&gt;绑定事件-&gt;查找-&gt;修改/添加/删除</p>
-<pre><code>查找: 4种:
-  1. 不需要查找可直接获得: html  head  body  form
-  2. 节点间关系: 节点树/元素树
-      鄙视: 递归遍历
-  3. 按HTML: 4种: ById, ByTagName, ByName, ByClassName
-  4. 按选择器: 2种:
-      只找一个: querySelector()
-      找多个: querySelectorAll()
-修改:
-  内容: .innerHTML  .textContent/.innerText  .value
-  属性:
-    1. 标准属性: 1. 核心DOM; 2. HTML DOM
-    2. 自定义属性: 核心DOM
-    3. 状态属性: HTML DOM
-  样式:
-    修改: elem.style.css属性=值
-    获取: var style=getComputedStyle(elem)
-         style.css属性 ——只读
-    可通过修改class属性批量应用修改多个css属性
-添加: 3步:
-   1. createElement,
-   2.设置关键属性,
-   3. appendChild/insertBefore/replaceChild
-  优化: 尽量少的操作DOM树
-  如何: 2种:
-   1. 同时添加父子元素: 先将子元素加入父元素，再将父元素整体添加到页面
-   2. 同时添加多个平级子元素: fragment
-删除: parent.removeChild(child)
-HTML DOM: Select/Option  Table/...  From/Element  Image
-过渡动画: 2步:
-  css中: 添加transition
-  js中: 修改css属性值
-   不支持transition: display  zIndex
-   支持: width  height  opacity   bottom/top/left/right ...
-</code></pre><p>2、BOM: Browser Object Model</p>
-<pre><code>什么是: 专门操作浏览器窗口的API
-比如: alert prompt confirm
-问题: 1. 没有标准——兼容性问题;
-     2. 不可定制
-window对象: 2个角色:
-  1. 代替ES中的Global充当全局作用域对象
-  2. 封装所有BOM和DOM的API
-
-打开超链接: 4种:
-  1. 在当前窗口打开，可后退
-    html: &lt;a href=&quot;url&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
-    js: /*window.*/open(&quot;url&quot;,&quot;_self&quot;)
-  2. 在当前窗口打开，不可后退
-    js: location.replace(&quot;url&quot;);
-       用新url代替history中当前url，结果: 无法后退
-  3. 在新窗口打开，可打开多个
-    html: &lt;a href=&quot;url&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
-    js: open(&quot;url&quot;,&quot;_blank&quot;)
-  4. 在新窗口打开，只能打开一个
-    html: &lt;a href=&quot;url&quot; target=&quot;自定义name属性值&quot;&gt;&lt;/a&gt;
-    js: open(&quot;url&quot;,&quot;自定义name属性值&quot;)
-    原理: 内存中每个窗口都有一个唯一的name属性来唯一标示一个窗口
-      浏览器规定，相同name属性的窗口只能打开一个
-    其实: html中的target属性就是在设置新窗口的name属性值。
-    如果target中使用自定义的窗口名，则只能打开一个
-    预定义:
-      _self: 默认使用当前窗口自己的name属性
-           结果，新窗口覆盖当前窗口
-      _blank: 意为不指定窗口名, 浏览器会随机生成不同的窗口名。
-           结果: 每次打开新窗口都随机生成不同的name
-                 结果: 可打开任意多个
-</code></pre><p>定时器: 2种:</p>
-<pre><code>1. 周期性定时器:
-  什么是: 让程序按照指定时间间隔，反复执行一项任务
-  何时: 只要让程序按照指定时间间隔，反复执行一项任务
-  如何: 3件事:
-    1. 任务函数: 让定时器反复调用的函数
-    2. 启动定时器:
-     var timer=setInterval(任务函数, 间隔的毫秒数)
-    3. 停止定时器: clearInterval(timer)
-        问题: timer中的序号会残留在timer变量中
-        解决: 停止定时器后，主动清空timer
-             timer=null
-  停止定时器: 2种:
-    1. 用户手动停止定时器: 用按钮调用clearInterval
-    2. 自动停止定时器: 在任务函数中:
-       1. 设定临界条件
-       2. 如果达到临界条件就自动调用clearInterval
-
-2. 一次性定时器:
- 什么是: 让程序先等待一段时间，再自动执行一次任务
-         执行一次后，定时器自动停止
- 何时: 只要先等待，再执行一次任务
- 如何: 三件事
-   1. 任务函数
-   2. 启动: var timer=setTimeout(任务函数, 等待的毫秒数)
-   3. 停止: clearTimeout(timer)
-</code></pre><p>鄙视: 定时器中的函数，只能在主程序所有程序执行后才能执行</p>
-<pre><code>for(var i=0;i&lt;3;i++){
-  setTimeout(function(){
-    console.log(i);
-  },0);
-}//结果: 3 3 3
-//alert(&quot;Hello&quot;) 如果不点确定，则永远不输出333
-</code></pre><p>window:<br> history，location，document，navigator，screen，event</p>
-<pre><code>history: 保存当前窗口打开后，成功访问过的历史记录的栈
-  history封装的非常严密
-  只能前进，后退，刷新: history.go(n)
-   前进: go(1)  后退:go(-1)  刷新:go(0)
-
-location: 专门保存当前窗口正在打开的url的对象
- 属性: location.href 保存了完整的url
-        在当前窗口打开: location.href=新url
-      location.protocol: 协议
-            .host: 主机名+端口号
-            .hostname: 主机名
-            .port: 端口号
-      location.pathname: 相对路径
-            .hash: 锚点地址#xxx
-            .search: 表单提交后地址栏中的查询字符串
-                   ?变量名=值&amp;变量名=值&amp;...
- 方法:
-   1. 替换history中当前url,实现进制后退:
-     location.replace(&quot;新url&quot;)
-   2. 在当前页面打开，可后退:
-     location.assign(&quot;新url&quot;)
-       =&gt; location.href=&quot;新url&quot;
-        =&gt; location=&quot;新url&quot;
-   3. 刷新页面:  location.reload(false/true);
-     鄙视: false/true的差别
-       浏览器本地是有缓存的
-         浏览器的缓存中会保存css，图片等静态资源
-       每次请求时，首先查看缓存中是否有想要文件
-         没有想要文件，或文件过期，才去服务器下载新文件
-       reload(false) 优先使用本地缓存的文件
-       reload(true) 强制去服务器下载新文件
-     查 浏览器缓存的原理！
-</code></pre><p>1、event</p>
-<pre><code>绑定事件: 2种:
- 1. 在HTML中绑定: &lt;ANY on事件名=&quot;js语句&quot;
-    问题: 不符合内容与行为分离的原则——不便于维护
- 2. 在js中动态绑定: 2种:
-    1. 一个事件只绑定一个处理函数:
-       elem.on事件名=function(){
-         //this-&gt;elem
-       }
-       解除绑定: elem.on事件名=null;
-       问题: 每个事件只能绑定一个处理函数
-       解决:
-    2. 一个事件可同时绑定多个处理函数:
-       elem.addEventListener(&quot;事件名&quot;,function(){
-         //this-&gt;elem
-       })
-       解除绑定:
-        elem.removeEventListener(&quot;事件名&quot;,&quot;函数名&quot;);
-        强调: 如果一个事件处理函数可能被动态移除，则绑定时，不能使用匿名函数，必须使用有名称的函数
-
-    事件模型: DOM标准: 3个阶段
-      1. 捕获: 由外向内，记录各级父元素绑定的事件处理函数
-      2. 目标触发: 首先执行目标元素上的事件处理函数
-      3. 冒泡: 由内向外，反向执行捕获阶段记录的处理函数
-
-    事件对象: 事件发生时自动创建的
-             封装事件信息
-             提供操作事件的API 的对象
-      何时: 只要希望获得事件信息或修改事件的默认行为
-      如何: 事件对象，在事件发生时，通常作为事件处理函数的第一个参数，默认自动传入！
-          .on事件名=function(e){
-             //e会自动获得事件对象
-          }
-    阻止蔓延/冒泡: e.stopPropagation();
-    利用冒泡:
-      优化: 尽量少的添加事件监听
-      原理: 因为浏览器触发事件监听，是采用遍历查找的方式。添加的监听越多，遍历的速度越慢
-      如何: 如果多个子元素都要绑定相同的事件
-          只要在父元素绑定一次，所有子元素即可共用
-      难题:
-         1. 获得目标元素:
-            不能用this, 因为this指父元素
-            应该用e.target，保存实际点击的目标元素
-         2. 鉴别目标元素:
-            先判断目标元素的nodeName或className...
-            只有目标元素符合要求时，才执行事件操作
-    取消事件/阻止默认行为: e.preventDefault();
-    事件坐标: 3对儿:
-      1. 相对于整个屏幕左上角的坐标: e.screenX|screenY
-      2. 相对于文档显示区左上角的坐标: e.clientX|clientY
-      3. 相对于当前元素左上角的坐标: e.offsetX|offsetY
-
-    页面滚动:
-      事件: window.onscroll
-      获得页面滚动位置: document.body.scrollTop
-          页面超出文档显示区顶部的距离
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;DOM: Document Object Model&lt;/p&gt;
-&lt;p&gt; DOM是专门操作网页内容的API标准&lt;br&gt; 为什么: 早起js操作不同浏览器的API没有标准，有严重兼容性问题&lt;br&gt; 所以，W3C制定了统一的操作网页内容的API标准,所有浏览器厂商
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-      <category term="DOM" scheme="www.wangchengzou.cn/tags/DOM/"/>
-    
-      <category term="BOM" scheme="www.wangchengzou.cn/tags/BOM/"/>
+      <category term="http" scheme="www.wangchengzou.cn/tags/http/"/>
     
   </entry>
   
@@ -3008,370 +3560,6 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
-    <title>MySql常用方法知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
-    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T16:08:55.461Z</updated>
-    
-    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
-<pre><code>&gt;grant select,insert,update,delete,create,drop
-&gt;on tutorials.*
-&gt;to &apos;zara&apos;@&apos;localhost&apos;
-&gt;identified by &apos;zara123&apos;;
-以上为为指定数据库tutorials添加用户zara 密码为zara123
-
-&gt;use数据库名；--选择操作的数据库
-&gt;show databases;   ---列出所有数据库
-&gt;show tables;      ---列出数据库所有表
-&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
-&gt;show index from 数据表； ---显示数据表索引信息
-&gt;show table status like 数据表\G; ---输出统计信息
-&gt;create database库名； ----创建库名
-&gt;drop database库名；   ----弹出框显示是否删除库名
-&gt;int bigint double varchar datetime now()  四大数据类型
-&gt;create table 表名；  ---创建数据表
-&gt;drop table 表名；    ---删除表
-&gt;insert into 表名（列，列）values(值，值)；---添加数据
-&gt;select 列名 from 表名 where 条件；  ----查询
-&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
-&gt;delete from 表名 where 条件； ---直接删除表内记录列
-&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
-&gt;create database 库名 charset=utf8；  ---指定库名编码
-&gt;set names utf8  -----设置语句编码
-&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
-&gt;$_request[&apos;title&apos;];--获取表单中的参数
-&gt;desc 表名；----将查看该表里面的所有类型
-&gt;require();  ---引用初始化PHP文件
-多表查询方法（
-    SELECT n.title,n.ctime,u.uname    多表联系
-    FROM t_user u,t_news n;           创建别名
-    WHERE u.id==n.uid          条件关系
-）
-
-{命令窗口使用SQL文件加载数据库，中文显示
-    &gt;set names utf8        --文件转换编码格式
-    &gt;source 文件位置    --加载文件位置
-    &gt;set names gbk        --临时使用gbk格式显示中文
-}
-</code></pre><p>php学习基本函数</p>
-<pre><code>phpinfo();显示软件版本信息
-var_dump();输出数组元素
-count();输出数组里面元素的个数
-foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
-</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
-<pre><code>1创建到MySQL服务器的连接
-  $conn=mysqli_connect(...);
-    服务器地址IP    本机127.0.0.1：8081
-    用户名      root
-    密码          p
-    选择库      库名
-2向MySQL服务器发送sql指令，等待服务器执行
-  $sql=&quot;...&quot;;//insert/delete/update
-3读取MySQL服务器返回结果
-  $result=mysqli_query($conn,$sql);
-4判断返回结果是否成功
-  if($result===false);
-5断开与MySQL服务器连接
-  mysqli_close($conn);
-</code></pre><p>php mysql查询操作</p>
-<pre><code>1:连接数据库
-  $conn=mysqli_connect(...);
-  服务器地址IP    本机127.0.0.1：8081
-  用户名            root
-  密码          p
-  选择库      库名
-2:发送查询sql   SELECT
-   $sql=&quot;...&quot;;    SELECT * FROM t_user;
-3:读取MySQL服务器返回结果 是不是true/false
-   $result=mysqli_query($conn,$sql);
-4:抓取结果中数据并且转换数组
-   a:抓取一行数据{关联数组}
-    mysqli_fetch_assoc(结果集对象);
-   b:抓取一行数据{索引数组
-    mysqli_fetch_row(结果集对象);
-5:断开与MySQL服务器连接
-   mysqli_close($conn);
-</code></pre><p>php常用函数说明</p>
-<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
-@    压制住当前行代码警告消息，在行首位置添加！
-#time() 返回当前系统时间，以毫秒为单位整数
-#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
-#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
-location.href   为跳转方式
-</code></pre><p>ajax  GET的使用方法</p>
-<pre><code>1.创建Ajax对象
-    var xhr= new XMLHttpRequest();
-2.绑定事件
-    xhr.onreadystatechange=function(){
-        alert(xhr.responseText);--输出事件运行文本状态
-    }
-3.打开连接
-    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
-4.发送请求
-    xhr.send(null)
-</code></pre><p>Ajax 常用对象和属性事件方法</p>
-<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
-    var xhr =new XMLHttpRequest();
-    兼容性问题，老IE8以下不支持
-    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
-
-readyState ;xhr对象当前状态，会自动改变
-    对应值：0 UNSENT 请求消息未发送
-        1 OPENED XHR已经找开连接
-        2 HEADERS_RECEVIED xhr已经接收信息
-        3 LOADING  XHR正在加载消息
-        4 DONE XHR接收完成消息
-
-status  表示服务器返回的状态码
-responseText  表示服务器响应文本
-responseXML   表示服务器响应XML文本
-
-属性使用方法
-    open(method,url.isAsyn)  表示打开服务器连接
-        method：请求方式，GET POST
-        Ulr  请求地址
-        isasyn：请求方式是异步TRUE还是同步FALSE
-
-    send（data）请求消息发送web服务器
-        data：请示消息主体内容:
-           GET为send(null)
-           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
-</code></pre><p>#AJAX POST  标准语法和用法</p>
-<pre><code>1.创建AJAX对象
- xhr=new XMLHttpRequest()
-2.绑定事件
-    xhr.onreadystatechange=function(){
-    判断事件输出信息，返回数据
-    if(xhr.readyState===4&amp;&amp;xhr.status===200){
-        if(parseInt(xhr.responseText)&gt;0){
-            作输出 ，返回成功结果
-        }else{
-            输出 失败结果
-        }
-    }
-  }
-3.打开连接
-  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
-  修改头部信息
-   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
-4.发送请求
-  xhr.send(发送参数);
-</code></pre><p>修改头部信息–php首行加头部信息</p>
-<pre><code>纯文本text
-    header(&quot;Content-Type:text/plain&quot;);
-        html-&gt;ajax
-        xhr.responseText
-网页页面HTML
-    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
-        html-&gt;ajax
-        xhr.responseText;
-javascript
-    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
-     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
-                html-&gt;ajax
-      eval(xhr.responseText);
-      示例:国际化
-       当前浏览器 zh-CN  你好
-                 en-US   hello
-</code></pre><p>json语法和要求</p>
-<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
-JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
-数组中可以包含多值 ，用， 分开
-对象中可以包含多个键值，使用逗号分开，
-
-怎么处理JSON数据
-服务器端PHP
-    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
-    $str=json_encode($arr)
-    echo $str;
-
-javascript 接收
-    var obj=JSON.parse(xhr.responstText);
-</code></pre><p>XML语法要求</p>
-<pre><code>XML 文档声明
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
-所有属性必须用双引号
-
-XML方法
-    服务器PHP
-    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
-    echo &quot; xml....&quot;;
-    客户端JS
-    AJXX请求接收数据
-    var xmlDoc=xhr.responseXML;---
-    获取所有标签
-    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
-    获取其中属性
-    var name=xmldDoc.querySelector(&quot;name&quot;)
-</code></pre><p>jquery 常用AJAX函数</p>
-<pre><code>$.get(url,callback);    发送get请求
-$.post(url,data,callback);   发送post请求
-$.getJSON(url,callback);    发送JSON请求‘
-$.load(url);       加载
-$.getScript(url.callback);
-$.ajax({})   全能
-    全能使用方法
-    ajax({
-        type:&quot;GET&quot;        请求方式post,pub,delete
-        url:&quot;  url&quot;        请求地址
-        data:&quot;{---:--,--:--}&quot;
-            请求服务器数据
-        beforeSend:fn
-            请求消息发送前调用函数
-        success:fn
-            响应完成并且成功调用函数
-        error:fn
-            响应完成但是有问题的调用函数
-        complete:fn
-            响应完成但是无论成功与否都调用函数
-    })
-</code></pre><p>开发项目</p>
-<pre><code>开发流程
-    需求说明书---技术经理，美工
-    剪切图片集---UI
-    静态网页----前端
-    动态网页---后端
-    部署服务器----运维
-    测试---------功能
-    上线-----
-    调试---加新功能--升级
-</code></pre><p>针对cookie作了解</p>
-<pre><code>添加
-    document.cookie = &apos;uid=10&apos;;
-    document.cookie = &apos;uname=qiangdong&apos;;
-
-读取
-    function getCookieVal(key){
-            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
-        var rs = null;
-            //1:创建变量保存最终返回结果值
-        var line = document.cookie;
-        var arr = line.split(&quot;;&quot;);
-            //2:按照;拆分cookie中字符串
-        for(var i=0;i&lt;arr.length;i++){
-            //3:循环数组中每一个键值
-            var kv = arr[i];
-            var option = kv.split(&quot;=&quot;);
-            //4:按照=拆分
-            var k = option[0].trim();
-            //5:下标0 k  ---  trim()去除字符串前后空格
-            var v = option[1];
-            //6:下标0 v
-            if(key===k){
-                //7:判断如果参数中指定
-                key == k
-                return v;
-                //8:返回v
-            }
-        }
-        return rs;
-        //9:否则返回 null
-    }
-     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
-         console.log(rs);
-     var rs = getCookieVal(&quot;uname&quot;);
-         console.log(rs);
-     var age = getCookieVal(&quot;age&quot;);
-         console.log(age);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
-&amp;gt;on tutorials.*
-&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
-    
-      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
-    
-      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zetpojs基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:56:58.353Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
-<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要引入js文件，调用方法即可
-特点：
-    学习成本低
-    轻量
-注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
-        如果要用到其他模块，去zeptoBuilder
-        官网：http://github.e-sites.nl/zeptobuilder/
-        选择需要用到的模块，勾选，下载即可
-</code></pre><p>二、使用Zepto</p>
-<pre><code>1、核心模块
-    集合、数据、类型判断的操作
-    选择器
-    DOM增删改查
-
-2、detect
-    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
-    $.os $.browser
-
-3、event模块
-    on off one trigger
-
-4、Ajax模块
-    $.get
-    $.post
-    $.ajax
-    $.load
-
-5、form模块
-    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
-    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
-    submit 表单指定submit触发时 执行的处理函数
-
-6、Touch模块
-    点按事件：tap singleTap doubleTap longTap
-    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
-
-7、Effects（Animate）模块
-    show/hide/fadeIn/fadeOut/fadeToggle
-    animate
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vue快速上手知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
     <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
@@ -3745,150 +3933,293 @@ Props验证：
   </entry>
   
   <entry>
-    <title>ajax面试题点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
+    <title>MySql常用方法知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
+    <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T14:23:51.280Z</updated>
+    <updated>2017-07-23T16:08:55.461Z</updated>
     
-    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
-<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
-，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
-使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
-ActiveXObject(IE浏览器)对象实现异步通信效果
-基本步骤：
-var xhr =null;//创建对象
-if(window.XMLHttpRequest){
-    xhr = new XMLHttpRequest();
-}else{
-    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+    <content type="html"><![CDATA[<p>添加用户方法 grant</p>
+<pre><code>&gt;grant select,insert,update,delete,create,drop
+&gt;on tutorials.*
+&gt;to &apos;zara&apos;@&apos;localhost&apos;
+&gt;identified by &apos;zara123&apos;;
+以上为为指定数据库tutorials添加用户zara 密码为zara123
+
+&gt;use数据库名；--选择操作的数据库
+&gt;show databases;   ---列出所有数据库
+&gt;show tables;      ---列出数据库所有表
+&gt;show columns from 数据表；----显示数据表属性，属性类型，主键信息
+&gt;show index from 数据表； ---显示数据表索引信息
+&gt;show table status like 数据表\G; ---输出统计信息
+&gt;create database库名； ----创建库名
+&gt;drop database库名；   ----弹出框显示是否删除库名
+&gt;int bigint double varchar datetime now()  四大数据类型
+&gt;create table 表名；  ---创建数据表
+&gt;drop table 表名；    ---删除表
+&gt;insert into 表名（列，列）values(值，值)；---添加数据
+&gt;select 列名 from 表名 where 条件；  ----查询
+&gt;update 表名 set 列=值，列=值 where 条件  ----更新或修改数据
+&gt;delete from 表名 where 条件； ---直接删除表内记录列
+&gt;drop database if exists 库名  ---判断是否存在数据库，存在就删除
+&gt;create database 库名 charset=utf8；  ---指定库名编码
+&gt;set names utf8  -----设置语句编码
+&gt;primary key auto_increment  --- 主键自增加，指定位置用null代替
+&gt;$_request[&apos;title&apos;];--获取表单中的参数
+&gt;desc 表名；----将查看该表里面的所有类型
+&gt;require();  ---引用初始化PHP文件
+多表查询方法（
+    SELECT n.title,n.ctime,u.uname    多表联系
+    FROM t_user u,t_news n;           创建别名
+    WHERE u.id==n.uid          条件关系
+）
+
+{命令窗口使用SQL文件加载数据库，中文显示
+    &gt;set names utf8        --文件转换编码格式
+    &gt;source 文件位置    --加载文件位置
+    &gt;set names gbk        --临时使用gbk格式显示中文
 }
-     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
-     xhr.setRequestHeader(“”,””);//设置http头信息
-     xhr.onreadystatechange =function(){}//指定回调函数
-     xhr.send();//发送请求
-</code></pre><p>3、如何解决跨域问题?</p>
-<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
-出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
-所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
-，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
-为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
-，这就是解决跨域问题的主流解决方案
-</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
-<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
-不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
-encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
-对于post请求不需要进行编码
-</code></pre><p>5、简述ajax 的过程。</p>
-<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
-2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
-3. 设置响应HTTP请求状态变化的函数
-4. 发送HTTP请求
-5. 获取异步调用返回的数据
-6. 使用JavaScript和DOM实现局部刷新
-</code></pre><p>6、阐述一下异步加载。</p>
-<pre><code>1. 异步加载的方案： 动态插入 script 标签
-2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
-3. script 标签上添加 defer 或者 async 属性
-4. 创建并插入 iframe，让它异步执行 js
-</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
-<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
-它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
-所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
-指一段脚本只能读取来自同一来源的窗口和文档的属性。
-</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
-<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
-一般在2000个字符，有的浏览器是8000个字符
-POST：一般用于修改服务器上的资源，对所发送的信息没有限制
-在以下情况中，请使用 POST 请求：
-1. 无法使用缓存文件（更新服务器上的文件或数据库）
-2. 向服务器发送大量数据（POST 没有数据量限制）
-3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
-</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
-<pre><code>1. 通过异步模式，提升了用户体验
-2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
-3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
-</code></pre><p>10、 Ajax的最大的特点是什么。</p>
-<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
-</code></pre><p>11、ajax的缺点</p>
-<pre><code>1、ajax不支持浏览器back按钮。
-2、安全问题 AJAX暴露了与服务器交互的细节。
-3、对搜索引擎的支持比较弱。
-4、破坏了程序的异常机制。
-</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，
-提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
-</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
-<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
-<p>14、什么是Ajax和JSON，它们的优缺点。</p>
-<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
-用于在Web页面中实现异步数据交互，实现页面局部刷新。
-优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
-避免用户不断刷新或者跳转页面，提高用户体验
-缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
-可能造成请求数的增加跨域问题限制；
-JSON是一种轻量级的数据交换格式，ECMA的一个子集
-优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
-解析，支持复合数据类型（数组、对象、字符串、数字）
-</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
-<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
-<pre><code>分为4个步骤：
-    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
-    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
-    这能使浏览器获得请求对应的 IP 地址。
-    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
-    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
-    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
-    ，最后由客户端发出该请求已经    被接受的报文。
-    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
-    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
-    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
-</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
-，数据不会暴漏在url地址中。
-</code></pre><p>18、ajax请求时，如何解释json数据</p>
-<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
-对数据的安全性更好。
-</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
-<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
-内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
-宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
-</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
-<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
-并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
-</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
-<pre><code>1、压缩css、js文件
-2、合并js、css文件，减少http请求
-3、外部js、css文件放在最底下
-4、减少dom操作，尽可能用变量替代不必要的dom操作
-</code></pre><p>22、HTTP状态码都有那些。</p>
-<pre><code>200 OK      //客户端请求成功
-400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
-403 Forbidden  //服务器收到请求，但是拒绝提供服务
-404 Not Found  //请求资源不存在，输入了错误的URL
-500 Internal Server Error //服务器发生不可预期的错误
-503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
+</code></pre><p>php学习基本函数</p>
+<pre><code>phpinfo();显示软件版本信息
+var_dump();输出数组元素
+count();输出数组里面元素的个数
+foreach($arr as $k=&gt;$v);用于处理关联数组遍历问题
+</code></pre><p>使用php操作mhsql服务器步骤(四步走)</p>
+<pre><code>1创建到MySQL服务器的连接
+  $conn=mysqli_connect(...);
+    服务器地址IP    本机127.0.0.1：8081
+    用户名      root
+    密码          p
+    选择库      库名
+2向MySQL服务器发送sql指令，等待服务器执行
+  $sql=&quot;...&quot;;//insert/delete/update
+3读取MySQL服务器返回结果
+  $result=mysqli_query($conn,$sql);
+4判断返回结果是否成功
+  if($result===false);
+5断开与MySQL服务器连接
+  mysqli_close($conn);
+</code></pre><p>php mysql查询操作</p>
+<pre><code>1:连接数据库
+  $conn=mysqli_connect(...);
+  服务器地址IP    本机127.0.0.1：8081
+  用户名            root
+  密码          p
+  选择库      库名
+2:发送查询sql   SELECT
+   $sql=&quot;...&quot;;    SELECT * FROM t_user;
+3:读取MySQL服务器返回结果 是不是true/false
+   $result=mysqli_query($conn,$sql);
+4:抓取结果中数据并且转换数组
+   a:抓取一行数据{关联数组}
+    mysqli_fetch_assoc(结果集对象);
+   b:抓取一行数据{索引数组
+    mysqli_fetch_row(结果集对象);
+5:断开与MySQL服务器连接
+   mysqli_close($conn);
+</code></pre><p>php常用函数说明</p>
+<pre><code>die($str);终止当前php文件执行，并向客户输出一个终止原因说明
+@    压制住当前行代码警告消息，在行首位置添加！
+#time() 返回当前系统时间，以毫秒为单位整数
+#mysqli_insert _id($conn) 返回连接上刚刚执行insert 语句产生ID值
+#mysqli_affected_rows($conn),返回刚刚连接上执行增删改语句影响行数
+location.href   为跳转方式
+</code></pre><p>ajax  GET的使用方法</p>
+<pre><code>1.创建Ajax对象
+    var xhr= new XMLHttpRequest();
+2.绑定事件
+    xhr.onreadystatechange=function(){
+        alert(xhr.responseText);--输出事件运行文本状态
+    }
+3.打开连接
+    xhr.open(&apos;GET&apos;,&apos;url&apos;,true);
+4.发送请求
+    xhr.send(null)
+</code></pre><p>Ajax 常用对象和属性事件方法</p>
+<pre><code>xhr对象：向web服务器发送请求并接收返回响应消息
+    var xhr =new XMLHttpRequest();
+    兼容性问题，老IE8以下不支持
+    采用 new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
+    对兼容性做判断 if（window.XMLHttpRequest）确认使用创建对象方法
+
+readyState ;xhr对象当前状态，会自动改变
+    对应值：0 UNSENT 请求消息未发送
+        1 OPENED XHR已经找开连接
+        2 HEADERS_RECEVIED xhr已经接收信息
+        3 LOADING  XHR正在加载消息
+        4 DONE XHR接收完成消息
+
+status  表示服务器返回的状态码
+responseText  表示服务器响应文本
+responseXML   表示服务器响应XML文本
+
+属性使用方法
+    open(method,url.isAsyn)  表示打开服务器连接
+        method：请求方式，GET POST
+        Ulr  请求地址
+        isasyn：请求方式是异步TRUE还是同步FALSE
+
+    send（data）请求消息发送web服务器
+        data：请示消息主体内容:
+           GET为send(null)
+           POST 为数据放在里面如send（‘id=10&amp;name=tome&amp;age=19&apos;）
+</code></pre><p>#AJAX POST  标准语法和用法</p>
+<pre><code>1.创建AJAX对象
+ xhr=new XMLHttpRequest()
+2.绑定事件
+    xhr.onreadystatechange=function(){
+    判断事件输出信息，返回数据
+    if(xhr.readyState===4&amp;&amp;xhr.status===200){
+        if(parseInt(xhr.responseText)&gt;0){
+            作输出 ，返回成功结果
+        }else{
+            输出 失败结果
+        }
+    }
+  }
+3.打开连接
+  xhr.open(&apos;POST&apos;,&apos;URL&apos;,ture)
+  修改头部信息
+   xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;);
+4.发送请求
+  xhr.send(发送参数);
+</code></pre><p>修改头部信息–php首行加头部信息</p>
+<pre><code>纯文本text
+    header(&quot;Content-Type:text/plain&quot;);
+        html-&gt;ajax
+        xhr.responseText
+网页页面HTML
+    header(&quot;Content-Type:text/html;charset=utf-8&quot;);
+        html-&gt;ajax
+        xhr.responseText;
+javascript
+    header(&quot;Content-Type:application/javascript;charset=utf-8&quot;);
+     echo &quot;var msg=&apos;hello&apos;;alert(msg)&quot;;
+                html-&gt;ajax
+      eval(xhr.responseText);
+      示例:国际化
+       当前浏览器 zh-CN  你好
+                 en-US   hello
+</code></pre><p>json语法和要求</p>
+<pre><code>一个JSON字符串有且只有一个根，可以是{}对象 []一个数组
+JSON中可以表示 数字 bool null 字符串，字符串必须用双引号
+数组中可以包含多值 ，用， 分开
+对象中可以包含多个键值，使用逗号分开，
+
+怎么处理JSON数据
+服务器端PHP
+    header(&quot;Content-Type:application/json;charset=utf-8&quot;);
+    $str=json_encode($arr)
+    echo $str;
+
+javascript 接收
+    var obj=JSON.parse(xhr.responstText);
+</code></pre><p>XML语法要求</p>
+<pre><code>XML 文档声明
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+整篇xml字符串只能一个根元素 标签有开始有结束 不能交叉
+所有属性必须用双引号
+
+XML方法
+    服务器PHP
+    header(&quot;Content-Type:application/xml;charset=utf-8&quot;);
+    echo &quot; xml....&quot;;
+    客户端JS
+    AJXX请求接收数据
+    var xmlDoc=xhr.responseXML;---
+    获取所有标签
+    var book=xmlDoc.querySelectorAll(&quot;book&quot;)
+    获取其中属性
+    var name=xmldDoc.querySelector(&quot;name&quot;)
+</code></pre><p>jquery 常用AJAX函数</p>
+<pre><code>$.get(url,callback);    发送get请求
+$.post(url,data,callback);   发送post请求
+$.getJSON(url,callback);    发送JSON请求‘
+$.load(url);       加载
+$.getScript(url.callback);
+$.ajax({})   全能
+    全能使用方法
+    ajax({
+        type:&quot;GET&quot;        请求方式post,pub,delete
+        url:&quot;  url&quot;        请求地址
+        data:&quot;{---:--,--:--}&quot;
+            请求服务器数据
+        beforeSend:fn
+            请求消息发送前调用函数
+        success:fn
+            响应完成并且成功调用函数
+        error:fn
+            响应完成但是有问题的调用函数
+        complete:fn
+            响应完成但是无论成功与否都调用函数
+    })
+</code></pre><p>开发项目</p>
+<pre><code>开发流程
+    需求说明书---技术经理，美工
+    剪切图片集---UI
+    静态网页----前端
+    动态网页---后端
+    部署服务器----运维
+    测试---------功能
+    上线-----
+    调试---加新功能--升级
+</code></pre><p>针对cookie作了解</p>
+<pre><code>添加
+    document.cookie = &apos;uid=10&apos;;
+    document.cookie = &apos;uname=qiangdong&apos;;
+
+读取
+    function getCookieVal(key){
+            //  [&quot;uid=10&quot;,&quot;uname=qiangdong&quot;]
+        var rs = null;
+            //1:创建变量保存最终返回结果值
+        var line = document.cookie;
+        var arr = line.split(&quot;;&quot;);
+            //2:按照;拆分cookie中字符串
+        for(var i=0;i&lt;arr.length;i++){
+            //3:循环数组中每一个键值
+            var kv = arr[i];
+            var option = kv.split(&quot;=&quot;);
+            //4:按照=拆分
+            var k = option[0].trim();
+            //5:下标0 k  ---  trim()去除字符串前后空格
+            var v = option[1];
+            //6:下标0 v
+            if(key===k){
+                //7:判断如果参数中指定
+                key == k
+                return v;
+                //8:返回v
+            }
+        }
+        return rs;
+        //9:否则返回 null
+    }
+     var rs = getCookieVal(&quot;uid&quot;);    //调用函数
+         console.log(rs);
+     var rs = getCookieVal(&quot;uname&quot;);
+         console.log(rs);
+     var age = getCookieVal(&quot;age&quot;);
+         console.log(age);
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
+      &lt;p&gt;添加用户方法 grant&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt;grant select,insert,update,delete,create,drop
+&amp;gt;on tutorials.*
+&amp;gt;to &amp;apos;zara&amp;apos;@&amp;apos;localhost&amp;
     
     </summary>
     
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
+      <category term="MySql" scheme="www.wangchengzou.cn/tags/MySql/"/>
     
-      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
+      <category term="PhP" scheme="www.wangchengzou.cn/tags/PhP/"/>
+    
+      <category term="Ajax" scheme="www.wangchengzou.cn/tags/Ajax/"/>
     
   </entry>
   
@@ -4354,6 +4685,227 @@ node端发起http请求
       <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
     
       <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ajax面试题点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-27T14:23:51.280Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
+<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
+，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
+使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
+ActiveXObject(IE浏览器)对象实现异步通信效果
+基本步骤：
+var xhr =null;//创建对象
+if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+}else{
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+}
+     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
+     xhr.setRequestHeader(“”,””);//设置http头信息
+     xhr.onreadystatechange =function(){}//指定回调函数
+     xhr.send();//发送请求
+</code></pre><p>3、如何解决跨域问题?</p>
+<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
+出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
+所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
+，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
+为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
+，这就是解决跨域问题的主流解决方案
+</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
+<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
+不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
+encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
+对于post请求不需要进行编码
+</code></pre><p>5、简述ajax 的过程。</p>
+<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
+2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
+3. 设置响应HTTP请求状态变化的函数
+4. 发送HTTP请求
+5. 获取异步调用返回的数据
+6. 使用JavaScript和DOM实现局部刷新
+</code></pre><p>6、阐述一下异步加载。</p>
+<pre><code>1. 异步加载的方案： 动态插入 script 标签
+2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
+3. script 标签上添加 defer 或者 async 属性
+4. 创建并插入 iframe，让它异步执行 js
+</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
+<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
+它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
+所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
+指一段脚本只能读取来自同一来源的窗口和文档的属性。
+</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
+<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
+一般在2000个字符，有的浏览器是8000个字符
+POST：一般用于修改服务器上的资源，对所发送的信息没有限制
+在以下情况中，请使用 POST 请求：
+1. 无法使用缓存文件（更新服务器上的文件或数据库）
+2. 向服务器发送大量数据（POST 没有数据量限制）
+3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
+<pre><code>1. 通过异步模式，提升了用户体验
+2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
+3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
+</code></pre><p>10、 Ajax的最大的特点是什么。</p>
+<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
+</code></pre><p>11、ajax的缺点</p>
+<pre><code>1、ajax不支持浏览器back按钮。
+2、安全问题 AJAX暴露了与服务器交互的细节。
+3、对搜索引擎的支持比较弱。
+4、破坏了程序的异常机制。
+</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，
+提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
+</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
+<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
+<p>14、什么是Ajax和JSON，它们的优缺点。</p>
+<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
+用于在Web页面中实现异步数据交互，实现页面局部刷新。
+优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
+避免用户不断刷新或者跳转页面，提高用户体验
+缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
+可能造成请求数的增加跨域问题限制；
+JSON是一种轻量级的数据交换格式，ECMA的一个子集
+优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
+解析，支持复合数据类型（数组、对象、字符串、数字）
+</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
+<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
+<pre><code>分为4个步骤：
+    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
+    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
+    这能使浏览器获得请求对应的 IP 地址。
+    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
+    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
+    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
+    ，最后由客户端发出该请求已经    被接受的报文。
+    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
+    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
+    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
+</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
+，数据不会暴漏在url地址中。
+</code></pre><p>18、ajax请求时，如何解释json数据</p>
+<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
+对数据的安全性更好。
+</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
+<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
+内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
+宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
+</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
+<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
+并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
+</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
+<pre><code>1、压缩css、js文件
+2、合并js、css文件，减少http请求
+3、外部js、css文件放在最底下
+4、减少dom操作，尽可能用变量替代不必要的dom操作
+</code></pre><p>22、HTTP状态码都有那些。</p>
+<pre><code>200 OK      //客户端请求成功
+400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
+403 Forbidden  //服务器收到请求，但是拒绝提供服务
+404 Not Found  //请求资源不存在，输入了错误的URL
+500 Internal Server Error //服务器发生不可预期的错误
+503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
+    
+      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zetpojs基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:56:58.353Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
+<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要引入js文件，调用方法即可
+特点：
+    学习成本低
+    轻量
+注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
+        如果要用到其他模块，去zeptoBuilder
+        官网：http://github.e-sites.nl/zeptobuilder/
+        选择需要用到的模块，勾选，下载即可
+</code></pre><p>二、使用Zepto</p>
+<pre><code>1、核心模块
+    集合、数据、类型判断的操作
+    选择器
+    DOM增删改查
+
+2、detect
+    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
+    $.os $.browser
+
+3、event模块
+    on off one trigger
+
+4、Ajax模块
+    $.get
+    $.post
+    $.ajax
+    $.load
+
+5、form模块
+    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
+    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
+    submit 表单指定submit触发时 执行的处理函数
+
+6、Touch模块
+    点按事件：tap singleTap doubleTap longTap
+    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
+
+7、Effects（Animate）模块
+    show/hide/fadeIn/fadeOut/fadeToggle
+    animate
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
     
   </entry>
   
@@ -5083,154 +5635,6 @@ less中提供的功能函数
   </entry>
   
   <entry>
-    <title>html和css3</title>
-    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-28T01:27:39.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
-<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
- skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
-4. 增加了更多的CSS选择器  多背景 rgba
-5. 在CSS3中唯一引入的伪元素是 ::selection.
-6. 媒体查询，多栏布局
-7. border-image
-</code></pre><ol>
-<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
-<li>拖拽释放(Drag and drop) API</li>
-<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
-<li>音频、视频API(audio,video)</li>
-<li>画布(Canvas) API</li>
-<li>地理(Geolocation) API</li>
-<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
-<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
-<li>表单控件，calendar、date、time、email、url、search</li>
-<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
-<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
-<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
-<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
-</ol>
-</li>
-</ol>
-<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
-<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
-本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
-或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
-清除或者使用Javascript代码移除
-</code></pre><p>6、    什么是响应式设计？</p>
-<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
-响应式设计是让所有的人能在这些设备上让网站运行正常
-</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
-<pre><code>HTML5文档类型：&lt;!doctype html&gt;
-HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
-</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
-<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
-在 HTML 上进行图形操作。
-</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
-<pre><code>Media API、Text Track API、Application Cache API、
-User Interaction、Data Transfer API、Command API、
-Constraint Validation API、History API
-</code></pre><p>11、    CSS3新增伪类有那些？</p>
-<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
-p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
-:enabled、:disabled 控制表单控件的禁用状态。
-:checked，单选框或复选框被选中。
-</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
-<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
-* 绘画 canvas 元素
-  用于媒介回放的 video 和 audio 元素
-  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
-  sessionStorage 的数据在浏览器关闭后自动删除
-  语意化更好的内容元素，比如 article、footer、header、nav、section
-  表单控件，calendar、date、time、email、url、search
-  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
-  新的技术webworker, websockt, Geolocation
-移除的元素
-纯表现的元素：basefont，big，center，font, s，strike，tt，u；
-对可用性产生负面影响的元素：frame，frameset，noframes；
-* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
-  可以利用这一特性让这些浏览器支持HTML5新标签，
-  浏览器支持新标签后，还需要添加标签默认的样式：
-* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
-&lt;!--[if lt IE 9]&gt;
-&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
-&lt;![endif]--&gt;
-</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
-<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
-保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
-优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
-　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
-从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
-降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
-　
-</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
-<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
-<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
-最常见的应用是利用伪类清除浮动。
-//一种常见利用伪类清除浮动的代码
-.clearfix:after {
-    content:&quot;.&quot;; //这里利用到了content属性
-    display:block;
-    height:0;
-    visibility:hidden;
-    clear:both; }
-.clearfix {
-    *zoom:1;
-}
-after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
-再利用clear:both清除浮动。
-</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
-<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
-&lt;audio controls&gt;
-  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-   Your browser does&apos;nt support audio embedding feature.
-&lt;/audio&gt;
-</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
-<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
-&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
-  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
-   Your browser does&apos;nt support video embedding feature.
-&lt;/video&gt;
-</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
-<pre><code>Datalist   datetime   output   keygen  date  month  week
-time  number   range   emailurl
-</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
-<pre><code>sessionStorage和localStorage的存储空间更大；
-sessionStorage和localStorage有更多丰富易用的接口；
-sessionStorage和localStorage各自独立的存储空间；
-</code></pre><p>30、    HTML5的离线储存？</p>
-<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
-sessionStorage  数据在浏览器关闭后自动删除。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transf
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
     <title>css hack兼容性</title>
     <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
     <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
@@ -5382,6 +5786,154 @@ inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌�
     
     
       <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>html和css3</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-28T01:27:39.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
+<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
+ skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
+4. 增加了更多的CSS选择器  多背景 rgba
+5. 在CSS3中唯一引入的伪元素是 ::selection.
+6. 媒体查询，多栏布局
+7. border-image
+</code></pre><ol>
+<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
+<li>拖拽释放(Drag and drop) API</li>
+<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
+<li>音频、视频API(audio,video)</li>
+<li>画布(Canvas) API</li>
+<li>地理(Geolocation) API</li>
+<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
+<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
+<li>表单控件，calendar、date、time、email、url、search</li>
+<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
+<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
+<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
+<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
+<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+<![endif]-->
+如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
+</ol>
+</li>
+</ol>
+<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
+<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
+本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
+或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
+清除或者使用Javascript代码移除
+</code></pre><p>6、    什么是响应式设计？</p>
+<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
+响应式设计是让所有的人能在这些设备上让网站运行正常
+</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
+<pre><code>HTML5文档类型：&lt;!doctype html&gt;
+HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
+</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
+<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
+在 HTML 上进行图形操作。
+</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
+<pre><code>Media API、Text Track API、Application Cache API、
+User Interaction、Data Transfer API、Command API、
+Constraint Validation API、History API
+</code></pre><p>11、    CSS3新增伪类有那些？</p>
+<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+:enabled、:disabled 控制表单控件的禁用状态。
+:checked，单选框或复选框被选中。
+</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
+<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
+* 绘画 canvas 元素
+  用于媒介回放的 video 和 audio 元素
+  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
+  sessionStorage 的数据在浏览器关闭后自动删除
+  语意化更好的内容元素，比如 article、footer、header、nav、section
+  表单控件，calendar、date、time、email、url、search
+  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
+  新的技术webworker, websockt, Geolocation
+移除的元素
+纯表现的元素：basefont，big，center，font, s，strike，tt，u；
+对可用性产生负面影响的元素：frame，frameset，noframes；
+* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+  可以利用这一特性让这些浏览器支持HTML5新标签，
+  浏览器支持新标签后，还需要添加标签默认的样式：
+* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
+&lt;!--[if lt IE 9]&gt;
+&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
+<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
+保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
+从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
+降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
+　
+</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
+<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
+<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
+最常见的应用是利用伪类清除浮动。
+//一种常见利用伪类清除浮动的代码
+.clearfix:after {
+    content:&quot;.&quot;; //这里利用到了content属性
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both; }
+.clearfix {
+    *zoom:1;
+}
+after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
+再利用clear:both清除浮动。
+</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
+<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
+&lt;audio controls&gt;
+  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+   Your browser does&apos;nt support audio embedding feature.
+&lt;/audio&gt;
+</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
+<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
+&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
+  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
+   Your browser does&apos;nt support video embedding feature.
+&lt;/video&gt;
+</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
+<pre><code>Datalist   datetime   output   keygen  date  month  week
+time  number   range   emailurl
+</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
+<pre><code>sessionStorage和localStorage的存储空间更大；
+sessionStorage和localStorage有更多丰富易用的接口；
+sessionStorage和localStorage各自独立的存储空间；
+</code></pre><p>30、    HTML5的离线储存？</p>
+<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
+sessionStorage  数据在浏览器关闭后自动删除。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transf
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -6263,6 +6815,1010 @@ xml语法要求:
   </entry>
   
   <entry>
+    <title>CSS3笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E7%AC%94%E8%AE%B0/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3笔记/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:29:58.932Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、CSS概述</p>
+<pre><code>1、问题
+    1、控制页面中所有的文本颜色为 红色
+    2、控制页面中所有div的文本颜色 为蓝色
+    3、将 所有div 的颜色 变为 黄色
+
+    HTML元素的不足：
+        1、要完成相同的效果，使用的是不同的属性
+            &lt;body text=&quot;red&quot;&gt;
+            &lt;font color=&quot;blue&quot;&gt;
+        2、没有提升 html属性的 可重用性和可维护性
+            可重用性：重复的操作 不用重复的写
+
+        可以通过 CSS 解决以上两个问题
+2、什么是CSS
+    CSS (Cascading Style Sheets),层叠样式表，级联样式表，简称：样式表。专门用于定义页面元素的样式的。
+    以统一的方式定义页面元素的样式
+
+    CSS实现了内容与表现相分离
+    提升了代码的可重用性 和 可维护性
+3、CSS 与 HTML之间的关系
+    HTML : 专门用于构建网页结构
+    CSS : 专门构建HTML网页的样式
+
+    HTML属性效果 与 CSS样式效果相冲突的话：
+    优先使用 CSS 定义页面元素的效果
+</code></pre><p>2、CSS语法</p>
+<pre><code>1、使用CSS样式表
+    1、内联方式
+        又称为 ：行内样式
+        将样式定义在某个html元素中
+        语法：
+        &lt;ANY style=&quot;样式声明;样式声明;&quot;&gt;&lt;/ANY&gt;
+        样式声明：
+            由 属性名称 和 属性值 来组成，属性名称和属性值之间用 : 来关联
+        ex:
+            属性名称          属性值
+            color             red,blue,yellow...
+            background-color  合法颜色值即可..(同上)
+            font-size         以px，pt，为单位的数值
+
+            控制以下 文本颜色为 红色，背景颜色为 黄色，文字大小为 24px
+            &lt;p&gt;静夜思&lt;/p&gt;
+    2、内部样式表
+        将样式定义在网页的一块独立位置处
+        在 &lt;head&gt;&lt;/head&gt; 中 增加一对 &lt;style&gt;&lt;/style&gt;元素，在 &lt;style&gt; 元素中 定义元素的样式,具体语法如下：
+        &lt;head&gt;
+            &lt;title&gt;&lt;/title&gt;
+            &lt;style&gt;
+                样式规则1
+                样式规则2
+                ...
+                样式规则n
+            &lt;/style&gt;
+        &lt;/head&gt;
+        样式规则，由两部分组成
+            1、选择器
+                选择(规范)页面中哪些元素能够使用声明好的样式
+                比如：元素选择器，由元素名称来充当选择器，控制某标记对应所有页面元素的样式
+            2、若干样式声明
+
+            样式规则 语法结构：
+            选择器{
+                样式声明1;
+                样式声明2;
+                ...
+                样式声明n;
+            }
+            ex:
+            p{
+                color:red;
+                background-color:yellow;
+                font-size:24px;
+            }
+
+    3、外部样式表
+        将样式定义在外部的&quot;样式表文件(*.css)&quot;中
+        1、创建 .css 文件，编写样式规则
+        2、在要使用 样式表的 html文件中进行引入
+            &lt;head&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;样式表文件url&quot;&gt;
+            &lt;/head&gt;
+2、CSS样式表特征
+    1、继承性
+        大部分样式属性是可以被继承
+    2、层叠性
+        可以为一个元素定义多个样式规则
+        如果 属性 不冲突时，多个样式规则可以层叠为一个(即都可以应用到当前元素上)
+    3、优先级
+        在层叠性基础上，如果 样式定义 冲突的话，那么就会按照不同使用方式的优先级，来选择性应用样式
+        低 ：浏览器默认设置
+        中 ：外部样式表 和 内部样式表
+            就近原则
+            后定义优先
+        高 ：内联方式
+    4、!important 规则
+        显示调整样式属性的优先级
+        语法：
+            属性名:值 !important;
+        谨慎使用!
+3、选择器(重点)
+    1、作用
+        选择(规范)页面中哪些元素能够使用声明好的样式
+        为了匹配页面的元素
+    2、详解
+        1、通用选择器
+            作用：匹配页面中所有的元素
+            语法：*{}
+            缺点：效率较低，尽可能少用,可以通过 使用 body 的继承性 来替代 *
+        2、元素选择器
+            作用：匹配某一标记所对应的页面中所有的元素
+            语法：元素/标签 {}
+            ex:
+            div{/*匹配页面中所有div*/}
+            span{/*匹配页面中所有span*/}
+            li{/*匹配页面中所有li*/}
+        3、类选择器
+            作用：事先定义好样式，可以由任意元素通过class属性进行引用
+            语法：
+                定义：.类名{}
+                引用：&lt;ANY class=&quot;类名&quot;&gt;&lt;/ANY&gt;
+
+            多类选择器的引用方式：
+            让一个元素引用多个类选择器，中间用 空格 隔开即可
+
+            分类选择器的声明方式：
+                将元素选择器和类选择器结合到一起进行声明，实现对某种元素中的不同样式细分控制
+
+                ex:想要控制 class为important的div元素，文字大小为 48px
+                语法：元素选择器.类选择器{}
+        4、id选择器
+            作用：匹配 指定id值的元素的 样式
+            ex:
+                &lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
+
+            语法：#ID值{}
+        5、群组选择器
+            群组选择器的声明以一个以 , 隔开的选择器列表
+            语法：
+                选择器1,选择器2,...{}
+            ex:
+                #title,p.redColor,.important,span{
+                    color:red;
+                }
+        6、后代选择器
+            后代：
+                多于 一级 层级关系的元素，只能叫后代
+                只具备 一级 层级关系的 也可以叫后代
+            语法：
+                选择器1 选择器2{}
+                语义：匹配 在选择器1 中的  所有后代元素 选择器2
+                ex:
+                    #content span{}
+        7、子代选择器
+            子代：
+                只具备 一级 层级关系的 称之为 子代
+            语法：
+                选择器1&gt;选择器2{}
+                语义：匹配 在选择器1 中的 子级元素 选择器2
+        8、伪类选择器
+            伪类：专门匹配元素不同状态的选择器
+            分类：
+                1、链接伪类
+                2、动态伪类
+
+                3、目标伪类
+                4、元素状态伪类
+                5、结构伪类
+                6、否定伪类
+            语法：
+                以 :作为开始的选择器
+
+                1、链接伪类
+                    1、:link
+                        适用于未被访问的超链接
+                    2、:visited
+                        适用于访问过的超链接
+                2、动态伪类
+                    1、:hover
+                        适用于鼠标悬停在html元素时
+                    2、:active
+                        适用于html元素被激活时
+                    3、:focus
+                        适用于html元素获取焦点时
+</code></pre><p>3、尺寸与边框</p>
+<pre><code>1、CSS单位
+    1、尺寸单位
+        1、px ：像素
+        2、pt ：磅 (1pt=1/72in)
+        3、in ：英寸，1in=2.54cm
+        4、%  ：百分比，占据 当前元素 或 父元素 对应属性的 占比
+        5、em ：倍数，多数用于 文字大小的描述
+        6、mm ：毫米
+        7、cm ：厘米
+        注意：css中尺寸单位是不能省略的。
+    2、颜色单位(取值)
+        1、rgb(r,g,b)
+                r : red , 范围 0-255
+                g : green,范围 0-255
+                b : blue, 范围 0-255
+
+             ex：
+                background-color:rgb(0,0,0);黑色
+                background-color:rgb(255,0,0);红色
+                background-color:rgb(255,255,255);白色
+        2、rgb(r%,g%,b%)
+        3、rgba(r,g,b,alpha)
+            alpha : 透明度 0-1之间的数字
+                0 : 完全透明
+                1 : 完全不透明
+                0.5 : 半透明
+        4、#rrggbb
+            通过6位16进制数字表示一个颜色
+            每位数字范围：0-9 A-F
+            #00ff00 : 绿色
+            #ff0000 : 红色
+            #1a2b3c : ?
+        5、#rgb
+            #rrggbb 每两位数字相同时，可以使用#rgb简化
+            #00ff00 -&gt; #0f0
+            #aabbcc -&gt; #abc
+            #accdda -&gt; ×
+        6、颜色的英文表示
+            red,green,blur,orange,yellow...
+2、尺寸属性
+    1、作用
+        用于设置元素的宽度和高度
+        单位一般为 px 或 %(父元素对应属性的占比)
+    2、语法
+        1、宽度
+            width
+            min-width : 最小宽度
+            max-width : 最大宽度
+        2、高度
+            height
+            min-height : 最小高度
+            max-height : 最大高度
+        注意：
+            页面中所有元素的高度，在不指定的情况全部是自适应(以内容为主)。
+
+            页面中所有块级元素的宽度，默认占据父元素的100%
+            页面中所有行内元素的宽度，默认自适应(以内容为主)
+    3、页面中允许修改 尺寸 属性的元素
+        1、所有块级元素都允许修改
+        2、大部分的行内块元素
+            所有的表单元素都是行内块元素
+            除radio、checkbox之外，其他元素允许修改尺寸
+        3、本身html元素就具备width 和 height的
+            img，table 可以修改尺寸
+        4、行内元素(除具备width和height之外)是不能修改尺寸
+            span,b,a,i,s,b ... 不能修改尺寸
+    4、溢出
+        1、什么是溢出
+            使用尺寸属性限制元素大小时，如果内容所需要的空间大于元素本身空间，则会导致内容溢出
+        2、溢出处理属性
+            属性：
+                overflow
+                overflow-x : 横向溢出处理
+                overflow-y : 纵向溢出处理
+            取值：
+                1、visible
+                    默认值，溢出可见
+                2、hidden
+                    隐藏
+                3、scroll
+                    滚动，让元素出现滚动条，溢出时，滚动条可用
+                4、auto
+                    自动，溢出时显示滚动条并可用，非溢出时，不显示滚动条
+3、边框属性
+    1、边框
+        1、简写方式
+            border:width style color;
+            作用：设置元素上下左右四个边框的宽度，样式以及颜色
+                width:边框的宽度(尺寸)
+                style:边框的样式
+                    取值：
+                        1、solid ：直线
+                        2、dotted ：虚线(点状)
+                        3、dashed ：虚线(线状)
+                color:边框的颜色,可以取值为 transparent(透明)
+
+            ex:
+                div{
+                    border:1px solid red;
+                }
+        2、单边定义
+            border-方向:width style color;
+            方向可以被以下关键字所取代
+            top : 上
+            right : 右
+            bottom : 下
+            left:左
+            ex:
+                border-bottom:2px dashed #00ff00;
+        3、单属性定义
+            border-属性:值;
+            属性可以被以下关键字取代：
+            width:宽度
+            style:样式
+            color:颜色
+            ex:
+                border-width:5px;
+                border-style:solid;
+                border-color:#f00f00;
+        4、单边单属性定义
+            border-方向-属性:值;
+            方向：top/right/bottom/left
+            属性：width/style/color
+            ex:
+                border-top-color:yellow;
+                border-right-style:dotted;
+</code></pre><hr>
+<p>1、边框</p>
+<pre><code>1、边框
+    边框实际上是由四个三角形组成的
+2、边框倒角
+    属性：border-radius
+    取值：
+        具体数值(px) 或 %
+        最少一个值，最多4个值
+    单角定义
+        border-top-left-radius:左上角倒角半径
+        border-bottom-right-radius:右下角
+        ... ...
+3、边框阴影
+    属性：box-shadow
+    取值：h-shadow v-shadow blur spread color inset;
+        h-shadow:(必须)
+            阴影的水平偏移距离
+            取值为正，右偏移
+            取值为负，左偏移
+        v-shadow:(必须)
+            阴影的垂直偏移距离
+            取值为正，下偏移
+            取值为负，上偏移
+        blur : 模糊距离,取值为数值
+        spread : 阴影的大小
+        color : 颜色
+        inset : 值，将默认的外阴影改为内阴影
+4、轮廓
+    1、什么是轮廓
+        位于元素外围的一条线,位于边框之外的
+    2、属性
+        outline:width style color;
+        outline-width:宽度;
+        outline-style:样式;
+        outline-color:颜色;
+
+        常用：
+            outline:none;
+            或
+            outline:0;
+    练习：作业基础上
+        1、为每幅图像增加四个角的倒角(5px)
+        2、鼠标移入的时候，为每幅图像增加阴影
+            右下偏移，大小不限，颜色不限
+</code></pre><p>2、框模型(重难点)</p>
+<pre><code>1、框 &amp; 框模型
+    框：页面元素皆为框
+    框模型：Box Model ,定义了元素框处理元素内容尺寸，内边距，边框和外边距的一种方式
+
+    元素一旦增加框模型对应属性的属性，那么实际的占地区域会发生改变
+
+    元素的实际宽度=左右外边距 + 左右边框 + 左右内边距 + width;
+
+    元素的实际高度=上下外边距 + 上下边框 + 上下内边距 + height;
+2、外边距
+    1 、外边距
+        围绕在元素边缘周围的空白区域
+        默认不能被其他元素所占据
+        作用：拉伸两个元素间的距离
+    2、语法
+        属性：
+            margin:值;
+            单边设置：
+            margin-方向:值;
+                方向：top/right/bottom/left
+        取值：
+            1、具体数值 px
+            2、%
+            3、负值
+                左外边距取负值 ：左移动
+                左外边距取正值 ：右移动
+                上外边距取负值 ：上移动
+                上外边距取正值 ：下移动
+            4、auto
+                自动，由浏览器计算外边距的值应该是多少
+                注意：默认情况下，auto只对左右有效，上下无效。
+
+                为块级元素设置宽度后，再设置其左右外边距为 auto，该元素能水平居中显示
+        margin的简洁写法：
+            margin:value; 四个方向外边距的值
+                margin:5px;
+            margin:v1 v2; v1 上下外边距 v2 左右外边距
+                margin:5px 10px;
+            margin:v1 v2 v3;v1 上外边距 v2 左右外边距 v3 下外边距
+                margin:5px 15px 3px;
+            margin:v1 v2 v3 v4;上 右 下 左
+    3、页面中具备默认外边距的元素
+    4、特殊注意
+        1、外边距合并
+            当两个垂直外边距相遇时，将合并成一个
+        2、外边距的溢出
+            特殊场合下，为子元素设置外边距(上下)会作用到父元素上
+            特殊场合：
+                1、父元素没有边框(上下)
+                2、为第一个(最后一个)子元素设置外边距
+            解决方案：
+                1、为父元素增加边框(透明的)
+                    弊端：父元素会变高
+                2、可以为父元素设置上内边距来取代子元素上外边距
+                    弊端：父元素高度会变高
+                3、为父元素增加一个空子元素
+                    &lt;table&gt;&lt;/table&gt;
+                    弊端：多一个子元素
+                4、后续讲解...(CSS3高级)
+        3、为行内元素和行内块元素设置垂直外边距
+            1、大部分行内元素垂直外边距无效
+                img允许设置
+            2、行内块元素设置垂直外边距，该行的所有元素都跟着变
+3、内边距
+    1、什么是内边距
+        内容区域 和 边框(边缘)之间的距离
+        注意：内边距会扩大边框所占用的区域
+    2、语法
+        属性：
+            padding:值;
+            padding-方向:值;
+                方向：top/right/bottom/left
+            取值：
+                1、px
+                2、%
+                3、auto
+        简写方式：
+            padding:value; 上下左右
+            padding:v1 v2; 上下  左右
+            padding:v1 v2 v3;上  左右  下
+            padding:v1 v2 v3 v4;上 右 下 左
+    3、特殊注意
+        1、为行内元素增加上下内边距时
+            只影响自己，并不影响其他元素
+4、box-sizing
+    1、作用
+        重新指定元素尺寸计算模式
+        占地宽度 = margin+border+padding+width
+        可见宽度 = border+padding+width
+    2、语法
+        属性：box-sizing
+        取值：
+            1、content-box
+                默认值，width只表示内容区域的宽度，border和padding额外进行计算
+                可见宽度=border+padding+width
+            2、border-box
+                width包含边框内所有的距离(padding,border)
+                可见宽度=width(border+padding+宽度);
+</code></pre><p>3、背景</p>
+<pre><code>1、背景颜色
+    属性：background-color
+    取值：颜色值 或 transparent
+    注意：背景颜色从边框位置处开始绘制
+2、背景图像
+    属性：background-image
+    取值：url(背景图url)
+3、背景重复
+    属性：background-repeat
+    取值：
+        1、repeat
+            默认值，即横向又纵向平铺
+        2、repeat-x
+            只在横向平铺
+        3、repeat-y
+            只在纵向平铺
+        4、no-repeat
+            不平铺
+4、背景图片尺寸
+    属性：background-size
+    取值：
+        1、value1 value2
+            指定背景图像宽度 和 高度
+        2、value1% value2%
+            采用当前元素宽和高的占比，来作为背景图大小
+        3、cover
+            覆盖，会将背景图像等比放大，直到背景图完全覆盖到元素为止
+        4、contain
+            包含，会将背景图像等比放大，直到右边或下边碰到元素边缘为止
+5、背景图片固定
+    属性：background-attachment
+    取值：
+        1、scroll
+            滚动，默认值
+        2、fixed
+            固定，让背景图一直在可视化区域中
+6、背景图片定位
+    改变背景图在元素中的位置
+    属性：background-position
+    取值：
+        1、x y
+            指定背景图水平 和 垂直偏移距离
+            x : 水平偏移距离
+                取值为正，背景图右偏移
+                取值为负，背景图左偏移
+            y : 垂直偏移距离
+                取值为正，背景图下偏移
+                取值为负，背景图上偏移
+        2、x% y%
+            0% 0% : 背景图在左上
+            0% 100% : 背景图在左下
+            100% 100% : 背景图在右下
+        3、关键字
+            x : left / center / right
+            y : top / center/ bottom
+7、背景属性
+    在一个 background 属性中声明所有的北京属性值
+
+    属性：background
+    取值：color url repeat attachment position;
+
+    ex:
+        background:red;
+        background:url(a.jpg) no-repeat;
+8、特殊使用
+    CSS Sprites(精灵图/雪碧图)
+</code></pre><p>1、渐变</p>
+<pre><code>1、什么是渐变
+    多种颜色之间平缓过度的显示效果
+2、渐变分类
+    1、线性渐变(linear-gradient)
+        按照直线的方式填充渐变颜色和方向
+    2、径向渐变(radial-gradient)
+        以圆的方式填充渐变效果(圆心位置，半径)
+    3、重复渐变
+        1、重复线性渐变
+            repeating-linear-gradient
+        2、重复径向渐变
+            repeating-radial-gradient
+3、渐变中的重要信息
+    1、色标
+        由 颜色 及其 出现的位置 来组成的
+4、渐变的语法
+    1、属性
+        background-image
+    2、取值
+        1、linear-gradient()
+            linear-gradient(angle,color-point1,color-point2);
+            1、angle
+                填充的方向或角度
+                1、关键字
+                    1、to top ：从下向上填充
+                    2、to right ：从左向右填充
+                    3、to bottom ：从上向下填充
+                    4、to left ：从右向左填充
+                2、角度
+                    0deg ~ 360deg
+
+                    0deg : to top
+                    90deg : to right
+                    180deg : to bottom
+                    270deg : to left
+            2、color-point
+                渐变中的色标,由 颜色 及其 出现的位置组成
+                ex:
+                    1、red 0px
+                        该色标颜色为 red ，位置为填充方向的 0px 处
+                    2、green 50px
+                        该色标颜色为 green,位置为填充方向的 50px 处
+                    3、blue 50%
+                        该色标颜色为 blue，位置为填充方向的 50% 处
+                    4、
+                        linear-gradient(to top,red,blue,green);
+                        自动分配位置
+        2、radial-gradient()
+            radial-gradient([size at position,]color-point,color-point)
+
+            1、[size at position,] : 允许被省略
+                size:圆的半径
+                at : 关键字
+                position:圆心的位置
+                    1、x y
+                        以px为单位的具体数值
+                    2、x% y%
+                    3、关键字
+                        x : left , center , right
+                        y : top , center, bottom
+        3、repeating-linear-gradient()
+        4、repeating-radial-gradient()
+5、浏览器兼容性问题
+    主流浏览器都支持渐变
+    对于不支持的浏览器，需要添加浏览器前缀的方式实现兼容性
+        浏览器前缀：
+            1、Firefox ：-moz-
+            2、Chrome 和 Safari ：-webkit-
+            3、Opear ：-o-
+            4、Microsoft IE ：-ms-
+        如果浏览器不支持属性的话，则将前缀添加到属性名称前
+            ex:
+                animation:值;
+                -moz-aniamtion:值;
+                -webkit-aniamtion:值;
+                -o-aniamtion:值;
+                -ms-animation:值;
+        如果浏览器支持属性，但不支持属性值的话，则将前缀添加到属性值前
+            ex:
+                background-image:linear-gradient();
+                background-image:-moz-linear-gradient();
+                background-image:-webkit-linear-gradient();
+                background-image:-o-linear-gradient();
+                background-image:-ms-linear-gradient();
+</code></pre><p>2、文本格式化</p>
+<pre><code>1、字体属性
+    1、指定字体
+        属性：font-family
+        取值：字体1,字体2,字体3;
+        注意：字体中包含中文或特殊字符的话，尽量使用 &quot;&quot; 引起来
+        ex:
+            font-family:&quot;微软雅黑&quot;,Arial;
+    2、字体大小
+        属性：font-size
+        取值：px 或 pt 为单位的数值
+    3、字体加粗
+        属性：font-weight
+        取值：
+            1、normal
+                非加粗显示，正常体
+            2、bold
+                加粗显示 &lt;b&gt;&lt;/b&gt;
+            3、400 ~ 900
+                400 ：normal
+                900 ：bold
+    4、字体样式
+        属性：font-style
+        取值：
+            1、normal
+                正常体
+            2、italic
+                斜体 &lt;i&gt;&lt;/i&gt;
+    5、小型大写字符
+        效果：将小写英文字符变成大写，但是大小和小写字符一样
+        属性：font-variant
+        取值：
+            1、normal
+                正常，默认值
+            2、small-caps
+                小型大写字符
+    6、字体属性
+        属性：font
+        取值：style variant weight size family;
+        注意：该简写属性中，必须包含 family 的值
+2、文本属性
+    1、文本颜色
+        属性：color
+        取值：~
+    2、文本排列
+        作用：控制内容的的水平对齐方式
+        属性：text-align
+        取值：left/center/right/justify(两端对齐)
+    3、文本修饰
+        线条修饰
+        属性：text-decoration
+        取值：
+            1、none
+                无线条修饰
+            2、underline
+                显示下划线
+            3、line-through
+                显示删除线 &lt;s&gt;&lt;/s&gt;
+            4、overline
+                显示上划线
+    4、行高
+        作用：一行数据的高度
+        属性：line-height
+        取值：以px为单位 或 当前字体大小的倍数
+            line-height:50px;
+            line-height:1.5;
+        注意：文字将在指定行高的范围内垂直居中显示
+        场合：
+            1、文字垂直居中
+            2、行间距的设置
+    5、文本阴影
+        属性：text-shadow
+        取值：h-shadow v-shadow blur color;
+</code></pre><p>3、表格</p>
+<pre><code>1、表格常用属性
+    1、边距属性
+        padding，margin(不能为td设置margin)
+    2、尺寸属性
+        width,height
+    3、文本格式化属性
+        font-*,text-*,line-height,color,... ...
+    4、背景属性
+        颜色，图片，渐变
+    5、border属性
+    6、垂直方向对齐
+        属性：vertical-align
+        取值：top / middle / bottom
+2、表格特有属性
+    1、边框合并属性
+        属性：border-collapse
+        取值：
+            1、separate
+                默认值
+            2、collapse
+                合并
+    2、边框边距
+        类似于 cellspacing
+        属性：border-spacing
+        取值：
+            1、指定1个值
+                每个单元格的水平和垂直间距相同
+            2、指定2个值
+                第一个值，表示水平间距
+                第二个值，表示垂直间距
+        注意：
+            必须保证border-collapse是separate时才有效
+    3、标题位置
+        默认情况下，标题表格上方，水平居中
+        属性：caption-side
+        取值：
+            1、top
+                默认值
+            2、bottom
+                底部
+    4、显示规则
+        作用：指定浏览器如何来布局一张表格(指定行和列的尺寸的计算模式)
+        属性：table-layout
+        取值：
+            1、auto
+                自动，即自动表格布局，默认值
+                列的宽度高度实际上是由内容来决定的
+            2、fixed
+                固定，即固定表格布局。
+                列的宽度和高度由设定的值决定
+        自动表格布局 VS 固定表格布局
+            1、自动表格布局
+                1、单元格的大小会适应内容
+                2、表格复杂时，加载速度较慢(缺点)
+                3、适用于不确定每列大小时使用
+                4、特别灵活(优点)
+            2、固定表格布局
+                1、尺寸取决于设定的值，与单元格内容无关
+                2、任何情况下，都会加速显示表格(优点)
+                3、不够灵活(缺点)
+        推荐：
+            复杂的布局不能使用table
+            简单，显示数据的布局，可以使用table
+</code></pre><p>4、浮动</p>
+<pre><code>1、定位
+    改变元素在网页中的默认位置
+2、定位的分类
+    按照定位效果，可以分为以下几种方式：
+    1、普通流定位/文档流定位
+    2、浮动定位
+    3、相对定位
+    4、绝对定位
+    5、固定定位
+3、定位-普通流定位
+    普通流定位，又称为 文档流定位，网页元素默认定位方式
+    1、页面中所有元素都有自己的位置
+    2、按照从左到右，从上到下的方式排列
+    3、块级元素 - 从上到下排列
+    4、行内/行内块 - 从左到右排列
+
+    问题：让多个块级元素在一行内显示?
+4、定位 - 浮动定位
+    1、浮动定位特点
+        将元素设置为浮动定位，将具备以下特征
+        1、会排除在文档流之外即&quot;脱离文档流&quot;，不再占据页面空间，后续元素则上前补位
+        2、浮动元素只在当前行内浮动
+        3、浮动元素会停靠在父元素的左边或右边或其他已浮动元素的边缘上
+        4、浮动元素依然位于父元素之内
+        5、解决问题-多个块级元素在一行内的显示问题
+    2、语法
+        属性：float
+        取值：
+            1、none
+                默认值，即无任何浮动
+            2、left
+                元素左浮动
+                停靠在父元素的左边 或 其他已浮动元素的右边上
+            3、right
+                元素右浮动
+                停靠在父元素的右边 或 其他已浮动元素的左边上
+    3、浮动引发的特殊效果
+        1、当父元素容纳不下所有已浮动子元素，最后一个将换行显示(有可能被卡住)
+        2、元素一旦浮动起来后，宽度将变成自适应(非手动指定情况下)
+        3、元素一旦浮动起来后，都将变成块级元素
+            块级：允许修改尺寸，允许设置上下margin
+            行内元素：不能改尺寸，不能设置上下margin
+        4、行内元素，行内块元素，文本 采用的是环绕的排列方式，无法被浮动元素压在底下
+</code></pre><p>1、浮动定位</p>
+<pre><code>1、清除浮动
+    1、什么是清除浮动
+        清除当前元素前面的元素浮动所带来的影响
+        清除浮动影响后，当前元素不会上前占位
+    2、属性
+        属性：clear
+        取值：
+            1、none
+                默认值，无清除效果
+            2、left
+                清除当前元素前面元素左浮动带来的影响
+            3、right
+                清除当前元素前面元素右浮动带来的影响
+            4、both
+                清除当前元素前面元素任何一种浮动方向所带来的影响
+    3、浮动元素为父元素高度带来的影响
+        父元素的高度是以未浮动的子元素高度为准
+        如果一个元素中所有的子元素全部都是浮动的，那么该父元素的高度为 0
+        解决父元素的高度问题方案：
+        1、直接设置父元素高度
+            弊端：必须知道父元素的高度
+        2、让父元素也浮动
+            弊端：对后续元素会产生影响
+        3、为父元素增加溢出处理属性
+            属性：overflow
+            取值：hidden 或 auto
+            弊端：要溢出显示的内容，也一同被隐藏
+        4、在父元素中，增加空子元素到最后一个位置处,并且设置其clear属性为both
+            弊端：多一个子元素在页面上
+</code></pre><p>2、显示</p>
+<pre><code>1、显示方式
+    属性：display
+    取值：
+        1、none
+            让指定的元素不显示 并且 不占据页面空间
+            (脱离文档流)
+        2、block
+            将指定的元素显示为块级
+        3、inline
+            将指定的元素显示为行内
+        4、inline-block
+            将指定的元素显示为行内块
+            行内块特点：
+                1、多个元素能够在一行内显示
+                2、允许修改尺寸
+        5、table
+            将指定的元素显示为 table
+2、显示效果
+    1、visibility 属性
+        作用：规范元素可见性
+        取值：
+            1、visible
+                默认值，元素可见
+            2、hidden
+                元素不可见，但是占据页面空间
+            3、collapse
+                用在表格元素上，删除一行或一列时，不影响表格整体布局
+        面试：
+            display:none 和 visibility:hidden 区别
+            1、display:none; 脱离文档流，所以不占据页面空间
+            2、visibility:hidden; 只是改变可见性，并不脱离文档流，空间依然占据
+    2、opacity 属性
+        作用：改变元素的透明度
+        取值：从0.0(完全透明) ~ 1.0(完全不透明) 之间的数字
+    3、vertical-align 属性
+        1、在 td 中，设置文本的垂直对齐方式
+        2、设置行内块元素两边文本的垂直对齐方式
+        3、设置图片两端文本垂直对齐方式
+
+        语法：
+            属性：vertical-align
+            取值：
+                1、top
+                2、middle
+                3、bottom
+                4、baseline
+                    基线对齐
+3、光标
+    改变鼠标在页面(元素)中的状态
+    属性：cursor
+    取值：
+        1、default
+        2、pointer
+            小手
+        3、crosshair
+            +
+        4、text
+            文本状态 I
+        5、wait
+            等待
+        6、help
+            帮助
+</code></pre><p>3、列表</p>
+<pre><code>1、列表项标识
+    属性：list-style-type
+    取值：
+        1、none
+        2、disc ：实心圆
+        ... ...
+2、列表项图像
+    属性：list-style-image
+    取值：url()
+3、列表项标识位置
+    列表项标识的默认位置是在内容区域之外
+    属性：list-style-position
+    取值：
+        1、outside
+            默认值
+        2、inside
+            将列表项标识的位置改为内容区域之内
+4、列表属性
+    属性：list-style
+    取值：type url position;
+    常用方式：list-style:none;
+5、CSS重写
+    CSS Reset，修改元素的默认样式
+    body,p,h1,h2,h3,h4,h5,h6,pre,ul,ol,dl,dd{
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+</code></pre><p>4、定位(相对，绝对，固定)</p>
+<pre><code>1、定位属性
+    1、定位属性
+        属性：position
+        作用：改变元素定位方式
+        取值：
+            1、static
+                静态的，默认值
+            2、relative
+                相对的
+            3、absolute
+                绝对的
+            4、fixed
+                固定定位
+        注意：relative，absolute，fixed被称之为 &quot;已定位元素&quot;
+    2、偏移属性
+        作用：改变元素在页面中的位置
+        属性：
+            1、top
+            2、bottom
+            3、left
+            4、right
+        取值：偏移距离(px)
+    3、堆叠顺序
+        作用：在已定位元素中调整堆叠顺序
+        属性：z-index
+        取值：无单位的数字
+2、定位 - 相对定位
+    1、什么是相对定位
+        元素会相对于它原来的位置偏移某个距离
+        元素原来所占的空间会被保留
+    2、语法
+        position:relative;
+        配合 top/right/bottom/left 偏移属性实现位置的微调
+    3、使用场合
+        1、元素位置微调
+3、定位 - 绝对定位
+    1、什么是绝对定位 &amp; 特点
+        1、绝对定位的元素会脱离文档流即不占据页面空间
+        2、绝对定位的元素会相对于离它最近的已定位的祖先元素去实现定位
+        3、如果没有已定位的祖先元素，那么就会相对于最初的包含块去实现定位比如body或html
+    2、语法
+        position:absolute;
+        配合着 top/right/bottom/left 实现位置定位
+    3、特点
+        1、绝对定位元素会变成块级元素
+        2、绝对定位元素的margin可以使用，默认情况下，auto会失效
+        &lt;div id=&quot;d1&quot;&gt;(无定位)
+            &lt;div id=&quot;d2&quot;&gt;(无定位)
+                &lt;p id=&quot;p1&quot;&gt;(无定位)
+                    &lt;span&gt;这是一个span&lt;/span&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+4、堆叠顺序
+    属性：z-index
+    取值：无单位的数值
+        数值越大，越靠前，默认是0
+        可以取负值，当前元素在页面所有内容之下
+    注意：
+        1、只有已定位元素才能设置z-index
+        2、默认的堆叠顺序是 后来者居上
+        3、父子元素中，永远都是子压在父上,是不受z-index影响的
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、CSS概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、问题
+    1、控制页面中所有的文本颜色为 红色
+    2、控制页面中所有div的文本颜色 为蓝色
+    3、将 所有div 的颜色 变为 黄色
+
+    HTML元素的不足：
+        1、要完成相同的效果，使
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+    
+      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git使用基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/git/"/>
     <id>www.wangchengzou.cn/2017/07/22/git/</id>
@@ -6847,37 +8403,6 @@ keep it simple
     
     
       <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo编写方法</title>
-    <link href="www.wangchengzou.cn/2017/07/22/hexo%E7%BC%96%E5%86%99%E6%96%B9%E6%B3%95/"/>
-    <id>www.wangchengzou.cn/2017/07/22/hexo编写方法/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-02T03:17:53.699Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
     
   </entry>
   
