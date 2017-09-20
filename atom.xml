@@ -2407,89 +2407,582 @@ when？ 实现UI层的渐进式的框架
   </entry>
   
   <entry>
-    <title>hexo使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/hexo/"/>
-    <id>www.wangchengzou.cn/2017/07/22/hexo/</id>
+    <title>git使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/git/"/>
+    <id>www.wangchengzou.cn/2017/07/22/git/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:10:17.259Z</updated>
+    <updated>2017-08-14T13:27:47.886Z</updated>
     
-    <content type="html"><![CDATA[<p>安装</p>
-<pre><code>$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├── scaffolds
-    ├── source
-    |   ├── _drafts
-    |   └── _posts
-    └── themes
-</code></pre><p>配置</p>
-<pre><code>_config.yml 中修改大部份的配置
-title    网站标题
-subtitle    网站副标题
-description    网站描述
-author    您的名字
-language    网站使用的语言
-timezone    网站时区。Hexo 默认使用您电脑的时区。时区列表。
-    比如说：America/New_York, Japan, 和 UTC 。
-网站存放在子目录
-    例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/
-</code></pre><p>目录</p>
-<pre><code>source_dir    资源文件夹，这个文件夹用来存放内容。    source
-public_dir    公共文件夹，这个文件夹用于存放生成的站点文件。    public
-tag_dir    标签文件夹    tags
-archive_dir    归档文件夹    archives
-category_dir    分类文件夹    categories
-code_dir    Include code 文件夹    downloads/code
-i18n_dir    国际化（i18n）文件夹    :lang
-skip_render    跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。
-</code></pre><p>文章</p>
-<pre><code>new_post_name    新文章的文件名称    :title.md
-default_layout    预设布局    post
-auto_spacing    在中文和英文之间加入空格    false
-titlecase    把标题转换为 title case    false
-external_link    在新标签中打开链接    true
-filename_case    把文件名称转换为 (1) 小写或 (2) 大写    0
-render_drafts    显示草稿    false
-post_asset_folder    启动 Asset 文件夹    false
-relative_link    把链接改为与根目录的相对位址    false
-future    显示未来的文章    true
-highlight    代码块的设置
-</code></pre><p>分类 &amp; 标签</p>
-<pre><code>default_category    默认分类    uncategorized
-category_map    分类别名
-tag_map    标签别名
-</code></pre><p>日期 / 时间格式</p>
-<pre><code>date_format    日期格式    YYYY-MM-DD
-time_format    时间格式    H:mm:ss
-</code></pre><p>分页</p>
-<pre><code>per_page    每页显示的文章量 (0 = 关闭分页功能)    10
-pagination_dir    分页目录    page
+    <content type="html"><![CDATA[<p>使用方法</p>
+<pre><code>git  config  --global   user.name   &quot;name&quot;
+git  config  --global   user.email   &quot;email@qq.com&quot;
+</code></pre><p>指令说明</p>
+<pre><code>git  status               查看工作区所有文件状态
+git  add  1.jpg          把指定文件添加到暂存区
+git  add  *.jpg          把指定后缀名的文件添加到暂存区
+git  add  *              把所有文件添加到暂存区
+git  add  .              把所有文件添加到暂存区
+git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
+git  log                 查看仓库中所有的提交记录
+
+git  reset  --hard  版本号     工作区回退到指定的版本
+git  log       查看当前已经生效的所有版本号
+git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
+</code></pre><p>远程仓库相关</p>
+<pre><code>git  clone  远程仓库的地址
+git  clone  git@github.com:jquery/jquery.git
+git  clone  https://github.com/jquery/jquery.git
+</code></pre><p>创建关联使用方法</p>
+<pre><code>git  init           本地创建一个空白仓库
+git  remote       查看当前仓库关联到哪些远程仓库
+git  remote  add  关联仓库名  远程仓库的地址
+git  pull  关联仓库名  master    从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
+git  add  .        修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
+git  commit   -m   &quot;说明信息&quot;
+git  push  远程仓库名  master    把本地仓库中的新的版本信息“推送(push)”给远程仓库
+
+git subtree push --prefix=dist origin gh-pages  建立分支结构
+</code></pre><p>关于分支的使用方法</p>
+<pre><code>1，将远程仓库克隆到本地：
+    git clone https://github.com/**.git(项目克隆地址)
+2，生成分支gh-pages并切换到此分支
+    cd flexSupplement （进入到你克隆仓库的本地文件夹）
+    git checkout - -orphan gh-pages (创建分支并切换，两个横杆)
+3，将本地克隆文件(文件名为github仓库名)里面除.git文件以外的其他文件全部删除，
+    再将根目录下dist文件夹里面的内容复制到克隆文件中。
+    依次执行以下命令：
+    git add . （将本地所有文件加到仓库里）
+    git commit -m “message” （设置提交信息）
+    git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
+    git push -u origin gh-pages （push文件到仓库中）
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;安装&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ npm install -g hexo-cli
-Hexo 将会在指定文件夹
-$ hexo init
-新建完成后 文件夹的目录如下
-    .
-    ├── _config.yml
-    ├── package.json
-    ├
+      &lt;p&gt;使用方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git  config  --global   user.name   &amp;quot;name&amp;quot;
+git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
+&lt;/
     
     </summary>
     
       <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
+      <category term="git" scheme="www.wangchengzou.cn/tags/git/"/>
     
       <category term="打包" scheme="www.wangchengzou.cn/tags/%E6%89%93%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JQuery基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
+    <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-11T01:11:01.703Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、 DOM分为三部分：</p>
+<pre><code>(1)核心DOM：操作任意标签树
+(2)HTML DOM：操作HTML标签树
+(3)XML DOM：操作XML标签树
+</code></pre><p>2、常用的核心DOM操作</p>
+<pre><code>(1)查找元素的方法
+    document.getElementById(&apos;p1&apos;)
+    document.getElementsByName(&apos;uname&apos;)
+    document.getElementsByTagName(&apos;div&apos;)
+    document.getElementsByClassName(&apos;btn&apos;)
+    document.querySelector(&apos;选择器&apos;)
+    document.querySelectorAll(&apos;选择器&apos;)
+    遍历DOM节点：
+    node.parentNode
+    parent.childNodes、parent.children
+    node.nextSibling、node.previousSibling
+(2)修改元素的属性
+    node.setAttribute(&apos;title&apos;,&apos;值&apos;)
+    node.getAttribute(&apos;title&apos;)
+(3)修改元素的内容
+    element.innerHTML
+    element.textContent/innerText
+(4)修改元素的样式
+    element.style.color = &apos;red&apos;;
+    element.className = &apos;btn btn-danger&apos;
+(5)修改元素的值
+    inputElement.value
+(6)添加新元素
+    var newElement = document.createElement(&apos;div&apos;);
+    parent.appendChild(newElement)
+(7)删除已有元素
+    parent.removeChild(node)
+(8)替换旧元素
+    parent.replaceChild(oldChild, newChild)
+(9)元素克隆
+    element.cloneNode()
+
+总结：核心DOM操作的问题
+  · 方法名普遍比较长
+  · 操作比较僵硬
+  · 方法存在浏览器兼容性
+</code></pre><p>3、jQuery 概述</p>
+<pre><code>jQuery是一个DOM操作的函数库，简化了常用的DOM操作。
+理念：Write Less，Do More
+jQuery提供了四类函数：
+  (1)DOM操作 —— 重点
+  (2)事件处理
+  (3)动画函数
+  (4)AJAX
+</code></pre><p>4、 jQuery的版本问题：</p>
+<pre><code>(1)jQuery 1.x：比较大、功能偏弱、兼容老IE
+(2)jQuery 2.x：比较小、功能强大、不兼容老IE
+(3)jQuery 3.x：比较小、功能更强大、不兼容老IE
+面试题：jQuery3的新特性有哪些？
+HTML中使用jQuery，只需要使用SCRIPT标签引入jquery-*.js即可，会为window添加两个新的成员：
+    window.$
+    window.jQuery
+</code></pre><p>5、jQuery函数的特点</p>
+<pre><code>(1) $或者jQuery是一个函数，返回值是一个jQuery类数组对象
+(2)即使没有查找到需要的元素，jQuery类数组对象也不会是null/undefined，调用jQuery函数不会报错！
+(3)jQuery类数组对象提供的函数都自带for循环遍历每个查找到的元素
+(4)jQuery函数底层都是DOM操作，所以可和原生的DOM操作组合使用
+(5)原生DOM对象不能调用jQuery提供的函数；jQuery函数返回的类数组对象也不能调用核心DOM成员
+(6)原生DOM对象和jQuery对象间如何转换：
+  原生DOM对象封装到一个jQuery类数组对象
+      $(domObject)
+  jQuery类数组中取出封装的DOM对象：
+      $(&apos;button&apos;)[index]
+(7)jQuery对象方法的返回值一般还是当前选定的类数组对象，可以实现“链式调用”
+</code></pre><p>6、jQuery函数第一部分：DOM操作函数 —— 查找元素</p>
+<pre><code>$( &apos;选择器&apos; )
+jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；
+同时还扩展了一些新的选择器语法。
+面试题：jQuery中的哪些选择器是CSS中没有的？ —— 执行效率较低
+</code></pre><p>7、 第一组：基本选择器   —— 重点</p>
+<pre><code>(1)#id
+  练习：点击一个button#bt1，让下方的一个p#p1隐藏起来
+  提示：jQuery类数组对象提供的.hide()函数可以隐藏一个元素
+(2).className
+  练习：点击一个button#bt2，让下方所有的span.badge字体变大为2em
+  提示：jQuery类数组对象提供的.css(&apos;color&apos;, &apos;red&apos;)函数可以修改当前选定元素的指定样式
+(3)标签名
+  练习：li元素上发生鼠标进入事件时，当前li显示出下边框
+  提示：使用.on(&apos;mouseover&apos;, fn)监听鼠标进入事件
+(4)*
+  练习：单击button#bt3后，让所有的元素的box-sizing变为border-box，所有元素的margin变为0
+(5)div, p, #c3
+  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，
+  添加事件监听，点击后打印出当前系统时间
+</code></pre><p>8、第二组：层级选择器       —— 重点</p>
+<pre><code>(6) ancestor descendant   后代选择器
+  练习：为所有#alert1中的.btn添加事件监听，单击后，隐藏#alert1
+(7) parent &gt; child     直接子代选择器
+  练习：为所有#alert2中的直接子元素.btn添加事件监听，单击后，隐藏#alert2
+(8) prev + next      下一个相邻兄弟选择器
+  练习：为UL中的LI添加上边框，实现如下效果：
+  $(&apos;li + li&apos;).....
+  $(&apos;li:not(:first-child)&apos;)....
+(9) prev ~ siblings    后续的所有兄弟选择器
+</code></pre><p>9、第三组：基本过滤选择器       —— 重点</p>
+<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，
+      不论是否在同一个父元素中与否。下标从0开始！
+(10) :first
+  练习：把所有列表中的第一个LI字体加粗显示
+(11) :last:
+  练习：把所有列表中的最后一个LI字体斜体显示
+(12) :eq(index)
+  练习：把所有列表中的第index个LI添加有边框
+(13) :gt(index)
+  练习：把所有列表中的下标大于index的LI添加删除线
+(14) :lt(index)
+  练习：把所有列表中的下标小于index的LI添加下划线
+(15) :odd
+  练习：把所有列表中的下标为奇数的LI背景颜色变为淡黄色
+(16) :even
+  练习：把所有列表中的下标为偶数的LI背景颜色变为淡蓝色
+(17) :not(selector)
+</code></pre><p>10、第四组：子元素过滤选择器       —— 重点</p>
+<pre><code>注意：在每个父元素中进行分组，查找指定的子元素。下标从1开始。
+(18) :first-child
+  $(&apos;li:first-child&apos;);
+  练习：把每个列表中的第一个子LI字体变浅蓝
+(19) :last-child
+  练习：把每个列表中的第最后一个子LI字体变红色
+(20) :nth-child(index)
+  练习：把每个列表中的第2个子LI字体添加绿色背景
+  $(&apos;li:nth-child(2)&apos;)...
+  $(&apos;li:nth-child(odd)&apos;)       $(&apos;li:nth-child(2n+2)&apos;)
+  $(&apos;li:nth-child(even)&apos;)    $(&apos;li:nth-child(2n)&apos;)
+(21) :only-child
+  $(&apos;li:only-child&apos;)
+</code></pre><p>11、第五组：属性选择器</p>
+<pre><code>(22) [attribute]
+  选中所有具备title属性的a元素： $(&apos;a[title]&apos;)...
+(23) [attribute=value]
+  选中所有具备data-toggle属性且值为dropddown的元素：
+  $(&apos;[data-toggle=&quot;dropdown&quot;]&apos;)....
+(24) [attribute!=value]
+(25) [attribute^=value]
+(26) [attribute$=value]
+(27) [attribute*=value]    具备指定的属性，且值中包含指定字符
+</code></pre><p>12、第六组：可见性选择器</p>
+<pre><code>(28) :visible         $(&apos;:visible&apos;)选中所有可见元素
+(29) :hidden        $(&apos;:hidden&apos;)选中所有隐藏元素
+测试：哪些是:hidden可以选中的？
+      · display: none            可以
+      · visibility: hidden        不可以
+      · opacity: 0            不可以
+      · input[type=&quot;hidden&quot;]    可以
+</code></pre><p>13、第七组：内容过滤选择器</p>
+<pre><code>  (30) :contains(txt)
+    练习：选中文本中包含“提交”字的button元素，让它们变为绿色按钮
+  (31) :has(selector)
+    练习：选中包含.close按钮的.alert元素，让它们变为红色的警告框；
+选中不包含.close按钮的.alert元素，让它们变为红色的警告框
+  (32) :empty
+    练习：选中内容为空的警告框    $(&apos;.alert:empty&apos;).....
+  (33) :parent
+    练习：选中内容不为空的警告框，即包含子元素或文本内容
+    $(&apos;.alert:parent&apos;).....
+</code></pre><p>14、第八组：表单元素选择器</p>
+<pre><code>: input         :text         :password     :radio
+:checkbox     :submit         :image         :reset
+:button     :file             :hidden
+
+:enabled     :disabled     :checked         :selected
+  &lt;input type=&quot;image&quot; src=&quot;img/1.jpg&quot;&gt;
+</code></pre><p>15、 W3C DOM把HTML文档看做树型结构，并提供操作节点方法；–总结</p>
+<pre><code>jQuery是一个函数库，用于简化DOM操作，屏蔽了浏览器兼容性问题。函数分为四类：
+  (1)DOM操作
+  (2)事件处理
+  (3)动画
+  (4)AJAX
+jQueryDOM操作——查找节点
+  jQuery(&apos;选择器&apos;)    =》  类数组对象
+基本选择器：
+    #id、.class、div、*、button,.btn
+层级选择器：
+    parent  child
+    parent &gt; child
+    prev + next
+    prev ~ siblings
+基本过滤选择器：
+    :first        :last        :eq(i)    :gt(i)        :lt(i)
+    :odd        :even    :not(selector)
+子代过滤选择器：
+    :first-child    :last-child        :nth-child(i)
+    :nth-child(odd)   :nth-child(even)
+属性选择器：
+    [attr=&quot;value&quot;]
+可见性选择器：
+    :visible        :hidden
+内容选择器：
+    :contains(txt)        :has(selector)
+    :empty            :parent
+表单元素选择器：
+    :text        :radio    :submit
+    :disabled    :enabled     :checked    :selected
+</code></pre><p>16、操作元素的属性</p>
+<pre><code>&lt;a  href=&quot;&quot; title=&quot;&quot;  data-toggle=&quot;dropdown&quot;&gt;
+核心DOM：
+  element.getAttribute(&apos;title&apos;)
+  element.setAttribute(&apos;title&apos;, &apos;abc&apos;)
+jQuery：
+  var value  = $(..).attr(&apos;title&apos;)        //读取属性的值
+  $(..).attr(&apos;title&apos;, &apos;abc&apos;)            //设置属性的值
+提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，
+  也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
+  var v = $(...).data(&apos;my-target&apos;)        //读取
+  $(...).data(&apos;my-target&apos;, &apos;2.jpg&apos;)        //设置
+
+练习：点击某个小图，下方就显示出对应的大图
+  &lt;img src=&quot;img/4.jpg&quot; data-target=&quot;img/Koala.jpg&quot;&gt;
+</code></pre><p>17、操作元素的内容</p>
+<pre><code>核心DOM：
+  var h = element.innerHTML;
+  element.innerHTML = h;
+  var t = element.innerText/textContent;
+  element.innerText/textContext = t;
+jQuery：
+  $(..).html( )        //读取innerHTML
+  $(..).html( &apos;html&apos; )    //设置innerHTML
+  $(..).text( )        //读取innerText
+  $(..).text( &apos;txt&apos; )        //设置innerText
+练习：点击一个Button，上方显示出已点击的次数
+练习：&lt;a href=&quot;#&quot;&gt;再次点击即显示下一张图片&lt;/a&gt;
+  1再次点击即显示下一张图片
+  2&lt;img src=&quot;1.jpg&quot;&gt;
+  3再次点击即显示下一张图片
+  4&lt;img src=&quot;2.jpg&quot;&gt;
+  5再次点击即显示下一张图片
+  6 ....
+</code></pre><p>18、操作元素的样式</p>
+<pre><code>核心DOM：
+  var c = element.style.color        //读取行内样式
+  element.style.color = &apos;red&apos;        //设置行内样式
+  var n = element.className        //读取ClassName
+  element.className = n            //设置ClassName
+jQuery：
+  $(..).css(&apos;color&apos;)        //读取指定样式的值
+  $(..).css(&apos;color&apos;, &apos;red&apos;)    //设置行内样式
+  $(..).addClass(&apos;alert&apos;)    //添加一个class
+  $(..).removeClass(&apos;alert&apos;)    //删除一个class
+  $(..).hasClass(&apos;alert&apos;)    //判断选定元素是否具有指定class
+练习：实现一个“双态按钮”，点击一次变为深色，再点击变为浅色
+  .up {  }            .down {  }
+</code></pre><p>19、操作表单元素的值</p>
+<pre><code>核心DOM：
+    var v = input.value        //读取值
+    input.value = &apos;v&apos;        //设置值
+jQuery：
+    $(...).val( )            //读取值
+    $(...).val(&apos;value&apos;)    //设置值
+练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，
+读取用户的两个输入，打印出来，在输入框中清除用户的输入
+
+面试题：在操作元素的相关属性时，使用attr()、val()、prop()、data()有何区别？
+attr()一般只用于操作元素的HTML字面属性，如src、href、name...
+val()操作的是HTML元素对应的JS对象的value属性
+prop()操作的是HTML元素对应的JS对象的disabled、
+readyonly、selected、checked等Boolean类型属性
+data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据）
+    而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
+</code></pre><p>20、遍历DOM树上的节点</p>
+<pre><code>核心DOM：
+  element.parentNode            //寻找父节点
+  element.childNodes/children        //获取子节点
+  elemnet.nextSibling            //获取下一个兄弟
+  element.previousSibling            //获取上一个兄弟
+jQuery：
+  $(..).parent()            //返回选定元素的父节点
+  $(..).children()            //返回所有子节点
+  $(..).next()            //返回下一个兄弟
+  $(..).prev()            //返回上一个兄弟
+  $(..).siblings()            //返回所有的同辈兄弟
+练习：实现一个自己的页签组件
+
+  &lt;ul class=&quot;tabs&quot;&gt;
+      &lt;li&gt;&lt;a&gt;十元套餐&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;active&quot;&gt;&lt;a&gt;二十元套餐&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a&gt;三十元套餐&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+</code></pre><p>21、添加新的元素</p>
+<pre><code>核心DOM：
+  var li = document.createElement(&apos;li&apos;)    //创建子节点
+  //修改li的属性....                    //设置其属性
+  ul.appendChild( li );                    //添加到父节点
+jQuery：
+  var li = $(&apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos;)    //创建子节点
+  //li.click(fn)
+  $(&apos;ul&apos;).append( li );                //在父节点最后追加子节点
+  $(li).appendTo( &apos;ul&apos; )            //子节点追加到父节点最后
+   -------可以简写为------------------------------
+  $(&apos;ul&apos;).append( &apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos; )
+练习：添加和删除小盒子
+
+  function rc(){            //Random Color:  返回一个随机的颜色
+      var r = Math.floor(Math.random()*256)
+      var g = Math.floor(Math.random()*256)
+      var b = Math.floor(Math.random()*256)
+      return `rgb(  ,  ,  )`;
+  }
+</code></pre><p>22、删除已有的元素</p>
+<pre><code>核心DOM：
+  ul.removeChild( li )            //由父元素删除孩子
+jQuery：
+  $(&apos;li&apos;).remove()                //删除当前选定元素
+</code></pre><p>23、替换已有元素</p>
+<pre><code>核心DOM：
+  parent.replaceChild(oldChild,  newChild);
+jQuery：
+  $(&apos;oldChild&apos;).replaceWith( newChild )
+  //已有节点用新节点替换，返回被删除的旧节点
+  $(&apos;newChild&apos;).replaceAll( oldChild )
+  //新节点替换所有的旧节点，返回新节点
+练习：实现英雄选择效果    div#chosen        div#list
+</code></pre><p>24克隆节点</p>
+<pre><code>核心DOM：
+  var copy = element.cloneNode( )
+jQuery：
+  var copy = $(..).clone()
+  //返回选定元素的副本
+  var copy = $(..).clone(copyListener)
+  //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
+练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，
+上方选中区域出现当前飞机的一个副本
+</code></pre><p>25、jQuery函数第二部分：事件处理函数</p>
+<pre><code>jQuery的历史上先后出现了若干事件处理函数：
+(1)bind() / unbind()            已废弃
+(2)one(事件名称, fn)    仅对指定事件监听一次
+(3)live() / die()                已废弃
+(4)delegate() / undelegate()    已废弃
+(5)on() / off()
+(6)click() / mouseover() / mouseout() / keyup() ...
+  $(..).click(fn)  &lt;=&gt;  $(..).on(&apos;click&apos;, fn)
+
+  on()函数的第一种使用方法——直接绑定在事件源上：
+      $(&apos;事件源&apos;).on(&apos;事件名称&apos;, fn)    //绑定监听函数
+      $(&apos;事件源&apos;).off(&apos;事件名称&apos;)        //取消所有监听函数
+  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；
+  要求此后此按钮再被点击无任何处理函数了。
+  on()的第一种用法有两个限制：
+      (1)若选中元素很多，每个都会有一个监听函数
+      (2)无法为后添加的元素执行绑定
+  on()函数的第二种使用方法——委托给父元素进行事件代理：
+      $(&apos;parent&apos;).on(&apos;事件名称&apos;, &apos;子元素选择器&apos;, fn)
+</code></pre><p>26、 DOM中为元素绑定监听函数：</p>
+<pre><code>btn.onclick = function(){  }
+btn.addEventListener(&apos;click&apos;, function(){  })
+jQuery中的on()函数底层是addEventListener
+</code></pre><p>27、DOM操作——增删改查</p>
+<pre><code>(1)查找元素：  $(&apos;选择器&apos;)   jQuery(&apos;选择器&apos;)
+(2)操作元素的属性： $(..).attr()
+(3)操作元素的内容： $(..).html()  $(..).text()
+(4)操作元素的样式： $(..).css()
+    $(..).addClass()   $(..)removeClass()
+    $(..).hasClass()  $(..).toggleClass(&apos;.btn&apos;)
+ (5)操作元素的值：  $(..).val()
+ (6)遍历元素：
+    $(..).parent()
+    $(..).children()-直接子代
+    $(..).find()-所有子元素
+    $(..).next()        $(..).nextAll()
+    $(..).prev()        $(..).prevAll()
+    $(..).siblings()
+(7)插入节点：  $(..).append()   $(..).prepend()
+(8)删除节点：  $(..).remove()   $(..).empty()
+(9)替换节点：  $(..).replaceWith()  $(..).replaceAll()
+(10)克隆节点： $(..).clone()
+</code></pre><p>28、事件处理函数：</p>
+<pre><code>(1)$(&apos;.btn&apos;).one(&apos;click&apos;, fn)
+(2)$(&apos;.btn&apos;).click(fn) ....
+(3)$(&apos;.btn&apos;).on(&apos;click&apos;, fn)        off(..)
+  $(&apos;.container&apos;).on(&apos;click&apos;, &apos;.btn&apos;, fn)  off(..)
+
+  让jQuery放弃使用 $ ：
+  jQuery.noConflict()
+</code></pre><p>29、面试题：window.onload和$(document).ready()的异同？</p>
+<pre><code>window.onload是核心DOM的写法：
+  window.onload = function(){ ... }
+  只能为绑定一次；
+  只有全部的网页内容(html/css/js/图片....)加载完成才能触发。
+
+$(document).ready()是jQuery的写法：
+  $(document).ready(function(){ ... })
+  底层是addEventListener(&apos;DOMContentLoaded&apos;, fn)，可以先后绑定多次；
+  只要“DOM内容(只包括html/js)加载完成”即可触发。
+</code></pre><p>30、补充：jQuery中的hover()函数</p>
+<pre><code>jQuery监听“鼠标进入+鼠标离开”有如下三种方法：
+(1) $(..).mouseover(fn)   +  $(..).mouseout(fn)
+(2) $(..).mouseenter(fn)   +   $(..).mouseleave(fn)
+(3) $(..).hover( fn, fn )
+注意：方法3等同于方法2
+</code></pre><p>31、补充：jQuery中的trigger()函数</p>
+<pre><code>使用JS代码代替用户触发指定的事件，调用之前绑定的监听函数。
+$(&apos;.btn&apos;).trigger( &apos;click&apos; )
+可以简写为：
+$(&apos;.btn&apos;).click( )
+</code></pre><p>32、jQuery中的函数第三部分：动画函数 —— 隐藏和显示动画</p>
+<pre><code>隐藏和显示函数通过使用定时器修改目标元素的width / height / opcaity三个样式的值来实现动画：
+$(..).show()      $(..).show(&apos;slow/normal/fast&apos;)  $(..).show(3000)
+$(..).hide()    $(..).hide(&apos;slow/normal/fast&apos;)  $(..).hide(3000)
+$(..).toggle()     ...  在隐藏和显示之间切换
+</code></pre><p>33、jQuery中的函数第三部分：动画函数 —— 折叠展开/收起动画</p>
+<pre><code>折叠展开/收起动画函数通过使用定时器修改目标元素的height一个样式的值来实现动画：
+$(..).slideUp( )    $(..).slideUp( &apos;slow/normal/fast&apos; )   $(..).slideUp( 300 )
+$(..).slideDown( )  ....
+$(..).slideToggle( )   ....
+
+练习：仿写Bootstrap中的响应式导航条在手机中的效果
+&lt;div class=&quot;navbar&quot;&gt;
+  &lt;div class=&quot;navbar-header&quot;&gt;
+      &lt;a class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
+      &lt;a class=&quot;navbar-toggle&quot;&gt;三&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;navbar-collapse&quot;&gt;
+      ul&gt;li&gt;a
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>34、jQuery中的函数第三部分：动画函数 —— 淡入/淡出动画</p>
+<pre><code>淡入/淡出动画函数通过使用定时器修改目标元素的opacity一个样式的值来实现动画：
+$(..).fadeIn( )  $(..).fadeIn(&apos;slow/normal/fast&apos;)  $(..).fadeIn(300)
+$(..).fadeOut( )
+$(..).fadeToggle( )
+提示：上述六个动画函数都可以在最后接收一个参数——函数
+  $(..).fadeOut( 300,  function(){ //在动画结束时的回调函数 })
+练习：点击小星星后，闪动3次，最后消失
+</code></pre><p>35、jQuery中的函数第三部分：动画函数 —— animate()</p>
+<pre><code>$(..).animate({
+  属性1: 值1;
+  ...
+}, 300, fn)
+动画排队：执行完一个动画后，再执行另一个
+动画并发：同时执行多个属性的动画效果
+
+animate({})可以对哪些CSS属性执行动画？
+(1)width、height、opacity、fontSize....等等有可渐变属性值（数值型）的样式可以执行动画
+(2)display、fontFamily、transform、颜色类属性等没有渐变属性值的样式不能执行动画
+</code></pre><p>36、Web应用中可用的动画技术：</p>
+<pre><code>(1)CSS3 Transition
+(2)CSS3 Keyframes
+(3)定时器 + 属性修改            jQuery1/2动画函数
+(4)requestAnimationFrame       jQuery3
+</code></pre><p>37、jQuery类数组对象的操作</p>
+<pre><code>  window.$  &lt;=&gt; window.jQuery
+$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，
+其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
+  $(..).length        获取类数组中封装的DOM对象的数量
+  $(..)[index]        获取类数组中封装的第index个DOM对象
+  $(..).get(index)        获取类数组中封装的第index个DOM对象
+  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，
+                      针对每个DOM元素执行一次指定的回调函数
+  $(..).index(domObj)    返回指定的DOM元素在当前类数组中的下标
+</code></pre><p>38、补充：页面DOM内容加载完成后执行指定的函数</p>
+<pre><code>$(document).ready(fn)
+$().ready(fn)
+$(fn)
+</code></pre><p>39、jQuery中的插件函数</p>
+<pre><code> Plugin：插件，在现有的功能基础上添加更多的功能，扩展整体的应用。
+jQuery中的插件（即函数）分为两类：
+ 1.jQuery全局插件函数
+   原本要声明的工具函数（如max()/min()）如果声明为全局函数，会造成“全局对象(window)的污染；
+   为了避免污染全局对象，可以把这些函数纳入到 jQuery对象的名下——与jQuery没有必然的关系：
+   声明方式：    jQuery.max = function(arr){  }
+               jQuery.extend({ max: fn,  min: fn})
+   调用方式：    jQuery.max([10,38,50])
+ 2.jQuery对象插件函数
+   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，
+   用于操作当前选定的DOM元素。
+   声明方式：    jQuery.fn.max = function( ){  }
+               jQuery.fn.extend({ max: fn,   min: fn})
+   调用方式：    $(&apos;li&apos;).max( )
+
+   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，
+   所有的jQuery对象的原型： jQuery.fn;
+   若想给所有的jQuery对象都添加一个扩展函数，只需要加给jQuery.fn即可
+
+  3.复杂插件的编写：轮播广告
+       $(&apos;..&apos;).carousel( );
+
+  4.复杂插件的编写：滚动监听
+       $(&apos;..&apos;).scrollspy( );
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、 DOM分为三部分：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(1)核心DOM：操作任意标签树
+(2)HTML DOM：操作HTML标签树
+(3)XML DOM：操作XML标签树
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、常用的核心DOM操作&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(1)查找元
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
+    
+      <category term="JQuery" scheme="www.wangchengzou.cn/tags/JQuery/"/>
     
   </entry>
   
@@ -3070,590 +3563,6 @@ $.ajax({})   全能
   </entry>
   
   <entry>
-    <title>JQuery基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
-    <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-11T01:11:01.703Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、 DOM分为三部分：</p>
-<pre><code>(1)核心DOM：操作任意标签树
-(2)HTML DOM：操作HTML标签树
-(3)XML DOM：操作XML标签树
-</code></pre><p>2、常用的核心DOM操作</p>
-<pre><code>(1)查找元素的方法
-    document.getElementById(&apos;p1&apos;)
-    document.getElementsByName(&apos;uname&apos;)
-    document.getElementsByTagName(&apos;div&apos;)
-    document.getElementsByClassName(&apos;btn&apos;)
-    document.querySelector(&apos;选择器&apos;)
-    document.querySelectorAll(&apos;选择器&apos;)
-    遍历DOM节点：
-    node.parentNode
-    parent.childNodes、parent.children
-    node.nextSibling、node.previousSibling
-(2)修改元素的属性
-    node.setAttribute(&apos;title&apos;,&apos;值&apos;)
-    node.getAttribute(&apos;title&apos;)
-(3)修改元素的内容
-    element.innerHTML
-    element.textContent/innerText
-(4)修改元素的样式
-    element.style.color = &apos;red&apos;;
-    element.className = &apos;btn btn-danger&apos;
-(5)修改元素的值
-    inputElement.value
-(6)添加新元素
-    var newElement = document.createElement(&apos;div&apos;);
-    parent.appendChild(newElement)
-(7)删除已有元素
-    parent.removeChild(node)
-(8)替换旧元素
-    parent.replaceChild(oldChild, newChild)
-(9)元素克隆
-    element.cloneNode()
-
-总结：核心DOM操作的问题
-  · 方法名普遍比较长
-  · 操作比较僵硬
-  · 方法存在浏览器兼容性
-</code></pre><p>3、jQuery 概述</p>
-<pre><code>jQuery是一个DOM操作的函数库，简化了常用的DOM操作。
-理念：Write Less，Do More
-jQuery提供了四类函数：
-  (1)DOM操作 —— 重点
-  (2)事件处理
-  (3)动画函数
-  (4)AJAX
-</code></pre><p>4、 jQuery的版本问题：</p>
-<pre><code>(1)jQuery 1.x：比较大、功能偏弱、兼容老IE
-(2)jQuery 2.x：比较小、功能强大、不兼容老IE
-(3)jQuery 3.x：比较小、功能更强大、不兼容老IE
-面试题：jQuery3的新特性有哪些？
-HTML中使用jQuery，只需要使用SCRIPT标签引入jquery-*.js即可，会为window添加两个新的成员：
-    window.$
-    window.jQuery
-</code></pre><p>5、jQuery函数的特点</p>
-<pre><code>(1) $或者jQuery是一个函数，返回值是一个jQuery类数组对象
-(2)即使没有查找到需要的元素，jQuery类数组对象也不会是null/undefined，调用jQuery函数不会报错！
-(3)jQuery类数组对象提供的函数都自带for循环遍历每个查找到的元素
-(4)jQuery函数底层都是DOM操作，所以可和原生的DOM操作组合使用
-(5)原生DOM对象不能调用jQuery提供的函数；jQuery函数返回的类数组对象也不能调用核心DOM成员
-(6)原生DOM对象和jQuery对象间如何转换：
-  原生DOM对象封装到一个jQuery类数组对象
-      $(domObject)
-  jQuery类数组中取出封装的DOM对象：
-      $(&apos;button&apos;)[index]
-(7)jQuery对象方法的返回值一般还是当前选定的类数组对象，可以实现“链式调用”
-</code></pre><p>6、jQuery函数第一部分：DOM操作函数 —— 查找元素</p>
-<pre><code>$( &apos;选择器&apos; )
-jQuery的选择器语法支持所有的CSS选择器语法！并屏蔽了浏览器兼容性；
-同时还扩展了一些新的选择器语法。
-面试题：jQuery中的哪些选择器是CSS中没有的？ —— 执行效率较低
-</code></pre><p>7、 第一组：基本选择器   —— 重点</p>
-<pre><code>(1)#id
-  练习：点击一个button#bt1，让下方的一个p#p1隐藏起来
-  提示：jQuery类数组对象提供的.hide()函数可以隐藏一个元素
-(2).className
-  练习：点击一个button#bt2，让下方所有的span.badge字体变大为2em
-  提示：jQuery类数组对象提供的.css(&apos;color&apos;, &apos;red&apos;)函数可以修改当前选定元素的指定样式
-(3)标签名
-  练习：li元素上发生鼠标进入事件时，当前li显示出下边框
-  提示：使用.on(&apos;mouseover&apos;, fn)监听鼠标进入事件
-(4)*
-  练习：单击button#bt3后，让所有的元素的box-sizing变为border-box，所有元素的margin变为0
-(5)div, p, #c3
-  练习：页面加载完成后，为所有的button、.btn、role=&quot;button&quot;的元素，
-  添加事件监听，点击后打印出当前系统时间
-</code></pre><p>8、第二组：层级选择器       —— 重点</p>
-<pre><code>(6) ancestor descendant   后代选择器
-  练习：为所有#alert1中的.btn添加事件监听，单击后，隐藏#alert1
-(7) parent &gt; child     直接子代选择器
-  练习：为所有#alert2中的直接子元素.btn添加事件监听，单击后，隐藏#alert2
-(8) prev + next      下一个相邻兄弟选择器
-  练习：为UL中的LI添加上边框，实现如下效果：
-  $(&apos;li + li&apos;).....
-  $(&apos;li:not(:first-child)&apos;)....
-(9) prev ~ siblings    后续的所有兄弟选择器
-</code></pre><p>9、第三组：基本过滤选择器       —— 重点</p>
-<pre><code>注意：基本过滤选择器把所有满足选中的元素放在一个大集合中进行排序，
-      不论是否在同一个父元素中与否。下标从0开始！
-(10) :first
-  练习：把所有列表中的第一个LI字体加粗显示
-(11) :last:
-  练习：把所有列表中的最后一个LI字体斜体显示
-(12) :eq(index)
-  练习：把所有列表中的第index个LI添加有边框
-(13) :gt(index)
-  练习：把所有列表中的下标大于index的LI添加删除线
-(14) :lt(index)
-  练习：把所有列表中的下标小于index的LI添加下划线
-(15) :odd
-  练习：把所有列表中的下标为奇数的LI背景颜色变为淡黄色
-(16) :even
-  练习：把所有列表中的下标为偶数的LI背景颜色变为淡蓝色
-(17) :not(selector)
-</code></pre><p>10、第四组：子元素过滤选择器       —— 重点</p>
-<pre><code>注意：在每个父元素中进行分组，查找指定的子元素。下标从1开始。
-(18) :first-child
-  $(&apos;li:first-child&apos;);
-  练习：把每个列表中的第一个子LI字体变浅蓝
-(19) :last-child
-  练习：把每个列表中的第最后一个子LI字体变红色
-(20) :nth-child(index)
-  练习：把每个列表中的第2个子LI字体添加绿色背景
-  $(&apos;li:nth-child(2)&apos;)...
-  $(&apos;li:nth-child(odd)&apos;)       $(&apos;li:nth-child(2n+2)&apos;)
-  $(&apos;li:nth-child(even)&apos;)    $(&apos;li:nth-child(2n)&apos;)
-(21) :only-child
-  $(&apos;li:only-child&apos;)
-</code></pre><p>11、第五组：属性选择器</p>
-<pre><code>(22) [attribute]
-  选中所有具备title属性的a元素： $(&apos;a[title]&apos;)...
-(23) [attribute=value]
-  选中所有具备data-toggle属性且值为dropddown的元素：
-  $(&apos;[data-toggle=&quot;dropdown&quot;]&apos;)....
-(24) [attribute!=value]
-(25) [attribute^=value]
-(26) [attribute$=value]
-(27) [attribute*=value]    具备指定的属性，且值中包含指定字符
-</code></pre><p>12、第六组：可见性选择器</p>
-<pre><code>(28) :visible         $(&apos;:visible&apos;)选中所有可见元素
-(29) :hidden        $(&apos;:hidden&apos;)选中所有隐藏元素
-测试：哪些是:hidden可以选中的？
-      · display: none            可以
-      · visibility: hidden        不可以
-      · opacity: 0            不可以
-      · input[type=&quot;hidden&quot;]    可以
-</code></pre><p>13、第七组：内容过滤选择器</p>
-<pre><code>  (30) :contains(txt)
-    练习：选中文本中包含“提交”字的button元素，让它们变为绿色按钮
-  (31) :has(selector)
-    练习：选中包含.close按钮的.alert元素，让它们变为红色的警告框；
-选中不包含.close按钮的.alert元素，让它们变为红色的警告框
-  (32) :empty
-    练习：选中内容为空的警告框    $(&apos;.alert:empty&apos;).....
-  (33) :parent
-    练习：选中内容不为空的警告框，即包含子元素或文本内容
-    $(&apos;.alert:parent&apos;).....
-</code></pre><p>14、第八组：表单元素选择器</p>
-<pre><code>: input         :text         :password     :radio
-:checkbox     :submit         :image         :reset
-:button     :file             :hidden
-
-:enabled     :disabled     :checked         :selected
-  &lt;input type=&quot;image&quot; src=&quot;img/1.jpg&quot;&gt;
-</code></pre><p>15、 W3C DOM把HTML文档看做树型结构，并提供操作节点方法；–总结</p>
-<pre><code>jQuery是一个函数库，用于简化DOM操作，屏蔽了浏览器兼容性问题。函数分为四类：
-  (1)DOM操作
-  (2)事件处理
-  (3)动画
-  (4)AJAX
-jQueryDOM操作——查找节点
-  jQuery(&apos;选择器&apos;)    =》  类数组对象
-基本选择器：
-    #id、.class、div、*、button,.btn
-层级选择器：
-    parent  child
-    parent &gt; child
-    prev + next
-    prev ~ siblings
-基本过滤选择器：
-    :first        :last        :eq(i)    :gt(i)        :lt(i)
-    :odd        :even    :not(selector)
-子代过滤选择器：
-    :first-child    :last-child        :nth-child(i)
-    :nth-child(odd)   :nth-child(even)
-属性选择器：
-    [attr=&quot;value&quot;]
-可见性选择器：
-    :visible        :hidden
-内容选择器：
-    :contains(txt)        :has(selector)
-    :empty            :parent
-表单元素选择器：
-    :text        :radio    :submit
-    :disabled    :enabled     :checked    :selected
-</code></pre><p>16、操作元素的属性</p>
-<pre><code>&lt;a  href=&quot;&quot; title=&quot;&quot;  data-toggle=&quot;dropdown&quot;&gt;
-核心DOM：
-  element.getAttribute(&apos;title&apos;)
-  element.setAttribute(&apos;title&apos;, &apos;abc&apos;)
-jQuery：
-  var value  = $(..).attr(&apos;title&apos;)        //读取属性的值
-  $(..).attr(&apos;title&apos;, &apos;abc&apos;)            //设置属性的值
-提示：读取和设置元素的data-*扩展属性，可以使用attr()方法，
-  也可以使用data()方法，如： &lt;a data-my-target=&quot;1.jpg&quot;&gt;
-  var v = $(...).data(&apos;my-target&apos;)        //读取
-  $(...).data(&apos;my-target&apos;, &apos;2.jpg&apos;)        //设置
-
-练习：点击某个小图，下方就显示出对应的大图
-  &lt;img src=&quot;img/4.jpg&quot; data-target=&quot;img/Koala.jpg&quot;&gt;
-</code></pre><p>17、操作元素的内容</p>
-<pre><code>核心DOM：
-  var h = element.innerHTML;
-  element.innerHTML = h;
-  var t = element.innerText/textContent;
-  element.innerText/textContext = t;
-jQuery：
-  $(..).html( )        //读取innerHTML
-  $(..).html( &apos;html&apos; )    //设置innerHTML
-  $(..).text( )        //读取innerText
-  $(..).text( &apos;txt&apos; )        //设置innerText
-练习：点击一个Button，上方显示出已点击的次数
-练习：&lt;a href=&quot;#&quot;&gt;再次点击即显示下一张图片&lt;/a&gt;
-  1再次点击即显示下一张图片
-  2&lt;img src=&quot;1.jpg&quot;&gt;
-  3再次点击即显示下一张图片
-  4&lt;img src=&quot;2.jpg&quot;&gt;
-  5再次点击即显示下一张图片
-  6 ....
-</code></pre><p>18、操作元素的样式</p>
-<pre><code>核心DOM：
-  var c = element.style.color        //读取行内样式
-  element.style.color = &apos;red&apos;        //设置行内样式
-  var n = element.className        //读取ClassName
-  element.className = n            //设置ClassName
-jQuery：
-  $(..).css(&apos;color&apos;)        //读取指定样式的值
-  $(..).css(&apos;color&apos;, &apos;red&apos;)    //设置行内样式
-  $(..).addClass(&apos;alert&apos;)    //添加一个class
-  $(..).removeClass(&apos;alert&apos;)    //删除一个class
-  $(..).hasClass(&apos;alert&apos;)    //判断选定元素是否具有指定class
-练习：实现一个“双态按钮”，点击一次变为深色，再点击变为浅色
-  .up {  }            .down {  }
-</code></pre><p>19、操作表单元素的值</p>
-<pre><code>核心DOM：
-    var v = input.value        //读取值
-    input.value = &apos;v&apos;        //设置值
-jQuery：
-    $(...).val( )            //读取值
-    $(...).val(&apos;value&apos;)    //设置值
-练习：“用户名”和“密码”输入框，点击“提交注册信息”按钮后，
-读取用户的两个输入，打印出来，在输入框中清除用户的输入
-
-面试题：在操作元素的相关属性时，使用attr()、val()、prop()、data()有何区别？
-attr()一般只用于操作元素的HTML字面属性，如src、href、name...
-val()操作的是HTML元素对应的JS对象的value属性
-prop()操作的是HTML元素对应的JS对象的disabled、
-readyonly、selected、checked等Boolean类型属性
-data()操作的是HTML元素对应的JS对象的扩展数据属性（对象缓存数据）
-    而attr(&apos;data-xx&apos;)读取/修改的HTML元素字面属性
-</code></pre><p>20、遍历DOM树上的节点</p>
-<pre><code>核心DOM：
-  element.parentNode            //寻找父节点
-  element.childNodes/children        //获取子节点
-  elemnet.nextSibling            //获取下一个兄弟
-  element.previousSibling            //获取上一个兄弟
-jQuery：
-  $(..).parent()            //返回选定元素的父节点
-  $(..).children()            //返回所有子节点
-  $(..).next()            //返回下一个兄弟
-  $(..).prev()            //返回上一个兄弟
-  $(..).siblings()            //返回所有的同辈兄弟
-练习：实现一个自己的页签组件
-
-  &lt;ul class=&quot;tabs&quot;&gt;
-      &lt;li&gt;&lt;a&gt;十元套餐&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;active&quot;&gt;&lt;a&gt;二十元套餐&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a&gt;三十元套餐&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-</code></pre><p>21、添加新的元素</p>
-<pre><code>核心DOM：
-  var li = document.createElement(&apos;li&apos;)    //创建子节点
-  //修改li的属性....                    //设置其属性
-  ul.appendChild( li );                    //添加到父节点
-jQuery：
-  var li = $(&apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos;)    //创建子节点
-  //li.click(fn)
-  $(&apos;ul&apos;).append( li );                //在父节点最后追加子节点
-  $(li).appendTo( &apos;ul&apos; )            //子节点追加到父节点最后
-   -------可以简写为------------------------------
-  $(&apos;ul&apos;).append( &apos;&lt;li class=&quot;item&quot;&gt;内容&lt;/li&gt;&apos; )
-练习：添加和删除小盒子
-
-  function rc(){            //Random Color:  返回一个随机的颜色
-      var r = Math.floor(Math.random()*256)
-      var g = Math.floor(Math.random()*256)
-      var b = Math.floor(Math.random()*256)
-      return `rgb(  ,  ,  )`;
-  }
-</code></pre><p>22、删除已有的元素</p>
-<pre><code>核心DOM：
-  ul.removeChild( li )            //由父元素删除孩子
-jQuery：
-  $(&apos;li&apos;).remove()                //删除当前选定元素
-</code></pre><p>23、替换已有元素</p>
-<pre><code>核心DOM：
-  parent.replaceChild(oldChild,  newChild);
-jQuery：
-  $(&apos;oldChild&apos;).replaceWith( newChild )
-  //已有节点用新节点替换，返回被删除的旧节点
-  $(&apos;newChild&apos;).replaceAll( oldChild )
-  //新节点替换所有的旧节点，返回新节点
-练习：实现英雄选择效果    div#chosen        div#list
-</code></pre><p>24克隆节点</p>
-<pre><code>核心DOM：
-  var copy = element.cloneNode( )
-jQuery：
-  var copy = $(..).clone()
-  //返回选定元素的副本
-  var copy = $(..).clone(copyListener)
-  //参数指示是否复制选定元素绑定的监听函数，默认为false，不复制监听函数
-练习：改进“英雄选择”应用，要求点击某个小飞机后，下方仍然有该飞机，
-上方选中区域出现当前飞机的一个副本
-</code></pre><p>25、jQuery函数第二部分：事件处理函数</p>
-<pre><code>jQuery的历史上先后出现了若干事件处理函数：
-(1)bind() / unbind()            已废弃
-(2)one(事件名称, fn)    仅对指定事件监听一次
-(3)live() / die()                已废弃
-(4)delegate() / undelegate()    已废弃
-(5)on() / off()
-(6)click() / mouseover() / mouseout() / keyup() ...
-  $(..).click(fn)  &lt;=&gt;  $(..).on(&apos;click&apos;, fn)
-
-  on()函数的第一种使用方法——直接绑定在事件源上：
-      $(&apos;事件源&apos;).on(&apos;事件名称&apos;, fn)    //绑定监听函数
-      $(&apos;事件源&apos;).off(&apos;事件名称&apos;)        //取消所有监听函数
-  练习：点击“开始抽奖”按钮，命令行中输出“抽奖中”，按钮上的文字也变为“抽奖中”；
-  要求此后此按钮再被点击无任何处理函数了。
-  on()的第一种用法有两个限制：
-      (1)若选中元素很多，每个都会有一个监听函数
-      (2)无法为后添加的元素执行绑定
-  on()函数的第二种使用方法——委托给父元素进行事件代理：
-      $(&apos;parent&apos;).on(&apos;事件名称&apos;, &apos;子元素选择器&apos;, fn)
-</code></pre><p>26、 DOM中为元素绑定监听函数：</p>
-<pre><code>btn.onclick = function(){  }
-btn.addEventListener(&apos;click&apos;, function(){  })
-jQuery中的on()函数底层是addEventListener
-</code></pre><p>27、DOM操作——增删改查</p>
-<pre><code>(1)查找元素：  $(&apos;选择器&apos;)   jQuery(&apos;选择器&apos;)
-(2)操作元素的属性： $(..).attr()
-(3)操作元素的内容： $(..).html()  $(..).text()
-(4)操作元素的样式： $(..).css()
-    $(..).addClass()   $(..)removeClass()
-    $(..).hasClass()  $(..).toggleClass(&apos;.btn&apos;)
- (5)操作元素的值：  $(..).val()
- (6)遍历元素：
-    $(..).parent()
-    $(..).children()-直接子代
-    $(..).find()-所有子元素
-    $(..).next()        $(..).nextAll()
-    $(..).prev()        $(..).prevAll()
-    $(..).siblings()
-(7)插入节点：  $(..).append()   $(..).prepend()
-(8)删除节点：  $(..).remove()   $(..).empty()
-(9)替换节点：  $(..).replaceWith()  $(..).replaceAll()
-(10)克隆节点： $(..).clone()
-</code></pre><p>28、事件处理函数：</p>
-<pre><code>(1)$(&apos;.btn&apos;).one(&apos;click&apos;, fn)
-(2)$(&apos;.btn&apos;).click(fn) ....
-(3)$(&apos;.btn&apos;).on(&apos;click&apos;, fn)        off(..)
-  $(&apos;.container&apos;).on(&apos;click&apos;, &apos;.btn&apos;, fn)  off(..)
-
-  让jQuery放弃使用 $ ：
-  jQuery.noConflict()
-</code></pre><p>29、面试题：window.onload和$(document).ready()的异同？</p>
-<pre><code>window.onload是核心DOM的写法：
-  window.onload = function(){ ... }
-  只能为绑定一次；
-  只有全部的网页内容(html/css/js/图片....)加载完成才能触发。
-
-$(document).ready()是jQuery的写法：
-  $(document).ready(function(){ ... })
-  底层是addEventListener(&apos;DOMContentLoaded&apos;, fn)，可以先后绑定多次；
-  只要“DOM内容(只包括html/js)加载完成”即可触发。
-</code></pre><p>30、补充：jQuery中的hover()函数</p>
-<pre><code>jQuery监听“鼠标进入+鼠标离开”有如下三种方法：
-(1) $(..).mouseover(fn)   +  $(..).mouseout(fn)
-(2) $(..).mouseenter(fn)   +   $(..).mouseleave(fn)
-(3) $(..).hover( fn, fn )
-注意：方法3等同于方法2
-</code></pre><p>31、补充：jQuery中的trigger()函数</p>
-<pre><code>使用JS代码代替用户触发指定的事件，调用之前绑定的监听函数。
-$(&apos;.btn&apos;).trigger( &apos;click&apos; )
-可以简写为：
-$(&apos;.btn&apos;).click( )
-</code></pre><p>32、jQuery中的函数第三部分：动画函数 —— 隐藏和显示动画</p>
-<pre><code>隐藏和显示函数通过使用定时器修改目标元素的width / height / opcaity三个样式的值来实现动画：
-$(..).show()      $(..).show(&apos;slow/normal/fast&apos;)  $(..).show(3000)
-$(..).hide()    $(..).hide(&apos;slow/normal/fast&apos;)  $(..).hide(3000)
-$(..).toggle()     ...  在隐藏和显示之间切换
-</code></pre><p>33、jQuery中的函数第三部分：动画函数 —— 折叠展开/收起动画</p>
-<pre><code>折叠展开/收起动画函数通过使用定时器修改目标元素的height一个样式的值来实现动画：
-$(..).slideUp( )    $(..).slideUp( &apos;slow/normal/fast&apos; )   $(..).slideUp( 300 )
-$(..).slideDown( )  ....
-$(..).slideToggle( )   ....
-
-练习：仿写Bootstrap中的响应式导航条在手机中的效果
-&lt;div class=&quot;navbar&quot;&gt;
-  &lt;div class=&quot;navbar-header&quot;&gt;
-      &lt;a class=&quot;navbar-brand&quot;&gt;TARENA&lt;/a&gt;
-      &lt;a class=&quot;navbar-toggle&quot;&gt;三&lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;navbar-collapse&quot;&gt;
-      ul&gt;li&gt;a
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>34、jQuery中的函数第三部分：动画函数 —— 淡入/淡出动画</p>
-<pre><code>淡入/淡出动画函数通过使用定时器修改目标元素的opacity一个样式的值来实现动画：
-$(..).fadeIn( )  $(..).fadeIn(&apos;slow/normal/fast&apos;)  $(..).fadeIn(300)
-$(..).fadeOut( )
-$(..).fadeToggle( )
-提示：上述六个动画函数都可以在最后接收一个参数——函数
-  $(..).fadeOut( 300,  function(){ //在动画结束时的回调函数 })
-练习：点击小星星后，闪动3次，最后消失
-</code></pre><p>35、jQuery中的函数第三部分：动画函数 —— animate()</p>
-<pre><code>$(..).animate({
-  属性1: 值1;
-  ...
-}, 300, fn)
-动画排队：执行完一个动画后，再执行另一个
-动画并发：同时执行多个属性的动画效果
-
-animate({})可以对哪些CSS属性执行动画？
-(1)width、height、opacity、fontSize....等等有可渐变属性值（数值型）的样式可以执行动画
-(2)display、fontFamily、transform、颜色类属性等没有渐变属性值的样式不能执行动画
-</code></pre><p>36、Web应用中可用的动画技术：</p>
-<pre><code>(1)CSS3 Transition
-(2)CSS3 Keyframes
-(3)定时器 + 属性修改            jQuery1/2动画函数
-(4)requestAnimationFrame       jQuery3
-</code></pre><p>37、jQuery类数组对象的操作</p>
-<pre><code>  window.$  &lt;=&gt; window.jQuery
-$()函数或jQuery()返回值是一个“类数组对象”—— 有点像数组，但不是Array类型的实例，
-其中封装着查找到的所有DOM元素。该对象称为“jQuery对象”，其类数组相关操作：
-  $(..).length        获取类数组中封装的DOM对象的数量
-  $(..)[index]        获取类数组中封装的第index个DOM对象
-  $(..).get(index)        获取类数组中封装的第index个DOM对象
-  $(..).each(fn)        遍历类数组中封装的每一个DOM对象，
-                      针对每个DOM元素执行一次指定的回调函数
-  $(..).index(domObj)    返回指定的DOM元素在当前类数组中的下标
-</code></pre><p>38、补充：页面DOM内容加载完成后执行指定的函数</p>
-<pre><code>$(document).ready(fn)
-$().ready(fn)
-$(fn)
-</code></pre><p>39、jQuery中的插件函数</p>
-<pre><code> Plugin：插件，在现有的功能基础上添加更多的功能，扩展整体的应用。
-jQuery中的插件（即函数）分为两类：
- 1.jQuery全局插件函数
-   原本要声明的工具函数（如max()/min()）如果声明为全局函数，会造成“全局对象(window)的污染；
-   为了避免污染全局对象，可以把这些函数纳入到 jQuery对象的名下——与jQuery没有必然的关系：
-   声明方式：    jQuery.max = function(arr){  }
-               jQuery.extend({ max: fn,  min: fn})
-   调用方式：    jQuery.max([10,38,50])
- 2.jQuery对象插件函数
-   jQuery对象插件函数就是为所有的jQuery对象（$()函数的返回值）添加的公共函数，
-   用于操作当前选定的DOM元素。
-   声明方式：    jQuery.fn.max = function( ){  }
-               jQuery.fn.extend({ max: fn,   min: fn})
-   调用方式：    $(&apos;li&apos;).max( )
-
-   jQuery(..) 或 $(..) 的返回值是一个类数组对象——“jQuery对象”，
-   所有的jQuery对象的原型： jQuery.fn;
-   若想给所有的jQuery对象都添加一个扩展函数，只需要加给jQuery.fn即可
-
-  3.复杂插件的编写：轮播广告
-       $(&apos;..&apos;).carousel( );
-
-  4.复杂插件的编写：滚动监听
-       $(&apos;..&apos;).scrollspy( );
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、 DOM分为三部分：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)核心DOM：操作任意标签树
-(2)HTML DOM：操作HTML标签树
-(3)XML DOM：操作XML标签树
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2、常用的核心DOM操作&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(1)查找元
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
-    
-      <category term="JQuery" scheme="www.wangchengzou.cn/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zetpojs基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:56:58.353Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
-<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要引入js文件，调用方法即可
-特点：
-    学习成本低
-    轻量
-注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
-        如果要用到其他模块，去zeptoBuilder
-        官网：http://github.e-sites.nl/zeptobuilder/
-        选择需要用到的模块，勾选，下载即可
-</code></pre><p>二、使用Zepto</p>
-<pre><code>1、核心模块
-    集合、数据、类型判断的操作
-    选择器
-    DOM增删改查
-
-2、detect
-    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
-    $.os $.browser
-
-3、event模块
-    on off one trigger
-
-4、Ajax模块
-    $.get
-    $.post
-    $.ajax
-    $.load
-
-5、form模块
-    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
-    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
-    submit 表单指定submit触发时 执行的处理函数
-
-6、Touch模块
-    点按事件：tap singleTap doubleTap longTap
-    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
-
-7、Effects（Animate）模块
-    show/hide/fadeIn/fadeOut/fadeToggle
-    animate
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vue快速上手知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
     <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
@@ -4023,6 +3932,227 @@ Props验证：
     
     
       <category term="Vue，App" scheme="www.wangchengzou.cn/tags/Vue%EF%BC%8CApp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zetpojs基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:56:58.353Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
+<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要引入js文件，调用方法即可
+特点：
+    学习成本低
+    轻量
+注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
+        如果要用到其他模块，去zeptoBuilder
+        官网：http://github.e-sites.nl/zeptobuilder/
+        选择需要用到的模块，勾选，下载即可
+</code></pre><p>二、使用Zepto</p>
+<pre><code>1、核心模块
+    集合、数据、类型判断的操作
+    选择器
+    DOM增删改查
+
+2、detect
+    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
+    $.os $.browser
+
+3、event模块
+    on off one trigger
+
+4、Ajax模块
+    $.get
+    $.post
+    $.ajax
+    $.load
+
+5、form模块
+    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
+    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
+    submit 表单指定submit触发时 执行的处理函数
+
+6、Touch模块
+    点按事件：tap singleTap doubleTap longTap
+    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
+
+7、Effects（Animate）模块
+    show/hide/fadeIn/fadeOut/fadeToggle
+    animate
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ajax面试题点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-27T14:23:51.280Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
+<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
+，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
+使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
+ActiveXObject(IE浏览器)对象实现异步通信效果
+基本步骤：
+var xhr =null;//创建对象
+if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+}else{
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+}
+     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
+     xhr.setRequestHeader(“”,””);//设置http头信息
+     xhr.onreadystatechange =function(){}//指定回调函数
+     xhr.send();//发送请求
+</code></pre><p>3、如何解决跨域问题?</p>
+<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
+出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
+所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
+，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
+为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
+，这就是解决跨域问题的主流解决方案
+</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
+<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
+不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
+encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
+对于post请求不需要进行编码
+</code></pre><p>5、简述ajax 的过程。</p>
+<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
+2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
+3. 设置响应HTTP请求状态变化的函数
+4. 发送HTTP请求
+5. 获取异步调用返回的数据
+6. 使用JavaScript和DOM实现局部刷新
+</code></pre><p>6、阐述一下异步加载。</p>
+<pre><code>1. 异步加载的方案： 动态插入 script 标签
+2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
+3. script 标签上添加 defer 或者 async 属性
+4. 创建并插入 iframe，让它异步执行 js
+</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
+<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
+它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
+所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
+指一段脚本只能读取来自同一来源的窗口和文档的属性。
+</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
+<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
+一般在2000个字符，有的浏览器是8000个字符
+POST：一般用于修改服务器上的资源，对所发送的信息没有限制
+在以下情况中，请使用 POST 请求：
+1. 无法使用缓存文件（更新服务器上的文件或数据库）
+2. 向服务器发送大量数据（POST 没有数据量限制）
+3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
+<pre><code>1. 通过异步模式，提升了用户体验
+2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
+3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
+</code></pre><p>10、 Ajax的最大的特点是什么。</p>
+<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
+</code></pre><p>11、ajax的缺点</p>
+<pre><code>1、ajax不支持浏览器back按钮。
+2、安全问题 AJAX暴露了与服务器交互的细节。
+3、对搜索引擎的支持比较弱。
+4、破坏了程序的异常机制。
+</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，
+提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
+</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
+<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
+<p>14、什么是Ajax和JSON，它们的优缺点。</p>
+<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
+用于在Web页面中实现异步数据交互，实现页面局部刷新。
+优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
+避免用户不断刷新或者跳转页面，提高用户体验
+缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
+可能造成请求数的增加跨域问题限制；
+JSON是一种轻量级的数据交换格式，ECMA的一个子集
+优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
+解析，支持复合数据类型（数组、对象、字符串、数字）
+</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
+<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
+<pre><code>分为4个步骤：
+    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
+    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
+    这能使浏览器获得请求对应的 IP 地址。
+    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
+    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
+    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
+    ，最后由客户端发出该请求已经    被接受的报文。
+    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
+    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
+    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
+</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
+，数据不会暴漏在url地址中。
+</code></pre><p>18、ajax请求时，如何解释json数据</p>
+<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
+对数据的安全性更好。
+</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
+<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
+内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
+宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
+</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
+<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
+并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
+</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
+<pre><code>1、压缩css、js文件
+2、合并js、css文件，减少http请求
+3、外部js、css文件放在最底下
+4、减少dom操作，尽可能用变量替代不必要的dom操作
+</code></pre><p>22、HTTP状态码都有那些。</p>
+<pre><code>200 OK      //客户端请求成功
+400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
+403 Forbidden  //服务器收到请求，但是拒绝提供服务
+404 Not Found  //请求资源不存在，输入了错误的URL
+500 Internal Server Error //服务器发生不可预期的错误
+503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
+    
+      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
     
   </entry>
   
@@ -5217,154 +5347,6 @@ less中提供的功能函数
   </entry>
   
   <entry>
-    <title>ajax面试题点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T14:23:51.280Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
-<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
-，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
-使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
-ActiveXObject(IE浏览器)对象实现异步通信效果
-基本步骤：
-var xhr =null;//创建对象
-if(window.XMLHttpRequest){
-    xhr = new XMLHttpRequest();
-}else{
-    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
-}
-     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
-     xhr.setRequestHeader(“”,””);//设置http头信息
-     xhr.onreadystatechange =function(){}//指定回调函数
-     xhr.send();//发送请求
-</code></pre><p>3、如何解决跨域问题?</p>
-<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
-出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
-所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
-，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
-为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
-，这就是解决跨域问题的主流解决方案
-</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
-<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
-不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
-encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
-对于post请求不需要进行编码
-</code></pre><p>5、简述ajax 的过程。</p>
-<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
-2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
-3. 设置响应HTTP请求状态变化的函数
-4. 发送HTTP请求
-5. 获取异步调用返回的数据
-6. 使用JavaScript和DOM实现局部刷新
-</code></pre><p>6、阐述一下异步加载。</p>
-<pre><code>1. 异步加载的方案： 动态插入 script 标签
-2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
-3. script 标签上添加 defer 或者 async 属性
-4. 创建并插入 iframe，让它异步执行 js
-</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
-<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
-它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
-所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
-指一段脚本只能读取来自同一来源的窗口和文档的属性。
-</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
-<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
-一般在2000个字符，有的浏览器是8000个字符
-POST：一般用于修改服务器上的资源，对所发送的信息没有限制
-在以下情况中，请使用 POST 请求：
-1. 无法使用缓存文件（更新服务器上的文件或数据库）
-2. 向服务器发送大量数据（POST 没有数据量限制）
-3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
-</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
-<pre><code>1. 通过异步模式，提升了用户体验
-2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
-3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
-</code></pre><p>10、 Ajax的最大的特点是什么。</p>
-<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
-</code></pre><p>11、ajax的缺点</p>
-<pre><code>1、ajax不支持浏览器back按钮。
-2、安全问题 AJAX暴露了与服务器交互的细节。
-3、对搜索引擎的支持比较弱。
-4、破坏了程序的异常机制。
-</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，
-提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
-</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
-<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
-<p>14、什么是Ajax和JSON，它们的优缺点。</p>
-<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
-用于在Web页面中实现异步数据交互，实现页面局部刷新。
-优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
-避免用户不断刷新或者跳转页面，提高用户体验
-缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
-可能造成请求数的增加跨域问题限制；
-JSON是一种轻量级的数据交换格式，ECMA的一个子集
-优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
-解析，支持复合数据类型（数组、对象、字符串、数字）
-</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
-<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
-<pre><code>分为4个步骤：
-    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
-    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
-    这能使浏览器获得请求对应的 IP 地址。
-    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
-    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
-    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
-    ，最后由客户端发出该请求已经    被接受的报文。
-    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
-    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
-    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
-</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
-，数据不会暴漏在url地址中。
-</code></pre><p>18、ajax请求时，如何解释json数据</p>
-<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
-对数据的安全性更好。
-</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
-<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
-内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
-宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
-</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
-<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
-并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
-</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
-<pre><code>1、压缩css、js文件
-2、合并js、css文件，减少http请求
-3、外部js、css文件放在最底下
-4、减少dom操作，尽可能用变量替代不必要的dom操作
-</code></pre><p>22、HTTP状态码都有那些。</p>
-<pre><code>200 OK      //客户端请求成功
-400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
-403 Forbidden  //服务器收到请求，但是拒绝提供服务
-404 Not Found  //请求资源不存在，输入了错误的URL
-500 Internal Server Error //服务器发生不可预期的错误
-503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
-    
-      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>html和css3</title>
     <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
@@ -5509,161 +5491,6 @@ sessionStorage  数据在浏览器关闭后自动删除。
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>css hack兼容性</title>
-    <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
-    <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-17T11:42:03.588Z</updated>
-    
-    <content type="html"><![CDATA[<p>css hack解决浏览器兼容性问题</p>
-<pre><code>网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
-因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
-致设计的页面效果不一样，用于解决这个问题的方法就是css hack，
-使用特别的css定义显示网页在不同浏览器的设计风格，针对不同的浏览器去写不同的css,
-最大化兼容浏览器
-</code></pre><p>比较频繁使用的css hack技巧</p>
-<pre><code>！important，它可以针对ie和非IE浏览器设置不同的样式
-*+html{...} 只无法充分IE7做样式时候使用
-IE的if条件hack
-    &lt;!--[if IE]&gt; Only IE &lt;![endif]--&gt; 所有的IE可识别
-    &lt;!--[if IE 5.0]&gt; Only IE 5.0 &lt;![endif]--&gt; 只有IE5.0可以识别
-    &lt;!--[if gt IE 5.0]&gt; Only IE 5.0+ &lt;![endif]--&gt; IE5.0包换IE5.5都可以识别
-    &lt;!--[if lt IE 6]&gt; Only IE 6- &lt;![endif]--&gt; 仅IE6可识别
-    &lt;!--[if gte IE 6]&gt; Only IE 6/+ &lt;![endif]--&gt; IE6以及IE6以下的IE5.x都可识别
-    &lt;!--[if lte IE 7]&gt; Only IE 7/- &lt;![endif]--&gt; 仅IE7可识别
-</code></pre><p>1、CSS HACK</p>
-<pre><code>以下两种方法几乎能解决现今所有HACK.
-1, !important (不是很推荐，用下面的一种感觉最安全)
-    随着IE7对!important的支持, !important 方法现在只针对IE6的HACK.
-    (注意写法.记得该声明位置需要提前.)
-    代码: &lt;style&gt;
-        #wrapper {
-            width: 100px!important; /* IE7+FF */
-            width: 80px; /* IE6 */ }
-        &lt;/style&gt;
-
-2, IE6/IE77对FireFox &lt;from 针对firefox ie6 ie7的css样式&gt;
-    *+html 与 *html 是IE特有的标签, firefox 暂不支持.而*+html 又为 IE7特有标签.
-        代码: &lt;style&gt;
-                    #wrapper { width: 120px; } /* FireFox */
-              *html #wrapper { width: 80px;} /* ie6 fixed */
-             *+html #wrapper { width: 60px;} /* ie7 fixed, 注意顺序 */
-            &lt;/style&gt;
-        注意:  *+html 对IE7的HACK 必须保证HTML顶部有如下声明：
-        代码:  &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
-        &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
-</code></pre><p>2、万能 float 闭合(非常重要!)</p>
-<pre><code>可以用这个解决多个div对齐时的间距不对，
-关于 clear float 的原理可参见 [How To Clear Floats Without Structural Markup]
-将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.
-代码: &lt;style&gt;
-    /* Clear Fix */
-    .clearfix:after { content:&quot;.&quot;; display:block;
-                    height:0; clear:both;
-                    visibility:hidden; }
-    .clearfix {  display:inline-block; }  /* Hide from IE Mac \*/
-    .clearfix {display:block;} /* End hide from IE Mac */
-                                /* end of clearfix */
-    &lt;/style&gt;
-</code></pre><p>3、其它兼容性技巧</p>
-<pre><code>1、FF下给div设置padding后会导致width和height增加，但ie不会
-    解决：可用！important
-
-2、居中问题
-    垂直居中
-        将line-heigth设置为 当前div相同高度，再通过vertical-align:middle
-    水平居中
-        margin:0 auto;
-
-3、若需要给a标签内容加上样式，需要设置
-    display:block;(常用于导航标签)
-
-4、FF和IE对BOX理解的差异导致相差2px
-    设为float的div在IE下margin加倍问题
-
-5、ul标签在FF下面默认有list-style和padding
-
-6、作为外部wrapper的div不要定死高度，最好加上overflow:hidden
-    以达到高度自适应
-
-7、 关于手形光标. cursor: pointer. 而hand 只适用于 IE
-</code></pre><p>4、针对firefox ie6 ie7的css样式</p>
-<pre><code>现在大部分都是用!important来hack，对于ie6和firefox测试可以正常显示，
-但是ie7对!important可以正确解释，会导致页 面没按要求显示！
-找到一个针对IE7不错的hack方式就是使用“*+html”，现在用IE7浏览一下，
-应该没有问题了现在写一个CSS可以这样：
-    #1 { color: #333; } /* Moz */
-    * html #1 { color: #666; } /* IE6 */
-    *+html #1 { color: #999; } /* IE7 */
-    那么在firefox下字体颜色显示为#333，
-    IE6下字体颜色显示为#666，
-    IE7下字体颜色显示为#999。
-</code></pre><p>5、css布局中的居中问题</p>
-<pre><code>主要的样式定义如下：
-body {TEXT-ALIGN: center;}
-#center { MARGIN-RIGHT: auto; MARGIN-LEFT: auto; }
-说明：
-    首先在父级元素定义TEXT-ALIGN: center;这个的意思就是在父级元素内的内容居中；
-    对于IE这样设定就已经可以了。但在mozilla中不能居中。
-    解决办法就是在子元素定义时候设定时再加上“MARGIN-RIGHT: auto;MARGIN-LEFT: auto; ”
-    需要说明的是，如果你想用这个方法使整个页面要居中，建议不要套在一个DIV里，
-    你可以依次拆出多个div，只要在每个拆出的div里定义
-    MARGIN-RIGHT: auto;MARGIN-LEFT: auto; 就可以了。
-</code></pre><p>6、盒模型不同解释</p>
-<pre><code>#box{  width:600px;
-    //for ie6.0- w\idth:500px;
-    //for ff+ie6.0 }
-#box{  width:600px!important
-    //for ff  width:600px;
-    //for ff+ie6.0  width /**/:500px;
-    //for ie6.0- }
-</code></pre><p>7、浮动IE产生的双倍距离</p>
-<pre><code>#box{float:left;width:100px;margin:0 0 0 100px;}
-解决：didplay:inline
-block,inline两个元素
-    Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);
-inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);
-#box{ display:block; //可以为内嵌元素模拟为块元素
-      display:inline; //实现同一行排列的的效果
-      diplay:table;
-</code></pre><p>8、IE与宽度和高度的问题</p>
-<pre><code>IE不认得min-这个定义，但实际上它把正常的width和heigth当作有min的情况来使，
-如果设置了min-，则ie下就等于没有设置宽高，设置背景图片最小宽度比较重要
-解决:#box{width:80px;height:35px;}
-    html&gt;body #box{width:auto;heigth:auto;min-width:80px;min-height:35px;}
-</code></pre><p>9、清除浮动</p>
-<pre><code>#box:after{
-    content:&quot;&quot;;
-    display:block;
-    height；0；
-    clear:both;
-    visibility:hidden;
-    }
-</code></pre><p>10、DIV浮动IE文本产生3px的bug</p>
-<pre><code>左边对象浮动，右边采用外补丁的左边距定位，右边对象内的文本会离左边有3px的间距
-#box{float:left;width:800px;}
-#left{float:left;width:50%}
-#right{width:50%}
-*html #left{margin-right:-3px;}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;css hack解决浏览器兼容性问题&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
-因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
-致设计的页面效果不一样，用于解决这个问题的方法就是css h
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
     
   </entry>
   
@@ -7060,6 +6887,161 @@ keep it simple
     
     
       <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css hack兼容性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-17T11:42:03.588Z</updated>
+    
+    <content type="html"><![CDATA[<p>css hack解决浏览器兼容性问题</p>
+<pre><code>网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
+因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
+致设计的页面效果不一样，用于解决这个问题的方法就是css hack，
+使用特别的css定义显示网页在不同浏览器的设计风格，针对不同的浏览器去写不同的css,
+最大化兼容浏览器
+</code></pre><p>比较频繁使用的css hack技巧</p>
+<pre><code>！important，它可以针对ie和非IE浏览器设置不同的样式
+*+html{...} 只无法充分IE7做样式时候使用
+IE的if条件hack
+    &lt;!--[if IE]&gt; Only IE &lt;![endif]--&gt; 所有的IE可识别
+    &lt;!--[if IE 5.0]&gt; Only IE 5.0 &lt;![endif]--&gt; 只有IE5.0可以识别
+    &lt;!--[if gt IE 5.0]&gt; Only IE 5.0+ &lt;![endif]--&gt; IE5.0包换IE5.5都可以识别
+    &lt;!--[if lt IE 6]&gt; Only IE 6- &lt;![endif]--&gt; 仅IE6可识别
+    &lt;!--[if gte IE 6]&gt; Only IE 6/+ &lt;![endif]--&gt; IE6以及IE6以下的IE5.x都可识别
+    &lt;!--[if lte IE 7]&gt; Only IE 7/- &lt;![endif]--&gt; 仅IE7可识别
+</code></pre><p>1、CSS HACK</p>
+<pre><code>以下两种方法几乎能解决现今所有HACK.
+1, !important (不是很推荐，用下面的一种感觉最安全)
+    随着IE7对!important的支持, !important 方法现在只针对IE6的HACK.
+    (注意写法.记得该声明位置需要提前.)
+    代码: &lt;style&gt;
+        #wrapper {
+            width: 100px!important; /* IE7+FF */
+            width: 80px; /* IE6 */ }
+        &lt;/style&gt;
+
+2, IE6/IE77对FireFox &lt;from 针对firefox ie6 ie7的css样式&gt;
+    *+html 与 *html 是IE特有的标签, firefox 暂不支持.而*+html 又为 IE7特有标签.
+        代码: &lt;style&gt;
+                    #wrapper { width: 120px; } /* FireFox */
+              *html #wrapper { width: 80px;} /* ie6 fixed */
+             *+html #wrapper { width: 60px;} /* ie7 fixed, 注意顺序 */
+            &lt;/style&gt;
+        注意:  *+html 对IE7的HACK 必须保证HTML顶部有如下声明：
+        代码:  &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+        &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+</code></pre><p>2、万能 float 闭合(非常重要!)</p>
+<pre><code>可以用这个解决多个div对齐时的间距不对，
+关于 clear float 的原理可参见 [How To Clear Floats Without Structural Markup]
+将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.
+代码: &lt;style&gt;
+    /* Clear Fix */
+    .clearfix:after { content:&quot;.&quot;; display:block;
+                    height:0; clear:both;
+                    visibility:hidden; }
+    .clearfix {  display:inline-block; }  /* Hide from IE Mac \*/
+    .clearfix {display:block;} /* End hide from IE Mac */
+                                /* end of clearfix */
+    &lt;/style&gt;
+</code></pre><p>3、其它兼容性技巧</p>
+<pre><code>1、FF下给div设置padding后会导致width和height增加，但ie不会
+    解决：可用！important
+
+2、居中问题
+    垂直居中
+        将line-heigth设置为 当前div相同高度，再通过vertical-align:middle
+    水平居中
+        margin:0 auto;
+
+3、若需要给a标签内容加上样式，需要设置
+    display:block;(常用于导航标签)
+
+4、FF和IE对BOX理解的差异导致相差2px
+    设为float的div在IE下margin加倍问题
+
+5、ul标签在FF下面默认有list-style和padding
+
+6、作为外部wrapper的div不要定死高度，最好加上overflow:hidden
+    以达到高度自适应
+
+7、 关于手形光标. cursor: pointer. 而hand 只适用于 IE
+</code></pre><p>4、针对firefox ie6 ie7的css样式</p>
+<pre><code>现在大部分都是用!important来hack，对于ie6和firefox测试可以正常显示，
+但是ie7对!important可以正确解释，会导致页 面没按要求显示！
+找到一个针对IE7不错的hack方式就是使用“*+html”，现在用IE7浏览一下，
+应该没有问题了现在写一个CSS可以这样：
+    #1 { color: #333; } /* Moz */
+    * html #1 { color: #666; } /* IE6 */
+    *+html #1 { color: #999; } /* IE7 */
+    那么在firefox下字体颜色显示为#333，
+    IE6下字体颜色显示为#666，
+    IE7下字体颜色显示为#999。
+</code></pre><p>5、css布局中的居中问题</p>
+<pre><code>主要的样式定义如下：
+body {TEXT-ALIGN: center;}
+#center { MARGIN-RIGHT: auto; MARGIN-LEFT: auto; }
+说明：
+    首先在父级元素定义TEXT-ALIGN: center;这个的意思就是在父级元素内的内容居中；
+    对于IE这样设定就已经可以了。但在mozilla中不能居中。
+    解决办法就是在子元素定义时候设定时再加上“MARGIN-RIGHT: auto;MARGIN-LEFT: auto; ”
+    需要说明的是，如果你想用这个方法使整个页面要居中，建议不要套在一个DIV里，
+    你可以依次拆出多个div，只要在每个拆出的div里定义
+    MARGIN-RIGHT: auto;MARGIN-LEFT: auto; 就可以了。
+</code></pre><p>6、盒模型不同解释</p>
+<pre><code>#box{  width:600px;
+    //for ie6.0- w\idth:500px;
+    //for ff+ie6.0 }
+#box{  width:600px!important
+    //for ff  width:600px;
+    //for ff+ie6.0  width /**/:500px;
+    //for ie6.0- }
+</code></pre><p>7、浮动IE产生的双倍距离</p>
+<pre><code>#box{float:left;width:100px;margin:0 0 0 100px;}
+解决：didplay:inline
+block,inline两个元素
+    Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);
+inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);
+#box{ display:block; //可以为内嵌元素模拟为块元素
+      display:inline; //实现同一行排列的的效果
+      diplay:table;
+</code></pre><p>8、IE与宽度和高度的问题</p>
+<pre><code>IE不认得min-这个定义，但实际上它把正常的width和heigth当作有min的情况来使，
+如果设置了min-，则ie下就等于没有设置宽高，设置背景图片最小宽度比较重要
+解决:#box{width:80px;height:35px;}
+    html&gt;body #box{width:auto;heigth:auto;min-width:80px;min-height:35px;}
+</code></pre><p>9、清除浮动</p>
+<pre><code>#box:after{
+    content:&quot;&quot;;
+    display:block;
+    height；0；
+    clear:both;
+    visibility:hidden;
+    }
+</code></pre><p>10、DIV浮动IE文本产生3px的bug</p>
+<pre><code>左边对象浮动，右边采用外补丁的左边距定位，右边对象内的文本会离左边有3px的间距
+#box{float:left;width:800px;}
+#left{float:left;width:50%}
+#right{width:50%}
+*html #left{margin-right:-3px;}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;css hack解决浏览器兼容性问题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
+因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
+致设计的页面效果不一样，用于解决这个问题的方法就是css h
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
     
   </entry>
   
