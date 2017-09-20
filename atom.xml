@@ -2476,6 +2476,291 @@ git  config  --global   user.email   &amp;quot;email@qq.com&amp;quot;
   </entry>
   
   <entry>
+    <title>Ionic基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:53:37.919Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
+<pre><code>三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
+HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
+
+学习WebApp以及HybridApp。
+
+将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
+
+前端+原生
+想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
+想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
+</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
+<pre><code>采用的开发语言：java
+
+使用Goolge公司所提供的SDK，java
+
+①安装jdk
+    java development kit java开发工具箱
+②安装eclipse
+③安装sdk
+    http://www.androiddevtools.cn/
+    ①、下载jdk 直接安装
+    ②、下载ADT bundle（集成了eclipse、sdk）
+</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
+<pre><code>操作注意事项：
+    工具条--》window--》show/hide toolbar 显示隐藏工具条
+    工具条--》window--》reset perspective 恢复默认视图
+    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
+
+    sdk manager：更新SDK
+    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
+    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
+    start-》launch
+
+创建Android项目
+file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
+
+运行Android项目
+选中项目，点击右键，run as-&gt;Android Application Project
+
+对于AndroidApp来说，添加权限，基本步骤：
+①找到工程中根目录下的AndroidManefiest.xml文件
+②打开，选中选项卡permissions
+③点击add，在弹窗中选中uses permission
+④在右侧的下拉菜单中选中需要用到的权限，保存即可
+
+Android工程所对应的目录功能：
+src(source) 源代码，java文件的修改
+gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
+Android* 是google所提供的sdk文件
+assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
+bin 运行工程（编译、链接）时所生成的可执行文件(apk)
+libs(libraries) 库文件：使用第三方的包
+res（resource） 资源文件：图片、布局文件、变量
+AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
+</code></pre><p>四、第一个hybridApp  – webView</p>
+<pre><code>1、基本步骤：
+①按照功能和要求 把前端代码编写完毕
+②将前端代码 放到 Android工程的assets目录
+③创建一个WebView（网页视图组件），配置webView加载指定的html页面
+④将webView作为一个app的内容视图展现出来
+⑤运行，最终是生成了安装包
+
+2、练习：（15:40 - 15：55）
+创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
+要求：创建一个新的Android。
+问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
+解决：借助于webview的setWebChromeClient
+
+3、混合编程的常见的两种方式
+①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
+②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
+
+
+练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
+http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
+localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
+http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
+注意事项：①加上网络权限 ②允许执行js
+
+技巧：
+①timeout 超时
+    只需要将eclipse和模拟器关掉再打开
+②ActivityManager: Warning: Activity not started, its current task has been brought to the front
+    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
+③android library projects can&apos;t be launched
+    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
+ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
+
+如何完成Android工程的创建、运行基本流程以及工作方式
+学习HybridApp的创建和运行
+
+扩展1：
+js调用原生组件：
+①创建一个接口类的文件
+②activity配置使用接口
+③在js中调用java中的一些接口
+
+扩展2：
+js调用原生组件：
+①创建一个接口类的文件
+    @JavascriptInterface
+
+②activity配置使用接口
+ wv.addJavascriptInterface(
+new webInterfac(getApplicationContext()),&quot;android&quot;);
+
+③在js中调用java中的一些接口
+function callShowToast(){
+    android.showToast();
+  }
+</code></pre><p>五、Ionic概述</p>
+<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
+Ionic是一个强大的h5的混合编程app开发框架
+Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
+注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
+特点：
+    ①完美融合了ng
+    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
+    ③设计风格好
+    ④性能优越，运行速度块
+    Ionic = ng + cordova + 移动ui库
+</code></pre><p>六、搭建Ionic的开发环境</p>
+<pre><code>1、方式1 （命令行）
+http://ionicframework.com/getting-started/
+①npm install -g cordova ionic
+    全局安装cordova以及ionic
+②ionic start myApp tabs/sidemenu
+    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
+③ionic serve
+2、方式2：借助于官方所提供的js、css文件
+</code></pre><p>七、学习Ionic样式类</p>
+<pre><code>1、color
+    9个常用的值 ，参考手册中最后一个color的介绍
+
+2、button按钮
+    button/button-small/button-large/button-outline/
+    button-clear/buttn-block/icon-left/icon-right/
+    ion-***/button-bar
+
+3、list 列表
+    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
+    item-divider(分隔符)/badge(badge-assertive)
+    item-avator/item-thumbnail-left/right
+
+4、card 卡片式
+
+5、form 表单
+    list/item/item-input/input-label/item-stacked-label/item-floating-label
+    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
+
+6、grid
+    row/col
+    col-10/20/50..(指定列的宽度)
+    .col-10    10%
+    .col-20    20%
+    .col-25    25%
+    .col-33    33.3333%
+    .col-50    50%
+    .col-67    66.6666%
+    .col-75    75%
+    .col-80    80%
+    .col-90    90%(设置列与列之间的offset)
+
+    .col-offset-10    10%
+    .col-offset-20    20%
+    .col-offset-25    25%
+    .col-offset-33    33.3333%
+    .col-offset-50    50%
+    .col-offset-67    66.6666%
+    .col-offset-75    75%
+    .col-offset-80    80%
+    .col-offset-90    90%
+    col-center/col-top/col-bottom
+</code></pre><p>八、IonRefresher 下拉刷新</p>
+<pre><code>①指定下拉刷新的处理函数
+on-refresh
+②处理完之后，结束刷新动作
+$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
+③ionContent第一个子元素
+</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
+<pre><code>①指定上拉的处理函数
+on-infinite
+②数据更新完成之后，结束刷新
+scroll.infiniteScrollComplete
+③ionContent最后一个子元素
+immediate-check=&apos;false&apos;
+</code></pre><p>十、$ionicScrollDelegate</p>
+<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
+scrollTo(left,top) 滚动到指定的位置
+getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
+</code></pre><p>十一、ionTabs 实现选项卡</p>
+<pre><code>ionTabs 常用属性：
+tabs-icon-top/left/right/bottom/only tabs-positive
+http://ionicons.com/
+ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
+                  badge/badge-style/on-select/ng-click
+</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
+<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
+操作侧边栏菜单打开或者关闭：
+1、js：
+    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
+2、滑动打开
+3、属性
+    menu-close 将现在打开的侧边栏菜单关掉
+    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
+</code></pre><p>十三、ActionSheet</p>
+<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
+    $ionicActionSheet.show({
+
+    })
+在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
+cancel/buttonClicked/destructiveButtonClicked
+(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
+</code></pre><p>十四、$ionicLoading</p>
+<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
+$ionicLoading.show({template/templateUrl/duration/delay})
+$ionicLoading.hide();
+</code></pre><p>十五、$ionicPopup</p>
+<pre><code>在ionic中内容弹窗（警告、确认。。）
+$ionicPopup.alert/confirm/prompt/show()
+</code></pre><p>十六、自定义弹窗</p>
+<pre><code>$ionicModal 模态窗
+①指定要去显示的模板内容
+②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
+③调用$scope.modal.show()
+</code></pre><p>十七、uiRouter</p>
+<pre><code>定位：UI-Router is a client-side router for single page web applications.
+注意：uiRouter用在ng、react中
+uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
+
+ngRoute：
+①路由的基本步骤
+   自定义模块，指定ngRoute模块（angular-route.js）
+   指定盛放代码片段的容器 ngView
+   创建代码片段
+   配置路由词典
+    $routerProvider.when().otherwise()
+②跳转
+  直接修改地址栏
+  $location.path(路由地址)
+  a href=&apos;#路由地址&apos;
+③参数的传递
+  发送方、接收方
+  配置接收方的路由
+  $routeParams
+  发送参数
+
+uiRouter的基本使用步骤：
+ 指定依赖的模块‘ui.router’
+ 盛放代码片段的容器 uiView
+ 创建模板文件
+ 设置状态
+    $stateProvider.state()
+注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
+        在ionic的项目没有必须要指定ui.router
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;三种趋势
+WebApp:通过前端技术来实现的接近传统应用程序体验的app
+NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JQuery基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/JQuery/"/>
     <id>www.wangchengzou.cn/2017/07/22/JQuery/</id>
@@ -2983,291 +3268,6 @@ jQuery中的插件（即函数）分为两类：
       <category term="javaScript" scheme="www.wangchengzou.cn/tags/javaScript/"/>
     
       <category term="JQuery" scheme="www.wangchengzou.cn/tags/JQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ionic基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:53:37.919Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
-<pre><code>三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
-HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
-
-学习WebApp以及HybridApp。
-
-将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
-
-前端+原生
-想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
-想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
-</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
-<pre><code>采用的开发语言：java
-
-使用Goolge公司所提供的SDK，java
-
-①安装jdk
-    java development kit java开发工具箱
-②安装eclipse
-③安装sdk
-    http://www.androiddevtools.cn/
-    ①、下载jdk 直接安装
-    ②、下载ADT bundle（集成了eclipse、sdk）
-</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
-<pre><code>操作注意事项：
-    工具条--》window--》show/hide toolbar 显示隐藏工具条
-    工具条--》window--》reset perspective 恢复默认视图
-    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
-
-    sdk manager：更新SDK
-    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
-    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
-    start-》launch
-
-创建Android项目
-file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
-
-运行Android项目
-选中项目，点击右键，run as-&gt;Android Application Project
-
-对于AndroidApp来说，添加权限，基本步骤：
-①找到工程中根目录下的AndroidManefiest.xml文件
-②打开，选中选项卡permissions
-③点击add，在弹窗中选中uses permission
-④在右侧的下拉菜单中选中需要用到的权限，保存即可
-
-Android工程所对应的目录功能：
-src(source) 源代码，java文件的修改
-gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
-Android* 是google所提供的sdk文件
-assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
-bin 运行工程（编译、链接）时所生成的可执行文件(apk)
-libs(libraries) 库文件：使用第三方的包
-res（resource） 资源文件：图片、布局文件、变量
-AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
-</code></pre><p>四、第一个hybridApp  – webView</p>
-<pre><code>1、基本步骤：
-①按照功能和要求 把前端代码编写完毕
-②将前端代码 放到 Android工程的assets目录
-③创建一个WebView（网页视图组件），配置webView加载指定的html页面
-④将webView作为一个app的内容视图展现出来
-⑤运行，最终是生成了安装包
-
-2、练习：（15:40 - 15：55）
-创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
-要求：创建一个新的Android。
-问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
-解决：借助于webview的setWebChromeClient
-
-3、混合编程的常见的两种方式
-①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
-②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
-
-
-练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
-http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
-localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
-http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
-注意事项：①加上网络权限 ②允许执行js
-
-技巧：
-①timeout 超时
-    只需要将eclipse和模拟器关掉再打开
-②ActivityManager: Warning: Activity not started, its current task has been brought to the front
-    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
-③android library projects can&apos;t be launched
-    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
-ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
-
-如何完成Android工程的创建、运行基本流程以及工作方式
-学习HybridApp的创建和运行
-
-扩展1：
-js调用原生组件：
-①创建一个接口类的文件
-②activity配置使用接口
-③在js中调用java中的一些接口
-
-扩展2：
-js调用原生组件：
-①创建一个接口类的文件
-    @JavascriptInterface
-
-②activity配置使用接口
- wv.addJavascriptInterface(
-new webInterfac(getApplicationContext()),&quot;android&quot;);
-
-③在js中调用java中的一些接口
-function callShowToast(){
-    android.showToast();
-  }
-</code></pre><p>五、Ionic概述</p>
-<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
-Ionic是一个强大的h5的混合编程app开发框架
-Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
-注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
-特点：
-    ①完美融合了ng
-    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
-    ③设计风格好
-    ④性能优越，运行速度块
-    Ionic = ng + cordova + 移动ui库
-</code></pre><p>六、搭建Ionic的开发环境</p>
-<pre><code>1、方式1 （命令行）
-http://ionicframework.com/getting-started/
-①npm install -g cordova ionic
-    全局安装cordova以及ionic
-②ionic start myApp tabs/sidemenu
-    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
-③ionic serve
-2、方式2：借助于官方所提供的js、css文件
-</code></pre><p>七、学习Ionic样式类</p>
-<pre><code>1、color
-    9个常用的值 ，参考手册中最后一个color的介绍
-
-2、button按钮
-    button/button-small/button-large/button-outline/
-    button-clear/buttn-block/icon-left/icon-right/
-    ion-***/button-bar
-
-3、list 列表
-    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
-    item-divider(分隔符)/badge(badge-assertive)
-    item-avator/item-thumbnail-left/right
-
-4、card 卡片式
-
-5、form 表单
-    list/item/item-input/input-label/item-stacked-label/item-floating-label
-    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
-
-6、grid
-    row/col
-    col-10/20/50..(指定列的宽度)
-    .col-10    10%
-    .col-20    20%
-    .col-25    25%
-    .col-33    33.3333%
-    .col-50    50%
-    .col-67    66.6666%
-    .col-75    75%
-    .col-80    80%
-    .col-90    90%(设置列与列之间的offset)
-
-    .col-offset-10    10%
-    .col-offset-20    20%
-    .col-offset-25    25%
-    .col-offset-33    33.3333%
-    .col-offset-50    50%
-    .col-offset-67    66.6666%
-    .col-offset-75    75%
-    .col-offset-80    80%
-    .col-offset-90    90%
-    col-center/col-top/col-bottom
-</code></pre><p>八、IonRefresher 下拉刷新</p>
-<pre><code>①指定下拉刷新的处理函数
-on-refresh
-②处理完之后，结束刷新动作
-$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
-③ionContent第一个子元素
-</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
-<pre><code>①指定上拉的处理函数
-on-infinite
-②数据更新完成之后，结束刷新
-scroll.infiniteScrollComplete
-③ionContent最后一个子元素
-immediate-check=&apos;false&apos;
-</code></pre><p>十、$ionicScrollDelegate</p>
-<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
-scrollTo(left,top) 滚动到指定的位置
-getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
-</code></pre><p>十一、ionTabs 实现选项卡</p>
-<pre><code>ionTabs 常用属性：
-tabs-icon-top/left/right/bottom/only tabs-positive
-http://ionicons.com/
-ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
-                  badge/badge-style/on-select/ng-click
-</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
-<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
-操作侧边栏菜单打开或者关闭：
-1、js：
-    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
-2、滑动打开
-3、属性
-    menu-close 将现在打开的侧边栏菜单关掉
-    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
-</code></pre><p>十三、ActionSheet</p>
-<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
-    $ionicActionSheet.show({
-
-    })
-在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
-cancel/buttonClicked/destructiveButtonClicked
-(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
-</code></pre><p>十四、$ionicLoading</p>
-<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
-$ionicLoading.show({template/templateUrl/duration/delay})
-$ionicLoading.hide();
-</code></pre><p>十五、$ionicPopup</p>
-<pre><code>在ionic中内容弹窗（警告、确认。。）
-$ionicPopup.alert/confirm/prompt/show()
-</code></pre><p>十六、自定义弹窗</p>
-<pre><code>$ionicModal 模态窗
-①指定要去显示的模板内容
-②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
-③调用$scope.modal.show()
-</code></pre><p>十七、uiRouter</p>
-<pre><code>定位：UI-Router is a client-side router for single page web applications.
-注意：uiRouter用在ng、react中
-uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
-
-ngRoute：
-①路由的基本步骤
-   自定义模块，指定ngRoute模块（angular-route.js）
-   指定盛放代码片段的容器 ngView
-   创建代码片段
-   配置路由词典
-    $routerProvider.when().otherwise()
-②跳转
-  直接修改地址栏
-  $location.path(路由地址)
-  a href=&apos;#路由地址&apos;
-③参数的传递
-  发送方、接收方
-  配置接收方的路由
-  $routeParams
-  发送参数
-
-uiRouter的基本使用步骤：
- 指定依赖的模块‘ui.router’
- 盛放代码片段的容器 uiView
- 创建模板文件
- 设置状态
-    $stateProvider.state()
-注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
-        在ionic的项目没有必须要指定ui.router
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
     
   </entry>
   
@@ -4157,471 +4157,6 @@ post请求方式主要用来提交数据，没有数据长度的限制，提交�
   </entry>
   
   <entry>
-    <title>axios使用基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
-    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-02T03:25:25.164Z</updated>
-    
-    <content type="html"><![CDATA[<p>axios</p>
-<p>##基于http客户端的promise，面向浏览器和nodejs</p>
-<pre><code>特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取消请求
-自动转化json数据
-客户端支持抵御XSRF（跨站请求伪造）
-</code></pre><p>安装</p>
-<pre><code>使用npm：
-
-$ npm i axios
-使用 bower
-
-$ bower instal axios
-使用cdn
-
-&lt;!--国内bootCDN--&gt;
-&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>示例</p>
-<pre><code>发起一个GET请求
-//发起一个user请求，参数为给定的ID
-axios.get(&apos;/user?ID=1234&apos;)
-.then(function(respone){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-//上面的请求也可选择下面的方式来写
-axios.get(&apos;/user&apos;,{
-    params:{
-        ID:12345
-    }
-})
-    .then(function(response){
-        console.log(response);
-    })
-    .catch(function(error){
-        console.log(error)
-    });
-
-发起一个POST请求
-axios.post(&apos;/user&apos;,{
-    firstName:&apos;friend&apos;,
-    lastName:&apos;Flintstone&apos;
-})
-.then(function(response){
-    console.log(response);
-})
-.catch(function(error){
-    console.log(error);
-});
-
-发起一个多重并发请求
-function getUserAccount(){
-    return axios.get(&apos;/user/12345&apos;);
-}
-
-function getUserPermissions(){
-    return axios.get(&apos;/user/12345/permissions&apos;);
-}
-
-axios.all([getUerAccount(),getUserPermissions()])
-    .then(axios.spread(function(acc,pers){
-        //两个请求现在都完成
-    }));
-</code></pre><p>axios API</p>
-<pre><code>可以对axios进行一些设置来生成请求。axios(config)
-
-//发起 POST请求
-axios({
-    method:&apos;post&apos;,//方法
-    url:&apos;/user/12345&apos;,//地址
-    data:{//参数
-        firstName:&apos;Fred&apos;,
-        lastName:&apos;Flintstone&apos;
-    }
-});
-
-//通过请求获取远程图片
-axios({
-    method:&apos;get&apos;,
-    url:&apos;http://bit.ly/2mTM3Ny&apos;,
-    responseType:&apos;stream&apos;
-})
-    .then(function(response){
-        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
-    })
-axios(url[,config])
-
-//发起一个GET请求
-axios(&apos;/user/12345/);
-请求方法的重命名。
-
-为了方便，axios提供了所有请求方法的重命名支持
-axios.request(config)
-axios.get(url[,config])
-axios.delete(url[,config])
-axios.head(url[,config])
-axios.options(url[,config])
-axios.post(url[,data[,config]])
-axios.put(url[,data[,config]])
-axios.patch(url[,data[,config]])
-
-注意
-当时用重命名方法时url,method,以及data属性不需要在config中指定。
-
-并发 Concurrency
-有用的方法
-axios.all(iterable)
-axios.spread(callback)
-
-创建一个实例
-你可以使用自定义设置创建一个新的实例
-axios.create([config])
-var instance = axios.create({
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-    timeout:1000,
-    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
-});
-实例方法
-
-下面列出了一些实例方法。具体的设置将在实例设置中被合并。
-axios#request(config)
-axios#get(url[,config])
-axios#delete(url[,config])
-axios#head(url[,config])
-axios#post(url[,data[,config]])
-axios#put(url[,data[,config]])
-axios#patch(url[,data[,config]])
-
-Requese Config请求设置
-以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
-{
-    //`url`是服务器链接，用来请求
-    url:&apos;/user&apos;,
-
-    //`method`是发起请求时的请求方法
-    method:`get`,
-
-    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
-    //当axios使用相对地址时这个设置非常方便
-    //在其实例中的方法
-    baseURL:&apos;http://some-domain.com/api/&apos;,
-
-    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
-    //这个只适用于`PUT`,`GET`,`PATCH`方法。
-    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
-        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
-    transformRequest:[function(data){
-        //依自己的需求对请求数据进行处理
-        return data;
-    }],
-
-    //`transformResponse`允许返回的数据传入then/catch之前进行处理
-    transformResponse:[function(data){
-        //依需要对数据进行处理
-        return data;
-    }],
-
-    //`headers`是自定义的要被发送的头信息
-    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
-
-    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
-    params:{
-        ID:12345
-    },
-
-    //`paramsSerializer`是一个可选的函数，是用来序列化参数
-    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
-    paramsSerializer: function(params){
-        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
-    },
-
-    //`data`是请求提需要设置的数据
-    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
-    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
-    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
-    //-仅浏览器：FormData,File,Blob
-    //-仅Node：Stream
-    data:{
-        firstName:&apos;fred&apos;
-    },
-    //`timeout`定义请求的时间，单位是毫秒。
-    //如果请求的时间超过这个设定时间，请求将会停止。
-    timeout:1000,
-
-    //`withCredentials`表明是否跨网站访问协议，
-    //应该使用证书
-    withCredentials:false //默认值
-
-    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
-    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
-    adapter:function(config){
-        /*...*/
-    },
-
-    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
-    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
-    auth:{
-        username:&apos;janedoe&apos;,
-        password:&apos;s00pers3cret&apos;
-    },
-
-    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
-    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
-    responsetype:&apos;json&apos;,
-
-    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
-    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
-
-    //`onUploadProgress`允许处理上传过程的事件
-    onUploadProgress: function(progressEvent){
-        //本地过程事件发生时想做的事
-    },
-
-    //`onDownloadProgress`允许处理下载过程的事件
-    onDownloadProgress: function(progressEvent){
-        //下载过程中想做的事
-    },
-
-    //`maxContentLength` 定义http返回内容的最大容量
-    maxContentLength: 2000,
-
-    //`validateStatus` 定义promise的resolve和reject。
-    //http返回状态码，如果`validateStatus`返回true
-        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
-    validateStatus: function(status){
-        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
-    },
-
-    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
-        定义一个自定义的代理，在nodejs中。
-    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
-    httpAgent: new http.Agent({keepAlive:treu}),
-    httpsAgent: new https.Agent({keepAlive:true}),
-
-    //`proxy`定义服务器的主机名字和端口号。
-    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
-    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
-    proxy:{
-        host:127.0.0.1,
-        port:9000,
-        auth:{
-            username:&apos;cdd&apos;,
-            password:&apos;123456&apos;
-        }
-    },
-
-    //`cancelTaken` 定义一个取消，能够用来取消请求
-    //（查看 下面的Cancellation 的详细部分）
-    cancelToken: new CancelToken(function(cancel){
-    })
-}
-
-返回响应概要 Response Schema
-一个请求的返回包含以下信息
-{
-    //`data`是服务器的提供的回复（相对于请求）
-    data{},
-
-    //`status`是服务器返回的http状态码
-    status:200,
-
-
-    //`statusText`是服务器返回的http状态信息
-    statusText: &apos;ok&apos;,
-
-    //`headers`是服务器返回中携带的headers
-    headers:{},
-
-    //`config`是对axios进行的设置，目的是为了请求（request）
-    config:{}
-}
-
-使用then，你会接受打下面的信息
-axios.get(&apos;/user/12345&apos;)
-    .then(function(response){
-        console.log(response.data);
-        console.log(response.status);
-        console.log(response.statusText);
-        console.log(response.headers);
-        console.log(response.config);
-    });
-使用catch时，或者传入一个reject callback作为then的第二个参数，
-那么返回的错误信息将能够被使用。
-</code></pre><p>默认设置（Config Default)</p>
-<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
-全局默认设置 Global axios defaults
-axios.defaults.baseURL = &apos;https://api.example.com&apos;;
-axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
-实例中自定义默认值 Custom instance default
-//当创建一个实例时进行默认设置
-var instance = axios.create({
-    baseURL:&apos;https://api.example.com&apos;
-});
-
-//在实例创建之后改变默认值
-instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
-设置优先级 Config order of precedence
-设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
-    其次是defaults实例属性的设置，最后是请求中config参数的设置。
-    越往后面的等级越高，会覆盖前面的设置。
-看下面这个例子：
-
-//使用默认库的设置创建一个实例，
-//这个实例中，使用的是默认库的timeout设置，默认值是0。
-var instance = axios.create();
-
-//覆盖默认库中timeout的默认值
-//此时，所有的请求的timeout时间是2.5秒
-instance.defaults.timeout = 2500;
-
-//覆盖该次请求中timeout的值，这个值设置的时间更长一些
-instance.get(&apos;/longRequest&apos;,{
-    timeout:5000
-});
-</code></pre><p>拦截器 interceptors</p>
-<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
-//添加一个请求拦截器
-axios.interceptors.request.use(function(config){
-    //在请求发送之前做一些事
-    return config;
-},function(error){
-    //当出现请求错误是做一些事
-    return Promise.reject(error);
-});
-
-//添加一个返回拦截器
-axios.interceptors.response.use(function(response){
-    //对返回的数据进行一些处理
-    return response;
-},function(error){
-    //对返回的错误进行一些处理
-    return Promise.reject(error);
-});
-
-如果你需要在稍后移除拦截器,你可以
-var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
-axios.interceptors.rquest.eject(myInterceptor);
-
-你可以在一个axios实例中使用拦截器
-var instance = axios.create();
-instance.interceptors.request.use(function(){/*...*/});
-</code></pre><p>错误处理 Handling Errors</p>
-<pre><code>axios.get(&apos;user/12345&apos;)
-    .catch(function(error){
-        if(error.response){
-            //存在请求，但是服务器的返回一个状态码
-            //他们都在2xx之外
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-        }else{
-            //一些错误是在设置请求时触发的
-            console.log(&apos;Error&apos;,error.message);
-        }
-        console.log(error.config);
-    });
-
-你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
-axios.get(&apos;user/12345&apos;,{
-    validateStatus:function(status){
-        return status &lt; 500;//当返回码小于等于500时视为错误
-    }
-});
-</code></pre><p>取消 Cancellation</p>
-<pre><code>你可以使用cancel token取消一个请求
-axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
-
-你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
-var CancelToken = axios.CancelToken;
-var source = CancelToken.source();
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken:source.toke
-}).catch(function(thrown){
-    if(axiso.isCancel(thrown)){
-        console.log(&apos;Rquest canceled&apos;, thrown.message);
-    }else{
-        //handle error
-    }
-});
-
-//取消请求(信息参数设可设置的)
-source.cancel(&quot;操作被用户取消&quot;);
-你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
-var CancelToken = axios.CancelToken;
-var cancel;
-axios.get(&apos;/user/12345&apos;, {
-    cancelToken: new CancelToken(function executor(c){
-        //这个executor 函数接受一个cancel function作为参数
-        cancel = c;
-    })
-});
-
-//取消请求
-cancel();
-注意：你可以使用同一个cancel token取消多个请求。
-使用 application/x-www-form-urlencoded 格式化
-默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
-你可以使用一下的设置。
-</code></pre><p>浏览器 Browser</p>
-<pre><code>在浏览器中你可以如下使用URLSearchParams API:
-var params = new URLSearchParams();
-params.append(&apos;param1&apos;,&apos;value1&apos;);
-params.append(&apos;param2&apos;,&apos;value2&apos;);
-axios.post(&apos;/foo&apos;,params);
-注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
-（poly fill）可用（确保垫片在浏览器全局环境中）
-
-其他方法：你可以使用qs库来格式化数据。
-var qs = require(&apos;qs&apos;);
-axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
-Node.js
-
-在nodejs中，你可以如下使用querystring:
-var querystring = require(&apos;querystring&apos;);
-axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
-你同样可以使用qs库。
-promises
-axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
-
-TypeScript
-axios 包含TypeScript定义
-
-import axios from &apos;axios&apos;
-axios.get(&apos;/user?ID=12345&apos;)
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;axios&lt;/p&gt;
-&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;特色
-浏览器端发起XMLHttpRequests请求
-node端发起http请求
-支持Promise API
-拦截请求和返回
-转化请求和返回（数据）
-取
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
-    
-      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
-    
-  </entry>
-  
-  <entry>
     <title>bootStrap基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/bootStrap/"/>
     <id>www.wangchengzou.cn/2017/07/22/bootStrap/</id>
@@ -5347,6 +4882,471 @@ less中提供的功能函数
   </entry>
   
   <entry>
+    <title>axios使用基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/axios/"/>
+    <id>www.wangchengzou.cn/2017/07/22/axios/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-02T03:25:25.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>axios</p>
+<p>##基于http客户端的promise，面向浏览器和nodejs</p>
+<pre><code>特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取消请求
+自动转化json数据
+客户端支持抵御XSRF（跨站请求伪造）
+</code></pre><p>安装</p>
+<pre><code>使用npm：
+
+$ npm i axios
+使用 bower
+
+$ bower instal axios
+使用cdn
+
+&lt;!--国内bootCDN--&gt;
+&lt;script src=&quot;https://cdn.bootcss.com/axios/0.16.0/axios.min.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>示例</p>
+<pre><code>发起一个GET请求
+//发起一个user请求，参数为给定的ID
+axios.get(&apos;/user?ID=1234&apos;)
+.then(function(respone){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+//上面的请求也可选择下面的方式来写
+axios.get(&apos;/user&apos;,{
+    params:{
+        ID:12345
+    }
+})
+    .then(function(response){
+        console.log(response);
+    })
+    .catch(function(error){
+        console.log(error)
+    });
+
+发起一个POST请求
+axios.post(&apos;/user&apos;,{
+    firstName:&apos;friend&apos;,
+    lastName:&apos;Flintstone&apos;
+})
+.then(function(response){
+    console.log(response);
+})
+.catch(function(error){
+    console.log(error);
+});
+
+发起一个多重并发请求
+function getUserAccount(){
+    return axios.get(&apos;/user/12345&apos;);
+}
+
+function getUserPermissions(){
+    return axios.get(&apos;/user/12345/permissions&apos;);
+}
+
+axios.all([getUerAccount(),getUserPermissions()])
+    .then(axios.spread(function(acc,pers){
+        //两个请求现在都完成
+    }));
+</code></pre><p>axios API</p>
+<pre><code>可以对axios进行一些设置来生成请求。axios(config)
+
+//发起 POST请求
+axios({
+    method:&apos;post&apos;,//方法
+    url:&apos;/user/12345&apos;,//地址
+    data:{//参数
+        firstName:&apos;Fred&apos;,
+        lastName:&apos;Flintstone&apos;
+    }
+});
+
+//通过请求获取远程图片
+axios({
+    method:&apos;get&apos;,
+    url:&apos;http://bit.ly/2mTM3Ny&apos;,
+    responseType:&apos;stream&apos;
+})
+    .then(function(response){
+        response.data.pipe(fs.createWriteStream(&apos;ada_lovelace.jpg&apos;))
+    })
+axios(url[,config])
+
+//发起一个GET请求
+axios(&apos;/user/12345/);
+请求方法的重命名。
+
+为了方便，axios提供了所有请求方法的重命名支持
+axios.request(config)
+axios.get(url[,config])
+axios.delete(url[,config])
+axios.head(url[,config])
+axios.options(url[,config])
+axios.post(url[,data[,config]])
+axios.put(url[,data[,config]])
+axios.patch(url[,data[,config]])
+
+注意
+当时用重命名方法时url,method,以及data属性不需要在config中指定。
+
+并发 Concurrency
+有用的方法
+axios.all(iterable)
+axios.spread(callback)
+
+创建一个实例
+你可以使用自定义设置创建一个新的实例
+axios.create([config])
+var instance = axios.create({
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+    timeout:1000,
+    headers:{&apos;X-Custom-Header&apos;:&apos;foobar&apos;}
+});
+实例方法
+
+下面列出了一些实例方法。具体的设置将在实例设置中被合并。
+axios#request(config)
+axios#get(url[,config])
+axios#delete(url[,config])
+axios#head(url[,config])
+axios#post(url[,data[,config]])
+axios#put(url[,data[,config]])
+axios#patch(url[,data[,config]])
+
+Requese Config请求设置
+以下列出了一些请求时的设置选项。只有url是必须的，如果没有指明method的话，默认的请求方法是GET.
+{
+    //`url`是服务器链接，用来请求
+    url:&apos;/user&apos;,
+
+    //`method`是发起请求时的请求方法
+    method:`get`,
+
+    //`baseURL`如果`url`不是绝对地址，那么将会加在其前面。
+    //当axios使用相对地址时这个设置非常方便
+    //在其实例中的方法
+    baseURL:&apos;http://some-domain.com/api/&apos;,
+
+    //`transformRequest`允许请求的数据在传到服务器之前进行转化。
+    //这个只适用于`PUT`,`GET`,`PATCH`方法。
+    //数组中的最后一个函数必须返回一个字符串或者一个`ArrayBuffer`,
+        或者`Stream`,`Buffer`实例,`ArrayBuffer`,`FormData`
+    transformRequest:[function(data){
+        //依自己的需求对请求数据进行处理
+        return data;
+    }],
+
+    //`transformResponse`允许返回的数据传入then/catch之前进行处理
+    transformResponse:[function(data){
+        //依需要对数据进行处理
+        return data;
+    }],
+
+    //`headers`是自定义的要被发送的头信息
+    headers:{&apos;X-Requested-with&apos;:&apos;XMLHttpRequest&apos;},
+
+    //`params`是请求连接中的请求参数，必须是一个纯对象，或者URLSearchParams对象
+    params:{
+        ID:12345
+    },
+
+    //`paramsSerializer`是一个可选的函数，是用来序列化参数
+    //例如：（https://ww.npmjs.com/package/qs,http://api.jquery.com/jquery.param/)
+    paramsSerializer: function(params){
+        return Qs.stringify(params,{arrayFormat:&apos;brackets&apos;})
+    },
+
+    //`data`是请求提需要设置的数据
+    //只适用于应用的&apos;PUT&apos;,&apos;POST&apos;,&apos;PATCH&apos;，请求方法
+    //当没有设置`transformRequest`时，必须是以下其中之一的类型（不可重复？）：
+    //-string,plain object,ArrayBuffer,ArrayBufferView,URLSearchParams
+    //-仅浏览器：FormData,File,Blob
+    //-仅Node：Stream
+    data:{
+        firstName:&apos;fred&apos;
+    },
+    //`timeout`定义请求的时间，单位是毫秒。
+    //如果请求的时间超过这个设定时间，请求将会停止。
+    timeout:1000,
+
+    //`withCredentials`表明是否跨网站访问协议，
+    //应该使用证书
+    withCredentials:false //默认值
+
+    //`adapter`适配器，允许自定义处理请求，这会使测试更简单。
+    //返回一个promise，并且提供验证返回（查看[response docs](#response-api)）
+    adapter:function(config){
+        /*...*/
+    },
+
+    //`auth`表明HTTP基础的认证应该被使用，并且提供证书。
+    //这个会设置一个`authorization` 头（header），并且覆盖你在header设置的Authorization头信息。
+    auth:{
+        username:&apos;janedoe&apos;,
+        password:&apos;s00pers3cret&apos;
+    },
+
+    //`responsetype`表明服务器返回的数据类型，这些类型的设置应该是
+    //&apos;arraybuffer&apos;,&apos;blob&apos;,&apos;document&apos;,&apos;json&apos;,&apos;text&apos;,stream&apos;
+    responsetype:&apos;json&apos;,
+
+    //`xsrfHeaderName` 是http头（header）的名字，并且该头携带xsrf的值
+    xrsfHeadername:&apos;X-XSRF-TOKEN&apos;，//默认值
+
+    //`onUploadProgress`允许处理上传过程的事件
+    onUploadProgress: function(progressEvent){
+        //本地过程事件发生时想做的事
+    },
+
+    //`onDownloadProgress`允许处理下载过程的事件
+    onDownloadProgress: function(progressEvent){
+        //下载过程中想做的事
+    },
+
+    //`maxContentLength` 定义http返回内容的最大容量
+    maxContentLength: 2000,
+
+    //`validateStatus` 定义promise的resolve和reject。
+    //http返回状态码，如果`validateStatus`返回true
+        （或者设置成null/undefined），promise将会接受；其他的promise将会拒绝。
+    validateStatus: function(status){
+        return status &gt;= 200 &amp;&amp; stauts &lt; 300;//默认
+    },
+
+    //`httpAgent` 和 `httpsAgent`当产生一个http或者https请求时分别
+        定义一个自定义的代理，在nodejs中。
+    //这个允许设置一些选选个，像是`keepAlive`--这个在默认中是没有开启的。
+    httpAgent: new http.Agent({keepAlive:treu}),
+    httpsAgent: new https.Agent({keepAlive:true}),
+
+    //`proxy`定义服务器的主机名字和端口号。
+    //`auth`表明HTTP基本认证应该跟`proxy`相连接，并且提供证书。
+    //这个将设置一个&apos;Proxy-Authorization&apos;头(header)，覆盖原先自定义的。
+    proxy:{
+        host:127.0.0.1,
+        port:9000,
+        auth:{
+            username:&apos;cdd&apos;,
+            password:&apos;123456&apos;
+        }
+    },
+
+    //`cancelTaken` 定义一个取消，能够用来取消请求
+    //（查看 下面的Cancellation 的详细部分）
+    cancelToken: new CancelToken(function(cancel){
+    })
+}
+
+返回响应概要 Response Schema
+一个请求的返回包含以下信息
+{
+    //`data`是服务器的提供的回复（相对于请求）
+    data{},
+
+    //`status`是服务器返回的http状态码
+    status:200,
+
+
+    //`statusText`是服务器返回的http状态信息
+    statusText: &apos;ok&apos;,
+
+    //`headers`是服务器返回中携带的headers
+    headers:{},
+
+    //`config`是对axios进行的设置，目的是为了请求（request）
+    config:{}
+}
+
+使用then，你会接受打下面的信息
+axios.get(&apos;/user/12345&apos;)
+    .then(function(response){
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    });
+使用catch时，或者传入一个reject callback作为then的第二个参数，
+那么返回的错误信息将能够被使用。
+</code></pre><p>默认设置（Config Default)</p>
+<pre><code>你可以设置一个默认的设置，这设置将在所有的请求中有效。
+全局默认设置 Global axios defaults
+axios.defaults.baseURL = &apos;https://api.example.com&apos;;
+axios.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+axios.defaults.headers.post[&apos;Content-Type&apos;]=&apos;application/x-www-form-urlencoded&apos;;
+实例中自定义默认值 Custom instance default
+//当创建一个实例时进行默认设置
+var instance = axios.create({
+    baseURL:&apos;https://api.example.com&apos;
+});
+
+//在实例创建之后改变默认值
+instance.defaults.headers.common[&apos;Authorization&apos;] = AUTH_TOKEN;
+设置优先级 Config order of precedence
+设置(config)将按照优先顺序整合起来。首先的是在lib/defaults.js中定义的默认设置，
+    其次是defaults实例属性的设置，最后是请求中config参数的设置。
+    越往后面的等级越高，会覆盖前面的设置。
+看下面这个例子：
+
+//使用默认库的设置创建一个实例，
+//这个实例中，使用的是默认库的timeout设置，默认值是0。
+var instance = axios.create();
+
+//覆盖默认库中timeout的默认值
+//此时，所有的请求的timeout时间是2.5秒
+instance.defaults.timeout = 2500;
+
+//覆盖该次请求中timeout的值，这个值设置的时间更长一些
+instance.get(&apos;/longRequest&apos;,{
+    timeout:5000
+});
+</code></pre><p>拦截器 interceptors</p>
+<pre><code>你可以在请求或者返回被then或者catch处理之前对他们进行拦截。
+//添加一个请求拦截器
+axios.interceptors.request.use(function(config){
+    //在请求发送之前做一些事
+    return config;
+},function(error){
+    //当出现请求错误是做一些事
+    return Promise.reject(error);
+});
+
+//添加一个返回拦截器
+axios.interceptors.response.use(function(response){
+    //对返回的数据进行一些处理
+    return response;
+},function(error){
+    //对返回的错误进行一些处理
+    return Promise.reject(error);
+});
+
+如果你需要在稍后移除拦截器,你可以
+var myInterceptor = axios.interceptors.request.use(function(){/*...*/});
+axios.interceptors.rquest.eject(myInterceptor);
+
+你可以在一个axios实例中使用拦截器
+var instance = axios.create();
+instance.interceptors.request.use(function(){/*...*/});
+</code></pre><p>错误处理 Handling Errors</p>
+<pre><code>axios.get(&apos;user/12345&apos;)
+    .catch(function(error){
+        if(error.response){
+            //存在请求，但是服务器的返回一个状态码
+            //他们都在2xx之外
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }else{
+            //一些错误是在设置请求时触发的
+            console.log(&apos;Error&apos;,error.message);
+        }
+        console.log(error.config);
+    });
+
+你可以使用validateStatus设置选项自定义HTTP状态码的错误范围。
+axios.get(&apos;user/12345&apos;,{
+    validateStatus:function(status){
+        return status &lt; 500;//当返回码小于等于500时视为错误
+    }
+});
+</code></pre><p>取消 Cancellation</p>
+<pre><code>你可以使用cancel token取消一个请求
+axios的cancel token API是基于**cnacelable promises proposal**，其目前处于第一阶段。
+
+你可以使用CancelToken.source工厂函数创建一个cancel token，如下：
+var CancelToken = axios.CancelToken;
+var source = CancelToken.source();
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken:source.toke
+}).catch(function(thrown){
+    if(axiso.isCancel(thrown)){
+        console.log(&apos;Rquest canceled&apos;, thrown.message);
+    }else{
+        //handle error
+    }
+});
+
+//取消请求(信息参数设可设置的)
+source.cancel(&quot;操作被用户取消&quot;);
+你可以给CancelToken构造函数传递一个executor function来创建一个cancel token:
+var CancelToken = axios.CancelToken;
+var cancel;
+axios.get(&apos;/user/12345&apos;, {
+    cancelToken: new CancelToken(function executor(c){
+        //这个executor 函数接受一个cancel function作为参数
+        cancel = c;
+    })
+});
+
+//取消请求
+cancel();
+注意：你可以使用同一个cancel token取消多个请求。
+使用 application/x-www-form-urlencoded 格式化
+默认情况下，axios串联js对象为JSON格式。为了发送application/x-wwww-form-urlencoded格式数据，
+你可以使用一下的设置。
+</code></pre><p>浏览器 Browser</p>
+<pre><code>在浏览器中你可以如下使用URLSearchParams API:
+var params = new URLSearchParams();
+params.append(&apos;param1&apos;,&apos;value1&apos;);
+params.append(&apos;param2&apos;,&apos;value2&apos;);
+axios.post(&apos;/foo&apos;,params);
+注意：URLSearchParams不支持所有的浏览器，但是这里有个垫片
+（poly fill）可用（确保垫片在浏览器全局环境中）
+
+其他方法：你可以使用qs库来格式化数据。
+var qs = require(&apos;qs&apos;);
+axios.post(&apos;/foo&apos;, qs.stringify({&apos;bar&apos;:123}));
+Node.js
+
+在nodejs中，你可以如下使用querystring:
+var querystring = require(&apos;querystring&apos;);
+axios.post(&apos;http://something.com/&apos;, querystring.stringify({foo:&apos;bar&apos;}));
+你同样可以使用qs库。
+promises
+axios 基于原生的ES6 Promise 实现。如果环境不支持请使用垫片.
+
+TypeScript
+axios 包含TypeScript定义
+
+import axios from &apos;axios&apos;
+axios.get(&apos;/user?ID=12345&apos;)
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;axios&lt;/p&gt;
+&lt;p&gt;##基于http客户端的promise，面向浏览器和nodejs&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;特色
+浏览器端发起XMLHttpRequests请求
+node端发起http请求
+支持Promise API
+拦截请求和返回
+转化请求和返回（数据）
+取
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
+    
+      <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
+    
+  </entry>
+  
+  <entry>
     <title>html和css3</title>
     <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
@@ -5491,6 +5491,161 @@ sessionStorage  数据在浏览器关闭后自动删除。
       <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
     
       <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css hack兼容性</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-17T11:42:03.588Z</updated>
+    
+    <content type="html"><![CDATA[<p>css hack解决浏览器兼容性问题</p>
+<pre><code>网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
+因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
+致设计的页面效果不一样，用于解决这个问题的方法就是css hack，
+使用特别的css定义显示网页在不同浏览器的设计风格，针对不同的浏览器去写不同的css,
+最大化兼容浏览器
+</code></pre><p>比较频繁使用的css hack技巧</p>
+<pre><code>！important，它可以针对ie和非IE浏览器设置不同的样式
+*+html{...} 只无法充分IE7做样式时候使用
+IE的if条件hack
+    &lt;!--[if IE]&gt; Only IE &lt;![endif]--&gt; 所有的IE可识别
+    &lt;!--[if IE 5.0]&gt; Only IE 5.0 &lt;![endif]--&gt; 只有IE5.0可以识别
+    &lt;!--[if gt IE 5.0]&gt; Only IE 5.0+ &lt;![endif]--&gt; IE5.0包换IE5.5都可以识别
+    &lt;!--[if lt IE 6]&gt; Only IE 6- &lt;![endif]--&gt; 仅IE6可识别
+    &lt;!--[if gte IE 6]&gt; Only IE 6/+ &lt;![endif]--&gt; IE6以及IE6以下的IE5.x都可识别
+    &lt;!--[if lte IE 7]&gt; Only IE 7/- &lt;![endif]--&gt; 仅IE7可识别
+</code></pre><p>1、CSS HACK</p>
+<pre><code>以下两种方法几乎能解决现今所有HACK.
+1, !important (不是很推荐，用下面的一种感觉最安全)
+    随着IE7对!important的支持, !important 方法现在只针对IE6的HACK.
+    (注意写法.记得该声明位置需要提前.)
+    代码: &lt;style&gt;
+        #wrapper {
+            width: 100px!important; /* IE7+FF */
+            width: 80px; /* IE6 */ }
+        &lt;/style&gt;
+
+2, IE6/IE77对FireFox &lt;from 针对firefox ie6 ie7的css样式&gt;
+    *+html 与 *html 是IE特有的标签, firefox 暂不支持.而*+html 又为 IE7特有标签.
+        代码: &lt;style&gt;
+                    #wrapper { width: 120px; } /* FireFox */
+              *html #wrapper { width: 80px;} /* ie6 fixed */
+             *+html #wrapper { width: 60px;} /* ie7 fixed, 注意顺序 */
+            &lt;/style&gt;
+        注意:  *+html 对IE7的HACK 必须保证HTML顶部有如下声明：
+        代码:  &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+        &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+</code></pre><p>2、万能 float 闭合(非常重要!)</p>
+<pre><code>可以用这个解决多个div对齐时的间距不对，
+关于 clear float 的原理可参见 [How To Clear Floats Without Structural Markup]
+将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.
+代码: &lt;style&gt;
+    /* Clear Fix */
+    .clearfix:after { content:&quot;.&quot;; display:block;
+                    height:0; clear:both;
+                    visibility:hidden; }
+    .clearfix {  display:inline-block; }  /* Hide from IE Mac \*/
+    .clearfix {display:block;} /* End hide from IE Mac */
+                                /* end of clearfix */
+    &lt;/style&gt;
+</code></pre><p>3、其它兼容性技巧</p>
+<pre><code>1、FF下给div设置padding后会导致width和height增加，但ie不会
+    解决：可用！important
+
+2、居中问题
+    垂直居中
+        将line-heigth设置为 当前div相同高度，再通过vertical-align:middle
+    水平居中
+        margin:0 auto;
+
+3、若需要给a标签内容加上样式，需要设置
+    display:block;(常用于导航标签)
+
+4、FF和IE对BOX理解的差异导致相差2px
+    设为float的div在IE下margin加倍问题
+
+5、ul标签在FF下面默认有list-style和padding
+
+6、作为外部wrapper的div不要定死高度，最好加上overflow:hidden
+    以达到高度自适应
+
+7、 关于手形光标. cursor: pointer. 而hand 只适用于 IE
+</code></pre><p>4、针对firefox ie6 ie7的css样式</p>
+<pre><code>现在大部分都是用!important来hack，对于ie6和firefox测试可以正常显示，
+但是ie7对!important可以正确解释，会导致页 面没按要求显示！
+找到一个针对IE7不错的hack方式就是使用“*+html”，现在用IE7浏览一下，
+应该没有问题了现在写一个CSS可以这样：
+    #1 { color: #333; } /* Moz */
+    * html #1 { color: #666; } /* IE6 */
+    *+html #1 { color: #999; } /* IE7 */
+    那么在firefox下字体颜色显示为#333，
+    IE6下字体颜色显示为#666，
+    IE7下字体颜色显示为#999。
+</code></pre><p>5、css布局中的居中问题</p>
+<pre><code>主要的样式定义如下：
+body {TEXT-ALIGN: center;}
+#center { MARGIN-RIGHT: auto; MARGIN-LEFT: auto; }
+说明：
+    首先在父级元素定义TEXT-ALIGN: center;这个的意思就是在父级元素内的内容居中；
+    对于IE这样设定就已经可以了。但在mozilla中不能居中。
+    解决办法就是在子元素定义时候设定时再加上“MARGIN-RIGHT: auto;MARGIN-LEFT: auto; ”
+    需要说明的是，如果你想用这个方法使整个页面要居中，建议不要套在一个DIV里，
+    你可以依次拆出多个div，只要在每个拆出的div里定义
+    MARGIN-RIGHT: auto;MARGIN-LEFT: auto; 就可以了。
+</code></pre><p>6、盒模型不同解释</p>
+<pre><code>#box{  width:600px;
+    //for ie6.0- w\idth:500px;
+    //for ff+ie6.0 }
+#box{  width:600px!important
+    //for ff  width:600px;
+    //for ff+ie6.0  width /**/:500px;
+    //for ie6.0- }
+</code></pre><p>7、浮动IE产生的双倍距离</p>
+<pre><code>#box{float:left;width:100px;margin:0 0 0 100px;}
+解决：didplay:inline
+block,inline两个元素
+    Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);
+inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);
+#box{ display:block; //可以为内嵌元素模拟为块元素
+      display:inline; //实现同一行排列的的效果
+      diplay:table;
+</code></pre><p>8、IE与宽度和高度的问题</p>
+<pre><code>IE不认得min-这个定义，但实际上它把正常的width和heigth当作有min的情况来使，
+如果设置了min-，则ie下就等于没有设置宽高，设置背景图片最小宽度比较重要
+解决:#box{width:80px;height:35px;}
+    html&gt;body #box{width:auto;heigth:auto;min-width:80px;min-height:35px;}
+</code></pre><p>9、清除浮动</p>
+<pre><code>#box:after{
+    content:&quot;&quot;;
+    display:block;
+    height；0；
+    clear:both;
+    visibility:hidden;
+    }
+</code></pre><p>10、DIV浮动IE文本产生3px的bug</p>
+<pre><code>左边对象浮动，右边采用外补丁的左边距定位，右边对象内的文本会离左边有3px的间距
+#box{float:left;width:800px;}
+#left{float:left;width:50%}
+#right{width:50%}
+*html #left{margin-right:-3px;}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;css hack解决浏览器兼容性问题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
+因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
+致设计的页面效果不一样，用于解决这个问题的方法就是css h
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
     
   </entry>
   
@@ -6368,1035 +6523,6 @@ xml语法要求:
       <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
     
       <category term="php" scheme="www.wangchengzou.cn/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Angular基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T12:53:02.708Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
-<pre><code>拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple and stupid
-语义化的标记、命名规则、减少嵌套
-
-3、DRY（善于使用封装和重用）
-Don&apos;t Repeat Yourself
-
-4、高内聚 低耦合（High cohesion,low coupling）
-内聚：一个组件（模块）内部的不同部分的关系
-耦合：不同组件（模块）之间的关系
-
-5、SRP 单一责任原则
-Single Responsibility Principle
-实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
-
-6、OCP原则(对于扩展开放、对于修改关闭)
-open close principle
-
-7、LCP（迪米特法则）
-Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
-
-常用的设计模式分为3大类：①创建 ②结构 ③行为
-
-常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
-先去实现功能，在迭代的过程中优化代码。
-</code></pre><p>2、AngularJS</p>
-<pre><code>认识新东西最好的方式：
-①官网
-②维基百科 wikipedia.org
-what?--ng(AngularJS)是一个开源的js框架
-where？--用来实现SPA应用程序（单一页面应用程序single page application）
-Gmail邮箱是由Google退出的前端历史中第一个SPA应用
-why？
-四大特征：
-①采用了MVC的设计模式
-Model 模型数据
-View  视图
-Controller 控制器
-</code></pre><p>3、MVC的工作原理：</p>
-<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
-1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
-2.双向数据绑定
-    数据-》视图
-    视图用户的输入 -》 数据
-3.依赖注入
-4.模块化设计
-</code></pre><p>4、使用ng</p>
-<pre><code>1、基本语法
-    &lt;any&gt;{{表达式}} &lt;/any&gt;
-    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
-
-2、常用指令
-    ngApp
-        ①启动ng
-        ②指定作用范围，将指令写在根标签
-    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
-    ngInit 指令 来完成数据的初始化
-    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
-        ①不需要在通过ngInit指令定义数据时候，加上var关键字
-        ②ngInit所初始化的变量是可以在整个html去使用变量
-</code></pre><p>5、常用指令</p>
-<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
-
-作为扩展属性来使用：
-    &lt;div ng-**&gt;&lt;/div&gt;
-    ngInit  --&gt; ng-init
-    ngApp --&gt; ng-app
-作为扩展标签来使用：
-    &lt;ngView/&gt;
-①ngApp
-    启动ng
-    指定作用范围，将指令写在根标签
-    注意事项：调用一次ngApp
-②ngInit
-    通过ngInit调用一次，初始化多个变量？？
-    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
-③ngRepeat
-    重复实例化模板
-    两种语法：
-    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
-    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
-
-    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
-        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
-
-④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
-    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
-    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
-    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
-    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
-    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
-    但是控制台是会报错的，通过ngSrc去指定就搞定了
-    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
-    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
-</code></pre><p>6、MVC</p>
-<pre><code>在ng中：
-    Model 模型数据：在ng中定义的一些变量
-    View  视图：通过ng指令和表达式增强版的html
-    Controller 控制器：负责数据的增删改查的
-MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
-在ng中应该怎么做才能实现一个SPA？
-准备工作：
-①创建一个模块
-    因为在ng中是以模块为基本单位的
-    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
-②使用模块
-    采用ngApp指令
-    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
-③创建一个控制器
-    app.controller(&apos;控制器的名称&apos;,function(){})
-    第二个参数时控制器被调用时，要执行的方法
-④调用控制器
-    采用ngController指令来调用控制器
-    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
-    实现数据的创建和显示等：
-⑤操作数据、显示出来
-
-$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
-    建立起控制器中的数据和控制器的所指定的视图的桥梁
-
-绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
-&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
-
-注意事项：
-由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
-</code></pre><p>7、ng是由很多指令的：</p>
-<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
-ngBind ngClass ngStyle
-
-在webStorm中创建一个文件模板的基本步骤：
-①拷贝要使用的代码
-②点击左上角的file，选择new
-③选择Edit File Templates
-④点击弹窗中右上角的+号
-⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
-</code></pre><p>8、自定义指令</p>
-<pre><code>1、如何自定义？？
-    angular.module()
-    app.controller()
-    //创建指令
-    app.directive(&apos;指令的名称&apos;，function(){
-        return {}
-    })
-    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
-    后缀：用来描述指令的功能
-    属性：
-    template：指定要显示的模板内容
-    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
-    replace: true,替换并显示出来
-    scope
-
-2、如何使用自定义的指令？？
-    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
-    &apos;tsHello&apos; --&gt; ts-hello
-    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
-
-3、自定义指令传递参数
-    怎么传？
-        在调用指令的时候可以传 将参数作为属性对应的值
-    怎么接受？
-        scope
-</code></pre><p>9、双向数据绑定</p>
-<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
-绑定方式：
-①常用指令： ngRepeat/ngIf/ngShow...
-②双花括号：{{}}
-
-方向2：从‘视图中用户的输入’绑定到‘数据’
-绑定方式：指令：ngModel
-
-如果要监听数据的变化：
-$scope.$watch(&apos;txt&apos;,function(){
-
-})
-
-在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
-ngOptions语法：
- &lt;select
-    ng-model=&quot;city&quot;
-    ng-options=&quot;city.cityName for city in cities&quot;&gt;
- &lt;/select&gt;
-</code></pre><p>10、过滤器</p>
-<pre><code>a.内置的过滤器
-    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
-    过滤器的语法：支持多重过滤和传参
-    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
-            | => 管道
-            常用的过滤器：
-                currency 货币样式的过滤器
-                date 日期
-                uppercase/lowercase 大小写的处理
-                orderBy 对指定的数组进行升序或者降序排列
-                number 格式化数字为文本（对有小数点的数据的处理）
-                limitTo 限定数组或者字符串要显示的个数
-        b.自定义过滤器
-            自定义过滤器方式：
-            app.filter('过滤器名称',function(){
-                return function(input，arg){
-                        //input是传递给过滤器的数据
-                        //arg 是过滤器本身的参数
-                    return '过滤后的结果'
-                }
-            })
-            使用自定义的过滤器:
-            和内置的过滤器用法是一样的
-
-11、ng模块内置的方法
-
-        序列化、反序列化
-        toJson:将对象或者数组 序列化 为json格式的字符串
-        fromJson：相反的过程
-
-12、服务
-
-    服务的本质是一个单例对象，提供数据和对象。
-    两大类：
-    ①内置服务
-        $location、$http、$window、$scope...
-        使用内置服务中提供的方法：
-            第一步 将需要用到的服务注入进来 function($scope,$location)
-            第二步 调用服务中提供的方法 数据。。
-    ②自定义的服务
-        面试题：$scope与$rootScope之间的关系
-        1、不同的控制器之间的数据是彼此隔离的
-        2、不同的控制器之间如何共享数据？？
-        $scope的id是从2开始依次往上递增，
-        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
-            方式1：借助于$rootScope
-                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
-            方式2：借助于控制器之间的嵌套
-                在调用控制器的元素 之间的嵌套关系
-                @@div ng-controller='myCtrl02'>
-                    @@<div ng-controller="myCtrl03"></div>
-                @@
-            方式3：触发事件传递参数
-                绑定事件：
-                $scope.$on('事件名称',function(event,data){
-
-                })
-        触发事件：
-        //从子作用对象 向 父作用域对象 传递事件
-        $scope.$emit()
-        //从父作用对象 向 子作用域对象 传递事件
-        $scope.$broadcaset()
-
-13、服务
-
-        双向数据绑定的工作原理：
-        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
-        怎么知道数据发生了变化？
-        在ng中有一个循环$digest,会不断的对比数据，
-        需要手工的触发循环做对比，可以通过：
-        $scope.$digest();
-        $scope.$apply();//触发$rootScope.$digest();
-
-14、ng内置的服务：
-
-        $location $scope $rootScope $window $interval $timeout
-        1、在ng中定时器相关的处理--》$interval $timeout
-        2、$http
-        $http({method:'',url:''}).success().error()
-        $http.get()
-        $http.post()
-        注意：如果需要发起post请求，需要设置:
-         app.run(function ($http) {
-                $http.defaults.headers.post =
-        {'Content-Type':'application/x-www-form-urlencoded'};})
-
-        在发起post请求时，如果需要对参数进行序列化:
-        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
-
-15、自定义服务
-
-        服务的目的是为了封装业务逻辑，提高代码的复用率
-        自定义指令 app.directive
-        自定义过滤器 app.filter
-        自定义服务的方法：
-        app.factory ('服务名称',function(){//普通方法 return {}})
-app.service(&apos;服务名称&apos;,function(){//构造函数})
-app.constant(&apos;服务名称&apos;，{})//创建常量服务
-app.value(&apos;服务名称&apos;，{})//创建变量服务
-
-注意事项：
-自定义的服务 需要用到其它服务中方法
-图：两个按钮：开始 结束。
-</code></pre><p>16、依赖注入</p>
-<pre><code>将代码部署到线上，都会对代码做压缩。
-使用YUI-Compressor.jar （有java的运行环境）
-①借助于CLI（command line）
-    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
-
-②IDE（webStorm）
-    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
-    在弹窗中的program选中对应的jar，保存即可
-压缩效果：
-会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
-但是数字、字符串、关键字是不会改变的。
-
-解决压缩后的问题方式：
-依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
-让我们可以去直接使用
-
-注入的方式：
-①推断式（猜测）
-    这种方式在进行压缩会有问题
-    app.controller(&apos;myCtrl&apos;,function($scope){});
-
-②标记式
-    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
-    存在一个字符串（服务名称）数组。
-    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
-    实现方式：
-    1、将处理函数单独的存在一个变量中
-    2、给变量设置$inject，值是一个由字符串构成的数组
-    3、使用服务即可
-③行内式（内联式）
-    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
-    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
-    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
-    依赖注入3种方式，官方推荐采用行内式依赖注入。
-    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
-    整个ng应用的注入对象都是由$injector定位和创建。
-    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
-    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
-</code></pre><p>17、模块化设计</p>
-<pre><code>ng有4大特征：
-①MVC
-②双向数据绑定
-③依赖注入
-④模块化设计
-
-高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
-
-如何自定义模块？
-angular.module();
-
-使用模块？
-ng-app=&quot;&quot;
-在创建模块时，在第二个参数所对应的数组中写上服务的名称
-
-一个ng的模块都可以包含哪些？
-控制器：对应部分业务逻辑的封装
-服务：经常用到的重复代码封装
-指令：扩展html标签、属性
-过滤器：针对数据做一些筛选 过滤 格式化的处理
-</code></pre><p>18、ngRoute（路由模块）</p>
-<pre><code>ng是主要实现SPA（单一页面应用程序）
-SPA的工作原理：
-    1、页面url
-    http://127.0.0.1/index.html#/路由地址
-    例如：http://127.0.0.1/index.html#/start
-    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
-    3、在路由词典中寻找路由地址(start)所对应的路由信息
-    4、在路由信息所对应的对象中找到真实的模板页面地址
-    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
-
-ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
-自动发起ajax请求加载页面显示。
-    0、在创建自定义模块，在依赖列表中指定ngRoute
-    1、指定盛放代码片段的容器
-    2、配置路由词典
-
-使用ngRoute的基本步骤：
-①创建一个完整的html页面
-    记得引入angular.js angular-route.js
-
-②创建模块，并指定依赖于ngRoute模块
-    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
-
-③使用指令创建一个盛放代码片段的容器
-    调用ngView指令：创建一个容器，代码片段会加载到这里
-
-④创建模板页面
-
-⑤配置路由词典
-    $routeProvider
-    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
-    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
-    otherwise是用来指定异常的处理
-    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
-
-SPA在ng实现过程，代码片段的跳转：
-①直接修改地址栏中的路由地址
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
-②通过js的方式
-    $location.path(&apos;路由地址&apos;)
-③超链接的方式
-    a href=&quot;#/myRegister&quot;
-    login-&gt;start 10
-
-SPA应用程序通过ngRoute来传递参数：
-①搞明白 发送 接收
-②配置接收方的路由
-    $routeProvider.when(&apos;/myStart/:num&apos;,{
-    templateUrl:&apos;tpl/start.html&apos;
-    })
-③拿到传递过来的参数
-    $routeParams.num
-④发送
-    a href=&apos;#/myStart/10&apos;
-    $location.path(&apos;/myStart/10&apos;)
-
-注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
-    myStart/:id $routeParams.id
-
-练习：实现一个SPA
-完整的html manager.html
-代码片段： checkProduct.html pay.html send.html
-
-要求：能够实现不同页面的跳转以及参数的传递
-checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
-pay 点击button跳转到send
-send button以及a跳转到check.html
-
-优化思路：如果多个控制器需要用到同一个方法或者数据，
-    ①将方法和数据封装成一个服务
-    ②$rootScope
-    ③控制器之间的嵌套
-    ④借助于事件
-
-由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
-控制器中的方法和数据，代码片段就可以用了。
-①发送 接收
-    checkProduct --&gt; pay
-
-②配置接收方路由
-    .when(&apos;/myPay/:price&apos;,{})
-
-③$routeParams
-    $routeParams.price
-
-④发送参数
-    href=&apos;#/myPay/20&apos;
-    $location.path(&apos;/myPay/20&apos;)
-
-ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
-
-要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
-
-注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
-</code></pre><p>19、ngAnimate（动画模块）</p>
-<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
-基本步骤：
-①引入对应的js文件
-    angular-animate.js
-②指定自定义模块依赖于ngAnimate
-    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
-③css给ng应用程序添加动画效果：
-    ngEnter 准备进入
-    ngEnterActive 进入完成
-    ngLeave 准备离开
-    ngLeaveActive 离开完成
-④引入对应的css文件
-
-如果用到其它的模块整体思路：
-    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
-    ②在创建模块，指定依赖列表
-    ③根据模块中所提供的指令、服务。。结合业务需要进行
-</code></pre><p>20、表单验证</p>
-<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
-布尔类型：
-$valid
-$invalid
-$dirty
-$pristine
-对象：
-$error
-
-注意事项：
-①给表单以及表单组件 加上name属性
-②给需要用到的表单组件 ，加上ngModel
-③属性的用法
-myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&amp;apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple 
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>css hack兼容性</title>
-    <link href="www.wangchengzou.cn/2017/07/22/css_hack/"/>
-    <id>www.wangchengzou.cn/2017/07/22/css_hack/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-08-17T11:42:03.588Z</updated>
-    
-    <content type="html"><![CDATA[<p>css hack解决浏览器兼容性问题</p>
-<pre><code>网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
-因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
-致设计的页面效果不一样，用于解决这个问题的方法就是css hack，
-使用特别的css定义显示网页在不同浏览器的设计风格，针对不同的浏览器去写不同的css,
-最大化兼容浏览器
-</code></pre><p>比较频繁使用的css hack技巧</p>
-<pre><code>！important，它可以针对ie和非IE浏览器设置不同的样式
-*+html{...} 只无法充分IE7做样式时候使用
-IE的if条件hack
-    &lt;!--[if IE]&gt; Only IE &lt;![endif]--&gt; 所有的IE可识别
-    &lt;!--[if IE 5.0]&gt; Only IE 5.0 &lt;![endif]--&gt; 只有IE5.0可以识别
-    &lt;!--[if gt IE 5.0]&gt; Only IE 5.0+ &lt;![endif]--&gt; IE5.0包换IE5.5都可以识别
-    &lt;!--[if lt IE 6]&gt; Only IE 6- &lt;![endif]--&gt; 仅IE6可识别
-    &lt;!--[if gte IE 6]&gt; Only IE 6/+ &lt;![endif]--&gt; IE6以及IE6以下的IE5.x都可识别
-    &lt;!--[if lte IE 7]&gt; Only IE 7/- &lt;![endif]--&gt; 仅IE7可识别
-</code></pre><p>1、CSS HACK</p>
-<pre><code>以下两种方法几乎能解决现今所有HACK.
-1, !important (不是很推荐，用下面的一种感觉最安全)
-    随着IE7对!important的支持, !important 方法现在只针对IE6的HACK.
-    (注意写法.记得该声明位置需要提前.)
-    代码: &lt;style&gt;
-        #wrapper {
-            width: 100px!important; /* IE7+FF */
-            width: 80px; /* IE6 */ }
-        &lt;/style&gt;
-
-2, IE6/IE77对FireFox &lt;from 针对firefox ie6 ie7的css样式&gt;
-    *+html 与 *html 是IE特有的标签, firefox 暂不支持.而*+html 又为 IE7特有标签.
-        代码: &lt;style&gt;
-                    #wrapper { width: 120px; } /* FireFox */
-              *html #wrapper { width: 80px;} /* ie6 fixed */
-             *+html #wrapper { width: 60px;} /* ie7 fixed, 注意顺序 */
-            &lt;/style&gt;
-        注意:  *+html 对IE7的HACK 必须保证HTML顶部有如下声明：
-        代码:  &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
-        &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
-</code></pre><p>2、万能 float 闭合(非常重要!)</p>
-<pre><code>可以用这个解决多个div对齐时的间距不对，
-关于 clear float 的原理可参见 [How To Clear Floats Without Structural Markup]
-将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.
-代码: &lt;style&gt;
-    /* Clear Fix */
-    .clearfix:after { content:&quot;.&quot;; display:block;
-                    height:0; clear:both;
-                    visibility:hidden; }
-    .clearfix {  display:inline-block; }  /* Hide from IE Mac \*/
-    .clearfix {display:block;} /* End hide from IE Mac */
-                                /* end of clearfix */
-    &lt;/style&gt;
-</code></pre><p>3、其它兼容性技巧</p>
-<pre><code>1、FF下给div设置padding后会导致width和height增加，但ie不会
-    解决：可用！important
-
-2、居中问题
-    垂直居中
-        将line-heigth设置为 当前div相同高度，再通过vertical-align:middle
-    水平居中
-        margin:0 auto;
-
-3、若需要给a标签内容加上样式，需要设置
-    display:block;(常用于导航标签)
-
-4、FF和IE对BOX理解的差异导致相差2px
-    设为float的div在IE下margin加倍问题
-
-5、ul标签在FF下面默认有list-style和padding
-
-6、作为外部wrapper的div不要定死高度，最好加上overflow:hidden
-    以达到高度自适应
-
-7、 关于手形光标. cursor: pointer. 而hand 只适用于 IE
-</code></pre><p>4、针对firefox ie6 ie7的css样式</p>
-<pre><code>现在大部分都是用!important来hack，对于ie6和firefox测试可以正常显示，
-但是ie7对!important可以正确解释，会导致页 面没按要求显示！
-找到一个针对IE7不错的hack方式就是使用“*+html”，现在用IE7浏览一下，
-应该没有问题了现在写一个CSS可以这样：
-    #1 { color: #333; } /* Moz */
-    * html #1 { color: #666; } /* IE6 */
-    *+html #1 { color: #999; } /* IE7 */
-    那么在firefox下字体颜色显示为#333，
-    IE6下字体颜色显示为#666，
-    IE7下字体颜色显示为#999。
-</code></pre><p>5、css布局中的居中问题</p>
-<pre><code>主要的样式定义如下：
-body {TEXT-ALIGN: center;}
-#center { MARGIN-RIGHT: auto; MARGIN-LEFT: auto; }
-说明：
-    首先在父级元素定义TEXT-ALIGN: center;这个的意思就是在父级元素内的内容居中；
-    对于IE这样设定就已经可以了。但在mozilla中不能居中。
-    解决办法就是在子元素定义时候设定时再加上“MARGIN-RIGHT: auto;MARGIN-LEFT: auto; ”
-    需要说明的是，如果你想用这个方法使整个页面要居中，建议不要套在一个DIV里，
-    你可以依次拆出多个div，只要在每个拆出的div里定义
-    MARGIN-RIGHT: auto;MARGIN-LEFT: auto; 就可以了。
-</code></pre><p>6、盒模型不同解释</p>
-<pre><code>#box{  width:600px;
-    //for ie6.0- w\idth:500px;
-    //for ff+ie6.0 }
-#box{  width:600px!important
-    //for ff  width:600px;
-    //for ff+ie6.0  width /**/:500px;
-    //for ie6.0- }
-</code></pre><p>7、浮动IE产生的双倍距离</p>
-<pre><code>#box{float:left;width:100px;margin:0 0 0 100px;}
-解决：didplay:inline
-block,inline两个元素
-    Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);
-inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);
-#box{ display:block; //可以为内嵌元素模拟为块元素
-      display:inline; //实现同一行排列的的效果
-      diplay:table;
-</code></pre><p>8、IE与宽度和高度的问题</p>
-<pre><code>IE不认得min-这个定义，但实际上它把正常的width和heigth当作有min的情况来使，
-如果设置了min-，则ie下就等于没有设置宽高，设置背景图片最小宽度比较重要
-解决:#box{width:80px;height:35px;}
-    html&gt;body #box{width:auto;heigth:auto;min-width:80px;min-height:35px;}
-</code></pre><p>9、清除浮动</p>
-<pre><code>#box:after{
-    content:&quot;&quot;;
-    display:block;
-    height；0；
-    clear:both;
-    visibility:hidden;
-    }
-</code></pre><p>10、DIV浮动IE文本产生3px的bug</p>
-<pre><code>左边对象浮动，右边采用外补丁的左边距定位，右边对象内的文本会离左边有3px的间距
-#box{float:left;width:800px;}
-#left{float:left;width:50%}
-#right{width:50%}
-*html #left{margin-right:-3px;}
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;css hack解决浏览器兼容性问题&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;网页设计遇到最大的麻烦之一莫过于网页对不同浏览器的兼容性问题了，
-因数ie6/ic7/fox2/opera9等主流浏览器对css解析不近相同，导
-致设计的页面效果不一样，用于解决这个问题的方法就是css h
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="css3" scheme="www.wangchengzou.cn/tags/css3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS3高级笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:33:13.367Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、复杂选择器</p>
-<pre><code>1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选择器2
-        如：div+p   #top+.important
-                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
-        选择器1~选择器2
-        如#d1~div
-2、属性选择器
-    通过元素所附带的属性及其值来匹配页面中的元素
-    语法：
-        基础属性选择器  [attr]
-            匹配页面中的有附带attr属性的元素
-        elem[attr]
-            elem:表示任意元素名称
-            attr:表示任意属性名称
-            匹配页面中附带attr属性的elem元素
-            如：div[id]:匹配页面中所有附带id属性的div元素
-        [attr1][attr2][attr3]
-            匹配页面中同时附带attr1和attr2属性的所有元素
-            如 input[name][hype]
-        [attr=value]
-            匹配页面中所有attr属性的值为value的元素
-            如input[type=text]
-        [class~=value]
-            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
-        [attr^=value]
-            匹配以value值作为开始的attr属性的元素
-        [attr$=value]
-            匹配以value值作为结束的attr属性的元素
-        [attr*=value]
-            匹配attr属性值中包含value字符的所有元素
-3、伪类选择器
-    目标伪类
-        突出显示活动的HTML锚元素
-        语法： ：target
-    结构伪类
-        通过元素之间的结构关系来匹配元素
-        ：first-child     获取属于其父元素中的首个子元素
-        ：last-child     获取属于其父元素中的尾（最后）子元素
-        :nth-child(N)  获取属于其父元素中的第N个子元素
-        ：empty   空的，匹配没有子元素的元素，包含文本
-        ：only-child   匹配属于其父元素中的唯一子元素
-    否定伪类
-        把匹配某选择器元素排除出去
-        ：not(选择器 )
-4、伪元素选择器
-    伪类与伪元素
-        伪类：匹配元素不同的状态
-        伪元素：是匹配元素中的内容
-    语法：
-        ：first-letter
-        ::first-letter  匹配某元素的首字符
-        ：first-line    匹配某元素的首行字符
-        ：：selection 匹配用户选取的内容部分
-    ：和：：区别
-        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
-        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
-</code></pre><p>2、内容生成</p>
-<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
-伪元素选择器
-    ：before   定位到元素内容区域之前
-    ：after    定位到元素内容区域之后
-语法：
-    属性：content
-    取值：普通文本
-         图像，url(...)
-         计数器
-问题处理：
-    外边距溢出问题
-        为父元素添加边框
-        使用父元素的内边距取代子元素的外边距
-        在父元素的第一个或最后一个子元素位置处增加一个空的table
-    浮动元素父元素的高度问题
-</code></pre><p>3、弹性布局</p>
-<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
-基本概念‘
-    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
-    flex项目：简称项目，存放在flex容器中的内容
-
-语法：
-    容器：display
-        取值：flex 将块级元素变为flex容器
-              inline-flex  将行内元素变为flex容器
-        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
-    容器属性;
-        该组属性要添加在容器元素上，控制子元素的位置
-        flex-direction  决定主轴的方向（main-axsis）
-            取值：
-                row  主轴为水平方向的轴，起点在容器左端，默认值
-                row-reverse 主轴为水平方向的轴，起点在容器右端
-                column  主轴为交叉轴，起点在容器的顶端
-                column-reverse 主轴为交叉轴，起点在容器的底端
-        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
-            取值：
-                nowrap     默认值，不换行
-                wrap        换行
-                wrap-reverse  反方向换行
-        flex-flow   dirextion和wrap的缩写方式
-            取值：
-                row nowrap 默认值
-                direction wrap
-        justify-content   定义项目在主轴上的对齐方式
-            取值：
-                flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                space-between  两端对齐，项目之间的距离是相等的
-                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
-        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
-            取值：
-                flex-start  交叉轴起点对齐
-                flex-end   交叉轴终点对齐
-                center     交叉轴中间对齐
-                baseline   基线对齐，以所有项目中的第一行文本为准
-                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
-        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
-            取值：
-                flex-start   交叉轴顶端对齐
-                flex-end    交叉轴底端对齐
-                center      交叉轴中间对齐
-                space-between  与交叉轴两端对齐
-                space-around     项目与项目间对齐
-    项目属性：
-        该组属性主要设置于项目中
-        order  定义项目在排列顺序，值越小，越靠前，默认为0
-        flex-grow  指定项目的放大比例，默认为0，即不放大
-        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
-        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
-        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
-            取值，auto  相当于1  1   auto
-                 none  相当于0 0  auto
-                 flex-grow【,flex-shrink,flex-basis】
-        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
-            取值： auto 默认值，使用
-                  flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                base-line
-                stretch
-</code></pre><p>4、CSS Hack 兼容性</p>
-<pre><code>标准模式和混杂模式和准标准模式
-IE6之前，没有兼容性说法
-IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
-    混杂模式  无标准可言
-        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
-    标准模式  安全支持
-    准标准模式，即支持标准，也同时向前兼容非标准代码
-如何根据不同的浏览器编写不同的css
-    css类内部Hack
-        在属性名称前和值添加前后缀以便识别不同的浏览器
-    选择器Hack
-        在选择器前添加特殊标识以便识别不同的浏览器
-    头部引用hack
-        通过html的条件注释来判断浏览器版本，去执行不同的CSS
-        条件注释
-            条件：
-                gt:判断当前浏览器是否大于指定定版本
-                gte：判断当前浏览器是否大于等于指定定版本
-                it:   判断当前浏览器是否小于指定版本
-                ite： 判断当前浏览器是否小于等于指定版本
-                !：   判断当前浏览器是否为非指定版本
-                    &lt;!--[if !IE 8]&gt;
-                        该段内容在除IE8以外浏览器中显示
-                    &lt;![endif]--&gt;
-</code></pre><p>5、转换</p>
-<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
-    允许进行2D和3D方向的转换
-    2D转换：在平面中进行的操作
-    3D转换：在空间中进行的操作
-转换属性：
-    rtansform:为元素应用2D或3D转换效果
-        取值：none;  没有效果
-
-            transform-functions:一组转换函数
-                位移转换函数：translate()
-                改变形状函数：skew()
-                注意：如果指定多个转换函数的话中间用空格隔开
-    转换原点：
-        属性：transform-origin
-        默认：转换原点在元素中心处
-        取值：轴线给值
-            两个轴线值：X Y
-            三个轴线值：X Y Z
-2D转换
-    位移：改变元素在页面中的位置
-        语法：transform
-            fransform(x)  改变元素在X轴的位置
-            fransform(X ,Y)  改变元素在两轴的位置
-            fransformX(X) 只在X轴上位置移动
-            fransformY(Y)  只在Y轴上位置移动
-    缩放： 改变元素在页面中的大小】
-        语法：transform
-            scale(value)  表示两轴等比缩放
-                取值：默认  为1
-                    放大   为大于1的数值
-                    缩小   为0~1之间小数
-                    返转   负数
-            sacle(X,Y)
-            saclex(y)
-            sacley(y)
-    旋转：改变元素在页面上的角度，要根据原点实现转换效果
-        语法：transform
-            rotate(ndeg)
-                n 取值正，顺时针旋转
-                n 取值负，逆时针旋转
-                deg 为角度
-                0~360范围
-        注意：转换原点问题
-            元素坐标轴也跟着旋转
-    倾斜：改变元素在页面中形状
-        语法：transform
-            skew(xdeg)  横向倾斜指定度数
-                x 取值正，y轴逆时针倾斜一定角度
-                  取值负，Y轴顺时针倾斜一定角度
-            skew(xdeg,ydeg)
-            skewx(xdeg)
-            skewy(ydeg)
-3D转换
-    感觉空间
-    属性：perspetive 假定人眼到投射平面的距离
-    注意：该属性要放在3D转换元素的父元素上
-        兼容性chrome和safari需要加前缀
-            -wedkit-perspective:500px;
-    旋转：以X轴中心轴旋转
-            rotatex(xdeg)
-          以Y轴中心轴旋转
-            rotatey(ydeg)
-          以Z轴中心轴旋转
-            rotatez(zdeg)
-        取值：正  顺时针
-            负   逆时针
-        以多个轴同时进行旋转
-            rotate3d(x ,y, z ,ndeg)
-                x y z 取值为1，该轴参与旋转
-                x y z  取值为0 ，该轴不参与旋转
-    位移：改变元素在Z轴上的位置
-        语法：transform
-            translatez(z)
-
-            transform-style
-                取值：flat  默认值，子元素不保留3D位置
-                     preserve-3D  子元素保留3D位置
-</code></pre><p>6、过渡</p>
-<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
-要素与属性：
-    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
-        transition-property: 属性名称（width）
-                      all   全部属性
-                      none
-        允许设置过渡效果的属性：
-            颜色属性
-            渐变属性
-            取值为数字属性
-            转换属性 transition-property:transform;
-            visibility属性
-            阴影属性
-    指定过渡时长
-        transition-duration: 以S、MS为单位数值
-    指定过渡时速曲线函数  可选
-        transition-timing-function
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-    指定过渡的延迟时间   可选
-        transition-delay
-            取值：以S或MS做为单位
-    简写属性：transition:prop duration  timing-fun delay;
-        多个过渡效果
-            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
-触发过渡条件
-    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
-    将过渡编写在:hover,:active伪类中
-</code></pre><p>7、动画</p>
-<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
-动画使用步骤
-    声明动画
-        指定动画名称
-        指定动画中的关键帧（keyframes）
-            时间点（以百分比描述时间）
-            元素状态（CSS样式）
-    为元素调用动画
-        指定调用动画的名称以及执行时长
-语法：
-    声明动画     注意前缀，兼容性问题
-        &lt;style&gt;
-            @keyframes 名称{
-                0%{   动画开始时，元素的状态   }
-                。。。。
-                100%{  动画结束时，元素的状态  }
-            }
-        &lt;/style&gt;
-    调用动画(animation)
-        animation-name  指定调用动画名称
-        animation-duration   指定动画周期时长，以S或MS为单位
-        animation-timing-function  指定动画的速度时间出线函数
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-        animation-delay  指定动画延迟时间
-        animation-iteration-count  指定动画播放次数
-            取值：默认1次，具体数值
-                infinite:无限次播放
-        animation-direction  指定动画的播放方向
-            取值：normal  从0%~100%
-                reverse  从100%~0%
-                alternate  轮流来回播放 奇数 0%~100%
-                                 偶数 100%~0%
-        animation  简写方式
-            取值：name  duration  timing-fun delay  iteration-count direction;
-        animation-fill-mode  指定动画播放之前、之后的填充模式
-            取值：none  默认值
-                 forwards  动画播放完成后，保持在最后一帧的位置
-                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
-                 both 同时应用在开始和最后的位置帧上
-        animation-play-state  动画播放状态
-            取值：paused 暂停
-                 running 播放
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、复杂选择器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
-    
-      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
     
   </entry>
   
@@ -8401,6 +7527,880 @@ IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它
       <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
     
       <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3高级笔记</title>
+    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
+    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T10:33:13.367Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、复杂选择器</p>
+<pre><code>1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选择器2
+        如：div+p   #top+.important
+                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
+        选择器1~选择器2
+        如#d1~div
+2、属性选择器
+    通过元素所附带的属性及其值来匹配页面中的元素
+    语法：
+        基础属性选择器  [attr]
+            匹配页面中的有附带attr属性的元素
+        elem[attr]
+            elem:表示任意元素名称
+            attr:表示任意属性名称
+            匹配页面中附带attr属性的elem元素
+            如：div[id]:匹配页面中所有附带id属性的div元素
+        [attr1][attr2][attr3]
+            匹配页面中同时附带attr1和attr2属性的所有元素
+            如 input[name][hype]
+        [attr=value]
+            匹配页面中所有attr属性的值为value的元素
+            如input[type=text]
+        [class~=value]
+            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
+        [attr^=value]
+            匹配以value值作为开始的attr属性的元素
+        [attr$=value]
+            匹配以value值作为结束的attr属性的元素
+        [attr*=value]
+            匹配attr属性值中包含value字符的所有元素
+3、伪类选择器
+    目标伪类
+        突出显示活动的HTML锚元素
+        语法： ：target
+    结构伪类
+        通过元素之间的结构关系来匹配元素
+        ：first-child     获取属于其父元素中的首个子元素
+        ：last-child     获取属于其父元素中的尾（最后）子元素
+        :nth-child(N)  获取属于其父元素中的第N个子元素
+        ：empty   空的，匹配没有子元素的元素，包含文本
+        ：only-child   匹配属于其父元素中的唯一子元素
+    否定伪类
+        把匹配某选择器元素排除出去
+        ：not(选择器 )
+4、伪元素选择器
+    伪类与伪元素
+        伪类：匹配元素不同的状态
+        伪元素：是匹配元素中的内容
+    语法：
+        ：first-letter
+        ::first-letter  匹配某元素的首字符
+        ：first-line    匹配某元素的首行字符
+        ：：selection 匹配用户选取的内容部分
+    ：和：：区别
+        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
+        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
+</code></pre><p>2、内容生成</p>
+<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
+伪元素选择器
+    ：before   定位到元素内容区域之前
+    ：after    定位到元素内容区域之后
+语法：
+    属性：content
+    取值：普通文本
+         图像，url(...)
+         计数器
+问题处理：
+    外边距溢出问题
+        为父元素添加边框
+        使用父元素的内边距取代子元素的外边距
+        在父元素的第一个或最后一个子元素位置处增加一个空的table
+    浮动元素父元素的高度问题
+</code></pre><p>3、弹性布局</p>
+<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
+基本概念‘
+    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
+    flex项目：简称项目，存放在flex容器中的内容
+
+语法：
+    容器：display
+        取值：flex 将块级元素变为flex容器
+              inline-flex  将行内元素变为flex容器
+        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
+    容器属性;
+        该组属性要添加在容器元素上，控制子元素的位置
+        flex-direction  决定主轴的方向（main-axsis）
+            取值：
+                row  主轴为水平方向的轴，起点在容器左端，默认值
+                row-reverse 主轴为水平方向的轴，起点在容器右端
+                column  主轴为交叉轴，起点在容器的顶端
+                column-reverse 主轴为交叉轴，起点在容器的底端
+        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
+            取值：
+                nowrap     默认值，不换行
+                wrap        换行
+                wrap-reverse  反方向换行
+        flex-flow   dirextion和wrap的缩写方式
+            取值：
+                row nowrap 默认值
+                direction wrap
+        justify-content   定义项目在主轴上的对齐方式
+            取值：
+                flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                space-between  两端对齐，项目之间的距离是相等的
+                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
+        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
+            取值：
+                flex-start  交叉轴起点对齐
+                flex-end   交叉轴终点对齐
+                center     交叉轴中间对齐
+                baseline   基线对齐，以所有项目中的第一行文本为准
+                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
+        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
+            取值：
+                flex-start   交叉轴顶端对齐
+                flex-end    交叉轴底端对齐
+                center      交叉轴中间对齐
+                space-between  与交叉轴两端对齐
+                space-around     项目与项目间对齐
+    项目属性：
+        该组属性主要设置于项目中
+        order  定义项目在排列顺序，值越小，越靠前，默认为0
+        flex-grow  指定项目的放大比例，默认为0，即不放大
+        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
+        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
+        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
+            取值，auto  相当于1  1   auto
+                 none  相当于0 0  auto
+                 flex-grow【,flex-shrink,flex-basis】
+        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
+            取值： auto 默认值，使用
+                  flex-start   主轴起点对齐
+                flex-end   主轴终点对齐
+                center    居中对齐
+                base-line
+                stretch
+</code></pre><p>4、CSS Hack 兼容性</p>
+<pre><code>标准模式和混杂模式和准标准模式
+IE6之前，没有兼容性说法
+IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
+    混杂模式  无标准可言
+        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
+    标准模式  安全支持
+    准标准模式，即支持标准，也同时向前兼容非标准代码
+如何根据不同的浏览器编写不同的css
+    css类内部Hack
+        在属性名称前和值添加前后缀以便识别不同的浏览器
+    选择器Hack
+        在选择器前添加特殊标识以便识别不同的浏览器
+    头部引用hack
+        通过html的条件注释来判断浏览器版本，去执行不同的CSS
+        条件注释
+            条件：
+                gt:判断当前浏览器是否大于指定定版本
+                gte：判断当前浏览器是否大于等于指定定版本
+                it:   判断当前浏览器是否小于指定版本
+                ite： 判断当前浏览器是否小于等于指定版本
+                !：   判断当前浏览器是否为非指定版本
+                    &lt;!--[if !IE 8]&gt;
+                        该段内容在除IE8以外浏览器中显示
+                    &lt;![endif]--&gt;
+</code></pre><p>5、转换</p>
+<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
+    允许进行2D和3D方向的转换
+    2D转换：在平面中进行的操作
+    3D转换：在空间中进行的操作
+转换属性：
+    rtansform:为元素应用2D或3D转换效果
+        取值：none;  没有效果
+
+            transform-functions:一组转换函数
+                位移转换函数：translate()
+                改变形状函数：skew()
+                注意：如果指定多个转换函数的话中间用空格隔开
+    转换原点：
+        属性：transform-origin
+        默认：转换原点在元素中心处
+        取值：轴线给值
+            两个轴线值：X Y
+            三个轴线值：X Y Z
+2D转换
+    位移：改变元素在页面中的位置
+        语法：transform
+            fransform(x)  改变元素在X轴的位置
+            fransform(X ,Y)  改变元素在两轴的位置
+            fransformX(X) 只在X轴上位置移动
+            fransformY(Y)  只在Y轴上位置移动
+    缩放： 改变元素在页面中的大小】
+        语法：transform
+            scale(value)  表示两轴等比缩放
+                取值：默认  为1
+                    放大   为大于1的数值
+                    缩小   为0~1之间小数
+                    返转   负数
+            sacle(X,Y)
+            saclex(y)
+            sacley(y)
+    旋转：改变元素在页面上的角度，要根据原点实现转换效果
+        语法：transform
+            rotate(ndeg)
+                n 取值正，顺时针旋转
+                n 取值负，逆时针旋转
+                deg 为角度
+                0~360范围
+        注意：转换原点问题
+            元素坐标轴也跟着旋转
+    倾斜：改变元素在页面中形状
+        语法：transform
+            skew(xdeg)  横向倾斜指定度数
+                x 取值正，y轴逆时针倾斜一定角度
+                  取值负，Y轴顺时针倾斜一定角度
+            skew(xdeg,ydeg)
+            skewx(xdeg)
+            skewy(ydeg)
+3D转换
+    感觉空间
+    属性：perspetive 假定人眼到投射平面的距离
+    注意：该属性要放在3D转换元素的父元素上
+        兼容性chrome和safari需要加前缀
+            -wedkit-perspective:500px;
+    旋转：以X轴中心轴旋转
+            rotatex(xdeg)
+          以Y轴中心轴旋转
+            rotatey(ydeg)
+          以Z轴中心轴旋转
+            rotatez(zdeg)
+        取值：正  顺时针
+            负   逆时针
+        以多个轴同时进行旋转
+            rotate3d(x ,y, z ,ndeg)
+                x y z 取值为1，该轴参与旋转
+                x y z  取值为0 ，该轴不参与旋转
+    位移：改变元素在Z轴上的位置
+        语法：transform
+            translatez(z)
+
+            transform-style
+                取值：flat  默认值，子元素不保留3D位置
+                     preserve-3D  子元素保留3D位置
+</code></pre><p>6、过渡</p>
+<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
+要素与属性：
+    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
+        transition-property: 属性名称（width）
+                      all   全部属性
+                      none
+        允许设置过渡效果的属性：
+            颜色属性
+            渐变属性
+            取值为数字属性
+            转换属性 transition-property:transform;
+            visibility属性
+            阴影属性
+    指定过渡时长
+        transition-duration: 以S、MS为单位数值
+    指定过渡时速曲线函数  可选
+        transition-timing-function
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+    指定过渡的延迟时间   可选
+        transition-delay
+            取值：以S或MS做为单位
+    简写属性：transition:prop duration  timing-fun delay;
+        多个过渡效果
+            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
+触发过渡条件
+    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
+    将过渡编写在:hover,:active伪类中
+</code></pre><p>7、动画</p>
+<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
+动画使用步骤
+    声明动画
+        指定动画名称
+        指定动画中的关键帧（keyframes）
+            时间点（以百分比描述时间）
+            元素状态（CSS样式）
+    为元素调用动画
+        指定调用动画的名称以及执行时长
+语法：
+    声明动画     注意前缀，兼容性问题
+        &lt;style&gt;
+            @keyframes 名称{
+                0%{   动画开始时，元素的状态   }
+                。。。。
+                100%{  动画结束时，元素的状态  }
+            }
+        &lt;/style&gt;
+    调用动画(animation)
+        animation-name  指定调用动画名称
+        animation-duration   指定动画周期时长，以S或MS为单位
+        animation-timing-function  指定动画的速度时间出线函数
+            取值：ease  默认值，慢速开始，快速变快，慢速结束
+                 linear  匀速进行
+                 ease-in   慢速开始，快速结束
+                 ease-out  快速开始，慢速结束
+                 ease-in-out  慢速开始和结束，先加速后减速
+        animation-delay  指定动画延迟时间
+        animation-iteration-count  指定动画播放次数
+            取值：默认1次，具体数值
+                infinite:无限次播放
+        animation-direction  指定动画的播放方向
+            取值：normal  从0%~100%
+                reverse  从100%~0%
+                alternate  轮流来回播放 奇数 0%~100%
+                                 偶数 100%~0%
+        animation  简写方式
+            取值：name  duration  timing-fun delay  iteration-count direction;
+        animation-fill-mode  指定动画播放之前、之后的填充模式
+            取值：none  默认值
+                 forwards  动画播放完成后，保持在最后一帧的位置
+                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
+                 both 同时应用在开始和最后的位置帧上
+        animation-play-state  动画播放状态
+            取值：paused 暂停
+                 running 播放
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、复杂选择器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1、兄弟选择器
+    通过兄弟级别的位置关系来匹配页面元素
+    注意，兄弟选择器，只能向后找，不能向前找
+    语法：
+        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
+        选择器1+选
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+    
+      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Angular基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-27T12:53:02.708Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
+<pre><code>拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple and stupid
+语义化的标记、命名规则、减少嵌套
+
+3、DRY（善于使用封装和重用）
+Don&apos;t Repeat Yourself
+
+4、高内聚 低耦合（High cohesion,low coupling）
+内聚：一个组件（模块）内部的不同部分的关系
+耦合：不同组件（模块）之间的关系
+
+5、SRP 单一责任原则
+Single Responsibility Principle
+实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
+
+6、OCP原则(对于扩展开放、对于修改关闭)
+open close principle
+
+7、LCP（迪米特法则）
+Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
+
+常用的设计模式分为3大类：①创建 ②结构 ③行为
+
+常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
+先去实现功能，在迭代的过程中优化代码。
+</code></pre><p>2、AngularJS</p>
+<pre><code>认识新东西最好的方式：
+①官网
+②维基百科 wikipedia.org
+what?--ng(AngularJS)是一个开源的js框架
+where？--用来实现SPA应用程序（单一页面应用程序single page application）
+Gmail邮箱是由Google退出的前端历史中第一个SPA应用
+why？
+四大特征：
+①采用了MVC的设计模式
+Model 模型数据
+View  视图
+Controller 控制器
+</code></pre><p>3、MVC的工作原理：</p>
+<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
+1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
+2.双向数据绑定
+    数据-》视图
+    视图用户的输入 -》 数据
+3.依赖注入
+4.模块化设计
+</code></pre><p>4、使用ng</p>
+<pre><code>1、基本语法
+    &lt;any&gt;{{表达式}} &lt;/any&gt;
+    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
+
+2、常用指令
+    ngApp
+        ①启动ng
+        ②指定作用范围，将指令写在根标签
+    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
+    ngInit 指令 来完成数据的初始化
+    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
+        ①不需要在通过ngInit指令定义数据时候，加上var关键字
+        ②ngInit所初始化的变量是可以在整个html去使用变量
+</code></pre><p>5、常用指令</p>
+<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
+
+作为扩展属性来使用：
+    &lt;div ng-**&gt;&lt;/div&gt;
+    ngInit  --&gt; ng-init
+    ngApp --&gt; ng-app
+作为扩展标签来使用：
+    &lt;ngView/&gt;
+①ngApp
+    启动ng
+    指定作用范围，将指令写在根标签
+    注意事项：调用一次ngApp
+②ngInit
+    通过ngInit调用一次，初始化多个变量？？
+    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
+③ngRepeat
+    重复实例化模板
+    两种语法：
+    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
+    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
+
+    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
+        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
+
+④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
+    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
+    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
+    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
+    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
+    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
+    但是控制台是会报错的，通过ngSrc去指定就搞定了
+    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
+    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
+</code></pre><p>6、MVC</p>
+<pre><code>在ng中：
+    Model 模型数据：在ng中定义的一些变量
+    View  视图：通过ng指令和表达式增强版的html
+    Controller 控制器：负责数据的增删改查的
+MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
+在ng中应该怎么做才能实现一个SPA？
+准备工作：
+①创建一个模块
+    因为在ng中是以模块为基本单位的
+    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
+②使用模块
+    采用ngApp指令
+    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
+③创建一个控制器
+    app.controller(&apos;控制器的名称&apos;,function(){})
+    第二个参数时控制器被调用时，要执行的方法
+④调用控制器
+    采用ngController指令来调用控制器
+    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
+    实现数据的创建和显示等：
+⑤操作数据、显示出来
+
+$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
+    建立起控制器中的数据和控制器的所指定的视图的桥梁
+
+绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
+&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
+
+注意事项：
+由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
+</code></pre><p>7、ng是由很多指令的：</p>
+<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
+ngBind ngClass ngStyle
+
+在webStorm中创建一个文件模板的基本步骤：
+①拷贝要使用的代码
+②点击左上角的file，选择new
+③选择Edit File Templates
+④点击弹窗中右上角的+号
+⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
+</code></pre><p>8、自定义指令</p>
+<pre><code>1、如何自定义？？
+    angular.module()
+    app.controller()
+    //创建指令
+    app.directive(&apos;指令的名称&apos;，function(){
+        return {}
+    })
+    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
+    后缀：用来描述指令的功能
+    属性：
+    template：指定要显示的模板内容
+    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
+    replace: true,替换并显示出来
+    scope
+
+2、如何使用自定义的指令？？
+    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
+    &apos;tsHello&apos; --&gt; ts-hello
+    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
+
+3、自定义指令传递参数
+    怎么传？
+        在调用指令的时候可以传 将参数作为属性对应的值
+    怎么接受？
+        scope
+</code></pre><p>9、双向数据绑定</p>
+<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
+绑定方式：
+①常用指令： ngRepeat/ngIf/ngShow...
+②双花括号：{{}}
+
+方向2：从‘视图中用户的输入’绑定到‘数据’
+绑定方式：指令：ngModel
+
+如果要监听数据的变化：
+$scope.$watch(&apos;txt&apos;,function(){
+
+})
+
+在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
+ngOptions语法：
+ &lt;select
+    ng-model=&quot;city&quot;
+    ng-options=&quot;city.cityName for city in cities&quot;&gt;
+ &lt;/select&gt;
+</code></pre><p>10、过滤器</p>
+<pre><code>a.内置的过滤器
+    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
+    过滤器的语法：支持多重过滤和传参
+    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
+            | => 管道
+            常用的过滤器：
+                currency 货币样式的过滤器
+                date 日期
+                uppercase/lowercase 大小写的处理
+                orderBy 对指定的数组进行升序或者降序排列
+                number 格式化数字为文本（对有小数点的数据的处理）
+                limitTo 限定数组或者字符串要显示的个数
+        b.自定义过滤器
+            自定义过滤器方式：
+            app.filter('过滤器名称',function(){
+                return function(input，arg){
+                        //input是传递给过滤器的数据
+                        //arg 是过滤器本身的参数
+                    return '过滤后的结果'
+                }
+            })
+            使用自定义的过滤器:
+            和内置的过滤器用法是一样的
+
+11、ng模块内置的方法
+
+        序列化、反序列化
+        toJson:将对象或者数组 序列化 为json格式的字符串
+        fromJson：相反的过程
+
+12、服务
+
+    服务的本质是一个单例对象，提供数据和对象。
+    两大类：
+    ①内置服务
+        $location、$http、$window、$scope...
+        使用内置服务中提供的方法：
+            第一步 将需要用到的服务注入进来 function($scope,$location)
+            第二步 调用服务中提供的方法 数据。。
+    ②自定义的服务
+        面试题：$scope与$rootScope之间的关系
+        1、不同的控制器之间的数据是彼此隔离的
+        2、不同的控制器之间如何共享数据？？
+        $scope的id是从2开始依次往上递增，
+        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
+            方式1：借助于$rootScope
+                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
+            方式2：借助于控制器之间的嵌套
+                在调用控制器的元素 之间的嵌套关系
+                @@div ng-controller='myCtrl02'>
+                    @@<div ng-controller="myCtrl03"></div>
+                @@
+            方式3：触发事件传递参数
+                绑定事件：
+                $scope.$on('事件名称',function(event,data){
+
+                })
+        触发事件：
+        //从子作用对象 向 父作用域对象 传递事件
+        $scope.$emit()
+        //从父作用对象 向 子作用域对象 传递事件
+        $scope.$broadcaset()
+
+13、服务
+
+        双向数据绑定的工作原理：
+        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
+        怎么知道数据发生了变化？
+        在ng中有一个循环$digest,会不断的对比数据，
+        需要手工的触发循环做对比，可以通过：
+        $scope.$digest();
+        $scope.$apply();//触发$rootScope.$digest();
+
+14、ng内置的服务：
+
+        $location $scope $rootScope $window $interval $timeout
+        1、在ng中定时器相关的处理--》$interval $timeout
+        2、$http
+        $http({method:'',url:''}).success().error()
+        $http.get()
+        $http.post()
+        注意：如果需要发起post请求，需要设置:
+         app.run(function ($http) {
+                $http.defaults.headers.post =
+        {'Content-Type':'application/x-www-form-urlencoded'};})
+
+        在发起post请求时，如果需要对参数进行序列化:
+        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
+
+15、自定义服务
+
+        服务的目的是为了封装业务逻辑，提高代码的复用率
+        自定义指令 app.directive
+        自定义过滤器 app.filter
+        自定义服务的方法：
+        app.factory ('服务名称',function(){//普通方法 return {}})
+app.service(&apos;服务名称&apos;,function(){//构造函数})
+app.constant(&apos;服务名称&apos;，{})//创建常量服务
+app.value(&apos;服务名称&apos;，{})//创建变量服务
+
+注意事项：
+自定义的服务 需要用到其它服务中方法
+图：两个按钮：开始 结束。
+</code></pre><p>16、依赖注入</p>
+<pre><code>将代码部署到线上，都会对代码做压缩。
+使用YUI-Compressor.jar （有java的运行环境）
+①借助于CLI（command line）
+    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
+
+②IDE（webStorm）
+    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
+    在弹窗中的program选中对应的jar，保存即可
+压缩效果：
+会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
+但是数字、字符串、关键字是不会改变的。
+
+解决压缩后的问题方式：
+依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
+让我们可以去直接使用
+
+注入的方式：
+①推断式（猜测）
+    这种方式在进行压缩会有问题
+    app.controller(&apos;myCtrl&apos;,function($scope){});
+
+②标记式
+    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
+    存在一个字符串（服务名称）数组。
+    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
+    实现方式：
+    1、将处理函数单独的存在一个变量中
+    2、给变量设置$inject，值是一个由字符串构成的数组
+    3、使用服务即可
+③行内式（内联式）
+    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
+    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
+    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
+    依赖注入3种方式，官方推荐采用行内式依赖注入。
+    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
+    整个ng应用的注入对象都是由$injector定位和创建。
+    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
+    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
+</code></pre><p>17、模块化设计</p>
+<pre><code>ng有4大特征：
+①MVC
+②双向数据绑定
+③依赖注入
+④模块化设计
+
+高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
+
+如何自定义模块？
+angular.module();
+
+使用模块？
+ng-app=&quot;&quot;
+在创建模块时，在第二个参数所对应的数组中写上服务的名称
+
+一个ng的模块都可以包含哪些？
+控制器：对应部分业务逻辑的封装
+服务：经常用到的重复代码封装
+指令：扩展html标签、属性
+过滤器：针对数据做一些筛选 过滤 格式化的处理
+</code></pre><p>18、ngRoute（路由模块）</p>
+<pre><code>ng是主要实现SPA（单一页面应用程序）
+SPA的工作原理：
+    1、页面url
+    http://127.0.0.1/index.html#/路由地址
+    例如：http://127.0.0.1/index.html#/start
+    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
+    3、在路由词典中寻找路由地址(start)所对应的路由信息
+    4、在路由信息所对应的对象中找到真实的模板页面地址
+    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
+
+ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
+自动发起ajax请求加载页面显示。
+    0、在创建自定义模块，在依赖列表中指定ngRoute
+    1、指定盛放代码片段的容器
+    2、配置路由词典
+
+使用ngRoute的基本步骤：
+①创建一个完整的html页面
+    记得引入angular.js angular-route.js
+
+②创建模块，并指定依赖于ngRoute模块
+    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
+
+③使用指令创建一个盛放代码片段的容器
+    调用ngView指令：创建一个容器，代码片段会加载到这里
+
+④创建模板页面
+
+⑤配置路由词典
+    $routeProvider
+    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
+    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
+    otherwise是用来指定异常的处理
+    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
+
+SPA在ng实现过程，代码片段的跳转：
+①直接修改地址栏中的路由地址
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
+②通过js的方式
+    $location.path(&apos;路由地址&apos;)
+③超链接的方式
+    a href=&quot;#/myRegister&quot;
+    login-&gt;start 10
+
+SPA应用程序通过ngRoute来传递参数：
+①搞明白 发送 接收
+②配置接收方的路由
+    $routeProvider.when(&apos;/myStart/:num&apos;,{
+    templateUrl:&apos;tpl/start.html&apos;
+    })
+③拿到传递过来的参数
+    $routeParams.num
+④发送
+    a href=&apos;#/myStart/10&apos;
+    $location.path(&apos;/myStart/10&apos;)
+
+注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
+    myStart/:id $routeParams.id
+
+练习：实现一个SPA
+完整的html manager.html
+代码片段： checkProduct.html pay.html send.html
+
+要求：能够实现不同页面的跳转以及参数的传递
+checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
+pay 点击button跳转到send
+send button以及a跳转到check.html
+
+优化思路：如果多个控制器需要用到同一个方法或者数据，
+    ①将方法和数据封装成一个服务
+    ②$rootScope
+    ③控制器之间的嵌套
+    ④借助于事件
+
+由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
+控制器中的方法和数据，代码片段就可以用了。
+①发送 接收
+    checkProduct --&gt; pay
+
+②配置接收方路由
+    .when(&apos;/myPay/:price&apos;,{})
+
+③$routeParams
+    $routeParams.price
+
+④发送参数
+    href=&apos;#/myPay/20&apos;
+    $location.path(&apos;/myPay/20&apos;)
+
+ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
+
+要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
+
+注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
+</code></pre><p>19、ngAnimate（动画模块）</p>
+<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
+基本步骤：
+①引入对应的js文件
+    angular-animate.js
+②指定自定义模块依赖于ngAnimate
+    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
+③css给ng应用程序添加动画效果：
+    ngEnter 准备进入
+    ngEnterActive 进入完成
+    ngLeave 准备离开
+    ngLeaveActive 离开完成
+④引入对应的css文件
+
+如果用到其它的模块整体思路：
+    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
+    ②在创建模块，指定依赖列表
+    ③根据模块中所提供的指令、服务。。结合业务需要进行
+</code></pre><p>20、表单验证</p>
+<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
+布尔类型：
+$valid
+$invalid
+$dirty
+$pristine
+对象：
+$error
+
+注意事项：
+①给表单以及表单组件 加上name属性
+②给需要用到的表单组件 ，加上ngModel
+③属性的用法
+myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&amp;apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple 
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
     
   </entry>
   
