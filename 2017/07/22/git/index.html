@@ -7,7 +7,7 @@
 
     
 
-    <title>git使用基础知识 | 千帆渡</title>
+    <title>git/svn使用基础知识 | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="git使用基础知识"/>
+    <meta property="og:title" content="git/svn使用基础知识"/>
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -241,7 +241,7 @@
             <div class="article-title">
                 
     
-        <h1>git使用基础知识</h1>
+        <h1>git/svn使用基础知识</h1>
     
 
 
@@ -257,6 +257,8 @@
     <div class="tags-row">
         
             <a href="/tags/git/" class="chip pink lighten-1">git</a>
+        
+            <a href="/tags/svn/" class="chip pink lighten-1">svn</a>
         
             <a href="/tags/打包/" class="chip pink lighten-1">打包</a>
         
@@ -311,19 +313,93 @@ git subtree push --prefix=dist origin gh-pages  建立分支结构
     git commit -m “message” （设置提交信息）
     git remote add origin https://github.com/***.git（本地仓库链接远程仓库）
     git push -u origin gh-pages （push文件到仓库中）
+</code></pre><p>1、VCS系统</p>
+<p>  Version Control System，版本控制系统；用于记录项目文件的开发版本，完成项目文件的存储、共享、合并、回退、回溯等功能。<br>  常见的VCS软件有：<br>    集中式VCS软件： CVS、SVN<br>    分布式VCS软件： Bitlocker、Git</p>
+<p>  仓库(Repository)：用于保存项目中所有文件（文本、二进制）,以及每个文件的每次修改记录(谁/何时/修改了什么)<br>  工作区(Working Directory)：用于检出(Checkout)、编辑、提交(Commit)项目文件</p>
+<p>2、SVN系统的使用</p>
+<p>  服务器端：<br>    (1)安装一款SVN服务器软件(VisualSVN-Server)<br>      (2)启动SVN服务器<br>    (3)创建用户(User)和组(Group)<br>    (4)为每个项目创建一个仓库(Repository)，指定用户和组的访问权限</p>
+<p>  客户端：<br>    (1)安装一款SVN客户端软件<br>    (2)选择一个目录作为工作目录(Working Directory)，检出(Checkout)服务器上的已有内容<br>    (3)修改项目文件<br>    (4)提交(Commit)项目文件到SVN服务器<br>    (5)其他项目组员可以从SVN服务器上更新(Update)你提交的项目文件</p>
+<p>3、使用WebStorm作为SVN客户端</p>
+<p>  只要首先安装SVN客户端，再启动WebStorm，它可以自动发现系统中安装的SVN客户端，<br>  如TortoiseSVN，可以使用WS中按钮直接实现SVN客户端的功能。</p>
+<p>4、Git的使用</p>
+<p>  快速入门：<a href="http://www.runoob.com/git/git-tutorial.html" target="_blank" rel="external">http://www.runoob.com/git/git-tutorial.html</a><br>  深入入门：<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/</a><br>  官方手册：<a href="https://www.gitbook.com/book/bingohuang/progit2/details" target="_blank" rel="external">https://www.gitbook.com/book/bingohuang/progit2/details</a><br>    Git是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<br>    Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>    Git 与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。<br>    SVN和Git的异同点？<br>        1、GIT是分布式的，SVN是集中式：这是GIT和其它非分布式的版本控制系统，例如SVN，CVS等，最核心的区别。<br>        2、GIT把内容按元数据方式存储，而SVN是按文件：所有的资源控制系统都是把文件的元信息隐藏在一个类似.svn,.cvs等的文件夹里。<br>        3、GIT分支和SVN的分支不同：分支在SVN中一点不特别，就是版本库中的另外的一个目录。<br>        4、GIT没有一个全局的版本号，而SVN有：目前为止这是跟SVN相比GIT缺少的最大的一个特征。<br>        5、GIT的内容完整性要优于SVN：GIT的内容存储使用的是SHA-1哈希算法。这能确保代码内容的完整性，<br>            确保在遇到磁盘故障和网络问题时降低对版本库的破坏。<br>    提示：Git系统服务器不是必需的！每个终端都自带仓库。Git账户不需要向服务器申请，自己随意指定即可，但需要为自己创建一个唯一的身份识别号。</p>
+<p>5、Git系统的使用</p>
+<pre><code>Git是分布式的VCS系统，每个终端都是独立的（有工作区和仓库），
+账户的name和email是自己指定的，也可以为每个终端都创建一个全球唯一的身份识别号。
+使用步骤：
+(1)安装一款Git客户端工具——msysgit
+  从官网下载：Git-2.13.0-64-bit.exe
+(2)使用Git GUI为自己分配一个全球唯一的身份识别号(SSH Key)
+(3)在当前系统中安装的Git全局声明一下当前用户的认证信息
+  git  config  --global   user.name   &quot;LiWenhua&quot;
+  git  config  --global   user.email   &quot;lwh@qq.com&quot;
+(4)创建一个空白工作区，其中包含一个仓库
+  git  init
+  提示：工作区所在的完整目录中不允许出现中文和空白字符
+(5)在工作区中添加/编写/修改/删除项目文件，添加到暂存区，永久提交给仓库，生成版本号
+  git  status               查看工作区所有文件状态
+  git  add  1.jpg          把指定文件添加到暂存区
+  git  add  *.jpg          把指定后缀名的文件添加到暂存区
+  git  add  *              把所有文件添加到暂存区
+  git  add  .              把所有文件添加到暂存区
+  git  commit  -m  &quot;消息内容&quot;   把暂存区的修改提交给仓库
+  git  log                 查看仓库中所有的提交记录
+(6)可以使用git reset命令回退到历史上的指定版本
+  git  reset  --hard  版本号     工作区回退到指定的版本
+  git  log       查看当前已经生效的所有版本号
+  git  reflog     查看当前已经生效&amp;撤销生效的所有版本号
+</code></pre><p>6、Git的常用操作：</p>
+<pre><code>使用Git作为VCS的步骤：
+(1)安装一款Git客户端——msysgit——一路下一步。
+(2)使用OpenSSL工具为自己创建一个唯一的身份识别号——若自己的Git服务器需要和其他的Git服务器进行数据同步，需要使用此识别号。
+(3)为Git客户端中设置当前用户的user.name和user.email
+    git  config   --global  user.name  &quot;用户名&quot;
+    git  config   --global  user.email  &quot;邮箱名&quot;
+    提示：上述命令中的双引号不能改用单引号！此命令本质是在修改c:/Users/Administrator/.gitconfig文件
+(4)在自己的电脑上分配一个工作空间目录(整个路径中不能有中文和空白)，初始化一个仓库
+git  init
+(5)编写文件，提交到Git暂存区
+    git  status    查看当前工作区文件的状态
+    git  add  &lt;文件名&gt;    把指定的文件添加到Git暂存区
+(6)把Git暂存区中的数据提交到仓库
+    git  commit   -m   &quot;此次提交的说明文字&quot;     把暂存区内容永久提交到仓库
+    git  log      查看所有的提交日志
+</code></pre><p>  7、从Github.com上克隆他人项目仓库的步骤：</p>
+<pre><code>(1)打开https://github.com/，注册(SignUp)，登录(SignIn)
+(2)把自己当前git终端的SSH Key添加给github.com
+(3)克隆github.com上的项目/仓库
+  git  clone  远程仓库的地址
+  git  clone  git@github.com:jquery/jquery.git
+  git  clone  https://github.com/jquery/jquery.git
+
+将自己本地的仓库与Github.com上的仓库同步：
+    (1)打开https://github.com/，注册(SignUp)，登录(SignIn)
+    (2)把自己当前git终端的SSH Key添加给github.com
+    (3)在自己的github账户下创建公共项目仓库
+    (4)在本地电脑上安装Git客户端，添加远程仓库，建立本地仓库与远程仓库的关联
+      git  init           本地创建一个空白仓库
+      git  remote       查看当前仓库关联到哪些远程仓库
+      git  remote  add  关联仓库名  远程仓库的地址
+    (5)从远程仓库“拉取(pull)”已有的文件和版本信息到本地仓库
+       git  pull  关联仓库名  master
+    (6)修改本地仓库中的文件，添加到本地暂存区，提交给本地的仓库
+      git  add  .
+      git  commit   -m   &quot;说明信息&quot;
+    (7)把本地仓库中的新的版本信息“推送(push)”给远程仓库
+      git  push  远程仓库名  master
 </code></pre>
                 
 <p class="pink-link-context">
-    <a href="/2017/08/02/vue基础知识/" rel="next" title="vue基础知识">
-    上一篇：vue基础知识
+    <a href="/2017/07/22/Angular/" rel="next" title="Angular基础知识">
+    上一篇：Angular基础知识
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/22/Ionic/" rel="next" title="Ionic基础知识">
-    下一篇：Ionic基础知识
+    <a href="/2017/07/22/Ajax_php/" rel="next" title="Ajax_php基础知识">
+    下一篇：Ajax_php基础知识
   </a>
 </p>
 
