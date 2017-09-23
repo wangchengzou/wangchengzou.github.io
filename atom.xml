@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.wangchengzou.cn/"/>
-  <updated>2017-09-20T12:52:30.359Z</updated>
+  <updated>2017-09-23T07:13:47.998Z</updated>
   <id>www.wangchengzou.cn/</id>
   
   <author>
@@ -14,6 +14,534 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端常见跨域解决方案</title>
+    <link href="www.wangchengzou.cn/2017/09/23/%E8%B7%A8%E5%93%89/"/>
+    <id>www.wangchengzou.cn/2017/09/23/跨哉/</id>
+    <published>2017-09-23T07:48:26.000Z</published>
+    <updated>2017-09-23T07:13:47.998Z</updated>
+    
+    <content type="html"><![CDATA[<p>什么是跨域？</p>
+<pre><code>跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+</code></pre><p>广义的跨域：</p>
+<pre><code>1.) 资源跳转： A链接、重定向、表单提交
+2.) 资源嵌入：&lt;link&gt;、&lt;script&gt;、&lt;img&gt;、&lt;frame&gt;等dom标签，
+    还有样式中background:url()、@font-face()等文件外链
+3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等
+其实我们通常所说的跨域是狭义的，是由浏览器同源策略限制的一类请求场景。
+</code></pre><p>什么是同源策略？</p>
+<pre><code>同源策略/SOP（Same origin policy）是一种约定，由Netscape公司1995年引入浏览器，
+它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。
+所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。
+</code></pre><p>同源策略限制以下几种行为：</p>
+<pre><code>1.) Cookie、LocalStorage 和 IndexDB 无法读取
+2.) DOM 和 Js对象无法获得
+3.) AJAX 请求不能发送
+</code></pre><p>常见跨域场景</p>
+<pre><code>URL                                      说明                    是否允许通信
+http://www.domain.com/a.js
+http://www.domain.com/b.js         同一域名，不同文件或路径           允许
+http://www.domain.com/lab/c.js
+
+http://www.domain.com:8000/a.js
+http://www.domain.com/b.js         同一域名，不同端口                不允许
+http://www.domain.com/a.js
+https://www.domain.com/b.js        同一域名，不同协议                不允许
+http://www.domain.com/a.js
+http://192.168.4.12/b.js           域名和域名对应相同ip              不允许
+http://www.domain.com/a.js
+http://x.domain.com/b.js           主域相同，子域不同                不允许
+http://domain.com/c.js
+http://www.domain1.com/a.js
+http://www.domain2.com/b.js        不同域名                         不允许
+</code></pre><p>跨域解决方案</p>
+<pre><code>1、 通过jsonp跨域
+2、 document.domain + iframe跨域
+3、 location.hash + iframe
+4、 window.name + iframe跨域
+5、 postMessage跨域
+6、 跨域资源共享（CORS）
+7、 nginx代理跨域
+8、 nodejs中间件代理跨域
+9、 WebSocket协议跨域
+</code></pre><p>一、 通过jsonp跨域</p>
+<pre><code>通常为了减轻web服务器的负载，我们把js、css，img等静态资源分离到另一台独立域名的服务器上，
+在html页面中再通过相应的标签从不同域名下加载静态资源，而被浏览器允许，基于此原理，
+我们可以通过动态创建script，再请求一个带参网址实现跨域通信。
+
+1.）原生实现：
+&lt;script&gt;
+    var script = document.createElement(&apos;script&apos;);
+    script.type = &apos;text/javascript&apos;;
+
+    // 传参并指定回调执行函数为onBack
+    script.src = &apos;http://www.domain2.com:8080/login?user=admin&amp;callback=onBack&apos;;
+    document.head.appendChild(script);
+
+    // 回调执行函数
+    function onBack(res) {
+        alert(JSON.stringify(res));
+    }
+&lt;/script&gt;
+
+服务端返回如下（返回时即执行全局函数）：
+onBack({&quot;status&quot;: true, &quot;user&quot;: &quot;admin&quot;})
+
+2.）jquery ajax：
+$.ajax({
+    url: &apos;http://www.domain2.com:8080/login&apos;,
+    type: &apos;get&apos;,
+    dataType: &apos;jsonp&apos;,  // 请求方式为jsonp
+    jsonpCallback: &quot;onBack&quot;,    // 自定义回调函数名
+    data: {}
+});
+
+3.）vue.js：
+this.$http.jsonp(&apos;http://www.domain2.com:8080/login&apos;, {
+    params: {},
+    jsonp: &apos;onBack&apos;
+}).then((res) =&gt; {
+    console.log(res);
+})
+
+后端node.js代码示例：
+var querystring = require(&apos;querystring&apos;);
+var http = require(&apos;http&apos;);
+var server = http.createServer();
+
+server.on(&apos;request&apos;, function(req, res) {
+    var params = qs.parse(req.url.split(&apos;?&apos;)[1]);
+    var fn = params.callback;
+
+    // jsonp返回设置
+    res.writeHead(200, { &apos;Content-Type&apos;: &apos;text/javascript&apos; });
+    res.write(fn + &apos;(&apos; + JSON.stringify(params) + &apos;)&apos;);
+
+    res.end();
+});
+server.listen(&apos;8080&apos;);
+console.log(&apos;Server is running at port 8080...&apos;);
+
+jsonp缺点：只能实现get一种请求。
+</code></pre><p>二、 document.domain + iframe跨域</p>
+<pre><code>此方案仅限主域相同，子域不同的跨域应用场景。
+实现原理：两个页面都通过js强制设置document.domain为基础主域，就实现了同域。
+
+1.）父窗口：(http://www.domain.com/a.html)
+&lt;iframe id=&quot;iframe&quot; src=&quot;http://child.domain.com/b.html&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+    document.domain = &apos;domain.com&apos;;
+    var user = &apos;admin&apos;;
+&lt;/script&gt;
+
+2.）子窗口：(http://child.domain.com/b.html)
+&lt;script&gt;
+    document.domain = &apos;domain.com&apos;;
+    // 获取父窗口中变量
+    alert(&apos;get js data from parent ---&gt; &apos; + window.parent.user);
+&lt;/script&gt;
+</code></pre><p>三、 location.hash + iframe跨域</p>
+<pre><code>实现原理：a欲与b跨域相互通信，通过中间页c来实现。
+ 三个页面，不同域之间利用iframe的location.hash传值，相同域之间直接js访问来通信。
+
+具体实现：A域：a.html -&gt; B域：b.html -&gt; A域：c.html，
+a与b不同域只能通过hash值单向通信，b与c也不同域也只能单向通信，
+但c与a同域，所以c可通过parent.parent访问a页面所有对象。
+
+1.）a.html：(http://www.domain1.com/a.html)
+&lt;iframe id=&quot;iframe&quot; src=&quot;http://www.domain2.com/b.html&quot; style=&quot;display:none;&quot;&gt;&lt;/iframe&amp;gt
+&lt;script&gt;
+    var iframe = document.getElementById(&apos;iframe&apos;);
+
+    // 向b.html传hash值
+    setTimeout(function() {
+        iframe.src = iframe.src + &apos;#user=admin&apos;;
+    }, 1000);
+
+    // 开放给同域c.html的回调方法
+    function onCallback(res) {
+        alert(&apos;data from c.html ---&gt; &apos; + res);
+    }
+&lt;/script&gt;
+
+2.）b.html：(http://www.domain2.com/b.html)
+&lt;iframe id=&quot;iframe&quot; src=&quot;http://www.domain1.com/c.html&quot; style=&quot;display:none;&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+    var iframe = document.getElementById(&apos;iframe&apos;);
+
+    // 监听a.html传来的hash值，再传给c.html
+    window.onhashchange = function () {
+        iframe.src = iframe.src + location.hash;
+    };
+&lt;/script&gt;
+
+3.）c.html：(http://www.domain1.com/c.html)
+&lt;script&gt;
+    // 监听b.html传来的hash值
+    window.onhashchange = function () {
+        // 再通过操作同域a.html的js回调，将结果传回
+        window.parent.parent.onCallback(&apos;hello: &apos; + location.hash.replace(&apos;#user=&apos;, &apos;&apos;));
+    };
+&lt;/script&gt;
+</code></pre><p>四、 window.name + iframe跨域</p>
+<pre><code>window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，
+并且可以支持非常长的 name 值（2MB）。
+1.）a.html：(http://www.domain1.com/a.html)
+var proxy = function(url, callback) {
+    var state = 0;
+    var iframe = document.createElement(&apos;iframe&apos;);
+
+    // 加载跨域页面
+    iframe.src = url;
+
+    // onload事件会触发2次，第1次加载跨域页，并留存数据于window.name
+    iframe.onload = function() {
+        if (state === 1) {
+            // 第2次onload(同域proxy页)成功后，读取同域window.name中数据
+            callback(iframe.contentWindow.name);
+            destoryFrame();
+
+        } else if (state === 0) {
+            // 第1次onload(跨域页)成功后，切换到同域代理页面
+            iframe.contentWindow.location = &apos;http://www.domain1.com/proxy.html&apos;;
+            state = 1;
+        }
+    };
+
+    document.body.appendChild(iframe);
+
+    // 获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）
+    function destoryFrame() {
+        iframe.contentWindow.document.write(&apos;&apos;);
+        iframe.contentWindow.close();
+        document.body.removeChild(iframe);
+    }
+};
+
+// 请求跨域b页面数据
+proxy(&apos;http://www.domain2.com/b.html&apos;, function(data){
+    alert(data);
+});
+
+2.）proxy.html：(http://www.domain1.com/proxy….
+中间代理页，与a.html同域，内容为空即可。
+
+3.）b.html：(http://www.domain2.com/b.html)
+&lt;script&gt;
+    window.name = &apos;This is domain2 data!&apos;;
+&lt;/script&gt;
+
+总结：通过iframe的src属性由外域转向本地域，跨域数据即由iframe的window.name
+从外域传递到本地域。这个就巧妙地绕过了浏览器的跨域访问限制，但同时它又是安全操作。
+</code></pre><p>五、 postMessage跨域</p>
+<pre><code>postMessage是HTML5 XMLHttpRequest Level 2中的API，
+且是为数不多可以跨域操作的window属性之一，它可用于解决以下方面的问题：
+a.） 页面和其打开的新窗口的数据传递
+b.） 多窗口之间消息传递
+c.） 页面与嵌套的iframe消息传递
+d.） 上面三个场景的跨域数据传递
+
+用法：postMessage(data,origin)方法接受两个参数
+data： html5规范支持任意基本类型或可复制的对象，但部分浏览器只支持字符串，
+    所以传参时最好用JSON.stringify()序列化。
+origin： 协议+主机+端口号，也可以设置为”*”，表示可以传递给任意窗口，
+    如果要指定和当前窗口同源的话设置为”/”。
+
+1.）a.html：(http://www.domain1.com/a.html)
+&lt;iframe id=&quot;iframe&quot; src=&quot;http://www.domain2.com/b.html&quot; style=&quot;display:none;&quot;&gt;&lt;/iframe&gt;
+&lt;script&gt;
+    var iframe = document.getElementById(&apos;iframe&apos;);
+    iframe.onload = function() {
+        var data = {
+            name: &apos;aym&apos;
+        };
+        // 向domain2传送跨域数据
+        iframe.contentWindow.postMessage(JSON.stringify(data), &apos;http://www.domain2.com&apos;);
+    };
+
+    // 接受domain2返回数据
+    window.addEventListener(&apos;message&apos;, function(e) {
+        alert(&apos;data from domain2 ---&gt; &apos; + e.data);
+    }, false);
+&lt;/script&gt;
+
+2.）b.html：(http://www.domain2.com/b.html)
+&lt;script&gt;
+    // 接收domain1的数据
+    window.addEventListener(&apos;message&apos;, function(e) {
+        alert(&apos;data from domain1 ---&gt; &apos; + e.data);
+
+        var data = JSON.parse(e.data);
+        if (data) {
+            data.number = 16;
+
+            // 处理后再发回domain1
+            window.parent.postMessage(JSON.stringify(data), &apos;http://www.domain1.com&apos;);
+        }
+    }, false);
+&lt;/script&gt;
+</code></pre><p>六、 跨域资源共享（CORS）</p>
+<pre><code>普通跨域请求：只服务端设置Access-Control-Allow-Origin即可，前端无须设置。
+带cookie请求：前后端都需要设置字段，另外需注意：所带cookie为跨域请求接口所在域的cookie，而非当前页。
+目前，所有浏览器都支持该功能(IE8+：IE8/9需要使用XDomainRequest对象来支持CORS）)，
+CORS也已经成为主流的跨域解决方案。
+
+1、 前端设置：
+    1.）原生ajax
+    // 前端设置是否带cookie
+    xhr.withCredentials = true;
+    示例代码：
+    var xhr = new XMLHttpRequest(); // IE8/9需用window.XDomainRequest兼容
+    // 前端设置是否带cookie
+    xhr.withCredentials = true;
+    xhr.open(&apos;post&apos;, &apos;http://www.domain2.com:8080/login&apos;, true);
+    xhr.setRequestHeader(&apos;Content-Type&apos;, &apos;application/x-www-form-urlencoded&apos;);
+    xhr.send(&apos;user=admin&apos;);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
+            alert(xhr.responseText);
+        }
+    };
+
+    2.）jQuery ajax
+    $.ajax({
+        ...
+       xhrFields: {
+           withCredentials: true    // 前端设置是否带cookie
+       },
+       crossDomain: true,   // 会让请求头中包含跨域的额外信息，但不会含cookie
+        ...
+    });
+
+    3.）vue框架
+    在vue-resource封装的ajax组件中加入以下代码：
+    Vue.http.options.credentials = true
+
+2、 服务端设置：
+
+    若后端设置成功，前端浏览器控制台则不会出现跨域报错信息，反之，说明没设成功。
+    1.）Java后台：
+    /*
+    * 导入包：import javax.servlet.http.HttpServletResponse;
+    * 接口参数中定义：HttpServletResponse response
+    */
+    response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;http://www.domain1.com&quot;);
+      // 若有端口需写全（协议+域名+端口）
+    response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
+
+    2.）Nodejs后台示例：
+    var http = require(&apos;http&apos;);
+    var server = http.createServer();
+    var qs = require(&apos;querystring&apos;);
+    server.on(&apos;request&apos;, function(req, res) {
+        var postData = &apos;&apos;;
+        // 数据块接收中
+        req.addListener(&apos;data&apos;, function(chunk) {
+            postData += chunk;
+        });
+        // 数据接收完毕
+        req.addListener(&apos;end&apos;, function() {
+            postData = qs.parse(postData);
+            // 跨域后台设置
+            res.writeHead(200, {
+                &apos;Access-Control-Allow-Credentials&apos;: &apos;true&apos;,
+                     // 后端允许发送Cookie
+                &apos;Access-Control-Allow-Origin&apos;: &apos;http://www.domain1.com&apos;,
+                    // 允许访问的域（协议+域名+端口）
+                &apos;Set-Cookie&apos;: &apos;l=a123456;Path=/;Domain=www.domain2.com;HttpOnly&apos;
+                   // HttpOnly:脚本无法读取cookie
+            });
+            res.write(JSON.stringify(postData));
+            res.end();
+        });
+    });
+    server.listen(&apos;8080&apos;);
+    console.log(&apos;Server is running at port 8080...&apos;);
+</code></pre><p>七、 nginx代理跨域</p>
+<pre><code>1、 nginx配置解决iconfont跨域
+浏览器跨域访问js、css、img等常规静态资源被同源策略许可，
+但iconfont字体文件(eot|otf|ttf|woff|svg)
+例外，此时可在nginx的静态资源服务器中加入以下配置。
+location / {
+  add_header Access-Control-Allow-Origin *;
+}
+
+2、 nginx反向代理接口跨域
+跨域原理： 同源策略是浏览器的安全策略，不是HTTP协议的一部分。
+服务器端调用HTTP接口只是使用HTTP协议，不会执行JS脚本，不需要同源策略，
+也就不存在跨越问题。
+
+实现思路：通过nginx配置一个代理服务器（域名与domain1相同，端口不同）做跳板机，
+反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域登录。
+
+nginx具体配置：
+#proxy服务器
+server {
+    listen       81;
+    server_name  www.domain1.com;
+    location / {
+        proxy_pass   http://www.domain2.com:8080;
+         #反向代理
+        proxy_cookie_domain www.domain2.com www.domain1.com;
+         #修改cookie里域名
+        index  index.html index.htm;
+        # 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，
+        故没有同源限制，下面的跨域配置可不启用
+        add_header Access-Control-Allow-Origin http://www.domain1.com;
+         #当前端只跨域不带cookie时，可为*
+        add_header Access-Control-Allow-Credentials true;
+    }
+}
+
+1.)前端代码示例：
+var xhr = new XMLHttpRequest();
+// 前端开关：浏览器是否读写cookie
+xhr.withCredentials = true;
+// 访问nginx中的代理服务器
+xhr.open(&apos;get&apos;, &apos;http://www.domain1.com:81/?user=admin&apos;, true);
+xhr.send();
+2.) Nodejs后台示例：
+var http = require(&apos;http&apos;);
+var server = http.createServer();
+var qs = require(&apos;querystring&apos;);
+server.on(&apos;request&apos;, function(req, res) {
+    var params = qs.parse(req.url.substring(2));
+    // 向前台写cookie
+    res.writeHead(200, {
+        &apos;Set-Cookie&apos;: &apos;l=a123456;Path=/;Domain=www.domain2.com;HttpOnly&apos;   // HttpOnly:脚本无法读取
+    });
+    res.write(JSON.stringify(params));
+    res.end();
+});
+server.listen(&apos;8080&apos;);
+console.log(&apos;Server is running at port 8080...&apos;);
+</code></pre><p>八、 Nodejs中间件代理跨域</p>
+<pre><code>node中间件实现跨域代理，原理大致与nginx相同，都是通过启一个代理服务器，实现数据的转发。
+
+1、 非vue框架的跨域（2次跨域）
+利用node + express + http-proxy-middleware搭建一个proxy服务器。
+
+1.）前端代码示例：
+var xhr = new XMLHttpRequest();
+// 前端开关：浏览器是否读写cookie
+xhr.withCredentials = true;
+// 访问http-proxy-middleware代理服务器
+xhr.open(&apos;get&apos;, &apos;http://www.domain1.com:3000/login?user=admin&apos;, true);
+xhr.send();
+
+2.）中间件服务器：
+var express = require(&apos;express&apos;);
+var proxy = require(&apos;http-proxy-middleware&apos;);
+var app = express();
+app.use(&apos;/&apos;, proxy({
+    // 代理跨域目标接口
+    target: &apos;http://www.domain2.com:8080&apos;,
+    changeOrigin: true,
+    // 修改响应头信息，实现跨域并允许带cookie
+    onProxyRes: function(proxyRes, req, res) {
+        res.header(&apos;Access-Control-Allow-Origin&apos;, &apos;http://www.domain1.com&apos;);
+        res.header(&apos;Access-Control-Allow-Credentials&apos;, &apos;true&apos;);
+    },
+    // 修改响应信息中的cookie域名
+    cookieDomainRewrite: &apos;www.domain1.com&apos;  // 可以为false，表示不修改
+}));
+app.listen(3000);
+console.log(&apos;Proxy server is listen at port 3000...&apos;);
+
+3.）Nodejs后台同（六：nginx）
+
+2、 vue框架的跨域（1次跨域）
+利用node + webpack + webpack-dev-server代理接口跨域。
+在开发环境下，由于vue渲染服务和接口代理服务都是webpack-dev-server同一个，
+所以页面与代理接口之间不再跨域，无须设置headers跨域信息了。
+
+webpack.config.js部分配置：
+module.exports = {
+    entry: {},
+    module: {},
+    ...
+    devServer: {
+        historyApiFallback: true,
+        proxy: [{
+            context: &apos;/login&apos;,
+            target: &apos;http://www.domain2.com:8080&apos;,  // 代理跨域目标接口
+            changeOrigin: true,
+            cookieDomainRewrite: &apos;www.domain1.com&apos;  // 可以为false，表示不修改
+        }],
+        noInfo: true
+    }
+}
+</code></pre><p>九、 WebSocket协议跨域</p>
+<pre><code>WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，
+同时允许跨域通讯，是server push技术的一种很好的实现。
+原生WebSocket API使用起来不太方便，我们使用Socket.io，它很好地封装了webSocket接口，
+提供了更简单、灵活的接口，也对不支持webSocket的浏览器提供了向下兼容。
+
+1.）前端代码：
+&lt;div&gt;user input：&lt;input type=&quot;text&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;./socket.io.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var socket = io(&apos;http://www.domain2.com:8080&apos;);
+// 连接成功处理
+socket.on(&apos;connect&apos;, function() {
+    // 监听服务端消息
+    socket.on(&apos;message&apos;, function(msg) {
+        console.log(&apos;data from server: ---&gt; &apos; + msg);
+    });
+    // 监听服务端关闭
+    socket.on(&apos;disconnect&apos;, function() {
+        console.log(&apos;Server socket has closed.&apos;);
+    });
+});
+document.getElementsByTagName(&apos;input&apos;)[0].onblur = function() {
+    socket.send(this.value);
+};
+&lt;/script&gt;
+
+2.）Nodejs socket后台：
+var http = require(&apos;http&apos;);
+var socket = require(&apos;socket.io&apos;);
+// 启http服务
+var server = http.createServer(function(req, res) {
+    res.writeHead(200, {
+        &apos;Content-type&apos;: &apos;text/html&apos;
+    });
+    res.end();
+});
+server.listen(&apos;8080&apos;);
+console.log(&apos;Server is running at port 8080...&apos;);
+
+// 监听socket连接
+socket.listen(server).on(&apos;connection&apos;, function(client) {
+    // 接收信息
+    client.on(&apos;message&apos;, function(msg) {
+        client.send(&apos;hello：&apos; + msg);
+        console.log(&apos;data from client: ---&gt; &apos; + msg);
+    });
+    // 断开处理
+    client.on(&apos;disconnect&apos;, function() {
+        console.log(&apos;Client socket has closed.&apos;);
+    });
+});
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;什么是跨域？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;广义的跨域：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.) 资源跳转： A链接、重定向、表单提交
+2.) 资源嵌入：&amp;lt;lin
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="跨域解决方案， javaScript" scheme="www.wangchengzou.cn/tags/%E8%B7%A8%E5%9F%9F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%8C-javaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>ES6 精简语法</title>
@@ -2407,357 +2935,967 @@ when？ 实现UI层的渐进式的框架
   </entry>
   
   <entry>
-    <title>CSS3高级笔记</title>
-    <link href="www.wangchengzou.cn/2017/07/22/CSS3%E9%AB%98%E7%BA%A7/"/>
-    <id>www.wangchengzou.cn/2017/07/22/CSS3高级/</id>
+    <title>Angular基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T10:33:13.367Z</updated>
+    <updated>2017-07-27T12:53:02.708Z</updated>
     
-    <content type="html"><![CDATA[<p>1、复杂选择器</p>
-<pre><code>1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选择器2
-        如：div+p   #top+.important
-                通用兄弟选择器：用于匹配某元素后面所有的兄弟元素
-        选择器1~选择器2
-        如#d1~div
-2、属性选择器
-    通过元素所附带的属性及其值来匹配页面中的元素
-    语法：
-        基础属性选择器  [attr]
-            匹配页面中的有附带attr属性的元素
-        elem[attr]
-            elem:表示任意元素名称
-            attr:表示任意属性名称
-            匹配页面中附带attr属性的elem元素
-            如：div[id]:匹配页面中所有附带id属性的div元素
-        [attr1][attr2][attr3]
-            匹配页面中同时附带attr1和attr2属性的所有元素
-            如 input[name][hype]
-        [attr=value]
-            匹配页面中所有attr属性的值为value的元素
-            如input[type=text]
-        [class~=value]
-            主要使用在多类选择器上，匹配页面中class属性值中包含value选择器的元素
-        [attr^=value]
-            匹配以value值作为开始的attr属性的元素
-        [attr$=value]
-            匹配以value值作为结束的attr属性的元素
-        [attr*=value]
-            匹配attr属性值中包含value字符的所有元素
-3、伪类选择器
-    目标伪类
-        突出显示活动的HTML锚元素
-        语法： ：target
-    结构伪类
-        通过元素之间的结构关系来匹配元素
-        ：first-child     获取属于其父元素中的首个子元素
-        ：last-child     获取属于其父元素中的尾（最后）子元素
-        :nth-child(N)  获取属于其父元素中的第N个子元素
-        ：empty   空的，匹配没有子元素的元素，包含文本
-        ：only-child   匹配属于其父元素中的唯一子元素
-    否定伪类
-        把匹配某选择器元素排除出去
-        ：not(选择器 )
-4、伪元素选择器
-    伪类与伪元素
-        伪类：匹配元素不同的状态
-        伪元素：是匹配元素中的内容
-    语法：
-        ：first-letter
-        ::first-letter  匹配某元素的首字符
-        ：first-line    匹配某元素的首行字符
-        ：：selection 匹配用户选取的内容部分
-    ：和：：区别
-        在CSS2.1中，伪类选择器和仿元素选择器都是用：来表示
-        在CSS3中，所有伪类选择器用：表示，所有的伪元素选择器用：：表示
-</code></pre><p>2、内容生成</p>
-<pre><code>通过CSS动态的向某个元素的内容区域之前、之后增加一部分内容
-伪元素选择器
-    ：before   定位到元素内容区域之前
-    ：after    定位到元素内容区域之后
-语法：
-    属性：content
-    取值：普通文本
-         图像，url(...)
-         计数器
-问题处理：
-    外边距溢出问题
-        为父元素添加边框
-        使用父元素的内边距取代子元素的外边距
-        在父元素的第一个或最后一个子元素位置处增加一个空的table
-    浮动元素父元素的高度问题
-</code></pre><p>3、弹性布局</p>
-<pre><code>flexible box,可伸缩布局，为普通布局带来更大的灵活性
-基本概念‘
-    flex容器：简称容器，将元素设置为flex容器后，其子元素允许实现灵活的位置摆放
-    flex项目：简称项目，存放在flex容器中的内容
+    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
+<pre><code>拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
 
-语法：
-    容器：display
-        取值：flex 将块级元素变为flex容器
-              inline-flex  将行内元素变为flex容器
-        注意：将元素设置为flex布局后，子元素的float,clear,vertical-align属性将失去作用
-    容器属性;
-        该组属性要添加在容器元素上，控制子元素的位置
-        flex-direction  决定主轴的方向（main-axsis）
-            取值：
-                row  主轴为水平方向的轴，起点在容器左端，默认值
-                row-reverse 主轴为水平方向的轴，起点在容器右端
-                column  主轴为交叉轴，起点在容器的顶端
-                column-reverse 主轴为交叉轴，起点在容器的底端
-        flex-wrap   当一条轴线（一行）排列不下时，子元素将如何换行
-            取值：
-                nowrap     默认值，不换行
-                wrap        换行
-                wrap-reverse  反方向换行
-        flex-flow   dirextion和wrap的缩写方式
-            取值：
-                row nowrap 默认值
-                direction wrap
-        justify-content   定义项目在主轴上的对齐方式
-            取值：
-                flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                space-between  两端对齐，项目之间的距离是相等的
-                space-around  每个项目两侧间距是相等的 项目与项目之间的间距，要比项目与父元素之间的间距大一倍
-        align-items  定义项目在交叉轴的对齐方式（单行项目有效）
-            取值：
-                flex-start  交叉轴起点对齐
-                flex-end   交叉轴终点对齐
-                center     交叉轴中间对齐
-                baseline   基线对齐，以所有项目中的第一行文本为准
-                stretch    默认值，如果项目不设置高度或为auto时，那么项目将占满整个容器的高度
-        align-content  定义了多跟轴线的对齐方式，如果项目只一根轴线，该属性无效
-            取值：
-                flex-start   交叉轴顶端对齐
-                flex-end    交叉轴底端对齐
-                center      交叉轴中间对齐
-                space-between  与交叉轴两端对齐
-                space-around     项目与项目间对齐
-    项目属性：
-        该组属性主要设置于项目中
-        order  定义项目在排列顺序，值越小，越靠前，默认为0
-        flex-grow  指定项目的放大比例，默认为0，即不放大
-        flex-shrink 指定项目的缩小比例，默认为1，即空间不足时，等比缩小，为0时不缩小
-        flex-basis  指定项目占据主轴的剩余空间大小 auto 默认值，项目本身大小
-        flex  是flex-grow,flex-shrink,flex-basis 的简写模式
-            取值，auto  相当于1  1   auto
-                 none  相当于0 0  auto
-                 flex-grow【,flex-shrink,flex-basis】
-        align-self  允许定义当个项目与其他项目不一样的交叉轴对齐方式（类似于align-items）,能够覆盖align-items的效果
-            取值： auto 默认值，使用
-                  flex-start   主轴起点对齐
-                flex-end   主轴终点对齐
-                center    居中对齐
-                base-line
-                stretch
-</code></pre><p>4、CSS Hack 兼容性</p>
-<pre><code>标准模式和混杂模式和准标准模式
-IE6之前，没有兼容性说法
-IE6之后，各个浏览器追求标准统一，开始支持标准，IE的其它浏览器要向前兼容，所以出现各种模式
-    混杂模式  无标准可言
-        编写代码时，不写&lt;!doctylpe&gt;就是混杂模式，采用的是IE5.5的内核进行渲染
-    标准模式  安全支持
-    准标准模式，即支持标准，也同时向前兼容非标准代码
-如何根据不同的浏览器编写不同的css
-    css类内部Hack
-        在属性名称前和值添加前后缀以便识别不同的浏览器
-    选择器Hack
-        在选择器前添加特殊标识以便识别不同的浏览器
-    头部引用hack
-        通过html的条件注释来判断浏览器版本，去执行不同的CSS
-        条件注释
-            条件：
-                gt:判断当前浏览器是否大于指定定版本
-                gte：判断当前浏览器是否大于等于指定定版本
-                it:   判断当前浏览器是否小于指定版本
-                ite： 判断当前浏览器是否小于等于指定版本
-                !：   判断当前浏览器是否为非指定版本
-                    &lt;!--[if !IE 8]&gt;
-                        该段内容在除IE8以外浏览器中显示
-                    &lt;![endif]--&gt;
-</code></pre><p>5、转换</p>
-<pre><code>说明：改变元素在页面中的形状，角度 大小 位置的一种效果
-    允许进行2D和3D方向的转换
-    2D转换：在平面中进行的操作
-    3D转换：在空间中进行的操作
-转换属性：
-    rtansform:为元素应用2D或3D转换效果
-        取值：none;  没有效果
+1、YAGNI（不要写不需要的代码）
+you aren&apos;t gonna need it
 
-            transform-functions:一组转换函数
-                位移转换函数：translate()
-                改变形状函数：skew()
-                注意：如果指定多个转换函数的话中间用空格隔开
-    转换原点：
-        属性：transform-origin
-        默认：转换原点在元素中心处
-        取值：轴线给值
-            两个轴线值：X Y
-            三个轴线值：X Y Z
-2D转换
-    位移：改变元素在页面中的位置
-        语法：transform
-            fransform(x)  改变元素在X轴的位置
-            fransform(X ,Y)  改变元素在两轴的位置
-            fransformX(X) 只在X轴上位置移动
-            fransformY(Y)  只在Y轴上位置移动
-    缩放： 改变元素在页面中的大小】
-        语法：transform
-            scale(value)  表示两轴等比缩放
-                取值：默认  为1
-                    放大   为大于1的数值
-                    缩小   为0~1之间小数
-                    返转   负数
-            sacle(X,Y)
-            saclex(y)
-            sacley(y)
-    旋转：改变元素在页面上的角度，要根据原点实现转换效果
-        语法：transform
-            rotate(ndeg)
-                n 取值正，顺时针旋转
-                n 取值负，逆时针旋转
-                deg 为角度
-                0~360范围
-        注意：转换原点问题
-            元素坐标轴也跟着旋转
-    倾斜：改变元素在页面中形状
-        语法：transform
-            skew(xdeg)  横向倾斜指定度数
-                x 取值正，y轴逆时针倾斜一定角度
-                  取值负，Y轴顺时针倾斜一定角度
-            skew(xdeg,ydeg)
-            skewx(xdeg)
-            skewy(ydeg)
-3D转换
-    感觉空间
-    属性：perspetive 假定人眼到投射平面的距离
-    注意：该属性要放在3D转换元素的父元素上
-        兼容性chrome和safari需要加前缀
-            -wedkit-perspective:500px;
-    旋转：以X轴中心轴旋转
-            rotatex(xdeg)
-          以Y轴中心轴旋转
-            rotatey(ydeg)
-          以Z轴中心轴旋转
-            rotatez(zdeg)
-        取值：正  顺时针
-            负   逆时针
-        以多个轴同时进行旋转
-            rotate3d(x ,y, z ,ndeg)
-                x y z 取值为1，该轴参与旋转
-                x y z  取值为0 ，该轴不参与旋转
-    位移：改变元素在Z轴上的位置
-        语法：transform
-            translatez(z)
+2、KISS （越简单越好）
+keep it simple and stupid
+语义化的标记、命名规则、减少嵌套
 
-            transform-style
-                取值：flat  默认值，子元素不保留3D位置
-                     preserve-3D  子元素保留3D位置
-</code></pre><p>6、过渡</p>
-<pre><code>作用效果：使得css属性值在一段时间内平缓变化的效果
-要素与属性：
-    指定过渡属性：指定哪个属性值在变化时使用过渡效果展示
-        transition-property: 属性名称（width）
-                      all   全部属性
-                      none
-        允许设置过渡效果的属性：
-            颜色属性
-            渐变属性
-            取值为数字属性
-            转换属性 transition-property:transform;
-            visibility属性
-            阴影属性
-    指定过渡时长
-        transition-duration: 以S、MS为单位数值
-    指定过渡时速曲线函数  可选
-        transition-timing-function
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-    指定过渡的延迟时间   可选
-        transition-delay
-            取值：以S或MS做为单位
-    简写属性：transition:prop duration  timing-fun delay;
-        多个过渡效果
-            transition:prop1 duration1 timing-fun1 delay1,prop2 duration2 timing-fun2 delay2........;
-触发过渡条件
-    将过渡编写在元素声明的样式中，由:hover,:active等，进行触发,
-    将过渡编写在:hover,:active伪类中
-</code></pre><p>7、动画</p>
-<pre><code>使元素从一种样式逐渐变化为另一种样式的过程，与动画相关的属性，增加浏览器前缀
-动画使用步骤
-    声明动画
-        指定动画名称
-        指定动画中的关键帧（keyframes）
-            时间点（以百分比描述时间）
-            元素状态（CSS样式）
-    为元素调用动画
-        指定调用动画的名称以及执行时长
-语法：
-    声明动画     注意前缀，兼容性问题
-        &lt;style&gt;
-            @keyframes 名称{
-                0%{   动画开始时，元素的状态   }
-                。。。。
-                100%{  动画结束时，元素的状态  }
-            }
-        &lt;/style&gt;
-    调用动画(animation)
-        animation-name  指定调用动画名称
-        animation-duration   指定动画周期时长，以S或MS为单位
-        animation-timing-function  指定动画的速度时间出线函数
-            取值：ease  默认值，慢速开始，快速变快，慢速结束
-                 linear  匀速进行
-                 ease-in   慢速开始，快速结束
-                 ease-out  快速开始，慢速结束
-                 ease-in-out  慢速开始和结束，先加速后减速
-        animation-delay  指定动画延迟时间
-        animation-iteration-count  指定动画播放次数
-            取值：默认1次，具体数值
-                infinite:无限次播放
-        animation-direction  指定动画的播放方向
-            取值：normal  从0%~100%
-                reverse  从100%~0%
-                alternate  轮流来回播放 奇数 0%~100%
-                                 偶数 100%~0%
-        animation  简写方式
-            取值：name  duration  timing-fun delay  iteration-count direction;
-        animation-fill-mode  指定动画播放之前、之后的填充模式
-            取值：none  默认值
-                 forwards  动画播放完成后，保持在最后一帧的位置
-                 backwards 动画播放前，延迟时间内，动画保持在开始第一帧上的位置
-                 both 同时应用在开始和最后的位置帧上
-        animation-play-state  动画播放状态
-            取值：paused 暂停
-                 running 播放
+3、DRY（善于使用封装和重用）
+Don&apos;t Repeat Yourself
+
+4、高内聚 低耦合（High cohesion,low coupling）
+内聚：一个组件（模块）内部的不同部分的关系
+耦合：不同组件（模块）之间的关系
+
+5、SRP 单一责任原则
+Single Responsibility Principle
+实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
+
+6、OCP原则(对于扩展开放、对于修改关闭)
+open close principle
+
+7、LCP（迪米特法则）
+Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
+
+常用的设计模式分为3大类：①创建 ②结构 ③行为
+
+常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
+先去实现功能，在迭代的过程中优化代码。
+</code></pre><p>2、AngularJS</p>
+<pre><code>认识新东西最好的方式：
+①官网
+②维基百科 wikipedia.org
+what?--ng(AngularJS)是一个开源的js框架
+where？--用来实现SPA应用程序（单一页面应用程序single page application）
+Gmail邮箱是由Google退出的前端历史中第一个SPA应用
+why？
+四大特征：
+①采用了MVC的设计模式
+Model 模型数据
+View  视图
+Controller 控制器
+</code></pre><p>3、MVC的工作原理：</p>
+<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
+1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
+2.双向数据绑定
+    数据-》视图
+    视图用户的输入 -》 数据
+3.依赖注入
+4.模块化设计
+</code></pre><p>4、使用ng</p>
+<pre><code>1、基本语法
+    &lt;any&gt;{{表达式}} &lt;/any&gt;
+    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
+
+2、常用指令
+    ngApp
+        ①启动ng
+        ②指定作用范围，将指令写在根标签
+    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
+    ngInit 指令 来完成数据的初始化
+    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
+        ①不需要在通过ngInit指令定义数据时候，加上var关键字
+        ②ngInit所初始化的变量是可以在整个html去使用变量
+</code></pre><p>5、常用指令</p>
+<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
+
+作为扩展属性来使用：
+    &lt;div ng-**&gt;&lt;/div&gt;
+    ngInit  --&gt; ng-init
+    ngApp --&gt; ng-app
+作为扩展标签来使用：
+    &lt;ngView/&gt;
+①ngApp
+    启动ng
+    指定作用范围，将指令写在根标签
+    注意事项：调用一次ngApp
+②ngInit
+    通过ngInit调用一次，初始化多个变量？？
+    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
+③ngRepeat
+    重复实例化模板
+    两种语法：
+    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
+    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
+
+    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
+        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
+
+④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
+    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
+    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
+    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
+    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
+    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
+    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
+    但是控制台是会报错的，通过ngSrc去指定就搞定了
+    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
+    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
+</code></pre><p>6、MVC</p>
+<pre><code>在ng中：
+    Model 模型数据：在ng中定义的一些变量
+    View  视图：通过ng指令和表达式增强版的html
+    Controller 控制器：负责数据的增删改查的
+MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
+在ng中应该怎么做才能实现一个SPA？
+准备工作：
+①创建一个模块
+    因为在ng中是以模块为基本单位的
+    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
+②使用模块
+    采用ngApp指令
+    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
+③创建一个控制器
+    app.controller(&apos;控制器的名称&apos;,function(){})
+    第二个参数时控制器被调用时，要执行的方法
+④调用控制器
+    采用ngController指令来调用控制器
+    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
+    实现数据的创建和显示等：
+⑤操作数据、显示出来
+
+$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
+    建立起控制器中的数据和控制器的所指定的视图的桥梁
+
+绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
+&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
+
+注意事项：
+由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
+</code></pre><p>7、ng是由很多指令的：</p>
+<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
+ngBind ngClass ngStyle
+
+在webStorm中创建一个文件模板的基本步骤：
+①拷贝要使用的代码
+②点击左上角的file，选择new
+③选择Edit File Templates
+④点击弹窗中右上角的+号
+⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
+</code></pre><p>8、自定义指令</p>
+<pre><code>1、如何自定义？？
+    angular.module()
+    app.controller()
+    //创建指令
+    app.directive(&apos;指令的名称&apos;，function(){
+        return {}
+    })
+    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
+    后缀：用来描述指令的功能
+    属性：
+    template：指定要显示的模板内容
+    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
+    replace: true,替换并显示出来
+    scope
+
+2、如何使用自定义的指令？？
+    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
+    &apos;tsHello&apos; --&gt; ts-hello
+    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
+
+3、自定义指令传递参数
+    怎么传？
+        在调用指令的时候可以传 将参数作为属性对应的值
+    怎么接受？
+        scope
+</code></pre><p>9、双向数据绑定</p>
+<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
+绑定方式：
+①常用指令： ngRepeat/ngIf/ngShow...
+②双花括号：{{}}
+
+方向2：从‘视图中用户的输入’绑定到‘数据’
+绑定方式：指令：ngModel
+
+如果要监听数据的变化：
+$scope.$watch(&apos;txt&apos;,function(){
+
+})
+
+在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
+ngOptions语法：
+ &lt;select
+    ng-model=&quot;city&quot;
+    ng-options=&quot;city.cityName for city in cities&quot;&gt;
+ &lt;/select&gt;
+</code></pre><p>10、过滤器</p>
+<pre><code>a.内置的过滤器
+    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
+    过滤器的语法：支持多重过滤和传参
+    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
+            | => 管道
+            常用的过滤器：
+                currency 货币样式的过滤器
+                date 日期
+                uppercase/lowercase 大小写的处理
+                orderBy 对指定的数组进行升序或者降序排列
+                number 格式化数字为文本（对有小数点的数据的处理）
+                limitTo 限定数组或者字符串要显示的个数
+        b.自定义过滤器
+            自定义过滤器方式：
+            app.filter('过滤器名称',function(){
+                return function(input，arg){
+                        //input是传递给过滤器的数据
+                        //arg 是过滤器本身的参数
+                    return '过滤后的结果'
+                }
+            })
+            使用自定义的过滤器:
+            和内置的过滤器用法是一样的
+
+11、ng模块内置的方法
+
+        序列化、反序列化
+        toJson:将对象或者数组 序列化 为json格式的字符串
+        fromJson：相反的过程
+
+12、服务
+
+    服务的本质是一个单例对象，提供数据和对象。
+    两大类：
+    ①内置服务
+        $location、$http、$window、$scope...
+        使用内置服务中提供的方法：
+            第一步 将需要用到的服务注入进来 function($scope,$location)
+            第二步 调用服务中提供的方法 数据。。
+    ②自定义的服务
+        面试题：$scope与$rootScope之间的关系
+        1、不同的控制器之间的数据是彼此隔离的
+        2、不同的控制器之间如何共享数据？？
+        $scope的id是从2开始依次往上递增，
+        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
+            方式1：借助于$rootScope
+                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
+            方式2：借助于控制器之间的嵌套
+                在调用控制器的元素 之间的嵌套关系
+                @@div ng-controller='myCtrl02'>
+                    @@<div ng-controller="myCtrl03"></div>
+                @@
+            方式3：触发事件传递参数
+                绑定事件：
+                $scope.$on('事件名称',function(event,data){
+
+                })
+        触发事件：
+        //从子作用对象 向 父作用域对象 传递事件
+        $scope.$emit()
+        //从父作用对象 向 子作用域对象 传递事件
+        $scope.$broadcaset()
+
+13、服务
+
+        双向数据绑定的工作原理：
+        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
+        怎么知道数据发生了变化？
+        在ng中有一个循环$digest,会不断的对比数据，
+        需要手工的触发循环做对比，可以通过：
+        $scope.$digest();
+        $scope.$apply();//触发$rootScope.$digest();
+
+14、ng内置的服务：
+
+        $location $scope $rootScope $window $interval $timeout
+        1、在ng中定时器相关的处理--》$interval $timeout
+        2、$http
+        $http({method:'',url:''}).success().error()
+        $http.get()
+        $http.post()
+        注意：如果需要发起post请求，需要设置:
+         app.run(function ($http) {
+                $http.defaults.headers.post =
+        {'Content-Type':'application/x-www-form-urlencoded'};})
+
+        在发起post请求时，如果需要对参数进行序列化:
+        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
+
+15、自定义服务
+
+        服务的目的是为了封装业务逻辑，提高代码的复用率
+        自定义指令 app.directive
+        自定义过滤器 app.filter
+        自定义服务的方法：
+        app.factory ('服务名称',function(){//普通方法 return {}})
+app.service(&apos;服务名称&apos;,function(){//构造函数})
+app.constant(&apos;服务名称&apos;，{})//创建常量服务
+app.value(&apos;服务名称&apos;，{})//创建变量服务
+
+注意事项：
+自定义的服务 需要用到其它服务中方法
+图：两个按钮：开始 结束。
+</code></pre><p>16、依赖注入</p>
+<pre><code>将代码部署到线上，都会对代码做压缩。
+使用YUI-Compressor.jar （有java的运行环境）
+①借助于CLI（command line）
+    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
+
+②IDE（webStorm）
+    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
+    在弹窗中的program选中对应的jar，保存即可
+压缩效果：
+会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
+但是数字、字符串、关键字是不会改变的。
+
+解决压缩后的问题方式：
+依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
+让我们可以去直接使用
+
+注入的方式：
+①推断式（猜测）
+    这种方式在进行压缩会有问题
+    app.controller(&apos;myCtrl&apos;,function($scope){});
+
+②标记式
+    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
+    存在一个字符串（服务名称）数组。
+    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
+    实现方式：
+    1、将处理函数单独的存在一个变量中
+    2、给变量设置$inject，值是一个由字符串构成的数组
+    3、使用服务即可
+③行内式（内联式）
+    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
+    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
+    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
+    依赖注入3种方式，官方推荐采用行内式依赖注入。
+    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
+    整个ng应用的注入对象都是由$injector定位和创建。
+    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
+    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
+</code></pre><p>17、模块化设计</p>
+<pre><code>ng有4大特征：
+①MVC
+②双向数据绑定
+③依赖注入
+④模块化设计
+
+高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
+
+如何自定义模块？
+angular.module();
+
+使用模块？
+ng-app=&quot;&quot;
+在创建模块时，在第二个参数所对应的数组中写上服务的名称
+
+一个ng的模块都可以包含哪些？
+控制器：对应部分业务逻辑的封装
+服务：经常用到的重复代码封装
+指令：扩展html标签、属性
+过滤器：针对数据做一些筛选 过滤 格式化的处理
+</code></pre><p>18、ngRoute（路由模块）</p>
+<pre><code>ng是主要实现SPA（单一页面应用程序）
+SPA的工作原理：
+    1、页面url
+    http://127.0.0.1/index.html#/路由地址
+    例如：http://127.0.0.1/index.html#/start
+    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
+    3、在路由词典中寻找路由地址(start)所对应的路由信息
+    4、在路由信息所对应的对象中找到真实的模板页面地址
+    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
+
+ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
+自动发起ajax请求加载页面显示。
+    0、在创建自定义模块，在依赖列表中指定ngRoute
+    1、指定盛放代码片段的容器
+    2、配置路由词典
+
+使用ngRoute的基本步骤：
+①创建一个完整的html页面
+    记得引入angular.js angular-route.js
+
+②创建模块，并指定依赖于ngRoute模块
+    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
+
+③使用指令创建一个盛放代码片段的容器
+    调用ngView指令：创建一个容器，代码片段会加载到这里
+
+④创建模板页面
+
+⑤配置路由词典
+    $routeProvider
+    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
+    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
+    otherwise是用来指定异常的处理
+    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
+
+SPA在ng实现过程，代码片段的跳转：
+①直接修改地址栏中的路由地址
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
+    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
+②通过js的方式
+    $location.path(&apos;路由地址&apos;)
+③超链接的方式
+    a href=&quot;#/myRegister&quot;
+    login-&gt;start 10
+
+SPA应用程序通过ngRoute来传递参数：
+①搞明白 发送 接收
+②配置接收方的路由
+    $routeProvider.when(&apos;/myStart/:num&apos;,{
+    templateUrl:&apos;tpl/start.html&apos;
+    })
+③拿到传递过来的参数
+    $routeParams.num
+④发送
+    a href=&apos;#/myStart/10&apos;
+    $location.path(&apos;/myStart/10&apos;)
+
+注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
+    myStart/:id $routeParams.id
+
+练习：实现一个SPA
+完整的html manager.html
+代码片段： checkProduct.html pay.html send.html
+
+要求：能够实现不同页面的跳转以及参数的传递
+checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
+pay 点击button跳转到send
+send button以及a跳转到check.html
+
+优化思路：如果多个控制器需要用到同一个方法或者数据，
+    ①将方法和数据封装成一个服务
+    ②$rootScope
+    ③控制器之间的嵌套
+    ④借助于事件
+
+由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
+控制器中的方法和数据，代码片段就可以用了。
+①发送 接收
+    checkProduct --&gt; pay
+
+②配置接收方路由
+    .when(&apos;/myPay/:price&apos;,{})
+
+③$routeParams
+    $routeParams.price
+
+④发送参数
+    href=&apos;#/myPay/20&apos;
+    $location.path(&apos;/myPay/20&apos;)
+
+ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
+
+要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
+
+注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
+</code></pre><p>19、ngAnimate（动画模块）</p>
+<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
+基本步骤：
+①引入对应的js文件
+    angular-animate.js
+②指定自定义模块依赖于ngAnimate
+    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
+③css给ng应用程序添加动画效果：
+    ngEnter 准备进入
+    ngEnterActive 进入完成
+    ngLeave 准备离开
+    ngLeaveActive 离开完成
+④引入对应的css文件
+
+如果用到其它的模块整体思路：
+    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
+    ②在创建模块，指定依赖列表
+    ③根据模块中所提供的指令、服务。。结合业务需要进行
+</code></pre><p>20、表单验证</p>
+<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
+布尔类型：
+$valid
+$invalid
+$dirty
+$pristine
+对象：
+$error
+
+注意事项：
+①给表单以及表单组件 加上name属性
+②给需要用到的表单组件 ，加上ngModel
+③属性的用法
+myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;1、复杂选择器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1、兄弟选择器
-    通过兄弟级别的位置关系来匹配页面元素
-    注意，兄弟选择器，只能向后找，不能向前找
-    语法：
-        相邻兄弟选择器：通过相邻（紧紧挨着的）位置关系匹配元素
-        选择器1+选
+      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;拙劣的设计：
+①僵化
+②脆弱
+③不必要的复杂
+④晦涩。。
+
+1、YAGNI（不要写不需要的代码）
+you aren&amp;apos;t gonna need it
+
+2、KISS （越简单越好）
+keep it simple 
     
     </summary>
     
       <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="CSS" scheme="www.wangchengzou.cn/tags/CSS/"/>
+      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
     
-      <category term="CSS3" scheme="www.wangchengzou.cn/tags/CSS3/"/>
+  </entry>
+  
+  <entry>
+    <title>Zetpojs基础知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:56:58.353Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
+<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要引入js文件，调用方法即可
+特点：
+    学习成本低
+    轻量
+注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
+        如果要用到其他模块，去zeptoBuilder
+        官网：http://github.e-sites.nl/zeptobuilder/
+        选择需要用到的模块，勾选，下载即可
+</code></pre><p>二、使用Zepto</p>
+<pre><code>1、核心模块
+    集合、数据、类型判断的操作
+    选择器
+    DOM增删改查
+
+2、detect
+    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
+    $.os $.browser
+
+3、event模块
+    on off one trigger
+
+4、Ajax模块
+    $.get
+    $.post
+    $.ajax
+    $.load
+
+5、form模块
+    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
+    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
+    submit 表单指定submit触发时 执行的处理函数
+
+6、Touch模块
+    点按事件：tap singleTap doubleTap longTap
+    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
+
+7、Effects（Animate）模块
+    show/hide/fadeIn/fadeOut/fadeToggle
+    animate
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
+what？ 是一个js库
+where？现代高级浏览器（移动端）
+why？轻量（放弃了对ie等低端浏览器的支持）
+how？类似jQuery的用法 只需要
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
+    
+      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue快速上手知识</title>
+    <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
+    <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-23T15:38:48.212Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、基本绑定：</p>
+<pre><code>new Vue(
+    {
+        el:&apos;#elID&apos;,
+        data:{
+            // data obj
+        },
+        computed:{
+            // computed obj
+        },
+        methods:{
+            // methods obj
+        },
+    }
+);
+</code></pre><p>2、指令：</p>
+<pre><code>前缀为v-
+*v-if, v-for, v-bind, v-on...
+*特性插值会转为v-bind绑定: href=&apos;{{url}}&apos; --&gt; v-bind:href=&apos;url&apos;
+</code></pre><p>3、数据绑定只接受单个表达式：</p>
+<pre><code>{{number+1}}                                    ok
+{{ok?'yes':'no'}}                                ok
+{{message.split('').reverse().join('')}}        ok
+{{var a=1}}                                        no
+{{if(ok){return message}}}                        no
+</code></pre><p>4、过滤器：</p>
+<pre><code>管道式的写法 --&gt; {{message|capitalize}}
+*可以串联: filterA|filterB
+*可以带参数: filterA &apos;arg1&apos; arg2
+</code></pre><p>5、修饰符</p>
+<pre><code>前缀为.
+*v-bind:href.literal=&apos;a/b/c&apos;
+</code></pre><p>6、缩写</p>
+<pre><code>v-bind:href=&apos;url&apos; --&gt; :href=&apos;url&apos;
+v-on:click=&apos;dosomething&apos; --&gt; @click=&apos;dosomething&apos;
+</code></pre><p>7、计算setter</p>
+<pre><code>computed:{
+    fullName:{
+        get:function(){
+            // getter
+        }
+        set:function(newValue){
+            //setter
+        }
+    }
+}
+</code></pre><p>8、Class与Style绑定</p>
+<pre><code>*变量语法：v-bind:class=&quot;{&apos;class-a&apos;:isA, &apos;class-b&apos;:isB}&quot;
+ --&gt;        data:{isA:true, isB:false}
+*对象语法：v-bind:class=&quot;classObj&quot;
+--&gt;        data:{classObj:{&apos;class-a&apos;:true, &apos;class-b&apos;:false}}
+*数组语法：v-bind:class=&apos;[classA, classB]&apos;
+ --&gt;        data:{classA:&apos;class-a&apos;, classB:&apos;class-b&apos;}
+</code></pre><p>9、条件渲染</p>
+<pre><code>*v-if, v-show, v-else
+*&lt;h1 v-if=&quot;ok&quot;&gt;Yes&lt;/h1&gt; &lt;h1 v-else&gt;No&lt;/h1&gt;
+*&lt;h1 v-show=&quot;ok&quot;&gt;Yes&lt;/h1&gt; &lt;h1 v-else&gt;No&lt;/h1&gt;
+*show只是简单的display:none
+</code></pre><p>10、列表渲染</p>
+<pre><code>v-for
+*内置变量：{{$index}}
+*用法：v-for=&apos;item in items&apos;
+       v-for=&apos;(index, item) in items&apos;    *数组则是索引，遍历对象则是键
+</code></pre><p>11、数组变动检测</p>
+<pre><code>能触发视图更新的方法：
+*push, pop, shift, unshift, splice, sort, reverse
+// 变异方法
+*filter, concat, slice
+// 替换数组
+*尽可能复用DOM: track-by
+    v-for=&quot;item in items&quot; track-by=&quot;_uid&quot;
+    track-by=&apos;$index&apos;
+    // 根据index追踪，不是很明白！...片段不被移动，
+    // 简单地已对应索引的新值刷新,也能处理数据数组中重复的值...
+
+不能检测到以下变化：
+    1.直接用索引设置元素：    vm.items[0]={};
+    // vue解决方案：vm.items.$set(0, { childMsg: &apos;Changed!&apos;}),
+                    vm.items.$remove(item)
+    2.修改数据的长度：        vm.items.length=0;
+    // js中常见的清空, vue解决方案：直接用空数组替换
+</code></pre><p>12、对象v-for</p>
+<pre><code>内置变量：$key
+</code></pre><p>13、值域v-for</p>
+<pre><code>&lt;span v-for=&quot;n in 10&quot;&gt;{{ n }}&lt;/span&gt;
+</code></pre><p>14、内置的过滤器</p>
+<pre><code>filterBy 和 orderBy
+</code></pre><p>15、方法与事件处理器</p>
+<pre><code>·v-on 监听DOM事件
+    &lt;button v-on:click=&quot;greet&quot;&gt;&lt;/button&gt;
+    &lt;button v-on:click=&quot;greet(&apos;xx&apos;, $event)&quot;&gt;&lt;/button&gt;
+    // 内联语句处理器, $event为内置变量，原生的DOM事件
+·事件修饰符
+    &lt;a v-on:click.stop.prevent=&apos;doThis&apos; /&gt;
+    // 阻止冒泡和默认行为，修饰符可以串联
+·按键修饰符
+    &lt;input v-on:keyup.13=&apos;submit&apos; &gt;
+    // 键盘事件后面可接keyCode
+    常见的按键有提供别名：
+        ·enter
+        ·tab
+        ·delete
+        ·esc
+        ·space
+        ·up
+        ·down
+        ·left
+        ·right
+</code></pre><p>16、表单控件绑定</p>
+<pre><code>·v-model绑定字段
+    &lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
+    // 绑定的值通常是静态字符串，勾选框是布尔值
+·参数特性
+    lazy        // 延迟到change事件中同步(原为input)
+    number        // 仅允许输入数字
+    debounce    // 延时同步
+</code></pre><p>17、过渡</p>
+<pre><code>典型的过渡：
+    &lt;div v-if=&quot;show&quot; transition=&quot;expand&quot;&gt;&lt;/div&gt;
+    需要添加CSS样式：
+        .expand-transition(必须), .expand-enter, .expand-leave
+        *如果未设置, 默认为.v-transition, .v-enter, .v-leave
+    同时提供钩子：
+        Vue.transition(&apos;expand&apos;,{...});
+        ·beforeEnter, enter, afterEnter, enterCancelled,
+        beforeLeave, leave, afterLeave, leaveCancelled
+    渐近过渡：
+        &lt;div v-for=&apos;list&apos; transition stagger=&apos;100&apos;&gt;&lt;/div&gt;
+        *钩子stagger, 延时过渡
+</code></pre><p>18、组件</p>
+<pre><code>·创建组件：        var c = Vue.extend({
+                    template:&apos;&lt;div&gt;A custom component!&lt;/div&gt;&apos;,
+                });
+·注册组件:        Vue.component(&apos;my-component&apos;, c);
+// 如果名字是myComponent, html中必须写成my-component
+·使用组件：        &lt;div id=&apos;app&apos;&gt;&lt;my-component&gt;&lt;/my-component&gt;&lt;/div&gt;
+// html
+                new Vue({el:&apos;#app&apos;});
+                // js
+
+*注册可缩写为    vue.component(&apos;my-component&apos;,{
+                    template:&apos;&lt;div&gt;A custom component!&lt;/div&gt;&apos;,
+                });
+局部注册：
+    var c = Vue.extend({});
+    var parentComponent = Vue.extend({
+        components:{
+            &apos;my-component&apos;: c,
+        }
+    });
+组件选项：
+    var c = Vue.extend({
+        data:function(){
+            return {a:1};
+        }
+    });
+
+is特性：
+    *table中限制其他的节点不能放置其中
+    &lt;table&gt;
+        &lt;tr is=&apos;my-component&apos;&gt;&lt;/tr&gt;
+    &lt;/table&gt;
+
+Props:
+    props用以从父组件接收数据:
+        使用：
+            Vue.component(&apos;child&apos;,{
+                props:[&apos;msg&apos;],
+                template:&apos;&lt;span&gt;{{msg}}&lt;/span&gt;&apos;
+            });
+        声明：
+            &lt;child msg=&apos;hello!&apos;&gt;&lt;/child&gt;            // 字面量语法
+            &lt;child v-bind:msg=&apos;parentMsg&apos;&gt;&lt;/child&gt;    // 动态语法
+        *如果props是myMsg, html中需要用my-msg
+        (即：camelCase - kebab-case, 因为html的特性是不区分大小写)
+        *字面量和动态语法稍有不同
+            &lt;comp some-prop=&quot;1&quot;&gt;&lt;/comp&gt;        // 传递了一个字符串 &quot;1&quot;
+            &lt;comp :some-prop=&quot;1&quot;&gt;&lt;/comp&gt;    // 传递实际的数字
+
+Props绑定类型：
+    &lt;child :msg=&quot;parentMsg&quot;&gt;&lt;/child&gt;        // 默认为单向绑定
+    &lt;child :msg.sync=&quot;parentMsg&quot;&gt;&lt;/child&gt;    // 双向绑定
+    &lt;child :msg.once=&quot;parentMsg&quot;&gt;&lt;/child&gt;    //单次绑定
+    *如果prop是一个对象或数组，是按引用传递。不管使用哪种绑定方式，都将是双向绑定
+
+Props验证：
+    props:{            // 此时props是一个对象
+        propA: Number,
+        propB:{
+            type: String,
+            // 类型(原生构造器：String, Number, Boolean, Function, Object, Array)
+            required: true,
+            // 是否必须项
+            default: &apos;thyiad&apos;,
+            // 默认值(如果是Object, 默认值需由一个函数返回)
+            validator: function(value){
+            // 验证
+                return value === &apos;thyiad&apos;;
+            },
+            coerce:function(val){
+                return val+&apos;&apos;;
+                // 将值强制转换为字符串
+                return JSON.parse(val);
+                // 将JSON字符串转换为对象
+            }
+        }
+    }
+
+父子组件通信：
+    this.$parent        // 子组件访问父组件
+    this.$root            // 访问根实例
+    this.$children        // 父组件的所有子元素
+    *不建议在子组件中修改父组件的状态
+
+自定义事件：
+    $on()                // 监听事件
+    $emit()                // 触发事件
+    $dispatch()            // 派发事件，沿着父链冒泡
+    $broadcast()        // 广播事件, 向下传递给所有的后代
+    使用：
+        子组件中绑定函数派发事件：
+            methods:{
+                notify:function(){
+                    this.$dispatch(&apos;child-msg&apos;,this.msg);
+                }
+            }
+        父组件中定义事件：
+            events:{
+                &apos;child-msg&apos;:function(msg){
+                    this.messages.push(msg);
+                }
+            }
+        *更直观的声明方式：
+            &lt;child v-on:child-msg=&apos;handleIt&apos;&gt;&lt;/child&gt;
+            // 直观的为父组件定义事件(child-msg), 并且触发父组件的handleIt函数, 子组件只关注触发事件
+
+子组件索引：
+    &lt;child v-ref:profile&gt;&lt;/child&gt;
+    var child = parent.$refs.profile;
+
+使用Slot分发内容：
+    单个Slot:
+        父组件的内容将被抛弃，除非子组件包含&lt;slot&gt;.
+        如果只有一个没有特性的slot, 整个内容将被插到它所在的地方, 替换slot.
+            父组件：
+            &lt;child&gt;
+                &lt;p&gt;parent content&lt;/p&gt;
+            &lt;/child&gt;
+            子组件模板：
+            &lt;div&gt;
+                &lt;h1&gt;child content&lt;/h1&gt;
+                &lt;slot&gt;
+                    如果父节点没有设置内容，这里才会被显示
+                &lt;/slot&gt;
+            &lt;/div&gt;
+    命名Slot：
+        父组件模板：
+            &lt;child&gt;
+                &lt;p slot=&apos;one&apos;&gt;One&lt;/p&gt;
+                &lt;p slot=&apos;two&apos;&gt;two&lt;/p&gt;
+                &lt;p&gt;Default A&lt;/p&gt;
+            &lt;/child&gt;
+        子组件模板：
+            &lt;div&gt;
+                &lt;slot name=&apos;one&apos;&gt;&lt;/slot&gt;
+                &lt;slot&gt;&lt;/slot&gt;
+                // 默认slot, 找不到匹配内容的回退插槽, 如果没有默认的slot, 不匹配内容将被抛弃
+                &lt;slot name=&apos;two&apos;&gt;&lt;/slot&gt;
+            &lt;/div&gt;
+
+    动态组件：
+        可以在不同组件之间切换：
+            new Vue({
+                el:&apos;body&apos;,
+                data:{
+                    currentView:&apos;home&apos;,
+                },
+                components:{
+                    home:{},
+                    posts:{},
+                    archive:{},
+                }
+            });
+            父组件：
+                &lt;component :is=&apos;currentView&apos; keep-alive&gt;&lt;/component&gt;
+                // component是Vue保留的元素
+                *keep-alive用来把切换出去的组件保留在内存中, 可以保留它的状态避免重新渲染
+        activate钩子：
+            用以在切入前做一些异步操作：
+                activate:function(done){
+                    var self = this;
+                    loadDataAsync(function(data){
+                        self.someData=data;
+                        done();
+                    });
+                }
+        transition-mode
+            指定列两个动态组件之间如何过渡：
+                &lt;component :is=&apos;currentView&apos; transition=&apos;fade&apos; transition-mode=&apos;out-in&apos;&gt;&lt;/component&gt;
+                *默认进入与离开平滑地过渡, 可以指定另外两种模式：in-out, out-in (先进入or先离开)
+
+    组件和v-for:
+        &lt;child v-for=&apos;item in items&apos; :item=&apos;item&apos; :index=&apos;$index&apos;&gt;&lt;/child&gt;
+        *因为组件的作用域是孤立的, v-for里的item无法直接传递给组件, 必须像上面一样使用props传递数据
+
+    异步组件
+    资源命名约定
+    递归组件
+    片段实例
+        *推荐模板只有一个根节点(使用template选项时)
+    内联模板
+        组件把它的内容当做它的模板
+        &lt;child inline-template&gt;&lt;/child&gt;
+        *不推荐
+</code></pre><p>19、深入响应式原理</p>
+<pre><code>·如何追踪变化
+    *使用Object.defineProperty设置getter/setter
+·变化检测问题
+    *不能检测到对象属性的添加或删除
+    *vm.$set(&apos;b&apos;, 2);
+     Vue.set(object, key, value);
+·初始化数据
+    *推荐在data对象上声明所有的响应属性
+·异步更新队列
+    *默认异步更新DOM, 下次事件循环时清空队列, 执行必要的DOM更新
+    *Vue.nextTick(callback);
+·计算属性的秘密
+    *计算属性是有缓存的, 除非显示设置为不缓存
+        computed:{
+            attr:function(){
+                return Date.now()+this.msg;
+            }
+        }
+        TO:
+        computed:{
+            attr:{
+                cache: false,
+                get: function(){
+                    return Date.now()+this.msg;
+                }
+            }
+        }
+        *但只是在JS中访问是这样的, 数据绑定仍是依赖驱动的。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、基本绑定：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new Vue(
+    {
+        el:&amp;apos;#elID&amp;apos;,
+        data:{
+            // data obj
+        },
+        computed:{
+
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Vue，App" scheme="www.wangchengzou.cn/tags/Vue%EF%BC%8CApp/"/>
     
   </entry>
   
@@ -3273,291 +4411,6 @@ jQuery中的插件（即函数）分为两类：
   </entry>
   
   <entry>
-    <title>Ionic基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Ionic/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Ionic/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:53:37.919Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、当前移动端开发的整体趋势</p>
-<pre><code>三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件和服务，编写的app称之为原生应用
-HybridApp：通过前端技术与原生技术混合编程所生成的app称为hybirdApp
-
-学习WebApp以及HybridApp。
-
-将3中开发模式对比，hybridApp是非常有潜力的，可以实现原生应用程序的功能，支持上传到应用市场，让用户去下载 去使用
-
-前端+原生
-想要创建ios的应用程序，开发工具：xcode（apple）,模拟器需要在MacOSX
-想要创建Android的应用程序，开发工具：eclipse/AndroidStudio,模拟器是可以运行PC、MacOSX、Linux
-</code></pre><p>二、第一个Android应用程序–搭建Android的开发环境</p>
-<pre><code>采用的开发语言：java
-
-使用Goolge公司所提供的SDK，java
-
-①安装jdk
-    java development kit java开发工具箱
-②安装eclipse
-③安装sdk
-    http://www.androiddevtools.cn/
-    ①、下载jdk 直接安装
-    ②、下载ADT bundle（集成了eclipse、sdk）
-</code></pre><p>三、使用Eclipse创建第一个AndroidApp</p>
-<pre><code>操作注意事项：
-    工具条--》window--》show/hide toolbar 显示隐藏工具条
-    工具条--》window--》reset perspective 恢复默认视图
-    工具条--》window--》preferences-&gt;genaeral-&gt;apperance-&gt;color and fonts-&gt;basic-&gt; text font-&gt;edit
-
-    sdk manager：更新SDK
-    Android Virtual Device Manager:管理模拟器的创建、编辑、删除
-    创建模拟器：1、testPhone 2、选中4寸的设备 3、给SD卡指定大小
-    start-》launch
-
-创建Android项目
-file-&gt;new -&gt;Android Application Project-&gt;配置应用名称以及包的名称-》配置icon，finish完成Android工程的创建
-
-运行Android项目
-选中项目，点击右键，run as-&gt;Android Application Project
-
-对于AndroidApp来说，添加权限，基本步骤：
-①找到工程中根目录下的AndroidManefiest.xml文件
-②打开，选中选项卡permissions
-③点击add，在弹窗中选中uses permission
-④在右侧的下拉菜单中选中需要用到的权限，保存即可
-
-Android工程所对应的目录功能：
-src(source) 源代码，java文件的修改
-gen 自动生成的文件夹 R.java非常关键的文件，可以通过R这个类找到android工程中所有的资源文件
-Android* 是google所提供的sdk文件
-assets 不希望被处理的文件放在该文件夹(在将工程代码打包成可执行文件的，多数文件都会被处理)
-bin 运行工程（编译、链接）时所生成的可执行文件(apk)
-libs(libraries) 库文件：使用第三方的包
-res（resource） 资源文件：图片、布局文件、变量
-AndroidManifest.xml： 版本号、权限、图标的配置、应用的配置。。。
-</code></pre><p>四、第一个hybridApp  – webView</p>
-<pre><code>1、基本步骤：
-①按照功能和要求 把前端代码编写完毕
-②将前端代码 放到 Android工程的assets目录
-③创建一个WebView（网页视图组件），配置webView加载指定的html页面
-④将webView作为一个app的内容视图展现出来
-⑤运行，最终是生成了安装包
-
-2、练习：（15:40 - 15：55）
-创建一个混合编程app，有一个p、有一个按钮，点击按钮将段落隐藏。
-要求：创建一个新的Android。
-问题：判断变量、数据，通过console.log控制台打印出来，确认是不是要的数据。
-解决：借助于webview的setWebChromeClient
-
-3、混合编程的常见的两种方式
-①直接将在pc端测试好的前端代码 全部拷贝到 android工程，打包生成一个app
-②将测试号的代码直接部署在服务器端， 让webview去加载指定的服务器的地址，加上网络权限
-
-
-练习：将开饭啦项目部署在服务器端（本地的服务器 apache mysql），然后通过webview加载，生成app
-http://localhost/chaptor4_code/angularjs/kfl/kaifanle.html
-localhost替换成当前pc的真实的ip地址：windows+R-&gt;cmd-&gt;ipconfig 查看ipv4的地址
-http://172.163.100.53/chaptor4_code/angularjs/kfl/kaifanle.html
-注意事项：①加上网络权限 ②允许执行js
-
-技巧：
-①timeout 超时
-    只需要将eclipse和模拟器关掉再打开
-②ActivityManager: Warning: Activity not started, its current task has been brought to the front
-    没有对原有的项目做任何的修改，又去重复去运行，会提示该警告
-③android library projects can&apos;t be launched
-    创建Android工程，把工程标记为了一个库项目，只能重新新建工程
-ADB：Android Debug Bridge 建立起PC端和移动端的桥梁。
-
-如何完成Android工程的创建、运行基本流程以及工作方式
-学习HybridApp的创建和运行
-
-扩展1：
-js调用原生组件：
-①创建一个接口类的文件
-②activity配置使用接口
-③在js中调用java中的一些接口
-
-扩展2：
-js调用原生组件：
-①创建一个接口类的文件
-    @JavascriptInterface
-
-②activity配置使用接口
- wv.addJavascriptInterface(
-new webInterfac(getApplicationContext()),&quot;android&quot;);
-
-③在js中调用java中的一些接口
-function callShowToast(){
-    android.showToast();
-  }
-</code></pre><p>五、Ionic概述</p>
-<pre><code>移动端app的开发有很多实现方案，原生、现成的框架（ionic、jQueryMobile）
-Ionic是一个强大的h5的混合编程app开发框架
-Ionic集成了ng、cordova、一套非常漂亮的移动的ui库
-注意事项：Ionic放弃了iOS6、Android4.1以下版本的支持
-特点：
-    ①完美融合了ng
-    ②集成了cordova，能够通过前端代码调用智能设备的底层硬件
-    ③设计风格好
-    ④性能优越，运行速度块
-    Ionic = ng + cordova + 移动ui库
-</code></pre><p>六、搭建Ionic的开发环境</p>
-<pre><code>1、方式1 （命令行）
-http://ionicframework.com/getting-started/
-①npm install -g cordova ionic
-    全局安装cordova以及ionic
-②ionic start myApp tabs/sidemenu
-    创建一个基于ionic的项目myApp，类型为tabs、sideMenu
-③ionic serve
-2、方式2：借助于官方所提供的js、css文件
-</code></pre><p>七、学习Ionic样式类</p>
-<pre><code>1、color
-    9个常用的值 ，参考手册中最后一个color的介绍
-
-2、button按钮
-    button/button-small/button-large/button-outline/
-    button-clear/buttn-block/icon-left/icon-right/
-    ion-***/button-bar
-
-3、list 列表
-    list/item/item-icon-left/item-icon-right/list-inset(嵌入效果)/
-    item-divider(分隔符)/badge(badge-assertive)
-    item-avator/item-thumbnail-left/right
-
-4、card 卡片式
-
-5、form 表单
-    list/item/item-input/input-label/item-stacked-label/item-floating-label
-    item-toggle(ionToggle)/item-select/ionCheckbox /ionRadio
-
-6、grid
-    row/col
-    col-10/20/50..(指定列的宽度)
-    .col-10    10%
-    .col-20    20%
-    .col-25    25%
-    .col-33    33.3333%
-    .col-50    50%
-    .col-67    66.6666%
-    .col-75    75%
-    .col-80    80%
-    .col-90    90%(设置列与列之间的offset)
-
-    .col-offset-10    10%
-    .col-offset-20    20%
-    .col-offset-25    25%
-    .col-offset-33    33.3333%
-    .col-offset-50    50%
-    .col-offset-67    66.6666%
-    .col-offset-75    75%
-    .col-offset-80    80%
-    .col-offset-90    90%
-    col-center/col-top/col-bottom
-</code></pre><p>八、IonRefresher 下拉刷新</p>
-<pre><code>①指定下拉刷新的处理函数
-on-refresh
-②处理完之后，结束刷新动作
-$scope.$broadcast(&apos;scroll.refreshComplete&apos;);
-③ionContent第一个子元素
-</code></pre><p>九、IonInfiniteScroll 无限滚动（上拉加载更多）</p>
-<pre><code>①指定上拉的处理函数
-on-infinite
-②数据更新完成之后，结束刷新
-scroll.infiniteScrollComplete
-③ionContent最后一个子元素
-immediate-check=&apos;false&apos;
-</code></pre><p>十、$ionicScrollDelegate</p>
-<pre><code>scrollTop/Bottom() 滚动到顶部或者底部
-scrollTo(left,top) 滚动到指定的位置
-getScrollPostion() 得到当前的滚动位置（返回对象：top\left）
-</code></pre><p>十一、ionTabs 实现选项卡</p>
-<pre><code>ionTabs 常用属性：
-tabs-icon-top/left/right/bottom/only tabs-positive
-http://ionicons.com/
-ionTab 常用的属性：title/icon/icon-on/icon-off/on-select(ionTabs默认是第一个被选中)
-                  badge/badge-style/on-select/ng-click
-</code></pre><p>十二、ionSideMenus 侧边栏菜单</p>
-<pre><code>ionSideMenus父级元素，在中间写上:ionSideMenuContent(正文),ionSideMenu（侧边栏菜单）
-操作侧边栏菜单打开或者关闭：
-1、js：
-    $ionicSideMenuDelegate.toggleLeft/toggleRight(true/false);
-2、滑动打开
-3、属性
-    menu-close 将现在打开的侧边栏菜单关掉
-    menu-toggle=&apos;left/right&apos; 对左边或则右边的侧边栏菜单进行开关的切换
-</code></pre><p>十三、ActionSheet</p>
-<pre><code>给用户提供有多种选择的小菜单，借助于$ionicActionSheet来实现
-    $ionicActionSheet.show({
-
-    })
-在show方法的对象中常用属性：titleText/cancelText/buttons/destructiveText/
-cancel/buttonClicked/destructiveButtonClicked
-(处理方法中，可以通过返回true，关掉当前打开的actionSheet)
-</code></pre><p>十四、$ionicLoading</p>
-<pre><code>在移动端当需要处理的时间比较久时，通过该服务显示一个遮盖层
-$ionicLoading.show({template/templateUrl/duration/delay})
-$ionicLoading.hide();
-</code></pre><p>十五、$ionicPopup</p>
-<pre><code>在ionic中内容弹窗（警告、确认。。）
-$ionicPopup.alert/confirm/prompt/show()
-</code></pre><p>十六、自定义弹窗</p>
-<pre><code>$ionicModal 模态窗
-①指定要去显示的模板内容
-②调用fromTemplate/fromTemplateUrl加载模板，并在then方法中得到对应的ionicModal的实例:$scope.modal
-③调用$scope.modal.show()
-</code></pre><p>十七、uiRouter</p>
-<pre><code>定位：UI-Router is a client-side router for single page web applications.
-注意：uiRouter用在ng、react中
-uiRouter与ngRoute最大的区别：uiRouter支持路由的嵌套。
-
-ngRoute：
-①路由的基本步骤
-   自定义模块，指定ngRoute模块（angular-route.js）
-   指定盛放代码片段的容器 ngView
-   创建代码片段
-   配置路由词典
-    $routerProvider.when().otherwise()
-②跳转
-  直接修改地址栏
-  $location.path(路由地址)
-  a href=&apos;#路由地址&apos;
-③参数的传递
-  发送方、接收方
-  配置接收方的路由
-  $routeParams
-  发送参数
-
-uiRouter的基本使用步骤：
- 指定依赖的模块‘ui.router’
- 盛放代码片段的容器 uiView
- 创建模板文件
- 设置状态
-    $stateProvider.state()
-注意事项：在ionic中的ionic模块 本身在创建时已经指定过依赖于ui.router模块，
-        在ionic的项目没有必须要指定ui.router
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、当前移动端开发的整体趋势&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;三种趋势
-WebApp:通过前端技术来实现的接近传统应用程序体验的app
-NativeApp:通过（Google或者Apple）SDK（software development kit 软件开发包）提供的原生的组件
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Ionic" scheme="www.wangchengzou.cn/tags/Ionic/"/>
-    
-  </entry>
-  
-  <entry>
     <title>MySql常用方法知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/MySql/"/>
     <id>www.wangchengzou.cn/2017/07/22/MySql/</id>
@@ -3849,375 +4702,298 @@ $.ajax({})   全能
   </entry>
   
   <entry>
-    <title>Vue快速上手知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Vue%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E7%9F%A5%E8%AF%86/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Vue快速上手知识/</id>
+    <title>ajax面试题点</title>
+    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
     <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:38:48.212Z</updated>
+    <updated>2017-07-27T14:23:51.280Z</updated>
     
-    <content type="html"><![CDATA[<p>1、基本绑定：</p>
-<pre><code>new Vue(
-    {
-        el:&apos;#elID&apos;,
-        data:{
-            // data obj
-        },
-        computed:{
-            // computed obj
-        },
-        methods:{
-            // methods obj
-        },
-    }
-);
-</code></pre><p>2、指令：</p>
-<pre><code>前缀为v-
-*v-if, v-for, v-bind, v-on...
-*特性插值会转为v-bind绑定: href=&apos;{{url}}&apos; --&gt; v-bind:href=&apos;url&apos;
-</code></pre><p>3、数据绑定只接受单个表达式：</p>
-<pre><code>{{number+1}}                                    ok
-{{ok?'yes':'no'}}                                ok
-{{message.split('').reverse().join('')}}        ok
-{{var a=1}}                                        no
-{{if(ok){return message}}}                        no
-</code></pre><p>4、过滤器：</p>
-<pre><code>管道式的写法 --&gt; {{message|capitalize}}
-*可以串联: filterA|filterB
-*可以带参数: filterA &apos;arg1&apos; arg2
-</code></pre><p>5、修饰符</p>
-<pre><code>前缀为.
-*v-bind:href.literal=&apos;a/b/c&apos;
-</code></pre><p>6、缩写</p>
-<pre><code>v-bind:href=&apos;url&apos; --&gt; :href=&apos;url&apos;
-v-on:click=&apos;dosomething&apos; --&gt; @click=&apos;dosomething&apos;
-</code></pre><p>7、计算setter</p>
-<pre><code>computed:{
-    fullName:{
-        get:function(){
-            // getter
-        }
-        set:function(newValue){
-            //setter
-        }
-    }
+    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
+<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
+，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
+使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
+ActiveXObject(IE浏览器)对象实现异步通信效果
+基本步骤：
+var xhr =null;//创建对象
+if(window.XMLHttpRequest){
+    xhr = new XMLHttpRequest();
+}else{
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
 }
-</code></pre><p>8、Class与Style绑定</p>
-<pre><code>*变量语法：v-bind:class=&quot;{&apos;class-a&apos;:isA, &apos;class-b&apos;:isB}&quot;
- --&gt;        data:{isA:true, isB:false}
-*对象语法：v-bind:class=&quot;classObj&quot;
---&gt;        data:{classObj:{&apos;class-a&apos;:true, &apos;class-b&apos;:false}}
-*数组语法：v-bind:class=&apos;[classA, classB]&apos;
- --&gt;        data:{classA:&apos;class-a&apos;, classB:&apos;class-b&apos;}
-</code></pre><p>9、条件渲染</p>
-<pre><code>*v-if, v-show, v-else
-*&lt;h1 v-if=&quot;ok&quot;&gt;Yes&lt;/h1&gt; &lt;h1 v-else&gt;No&lt;/h1&gt;
-*&lt;h1 v-show=&quot;ok&quot;&gt;Yes&lt;/h1&gt; &lt;h1 v-else&gt;No&lt;/h1&gt;
-*show只是简单的display:none
-</code></pre><p>10、列表渲染</p>
-<pre><code>v-for
-*内置变量：{{$index}}
-*用法：v-for=&apos;item in items&apos;
-       v-for=&apos;(index, item) in items&apos;    *数组则是索引，遍历对象则是键
-</code></pre><p>11、数组变动检测</p>
-<pre><code>能触发视图更新的方法：
-*push, pop, shift, unshift, splice, sort, reverse
-// 变异方法
-*filter, concat, slice
-// 替换数组
-*尽可能复用DOM: track-by
-    v-for=&quot;item in items&quot; track-by=&quot;_uid&quot;
-    track-by=&apos;$index&apos;
-    // 根据index追踪，不是很明白！...片段不被移动，
-    // 简单地已对应索引的新值刷新,也能处理数据数组中重复的值...
-
-不能检测到以下变化：
-    1.直接用索引设置元素：    vm.items[0]={};
-    // vue解决方案：vm.items.$set(0, { childMsg: &apos;Changed!&apos;}),
-                    vm.items.$remove(item)
-    2.修改数据的长度：        vm.items.length=0;
-    // js中常见的清空, vue解决方案：直接用空数组替换
-</code></pre><p>12、对象v-for</p>
-<pre><code>内置变量：$key
-</code></pre><p>13、值域v-for</p>
-<pre><code>&lt;span v-for=&quot;n in 10&quot;&gt;{{ n }}&lt;/span&gt;
-</code></pre><p>14、内置的过滤器</p>
-<pre><code>filterBy 和 orderBy
-</code></pre><p>15、方法与事件处理器</p>
-<pre><code>·v-on 监听DOM事件
-    &lt;button v-on:click=&quot;greet&quot;&gt;&lt;/button&gt;
-    &lt;button v-on:click=&quot;greet(&apos;xx&apos;, $event)&quot;&gt;&lt;/button&gt;
-    // 内联语句处理器, $event为内置变量，原生的DOM事件
-·事件修饰符
-    &lt;a v-on:click.stop.prevent=&apos;doThis&apos; /&gt;
-    // 阻止冒泡和默认行为，修饰符可以串联
-·按键修饰符
-    &lt;input v-on:keyup.13=&apos;submit&apos; &gt;
-    // 键盘事件后面可接keyCode
-    常见的按键有提供别名：
-        ·enter
-        ·tab
-        ·delete
-        ·esc
-        ·space
-        ·up
-        ·down
-        ·left
-        ·right
-</code></pre><p>16、表单控件绑定</p>
-<pre><code>·v-model绑定字段
-    &lt;input type=&quot;checkbox&quot; id=&quot;checkbox&quot; v-model=&quot;checked&quot;&gt;
-    // 绑定的值通常是静态字符串，勾选框是布尔值
-·参数特性
-    lazy        // 延迟到change事件中同步(原为input)
-    number        // 仅允许输入数字
-    debounce    // 延时同步
-</code></pre><p>17、过渡</p>
-<pre><code>典型的过渡：
-    &lt;div v-if=&quot;show&quot; transition=&quot;expand&quot;&gt;&lt;/div&gt;
-    需要添加CSS样式：
-        .expand-transition(必须), .expand-enter, .expand-leave
-        *如果未设置, 默认为.v-transition, .v-enter, .v-leave
-    同时提供钩子：
-        Vue.transition(&apos;expand&apos;,{...});
-        ·beforeEnter, enter, afterEnter, enterCancelled,
-        beforeLeave, leave, afterLeave, leaveCancelled
-    渐近过渡：
-        &lt;div v-for=&apos;list&apos; transition stagger=&apos;100&apos;&gt;&lt;/div&gt;
-        *钩子stagger, 延时过渡
-</code></pre><p>18、组件</p>
-<pre><code>·创建组件：        var c = Vue.extend({
-                    template:&apos;&lt;div&gt;A custom component!&lt;/div&gt;&apos;,
-                });
-·注册组件:        Vue.component(&apos;my-component&apos;, c);
-// 如果名字是myComponent, html中必须写成my-component
-·使用组件：        &lt;div id=&apos;app&apos;&gt;&lt;my-component&gt;&lt;/my-component&gt;&lt;/div&gt;
-// html
-                new Vue({el:&apos;#app&apos;});
-                // js
-
-*注册可缩写为    vue.component(&apos;my-component&apos;,{
-                    template:&apos;&lt;div&gt;A custom component!&lt;/div&gt;&apos;,
-                });
-局部注册：
-    var c = Vue.extend({});
-    var parentComponent = Vue.extend({
-        components:{
-            &apos;my-component&apos;: c,
-        }
-    });
-组件选项：
-    var c = Vue.extend({
-        data:function(){
-            return {a:1};
-        }
-    });
-
-is特性：
-    *table中限制其他的节点不能放置其中
-    &lt;table&gt;
-        &lt;tr is=&apos;my-component&apos;&gt;&lt;/tr&gt;
-    &lt;/table&gt;
-
-Props:
-    props用以从父组件接收数据:
-        使用：
-            Vue.component(&apos;child&apos;,{
-                props:[&apos;msg&apos;],
-                template:&apos;&lt;span&gt;{{msg}}&lt;/span&gt;&apos;
-            });
-        声明：
-            &lt;child msg=&apos;hello!&apos;&gt;&lt;/child&gt;            // 字面量语法
-            &lt;child v-bind:msg=&apos;parentMsg&apos;&gt;&lt;/child&gt;    // 动态语法
-        *如果props是myMsg, html中需要用my-msg
-        (即：camelCase - kebab-case, 因为html的特性是不区分大小写)
-        *字面量和动态语法稍有不同
-            &lt;comp some-prop=&quot;1&quot;&gt;&lt;/comp&gt;        // 传递了一个字符串 &quot;1&quot;
-            &lt;comp :some-prop=&quot;1&quot;&gt;&lt;/comp&gt;    // 传递实际的数字
-
-Props绑定类型：
-    &lt;child :msg=&quot;parentMsg&quot;&gt;&lt;/child&gt;        // 默认为单向绑定
-    &lt;child :msg.sync=&quot;parentMsg&quot;&gt;&lt;/child&gt;    // 双向绑定
-    &lt;child :msg.once=&quot;parentMsg&quot;&gt;&lt;/child&gt;    //单次绑定
-    *如果prop是一个对象或数组，是按引用传递。不管使用哪种绑定方式，都将是双向绑定
-
-Props验证：
-    props:{            // 此时props是一个对象
-        propA: Number,
-        propB:{
-            type: String,
-            // 类型(原生构造器：String, Number, Boolean, Function, Object, Array)
-            required: true,
-            // 是否必须项
-            default: &apos;thyiad&apos;,
-            // 默认值(如果是Object, 默认值需由一个函数返回)
-            validator: function(value){
-            // 验证
-                return value === &apos;thyiad&apos;;
-            },
-            coerce:function(val){
-                return val+&apos;&apos;;
-                // 将值强制转换为字符串
-                return JSON.parse(val);
-                // 将JSON字符串转换为对象
-            }
-        }
-    }
-
-父子组件通信：
-    this.$parent        // 子组件访问父组件
-    this.$root            // 访问根实例
-    this.$children        // 父组件的所有子元素
-    *不建议在子组件中修改父组件的状态
-
-自定义事件：
-    $on()                // 监听事件
-    $emit()                // 触发事件
-    $dispatch()            // 派发事件，沿着父链冒泡
-    $broadcast()        // 广播事件, 向下传递给所有的后代
-    使用：
-        子组件中绑定函数派发事件：
-            methods:{
-                notify:function(){
-                    this.$dispatch(&apos;child-msg&apos;,this.msg);
-                }
-            }
-        父组件中定义事件：
-            events:{
-                &apos;child-msg&apos;:function(msg){
-                    this.messages.push(msg);
-                }
-            }
-        *更直观的声明方式：
-            &lt;child v-on:child-msg=&apos;handleIt&apos;&gt;&lt;/child&gt;
-            // 直观的为父组件定义事件(child-msg), 并且触发父组件的handleIt函数, 子组件只关注触发事件
-
-子组件索引：
-    &lt;child v-ref:profile&gt;&lt;/child&gt;
-    var child = parent.$refs.profile;
-
-使用Slot分发内容：
-    单个Slot:
-        父组件的内容将被抛弃，除非子组件包含&lt;slot&gt;.
-        如果只有一个没有特性的slot, 整个内容将被插到它所在的地方, 替换slot.
-            父组件：
-            &lt;child&gt;
-                &lt;p&gt;parent content&lt;/p&gt;
-            &lt;/child&gt;
-            子组件模板：
-            &lt;div&gt;
-                &lt;h1&gt;child content&lt;/h1&gt;
-                &lt;slot&gt;
-                    如果父节点没有设置内容，这里才会被显示
-                &lt;/slot&gt;
-            &lt;/div&gt;
-    命名Slot：
-        父组件模板：
-            &lt;child&gt;
-                &lt;p slot=&apos;one&apos;&gt;One&lt;/p&gt;
-                &lt;p slot=&apos;two&apos;&gt;two&lt;/p&gt;
-                &lt;p&gt;Default A&lt;/p&gt;
-            &lt;/child&gt;
-        子组件模板：
-            &lt;div&gt;
-                &lt;slot name=&apos;one&apos;&gt;&lt;/slot&gt;
-                &lt;slot&gt;&lt;/slot&gt;
-                // 默认slot, 找不到匹配内容的回退插槽, 如果没有默认的slot, 不匹配内容将被抛弃
-                &lt;slot name=&apos;two&apos;&gt;&lt;/slot&gt;
-            &lt;/div&gt;
-
-    动态组件：
-        可以在不同组件之间切换：
-            new Vue({
-                el:&apos;body&apos;,
-                data:{
-                    currentView:&apos;home&apos;,
-                },
-                components:{
-                    home:{},
-                    posts:{},
-                    archive:{},
-                }
-            });
-            父组件：
-                &lt;component :is=&apos;currentView&apos; keep-alive&gt;&lt;/component&gt;
-                // component是Vue保留的元素
-                *keep-alive用来把切换出去的组件保留在内存中, 可以保留它的状态避免重新渲染
-        activate钩子：
-            用以在切入前做一些异步操作：
-                activate:function(done){
-                    var self = this;
-                    loadDataAsync(function(data){
-                        self.someData=data;
-                        done();
-                    });
-                }
-        transition-mode
-            指定列两个动态组件之间如何过渡：
-                &lt;component :is=&apos;currentView&apos; transition=&apos;fade&apos; transition-mode=&apos;out-in&apos;&gt;&lt;/component&gt;
-                *默认进入与离开平滑地过渡, 可以指定另外两种模式：in-out, out-in (先进入or先离开)
-
-    组件和v-for:
-        &lt;child v-for=&apos;item in items&apos; :item=&apos;item&apos; :index=&apos;$index&apos;&gt;&lt;/child&gt;
-        *因为组件的作用域是孤立的, v-for里的item无法直接传递给组件, 必须像上面一样使用props传递数据
-
-    异步组件
-    资源命名约定
-    递归组件
-    片段实例
-        *推荐模板只有一个根节点(使用template选项时)
-    内联模板
-        组件把它的内容当做它的模板
-        &lt;child inline-template&gt;&lt;/child&gt;
-        *不推荐
-</code></pre><p>19、深入响应式原理</p>
-<pre><code>·如何追踪变化
-    *使用Object.defineProperty设置getter/setter
-·变化检测问题
-    *不能检测到对象属性的添加或删除
-    *vm.$set(&apos;b&apos;, 2);
-     Vue.set(object, key, value);
-·初始化数据
-    *推荐在data对象上声明所有的响应属性
-·异步更新队列
-    *默认异步更新DOM, 下次事件循环时清空队列, 执行必要的DOM更新
-    *Vue.nextTick(callback);
-·计算属性的秘密
-    *计算属性是有缓存的, 除非显示设置为不缓存
-        computed:{
-            attr:function(){
-                return Date.now()+this.msg;
-            }
-        }
-        TO:
-        computed:{
-            attr:{
-                cache: false,
-                get: function(){
-                    return Date.now()+this.msg;
-                }
-            }
-        }
-        *但只是在JS中访问是这样的, 数据绑定仍是依赖驱动的。
+     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
+     xhr.setRequestHeader(“”,””);//设置http头信息
+     xhr.onreadystatechange =function(){}//指定回调函数
+     xhr.send();//发送请求
+</code></pre><p>3、如何解决跨域问题?</p>
+<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
+出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
+所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
+，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
+为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
+，这就是解决跨域问题的主流解决方案
+</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
+<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
+不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
+encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
+对于post请求不需要进行编码
+</code></pre><p>5、简述ajax 的过程。</p>
+<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
+2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
+3. 设置响应HTTP请求状态变化的函数
+4. 发送HTTP请求
+5. 获取异步调用返回的数据
+6. 使用JavaScript和DOM实现局部刷新
+</code></pre><p>6、阐述一下异步加载。</p>
+<pre><code>1. 异步加载的方案： 动态插入 script 标签
+2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
+3. script 标签上添加 defer 或者 async 属性
+4. 创建并插入 iframe，让它异步执行 js
+</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
+<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
+它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
+所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
+指一段脚本只能读取来自同一来源的窗口和文档的属性。
+</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
+<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
+一般在2000个字符，有的浏览器是8000个字符
+POST：一般用于修改服务器上的资源，对所发送的信息没有限制
+在以下情况中，请使用 POST 请求：
+1. 无法使用缓存文件（更新服务器上的文件或数据库）
+2. 向服务器发送大量数据（POST 没有数据量限制）
+3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
+</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
+<pre><code>1. 通过异步模式，提升了用户体验
+2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
+3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
+</code></pre><p>10、 Ajax的最大的特点是什么。</p>
+<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
+</code></pre><p>11、ajax的缺点</p>
+<pre><code>1、ajax不支持浏览器back按钮。
+2、安全问题 AJAX暴露了与服务器交互的细节。
+3、对搜索引擎的支持比较弱。
+4、破坏了程序的异常机制。
+</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，
+提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
+</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
+<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
+<p>14、什么是Ajax和JSON，它们的优缺点。</p>
+<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
+用于在Web页面中实现异步数据交互，实现页面局部刷新。
+优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
+避免用户不断刷新或者跳转页面，提高用户体验
+缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
+可能造成请求数的增加跨域问题限制；
+JSON是一种轻量级的数据交换格式，ECMA的一个子集
+优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
+解析，支持复合数据类型（数组、对象、字符串、数字）
+</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
+<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
+<pre><code>分为4个步骤：
+    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
+    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
+    这能使浏览器获得请求对应的 IP 地址。
+    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
+    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
+    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
+    ，最后由客户端发出该请求已经    被接受的报文。
+    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
+    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
+    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
+</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
+<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
+如果传递中文参数，需要自己进行编码操作，安全性较低。
+post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
+，数据不会暴漏在url地址中。
+</code></pre><p>18、ajax请求时，如何解释json数据</p>
+<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
+对数据的安全性更好。
+</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
+<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
+内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
+宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
+</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
+<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
+并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
+</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
+<pre><code>1、压缩css、js文件
+2、合并js、css文件，减少http请求
+3、外部js、css文件放在最底下
+4、减少dom操作，尽可能用变量替代不必要的dom操作
+</code></pre><p>22、HTTP状态码都有那些。</p>
+<pre><code>200 OK      //客户端请求成功
+400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
+403 Forbidden  //服务器收到请求，但是拒绝提供服务
+404 Not Found  //请求资源不存在，输入了错误的URL
+500 Internal Server Error //服务器发生不可预期的错误
+503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
 </code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;1、基本绑定：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;new Vue(
-    {
-        el:&amp;apos;#elID&amp;apos;,
-        data:{
-            // data obj
-        },
-        computed:{
-
+      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
+主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
     
     </summary>
     
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
     
     
-      <category term="Vue，App" scheme="www.wangchengzou.cn/tags/Vue%EF%BC%8CApp/"/>
+      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
+    
+      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>html和css3</title>
+    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-07-28T01:27:39.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
+<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
+ skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
+4. 增加了更多的CSS选择器  多背景 rgba
+5. 在CSS3中唯一引入的伪元素是 ::selection.
+6. 媒体查询，多栏布局
+7. border-image
+</code></pre><ol>
+<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
+<li>拖拽释放(Drag and drop) API</li>
+<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
+<li>音频、视频API(audio,video)</li>
+<li>画布(Canvas) API</li>
+<li>地理(Geolocation) API</li>
+<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
+<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
+<li>表单控件，calendar、date、time、email、url、search</li>
+<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
+<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
+<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
+<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
+<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+<![endif]-->
+如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
+</ol>
+</li>
+</ol>
+<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
+<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
+本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
+或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
+清除或者使用Javascript代码移除
+</code></pre><p>6、    什么是响应式设计？</p>
+<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
+响应式设计是让所有的人能在这些设备上让网站运行正常
+</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
+<pre><code>HTML5文档类型：&lt;!doctype html&gt;
+HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
+</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
+<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
+在 HTML 上进行图形操作。
+</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
+<pre><code>Media API、Text Track API、Application Cache API、
+User Interaction、Data Transfer API、Command API、
+Constraint Validation API、History API
+</code></pre><p>11、    CSS3新增伪类有那些？</p>
+<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+:enabled、:disabled 控制表单控件的禁用状态。
+:checked，单选框或复选框被选中。
+</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
+<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
+* 绘画 canvas 元素
+  用于媒介回放的 video 和 audio 元素
+  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
+  sessionStorage 的数据在浏览器关闭后自动删除
+  语意化更好的内容元素，比如 article、footer、header、nav、section
+  表单控件，calendar、date、time、email、url、search
+  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
+  新的技术webworker, websockt, Geolocation
+移除的元素
+纯表现的元素：basefont，big，center，font, s，strike，tt，u；
+对可用性产生负面影响的元素：frame，frameset，noframes；
+* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+  可以利用这一特性让这些浏览器支持HTML5新标签，
+  浏览器支持新标签后，还需要添加标签默认的样式：
+* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
+&lt;!--[if lt IE 9]&gt;
+&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
+<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
+保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
+从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
+降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
+　
+</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
+<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
+<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
+最常见的应用是利用伪类清除浮动。
+//一种常见利用伪类清除浮动的代码
+.clearfix:after {
+    content:&quot;.&quot;; //这里利用到了content属性
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both; }
+.clearfix {
+    *zoom:1;
+}
+after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
+再利用clear:both清除浮动。
+</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
+<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
+&lt;audio controls&gt;
+  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+   Your browser does&apos;nt support audio embedding feature.
+&lt;/audio&gt;
+</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
+<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
+&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
+  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
+   Your browser does&apos;nt support video embedding feature.
+&lt;/video&gt;
+</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
+<pre><code>Datalist   datetime   output   keygen  date  month  week
+time  number   range   emailurl
+</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
+<pre><code>sessionStorage和localStorage的存储空间更大；
+sessionStorage和localStorage有更多丰富易用的接口；
+sessionStorage和localStorage各自独立的存储空间；
+</code></pre><p>30、    HTML5的离线储存？</p>
+<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
+sessionStorage  数据在浏览器关闭后自动删除。
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
+2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
+3.transf
+    
+    </summary>
+    
+      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
+    
+    
+      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
+    
+      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -5408,375 +6184,6 @@ node端发起http请求
       <category term="vue" scheme="www.wangchengzou.cn/tags/vue/"/>
     
       <category term="axios" scheme="www.wangchengzou.cn/tags/axios/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Zetpojs基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Zeptojs/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Zeptojs/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-23T15:56:58.353Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、zeptojs概述</p>
-<pre><code>目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要引入js文件，调用方法即可
-特点：
-    学习成本低
-    轻量
-注意：zeptojs官网下载的包 默认包含5个模块（zepto\ie\ajax\event\form）,
-        如果要用到其他模块，去zeptoBuilder
-        官网：http://github.e-sites.nl/zeptobuilder/
-        选择需要用到的模块，勾选，下载即可
-</code></pre><p>二、使用Zepto</p>
-<pre><code>1、核心模块
-    集合、数据、类型判断的操作
-    选择器
-    DOM增删改查
-
-2、detect
-    如果不是默认的模块，可以到zeptoBuilder下载对应的模块文件。
-    $.os $.browser
-
-3、event模块
-    on off one trigger
-
-4、Ajax模块
-    $.get
-    $.post
-    $.ajax
-    $.load
-
-5、form模块
-    serialize  将表单中的输入组件的name属性和对应的值 处理成urlEncoded的字符串
-    serializeArray  将表单中的输入组件的name属性和对应的值（放在value中） [{name:&apos;&apos;,value:&apos;&apos;},{...}]
-    submit 表单指定submit触发时 执行的处理函数
-
-6、Touch模块
-    点按事件：tap singleTap doubleTap longTap
-    滑动事件：swipe swipeLeft swipeRight swipeUp swipeDown
-
-7、Effects（Animate）模块
-    show/hide/fadeIn/fadeOut/fadeToggle
-    animate
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、zeptojs概述&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;目标：实现一个10k以内的非常轻量的移动端用的方便DOM操作的js库
-what？ 是一个js库
-where？现代高级浏览器（移动端）
-why？轻量（放弃了对ie等低端浏览器的支持）
-how？类似jQuery的用法 只需要
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="App" scheme="www.wangchengzou.cn/tags/App/"/>
-    
-      <category term="Zetpojs" scheme="www.wangchengzou.cn/tags/Zetpojs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ajax面试题点</title>
-    <link href="www.wangchengzou.cn/2017/07/22/ajax%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/ajax面试题/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T14:23:51.280Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、Ajax 是什么? 如何创建一个Ajax？</p>
-<pre><code>Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏览器并不能原生支持ajax
-，可以使用隐藏帧（iframe）方式变相实现异步效果，后来的浏览器提供了对ajax的原生支持
-使用ajax原生方式发送请求主要通过XMLHttpRequest(标准浏览器)、
-ActiveXObject(IE浏览器)对象实现异步通信效果
-基本步骤：
-var xhr =null;//创建对象
-if(window.XMLHttpRequest){
-    xhr = new XMLHttpRequest();
-}else{
-    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
-}
-     xhr.open(“方式”,”地址”,”标志位”);//初始化请求
-     xhr.setRequestHeader(“”,””);//设置http头信息
-     xhr.onreadystatechange =function(){}//指定回调函数
-     xhr.send();//发送请求
-</code></pre><p>3、如何解决跨域问题?</p>
-<pre><code>理解跨域的概念：协议、域名、端口都相同才同域，否则都是跨域
-出于安全考虑，服务器不允许ajax跨域获取数据，但是可以跨域获取文件内容，
-所以基于这一点，可以动态创建script标签，使用标签的src属性访问js文件的形式获取js脚本
-，并且这个js脚本中的内容是函数调用，该函数调用的参数是服务器返回的数据，
-为了获取这里的参数数据，需要事先在页面中定义回调函数，在回调函数中处理服务器返回的数据
-，这就是解决跨域问题的主流解决方案
-</code></pre><p>4、页面编码和被请求的资源编码如果不一致如何处理？</p>
-<pre><code>对于ajax请求传递的参数，如果是get请求方式，参数如果传递中文，在有些浏览器会乱码，
-不同的浏览器对参数编码的处理方式不同，所以对于get请求的参数需要使用
-encodeURIComponent函数对参数进行编码处理，后台开发语言都有相应的解码api。
-对于post请求不需要进行编码
-</code></pre><p>5、简述ajax 的过程。</p>
-<pre><code>1. 创建XMLHttpRequest对象,也就是创建一个异步调用对象
-2. 创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息
-3. 设置响应HTTP请求状态变化的函数
-4. 发送HTTP请求
-5. 获取异步调用返回的数据
-6. 使用JavaScript和DOM实现局部刷新
-</code></pre><p>6、阐述一下异步加载。</p>
-<pre><code>1. 异步加载的方案： 动态插入 script 标签
-2. 通过 ajax 去获取 js 代码，然后通过 eval 执行
-3. script 标签上添加 defer 或者 async 属性
-4. 创建并插入 iframe，让它异步执行 js
-</code></pre><p>7、请解释一下 JavaScript 的同源策略。</p>
-<pre><code>同源策略是客户端脚本（尤其是Javascript）的重要的安全度量标准。
-它最早出自Netscape Navigator2.0，其目的是防止某个文档或脚本从多个不同源装载。
-所谓同源指的是：协议，域名，端口相同，同源策略是一种安全协议，
-指一段脚本只能读取来自同一来源的窗口和文档的属性。
-</code></pre><p>8、GET和POST的区别，何时使用POST？</p>
-<pre><code>GET：一般用于信息获取，使用URL传递参数，对所发送信息的数量也有限制，
-一般在2000个字符，有的浏览器是8000个字符
-POST：一般用于修改服务器上的资源，对所发送的信息没有限制
-在以下情况中，请使用 POST 请求：
-1. 无法使用缓存文件（更新服务器上的文件或数据库）
-2. 向服务器发送大量数据（POST 没有数据量限制）
-3. 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
-</code></pre><p>9、ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?</p>
-<pre><code>1. 通过异步模式，提升了用户体验
-2. 优化了浏览器和服务器之间的传输，减少不必要的数据往返，减少了带宽占用
-3.  Ajax在客户端运行，承担了一部分本来由服务器承担的工作，减少了大用户量下的服务器负载。
-</code></pre><p>10、 Ajax的最大的特点是什么。</p>
-<pre><code>Ajax可以实现异步通信效果，实现页面局部刷新，带来更好的用户体验；按需获取数据，节约带宽资源；
-</code></pre><p>11、ajax的缺点</p>
-<pre><code>1、ajax不支持浏览器back按钮。
-2、安全问题 AJAX暴露了与服务器交互的细节。
-3、对搜索引擎的支持比较弱。
-4、破坏了程序的异常机制。
-</code></pre><p>12、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，
-提交的数据内容存在于http请求体中，数据不会暴漏在url地址中。
-</code></pre><p>13、解释jsonp的原理，以及为什么不是真正的ajax</p>
-<p>　　  Jsonp并不是一种数据格式，而json是一种数据格式，<br>    jsonp是用来解决跨域获取数据的一种解决方案，具体是通过动态创建script标签，<br>    然后通过标签的src属性获取js文件中的js脚本，该脚本的内容是一个函数调用，<br>    参数就是服务器返回的数据，为了处理这些返回的数据，需要事先在页面定义好回调函数<br>    ，本质上使用的并不是ajax技术</p>
-<p>14、什么是Ajax和JSON，它们的优缺点。</p>
-<pre><code>Ajax是全称是asynchronous JavaScript andXML，即异步JavaScript和xml，
-用于在Web页面中实现异步数据交互，实现页面局部刷新。
-优点：可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量，
-避免用户不断刷新或者跳转页面，提高用户体验
-缺点：对搜索引擎不友好；要实现ajax下的前后退功能成本较大；
-可能造成请求数的增加跨域问题限制；
-JSON是一种轻量级的数据交换格式，ECMA的一个子集
-优点：轻量级、易于人的阅读和编写，便于机器（JavaScript）
-解析，支持复合数据类型（数组、对象、字符串、数字）
-</code></pre><p>15、http常见的状态码有那些？分别代表是什么意思？<br>    200 - 请求成功<br>    301 - 资源（网页等）被永久转移到其它URL<br>    404 - 请求的资源（网页等）不存在<br>    500 - 内部服务器错误</p>
-<p>16、一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？</p>
-<pre><code>分为4个步骤：
-    1. 当发送一个 URL 请求时，不管这个 URL 是 Web 页面的 URL 还是 Web 页面上每个资源的 URL
-    ，浏览器都会开启一个线程来处理这个请求  ，同时在远程 DNS 服务器上启动一个 DNS 查询。
-    这能使浏览器获得请求对应的 IP 地址。
-    2. 浏览器与远程 Web 服务器通过 TCP 三次握手协商来建立一个 TCP/IP 连接。
-    该握手包括一个同步报文，一个同步-应答报文和一个应答报    文，这三个报文在
-    浏览器和服务器之间传递。该握手首先由客户端尝试建立起通信，而后服务器应答并接受客户端的请求
-    ，最后由客户端发出该请求已经    被接受的报文。
-    3. 一旦 TCP/IP 连接建立，浏览器会通过该连接向远程服务器发送 HTTP 的 GET 请求。
-    远程服务器找到资源并使用 HTTP响应返回该资源，值为 200 的 HTTP 响应状态表示一个正确的响应。
-    4. 此时，Web 服务器提供资源服务，客户端开始下载资源。
-</code></pre><p>17、ajax请求的时候get 和post方式的区别</p>
-<pre><code>get一般用来进行查询操作，url地址有长度限制，请求的参数都暴露在url地址当中，
-如果传递中文参数，需要自己进行编码操作，安全性较低。
-post请求方式主要用来提交数据，没有数据长度的限制，提交的数据内容存在于http请求体中
-，数据不会暴漏在url地址中。
-</code></pre><p>18、ajax请求时，如何解释json数据</p>
-<pre><code>使用eval()或者JSON.parse() 鉴于安全性考虑，推荐使用JSON.parse()更靠谱，
-对数据的安全性更好。
-</code></pre><p>19、.javascript的本地对象，内置对象和宿主对象</p>
-<pre><code>本地对象为独立于宿主环境的ECMAScript提供的对象，包括ArrayObjectRegExp等可以new实例化的对象
-内置对象为Gload，Math 等不可以实例化的(他们也是本地对象，内置对象是本地对象的一个子集)
-宿主对象为所有的非本地对象，所有的BOM和DOM对象都是宿主对象，如浏览器自带的document,window 等对象
-</code></pre><p>20、为什么利用多个域名来存储网站资源会更有效？</p>
-<pre><code>确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站，
-并且不同的资源放到不同的服务器上有利于减轻单台服务器的压力。
-</code></pre><p>21、请说出三种减低页面加载时间的方法</p>
-<pre><code>1、压缩css、js文件
-2、合并js、css文件，减少http请求
-3、外部js、css文件放在最底下
-4、减少dom操作，尽可能用变量替代不必要的dom操作
-</code></pre><p>22、HTTP状态码都有那些。</p>
-<pre><code>200 OK      //客户端请求成功
-400 Bad Request  //客户端请求有语法错误，不能被服务器所理解
-403 Forbidden  //服务器收到请求，但是拒绝提供服务
-404 Not Found  //请求资源不存在，输入了错误的URL
-500 Internal Server Error //服务器发生不可预期的错误
-503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、Ajax 是什么? 如何创建一个Ajax？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Ajax并不算是一种新的技术，全称是asychronous javascript and xml，可以说是已有技术的组合，
-主要用来实现客户端与服务器端的异步通信效果，实现页面的局部刷新，早期的浏
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
-    
-      <category term="js" scheme="www.wangchengzou.cn/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>html和css3</title>
-    <link href="www.wangchengzou.cn/2017/07/22/css3+HTML5%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>www.wangchengzou.cn/2017/07/22/css3+HTML5面试题/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-28T01:27:39.844Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、    CSS3有哪些新特性？</p>
-<pre><code>1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px)
- skew(-9deg,0deg);// 旋转,缩放,定位,倾斜
-4. 增加了更多的CSS选择器  多背景 rgba
-5. 在CSS3中唯一引入的伪元素是 ::selection.
-6. 媒体查询，多栏布局
-7. border-image
-</code></pre><ol>
-<li>html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>如何区分 HTML 和 HTML5？<br>新特性：<ol>
-<li>拖拽释放(Drag and drop) API</li>
-<li>语义化更好的内容标签（header,nav,footer,aside,article,section）</li>
-<li>音频、视频API(audio,video)</li>
-<li>画布(Canvas) API</li>
-<li>地理(Geolocation) API</li>
-<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
-<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
-<li>表单控件，calendar、date、time、email、url、search</li>
-<li>新的技术webworker, websocket, Geolocation<br>移除的元素：</li>
-<li>纯表现的元素：basefont，big，center，font, s，strike，tt，u；</li>
-<li>对可用性产生负面影响的元素：frame，frameset，noframes；<br>支持HTML5新标签：</li>
-<li>IE8/IE7/IE6支持通过 document.createElement 方法产生的标签，<br>可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，<br>还需要添加标签默认的样式（当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架）：<!--[if lt IE 9]>
-<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
-<![endif]-->
-如何区分：<br>DOCTYPE声明新增的结构元素、功能元素</li>
-</ol>
-</li>
-</ol>
-<p>3、    本地存储（Local Storage ）和cookies（储存在用户本地终端上的数据）之间的区别是什么？</p>
-<pre><code>Cookies:服务器和客户端都可以访问；大小只有4KB左右；有有效期，过期后将会删除；
-本地存储：只有本地浏览器端可访问数据，服务器不能访问本地存储直到故意通过POST
-或者GET的通道发送到服务器；每个域5MB；没有过期数据，它将保留知道用户从浏览器
-清除或者使用Javascript代码移除
-</code></pre><p>6、    什么是响应式设计？</p>
-<pre><code>它是关于网页制作的过程中让不同的设备有不同的尺寸和不同的功能。
-响应式设计是让所有的人能在这些设备上让网站运行正常
-</code></pre><p>7、    新的 HTML5 文档类型和字符集是？</p>
-<pre><code>HTML5文档类型：&lt;!doctype html&gt;
-HTML5使用的编码&lt;meta charset=”UTF-8”&gt;
-</code></pre><p>8、    HTML5 Canvas 元素有什么用？</p>
-<pre><code>Canvas 元素用于在网页上绘制图形，该元素标签强大之处在于可以直接
-在 HTML 上进行图形操作。
-</code></pre><p>9、    HTML5 存储类型有什么区别？</p>
-<pre><code>Media API、Text Track API、Application Cache API、
-User Interaction、Data Transfer API、Command API、
-Constraint Validation API、History API
-</code></pre><p>11、    CSS3新增伪类有那些？</p>
-<pre><code>p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
-p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
-p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
-:enabled、:disabled 控制表单控件的禁用状态。
-:checked，单选框或复选框被选中。
-</code></pre><p>14、    html5\CSS3有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？<br>    如何区分 HTML 和 HTML5？</p>
-<pre><code>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，地理定位等功能的增加。
-* 绘画 canvas 元素
-  用于媒介回放的 video 和 audio 元素
-  本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；
-  sessionStorage 的数据在浏览器关闭后自动删除
-  语意化更好的内容元素，比如 article、footer、header、nav、section
-  表单控件，calendar、date、time、email、url、search
-  CSS3实现圆角，阴影，对文字加特效，增加了更多的CSS选择器  多背景 rgba
-  新的技术webworker, websockt, Geolocation
-移除的元素
-纯表现的元素：basefont，big，center，font, s，strike，tt，u；
-对可用性产生负面影响的元素：frame，frameset，noframes；
-* 是IE8/IE7/IE6支持通过document.createElement方法产生的标签，
-  可以利用这一特性让这些浏览器支持HTML5新标签，
-  浏览器支持新标签后，还需要添加标签默认的样式：
-* 当然最好的方式是直接使用成熟的框架、使用最多的是html5shim框架
-&lt;!--[if lt IE 9]&gt;
-&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;
-&lt;![endif]--&gt;
-</code></pre><p>16、    你能描述一下渐进增强和优雅降级之间的不同吗?</p>
-<pre><code>渐进增强 progressive enhancement：针对低版本浏览器进行构建页面，
-保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
-优雅降级 graceful degradation：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
-　　区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是
-从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。
-降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带。　
-　
-</code></pre><p>19、    请描述一下cookies，sessionStorage和localStorage的区别？<br>　　<br>    　　  sessionStorage用于本地存储一个会话（session）中的数据，<br>    这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。<br>    因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。<br>    而localStorage用于持久化的本地存储，除非主动删除数据，<br>    否则数据是永远不会过期的。<br>    web storage和cookie的区别<br>    Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。<br>    Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，<br>    这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。<br>    除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，<br>    不像cookie需要前端开发者自己封装setCookie，getCookie。<br>    但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，<br>    作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生。</p>
-<p>20、    知道css有个content属性吗？有什么作用？有什么应用？</p>
-<pre><code>css的content属性专门应用在 before/after 伪元素上，用来插入生成内容。
-最常见的应用是利用伪类清除浮动。
-//一种常见利用伪类清除浮动的代码
-.clearfix:after {
-    content:&quot;.&quot;; //这里利用到了content属性
-    display:block;
-    height:0;
-    visibility:hidden;
-    clear:both; }
-.clearfix {
-    *zoom:1;
-}
-after伪元素通过 content 在元素的后面生成了内容为一个点的块级素，
-再利用clear:both清除浮动。
-</code></pre><p>　　<br>21、    如何在 HTML5 页面中嵌入音频?</p>
-<pre><code>HTML 5 包含嵌入音频文件的标准方式，支持的格式包括 MP3、Wav 和 Ogg：
-&lt;audio controls&gt;
-  &lt;source src=&quot;jamshed.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-   Your browser does&apos;nt support audio embedding feature.
-&lt;/audio&gt;
-</code></pre><p>22、    如何在 HTML5 页面中嵌入视频？</p>
-<pre><code>和音频一样，HTML5 定义了嵌入视频的标准方法，支持的格式包括：MP4、WebM 和 Ogg：
-&lt;video width=&quot;450&quot; height=&quot;340&quot; controls&gt;
-  &lt;source src=&quot;jamshed.mp4&quot; type=&quot;video/mp4&quot;&gt;
-   Your browser does&apos;nt support video embedding feature.
-&lt;/video&gt;
-</code></pre><p>23、    HTML5 引入什么新的表单属性？</p>
-<pre><code>Datalist   datetime   output   keygen  date  month  week
-time  number   range   emailurl
-</code></pre><p>26、    cookie在浏览器和服务器间来回传递。 sessionStorage和localStorage区别</p>
-<pre><code>sessionStorage和localStorage的存储空间更大；
-sessionStorage和localStorage有更多丰富易用的接口；
-sessionStorage和localStorage各自独立的存储空间；
-</code></pre><p>30、    HTML5的离线储存？</p>
-<pre><code>localStorage    长期存储数据，浏览器关闭后数据不丢失；
-sessionStorage  数据在浏览器关闭后自动删除。
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、    CSS3有哪些新特性？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1. CSS3实现圆角（border-radius），阴影（box-shadow），
-2. 对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
-3.transf
-    
-    </summary>
-    
-      <category term="面试题目" scheme="www.wangchengzou.cn/categories/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE/"/>
-    
-    
-      <category term="html" scheme="www.wangchengzou.cn/tags/html/"/>
-    
-      <category term="H5" scheme="www.wangchengzou.cn/tags/H5/"/>
     
   </entry>
   
@@ -7115,525 +7522,6 @@ inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌�
   </entry>
   
   <entry>
-    <title>Angular基础知识</title>
-    <link href="www.wangchengzou.cn/2017/07/22/Angular/"/>
-    <id>www.wangchengzou.cn/2017/07/22/Angular/</id>
-    <published>2017-07-22T15:48:26.000Z</published>
-    <updated>2017-07-27T12:53:02.708Z</updated>
-    
-    <content type="html"><![CDATA[<p>1、设计原则和设计模式</p>
-<pre><code>拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple and stupid
-语义化的标记、命名规则、减少嵌套
-
-3、DRY（善于使用封装和重用）
-Don&apos;t Repeat Yourself
-
-4、高内聚 低耦合（High cohesion,low coupling）
-内聚：一个组件（模块）内部的不同部分的关系
-耦合：不同组件（模块）之间的关系
-
-5、SRP 单一责任原则
-Single Responsibility Principle
-实现功能的时候，尽可能的做到每一个模块实现一个单一的功能
-
-6、OCP原则(对于扩展开放、对于修改关闭)
-open close principle
-
-7、LCP（迪米特法则）
-Least Knowledge Principle 最少知识法则：封装的功能单位要尽可能的小，尽量做到只与自己相关
-
-常用的设计模式分为3大类：①创建 ②结构 ③行为
-
-常用的设计模式：工厂方法模式、单例模式、组合模式、迭代子模式、适配器。。
-先去实现功能，在迭代的过程中优化代码。
-</code></pre><p>2、AngularJS</p>
-<pre><code>认识新东西最好的方式：
-①官网
-②维基百科 wikipedia.org
-what?--ng(AngularJS)是一个开源的js框架
-where？--用来实现SPA应用程序（单一页面应用程序single page application）
-Gmail邮箱是由Google退出的前端历史中第一个SPA应用
-why？
-四大特征：
-①采用了MVC的设计模式
-Model 模型数据
-View  视图
-Controller 控制器
-</code></pre><p>3、MVC的工作原理：</p>
-<pre><code>View视图 接收用户的输入，通过控制器（Controller）当中的方法，完成对于Model的增删改查的操作。
-1.数据绑定：将数据和视图绑定起来，一旦数据被修改了，视图就会更新
-2.双向数据绑定
-    数据-》视图
-    视图用户的输入 -》 数据
-3.依赖注入
-4.模块化设计
-</code></pre><p>4、使用ng</p>
-<pre><code>1、基本语法
-    &lt;any&gt;{{表达式}} &lt;/any&gt;
-    直接按照上述方法写，结果是不对的，解决方案：在html标签写上了ng-app
-
-2、常用指令
-    ngApp
-        ①启动ng
-        ②指定作用范围，将指令写在根标签
-    快捷键：在webStorm中alt+f2,快速选中要去执行在哪个浏览器。
-    ngInit 指令 来完成数据的初始化
-    &lt;any ng-init=&quot;num=2&quot;&gt;&lt;/any&gt;
-        ①不需要在通过ngInit指令定义数据时候，加上var关键字
-        ②ngInit所初始化的变量是可以在整个html去使用变量
-</code></pre><p>5、常用指令</p>
-<pre><code>ng中指令：由angularJS提供了，可以用在html中作为扩展属性、扩展标签。。
-
-作为扩展属性来使用：
-    &lt;div ng-**&gt;&lt;/div&gt;
-    ngInit  --&gt; ng-init
-    ngApp --&gt; ng-app
-作为扩展标签来使用：
-    &lt;ngView/&gt;
-①ngApp
-    启动ng
-    指定作用范围，将指令写在根标签
-    注意事项：调用一次ngApp
-②ngInit
-    通过ngInit调用一次，初始化多个变量？？
-    &lt;any ng-init=&quot;a=1;b=2&quot;/&gt;
-③ngRepeat
-    重复实例化模板
-    两种语法：
-    &lt;any ng-repeat=&quot;临时变量的名称 in 集合的名称&quot;&gt;&lt;/any&gt;
-    &lt;any ng-repeat=&quot;（key,value） in 集合的名称&quot;&gt;&lt;/any&gt;
-
-    注意事项：在使用ngRpeat的时候要遍历的集合默认是不允许有重复的数据，
-        可以通过 track by $index来指定一个不会重复的值就可以解决报错的问题。
-
-④ngIf、ngShow、ngHide、ngSrc、ngDisabled、ngChecked
-    ngIf-》选择是否要显示出来（挂载到DOM，从DOM中删除）
-    ngShow/ngHide -&gt;选择是否要显示出来(显示或者隐藏)
-    &lt;any ng-if=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-show=&quot;表达式&quot;&gt;&lt;/any&gt;
-    &lt;any ng-hide=&quot;表达式&quot;&gt;&lt;/any&gt;
-    注意事项：在使用ngSrc去读取变量中值的时候，要记得加上双花括号
-    &lt;img ng-src=&quot;img/{{imgUrl}}&quot; /&gt; 如果你写的不是ngSrc而是src，显示是ok的，
-    但是控制台是会报错的，通过ngSrc去指定就搞定了
-    &lt;any ng-disabled=&apos;表达式&apos;&gt;&lt;/any&gt;
-    &lt;input type=&apos;checkbox&apos; ng-checked=&quot;表达式&quot;/&gt;
-</code></pre><p>6、MVC</p>
-<pre><code>在ng中：
-    Model 模型数据：在ng中定义的一些变量
-    View  视图：通过ng指令和表达式增强版的html
-    Controller 控制器：负责数据的增删改查的
-MVC的好处:在实现大型应用程序，可以通过将视图和数据隔离开，有效的降低代码的复杂度、耦合度
-在ng中应该怎么做才能实现一个SPA？
-准备工作：
-①创建一个模块
-    因为在ng中是以模块为基本单位的
-    var app = angular.module(&apos;模块的名称&apos;，[&apos;依赖模块1&apos;,&apos;依赖模块2&apos;])
-②使用模块
-    采用ngApp指令
-    &lt;html ng-app=&quot;模块的名称&quot;&gt;&lt;/html&gt;
-③创建一个控制器
-    app.controller(&apos;控制器的名称&apos;,function(){})
-    第二个参数时控制器被调用时，要执行的方法
-④调用控制器
-    采用ngController指令来调用控制器
-    &lt;div ng-controller=&apos;控制器的名称&apos;&gt;&lt;/div&gt;
-    实现数据的创建和显示等：
-⑤操作数据、显示出来
-
-$scope是一个对象，称之为作用域对象，是一个非常重要的概念，
-    建立起控制器中的数据和控制器的所指定的视图的桥梁
-
-绑定事件的时候，在ng的做法： &lt;any ng-eventName=&quot;handle()&quot;&gt;
-&lt;button ng-click=&quot;handleClick()&quot;&gt;&lt;/button&gt;
-
-注意事项：
-由于ngInit和$scope都可以完成数据的初始化，建议使用$scope,因为ngInit会增加代码的耦合度和复杂度。
-</code></pre><p>7、ng是由很多指令的：</p>
-<pre><code>ngApp ngRepeat ngIf ngShow ngHide ngChecked ngDisabled ngSrc
-ngBind ngClass ngStyle
-
-在webStorm中创建一个文件模板的基本步骤：
-①拷贝要使用的代码
-②点击左上角的file，选择new
-③选择Edit File Templates
-④点击弹窗中右上角的+号
-⑤修改name和extension为创建的文件模板的名称以及格式，点击ok保存即可
-</code></pre><p>8、自定义指令</p>
-<pre><code>1、如何自定义？？
-    angular.module()
-    app.controller()
-    //创建指令
-    app.directive(&apos;指令的名称&apos;，function(){
-        return {}
-    })
-    指令的命令规则：指令的名称由两部分构成，前缀：一般使我们模块或者项目的名字缩写；
-    后缀：用来描述指令的功能
-    属性：
-    template：指定要显示的模板内容
-    restrict: &quot;EAC&quot; //E(Element)A(Attribute)C(Class)M(Comment)
-    replace: true,替换并显示出来
-    scope
-
-2、如何使用自定义的指令？？
-    注意事项：指令在命名时是要遵循驼峰式命名规则；在使用时要遵循烤串式用方
-    &apos;tsHello&apos; --&gt; ts-hello
-    根据配置指令时的restrict属性所对应的值，在合适的场景下使用指令。
-
-3、自定义指令传递参数
-    怎么传？
-        在调用指令的时候可以传 将参数作为属性对应的值
-    怎么接受？
-        scope
-</code></pre><p>9、双向数据绑定</p>
-<pre><code>方向1：从&apos;数据&apos;绑定到&apos;视图&apos;
-绑定方式：
-①常用指令： ngRepeat/ngIf/ngShow...
-②双花括号：{{}}
-
-方向2：从‘视图中用户的输入’绑定到‘数据’
-绑定方式：指令：ngModel
-
-如果要监听数据的变化：
-$scope.$watch(&apos;txt&apos;,function(){
-
-})
-
-在实现下拉框的过程中，如果数据是动态的，可以通过ngOptions将数据绑定到视图中。
-ngOptions语法：
- &lt;select
-    ng-model=&quot;city&quot;
-    ng-options=&quot;city.cityName for city in cities&quot;&gt;
- &lt;/select&gt;
-</code></pre><p>10、过滤器</p>
-<pre><code>a.内置的过滤器
-    ng中的过滤器为了实现对于表达式结果的筛选、过滤、格式化，达到更好的表现效果。
-    过滤器的语法：支持多重过滤和传参
-    {{expression | 过滤器名称 : '参数' | 过滤器名称2：‘参数’ }
-            | => 管道
-            常用的过滤器：
-                currency 货币样式的过滤器
-                date 日期
-                uppercase/lowercase 大小写的处理
-                orderBy 对指定的数组进行升序或者降序排列
-                number 格式化数字为文本（对有小数点的数据的处理）
-                limitTo 限定数组或者字符串要显示的个数
-        b.自定义过滤器
-            自定义过滤器方式：
-            app.filter('过滤器名称',function(){
-                return function(input，arg){
-                        //input是传递给过滤器的数据
-                        //arg 是过滤器本身的参数
-                    return '过滤后的结果'
-                }
-            })
-            使用自定义的过滤器:
-            和内置的过滤器用法是一样的
-
-11、ng模块内置的方法
-
-        序列化、反序列化
-        toJson:将对象或者数组 序列化 为json格式的字符串
-        fromJson：相反的过程
-
-12、服务
-
-    服务的本质是一个单例对象，提供数据和对象。
-    两大类：
-    ①内置服务
-        $location、$http、$window、$scope...
-        使用内置服务中提供的方法：
-            第一步 将需要用到的服务注入进来 function($scope,$location)
-            第二步 调用服务中提供的方法 数据。。
-    ②自定义的服务
-        面试题：$scope与$rootScope之间的关系
-        1、不同的控制器之间的数据是彼此隔离的
-        2、不同的控制器之间如何共享数据？？
-        $scope的id是从2开始依次往上递增，
-        id为1的是谁？ $rootScope是根作用域对象，其余的$scope都是子对象
-            方式1：借助于$rootScope
-                把要共享的数据存在$rootScope,所有的子对象就可以读取该数据
-            方式2：借助于控制器之间的嵌套
-                在调用控制器的元素 之间的嵌套关系
-                @@div ng-controller='myCtrl02'>
-                    @@<div ng-controller="myCtrl03"></div>
-                @@
-            方式3：触发事件传递参数
-                绑定事件：
-                $scope.$on('事件名称',function(event,data){
-
-                })
-        触发事件：
-        //从子作用对象 向 父作用域对象 传递事件
-        $scope.$emit()
-        //从父作用对象 向 子作用域对象 传递事件
-        $scope.$broadcaset()
-
-13、服务
-
-        双向数据绑定的工作原理：
-        绑定时，ng会自动添加一个监听watcher,当数据发生变化时，会执行更新DOM操作的函数。
-        怎么知道数据发生了变化？
-        在ng中有一个循环$digest,会不断的对比数据，
-        需要手工的触发循环做对比，可以通过：
-        $scope.$digest();
-        $scope.$apply();//触发$rootScope.$digest();
-
-14、ng内置的服务：
-
-        $location $scope $rootScope $window $interval $timeout
-        1、在ng中定时器相关的处理--》$interval $timeout
-        2、$http
-        $http({method:'',url:''}).success().error()
-        $http.get()
-        $http.post()
-        注意：如果需要发起post请求，需要设置:
-         app.run(function ($http) {
-                $http.defaults.headers.post =
-        {'Content-Type':'application/x-www-form-urlencoded'};})
-
-        在发起post请求时，如果需要对参数进行序列化:
-        借助于$httpParamSerializer服务，首先注入进来，$httpParamSerializer（obj）。
-
-15、自定义服务
-
-        服务的目的是为了封装业务逻辑，提高代码的复用率
-        自定义指令 app.directive
-        自定义过滤器 app.filter
-        自定义服务的方法：
-        app.factory ('服务名称',function(){//普通方法 return {}})
-app.service(&apos;服务名称&apos;,function(){//构造函数})
-app.constant(&apos;服务名称&apos;，{})//创建常量服务
-app.value(&apos;服务名称&apos;，{})//创建变量服务
-
-注意事项：
-自定义的服务 需要用到其它服务中方法
-图：两个按钮：开始 结束。
-</code></pre><p>16、依赖注入</p>
-<pre><code>将代码部署到线上，都会对代码做压缩。
-使用YUI-Compressor.jar （有java的运行环境）
-①借助于CLI（command line）
-    java -jar yui**.jar  c:\demo10.js &gt; c:\demo10.min.js
-
-②IDE（webStorm）
-    file-&gt;settings-&gt;tools-&gt;fileWathchers-&gt;+-&gt;选中YUI-Compressor JS，
-    在弹窗中的program选中对应的jar，保存即可
-压缩效果：
-会删除所有的注释、删除没有语义的空白字符、尽可能的简化变量的名称（混淆），
-但是数字、字符串、关键字是不会改变的。
-
-解决压缩后的问题方式：
-依赖注入：将依赖的服务或者其他，通过参数形式注入进来，背后ng框架会帮助对服务等做实例化的操作，
-让我们可以去直接使用
-
-注入的方式：
-①推断式（猜测）
-    这种方式在进行压缩会有问题
-    app.controller(&apos;myCtrl&apos;,function($scope){});
-
-②标记式
-    由于文件压缩时，关键数据 字符串 关键字等不会被处理的；将所需要用到的服务，
-    存在一个字符串（服务名称）数组。
-    注意事项：在数组中服务名称的顺序和创建对应的处理函数参数的顺序是要保持一致的
-    实现方式：
-    1、将处理函数单独的存在一个变量中
-    2、给变量设置$inject，值是一个由字符串构成的数组
-    3、使用服务即可
-③行内式（内联式）
-    在构建一个ng对象时，允许将一个字符型数组 作为对象的参数，
-    在数组中可以：服务名称、函数（必须是在数组的最后一个元素）
-    app.controller(&apos;myCtrl&apos;,[&apos;$scope&apos;,function($scope){}])
-    依赖注入3种方式，官方推荐采用行内式依赖注入。
-    依赖注入的背后：$injector 注入器：快速的定位到应用需要用到的各种该服务，
-    整个ng应用的注入对象都是由$injector定位和创建。
-    $injector.has(&apos;服务名称&apos;) ==》判断指定的服务是否存在
-    $injector.get(&apos;服务名称&apos;) ==》 得到指定的服务对应的实例
-</code></pre><p>17、模块化设计</p>
-<pre><code>ng有4大特征：
-①MVC
-②双向数据绑定
-③依赖注入
-④模块化设计
-
-高内聚低耦合，在ng中有两种：①内置的模块 ②自定义的模块
-
-如何自定义模块？
-angular.module();
-
-使用模块？
-ng-app=&quot;&quot;
-在创建模块时，在第二个参数所对应的数组中写上服务的名称
-
-一个ng的模块都可以包含哪些？
-控制器：对应部分业务逻辑的封装
-服务：经常用到的重复代码封装
-指令：扩展html标签、属性
-过滤器：针对数据做一些筛选 过滤 格式化的处理
-</code></pre><p>18、ngRoute（路由模块）</p>
-<pre><code>ng是主要实现SPA（单一页面应用程序）
-SPA的工作原理：
-    1、页面url
-    http://127.0.0.1/index.html#/路由地址
-    例如：http://127.0.0.1/index.html#/start
-    2、解析index.html 是一个完整的html页面，再解析路由地址(start)
-    3、在路由词典中寻找路由地址(start)所对应的路由信息
-    4、在路由信息所对应的对象中找到真实的模板页面地址
-    5、（发起异步ajax）加载模板页面到指定的容器中，实现局部刷新
-
-ngRoute（路由模块）可以定义路由词典，自动解析路由地址，查找路由词典，
-自动发起ajax请求加载页面显示。
-    0、在创建自定义模块，在依赖列表中指定ngRoute
-    1、指定盛放代码片段的容器
-    2、配置路由词典
-
-使用ngRoute的基本步骤：
-①创建一个完整的html页面
-    记得引入angular.js angular-route.js
-
-②创建模块，并指定依赖于ngRoute模块
-    angular.module(&apos;myApp&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;])
-
-③使用指令创建一个盛放代码片段的容器
-    调用ngView指令：创建一个容器，代码片段会加载到这里
-
-④创建模板页面
-
-⑤配置路由词典
-    $routeProvider
-    when是用来添加一条路由信息的(路由地址的字符串是以/开始)
-    $routeProvider.when(&apos;/myStart&apos;,{controller:&apos;&apos;,template/templateUrl:&apos;&apos;})
-    otherwise是用来指定异常的处理
-    $routePriovder.otherwise({redirectTo:&apos;路由地址&apos;})
-
-SPA在ng实现过程，代码片段的跳转：
-①直接修改地址栏中的路由地址
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myLogin
-    http://localhost:63342/day4/demo03_SPA%E7%BB%83%E4%B9%A0.html#/myRegister
-②通过js的方式
-    $location.path(&apos;路由地址&apos;)
-③超链接的方式
-    a href=&quot;#/myRegister&quot;
-    login-&gt;start 10
-
-SPA应用程序通过ngRoute来传递参数：
-①搞明白 发送 接收
-②配置接收方的路由
-    $routeProvider.when(&apos;/myStart/:num&apos;,{
-    templateUrl:&apos;tpl/start.html&apos;
-    })
-③拿到传递过来的参数
-    $routeParams.num
-④发送
-    a href=&apos;#/myStart/10&apos;
-    $location.path(&apos;/myStart/10&apos;)
-
-注意事项：配置接收方路由时的冒号后的变量名称要和通过$routeParams解析参数的属性是要保持一致
-    myStart/:id $routeParams.id
-
-练习：实现一个SPA
-完整的html manager.html
-代码片段： checkProduct.html pay.html send.html
-
-要求：能够实现不同页面的跳转以及参数的传递
-checkProduct.html 能够a跳转到pay，传递price，在pay接收传递过来的参数显示在pay页面
-pay 点击button跳转到send
-send button以及a跳转到check.html
-
-优化思路：如果多个控制器需要用到同一个方法或者数据，
-    ①将方法和数据封装成一个服务
-    ②$rootScope
-    ③控制器之间的嵌套
-    ④借助于事件
-
-由于不同的代码片段都显示在了body的子元素中：body是所有代码片段的父元素，可以在body指定控制器，
-控制器中的方法和数据，代码片段就可以用了。
-①发送 接收
-    checkProduct --&gt; pay
-
-②配置接收方路由
-    .when(&apos;/myPay/:price&apos;,{})
-
-③$routeParams
-    $routeParams.price
-
-④发送参数
-    href=&apos;#/myPay/20&apos;
-    $location.path(&apos;/myPay/20&apos;)
-
-ngInclude 引入多个地方同时需要用到的，比如页头、页尾。。。
-
-要求：给综合练习的3个代码片段加上头信息(显示一个p标签)
-
-注意事项：在使用ngInclude进行赋值的时候，对应的路径字符串要在双引号内 加上一对单引号
-</code></pre><p>19、ngAnimate（动画模块）</p>
-<pre><code>在angularJS添加动画效果，需要用到ngAnimate模块
-基本步骤：
-①引入对应的js文件
-    angular-animate.js
-②指定自定义模块依赖于ngAnimate
-    angular.module(&apos;myModule&apos;,[&apos;ng&apos;,&apos;ngRoute&apos;,&apos;ngAnimate&apos;])
-③css给ng应用程序添加动画效果：
-    ngEnter 准备进入
-    ngEnterActive 进入完成
-    ngLeave 准备离开
-    ngLeaveActive 离开完成
-④引入对应的css文件
-
-如果用到其它的模块整体思路：
-    ①在ng每一个模块都有自己的js文件，用到哪个模块，把指定模块的js文件引入进来
-    ②在创建模块，指定依赖列表
-    ③根据模块中所提供的指令、服务。。结合业务需要进行
-</code></pre><p>20、表单验证</p>
-<pre><code>在ng中，针对表单和空间提供了属性，用于验证控件交互的状态
-布尔类型：
-$valid
-$invalid
-$dirty
-$pristine
-对象：
-$error
-
-注意事项：
-①给表单以及表单组件 加上name属性
-②给需要用到的表单组件 ，加上ngModel
-③属性的用法
-myForm.t_age.$dirty/$pristine/$valid/$invalid/$error
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;1、设计原则和设计模式&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;拙劣的设计：
-①僵化
-②脆弱
-③不必要的复杂
-④晦涩。。
-
-1、YAGNI（不要写不需要的代码）
-you aren&amp;apos;t gonna need it
-
-2、KISS （越简单越好）
-keep it simple 
-    
-    </summary>
-    
-      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Angular" scheme="www.wangchengzou.cn/tags/Angular/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ajax_php基础知识</title>
     <link href="www.wangchengzou.cn/2017/07/22/Ajax_php/"/>
     <id>www.wangchengzou.cn/2017/07/22/Ajax_php/</id>
@@ -8507,6 +8395,37 @@ xml语法要求:
       <category term="ajax" scheme="www.wangchengzou.cn/tags/ajax/"/>
     
       <category term="php" scheme="www.wangchengzou.cn/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo编写方法</title>
+    <link href="www.wangchengzou.cn/2017/07/22/hexo%E7%BC%96%E5%86%99%E6%96%B9%E6%B3%95/"/>
+    <id>www.wangchengzou.cn/2017/07/22/hexo编写方法/</id>
+    <published>2017-07-22T15:48:26.000Z</published>
+    <updated>2017-08-02T03:17:53.699Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="www.wangchengzou.cn/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="hexo" scheme="www.wangchengzou.cn/tags/hexo/"/>
     
   </entry>
   

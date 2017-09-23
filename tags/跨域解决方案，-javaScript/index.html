@@ -7,7 +7,7 @@
 
     
 
-    <title>react基础知识 | 千帆渡</title>
+    <title>跨域解决方案， javaScript | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="react基础知识"/>
+    
     <meta property="og:site_name" content="~~博客园~~"/>
 
     
@@ -217,179 +217,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-    
-    
-    <a class="breadcrumb" href="/categories/学习笔记/">学习笔记</a>
-
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
+        
+            <a class="breadcrumb" href="/tags/跨域解决方案，-javaScript/">跨域解决方案， javaScript</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>react基础知识</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2017-07-22T15:48:26.000Z"><a href="/2017/07/22/react/">2017-07-22</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/tags/App/" class="chip pink lighten-1">App</a>
-        
-            <a href="/tags/react/" class="chip pink lighten-1">react</a>
+            <a href="/2017/09/23/跨哉/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-09-23T07:48:26.000Z">2017-09-23</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                前端常见跨域解决方案
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    
-</div>
-
-
-            <div class="entry pink-link-context">
-                <p>一、React介绍</p>
-<pre><code>官网：
-reactjs.com(https://facebook.github.io/react/)
-
-what?
-React是一个开源的js库
-
-where？
-提供视图（DOM操作非常频繁）
-
-why？
-①组件化的思维模式
-②声明式设计
-③高效、灵活
-④JSX 基于js语法的扩展
-
-历史：
-React 11年 被fb工程师部署在newsfeed
-12年 部署在Instagram
-13年5 fb宣布将React开源
-15年 fb宣布ReactNative 定位于移动端原生开发提供视图层
-16年 发布现版本 V15
-</code></pre><p>二、搭建React开发环境</p>
-<pre><code>1、CLI
-    https://github.com/facebookincubator/create-react-app
-2、引入对应的js文件
-    react reactDOM browser
-</code></pre><p>三、使用React</p>
-<pre><code>1、render方法介绍
-    ReactDOM.render(要渲染的元素， 容器)
-    ReactDOM.render(
-    &lt;h1&gt; Hello React &lt;/h1&gt;,
-    document.getElementById(&apos;example&apos;)
-    )
-
-2、React开发的核心思想和核心概念
-    核心思想：组件化
-    核心概念：
-    组件
-    JSX：并不是React强制要求的，只是建议
-    VirtualDOM
-    单向数据流
-
-3、jsx语法
-    遇到花括号就会使用js来解析表达式，遇到&lt;就会使用html来解析
-
-    注意事项：
-    react规定渲染的元素有多个，指定在顶层标签中
-
-4、组件的创建和使用
-    创建组件:
-    var HelloMsg = React.createClass({
-        render:function(){
-            return &lt;p&gt;test&lt;/p&gt;
-        }
-    })
-    使用组件：
-    就像使用html标签一样去使用组件
-    &lt;HelloMsg&gt;&lt;/HelloMsg&gt;
-
-    注意事项：
-    ①组件名称首字母必须是大写的，遵循驼峰式命名和使用
-    ②返回多个元素时，放到顶层标签中，在return时，顶层标签不能直接换行
-        return &lt;div&gt;
-        ..
-        &lt;/div&gt;
-    ③在创建组件时，一定要写上render方法，用来指定渲染的内容
-
-5、复合组件
-    就是一个普通的组件，只不过包含其他的组件
-
-6、props 属性
-    &lt;a href=&quot;&quot;&gt;
-    &lt;ButtonComponent name=&apos;123&apos;/&gt;
-
-    使用组件的过程中是可以使用属性传递给组件值，接收的时候是通过this.props对象读取属性所对应的值。
-    组件不仅可以通过属性传递值，还可以传递方法，执行方法依然是通过this.props.属性名字
-    &lt;ButtonComponent funcClick={this.showLog}/&gt;
-    this.props.funcClick();
-    props对象中的属性和调用的组件指定的属性是一一对应的，有一个比较特殊：
-    this.props.children
-
-7、VDOM
-    virtual DOM 虚拟DOM
-    组件并不是真实的DOM节点，而是存在内存中的一种数据结构，称之为VDOM
-    只有组件插入到文档之后，真实的DOM。
-
-    Diff算法：当组件中有用户交互或者数据修改时，通过广度优先算法对比虚拟DOM和真实DOM，
-    找到真正需要更新的DOM节点，最大限度的减少对DOM的操作
-    refs 找到真实的DOM节点。
-    input ref=&quot;inputTxt&quot;
-    this.refs.inputTxt
-    要求通过ref来实现。
-    ①组件的创建和使用
-    ②指定按钮点击的处理函数
-</code></pre>
-                
-<p class="pink-link-context">
-    <a href="/2017/07/22/js面试题/" rel="next" title="javaScript面试题">
-    上一篇：javaScript面试题
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/07/22/node/" rel="next" title="node基础知识">
-    下一篇：node基础知识
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>
