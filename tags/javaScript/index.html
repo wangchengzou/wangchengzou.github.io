@@ -7,7 +7,7 @@
 
     
 
-    <title>javaScript | 千帆渡</title>
+    <title>javascript | 千帆渡</title>
     <meta name="author" content="汪成邹">
     
     <meta name="description" content="前端有我，我会前端">
@@ -172,7 +172,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/学习笔记/">
-                    学习笔记 <span class="right">29 篇</span></a>
+                    学习笔记 <span class="right">30 篇</span></a>
                 </a>
             </li>
 
@@ -225,7 +225,7 @@
         
 
         
-            <a class="breadcrumb" href="/tags/javaScript/">javaScript</a>
+            <a class="breadcrumb" href="/tags/javascript/">javascript</a>
         
     </div>
 </nav>
@@ -234,64 +234,10 @@
 
     <div class="collection mt-0">
         
-            <a href="/2017/09/20/es6精简学习方法/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-09-20T12:48:26.000Z">2017-09-20</time>
+            <a href="/2017/10/09/canvas/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-10-09T15:48:26.000Z">2017-10-09</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                ES6 精简语法
-            </a>
-        
-            <a href="/2017/09/18/es6语法/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-09-18T12:48:26.000Z">2017-09-18</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                ES6 语法
-            </a>
-        
-            <a href="/2017/07/22/DOM_BOM笔记/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                DOM_BOM笔记
-            </a>
-        
-            <a href="/2017/07/22/JQuery/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JQuery基础知识
-            </a>
-        
-            <a href="/2017/07/22/javaScript/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                javaScript基础知识
-            </a>
-        
-            <a href="/2017/07/22/javaScript高级知识/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                javaScript高级知识
-            </a>
-        
-            <a href="/2017/07/22/javaScript高级面试题/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                js高级
-            </a>
-        
-            <a href="/2017/07/22/javaScrtip算法题/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                javaScript算法题
-            </a>
-        
-            <a href="/2017/07/22/js面试题/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                javaScript面试题
-            </a>
-        
-            <a href="/2017/07/22/判断质数算法/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-22T15:48:26.000Z">2017-07-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                判断质数算法
+                canvas基础知识和使用方法
             </a>
         
     </div>
@@ -541,6 +487,73 @@
                             if (isMatch) {
                                 keywords.forEach(function(keyword) {
                                     var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
+                var regS = new RegExp(keyword, "gi");
                                     data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
                                 });
 
